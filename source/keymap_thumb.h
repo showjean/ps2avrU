@@ -12,7 +12,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 		//
 		{ KEY_Q,		KEY_TAB,	KEY_A,		KEY_NONE,	KEY_Z,		KEY_NONE,	KEY_ESC,	KEY_1 },	// ROW1
 		{ KEY_W,		KEY_CAPS,	KEY_S,		KEY_NONE,	KEY_X,		KEY_NONE,	KEY_NONE, 	KEY_2 },	// ROW2
-		{ KEY_E,		KEY_Europe2, 	KEY_D,		KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_3 },	// ROW3
+		{ KEY_E,		KEY_Europe1, 	KEY_D,		KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_3 },	// ROW3
 		{ KEY_R,		KEY_T,		KEY_F,		KEY_G,		KEY_V,		KEY_B,		KEY_5,		KEY_4 },	// ROW4
 		{ KEY_U,		KEY_Y,		KEY_J,		KEY_H,		KEY_M,		KEY_N,		KEY_6,		KEY_7 },	// ROW5
 		{ KEY_I,		KEY_RBR,	KEY_K,		KEY_NONE, 	KEY_COMMA,	KEY_NONE,	KEY_EQUAL,	KEY_8 },	// ROW6
@@ -36,7 +36,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 		//
 		{ KEY_Q,		KEY_HASH,	KEY_LEFT,	KEY_NONE,	KEY_Z,		KEY_NONE,	KEY_ESC,	KEY_F1 },	// ROW1
 		{ KEY_UP,		KEY_LED,	KEY_DOWN,	KEY_NONE,	KEY_X,		KEY_NONE,	KEY_NONE, 	KEY_F2 },	// ROW2
-		{ KEY_E,		KEY_Europe2, 	KEY_RIGHT,	KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_F3 },	// ROW3
+		{ KEY_E,		KEY_Europe1, 	KEY_RIGHT,	KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_F3 },	// ROW3
 		{ KEY_R,		KEY_T,		KEY_F,		KEY_G,		KEY_V,		KEY_B,		KEY_F5,		KEY_F4 },	// ROW4
 		{ KEY_NUMLOCK,		KEY_Y,		KEY_J,		KEY_H,		KEY_M,		KEY_N,		KEY_F6,		KEY_F7 },	// ROW5
 		{ KEY_PRNSCR,	KEY_INSERT,	KEY_HOME,	KEY_NONE, 	KEY_END,	KEY_NONE,	KEY_F12,	KEY_F8 },	// ROW6
@@ -60,7 +60,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 		//
 		{ KEY_Q,		KEY_TAB,	KEY_A,		KEY_NONE,	KEY_Z,		KEY_NONE,	KEY_ESC,	KEY_1 },	// ROW1
 		{ KEY_W,		KEY_CAPS,	KEY_S,		KEY_NONE,	KEY_X,		KEY_NONE,	KEY_NONE, 	KEY_2 },	// ROW2
-		{ KEY_E,		KEY_Europe2, 	KEY_D,		KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_3 },	// ROW3
+		{ KEY_E,		KEY_Europe1, 	KEY_D,		KEY_NONE, 	KEY_C,		KEY_NONE,	KEY_NONE, 	KEY_3 },	// ROW3
 		{ KEY_R,		KEY_T,		KEY_F,		KEY_G,		KEY_V,		KEY_B,		KEY_5,		KEY_4 },	// ROW4
 		{ KEY_U,		KEY_Y,		KEY_J,		KEY_H,		KEY_M,		KEY_N,		KEY_6,		KEY_7 },	// ROW5
 		{ KEY_I,		KEY_RBR,	KEY_K,		KEY_NONE, 	KEY_COMMA,	KEY_NONE,	KEY_EQUAL,	KEY_8 },	// ROW6
