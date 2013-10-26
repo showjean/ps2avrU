@@ -149,12 +149,13 @@ void setLEDIndicate(void) {
     }
 
 #ifdef LEDSCROLL
-    if (LEDstate & LED_STATE_SCROLL) { // light up caps lock
+    if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
         turnOnLED(LEDSCROLL); //PORTLEDS |= (1 << LEDCAPS);	// 
     } else {
         turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
     }
-#else
+#endif
+    
 	static uint8_t prevSCRLED = 0;
     if ((LEDstate & LED_STATE_SCROLL) && prevSCRLED == 0) { // light up scroll lock
     	
@@ -177,7 +178,6 @@ void setLEDIndicate(void) {
 		}
 	
 	}
-#endif
 	
 }
 
