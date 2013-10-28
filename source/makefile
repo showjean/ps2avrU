@@ -37,6 +37,7 @@ F_CPU = 12000000
 	SRC = $(AVRLIB)/timer.c\
 			keysta.c \
 			usbdrv/usbdrv.c usbdrv/oddebug.c \
+			ledrender.c sleep.c keymapper.c ps2avru_util.c macrobuffer.c keymap.c keymatrix.c ps2main.c usbmain.c \
 			udelay.c $(TRG).c \
 
 

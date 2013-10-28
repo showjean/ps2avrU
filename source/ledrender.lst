@@ -1,0 +1,3854 @@
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 1
+
+
+   1               		.file	"ledrender.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.section	.debug_abbrev,"",@progbits
+   9               	.Ldebug_abbrev0:
+  10               		.section	.debug_info,"",@progbits
+  11               	.Ldebug_info0:
+  12               		.section	.debug_line,"",@progbits
+  13               	.Ldebug_line0:
+  14               		.text
+  15               	.Ltext0:
+  16               	.global	setLEDState
+  17               		.type	setLEDState, @function
+  18               	setLEDState:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 8093 0000 		sts LEDstate,r24
+  26               	/* epilogue start */
+  27               	.LM3:
+  28 0004 0895      		ret
+  29               	.LFE8:
+  30               		.size	setLEDState, .-setLEDState
+  31               	.global	getLEDState
+  32               		.type	getLEDState, @function
+  33               	getLEDState:
+  34               	.LFB9:
+  35               	.LM4:
+  36               	/* prologue: function */
+  37               	/* frame size = 0 */
+  38               	.LM5:
+  39 0006 8091 0000 		lds r24,LEDstate
+  40               	/* epilogue start */
+  41 000a 0895      		ret
+  42               	.LFE9:
+  43               		.size	getLEDState, .-getLEDState
+  44               	.global	clearLEDInited
+  45               		.type	clearLEDInited, @function
+  46               	clearLEDInited:
+  47               	.LFB14:
+  48               	.LM6:
+  49               	/* prologue: function */
+  50               	/* frame size = 0 */
+  51               	.LM7:
+  52 000c 1092 0000 		sts ledInited,__zero_reg__
+  53               	/* epilogue start */
+  54               	.LM8:
+  55 0010 0895      		ret
+  56               	.LFE14:
+  57               		.size	clearLEDInited, .-clearLEDInited
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 2
+
+
+  58               	.global	setLEDIndicate
+  59               		.type	setLEDIndicate, @function
+  60               	setLEDIndicate:
+  61               	.LFB16:
+  62               	.LM9:
+  63               	/* prologue: function */
+  64               	/* frame size = 0 */
+  65               	.LM10:
+  66 0012 8091 0000 		lds r24,LEDstate
+  67 0016 90E0      		ldi r25,lo8(0)
+  68 0018 80FF      		sbrs r24,0
+  69 001a 00C0      		rjmp .L8
+  70               	.LM11:
+  71 001c 909A      		sbi 50-32,0
+  72 001e 00C0      		rjmp .L9
+  73               	.L8:
+  74               	.LM12:
+  75 0020 9098      		cbi 50-32,0
+  76               	.L9:
+  77               	.LM13:
+  78 0022 AC01      		movw r20,r24
+  79 0024 4270      		andi r20,lo8(2)
+  80 0026 5070      		andi r21,hi8(2)
+  81 0028 81FF      		sbrs r24,1
+  82 002a 00C0      		rjmp .L10
+  83               	.LM14:
+  84 002c 919A      		sbi 50-32,1
+  85 002e 00C0      		rjmp .L11
+  86               	.L10:
+  87               	.LM15:
+  88 0030 9198      		cbi 50-32,1
+  89               	.L11:
+  90 0032 2091 0000 		lds r18,prevSCRLED.1815
+  91               	.LM16:
+  92 0036 82FF      		sbrs r24,2
+  93 0038 00C0      		rjmp .L12
+  94               	.LM17:
+  95 003a 969A      		sbi 50-32,6
+  96               	.LM18:
+  97 003c 2223      		tst r18
+  98 003e 01F4      		brne .L18
+  99 0040 00C0      		rjmp .L21
+ 100               	.L12:
+ 101               	.LM19:
+ 102 0042 9698      		cbi 50-32,6
+ 103               	.LM20:
+ 104 0044 2130      		cpi r18,lo8(1)
+ 105 0046 01F4      		brne .L18
+ 106 0048 00C0      		rjmp .L22
+ 107               	.L21:
+ 108               	.LM21:
+ 109 004a 81E0      		ldi r24,lo8(1)
+ 110 004c 8093 0000 		sts prevSCRLED.1815,r24
+ 111               	.LM22:
+ 112 0050 452B      		or r20,r21
+ 113 0052 01F4      		brne .L16
+ 114               	.LM23:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 3
+
+
+ 115 0054 85E0      		ldi r24,lo8(5)
+ 116 0056 00C0      		rjmp .L20
+ 117               	.L16:
+ 118               	.LM24:
+ 119 0058 84E0      		ldi r24,lo8(4)
+ 120 005a 00C0      		rjmp .L20
+ 121               	.L22:
+ 122               	.LM25:
+ 123 005c 1092 0000 		sts prevSCRLED.1815,__zero_reg__
+ 124               	.LM26:
+ 125 0060 452B      		or r20,r21
+ 126 0062 01F4      		brne .L17
+ 127               	.LM27:
+ 128 0064 83E0      		ldi r24,lo8(3)
+ 129               	.L20:
+ 130 0066 8093 0000 		sts scrollLockLED,r24
+ 131 006a 0895      		ret
+ 132               	.L17:
+ 133               	.LM28:
+ 134 006c 82E0      		ldi r24,lo8(2)
+ 135 006e 8093 0000 		sts scrollLockLED,r24
+ 136               	.L18:
+ 137 0072 0895      		ret
+ 138               	.LFE16:
+ 139               		.size	setLEDIndicate, .-setLEDIndicate
+ 140               	.global	applyKeyDownForFullLED
+ 141               		.type	applyKeyDownForFullLED, @function
+ 142               	applyKeyDownForFullLED:
+ 143               	.LFB17:
+ 144               	.LM29:
+ 145               	/* prologue: function */
+ 146               	/* frame size = 0 */
+ 147               	.LM30:
+ 148 0074 8091 0000 		lds r24,_fullLEDMode
+ 149 0078 8330      		cpi r24,lo8(3)
+ 150 007a 01F4      		brne .L24
+ 151               	.LM31:
+ 152 007c 8FEF      		ldi r24,lo8(511)
+ 153 007e 91E0      		ldi r25,hi8(511)
+ 154 0080 9093 0000 		sts (downLevelStay)+1,r25
+ 155 0084 8093 0000 		sts downLevelStay,r24
+ 156               	.LM32:
+ 157 0088 8091 0000 		lds r24,downLevel
+ 158 008c 8C30      		cpi r24,lo8(12)
+ 159 008e 00F4      		brsh .L26
+ 160               	.LM33:
+ 161 0090 8F5F      		subi r24,lo8(-(1))
+ 162 0092 8093 0000 		sts downLevel,r24
+ 163               	.LM34:
+ 164 0096 9FEF      		ldi r25,lo8(-1)
+ 165 0098 899F      		mul r24,r25
+ 166 009a C001      		movw r24,r0
+ 167 009c 1124      		clr r1
+ 168 009e 6CE0      		ldi r22,lo8(12)
+ 169 00a0 70E0      		ldi r23,hi8(12)
+ 170 00a2 0E94 0000 		call __divmodhi4
+ 171 00a6 6093 0000 		sts downLevelLife,r22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 4
+
+
+ 172 00aa 0895      		ret
+ 173               	.L24:
+ 174               	.LM35:
+ 175 00ac 8430      		cpi r24,lo8(4)
+ 176 00ae 01F4      		brne .L26
+ 177               	.LM36:
+ 178 00b0 8FEF      		ldi r24,lo8(511)
+ 179 00b2 91E0      		ldi r25,hi8(511)
+ 180 00b4 9093 0000 		sts (downLevelStay)+1,r25
+ 181 00b8 8093 0000 		sts downLevelStay,r24
+ 182               	.LM37:
+ 183 00bc 8091 0000 		lds r24,downLevel
+ 184 00c0 8823      		tst r24
+ 185 00c2 01F0      		breq .L26
+ 186               	.LM38:
+ 187 00c4 8150      		subi r24,lo8(-(-1))
+ 188 00c6 8093 0000 		sts downLevel,r24
+ 189               	.LM39:
+ 190 00ca 9FEF      		ldi r25,lo8(-1)
+ 191 00cc 899F      		mul r24,r25
+ 192 00ce C001      		movw r24,r0
+ 193 00d0 1124      		clr r1
+ 194 00d2 6CE0      		ldi r22,lo8(12)
+ 195 00d4 70E0      		ldi r23,hi8(12)
+ 196 00d6 0E94 0000 		call __divmodhi4
+ 197 00da 6093 0000 		sts downLevelLife,r22
+ 198               	.L26:
+ 199 00de 0895      		ret
+ 200               	.LFE17:
+ 201               		.size	applyKeyDownForFullLED, .-applyKeyDownForFullLED
+ 202               		.type	getBrightness, @function
+ 203               	getBrightness:
+ 204               	.LFB19:
+ 205               	.LM40:
+ 206               	.LVL1:
+ 207               	/* prologue: function */
+ 208               	/* frame size = 0 */
+ 209               	.LM41:
+ 210 00e0 2091 0000 		lds r18,_ledBrightnessMax
+ 211 00e4 30E0      		ldi r19,lo8(0)
+ 212 00e6 AC01      		movw r20,r24
+ 213 00e8 429F      		mul r20,r18
+ 214 00ea C001      		movw r24,r0
+ 215 00ec 439F      		mul r20,r19
+ 216 00ee 900D      		add r25,r0
+ 217 00f0 529F      		mul r21,r18
+ 218 00f2 900D      		add r25,r0
+ 219 00f4 1124      		clr r1
+ 220               	.LVL2:
+ 221 00f6 6FEF      		ldi r22,lo8(255)
+ 222 00f8 70E0      		ldi r23,hi8(255)
+ 223 00fa 0E94 0000 		call __divmodhi4
+ 224 00fe CB01      		movw r24,r22
+ 225               	/* epilogue start */
+ 226               	.LM42:
+ 227 0100 0895      		ret
+ 228               	.LFE19:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 5
+
+
+ 229               		.size	getBrightness, .-getBrightness
+ 230               	.global	sleepLED
+ 231               		.type	sleepLED, @function
+ 232               	sleepLED:
+ 233               	.LFB23:
+ 234               	.LM43:
+ 235               	/* prologue: function */
+ 236               	/* frame size = 0 */
+ 237               	.LM44:
+ 238 0102 9098      		cbi 50-32,0
+ 239               	.LM45:
+ 240 0104 9198      		cbi 50-32,1
+ 241               	.LM46:
+ 242 0106 8091 0000 		lds r24,_fullLEDMode
+ 243 010a 8230      		cpi r24,lo8(2)
+ 244 010c 01F0      		breq .L30
+ 245 010e 8430      		cpi r24,lo8(4)
+ 246 0110 01F4      		brne .L31
+ 247               	.L30:
+ 248               	.LM47:
+ 249 0112 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 250 0116 1092 0000 		sts pwmCounter,__zero_reg__
+ 251 011a 00C0      		rjmp .L34
+ 252               	.L31:
+ 253               	.LM48:
+ 254 011c 8823      		tst r24
+ 255 011e 01F0      		breq .L33
+ 256 0120 8330      		cpi r24,lo8(3)
+ 257 0122 01F4      		brne .L34
+ 258               	.L33:
+ 259               	.LM49:
+ 260 0124 81E0      		ldi r24,lo8(1)
+ 261 0126 8093 0000 		sts _isDidSleep,r24
+ 262 012a 0895      		ret
+ 263               	.L34:
+ 264               	.LM50:
+ 265 012c 1092 0000 		sts _isDidSleep,__zero_reg__
+ 266 0130 0895      		ret
+ 267               	.LFE23:
+ 268               		.size	sleepLED, .-sleepLED
+ 269               	.global	doSleep
+ 270               		.type	doSleep, @function
+ 271               	doSleep:
+ 272               	.LFB25:
+ 273               	.LM51:
+ 274               	/* prologue: function */
+ 275               	/* frame size = 0 */
+ 276               	.LM52:
+ 277 0132 8091 0000 		lds r24,_isDidSleep
+ 278 0136 8130      		cpi r24,lo8(1)
+ 279 0138 01F0      		breq .L39
+ 280               	.LM53:
+ 281 013a 8091 0000 		lds r24,pwmCounter
+ 282 013e 9091 0000 		lds r25,(pwmCounter)+1
+ 283 0142 68E0      		ldi r22,lo8(8)
+ 284 0144 70E0      		ldi r23,hi8(8)
+ 285 0146 0E94 0000 		call __divmodhi4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 6
+
+
+ 286 014a CB01      		movw r24,r22
+ 287 014c 9095      		com r25
+ 288 014e 8195      		neg r24
+ 289 0150 9F4F      		sbci r25,lo8(-1)
+ 290 0152 8150      		subi r24,lo8(-(255))
+ 291 0154 9F4F      		sbci r25,hi8(-(255))
+ 292 0156 0E94 0000 		call getBrightness
+ 293 015a 0E94 0000 		call timer1PWMBSet
+ 294               	.LM54:
+ 295 015e 8091 0000 		lds r24,pwmCounter
+ 296 0162 9091 0000 		lds r25,(pwmCounter)+1
+ 297 0166 885F      		subi r24,lo8(2040)
+ 298 0168 9740      		sbci r25,hi8(2040)
+ 299 016a 04F0      		brlt .L38
+ 300               	.LM55:
+ 301 016c 80E0      		ldi r24,lo8(0)
+ 302 016e 90E0      		ldi r25,hi8(0)
+ 303 0170 0E94 0000 		call timer1PWMBSet
+ 304               	.LM56:
+ 305 0174 9498      		cbi 50-32,4
+ 306               	.LM57:
+ 307 0176 81E0      		ldi r24,lo8(1)
+ 308 0178 8093 0000 		sts _isDidSleep,r24
+ 309               	.L38:
+ 310               	.LM58:
+ 311 017c 8091 0000 		lds r24,pwmCounter
+ 312 0180 9091 0000 		lds r25,(pwmCounter)+1
+ 313 0184 0196      		adiw r24,1
+ 314 0186 9093 0000 		sts (pwmCounter)+1,r25
+ 315 018a 8093 0000 		sts pwmCounter,r24
+ 316               	.L39:
+ 317 018e 0895      		ret
+ 318               	.LFE25:
+ 319               		.size	doSleep, .-doSleep
+ 320               	.global	renderLED
+ 321               		.type	renderLED, @function
+ 322               	renderLED:
+ 323               	.LFB26:
+ 324               	.LM59:
+ 325               	.LVL3:
+ 326 0190 1F93      		push r17
+ 327               	/* prologue: function */
+ 328               	/* frame size = 0 */
+ 329 0192 182F      		mov r17,r24
+ 330               	.LM60:
+ 331 0194 8091 0000 		lds r24,ledInited
+ 332               	.LVL4:
+ 333 0198 8823      		tst r24
+ 334 019a 01F4      		brne .+2
+ 335 019c 00C0      		rjmp .L72
+ 336               	.LM61:
+ 337 019e 0E94 0000 		call isSleep
+ 338 01a2 8823      		tst r24
+ 339 01a4 01F0      		breq .L42
+ 340               	.LM62:
+ 341 01a6 0E94 0000 		call doSleep
+ 342 01aa 00C0      		rjmp .L72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 7
+
+
+ 343               	.L42:
+ 344               	.LBB28:
+ 345               	.LBB29:
+ 346               	.LM63:
+ 347 01ac 1130      		cpi r17,lo8(1)
+ 348 01ae 01F4      		brne .L43
+ 349               	.LM64:
+ 350 01b0 8091 0000 		lds r24,beyondFNDelayCounter.1903
+ 351 01b4 9091 0000 		lds r25,(beyondFNDelayCounter.1903)+1
+ 352 01b8 0196      		adiw r24,1
+ 353 01ba 9093 0000 		sts (beyondFNDelayCounter.1903)+1,r25
+ 354 01be 8093 0000 		sts beyondFNDelayCounter.1903,r24
+ 355               	.LM65:
+ 356 01c2 8558      		subi r24,lo8(901)
+ 357 01c4 9340      		sbci r25,hi8(901)
+ 358 01c6 04F0      		brlt .L44
+ 359               	.LM66:
+ 360 01c8 8091 0000 		lds r24,beyondFNCounter.1902
+ 361 01cc 9091 0000 		lds r25,(beyondFNCounter.1902)+1
+ 362 01d0 0196      		adiw r24,1
+ 363 01d2 9093 0000 		sts (beyondFNCounter.1902)+1,r25
+ 364 01d6 8093 0000 		sts beyondFNCounter.1902,r24
+ 365               	.LM67:
+ 366 01da 893C      		cpi r24,201
+ 367 01dc 9105      		cpc r25,__zero_reg__
+ 368 01de 04F0      		brlt .L44
+ 369               	.LBE29:
+ 370               	.LM68:
+ 371 01e0 8091 0000 		lds r24,LEDstate
+ 372 01e4 9091 0000 		lds r25,beyondFNLEDState.1904
+ 373 01e8 80FF      		sbrs r24,0
+ 374 01ea 00C0      		rjmp .L45
+ 375               	.LBB30:
+ 376               	.LM69:
+ 377 01ec 9130      		cpi r25,lo8(1)
+ 378 01ee 01F4      		brne .L46
+ 379               	.LM70:
+ 380 01f0 9098      		cbi 50-32,0
+ 381 01f2 00C0      		rjmp .L47
+ 382               	.L46:
+ 383               	.LM71:
+ 384 01f4 909A      		sbi 50-32,0
+ 385 01f6 00C0      		rjmp .L73
+ 386               	.L45:
+ 387               	.LM72:
+ 388 01f8 9130      		cpi r25,lo8(1)
+ 389 01fa 01F4      		brne .L48
+ 390               	.LM73:
+ 391 01fc 909A      		sbi 50-32,0
+ 392 01fe 00C0      		rjmp .L47
+ 393               	.L48:
+ 394               	.LM74:
+ 395 0200 9098      		cbi 50-32,0
+ 396               	.L73:
+ 397               	.LM75:
+ 398 0202 1092 0000 		sts (beyondFNDelayCounter.1903)+1,__zero_reg__
+ 399 0206 1092 0000 		sts beyondFNDelayCounter.1903,__zero_reg__
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 8
+
+
+ 400               	.L47:
+ 401               	.LM76:
+ 402 020a 8091 0000 		lds r24,beyondFNLEDState.1904
+ 403 020e 91E0      		ldi r25,lo8(1)
+ 404 0210 8927      		eor r24,r25
+ 405 0212 8093 0000 		sts beyondFNLEDState.1904,r24
+ 406               	.LM77:
+ 407 0216 1092 0000 		sts (beyondFNCounter.1902)+1,__zero_reg__
+ 408 021a 1092 0000 		sts beyondFNCounter.1902,__zero_reg__
+ 409 021e 00C0      		rjmp .L44
+ 410               	.L43:
+ 411               	.LM78:
+ 412 0220 1092 0000 		sts (beyondFNCounter.1902)+1,__zero_reg__
+ 413 0224 1092 0000 		sts beyondFNCounter.1902,__zero_reg__
+ 414               	.LM79:
+ 415 0228 81E0      		ldi r24,lo8(1)
+ 416 022a 8093 0000 		sts beyondFNLEDState.1904,r24
+ 417               	.L44:
+ 418               	.LBE30:
+ 419               	.LBE28:
+ 420               	.LBB31:
+ 421               	.LBB32:
+ 422               	.LM80:
+ 423 022e 2091 0000 		lds r18,scrollLockLED
+ 424 0232 2223      		tst r18
+ 425 0234 01F0      		breq .L49
+ 426               	.LM81:
+ 427 0236 8091 0000 		lds r24,counter.1929
+ 428 023a 9091 0000 		lds r25,(counter.1929)+1
+ 429 023e 0196      		adiw r24,1
+ 430 0240 9093 0000 		sts (counter.1929)+1,r25
+ 431 0244 8093 0000 		sts counter.1929,r24
+ 432               	.LM82:
+ 433 0248 8536      		cpi r24,101
+ 434 024a 9105      		cpc r25,__zero_reg__
+ 435 024c 04F0      		brlt .L50
+ 436               	.LM83:
+ 437 024e 2530      		cpi r18,lo8(5)
+ 438 0250 01F0      		breq .L74
+ 439 0252 2330      		cpi r18,lo8(3)
+ 440 0254 01F0      		breq .L74
+ 441               	.L52:
+ 442               	.LM84:
+ 443 0256 2430      		cpi r18,lo8(4)
+ 444 0258 01F0      		breq .L54
+ 445 025a 2230      		cpi r18,lo8(2)
+ 446 025c 01F4      		brne .L55
+ 447               	.L54:
+ 448               	.LM85:
+ 449 025e 9198      		cbi 50-32,1
+ 450 0260 00C0      		rjmp .L53
+ 451               	.L55:
+ 452               	.LM86:
+ 453 0262 8091 0000 		lds r24,LEDstate
+ 454 0266 81FD      		sbrc r24,1
+ 455               	.L74:
+ 456               	.LM87:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 9
+
+
+ 457 0268 919A      		sbi 50-32,1
+ 458               	.L53:
+ 459               	.LM88:
+ 460 026a 1092 0000 		sts (counter.1929)+1,__zero_reg__
+ 461 026e 1092 0000 		sts counter.1929,__zero_reg__
+ 462               	.LM89:
+ 463 0272 2150      		subi r18,lo8(-(-1))
+ 464 0274 2093 0000 		sts scrollLockLED,r18
+ 465 0278 00C0      		rjmp .L50
+ 466               	.L49:
+ 467               	.LM90:
+ 468 027a 1092 0000 		sts (counter.1929)+1,__zero_reg__
+ 469 027e 1092 0000 		sts counter.1929,__zero_reg__
+ 470               	.L50:
+ 471               	.LBE32:
+ 472               	.LBE31:
+ 473               	.LBB33:
+ 474               	.LBB34:
+ 475               	.LM91:
+ 476 0282 8091 0000 		lds r24,ledStateCount
+ 477 0286 9091 0000 		lds r25,(ledStateCount)+1
+ 478 028a 0196      		adiw r24,1
+ 479 028c 9093 0000 		sts (ledStateCount)+1,r25
+ 480 0290 8093 0000 		sts ledStateCount,r24
+ 481 0294 0197      		sbiw r24,1
+ 482 0296 8958      		subi r24,lo8(5001)
+ 483 0298 9341      		sbci r25,hi8(5001)
+ 484 029a 04F0      		brlt .L56
+ 485               	.LM92:
+ 486 029c 6091 0000 		lds r22,_fullLEDMode
+ 487 02a0 8091 0000 		lds r24,_fullLEDMode_saved
+ 488 02a4 6817      		cp r22,r24
+ 489 02a6 01F0      		breq .L57
+ 490               	.LM93:
+ 491 02a8 6093 0000 		sts _fullLEDMode_saved,r22
+ 492               	.LM94:
+ 493 02ac 8BE0      		ldi r24,lo8(11)
+ 494 02ae 90E0      		ldi r25,hi8(11)
+ 495 02b0 0E94 0000 		call __eewr_byte_m32
+ 496               	.L57:
+ 497               	.LM95:
+ 498 02b4 6091 0000 		lds r22,_ledBrightnessMax
+ 499 02b8 8091 0000 		lds r24,_ledBrightnessMax_saved
+ 500 02bc 8617      		cp r24,r22
+ 501 02be 01F0      		breq .L56
+ 502               	.LM96:
+ 503 02c0 6093 0000 		sts _ledBrightnessMax_saved,r22
+ 504               	.LM97:
+ 505 02c4 89E0      		ldi r24,lo8(9)
+ 506 02c6 90E0      		ldi r25,hi8(9)
+ 507 02c8 0E94 0000 		call __eewr_byte_m32
+ 508               	.L56:
+ 509               	.LBE34:
+ 510               	.LBE33:
+ 511               	.LBB35:
+ 512               	.LBB36:
+ 513               	.LM98:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 10
+
+
+ 514 02cc 8091 0000 		lds r24,_fullLEDMode
+ 515 02d0 8130      		cpi r24,lo8(1)
+ 516 02d2 01F0      		breq .+2
+ 517 02d4 00C0      		rjmp .L58
+ 518               	.LM99:
+ 519 02d6 8091 0000 		lds r24,pwmDir
+ 520 02da 9091 0000 		lds r25,(pwmDir)+1
+ 521 02de 0097      		sbiw r24,0
+ 522 02e0 01F4      		brne .L59
+ 523               	.LBE36:
+ 524               	.LM100:
+ 525 02e2 8091 0000 		lds r24,pwmCounter
+ 526 02e6 9091 0000 		lds r25,(pwmCounter)+1
+ 527 02ea 68E0      		ldi r22,lo8(8)
+ 528 02ec 70E0      		ldi r23,hi8(8)
+ 529 02ee 0E94 0000 		call __divmodhi4
+ 530 02f2 CB01      		movw r24,r22
+ 531 02f4 0E94 0000 		call getBrightness
+ 532 02f8 00C0      		rjmp .L75
+ 533               	.L59:
+ 534               	.LBB37:
+ 535               	.LM101:
+ 536 02fa 8230      		cpi r24,2
+ 537 02fc 9105      		cpc r25,__zero_reg__
+ 538 02fe 01F4      		brne .L61
+ 539               	.LBE37:
+ 540               	.LM102:
+ 541 0300 8091 0000 		lds r24,pwmCounter
+ 542 0304 9091 0000 		lds r25,(pwmCounter)+1
+ 543 0308 68E0      		ldi r22,lo8(8)
+ 544 030a 70E0      		ldi r23,hi8(8)
+ 545 030c 0E94 0000 		call __divmodhi4
+ 546 0310 CB01      		movw r24,r22
+ 547 0312 9095      		com r25
+ 548 0314 8195      		neg r24
+ 549 0316 9F4F      		sbci r25,lo8(-1)
+ 550 0318 8150      		subi r24,lo8(-(255))
+ 551 031a 9F4F      		sbci r25,hi8(-(255))
+ 552 031c 0E94 0000 		call getBrightness
+ 553               	.L75:
+ 554               	.LBB38:
+ 555 0320 0E94 0000 		call timer1PWMBSet
+ 556 0324 00C0      		rjmp .L60
+ 557               	.L61:
+ 558               	.LM103:
+ 559 0326 8130      		cpi r24,1
+ 560 0328 9105      		cpc r25,__zero_reg__
+ 561 032a 01F0      		breq .L62
+ 562 032c 0397      		sbiw r24,3
+ 563 032e 01F4      		brne .L60
+ 564               	.L62:
+ 565               	.LM104:
+ 566 0330 8091 0000 		lds r24,pwmCounter
+ 567 0334 9091 0000 		lds r25,(pwmCounter)+1
+ 568 0338 0196      		adiw r24,1
+ 569 033a 9093 0000 		sts (pwmCounter)+1,r25
+ 570 033e 8093 0000 		sts pwmCounter,r24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 11
+
+
+ 571               	.L60:
+ 572               	.LM105:
+ 573 0342 8091 0000 		lds r24,pwmCounter
+ 574 0346 9091 0000 		lds r25,(pwmCounter)+1
+ 575 034a 885F      		subi r24,lo8(2040)
+ 576 034c 9740      		sbci r25,hi8(2040)
+ 577 034e 04F0      		brlt .L63
+ 578               	.LM106:
+ 579 0350 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 580 0354 1092 0000 		sts pwmCounter,__zero_reg__
+ 581               	.LM107:
+ 582 0358 8091 0000 		lds r24,pwmDir
+ 583 035c 9091 0000 		lds r25,(pwmDir)+1
+ 584 0360 0196      		adiw r24,1
+ 585 0362 64E0      		ldi r22,lo8(4)
+ 586 0364 70E0      		ldi r23,hi8(4)
+ 587 0366 0E94 0000 		call __divmodhi4
+ 588 036a 9093 0000 		sts (pwmDir)+1,r25
+ 589 036e 8093 0000 		sts pwmDir,r24
+ 590               	.L63:
+ 591               	.LM108:
+ 592 0372 8091 0000 		lds r24,pwmCounter
+ 593 0376 9091 0000 		lds r25,(pwmCounter)+1
+ 594 037a 0196      		adiw r24,1
+ 595 037c 9093 0000 		sts (pwmCounter)+1,r25
+ 596 0380 8093 0000 		sts pwmCounter,r24
+ 597 0384 00C0      		rjmp .L72
+ 598               	.L58:
+ 599               	.LM109:
+ 600 0386 8330      		cpi r24,lo8(3)
+ 601 0388 01F4      		brne .L64
+ 602               	.LM110:
+ 603 038a 8091 0000 		lds r24,downLevelStay
+ 604 038e 9091 0000 		lds r25,(downLevelStay)+1
+ 605 0392 0097      		sbiw r24,0
+ 606 0394 01F0      		breq .L65
+ 607               	.LM111:
+ 608 0396 0197      		sbiw r24,1
+ 609 0398 9093 0000 		sts (downLevelStay)+1,r25
+ 610 039c 8093 0000 		sts downLevelStay,r24
+ 611 03a0 00C0      		rjmp .L66
+ 612               	.L65:
+ 613               	.LM112:
+ 614 03a2 2091 0000 		lds r18,downLevelLife
+ 615 03a6 2223      		tst r18
+ 616 03a8 01F0      		breq .L67
+ 617               	.LM113:
+ 618 03aa 8091 0000 		lds r24,pwmCounter
+ 619 03ae 9091 0000 		lds r25,(pwmCounter)+1
+ 620 03b2 0196      		adiw r24,1
+ 621 03b4 9093 0000 		sts (pwmCounter)+1,r25
+ 622 03b8 8093 0000 		sts pwmCounter,r24
+ 623               	.LM114:
+ 624 03bc 0897      		sbiw r24,8
+ 625 03be 04F0      		brlt .L66
+ 626               	.LM115:
+ 627 03c0 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 12
+
+
+ 628 03c4 1092 0000 		sts pwmCounter,__zero_reg__
+ 629               	.LM116:
+ 630 03c8 2150      		subi r18,lo8(-(-1))
+ 631 03ca 2093 0000 		sts downLevelLife,r18
+ 632               	.LM117:
+ 633 03ce 8FEF      		ldi r24,lo8(255)
+ 634 03d0 90E0      		ldi r25,hi8(255)
+ 635 03d2 821B      		sub r24,r18
+ 636 03d4 9109      		sbc r25,__zero_reg__
+ 637 03d6 6BEE      		ldi r22,lo8(-21)
+ 638 03d8 7FEF      		ldi r23,hi8(-21)
+ 639 03da 0E94 0000 		call __divmodhi4
+ 640 03de 645F      		subi r22,lo8(-(12))
+ 641 03e0 6093 0000 		sts downLevel,r22
+ 642 03e4 00C0      		rjmp .L66
+ 643               	.L67:
+ 644               	.LM118:
+ 645 03e6 1092 0000 		sts downLevel,__zero_reg__
+ 646               	.LM119:
+ 647 03ea 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 648 03ee 1092 0000 		sts pwmCounter,__zero_reg__
+ 649               	.L66:
+ 650               	.LBE38:
+ 651               	.LM120:
+ 652 03f2 8091 0000 		lds r24,downLevelLife
+ 653 03f6 90E0      		ldi r25,lo8(0)
+ 654 03f8 0E94 0000 		call getBrightness
+ 655 03fc 00C0      		rjmp .L76
+ 656               	.L64:
+ 657               	.LBB39:
+ 658               	.LM121:
+ 659 03fe 8430      		cpi r24,lo8(4)
+ 660 0400 01F4      		brne .L68
+ 661               	.LM122:
+ 662 0402 8091 0000 		lds r24,downLevelStay
+ 663 0406 9091 0000 		lds r25,(downLevelStay)+1
+ 664 040a 0097      		sbiw r24,0
+ 665 040c 01F0      		breq .L69
+ 666               	.LM123:
+ 667 040e 0197      		sbiw r24,1
+ 668 0410 9093 0000 		sts (downLevelStay)+1,r25
+ 669 0414 8093 0000 		sts downLevelStay,r24
+ 670 0418 00C0      		rjmp .L70
+ 671               	.L69:
+ 672               	.LM124:
+ 673 041a 2091 0000 		lds r18,downLevelLife
+ 674 041e 2F3F      		cpi r18,lo8(-1)
+ 675 0420 01F0      		breq .L71
+ 676               	.LM125:
+ 677 0422 8091 0000 		lds r24,pwmCounter
+ 678 0426 9091 0000 		lds r25,(pwmCounter)+1
+ 679 042a 0196      		adiw r24,1
+ 680 042c 9093 0000 		sts (pwmCounter)+1,r25
+ 681 0430 8093 0000 		sts pwmCounter,r24
+ 682               	.LM126:
+ 683 0434 0897      		sbiw r24,8
+ 684 0436 04F0      		brlt .L70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 13
+
+
+ 685               	.LM127:
+ 686 0438 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 687 043c 1092 0000 		sts pwmCounter,__zero_reg__
+ 688               	.LM128:
+ 689 0440 2F5F      		subi r18,lo8(-(1))
+ 690 0442 2093 0000 		sts downLevelLife,r18
+ 691               	.LM129:
+ 692 0446 8FEF      		ldi r24,lo8(255)
+ 693 0448 90E0      		ldi r25,hi8(255)
+ 694 044a 821B      		sub r24,r18
+ 695 044c 9109      		sbc r25,__zero_reg__
+ 696 044e 6BEE      		ldi r22,lo8(-21)
+ 697 0450 7FEF      		ldi r23,hi8(-21)
+ 698 0452 0E94 0000 		call __divmodhi4
+ 699 0456 645F      		subi r22,lo8(-(12))
+ 700 0458 6093 0000 		sts downLevel,r22
+ 701 045c 00C0      		rjmp .L70
+ 702               	.L71:
+ 703               	.LM130:
+ 704 045e 8CE0      		ldi r24,lo8(12)
+ 705 0460 8093 0000 		sts downLevel,r24
+ 706               	.LM131:
+ 707 0464 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 708 0468 1092 0000 		sts pwmCounter,__zero_reg__
+ 709               	.L70:
+ 710               	.LBE39:
+ 711               	.LM132:
+ 712 046c 8091 0000 		lds r24,downLevelLife
+ 713 0470 90E0      		ldi r25,lo8(0)
+ 714 0472 0E94 0000 		call getBrightness
+ 715               	.L76:
+ 716               	.LBB40:
+ 717 0476 0E94 0000 		call timer1PWMBSet
+ 718 047a 00C0      		rjmp .L72
+ 719               	.L68:
+ 720               	.LM133:
+ 721 047c 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 722 0480 1092 0000 		sts pwmCounter,__zero_reg__
+ 723               	.LM134:
+ 724 0484 83E0      		ldi r24,lo8(3)
+ 725 0486 90E0      		ldi r25,hi8(3)
+ 726 0488 9093 0000 		sts (pwmDir)+1,r25
+ 727 048c 8093 0000 		sts pwmDir,r24
+ 728               	.L72:
+ 729               	/* epilogue start */
+ 730               	.LBE40:
+ 731               	.LBE35:
+ 732               	.LM135:
+ 733 0490 1F91      		pop r17
+ 734               	.LVL5:
+ 735 0492 0895      		ret
+ 736               	.LFE26:
+ 737               		.size	renderLED, .-renderLED
+ 738               		.type	setFullLEDState, @function
+ 739               	setFullLEDState:
+ 740               	.LFB10:
+ 741               	.LM136:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 14
+
+
+ 742               	/* prologue: function */
+ 743               	/* frame size = 0 */
+ 744               	.LM137:
+ 745 0494 9091 0000 		lds r25,_fullLEDMode
+ 746 0498 9923      		tst r25
+ 747 049a 01F4      		brne .L78
+ 748               	.LM138:
+ 749 049c 80E0      		ldi r24,lo8(0)
+ 750 049e 90E0      		ldi r25,hi8(0)
+ 751 04a0 00C0      		rjmp .L84
+ 752               	.L78:
+ 753               	.LM139:
+ 754 04a2 9130      		cpi r25,lo8(1)
+ 755 04a4 01F4      		brne .L80
+ 756               	.LM140:
+ 757 04a6 1092 0000 		sts (pwmCounter)+1,__zero_reg__
+ 758 04aa 1092 0000 		sts pwmCounter,__zero_reg__
+ 759               	.LM141:
+ 760 04ae 1092 0000 		sts (pwmDir)+1,__zero_reg__
+ 761 04b2 1092 0000 		sts pwmDir,__zero_reg__
+ 762 04b6 0895      		ret
+ 763               	.L80:
+ 764               	.LM142:
+ 765 04b8 9230      		cpi r25,lo8(2)
+ 766 04ba 01F4      		brne .L81
+ 767               	.LM143:
+ 768 04bc 8091 0000 		lds r24,_ledBrightnessMax
+ 769 04c0 90E0      		ldi r25,lo8(0)
+ 770               	.L84:
+ 771 04c2 0E94 0000 		call timer1PWMBSet
+ 772 04c6 0895      		ret
+ 773               	.L81:
+ 774               	.LM144:
+ 775 04c8 892F      		mov r24,r25
+ 776 04ca 8350      		subi r24,lo8(-(-3))
+ 777 04cc 8230      		cpi r24,lo8(2)
+ 778 04ce 00F4      		brsh .L83
+ 779               	.LM145:
+ 780 04d0 83E0      		ldi r24,lo8(3)
+ 781 04d2 8093 0000 		sts downLevel,r24
+ 782               	.LM146:
+ 783 04d6 9430      		cpi r25,lo8(4)
+ 784 04d8 01F4      		brne .L82
+ 785 04da 81E0      		ldi r24,lo8(1)
+ 786 04dc 8093 0000 		sts downLevel,r24
+ 787               	.L82:
+ 788               	.LM147:
+ 789 04e0 8091 0000 		lds r24,downLevel
+ 790 04e4 9FEF      		ldi r25,lo8(-1)
+ 791 04e6 899F      		mul r24,r25
+ 792 04e8 C001      		movw r24,r0
+ 793 04ea 1124      		clr r1
+ 794 04ec 6CE0      		ldi r22,lo8(12)
+ 795 04ee 70E0      		ldi r23,hi8(12)
+ 796 04f0 0E94 0000 		call __divmodhi4
+ 797 04f4 6093 0000 		sts downLevelLife,r22
+ 798               	.L83:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 15
+
+
+ 799 04f8 0895      		ret
+ 800               	.LFE10:
+ 801               		.size	setFullLEDState, .-setFullLEDState
+ 802               	.global	wakeUpLED
+ 803               		.type	wakeUpLED, @function
+ 804               	wakeUpLED:
+ 805               	.LFB24:
+ 806               	.LM148:
+ 807               	/* prologue: function */
+ 808               	/* frame size = 0 */
+ 809               	.LM149:
+ 810 04fa 0E94 0000 		call setLEDIndicate
+ 811               	.LM150:
+ 812 04fe 0E94 0000 		call setFullLEDState
+ 813               	/* epilogue start */
+ 814               	.LM151:
+ 815 0502 0895      		ret
+ 816               	.LFE24:
+ 817               		.size	wakeUpLED, .-wakeUpLED
+ 818               	.global	changeFullLedState
+ 819               		.type	changeFullLedState, @function
+ 820               	changeFullLedState:
+ 821               	.LFB13:
+ 822               	.LM152:
+ 823               	/* prologue: function */
+ 824               	/* frame size = 0 */
+ 825               	.LM153:
+ 826 0504 8091 0000 		lds r24,_fullLEDMode
+ 827 0508 90E0      		ldi r25,lo8(0)
+ 828 050a 0196      		adiw r24,1
+ 829 050c 65E0      		ldi r22,lo8(5)
+ 830 050e 70E0      		ldi r23,hi8(5)
+ 831 0510 0E94 0000 		call __divmodhi4
+ 832 0514 8093 0000 		sts _fullLEDMode,r24
+ 833               	.LM154:
+ 834 0518 1092 0000 		sts (ledStateCount)+1,__zero_reg__
+ 835 051c 1092 0000 		sts ledStateCount,__zero_reg__
+ 836               	.LM155:
+ 837 0520 0E94 0000 		call setFullLEDState
+ 838               	/* epilogue start */
+ 839               	.LM156:
+ 840 0524 0895      		ret
+ 841               	.LFE13:
+ 842               		.size	changeFullLedState, .-changeFullLedState
+ 843               	.global	reduceLedBrightness
+ 844               		.type	reduceLedBrightness, @function
+ 845               	reduceLedBrightness:
+ 846               	.LFB12:
+ 847               	.LM157:
+ 848               	/* prologue: function */
+ 849               	/* frame size = 0 */
+ 850               	.LM158:
+ 851 0526 8091 0000 		lds r24,_ledBrightnessMax
+ 852 052a 8E31      		cpi r24,lo8(30)
+ 853 052c 01F0      		breq .L93
+ 854               	.LM159:
+ 855 052e 8951      		subi r24,lo8(-(-25))
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 16
+
+
+ 856 0530 8093 0000 		sts _ledBrightnessMax,r24
+ 857               	.LM160:
+ 858 0534 8E31      		cpi r24,lo8(30)
+ 859 0536 00F4      		brsh .L91
+ 860               	.LM161:
+ 861 0538 8EE1      		ldi r24,lo8(30)
+ 862 053a 8093 0000 		sts _ledBrightnessMax,r24
+ 863               	.L91:
+ 864               	.LM162:
+ 865 053e 8091 0000 		lds r24,_fullLEDMode
+ 866 0542 8230      		cpi r24,lo8(2)
+ 867 0544 01F4      		brne .L92
+ 868               	.LM163:
+ 869 0546 0E94 0000 		call setFullLEDState
+ 870               	.L92:
+ 871               	.LM164:
+ 872 054a 1092 0000 		sts (ledStateCount)+1,__zero_reg__
+ 873 054e 1092 0000 		sts ledStateCount,__zero_reg__
+ 874               	.L93:
+ 875 0552 0895      		ret
+ 876               	.LFE12:
+ 877               		.size	reduceLedBrightness, .-reduceLedBrightness
+ 878               	.global	increaseLedBrightness
+ 879               		.type	increaseLedBrightness, @function
+ 880               	increaseLedBrightness:
+ 881               	.LFB11:
+ 882               	.LM165:
+ 883               	/* prologue: function */
+ 884               	/* frame size = 0 */
+ 885               	.LM166:
+ 886 0554 8091 0000 		lds r24,_ledBrightnessMax
+ 887 0558 8F3F      		cpi r24,lo8(-1)
+ 888 055a 01F0      		breq .L99
+ 889               	.LM167:
+ 890 055c 90E0      		ldi r25,lo8(0)
+ 891               	.LVL6:
+ 892 055e 4996      		adiw r24,25
+ 893               	.LVL7:
+ 894               	.LM168:
+ 895 0560 8F3F      		cpi r24,255
+ 896 0562 9105      		cpc r25,__zero_reg__
+ 897 0564 01F0      		breq .L96
+ 898 0566 04F0      		brlt .L96
+ 899               	.LM169:
+ 900 0568 8FEF      		ldi r24,lo8(-1)
+ 901               	.LVL8:
+ 902               	.L96:
+ 903               	.LM170:
+ 904 056a 8093 0000 		sts _ledBrightnessMax,r24
+ 905               	.LM171:
+ 906 056e 8091 0000 		lds r24,_fullLEDMode
+ 907               	.LVL9:
+ 908 0572 8230      		cpi r24,lo8(2)
+ 909 0574 01F4      		brne .L98
+ 910               	.LM172:
+ 911 0576 0E94 0000 		call setFullLEDState
+ 912               	.LVL10:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 17
+
+
+ 913               	.L98:
+ 914               	.LM173:
+ 915 057a 1092 0000 		sts (ledStateCount)+1,__zero_reg__
+ 916 057e 1092 0000 		sts ledStateCount,__zero_reg__
+ 917               	.L99:
+ 918 0582 0895      		ret
+ 919               	.LFE11:
+ 920               		.size	increaseLedBrightness, .-increaseLedBrightness
+ 921               	.global	initFullLEDState
+ 922               		.type	initFullLEDState, @function
+ 923               	initFullLEDState:
+ 924               	.LFB15:
+ 925               	.LM174:
+ 926               	/* prologue: function */
+ 927               	/* frame size = 0 */
+ 928               	.LM175:
+ 929 0584 8091 0000 		lds r24,ledInited
+ 930 0588 8823      		tst r24
+ 931 058a 01F4      		brne .L103
+ 932               	.LM176:
+ 933 058c 81E0      		ldi r24,lo8(1)
+ 934 058e 8093 0000 		sts ledInited,r24
+ 935               	.LM177:
+ 936 0592 0E94 0000 		call timer1Init
+ 937               	.LM178:
+ 938 0596 88E0      		ldi r24,lo8(8)
+ 939 0598 90E0      		ldi r25,hi8(8)
+ 940 059a 0E94 0000 		call timer1PWMInit
+ 941               	.LM179:
+ 942 059e 0E94 0000 		call timer1PWMBOn
+ 943               	.LM180:
+ 944 05a2 89E0      		ldi r24,lo8(9)
+ 945 05a4 90E0      		ldi r25,hi8(9)
+ 946 05a6 0E94 0000 		call __eerd_byte_m32
+ 947 05aa 8093 0000 		sts _ledBrightnessMax,r24
+ 948               	.LM181:
+ 949 05ae 8093 0000 		sts _ledBrightnessMax_saved,r24
+ 950               	.LM182:
+ 951 05b2 8BE0      		ldi r24,lo8(11)
+ 952 05b4 90E0      		ldi r25,hi8(11)
+ 953 05b6 0E94 0000 		call __eerd_byte_m32
+ 954 05ba 8093 0000 		sts _fullLEDMode,r24
+ 955               	.LM183:
+ 956 05be 8F3F      		cpi r24,lo8(-1)
+ 957 05c0 01F4      		brne .L102
+ 958               	.LM184:
+ 959 05c2 1092 0000 		sts _fullLEDMode,__zero_reg__
+ 960               	.L102:
+ 961               	.LM185:
+ 962 05c6 8091 0000 		lds r24,_fullLEDMode
+ 963 05ca 8093 0000 		sts _fullLEDMode_saved,r24
+ 964               	.LM186:
+ 965 05ce 0E94 0000 		call setFullLEDState
+ 966               	.L103:
+ 967 05d2 0895      		ret
+ 968               	.LFE15:
+ 969               		.size	initFullLEDState, .-initFullLEDState
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 18
+
+
+ 970               		.lcomm ledInited,1
+ 971               		.data
+ 972               		.type	beyondFNLEDState.1904, @object
+ 973               		.size	beyondFNLEDState.1904, 1
+ 974               	beyondFNLEDState.1904:
+ 975 0000 01        		.byte	1
+ 976               		.lcomm beyondFNDelayCounter.1903,2
+ 977               		.lcomm beyondFNCounter.1902,2
+ 978               		.lcomm scrollLockLED,1
+ 979               		.lcomm counter.1929,2
+ 980               		.lcomm ledStateCount,2
+ 981               		.lcomm _fullLEDMode,1
+ 982               		.lcomm _fullLEDMode_saved,1
+ 983               		.lcomm _ledBrightnessMax_saved,1
+ 984               		.type	_ledBrightnessMax, @object
+ 985               		.size	_ledBrightnessMax, 1
+ 986               	_ledBrightnessMax:
+ 987 0001 FF        		.byte	-1
+ 988               		.lcomm pwmDir,2
+ 989               		.lcomm pwmCounter,2
+ 990               		.lcomm downLevelStay,2
+ 991               		.lcomm downLevelLife,1
+ 992               		.lcomm downLevel,1
+ 993               		.lcomm _isDidSleep,1
+ 994               		.lcomm LEDstate,1
+ 995               		.lcomm prevSCRLED.1815,1
+ 996               		.section	.debug_frame,"",@progbits
+ 997               	.Lframe0:
+ 998 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
+ 999               	.LSCIE0:
+ 1000 0004 FFFF FFFF 		.long	0xffffffff
+ 1001 0008 01        		.byte	0x1
+ 1002 0009 00        		.string	""
+ 1003 000a 01        		.uleb128 0x1
+ 1004 000b 7F        		.sleb128 -1
+ 1005 000c 24        		.byte	0x24
+ 1006 000d 0C        		.byte	0xc
+ 1007 000e 20        		.uleb128 0x20
+ 1008 000f 00        		.uleb128 0x0
+ 1009               		.p2align	2
+ 1010               	.LECIE0:
+ 1011               	.LSFDE0:
+ 1012 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
+ 1013               	.LASFDE0:
+ 1014 0014 0000 0000 		.long	.Lframe0
+ 1015 0018 0000 0000 		.long	.LFB8
+ 1016 001c 0600 0000 		.long	.LFE8-.LFB8
+ 1017               		.p2align	2
+ 1018               	.LEFDE0:
+ 1019               	.LSFDE2:
+ 1020 0020 0C00 0000 		.long	.LEFDE2-.LASFDE2
+ 1021               	.LASFDE2:
+ 1022 0024 0000 0000 		.long	.Lframe0
+ 1023 0028 0000 0000 		.long	.LFB9
+ 1024 002c 0600 0000 		.long	.LFE9-.LFB9
+ 1025               		.p2align	2
+ 1026               	.LEFDE2:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 19
+
+
+ 1027               	.LSFDE4:
+ 1028 0030 0C00 0000 		.long	.LEFDE4-.LASFDE4
+ 1029               	.LASFDE4:
+ 1030 0034 0000 0000 		.long	.Lframe0
+ 1031 0038 0000 0000 		.long	.LFB14
+ 1032 003c 0600 0000 		.long	.LFE14-.LFB14
+ 1033               		.p2align	2
+ 1034               	.LEFDE4:
+ 1035               	.LSFDE6:
+ 1036 0040 0C00 0000 		.long	.LEFDE6-.LASFDE6
+ 1037               	.LASFDE6:
+ 1038 0044 0000 0000 		.long	.Lframe0
+ 1039 0048 0000 0000 		.long	.LFB16
+ 1040 004c 6200 0000 		.long	.LFE16-.LFB16
+ 1041               		.p2align	2
+ 1042               	.LEFDE6:
+ 1043               	.LSFDE8:
+ 1044 0050 0C00 0000 		.long	.LEFDE8-.LASFDE8
+ 1045               	.LASFDE8:
+ 1046 0054 0000 0000 		.long	.Lframe0
+ 1047 0058 0000 0000 		.long	.LFB17
+ 1048 005c 6C00 0000 		.long	.LFE17-.LFB17
+ 1049               		.p2align	2
+ 1050               	.LEFDE8:
+ 1051               	.LSFDE10:
+ 1052 0060 0C00 0000 		.long	.LEFDE10-.LASFDE10
+ 1053               	.LASFDE10:
+ 1054 0064 0000 0000 		.long	.Lframe0
+ 1055 0068 0000 0000 		.long	.LFB19
+ 1056 006c 2200 0000 		.long	.LFE19-.LFB19
+ 1057               		.p2align	2
+ 1058               	.LEFDE10:
+ 1059               	.LSFDE12:
+ 1060 0070 0C00 0000 		.long	.LEFDE12-.LASFDE12
+ 1061               	.LASFDE12:
+ 1062 0074 0000 0000 		.long	.Lframe0
+ 1063 0078 0000 0000 		.long	.LFB23
+ 1064 007c 3000 0000 		.long	.LFE23-.LFB23
+ 1065               		.p2align	2
+ 1066               	.LEFDE12:
+ 1067               	.LSFDE14:
+ 1068 0080 0C00 0000 		.long	.LEFDE14-.LASFDE14
+ 1069               	.LASFDE14:
+ 1070 0084 0000 0000 		.long	.Lframe0
+ 1071 0088 0000 0000 		.long	.LFB25
+ 1072 008c 5E00 0000 		.long	.LFE25-.LFB25
+ 1073               		.p2align	2
+ 1074               	.LEFDE14:
+ 1075               	.LSFDE16:
+ 1076 0090 0C00 0000 		.long	.LEFDE16-.LASFDE16
+ 1077               	.LASFDE16:
+ 1078 0094 0000 0000 		.long	.Lframe0
+ 1079 0098 0000 0000 		.long	.LFB26
+ 1080 009c 0403 0000 		.long	.LFE26-.LFB26
+ 1081               		.p2align	2
+ 1082               	.LEFDE16:
+ 1083               	.LSFDE18:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 20
+
+
+ 1084 00a0 0C00 0000 		.long	.LEFDE18-.LASFDE18
+ 1085               	.LASFDE18:
+ 1086 00a4 0000 0000 		.long	.Lframe0
+ 1087 00a8 0000 0000 		.long	.LFB10
+ 1088 00ac 6600 0000 		.long	.LFE10-.LFB10
+ 1089               		.p2align	2
+ 1090               	.LEFDE18:
+ 1091               	.LSFDE20:
+ 1092 00b0 0C00 0000 		.long	.LEFDE20-.LASFDE20
+ 1093               	.LASFDE20:
+ 1094 00b4 0000 0000 		.long	.Lframe0
+ 1095 00b8 0000 0000 		.long	.LFB24
+ 1096 00bc 0A00 0000 		.long	.LFE24-.LFB24
+ 1097               		.p2align	2
+ 1098               	.LEFDE20:
+ 1099               	.LSFDE22:
+ 1100 00c0 0C00 0000 		.long	.LEFDE22-.LASFDE22
+ 1101               	.LASFDE22:
+ 1102 00c4 0000 0000 		.long	.Lframe0
+ 1103 00c8 0000 0000 		.long	.LFB13
+ 1104 00cc 2200 0000 		.long	.LFE13-.LFB13
+ 1105               		.p2align	2
+ 1106               	.LEFDE22:
+ 1107               	.LSFDE24:
+ 1108 00d0 0C00 0000 		.long	.LEFDE24-.LASFDE24
+ 1109               	.LASFDE24:
+ 1110 00d4 0000 0000 		.long	.Lframe0
+ 1111 00d8 0000 0000 		.long	.LFB12
+ 1112 00dc 2E00 0000 		.long	.LFE12-.LFB12
+ 1113               		.p2align	2
+ 1114               	.LEFDE24:
+ 1115               	.LSFDE26:
+ 1116 00e0 0C00 0000 		.long	.LEFDE26-.LASFDE26
+ 1117               	.LASFDE26:
+ 1118 00e4 0000 0000 		.long	.Lframe0
+ 1119 00e8 0000 0000 		.long	.LFB11
+ 1120 00ec 3000 0000 		.long	.LFE11-.LFB11
+ 1121               		.p2align	2
+ 1122               	.LEFDE26:
+ 1123               	.LSFDE28:
+ 1124 00f0 0C00 0000 		.long	.LEFDE28-.LASFDE28
+ 1125               	.LASFDE28:
+ 1126 00f4 0000 0000 		.long	.Lframe0
+ 1127 00f8 0000 0000 		.long	.LFB15
+ 1128 00fc 5000 0000 		.long	.LFE15-.LFB15
+ 1129               		.p2align	2
+ 1130               	.LEFDE28:
+ 1131               		.text
+ 1132               	.Letext0:
+ 1133               		.section	.debug_loc,"",@progbits
+ 1134               	.Ldebug_loc0:
+ 1135               	.LLST6:
+ 1136 0000 E000 0000 		.long	.LVL1-.Ltext0
+ 1137 0004 F600 0000 		.long	.LVL2-.Ltext0
+ 1138 0008 0600      		.word	0x6
+ 1139 000a 68        		.byte	0x68
+ 1140 000b 93        		.byte	0x93
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 21
+
+
+ 1141 000c 01        		.uleb128 0x1
+ 1142 000d 69        		.byte	0x69
+ 1143 000e 93        		.byte	0x93
+ 1144 000f 01        		.uleb128 0x1
+ 1145 0010 0000 0000 		.long	0x0
+ 1146 0014 0000 0000 		.long	0x0
+ 1147               	.LLST10:
+ 1148 0018 9001 0000 		.long	.LVL3-.Ltext0
+ 1149 001c 9801 0000 		.long	.LVL4-.Ltext0
+ 1150 0020 0100      		.word	0x1
+ 1151 0022 68        		.byte	0x68
+ 1152 0023 9801 0000 		.long	.LVL4-.Ltext0
+ 1153 0027 9204 0000 		.long	.LVL5-.Ltext0
+ 1154 002b 0100      		.word	0x1
+ 1155 002d 61        		.byte	0x61
+ 1156 002e 0000 0000 		.long	0x0
+ 1157 0032 0000 0000 		.long	0x0
+ 1158               	.LLST16:
+ 1159 0036 6005 0000 		.long	.LVL7-.Ltext0
+ 1160 003a 6A05 0000 		.long	.LVL8-.Ltext0
+ 1161 003e 0600      		.word	0x6
+ 1162 0040 68        		.byte	0x68
+ 1163 0041 93        		.byte	0x93
+ 1164 0042 01        		.uleb128 0x1
+ 1165 0043 69        		.byte	0x69
+ 1166 0044 93        		.byte	0x93
+ 1167 0045 01        		.uleb128 0x1
+ 1168 0046 6A05 0000 		.long	.LVL8-.Ltext0
+ 1169 004a 7205 0000 		.long	.LVL9-.Ltext0
+ 1170 004e 0600      		.word	0x6
+ 1171 0050 68        		.byte	0x68
+ 1172 0051 93        		.byte	0x93
+ 1173 0052 01        		.uleb128 0x1
+ 1174 0053 69        		.byte	0x69
+ 1175 0054 93        		.byte	0x93
+ 1176 0055 01        		.uleb128 0x1
+ 1177 0056 0000 0000 		.long	0x0
+ 1178 005a 0000 0000 		.long	0x0
+ 1179               		.section	.debug_info
+ 1180 0000 7704 0000 		.long	0x477
+ 1181 0004 0200      		.word	0x2
+ 1182 0006 0000 0000 		.long	.Ldebug_abbrev0
+ 1183 000a 04        		.byte	0x4
+ 1184 000b 01        		.uleb128 0x1
+ 1185 000c 0000 0000 		.long	.LASF59
+ 1186 0010 01        		.byte	0x1
+ 1187 0011 0000 0000 		.long	.LASF60
+ 1188 0015 0000 0000 		.long	.LASF61
+ 1189 0019 0000 0000 		.long	.Ltext0
+ 1190 001d 0000 0000 		.long	.Letext0
+ 1191 0021 0000 0000 		.long	.Ldebug_line0
+ 1192 0025 02        		.uleb128 0x2
+ 1193 0026 01        		.byte	0x1
+ 1194 0027 06        		.byte	0x6
+ 1195 0028 0000 0000 		.long	.LASF0
+ 1196 002c 03        		.uleb128 0x3
+ 1197 002d 0000 0000 		.long	.LASF2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 22
+
+
+ 1198 0031 02        		.byte	0x2
+ 1199 0032 7A        		.byte	0x7a
+ 1200 0033 3700 0000 		.long	0x37
+ 1201 0037 02        		.uleb128 0x2
+ 1202 0038 01        		.byte	0x1
+ 1203 0039 08        		.byte	0x8
+ 1204 003a 0000 0000 		.long	.LASF1
+ 1205 003e 04        		.uleb128 0x4
+ 1206 003f 02        		.byte	0x2
+ 1207 0040 05        		.byte	0x5
+ 1208 0041 696E 7400 		.string	"int"
+ 1209 0045 03        		.uleb128 0x3
+ 1210 0046 0000 0000 		.long	.LASF3
+ 1211 004a 02        		.byte	0x2
+ 1212 004b 7C        		.byte	0x7c
+ 1213 004c 5000 0000 		.long	0x50
+ 1214 0050 02        		.uleb128 0x2
+ 1215 0051 02        		.byte	0x2
+ 1216 0052 07        		.byte	0x7
+ 1217 0053 0000 0000 		.long	.LASF4
+ 1218 0057 02        		.uleb128 0x2
+ 1219 0058 04        		.byte	0x4
+ 1220 0059 05        		.byte	0x5
+ 1221 005a 0000 0000 		.long	.LASF5
+ 1222 005e 02        		.uleb128 0x2
+ 1223 005f 04        		.byte	0x4
+ 1224 0060 07        		.byte	0x7
+ 1225 0061 0000 0000 		.long	.LASF6
+ 1226 0065 02        		.uleb128 0x2
+ 1227 0066 08        		.byte	0x8
+ 1228 0067 05        		.byte	0x5
+ 1229 0068 0000 0000 		.long	.LASF7
+ 1230 006c 02        		.uleb128 0x2
+ 1231 006d 08        		.byte	0x8
+ 1232 006e 07        		.byte	0x7
+ 1233 006f 0000 0000 		.long	.LASF8
+ 1234 0073 05        		.uleb128 0x5
+ 1235 0074 01        		.byte	0x1
+ 1236 0075 06        		.byte	0x6
+ 1237 0076 05        		.uleb128 0x5
+ 1238 0077 01        		.byte	0x1
+ 1239 0078 08        		.byte	0x8
+ 1240 0079 02        		.uleb128 0x2
+ 1241 007a 01        		.byte	0x1
+ 1242 007b 06        		.byte	0x6
+ 1243 007c 0000 0000 		.long	.LASF9
+ 1244 0080 02        		.uleb128 0x2
+ 1245 0081 02        		.byte	0x2
+ 1246 0082 07        		.byte	0x7
+ 1247 0083 0000 0000 		.long	.LASF10
+ 1248 0087 02        		.uleb128 0x2
+ 1249 0088 02        		.byte	0x2
+ 1250 0089 05        		.byte	0x5
+ 1251 008a 0000 0000 		.long	.LASF11
+ 1252 008e 06        		.uleb128 0x6
+ 1253 008f 01        		.byte	0x1
+ 1254 0090 0000 0000 		.long	.LASF62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 23
+
+
+ 1255 0094 01        		.byte	0x1
+ 1256 0095 2D        		.byte	0x2d
+ 1257 0096 01        		.byte	0x1
+ 1258 0097 2C00 0000 		.long	0x2c
+ 1259 009b 01        		.byte	0x1
+ 1260 009c 07        		.uleb128 0x7
+ 1261 009d 0000 0000 		.long	.LASF17
+ 1262 00a1 01        		.byte	0x1
+ 1263 00a2 3501      		.word	0x135
+ 1264 00a4 01        		.byte	0x1
+ 1265 00a5 01        		.byte	0x1
+ 1266 00a6 0601 0000 		.long	0x106
+ 1267 00aa 08        		.uleb128 0x8
+ 1268 00ab 0000 0000 		.long	.LASF34
+ 1269 00af 01        		.byte	0x1
+ 1270 00b0 3501      		.word	0x135
+ 1271 00b2 2C00 0000 		.long	0x2c
+ 1272 00b6 09        		.uleb128 0x9
+ 1273 00b7 0000 0000 		.long	.LASF12
+ 1274 00bb 01        		.byte	0x1
+ 1275 00bc 3A01      		.word	0x13a
+ 1276 00be 0601 0000 		.long	0x106
+ 1277 00c2 09        		.uleb128 0x9
+ 1278 00c3 0000 0000 		.long	.LASF13
+ 1279 00c7 01        		.byte	0x1
+ 1280 00c8 3B01      		.word	0x13b
+ 1281 00ca 0601 0000 		.long	0x106
+ 1282 00ce 0A        		.uleb128 0xa
+ 1283 00cf 0B        		.uleb128 0xb
+ 1284 00d0 0000 0000 		.long	.LASF14
+ 1285 00d4 01        		.byte	0x1
+ 1286 00d5 3701      		.word	0x137
+ 1287 00d7 3E00 0000 		.long	0x3e
+ 1288 00db 05        		.byte	0x5
+ 1289 00dc 03        		.byte	0x3
+ 1290 00dd 0000 0000 		.long	beyondFNCounter.1902
+ 1291 00e1 0B        		.uleb128 0xb
+ 1292 00e2 0000 0000 		.long	.LASF15
+ 1293 00e6 01        		.byte	0x1
+ 1294 00e7 3801      		.word	0x138
+ 1295 00e9 3E00 0000 		.long	0x3e
+ 1296 00ed 05        		.byte	0x5
+ 1297 00ee 03        		.byte	0x3
+ 1298 00ef 0000 0000 		.long	beyondFNDelayCounter.1903
+ 1299 00f3 0B        		.uleb128 0xb
+ 1300 00f4 0000 0000 		.long	.LASF16
+ 1301 00f8 01        		.byte	0x1
+ 1302 00f9 3901      		.word	0x139
+ 1303 00fb 2C00 0000 		.long	0x2c
+ 1304 00ff 05        		.byte	0x5
+ 1305 0100 03        		.byte	0x3
+ 1306 0101 0000 0000 		.long	beyondFNLEDState.1904
+ 1307 0105 00        		.byte	0x0
+ 1308 0106 0C        		.uleb128 0xc
+ 1309 0107 3E00 0000 		.long	0x3e
+ 1310 010b 07        		.uleb128 0x7
+ 1311 010c 0000 0000 		.long	.LASF18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 24
+
+
+ 1312 0110 01        		.byte	0x1
+ 1313 0111 5C01      		.word	0x15c
+ 1314 0113 01        		.byte	0x1
+ 1315 0114 01        		.byte	0x1
+ 1316 0115 3901 0000 		.long	0x139
+ 1317 0119 09        		.uleb128 0x9
+ 1318 011a 0000 0000 		.long	.LASF19
+ 1319 011e 01        		.byte	0x1
+ 1320 011f 5F01      		.word	0x15f
+ 1321 0121 0601 0000 		.long	0x106
+ 1322 0125 0A        		.uleb128 0xa
+ 1323 0126 0B        		.uleb128 0xb
+ 1324 0127 0000 0000 		.long	.LASF20
+ 1325 012b 01        		.byte	0x1
+ 1326 012c 5E01      		.word	0x15e
+ 1327 012e 3E00 0000 		.long	0x3e
+ 1328 0132 05        		.byte	0x5
+ 1329 0133 03        		.byte	0x3
+ 1330 0134 0000 0000 		.long	counter.1929
+ 1331 0138 00        		.byte	0x0
+ 1332 0139 0D        		.uleb128 0xd
+ 1333 013a 0000 0000 		.long	.LASF31
+ 1334 013e 01        		.byte	0x1
+ 1335 013f D1        		.byte	0xd1
+ 1336 0140 01        		.byte	0x1
+ 1337 0141 01        		.byte	0x1
+ 1338 0142 0E        		.uleb128 0xe
+ 1339 0143 01        		.byte	0x1
+ 1340 0144 0000 0000 		.long	.LASF21
+ 1341 0148 01        		.byte	0x1
+ 1342 0149 2A        		.byte	0x2a
+ 1343 014a 01        		.byte	0x1
+ 1344 014b 0000 0000 		.long	.LFB8
+ 1345 014f 0000 0000 		.long	.LFE8
+ 1346 0153 02        		.byte	0x2
+ 1347 0154 90        		.byte	0x90
+ 1348 0155 20        		.uleb128 0x20
+ 1349 0156 6801 0000 		.long	0x168
+ 1350 015a 0F        		.uleb128 0xf
+ 1351 015b 0000 0000 		.long	.LASF26
+ 1352 015f 01        		.byte	0x1
+ 1353 0160 2A        		.byte	0x2a
+ 1354 0161 2C00 0000 		.long	0x2c
+ 1355 0165 01        		.byte	0x1
+ 1356 0166 68        		.byte	0x68
+ 1357 0167 00        		.byte	0x0
+ 1358 0168 10        		.uleb128 0x10
+ 1359 0169 8E00 0000 		.long	0x8e
+ 1360 016d 0000 0000 		.long	.LFB9
+ 1361 0171 0000 0000 		.long	.LFE9
+ 1362 0175 02        		.byte	0x2
+ 1363 0176 90        		.byte	0x90
+ 1364 0177 20        		.uleb128 0x20
+ 1365 0178 11        		.uleb128 0x11
+ 1366 0179 01        		.byte	0x1
+ 1367 017a 0000 0000 		.long	.LASF24
+ 1368 017e 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 25
+
+
+ 1369 017f 6A        		.byte	0x6a
+ 1370 0180 01        		.byte	0x1
+ 1371 0181 0000 0000 		.long	.LFB14
+ 1372 0185 0000 0000 		.long	.LFE14
+ 1373 0189 02        		.byte	0x2
+ 1374 018a 90        		.byte	0x90
+ 1375 018b 20        		.uleb128 0x20
+ 1376 018c 0E        		.uleb128 0xe
+ 1377 018d 01        		.byte	0x1
+ 1378 018e 0000 0000 		.long	.LASF22
+ 1379 0192 01        		.byte	0x1
+ 1380 0193 8F        		.byte	0x8f
+ 1381 0194 01        		.byte	0x1
+ 1382 0195 0000 0000 		.long	.LFB16
+ 1383 0199 0000 0000 		.long	.LFE16
+ 1384 019d 02        		.byte	0x2
+ 1385 019e 90        		.byte	0x90
+ 1386 019f 20        		.uleb128 0x20
+ 1387 01a0 B601 0000 		.long	0x1b6
+ 1388 01a4 12        		.uleb128 0x12
+ 1389 01a5 0000 0000 		.long	.LASF23
+ 1390 01a9 01        		.byte	0x1
+ 1391 01aa A3        		.byte	0xa3
+ 1392 01ab 2C00 0000 		.long	0x2c
+ 1393 01af 05        		.byte	0x5
+ 1394 01b0 03        		.byte	0x3
+ 1395 01b1 0000 0000 		.long	prevSCRLED.1815
+ 1396 01b5 00        		.byte	0x0
+ 1397 01b6 11        		.uleb128 0x11
+ 1398 01b7 01        		.byte	0x1
+ 1399 01b8 0000 0000 		.long	.LASF25
+ 1400 01bc 01        		.byte	0x1
+ 1401 01bd BC        		.byte	0xbc
+ 1402 01be 01        		.byte	0x1
+ 1403 01bf 0000 0000 		.long	.LFB17
+ 1404 01c3 0000 0000 		.long	.LFE17
+ 1405 01c7 02        		.byte	0x2
+ 1406 01c8 90        		.byte	0x90
+ 1407 01c9 20        		.uleb128 0x20
+ 1408 01ca 13        		.uleb128 0x13
+ 1409 01cb 0000 0000 		.long	.LASF63
+ 1410 01cf 01        		.byte	0x1
+ 1411 01d0 E3        		.byte	0xe3
+ 1412 01d1 01        		.byte	0x1
+ 1413 01d2 3E00 0000 		.long	0x3e
+ 1414 01d6 0000 0000 		.long	.LFB19
+ 1415 01da 0000 0000 		.long	.LFE19
+ 1416 01de 02        		.byte	0x2
+ 1417 01df 90        		.byte	0x90
+ 1418 01e0 20        		.uleb128 0x20
+ 1419 01e1 0002 0000 		.long	0x200
+ 1420 01e5 14        		.uleb128 0x14
+ 1421 01e6 0000 0000 		.long	.LASF27
+ 1422 01ea 01        		.byte	0x1
+ 1423 01eb E3        		.byte	0xe3
+ 1424 01ec 3E00 0000 		.long	0x3e
+ 1425 01f0 0000 0000 		.long	.LLST6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 26
+
+
+ 1426 01f4 15        		.uleb128 0x15
+ 1427 01f5 0000 0000 		.long	.LASF28
+ 1428 01f9 01        		.byte	0x1
+ 1429 01fa E4        		.byte	0xe4
+ 1430 01fb 3E00 0000 		.long	0x3e
+ 1431 01ff 00        		.byte	0x0
+ 1432 0200 16        		.uleb128 0x16
+ 1433 0201 01        		.byte	0x1
+ 1434 0202 0000 0000 		.long	.LASF29
+ 1435 0206 01        		.byte	0x1
+ 1436 0207 7701      		.word	0x177
+ 1437 0209 01        		.byte	0x1
+ 1438 020a 0000 0000 		.long	.LFB23
+ 1439 020e 0000 0000 		.long	.LFE23
+ 1440 0212 02        		.byte	0x2
+ 1441 0213 90        		.byte	0x90
+ 1442 0214 20        		.uleb128 0x20
+ 1443 0215 16        		.uleb128 0x16
+ 1444 0216 01        		.byte	0x1
+ 1445 0217 0000 0000 		.long	.LASF30
+ 1446 021b 01        		.byte	0x1
+ 1447 021c 8E01      		.word	0x18e
+ 1448 021e 01        		.byte	0x1
+ 1449 021f 0000 0000 		.long	.LFB25
+ 1450 0223 0000 0000 		.long	.LFE25
+ 1451 0227 02        		.byte	0x2
+ 1452 0228 90        		.byte	0x90
+ 1453 0229 20        		.uleb128 0x20
+ 1454 022a 0D        		.uleb128 0xd
+ 1455 022b 0000 0000 		.long	.LASF32
+ 1456 022f 01        		.byte	0x1
+ 1457 0230 EA        		.byte	0xea
+ 1458 0231 01        		.byte	0x1
+ 1459 0232 01        		.byte	0x1
+ 1460 0233 17        		.uleb128 0x17
+ 1461 0234 01        		.byte	0x1
+ 1462 0235 0000 0000 		.long	.LASF33
+ 1463 0239 01        		.byte	0x1
+ 1464 023a 9A01      		.word	0x19a
+ 1465 023c 01        		.byte	0x1
+ 1466 023d 0000 0000 		.long	.LFB26
+ 1467 0241 0000 0000 		.long	.LFE26
+ 1468 0245 02        		.byte	0x2
+ 1469 0246 90        		.byte	0x90
+ 1470 0247 20        		.uleb128 0x20
+ 1471 0248 CB02 0000 		.long	0x2cb
+ 1472 024c 18        		.uleb128 0x18
+ 1473 024d 0000 0000 		.long	.LASF34
+ 1474 0251 01        		.byte	0x1
+ 1475 0252 9A01      		.word	0x19a
+ 1476 0254 2C00 0000 		.long	0x2c
+ 1477 0258 0000 0000 		.long	.LLST10
+ 1478 025c 19        		.uleb128 0x19
+ 1479 025d 9C00 0000 		.long	0x9c
+ 1480 0261 0000 0000 		.long	.LBB28
+ 1481 0265 0000 0000 		.long	.LBE28
+ 1482 0269 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 27
+
+
+ 1483 026a A201      		.word	0x1a2
+ 1484 026c 8602 0000 		.long	0x286
+ 1485 0270 1A        		.uleb128 0x1a
+ 1486 0271 AA00 0000 		.long	0xaa
+ 1487 0275 1B        		.uleb128 0x1b
+ 1488 0276 0000 0000 		.long	.Ldebug_ranges0+0x0
+ 1489 027a 1C        		.uleb128 0x1c
+ 1490 027b B600 0000 		.long	0xb6
+ 1491 027f 1C        		.uleb128 0x1c
+ 1492 0280 C200 0000 		.long	0xc2
+ 1493 0284 00        		.byte	0x0
+ 1494 0285 00        		.byte	0x0
+ 1495 0286 19        		.uleb128 0x19
+ 1496 0287 0B01 0000 		.long	0x10b
+ 1497 028b 0000 0000 		.long	.LBB31
+ 1498 028f 0000 0000 		.long	.LBE31
+ 1499 0293 01        		.byte	0x1
+ 1500 0294 A501      		.word	0x1a5
+ 1501 0296 AA02 0000 		.long	0x2aa
+ 1502 029a 1D        		.uleb128 0x1d
+ 1503 029b 0000 0000 		.long	.LBB32
+ 1504 029f 0000 0000 		.long	.LBE32
+ 1505 02a3 1C        		.uleb128 0x1c
+ 1506 02a4 1901 0000 		.long	0x119
+ 1507 02a8 00        		.byte	0x0
+ 1508 02a9 00        		.byte	0x0
+ 1509 02aa 1E        		.uleb128 0x1e
+ 1510 02ab 3901 0000 		.long	0x139
+ 1511 02af 0000 0000 		.long	.LBB33
+ 1512 02b3 0000 0000 		.long	.LBE33
+ 1513 02b7 01        		.byte	0x1
+ 1514 02b8 A801      		.word	0x1a8
+ 1515 02ba 1E        		.uleb128 0x1e
+ 1516 02bb 2A02 0000 		.long	0x22a
+ 1517 02bf 0000 0000 		.long	.LBB35
+ 1518 02c3 0000 0000 		.long	.LBE35
+ 1519 02c7 01        		.byte	0x1
+ 1520 02c8 AB01      		.word	0x1ab
+ 1521 02ca 00        		.byte	0x0
+ 1522 02cb 1F        		.uleb128 0x1f
+ 1523 02cc 0000 0000 		.long	.LASF64
+ 1524 02d0 01        		.byte	0x1
+ 1525 02d1 31        		.byte	0x31
+ 1526 02d2 01        		.byte	0x1
+ 1527 02d3 0000 0000 		.long	.LFB10
+ 1528 02d7 0000 0000 		.long	.LFE10
+ 1529 02db 02        		.byte	0x2
+ 1530 02dc 90        		.byte	0x90
+ 1531 02dd 20        		.uleb128 0x20
+ 1532 02de 16        		.uleb128 0x16
+ 1533 02df 01        		.byte	0x1
+ 1534 02e0 0000 0000 		.long	.LASF35
+ 1535 02e4 01        		.byte	0x1
+ 1536 02e5 8801      		.word	0x188
+ 1537 02e7 01        		.byte	0x1
+ 1538 02e8 0000 0000 		.long	.LFB24
+ 1539 02ec 0000 0000 		.long	.LFE24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 28
+
+
+ 1540 02f0 02        		.byte	0x2
+ 1541 02f1 90        		.byte	0x90
+ 1542 02f2 20        		.uleb128 0x20
+ 1543 02f3 11        		.uleb128 0x11
+ 1544 02f4 01        		.byte	0x1
+ 1545 02f5 0000 0000 		.long	.LASF36
+ 1546 02f9 01        		.byte	0x1
+ 1547 02fa 62        		.byte	0x62
+ 1548 02fb 01        		.byte	0x1
+ 1549 02fc 0000 0000 		.long	.LFB13
+ 1550 0300 0000 0000 		.long	.LFE13
+ 1551 0304 02        		.byte	0x2
+ 1552 0305 90        		.byte	0x90
+ 1553 0306 20        		.uleb128 0x20
+ 1554 0307 11        		.uleb128 0x11
+ 1555 0308 01        		.byte	0x1
+ 1556 0309 0000 0000 		.long	.LASF37
+ 1557 030d 01        		.byte	0x1
+ 1558 030e 56        		.byte	0x56
+ 1559 030f 01        		.byte	0x1
+ 1560 0310 0000 0000 		.long	.LFB12
+ 1561 0314 0000 0000 		.long	.LFE12
+ 1562 0318 02        		.byte	0x2
+ 1563 0319 90        		.byte	0x90
+ 1564 031a 20        		.uleb128 0x20
+ 1565 031b 0E        		.uleb128 0xe
+ 1566 031c 01        		.byte	0x1
+ 1567 031d 0000 0000 		.long	.LASF38
+ 1568 0321 01        		.byte	0x1
+ 1569 0322 48        		.byte	0x48
+ 1570 0323 01        		.byte	0x1
+ 1571 0324 0000 0000 		.long	.LFB11
+ 1572 0328 0000 0000 		.long	.LFE11
+ 1573 032c 02        		.byte	0x2
+ 1574 032d 90        		.byte	0x90
+ 1575 032e 20        		.uleb128 0x20
+ 1576 032f 4303 0000 		.long	0x343
+ 1577 0333 20        		.uleb128 0x20
+ 1578 0334 0000 0000 		.long	.LASF39
+ 1579 0338 01        		.byte	0x1
+ 1580 0339 4B        		.byte	0x4b
+ 1581 033a 3E00 0000 		.long	0x3e
+ 1582 033e 0000 0000 		.long	.LLST16
+ 1583 0342 00        		.byte	0x0
+ 1584 0343 11        		.uleb128 0x11
+ 1585 0344 01        		.byte	0x1
+ 1586 0345 0000 0000 		.long	.LASF40
+ 1587 0349 01        		.byte	0x1
+ 1588 034a 6E        		.byte	0x6e
+ 1589 034b 01        		.byte	0x1
+ 1590 034c 0000 0000 		.long	.LFB15
+ 1591 0350 0000 0000 		.long	.LFE15
+ 1592 0354 02        		.byte	0x2
+ 1593 0355 90        		.byte	0x90
+ 1594 0356 20        		.uleb128 0x20
+ 1595 0357 12        		.uleb128 0x12
+ 1596 0358 0000 0000 		.long	.LASF41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 29
+
+
+ 1597 035c 01        		.byte	0x1
+ 1598 035d 12        		.byte	0x12
+ 1599 035e 4500 0000 		.long	0x45
+ 1600 0362 05        		.byte	0x5
+ 1601 0363 03        		.byte	0x3
+ 1602 0364 0000 0000 		.long	downLevelStay
+ 1603 0368 12        		.uleb128 0x12
+ 1604 0369 0000 0000 		.long	.LASF42
+ 1605 036d 01        		.byte	0x1
+ 1606 036e 13        		.byte	0x13
+ 1607 036f 2C00 0000 		.long	0x2c
+ 1608 0373 05        		.byte	0x5
+ 1609 0374 03        		.byte	0x3
+ 1610 0375 0000 0000 		.long	downLevel
+ 1611 0379 21        		.uleb128 0x21
+ 1612 037a 0000 0000 		.long	.LASF43
+ 1613 037e 01        		.byte	0x1
+ 1614 037f 14        		.byte	0x14
+ 1615 0380 8503 0000 		.long	0x385
+ 1616 0384 0C        		.byte	0xc
+ 1617 0385 0C        		.uleb128 0xc
+ 1618 0386 2C00 0000 		.long	0x2c
+ 1619 038a 12        		.uleb128 0x12
+ 1620 038b 0000 0000 		.long	.LASF44
+ 1621 038f 01        		.byte	0x1
+ 1622 0390 15        		.byte	0x15
+ 1623 0391 2C00 0000 		.long	0x2c
+ 1624 0395 05        		.byte	0x5
+ 1625 0396 03        		.byte	0x3
+ 1626 0397 0000 0000 		.long	downLevelLife
+ 1627 039b 12        		.uleb128 0x12
+ 1628 039c 0000 0000 		.long	.LASF45
+ 1629 03a0 01        		.byte	0x1
+ 1630 03a1 17        		.byte	0x17
+ 1631 03a2 2C00 0000 		.long	0x2c
+ 1632 03a6 05        		.byte	0x5
+ 1633 03a7 03        		.byte	0x3
+ 1634 03a8 0000 0000 		.long	ledInited
+ 1635 03ac 12        		.uleb128 0x12
+ 1636 03ad 0000 0000 		.long	.LASF46
+ 1637 03b1 01        		.byte	0x1
+ 1638 03b2 18        		.byte	0x18
+ 1639 03b3 2C00 0000 		.long	0x2c
+ 1640 03b7 05        		.byte	0x5
+ 1641 03b8 03        		.byte	0x3
+ 1642 03b9 0000 0000 		.long	LEDstate
+ 1643 03bd 12        		.uleb128 0x12
+ 1644 03be 0000 0000 		.long	.LASF47
+ 1645 03c2 01        		.byte	0x1
+ 1646 03c3 19        		.byte	0x19
+ 1647 03c4 2C00 0000 		.long	0x2c
+ 1648 03c8 05        		.byte	0x5
+ 1649 03c9 03        		.byte	0x3
+ 1650 03ca 0000 0000 		.long	scrollLockLED
+ 1651 03ce 12        		.uleb128 0x12
+ 1652 03cf 0000 0000 		.long	.LASF48
+ 1653 03d3 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 30
+
+
+ 1654 03d4 1B        		.byte	0x1b
+ 1655 03d5 2C00 0000 		.long	0x2c
+ 1656 03d9 05        		.byte	0x5
+ 1657 03da 03        		.byte	0x3
+ 1658 03db 0000 0000 		.long	_fullLEDMode
+ 1659 03df 12        		.uleb128 0x12
+ 1660 03e0 0000 0000 		.long	.LASF49
+ 1661 03e4 01        		.byte	0x1
+ 1662 03e5 1C        		.byte	0x1c
+ 1663 03e6 2C00 0000 		.long	0x2c
+ 1664 03ea 05        		.byte	0x5
+ 1665 03eb 03        		.byte	0x3
+ 1666 03ec 0000 0000 		.long	_fullLEDMode_saved
+ 1667 03f0 12        		.uleb128 0x12
+ 1668 03f1 0000 0000 		.long	.LASF50
+ 1669 03f5 01        		.byte	0x1
+ 1670 03f6 1E        		.byte	0x1e
+ 1671 03f7 3E00 0000 		.long	0x3e
+ 1672 03fb 05        		.byte	0x5
+ 1673 03fc 03        		.byte	0x3
+ 1674 03fd 0000 0000 		.long	pwmCounter
+ 1675 0401 12        		.uleb128 0x12
+ 1676 0402 0000 0000 		.long	.LASF51
+ 1677 0406 01        		.byte	0x1
+ 1678 0407 1F        		.byte	0x1f
+ 1679 0408 3E00 0000 		.long	0x3e
+ 1680 040c 05        		.byte	0x5
+ 1681 040d 03        		.byte	0x3
+ 1682 040e 0000 0000 		.long	pwmDir
+ 1683 0412 21        		.uleb128 0x21
+ 1684 0413 0000 0000 		.long	.LASF52
+ 1685 0417 01        		.byte	0x1
+ 1686 0418 20        		.byte	0x20
+ 1687 0419 8503 0000 		.long	0x385
+ 1688 041d 08        		.byte	0x8
+ 1689 041e 12        		.uleb128 0x12
+ 1690 041f 0000 0000 		.long	.LASF53
+ 1691 0423 01        		.byte	0x1
+ 1692 0424 21        		.byte	0x21
+ 1693 0425 2C00 0000 		.long	0x2c
+ 1694 0429 05        		.byte	0x5
+ 1695 042a 03        		.byte	0x3
+ 1696 042b 0000 0000 		.long	_isDidSleep
+ 1697 042f 12        		.uleb128 0x12
+ 1698 0430 0000 0000 		.long	.LASF54
+ 1699 0434 01        		.byte	0x1
+ 1700 0435 23        		.byte	0x23
+ 1701 0436 3E00 0000 		.long	0x3e
+ 1702 043a 05        		.byte	0x5
+ 1703 043b 03        		.byte	0x3
+ 1704 043c 0000 0000 		.long	ledStateCount
+ 1705 0440 12        		.uleb128 0x12
+ 1706 0441 0000 0000 		.long	.LASF55
+ 1707 0445 01        		.byte	0x1
+ 1708 0446 25        		.byte	0x25
+ 1709 0447 2C00 0000 		.long	0x2c
+ 1710 044b 05        		.byte	0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 31
+
+
+ 1711 044c 03        		.byte	0x3
+ 1712 044d 0000 0000 		.long	_ledBrightnessMax
+ 1713 0451 12        		.uleb128 0x12
+ 1714 0452 0000 0000 		.long	.LASF56
+ 1715 0456 01        		.byte	0x1
+ 1716 0457 26        		.byte	0x26
+ 1717 0458 2C00 0000 		.long	0x2c
+ 1718 045c 05        		.byte	0x5
+ 1719 045d 03        		.byte	0x3
+ 1720 045e 0000 0000 		.long	_ledBrightnessMax_saved
+ 1721 0462 21        		.uleb128 0x21
+ 1722 0463 0000 0000 		.long	.LASF57
+ 1723 0467 01        		.byte	0x1
+ 1724 0468 27        		.byte	0x27
+ 1725 0469 8503 0000 		.long	0x385
+ 1726 046d 1E        		.byte	0x1e
+ 1727 046e 21        		.uleb128 0x21
+ 1728 046f 0000 0000 		.long	.LASF58
+ 1729 0473 01        		.byte	0x1
+ 1730 0474 28        		.byte	0x28
+ 1731 0475 8503 0000 		.long	0x385
+ 1732 0479 19        		.byte	0x19
+ 1733 047a 00        		.byte	0x0
+ 1734               		.section	.debug_abbrev
+ 1735 0000 01        		.uleb128 0x1
+ 1736 0001 11        		.uleb128 0x11
+ 1737 0002 01        		.byte	0x1
+ 1738 0003 25        		.uleb128 0x25
+ 1739 0004 0E        		.uleb128 0xe
+ 1740 0005 13        		.uleb128 0x13
+ 1741 0006 0B        		.uleb128 0xb
+ 1742 0007 03        		.uleb128 0x3
+ 1743 0008 0E        		.uleb128 0xe
+ 1744 0009 1B        		.uleb128 0x1b
+ 1745 000a 0E        		.uleb128 0xe
+ 1746 000b 11        		.uleb128 0x11
+ 1747 000c 01        		.uleb128 0x1
+ 1748 000d 12        		.uleb128 0x12
+ 1749 000e 01        		.uleb128 0x1
+ 1750 000f 10        		.uleb128 0x10
+ 1751 0010 06        		.uleb128 0x6
+ 1752 0011 00        		.byte	0x0
+ 1753 0012 00        		.byte	0x0
+ 1754 0013 02        		.uleb128 0x2
+ 1755 0014 24        		.uleb128 0x24
+ 1756 0015 00        		.byte	0x0
+ 1757 0016 0B        		.uleb128 0xb
+ 1758 0017 0B        		.uleb128 0xb
+ 1759 0018 3E        		.uleb128 0x3e
+ 1760 0019 0B        		.uleb128 0xb
+ 1761 001a 03        		.uleb128 0x3
+ 1762 001b 0E        		.uleb128 0xe
+ 1763 001c 00        		.byte	0x0
+ 1764 001d 00        		.byte	0x0
+ 1765 001e 03        		.uleb128 0x3
+ 1766 001f 16        		.uleb128 0x16
+ 1767 0020 00        		.byte	0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 32
+
+
+ 1768 0021 03        		.uleb128 0x3
+ 1769 0022 0E        		.uleb128 0xe
+ 1770 0023 3A        		.uleb128 0x3a
+ 1771 0024 0B        		.uleb128 0xb
+ 1772 0025 3B        		.uleb128 0x3b
+ 1773 0026 0B        		.uleb128 0xb
+ 1774 0027 49        		.uleb128 0x49
+ 1775 0028 13        		.uleb128 0x13
+ 1776 0029 00        		.byte	0x0
+ 1777 002a 00        		.byte	0x0
+ 1778 002b 04        		.uleb128 0x4
+ 1779 002c 24        		.uleb128 0x24
+ 1780 002d 00        		.byte	0x0
+ 1781 002e 0B        		.uleb128 0xb
+ 1782 002f 0B        		.uleb128 0xb
+ 1783 0030 3E        		.uleb128 0x3e
+ 1784 0031 0B        		.uleb128 0xb
+ 1785 0032 03        		.uleb128 0x3
+ 1786 0033 08        		.uleb128 0x8
+ 1787 0034 00        		.byte	0x0
+ 1788 0035 00        		.byte	0x0
+ 1789 0036 05        		.uleb128 0x5
+ 1790 0037 24        		.uleb128 0x24
+ 1791 0038 00        		.byte	0x0
+ 1792 0039 0B        		.uleb128 0xb
+ 1793 003a 0B        		.uleb128 0xb
+ 1794 003b 3E        		.uleb128 0x3e
+ 1795 003c 0B        		.uleb128 0xb
+ 1796 003d 00        		.byte	0x0
+ 1797 003e 00        		.byte	0x0
+ 1798 003f 06        		.uleb128 0x6
+ 1799 0040 2E        		.uleb128 0x2e
+ 1800 0041 00        		.byte	0x0
+ 1801 0042 3F        		.uleb128 0x3f
+ 1802 0043 0C        		.uleb128 0xc
+ 1803 0044 03        		.uleb128 0x3
+ 1804 0045 0E        		.uleb128 0xe
+ 1805 0046 3A        		.uleb128 0x3a
+ 1806 0047 0B        		.uleb128 0xb
+ 1807 0048 3B        		.uleb128 0x3b
+ 1808 0049 0B        		.uleb128 0xb
+ 1809 004a 27        		.uleb128 0x27
+ 1810 004b 0C        		.uleb128 0xc
+ 1811 004c 49        		.uleb128 0x49
+ 1812 004d 13        		.uleb128 0x13
+ 1813 004e 20        		.uleb128 0x20
+ 1814 004f 0B        		.uleb128 0xb
+ 1815 0050 00        		.byte	0x0
+ 1816 0051 00        		.byte	0x0
+ 1817 0052 07        		.uleb128 0x7
+ 1818 0053 2E        		.uleb128 0x2e
+ 1819 0054 01        		.byte	0x1
+ 1820 0055 03        		.uleb128 0x3
+ 1821 0056 0E        		.uleb128 0xe
+ 1822 0057 3A        		.uleb128 0x3a
+ 1823 0058 0B        		.uleb128 0xb
+ 1824 0059 3B        		.uleb128 0x3b
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 33
+
+
+ 1825 005a 05        		.uleb128 0x5
+ 1826 005b 27        		.uleb128 0x27
+ 1827 005c 0C        		.uleb128 0xc
+ 1828 005d 20        		.uleb128 0x20
+ 1829 005e 0B        		.uleb128 0xb
+ 1830 005f 01        		.uleb128 0x1
+ 1831 0060 13        		.uleb128 0x13
+ 1832 0061 00        		.byte	0x0
+ 1833 0062 00        		.byte	0x0
+ 1834 0063 08        		.uleb128 0x8
+ 1835 0064 05        		.uleb128 0x5
+ 1836 0065 00        		.byte	0x0
+ 1837 0066 03        		.uleb128 0x3
+ 1838 0067 0E        		.uleb128 0xe
+ 1839 0068 3A        		.uleb128 0x3a
+ 1840 0069 0B        		.uleb128 0xb
+ 1841 006a 3B        		.uleb128 0x3b
+ 1842 006b 05        		.uleb128 0x5
+ 1843 006c 49        		.uleb128 0x49
+ 1844 006d 13        		.uleb128 0x13
+ 1845 006e 00        		.byte	0x0
+ 1846 006f 00        		.byte	0x0
+ 1847 0070 09        		.uleb128 0x9
+ 1848 0071 34        		.uleb128 0x34
+ 1849 0072 00        		.byte	0x0
+ 1850 0073 03        		.uleb128 0x3
+ 1851 0074 0E        		.uleb128 0xe
+ 1852 0075 3A        		.uleb128 0x3a
+ 1853 0076 0B        		.uleb128 0xb
+ 1854 0077 3B        		.uleb128 0x3b
+ 1855 0078 05        		.uleb128 0x5
+ 1856 0079 49        		.uleb128 0x49
+ 1857 007a 13        		.uleb128 0x13
+ 1858 007b 00        		.byte	0x0
+ 1859 007c 00        		.byte	0x0
+ 1860 007d 0A        		.uleb128 0xa
+ 1861 007e 0B        		.uleb128 0xb
+ 1862 007f 00        		.byte	0x0
+ 1863 0080 00        		.byte	0x0
+ 1864 0081 00        		.byte	0x0
+ 1865 0082 0B        		.uleb128 0xb
+ 1866 0083 34        		.uleb128 0x34
+ 1867 0084 00        		.byte	0x0
+ 1868 0085 03        		.uleb128 0x3
+ 1869 0086 0E        		.uleb128 0xe
+ 1870 0087 3A        		.uleb128 0x3a
+ 1871 0088 0B        		.uleb128 0xb
+ 1872 0089 3B        		.uleb128 0x3b
+ 1873 008a 05        		.uleb128 0x5
+ 1874 008b 49        		.uleb128 0x49
+ 1875 008c 13        		.uleb128 0x13
+ 1876 008d 02        		.uleb128 0x2
+ 1877 008e 0A        		.uleb128 0xa
+ 1878 008f 00        		.byte	0x0
+ 1879 0090 00        		.byte	0x0
+ 1880 0091 0C        		.uleb128 0xc
+ 1881 0092 26        		.uleb128 0x26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 34
+
+
+ 1882 0093 00        		.byte	0x0
+ 1883 0094 49        		.uleb128 0x49
+ 1884 0095 13        		.uleb128 0x13
+ 1885 0096 00        		.byte	0x0
+ 1886 0097 00        		.byte	0x0
+ 1887 0098 0D        		.uleb128 0xd
+ 1888 0099 2E        		.uleb128 0x2e
+ 1889 009a 00        		.byte	0x0
+ 1890 009b 03        		.uleb128 0x3
+ 1891 009c 0E        		.uleb128 0xe
+ 1892 009d 3A        		.uleb128 0x3a
+ 1893 009e 0B        		.uleb128 0xb
+ 1894 009f 3B        		.uleb128 0x3b
+ 1895 00a0 0B        		.uleb128 0xb
+ 1896 00a1 27        		.uleb128 0x27
+ 1897 00a2 0C        		.uleb128 0xc
+ 1898 00a3 20        		.uleb128 0x20
+ 1899 00a4 0B        		.uleb128 0xb
+ 1900 00a5 00        		.byte	0x0
+ 1901 00a6 00        		.byte	0x0
+ 1902 00a7 0E        		.uleb128 0xe
+ 1903 00a8 2E        		.uleb128 0x2e
+ 1904 00a9 01        		.byte	0x1
+ 1905 00aa 3F        		.uleb128 0x3f
+ 1906 00ab 0C        		.uleb128 0xc
+ 1907 00ac 03        		.uleb128 0x3
+ 1908 00ad 0E        		.uleb128 0xe
+ 1909 00ae 3A        		.uleb128 0x3a
+ 1910 00af 0B        		.uleb128 0xb
+ 1911 00b0 3B        		.uleb128 0x3b
+ 1912 00b1 0B        		.uleb128 0xb
+ 1913 00b2 27        		.uleb128 0x27
+ 1914 00b3 0C        		.uleb128 0xc
+ 1915 00b4 11        		.uleb128 0x11
+ 1916 00b5 01        		.uleb128 0x1
+ 1917 00b6 12        		.uleb128 0x12
+ 1918 00b7 01        		.uleb128 0x1
+ 1919 00b8 40        		.uleb128 0x40
+ 1920 00b9 0A        		.uleb128 0xa
+ 1921 00ba 01        		.uleb128 0x1
+ 1922 00bb 13        		.uleb128 0x13
+ 1923 00bc 00        		.byte	0x0
+ 1924 00bd 00        		.byte	0x0
+ 1925 00be 0F        		.uleb128 0xf
+ 1926 00bf 05        		.uleb128 0x5
+ 1927 00c0 00        		.byte	0x0
+ 1928 00c1 03        		.uleb128 0x3
+ 1929 00c2 0E        		.uleb128 0xe
+ 1930 00c3 3A        		.uleb128 0x3a
+ 1931 00c4 0B        		.uleb128 0xb
+ 1932 00c5 3B        		.uleb128 0x3b
+ 1933 00c6 0B        		.uleb128 0xb
+ 1934 00c7 49        		.uleb128 0x49
+ 1935 00c8 13        		.uleb128 0x13
+ 1936 00c9 02        		.uleb128 0x2
+ 1937 00ca 0A        		.uleb128 0xa
+ 1938 00cb 00        		.byte	0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 35
+
+
+ 1939 00cc 00        		.byte	0x0
+ 1940 00cd 10        		.uleb128 0x10
+ 1941 00ce 2E        		.uleb128 0x2e
+ 1942 00cf 00        		.byte	0x0
+ 1943 00d0 31        		.uleb128 0x31
+ 1944 00d1 13        		.uleb128 0x13
+ 1945 00d2 11        		.uleb128 0x11
+ 1946 00d3 01        		.uleb128 0x1
+ 1947 00d4 12        		.uleb128 0x12
+ 1948 00d5 01        		.uleb128 0x1
+ 1949 00d6 40        		.uleb128 0x40
+ 1950 00d7 0A        		.uleb128 0xa
+ 1951 00d8 00        		.byte	0x0
+ 1952 00d9 00        		.byte	0x0
+ 1953 00da 11        		.uleb128 0x11
+ 1954 00db 2E        		.uleb128 0x2e
+ 1955 00dc 00        		.byte	0x0
+ 1956 00dd 3F        		.uleb128 0x3f
+ 1957 00de 0C        		.uleb128 0xc
+ 1958 00df 03        		.uleb128 0x3
+ 1959 00e0 0E        		.uleb128 0xe
+ 1960 00e1 3A        		.uleb128 0x3a
+ 1961 00e2 0B        		.uleb128 0xb
+ 1962 00e3 3B        		.uleb128 0x3b
+ 1963 00e4 0B        		.uleb128 0xb
+ 1964 00e5 27        		.uleb128 0x27
+ 1965 00e6 0C        		.uleb128 0xc
+ 1966 00e7 11        		.uleb128 0x11
+ 1967 00e8 01        		.uleb128 0x1
+ 1968 00e9 12        		.uleb128 0x12
+ 1969 00ea 01        		.uleb128 0x1
+ 1970 00eb 40        		.uleb128 0x40
+ 1971 00ec 0A        		.uleb128 0xa
+ 1972 00ed 00        		.byte	0x0
+ 1973 00ee 00        		.byte	0x0
+ 1974 00ef 12        		.uleb128 0x12
+ 1975 00f0 34        		.uleb128 0x34
+ 1976 00f1 00        		.byte	0x0
+ 1977 00f2 03        		.uleb128 0x3
+ 1978 00f3 0E        		.uleb128 0xe
+ 1979 00f4 3A        		.uleb128 0x3a
+ 1980 00f5 0B        		.uleb128 0xb
+ 1981 00f6 3B        		.uleb128 0x3b
+ 1982 00f7 0B        		.uleb128 0xb
+ 1983 00f8 49        		.uleb128 0x49
+ 1984 00f9 13        		.uleb128 0x13
+ 1985 00fa 02        		.uleb128 0x2
+ 1986 00fb 0A        		.uleb128 0xa
+ 1987 00fc 00        		.byte	0x0
+ 1988 00fd 00        		.byte	0x0
+ 1989 00fe 13        		.uleb128 0x13
+ 1990 00ff 2E        		.uleb128 0x2e
+ 1991 0100 01        		.byte	0x1
+ 1992 0101 03        		.uleb128 0x3
+ 1993 0102 0E        		.uleb128 0xe
+ 1994 0103 3A        		.uleb128 0x3a
+ 1995 0104 0B        		.uleb128 0xb
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 36
+
+
+ 1996 0105 3B        		.uleb128 0x3b
+ 1997 0106 0B        		.uleb128 0xb
+ 1998 0107 27        		.uleb128 0x27
+ 1999 0108 0C        		.uleb128 0xc
+ 2000 0109 49        		.uleb128 0x49
+ 2001 010a 13        		.uleb128 0x13
+ 2002 010b 11        		.uleb128 0x11
+ 2003 010c 01        		.uleb128 0x1
+ 2004 010d 12        		.uleb128 0x12
+ 2005 010e 01        		.uleb128 0x1
+ 2006 010f 40        		.uleb128 0x40
+ 2007 0110 0A        		.uleb128 0xa
+ 2008 0111 01        		.uleb128 0x1
+ 2009 0112 13        		.uleb128 0x13
+ 2010 0113 00        		.byte	0x0
+ 2011 0114 00        		.byte	0x0
+ 2012 0115 14        		.uleb128 0x14
+ 2013 0116 05        		.uleb128 0x5
+ 2014 0117 00        		.byte	0x0
+ 2015 0118 03        		.uleb128 0x3
+ 2016 0119 0E        		.uleb128 0xe
+ 2017 011a 3A        		.uleb128 0x3a
+ 2018 011b 0B        		.uleb128 0xb
+ 2019 011c 3B        		.uleb128 0x3b
+ 2020 011d 0B        		.uleb128 0xb
+ 2021 011e 49        		.uleb128 0x49
+ 2022 011f 13        		.uleb128 0x13
+ 2023 0120 02        		.uleb128 0x2
+ 2024 0121 06        		.uleb128 0x6
+ 2025 0122 00        		.byte	0x0
+ 2026 0123 00        		.byte	0x0
+ 2027 0124 15        		.uleb128 0x15
+ 2028 0125 34        		.uleb128 0x34
+ 2029 0126 00        		.byte	0x0
+ 2030 0127 03        		.uleb128 0x3
+ 2031 0128 0E        		.uleb128 0xe
+ 2032 0129 3A        		.uleb128 0x3a
+ 2033 012a 0B        		.uleb128 0xb
+ 2034 012b 3B        		.uleb128 0x3b
+ 2035 012c 0B        		.uleb128 0xb
+ 2036 012d 49        		.uleb128 0x49
+ 2037 012e 13        		.uleb128 0x13
+ 2038 012f 00        		.byte	0x0
+ 2039 0130 00        		.byte	0x0
+ 2040 0131 16        		.uleb128 0x16
+ 2041 0132 2E        		.uleb128 0x2e
+ 2042 0133 00        		.byte	0x0
+ 2043 0134 3F        		.uleb128 0x3f
+ 2044 0135 0C        		.uleb128 0xc
+ 2045 0136 03        		.uleb128 0x3
+ 2046 0137 0E        		.uleb128 0xe
+ 2047 0138 3A        		.uleb128 0x3a
+ 2048 0139 0B        		.uleb128 0xb
+ 2049 013a 3B        		.uleb128 0x3b
+ 2050 013b 05        		.uleb128 0x5
+ 2051 013c 27        		.uleb128 0x27
+ 2052 013d 0C        		.uleb128 0xc
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 37
+
+
+ 2053 013e 11        		.uleb128 0x11
+ 2054 013f 01        		.uleb128 0x1
+ 2055 0140 12        		.uleb128 0x12
+ 2056 0141 01        		.uleb128 0x1
+ 2057 0142 40        		.uleb128 0x40
+ 2058 0143 0A        		.uleb128 0xa
+ 2059 0144 00        		.byte	0x0
+ 2060 0145 00        		.byte	0x0
+ 2061 0146 17        		.uleb128 0x17
+ 2062 0147 2E        		.uleb128 0x2e
+ 2063 0148 01        		.byte	0x1
+ 2064 0149 3F        		.uleb128 0x3f
+ 2065 014a 0C        		.uleb128 0xc
+ 2066 014b 03        		.uleb128 0x3
+ 2067 014c 0E        		.uleb128 0xe
+ 2068 014d 3A        		.uleb128 0x3a
+ 2069 014e 0B        		.uleb128 0xb
+ 2070 014f 3B        		.uleb128 0x3b
+ 2071 0150 05        		.uleb128 0x5
+ 2072 0151 27        		.uleb128 0x27
+ 2073 0152 0C        		.uleb128 0xc
+ 2074 0153 11        		.uleb128 0x11
+ 2075 0154 01        		.uleb128 0x1
+ 2076 0155 12        		.uleb128 0x12
+ 2077 0156 01        		.uleb128 0x1
+ 2078 0157 40        		.uleb128 0x40
+ 2079 0158 0A        		.uleb128 0xa
+ 2080 0159 01        		.uleb128 0x1
+ 2081 015a 13        		.uleb128 0x13
+ 2082 015b 00        		.byte	0x0
+ 2083 015c 00        		.byte	0x0
+ 2084 015d 18        		.uleb128 0x18
+ 2085 015e 05        		.uleb128 0x5
+ 2086 015f 00        		.byte	0x0
+ 2087 0160 03        		.uleb128 0x3
+ 2088 0161 0E        		.uleb128 0xe
+ 2089 0162 3A        		.uleb128 0x3a
+ 2090 0163 0B        		.uleb128 0xb
+ 2091 0164 3B        		.uleb128 0x3b
+ 2092 0165 05        		.uleb128 0x5
+ 2093 0166 49        		.uleb128 0x49
+ 2094 0167 13        		.uleb128 0x13
+ 2095 0168 02        		.uleb128 0x2
+ 2096 0169 06        		.uleb128 0x6
+ 2097 016a 00        		.byte	0x0
+ 2098 016b 00        		.byte	0x0
+ 2099 016c 19        		.uleb128 0x19
+ 2100 016d 1D        		.uleb128 0x1d
+ 2101 016e 01        		.byte	0x1
+ 2102 016f 31        		.uleb128 0x31
+ 2103 0170 13        		.uleb128 0x13
+ 2104 0171 11        		.uleb128 0x11
+ 2105 0172 01        		.uleb128 0x1
+ 2106 0173 12        		.uleb128 0x12
+ 2107 0174 01        		.uleb128 0x1
+ 2108 0175 58        		.uleb128 0x58
+ 2109 0176 0B        		.uleb128 0xb
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 38
+
+
+ 2110 0177 59        		.uleb128 0x59
+ 2111 0178 05        		.uleb128 0x5
+ 2112 0179 01        		.uleb128 0x1
+ 2113 017a 13        		.uleb128 0x13
+ 2114 017b 00        		.byte	0x0
+ 2115 017c 00        		.byte	0x0
+ 2116 017d 1A        		.uleb128 0x1a
+ 2117 017e 05        		.uleb128 0x5
+ 2118 017f 00        		.byte	0x0
+ 2119 0180 31        		.uleb128 0x31
+ 2120 0181 13        		.uleb128 0x13
+ 2121 0182 00        		.byte	0x0
+ 2122 0183 00        		.byte	0x0
+ 2123 0184 1B        		.uleb128 0x1b
+ 2124 0185 0B        		.uleb128 0xb
+ 2125 0186 01        		.byte	0x1
+ 2126 0187 55        		.uleb128 0x55
+ 2127 0188 06        		.uleb128 0x6
+ 2128 0189 00        		.byte	0x0
+ 2129 018a 00        		.byte	0x0
+ 2130 018b 1C        		.uleb128 0x1c
+ 2131 018c 34        		.uleb128 0x34
+ 2132 018d 00        		.byte	0x0
+ 2133 018e 31        		.uleb128 0x31
+ 2134 018f 13        		.uleb128 0x13
+ 2135 0190 00        		.byte	0x0
+ 2136 0191 00        		.byte	0x0
+ 2137 0192 1D        		.uleb128 0x1d
+ 2138 0193 0B        		.uleb128 0xb
+ 2139 0194 01        		.byte	0x1
+ 2140 0195 11        		.uleb128 0x11
+ 2141 0196 01        		.uleb128 0x1
+ 2142 0197 12        		.uleb128 0x12
+ 2143 0198 01        		.uleb128 0x1
+ 2144 0199 00        		.byte	0x0
+ 2145 019a 00        		.byte	0x0
+ 2146 019b 1E        		.uleb128 0x1e
+ 2147 019c 1D        		.uleb128 0x1d
+ 2148 019d 00        		.byte	0x0
+ 2149 019e 31        		.uleb128 0x31
+ 2150 019f 13        		.uleb128 0x13
+ 2151 01a0 11        		.uleb128 0x11
+ 2152 01a1 01        		.uleb128 0x1
+ 2153 01a2 12        		.uleb128 0x12
+ 2154 01a3 01        		.uleb128 0x1
+ 2155 01a4 58        		.uleb128 0x58
+ 2156 01a5 0B        		.uleb128 0xb
+ 2157 01a6 59        		.uleb128 0x59
+ 2158 01a7 05        		.uleb128 0x5
+ 2159 01a8 00        		.byte	0x0
+ 2160 01a9 00        		.byte	0x0
+ 2161 01aa 1F        		.uleb128 0x1f
+ 2162 01ab 2E        		.uleb128 0x2e
+ 2163 01ac 00        		.byte	0x0
+ 2164 01ad 03        		.uleb128 0x3
+ 2165 01ae 0E        		.uleb128 0xe
+ 2166 01af 3A        		.uleb128 0x3a
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 39
+
+
+ 2167 01b0 0B        		.uleb128 0xb
+ 2168 01b1 3B        		.uleb128 0x3b
+ 2169 01b2 0B        		.uleb128 0xb
+ 2170 01b3 27        		.uleb128 0x27
+ 2171 01b4 0C        		.uleb128 0xc
+ 2172 01b5 11        		.uleb128 0x11
+ 2173 01b6 01        		.uleb128 0x1
+ 2174 01b7 12        		.uleb128 0x12
+ 2175 01b8 01        		.uleb128 0x1
+ 2176 01b9 40        		.uleb128 0x40
+ 2177 01ba 0A        		.uleb128 0xa
+ 2178 01bb 00        		.byte	0x0
+ 2179 01bc 00        		.byte	0x0
+ 2180 01bd 20        		.uleb128 0x20
+ 2181 01be 34        		.uleb128 0x34
+ 2182 01bf 00        		.byte	0x0
+ 2183 01c0 03        		.uleb128 0x3
+ 2184 01c1 0E        		.uleb128 0xe
+ 2185 01c2 3A        		.uleb128 0x3a
+ 2186 01c3 0B        		.uleb128 0xb
+ 2187 01c4 3B        		.uleb128 0x3b
+ 2188 01c5 0B        		.uleb128 0xb
+ 2189 01c6 49        		.uleb128 0x49
+ 2190 01c7 13        		.uleb128 0x13
+ 2191 01c8 02        		.uleb128 0x2
+ 2192 01c9 06        		.uleb128 0x6
+ 2193 01ca 00        		.byte	0x0
+ 2194 01cb 00        		.byte	0x0
+ 2195 01cc 21        		.uleb128 0x21
+ 2196 01cd 34        		.uleb128 0x34
+ 2197 01ce 00        		.byte	0x0
+ 2198 01cf 03        		.uleb128 0x3
+ 2199 01d0 0E        		.uleb128 0xe
+ 2200 01d1 3A        		.uleb128 0x3a
+ 2201 01d2 0B        		.uleb128 0xb
+ 2202 01d3 3B        		.uleb128 0x3b
+ 2203 01d4 0B        		.uleb128 0xb
+ 2204 01d5 49        		.uleb128 0x49
+ 2205 01d6 13        		.uleb128 0x13
+ 2206 01d7 1C        		.uleb128 0x1c
+ 2207 01d8 0B        		.uleb128 0xb
+ 2208 01d9 00        		.byte	0x0
+ 2209 01da 00        		.byte	0x0
+ 2210 01db 00        		.byte	0x0
+ 2211               		.section	.debug_pubnames,"",@progbits
+ 2212 0000 0201 0000 		.long	0x102
+ 2213 0004 0200      		.word	0x2
+ 2214 0006 0000 0000 		.long	.Ldebug_info0
+ 2215 000a 7B04 0000 		.long	0x47b
+ 2216 000e 4201 0000 		.long	0x142
+ 2217 0012 7365 744C 		.string	"setLEDState"
+ 2217      4544 5374 
+ 2217      6174 6500 
+ 2218 001e 6801 0000 		.long	0x168
+ 2219 0022 6765 744C 		.string	"getLEDState"
+ 2219      4544 5374 
+ 2219      6174 6500 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 40
+
+
+ 2220 002e 7801 0000 		.long	0x178
+ 2221 0032 636C 6561 		.string	"clearLEDInited"
+ 2221      724C 4544 
+ 2221      496E 6974 
+ 2221      6564 00
+ 2222 0041 8C01 0000 		.long	0x18c
+ 2223 0045 7365 744C 		.string	"setLEDIndicate"
+ 2223      4544 496E 
+ 2223      6469 6361 
+ 2223      7465 00
+ 2224 0054 B601 0000 		.long	0x1b6
+ 2225 0058 6170 706C 		.string	"applyKeyDownForFullLED"
+ 2225      794B 6579 
+ 2225      446F 776E 
+ 2225      466F 7246 
+ 2225      756C 6C4C 
+ 2226 006f 0002 0000 		.long	0x200
+ 2227 0073 736C 6565 		.string	"sleepLED"
+ 2227      704C 4544 
+ 2227      00
+ 2228 007c 1502 0000 		.long	0x215
+ 2229 0080 646F 536C 		.string	"doSleep"
+ 2229      6565 7000 
+ 2230 0088 3302 0000 		.long	0x233
+ 2231 008c 7265 6E64 		.string	"renderLED"
+ 2231      6572 4C45 
+ 2231      4400 
+ 2232 0096 DE02 0000 		.long	0x2de
+ 2233 009a 7761 6B65 		.string	"wakeUpLED"
+ 2233      5570 4C45 
+ 2233      4400 
+ 2234 00a4 F302 0000 		.long	0x2f3
+ 2235 00a8 6368 616E 		.string	"changeFullLedState"
+ 2235      6765 4675 
+ 2235      6C6C 4C65 
+ 2235      6453 7461 
+ 2235      7465 00
+ 2236 00bb 0703 0000 		.long	0x307
+ 2237 00bf 7265 6475 		.string	"reduceLedBrightness"
+ 2237      6365 4C65 
+ 2237      6442 7269 
+ 2237      6768 746E 
+ 2237      6573 7300 
+ 2238 00d3 1B03 0000 		.long	0x31b
+ 2239 00d7 696E 6372 		.string	"increaseLedBrightness"
+ 2239      6561 7365 
+ 2239      4C65 6442 
+ 2239      7269 6768 
+ 2239      746E 6573 
+ 2240 00ed 4303 0000 		.long	0x343
+ 2241 00f1 696E 6974 		.string	"initFullLEDState"
+ 2241      4675 6C6C 
+ 2241      4C45 4453 
+ 2241      7461 7465 
+ 2241      00
+ 2242 0102 0000 0000 		.long	0x0
+ 2243               		.section	.debug_aranges,"",@progbits
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 41
+
+
+ 2244 0000 1C00 0000 		.long	0x1c
+ 2245 0004 0200      		.word	0x2
+ 2246 0006 0000 0000 		.long	.Ldebug_info0
+ 2247 000a 04        		.byte	0x4
+ 2248 000b 00        		.byte	0x0
+ 2249 000c 0000      		.word	0x0
+ 2250 000e 0000      		.word	0x0
+ 2251 0010 0000 0000 		.long	.Ltext0
+ 2252 0014 D405 0000 		.long	.Letext0-.Ltext0
+ 2253 0018 0000 0000 		.long	0x0
+ 2254 001c 0000 0000 		.long	0x0
+ 2255               		.section	.debug_ranges,"",@progbits
+ 2256               	.Ldebug_ranges0:
+ 2257 0000 AC01 0000 		.long	.LBB29-.Ltext0
+ 2258 0004 E001 0000 		.long	.LBE29-.Ltext0
+ 2259 0008 EC01 0000 		.long	.LBB30-.Ltext0
+ 2260 000c 2E02 0000 		.long	.LBE30-.Ltext0
+ 2261 0010 0000 0000 		.long	0x0
+ 2262 0014 0000 0000 		.long	0x0
+ 2263               		.section	.debug_line
+ 2264 0000 4B06 0000 		.long	.LELT0-.LSLT0
+ 2265               	.LSLT0:
+ 2266 0004 0200      		.word	0x2
+ 2267 0006 5800 0000 		.long	.LELTP0-.LASLTP0
+ 2268               	.LASLTP0:
+ 2269 000a 01        		.byte	0x1
+ 2270 000b 01        		.byte	0x1
+ 2271 000c F6        		.byte	0xf6
+ 2272 000d F5        		.byte	0xf5
+ 2273 000e 0A        		.byte	0xa
+ 2274 000f 00        		.byte	0x0
+ 2275 0010 01        		.byte	0x1
+ 2276 0011 01        		.byte	0x1
+ 2277 0012 01        		.byte	0x1
+ 2278 0013 01        		.byte	0x1
+ 2279 0014 00        		.byte	0x0
+ 2280 0015 00        		.byte	0x0
+ 2281 0016 00        		.byte	0x0
+ 2282 0017 01        		.byte	0x1
+ 2283 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
+ 2283      696E 6176 
+ 2283      722D 3230 
+ 2283      3130 3031 
+ 2283      3130 2F6C 
+ 2284 0044 00        		.byte	0
+ 2285 0045 00        		.byte	0x0
+ 2286 0046 6C65 6472 		.string	"ledrender.c"
+ 2286      656E 6465 
+ 2286      722E 6300 
+ 2287 0052 00        		.uleb128 0x0
+ 2288 0053 00        		.uleb128 0x0
+ 2289 0054 00        		.uleb128 0x0
+ 2290 0055 7374 6469 		.string	"stdint.h"
+ 2290      6E74 2E68 
+ 2290      00
+ 2291 005e 01        		.uleb128 0x1
+ 2292 005f 00        		.uleb128 0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 42
+
+
+ 2293 0060 00        		.uleb128 0x0
+ 2294 0061 00        		.byte	0x0
+ 2295               	.LELTP0:
+ 2296 0062 00        		.byte	0x0
+ 2297 0063 05        		.uleb128 0x5
+ 2298 0064 02        		.byte	0x2
+ 2299 0065 0000 0000 		.long	.LM1
+ 2300 0069 3D        		.byte	0x3d
+ 2301 006a 00        		.byte	0x0
+ 2302 006b 05        		.uleb128 0x5
+ 2303 006c 02        		.byte	0x2
+ 2304 006d 0000 0000 		.long	.LM2
+ 2305 0071 15        		.byte	0x15
+ 2306 0072 00        		.byte	0x0
+ 2307 0073 05        		.uleb128 0x5
+ 2308 0074 02        		.byte	0x2
+ 2309 0075 0000 0000 		.long	.LM3
+ 2310 0079 15        		.byte	0x15
+ 2311 007a 00        		.byte	0x0
+ 2312 007b 05        		.uleb128 0x5
+ 2313 007c 02        		.byte	0x2
+ 2314 007d 0000 0000 		.long	.LM4
+ 2315 0081 15        		.byte	0x15
+ 2316 0082 00        		.byte	0x0
+ 2317 0083 05        		.uleb128 0x5
+ 2318 0084 02        		.byte	0x2
+ 2319 0085 0000 0000 		.long	.LM5
+ 2320 0089 16        		.byte	0x16
+ 2321 008a 00        		.byte	0x0
+ 2322 008b 05        		.uleb128 0x5
+ 2323 008c 02        		.byte	0x2
+ 2324 008d 0000 0000 		.long	.LM6
+ 2325 0091 4F        		.byte	0x4f
+ 2326 0092 00        		.byte	0x0
+ 2327 0093 05        		.uleb128 0x5
+ 2328 0094 02        		.byte	0x2
+ 2329 0095 0000 0000 		.long	.LM7
+ 2330 0099 15        		.byte	0x15
+ 2331 009a 00        		.byte	0x0
+ 2332 009b 05        		.uleb128 0x5
+ 2333 009c 02        		.byte	0x2
+ 2334 009d 0000 0000 		.long	.LM8
+ 2335 00a1 15        		.byte	0x15
+ 2336 00a2 00        		.byte	0x0
+ 2337 00a3 05        		.uleb128 0x5
+ 2338 00a4 02        		.byte	0x2
+ 2339 00a5 0000 0000 		.long	.LM9
+ 2340 00a9 37        		.byte	0x37
+ 2341 00aa 00        		.byte	0x0
+ 2342 00ab 05        		.uleb128 0x5
+ 2343 00ac 02        		.byte	0x2
+ 2344 00ad 0000 0000 		.long	.LM10
+ 2345 00b1 15        		.byte	0x15
+ 2346 00b2 00        		.byte	0x0
+ 2347 00b3 05        		.uleb128 0x5
+ 2348 00b4 02        		.byte	0x2
+ 2349 00b5 0000 0000 		.long	.LM11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 43
+
+
+ 2350 00b9 15        		.byte	0x15
+ 2351 00ba 00        		.byte	0x0
+ 2352 00bb 05        		.uleb128 0x5
+ 2353 00bc 02        		.byte	0x2
+ 2354 00bd 0000 0000 		.long	.LM12
+ 2355 00c1 16        		.byte	0x16
+ 2356 00c2 00        		.byte	0x0
+ 2357 00c3 05        		.uleb128 0x5
+ 2358 00c4 02        		.byte	0x2
+ 2359 00c5 0000 0000 		.long	.LM13
+ 2360 00c9 16        		.byte	0x16
+ 2361 00ca 00        		.byte	0x0
+ 2362 00cb 05        		.uleb128 0x5
+ 2363 00cc 02        		.byte	0x2
+ 2364 00cd 0000 0000 		.long	.LM14
+ 2365 00d1 15        		.byte	0x15
+ 2366 00d2 00        		.byte	0x0
+ 2367 00d3 05        		.uleb128 0x5
+ 2368 00d4 02        		.byte	0x2
+ 2369 00d5 0000 0000 		.long	.LM15
+ 2370 00d9 16        		.byte	0x16
+ 2371 00da 00        		.byte	0x0
+ 2372 00db 05        		.uleb128 0x5
+ 2373 00dc 02        		.byte	0x2
+ 2374 00dd 0000 0000 		.long	.LM16
+ 2375 00e1 18        		.byte	0x18
+ 2376 00e2 00        		.byte	0x0
+ 2377 00e3 05        		.uleb128 0x5
+ 2378 00e4 02        		.byte	0x2
+ 2379 00e5 0000 0000 		.long	.LM17
+ 2380 00e9 15        		.byte	0x15
+ 2381 00ea 00        		.byte	0x0
+ 2382 00eb 05        		.uleb128 0x5
+ 2383 00ec 02        		.byte	0x2
+ 2384 00ed 0000 0000 		.long	.LM18
+ 2385 00f1 1B        		.byte	0x1b
+ 2386 00f2 00        		.byte	0x0
+ 2387 00f3 05        		.uleb128 0x5
+ 2388 00f4 02        		.byte	0x2
+ 2389 00f5 0000 0000 		.long	.LM19
+ 2390 00f9 0F        		.byte	0xf
+ 2391 00fa 00        		.byte	0x0
+ 2392 00fb 05        		.uleb128 0x5
+ 2393 00fc 02        		.byte	0x2
+ 2394 00fd 0000 0000 		.long	.LM20
+ 2395 0101 24        		.byte	0x24
+ 2396 0102 00        		.byte	0x0
+ 2397 0103 05        		.uleb128 0x5
+ 2398 0104 02        		.byte	0x2
+ 2399 0105 0000 0000 		.long	.LM21
+ 2400 0109 0B        		.byte	0xb
+ 2401 010a 00        		.byte	0x0
+ 2402 010b 05        		.uleb128 0x5
+ 2403 010c 02        		.byte	0x2
+ 2404 010d 0000 0000 		.long	.LM22
+ 2405 0111 17        		.byte	0x17
+ 2406 0112 00        		.byte	0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 44
+
+
+ 2407 0113 05        		.uleb128 0x5
+ 2408 0114 02        		.byte	0x2
+ 2409 0115 0000 0000 		.long	.LM23
+ 2410 0119 15        		.byte	0x15
+ 2411 011a 00        		.byte	0x0
+ 2412 011b 05        		.uleb128 0x5
+ 2413 011c 02        		.byte	0x2
+ 2414 011d 0000 0000 		.long	.LM24
+ 2415 0121 16        		.byte	0x16
+ 2416 0122 00        		.byte	0x0
+ 2417 0123 05        		.uleb128 0x5
+ 2418 0124 02        		.byte	0x2
+ 2419 0125 0000 0000 		.long	.LM25
+ 2420 0129 19        		.byte	0x19
+ 2421 012a 00        		.byte	0x0
+ 2422 012b 05        		.uleb128 0x5
+ 2423 012c 02        		.byte	0x2
+ 2424 012d 0000 0000 		.long	.LM26
+ 2425 0131 15        		.byte	0x15
+ 2426 0132 00        		.byte	0x0
+ 2427 0133 05        		.uleb128 0x5
+ 2428 0134 02        		.byte	0x2
+ 2429 0135 0000 0000 		.long	.LM27
+ 2430 0139 15        		.byte	0x15
+ 2431 013a 00        		.byte	0x0
+ 2432 013b 05        		.uleb128 0x5
+ 2433 013c 02        		.byte	0x2
+ 2434 013d 0000 0000 		.long	.LM28
+ 2435 0141 16        		.byte	0x16
+ 2436 0142 00        		.byte	0x0
+ 2437 0143 05        		.uleb128 0x5
+ 2438 0144 02        		.byte	0x2
+ 2439 0145 0000 0000 		.long	.LM29
+ 2440 0149 1B        		.byte	0x1b
+ 2441 014a 00        		.byte	0x0
+ 2442 014b 05        		.uleb128 0x5
+ 2443 014c 02        		.byte	0x2
+ 2444 014d 0000 0000 		.long	.LM30
+ 2445 0151 15        		.byte	0x15
+ 2446 0152 00        		.byte	0x0
+ 2447 0153 05        		.uleb128 0x5
+ 2448 0154 02        		.byte	0x2
+ 2449 0155 0000 0000 		.long	.LM31
+ 2450 0159 16        		.byte	0x16
+ 2451 015a 00        		.byte	0x0
+ 2452 015b 05        		.uleb128 0x5
+ 2453 015c 02        		.byte	0x2
+ 2454 015d 0000 0000 		.long	.LM32
+ 2455 0161 15        		.byte	0x15
+ 2456 0162 00        		.byte	0x0
+ 2457 0163 05        		.uleb128 0x5
+ 2458 0164 02        		.byte	0x2
+ 2459 0165 0000 0000 		.long	.LM33
+ 2460 0169 15        		.byte	0x15
+ 2461 016a 00        		.byte	0x0
+ 2462 016b 05        		.uleb128 0x5
+ 2463 016c 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 45
+
+
+ 2464 016d 0000 0000 		.long	.LM34
+ 2465 0171 15        		.byte	0x15
+ 2466 0172 00        		.byte	0x0
+ 2467 0173 05        		.uleb128 0x5
+ 2468 0174 02        		.byte	0x2
+ 2469 0175 0000 0000 		.long	.LM35
+ 2470 0179 17        		.byte	0x17
+ 2471 017a 00        		.byte	0x0
+ 2472 017b 05        		.uleb128 0x5
+ 2473 017c 02        		.byte	0x2
+ 2474 017d 0000 0000 		.long	.LM36
+ 2475 0181 16        		.byte	0x16
+ 2476 0182 00        		.byte	0x0
+ 2477 0183 05        		.uleb128 0x5
+ 2478 0184 02        		.byte	0x2
+ 2479 0185 0000 0000 		.long	.LM37
+ 2480 0189 15        		.byte	0x15
+ 2481 018a 00        		.byte	0x0
+ 2482 018b 05        		.uleb128 0x5
+ 2483 018c 02        		.byte	0x2
+ 2484 018d 0000 0000 		.long	.LM38
+ 2485 0191 15        		.byte	0x15
+ 2486 0192 00        		.byte	0x0
+ 2487 0193 05        		.uleb128 0x5
+ 2488 0194 02        		.byte	0x2
+ 2489 0195 0000 0000 		.long	.LM39
+ 2490 0199 15        		.byte	0x15
+ 2491 019a 00        		.byte	0x0
+ 2492 019b 05        		.uleb128 0x5
+ 2493 019c 02        		.byte	0x2
+ 2494 019d 0000 0000 		.long	.LM40
+ 2495 01a1 2D        		.byte	0x2d
+ 2496 01a2 00        		.byte	0x0
+ 2497 01a3 05        		.uleb128 0x5
+ 2498 01a4 02        		.byte	0x2
+ 2499 01a5 0000 0000 		.long	.LM41
+ 2500 01a9 01        		.byte	0x1
+ 2501 01aa 00        		.byte	0x0
+ 2502 01ab 05        		.uleb128 0x5
+ 2503 01ac 02        		.byte	0x2
+ 2504 01ad 0000 0000 		.long	.LM42
+ 2505 01b1 18        		.byte	0x18
+ 2506 01b2 00        		.byte	0x0
+ 2507 01b3 05        		.uleb128 0x5
+ 2508 01b4 02        		.byte	0x2
+ 2509 01b5 0000 0000 		.long	.LM43
+ 2510 01b9 A4        		.byte	0xa4
+ 2511 01ba 00        		.byte	0x0
+ 2512 01bb 05        		.uleb128 0x5
+ 2513 01bc 02        		.byte	0x2
+ 2514 01bd 0000 0000 		.long	.LM44
+ 2515 01c1 16        		.byte	0x16
+ 2516 01c2 00        		.byte	0x0
+ 2517 01c3 05        		.uleb128 0x5
+ 2518 01c4 02        		.byte	0x2
+ 2519 01c5 0000 0000 		.long	.LM45
+ 2520 01c9 15        		.byte	0x15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 46
+
+
+ 2521 01ca 00        		.byte	0x0
+ 2522 01cb 05        		.uleb128 0x5
+ 2523 01cc 02        		.byte	0x2
+ 2524 01cd 0000 0000 		.long	.LM46
+ 2525 01d1 15        		.byte	0x15
+ 2526 01d2 00        		.byte	0x0
+ 2527 01d3 05        		.uleb128 0x5
+ 2528 01d4 02        		.byte	0x2
+ 2529 01d5 0000 0000 		.long	.LM47
+ 2530 01d9 16        		.byte	0x16
+ 2531 01da 00        		.byte	0x0
+ 2532 01db 05        		.uleb128 0x5
+ 2533 01dc 02        		.byte	0x2
+ 2534 01dd 0000 0000 		.long	.LM48
+ 2535 01e1 16        		.byte	0x16
+ 2536 01e2 00        		.byte	0x0
+ 2537 01e3 05        		.uleb128 0x5
+ 2538 01e4 02        		.byte	0x2
+ 2539 01e5 0000 0000 		.long	.LM49
+ 2540 01e9 16        		.byte	0x16
+ 2541 01ea 00        		.byte	0x0
+ 2542 01eb 05        		.uleb128 0x5
+ 2543 01ec 02        		.byte	0x2
+ 2544 01ed 0000 0000 		.long	.LM50
+ 2545 01f1 17        		.byte	0x17
+ 2546 01f2 00        		.byte	0x0
+ 2547 01f3 05        		.uleb128 0x5
+ 2548 01f4 02        		.byte	0x2
+ 2549 01f5 0000 0000 		.long	.LM51
+ 2550 01f9 1E        		.byte	0x1e
+ 2551 01fa 00        		.byte	0x0
+ 2552 01fb 05        		.uleb128 0x5
+ 2553 01fc 02        		.byte	0x2
+ 2554 01fd 0000 0000 		.long	.LM52
+ 2555 0201 15        		.byte	0x15
+ 2556 0202 00        		.byte	0x0
+ 2557 0203 05        		.uleb128 0x5
+ 2558 0204 02        		.byte	0x2
+ 2559 0205 0000 0000 		.long	.LM53
+ 2560 0209 16        		.byte	0x16
+ 2561 020a 00        		.byte	0x0
+ 2562 020b 05        		.uleb128 0x5
+ 2563 020c 02        		.byte	0x2
+ 2564 020d 0000 0000 		.long	.LM54
+ 2565 0211 15        		.byte	0x15
+ 2566 0212 00        		.byte	0x0
+ 2567 0213 05        		.uleb128 0x5
+ 2568 0214 02        		.byte	0x2
+ 2569 0215 0000 0000 		.long	.LM55
+ 2570 0219 15        		.byte	0x15
+ 2571 021a 00        		.byte	0x0
+ 2572 021b 05        		.uleb128 0x5
+ 2573 021c 02        		.byte	0x2
+ 2574 021d 0000 0000 		.long	.LM56
+ 2575 0221 15        		.byte	0x15
+ 2576 0222 00        		.byte	0x0
+ 2577 0223 05        		.uleb128 0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 47
+
+
+ 2578 0224 02        		.byte	0x2
+ 2579 0225 0000 0000 		.long	.LM57
+ 2580 0229 15        		.byte	0x15
+ 2581 022a 00        		.byte	0x0
+ 2582 022b 05        		.uleb128 0x5
+ 2583 022c 02        		.byte	0x2
+ 2584 022d 0000 0000 		.long	.LM58
+ 2585 0231 16        		.byte	0x16
+ 2586 0232 00        		.byte	0x0
+ 2587 0233 05        		.uleb128 0x5
+ 2588 0234 02        		.byte	0x2
+ 2589 0235 0000 0000 		.long	.LM59
+ 2590 0239 17        		.byte	0x17
+ 2591 023a 00        		.byte	0x0
+ 2592 023b 05        		.uleb128 0x5
+ 2593 023c 02        		.byte	0x2
+ 2594 023d 0000 0000 		.long	.LM60
+ 2595 0241 15        		.byte	0x15
+ 2596 0242 00        		.byte	0x0
+ 2597 0243 05        		.uleb128 0x5
+ 2598 0244 02        		.byte	0x2
+ 2599 0245 0000 0000 		.long	.LM61
+ 2600 0249 15        		.byte	0x15
+ 2601 024a 00        		.byte	0x0
+ 2602 024b 05        		.uleb128 0x5
+ 2603 024c 02        		.byte	0x2
+ 2604 024d 0000 0000 		.long	.LM62
+ 2605 0251 15        		.byte	0x15
+ 2606 0252 00        		.byte	0x0
+ 2607 0253 05        		.uleb128 0x5
+ 2608 0254 02        		.byte	0x2
+ 2609 0255 0000 0000 		.long	.LM63
+ 2610 0259 03        		.byte	0x3
+ 2611 025a A07F      		.sleb128 -96
+ 2612 025c 01        		.byte	0x1
+ 2613 025d 00        		.byte	0x0
+ 2614 025e 05        		.uleb128 0x5
+ 2615 025f 02        		.byte	0x2
+ 2616 0260 0000 0000 		.long	.LM64
+ 2617 0264 15        		.byte	0x15
+ 2618 0265 00        		.byte	0x0
+ 2619 0266 05        		.uleb128 0x5
+ 2620 0267 02        		.byte	0x2
+ 2621 0268 0000 0000 		.long	.LM65
+ 2622 026c 15        		.byte	0x15
+ 2623 026d 00        		.byte	0x0
+ 2624 026e 05        		.uleb128 0x5
+ 2625 026f 02        		.byte	0x2
+ 2626 0270 0000 0000 		.long	.LM66
+ 2627 0274 15        		.byte	0x15
+ 2628 0275 00        		.byte	0x0
+ 2629 0276 05        		.uleb128 0x5
+ 2630 0277 02        		.byte	0x2
+ 2631 0278 0000 0000 		.long	.LM67
+ 2632 027c 15        		.byte	0x15
+ 2633 027d 00        		.byte	0x0
+ 2634 027e 05        		.uleb128 0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 48
+
+
+ 2635 027f 02        		.byte	0x2
+ 2636 0280 0000 0000 		.long	.LM68
+ 2637 0284 15        		.byte	0x15
+ 2638 0285 00        		.byte	0x0
+ 2639 0286 05        		.uleb128 0x5
+ 2640 0287 02        		.byte	0x2
+ 2641 0288 0000 0000 		.long	.LM69
+ 2642 028c 15        		.byte	0x15
+ 2643 028d 00        		.byte	0x0
+ 2644 028e 05        		.uleb128 0x5
+ 2645 028f 02        		.byte	0x2
+ 2646 0290 0000 0000 		.long	.LM70
+ 2647 0294 15        		.byte	0x15
+ 2648 0295 00        		.byte	0x0
+ 2649 0296 05        		.uleb128 0x5
+ 2650 0297 02        		.byte	0x2
+ 2651 0298 0000 0000 		.long	.LM71
+ 2652 029c 16        		.byte	0x16
+ 2653 029d 00        		.byte	0x0
+ 2654 029e 05        		.uleb128 0x5
+ 2655 029f 02        		.byte	0x2
+ 2656 02a0 0000 0000 		.long	.LM72
+ 2657 02a4 18        		.byte	0x18
+ 2658 02a5 00        		.byte	0x0
+ 2659 02a6 05        		.uleb128 0x5
+ 2660 02a7 02        		.byte	0x2
+ 2661 02a8 0000 0000 		.long	.LM73
+ 2662 02ac 15        		.byte	0x15
+ 2663 02ad 00        		.byte	0x0
+ 2664 02ae 05        		.uleb128 0x5
+ 2665 02af 02        		.byte	0x2
+ 2666 02b0 0000 0000 		.long	.LM74
+ 2667 02b4 16        		.byte	0x16
+ 2668 02b5 00        		.byte	0x0
+ 2669 02b6 05        		.uleb128 0x5
+ 2670 02b7 02        		.byte	0x2
+ 2671 02b8 0000 0000 		.long	.LM75
+ 2672 02bc 15        		.byte	0x15
+ 2673 02bd 00        		.byte	0x0
+ 2674 02be 05        		.uleb128 0x5
+ 2675 02bf 02        		.byte	0x2
+ 2676 02c0 0000 0000 		.long	.LM76
+ 2677 02c4 17        		.byte	0x17
+ 2678 02c5 00        		.byte	0x0
+ 2679 02c6 05        		.uleb128 0x5
+ 2680 02c7 02        		.byte	0x2
+ 2681 02c8 0000 0000 		.long	.LM77
+ 2682 02cc 15        		.byte	0x15
+ 2683 02cd 00        		.byte	0x0
+ 2684 02ce 05        		.uleb128 0x5
+ 2685 02cf 02        		.byte	0x2
+ 2686 02d0 0000 0000 		.long	.LM78
+ 2687 02d4 18        		.byte	0x18
+ 2688 02d5 00        		.byte	0x0
+ 2689 02d6 05        		.uleb128 0x5
+ 2690 02d7 02        		.byte	0x2
+ 2691 02d8 0000 0000 		.long	.LM79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 49
+
+
+ 2692 02dc 15        		.byte	0x15
+ 2693 02dd 00        		.byte	0x0
+ 2694 02de 05        		.uleb128 0x5
+ 2695 02df 02        		.byte	0x2
+ 2696 02e0 0000 0000 		.long	.LM80
+ 2697 02e4 1E        		.byte	0x1e
+ 2698 02e5 00        		.byte	0x0
+ 2699 02e6 05        		.uleb128 0x5
+ 2700 02e7 02        		.byte	0x2
+ 2701 02e8 0000 0000 		.long	.LM81
+ 2702 02ec 15        		.byte	0x15
+ 2703 02ed 00        		.byte	0x0
+ 2704 02ee 05        		.uleb128 0x5
+ 2705 02ef 02        		.byte	0x2
+ 2706 02f0 0000 0000 		.long	.LM82
+ 2707 02f4 15        		.byte	0x15
+ 2708 02f5 00        		.byte	0x0
+ 2709 02f6 05        		.uleb128 0x5
+ 2710 02f7 02        		.byte	0x2
+ 2711 02f8 0000 0000 		.long	.LM83
+ 2712 02fc 15        		.byte	0x15
+ 2713 02fd 00        		.byte	0x0
+ 2714 02fe 05        		.uleb128 0x5
+ 2715 02ff 02        		.byte	0x2
+ 2716 0300 0000 0000 		.long	.LM84
+ 2717 0304 16        		.byte	0x16
+ 2718 0305 00        		.byte	0x0
+ 2719 0306 05        		.uleb128 0x5
+ 2720 0307 02        		.byte	0x2
+ 2721 0308 0000 0000 		.long	.LM85
+ 2722 030c 15        		.byte	0x15
+ 2723 030d 00        		.byte	0x0
+ 2724 030e 05        		.uleb128 0x5
+ 2725 030f 02        		.byte	0x2
+ 2726 0310 0000 0000 		.long	.LM86
+ 2727 0314 17        		.byte	0x17
+ 2728 0315 00        		.byte	0x0
+ 2729 0316 05        		.uleb128 0x5
+ 2730 0317 02        		.byte	0x2
+ 2731 0318 0000 0000 		.long	.LM87
+ 2732 031c 15        		.byte	0x15
+ 2733 031d 00        		.byte	0x0
+ 2734 031e 05        		.uleb128 0x5
+ 2735 031f 02        		.byte	0x2
+ 2736 0320 0000 0000 		.long	.LM88
+ 2737 0324 17        		.byte	0x17
+ 2738 0325 00        		.byte	0x0
+ 2739 0326 05        		.uleb128 0x5
+ 2740 0327 02        		.byte	0x2
+ 2741 0328 0000 0000 		.long	.LM89
+ 2742 032c 16        		.byte	0x16
+ 2743 032d 00        		.byte	0x0
+ 2744 032e 05        		.uleb128 0x5
+ 2745 032f 02        		.byte	0x2
+ 2746 0330 0000 0000 		.long	.LM90
+ 2747 0334 17        		.byte	0x17
+ 2748 0335 00        		.byte	0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 50
+
+
+ 2749 0336 05        		.uleb128 0x5
+ 2750 0337 02        		.byte	0x2
+ 2751 0338 0000 0000 		.long	.LM91
+ 2752 033c 03        		.byte	0x3
+ 2753 033d E07E      		.sleb128 -160
+ 2754 033f 01        		.byte	0x1
+ 2755 0340 00        		.byte	0x0
+ 2756 0341 05        		.uleb128 0x5
+ 2757 0342 02        		.byte	0x2
+ 2758 0343 0000 0000 		.long	.LM92
+ 2759 0347 15        		.byte	0x15
+ 2760 0348 00        		.byte	0x0
+ 2761 0349 05        		.uleb128 0x5
+ 2762 034a 02        		.byte	0x2
+ 2763 034b 0000 0000 		.long	.LM93
+ 2764 034f 15        		.byte	0x15
+ 2765 0350 00        		.byte	0x0
+ 2766 0351 05        		.uleb128 0x5
+ 2767 0352 02        		.byte	0x2
+ 2768 0353 0000 0000 		.long	.LM94
+ 2769 0357 15        		.byte	0x15
+ 2770 0358 00        		.byte	0x0
+ 2771 0359 05        		.uleb128 0x5
+ 2772 035a 02        		.byte	0x2
+ 2773 035b 0000 0000 		.long	.LM95
+ 2774 035f 19        		.byte	0x19
+ 2775 0360 00        		.byte	0x0
+ 2776 0361 05        		.uleb128 0x5
+ 2777 0362 02        		.byte	0x2
+ 2778 0363 0000 0000 		.long	.LM96
+ 2779 0367 15        		.byte	0x15
+ 2780 0368 00        		.byte	0x0
+ 2781 0369 05        		.uleb128 0x5
+ 2782 036a 02        		.byte	0x2
+ 2783 036b 0000 0000 		.long	.LM97
+ 2784 036f 15        		.byte	0x15
+ 2785 0370 00        		.byte	0x0
+ 2786 0371 05        		.uleb128 0x5
+ 2787 0372 02        		.byte	0x2
+ 2788 0373 0000 0000 		.long	.LM98
+ 2789 0377 23        		.byte	0x23
+ 2790 0378 00        		.byte	0x0
+ 2791 0379 05        		.uleb128 0x5
+ 2792 037a 02        		.byte	0x2
+ 2793 037b 0000 0000 		.long	.LM99
+ 2794 037f 16        		.byte	0x16
+ 2795 0380 00        		.byte	0x0
+ 2796 0381 05        		.uleb128 0x5
+ 2797 0382 02        		.byte	0x2
+ 2798 0383 0000 0000 		.long	.LM100
+ 2799 0387 15        		.byte	0x15
+ 2800 0388 00        		.byte	0x0
+ 2801 0389 05        		.uleb128 0x5
+ 2802 038a 02        		.byte	0x2
+ 2803 038b 0000 0000 		.long	.LM101
+ 2804 038f 15        		.byte	0x15
+ 2805 0390 00        		.byte	0x0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 51
+
+
+ 2806 0391 05        		.uleb128 0x5
+ 2807 0392 02        		.byte	0x2
+ 2808 0393 0000 0000 		.long	.LM102
+ 2809 0397 15        		.byte	0x15
+ 2810 0398 00        		.byte	0x0
+ 2811 0399 05        		.uleb128 0x5
+ 2812 039a 02        		.byte	0x2
+ 2813 039b 0000 0000 		.long	.LM103
+ 2814 039f 15        		.byte	0x15
+ 2815 03a0 00        		.byte	0x0
+ 2816 03a1 05        		.uleb128 0x5
+ 2817 03a2 02        		.byte	0x2
+ 2818 03a3 0000 0000 		.long	.LM104
+ 2819 03a7 15        		.byte	0x15
+ 2820 03a8 00        		.byte	0x0
+ 2821 03a9 05        		.uleb128 0x5
+ 2822 03aa 02        		.byte	0x2
+ 2823 03ab 0000 0000 		.long	.LM105
+ 2824 03af 17        		.byte	0x17
+ 2825 03b0 00        		.byte	0x0
+ 2826 03b1 05        		.uleb128 0x5
+ 2827 03b2 02        		.byte	0x2
+ 2828 03b3 0000 0000 		.long	.LM106
+ 2829 03b7 15        		.byte	0x15
+ 2830 03b8 00        		.byte	0x0
+ 2831 03b9 05        		.uleb128 0x5
+ 2832 03ba 02        		.byte	0x2
+ 2833 03bb 0000 0000 		.long	.LM107
+ 2834 03bf 15        		.byte	0x15
+ 2835 03c0 00        		.byte	0x0
+ 2836 03c1 05        		.uleb128 0x5
+ 2837 03c2 02        		.byte	0x2
+ 2838 03c3 0000 0000 		.long	.LM108
+ 2839 03c7 16        		.byte	0x16
+ 2840 03c8 00        		.byte	0x0
+ 2841 03c9 05        		.uleb128 0x5
+ 2842 03ca 02        		.byte	0x2
+ 2843 03cb 0000 0000 		.long	.LM109
+ 2844 03cf 1D        		.byte	0x1d
+ 2845 03d0 00        		.byte	0x0
+ 2846 03d1 05        		.uleb128 0x5
+ 2847 03d2 02        		.byte	0x2
+ 2848 03d3 0000 0000 		.long	.LM110
+ 2849 03d7 17        		.byte	0x17
+ 2850 03d8 00        		.byte	0x0
+ 2851 03d9 05        		.uleb128 0x5
+ 2852 03da 02        		.byte	0x2
+ 2853 03db 0000 0000 		.long	.LM111
+ 2854 03df 15        		.byte	0x15
+ 2855 03e0 00        		.byte	0x0
+ 2856 03e1 05        		.uleb128 0x5
+ 2857 03e2 02        		.byte	0x2
+ 2858 03e3 0000 0000 		.long	.LM112
+ 2859 03e7 17        		.byte	0x17
+ 2860 03e8 00        		.byte	0x0
+ 2861 03e9 05        		.uleb128 0x5
+ 2862 03ea 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 52
+
+
+ 2863 03eb 0000 0000 		.long	.LM113
+ 2864 03ef 15        		.byte	0x15
+ 2865 03f0 00        		.byte	0x0
+ 2866 03f1 05        		.uleb128 0x5
+ 2867 03f2 02        		.byte	0x2
+ 2868 03f3 0000 0000 		.long	.LM114
+ 2869 03f7 15        		.byte	0x15
+ 2870 03f8 00        		.byte	0x0
+ 2871 03f9 05        		.uleb128 0x5
+ 2872 03fa 02        		.byte	0x2
+ 2873 03fb 0000 0000 		.long	.LM115
+ 2874 03ff 15        		.byte	0x15
+ 2875 0400 00        		.byte	0x0
+ 2876 0401 05        		.uleb128 0x5
+ 2877 0402 02        		.byte	0x2
+ 2878 0403 0000 0000 		.long	.LM116
+ 2879 0407 15        		.byte	0x15
+ 2880 0408 00        		.byte	0x0
+ 2881 0409 05        		.uleb128 0x5
+ 2882 040a 02        		.byte	0x2
+ 2883 040b 0000 0000 		.long	.LM117
+ 2884 040f 15        		.byte	0x15
+ 2885 0410 00        		.byte	0x0
+ 2886 0411 05        		.uleb128 0x5
+ 2887 0412 02        		.byte	0x2
+ 2888 0413 0000 0000 		.long	.LM118
+ 2889 0417 17        		.byte	0x17
+ 2890 0418 00        		.byte	0x0
+ 2891 0419 05        		.uleb128 0x5
+ 2892 041a 02        		.byte	0x2
+ 2893 041b 0000 0000 		.long	.LM119
+ 2894 041f 15        		.byte	0x15
+ 2895 0420 00        		.byte	0x0
+ 2896 0421 05        		.uleb128 0x5
+ 2897 0422 02        		.byte	0x2
+ 2898 0423 0000 0000 		.long	.LM120
+ 2899 0427 17        		.byte	0x17
+ 2900 0428 00        		.byte	0x0
+ 2901 0429 05        		.uleb128 0x5
+ 2902 042a 02        		.byte	0x2
+ 2903 042b 0000 0000 		.long	.LM121
+ 2904 042f 16        		.byte	0x16
+ 2905 0430 00        		.byte	0x0
+ 2906 0431 05        		.uleb128 0x5
+ 2907 0432 02        		.byte	0x2
+ 2908 0433 0000 0000 		.long	.LM122
+ 2909 0437 16        		.byte	0x16
+ 2910 0438 00        		.byte	0x0
+ 2911 0439 05        		.uleb128 0x5
+ 2912 043a 02        		.byte	0x2
+ 2913 043b 0000 0000 		.long	.LM123
+ 2914 043f 15        		.byte	0x15
+ 2915 0440 00        		.byte	0x0
+ 2916 0441 05        		.uleb128 0x5
+ 2917 0442 02        		.byte	0x2
+ 2918 0443 0000 0000 		.long	.LM124
+ 2919 0447 17        		.byte	0x17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 53
+
+
+ 2920 0448 00        		.byte	0x0
+ 2921 0449 05        		.uleb128 0x5
+ 2922 044a 02        		.byte	0x2
+ 2923 044b 0000 0000 		.long	.LM125
+ 2924 044f 15        		.byte	0x15
+ 2925 0450 00        		.byte	0x0
+ 2926 0451 05        		.uleb128 0x5
+ 2927 0452 02        		.byte	0x2
+ 2928 0453 0000 0000 		.long	.LM126
+ 2929 0457 15        		.byte	0x15
+ 2930 0458 00        		.byte	0x0
+ 2931 0459 05        		.uleb128 0x5
+ 2932 045a 02        		.byte	0x2
+ 2933 045b 0000 0000 		.long	.LM127
+ 2934 045f 15        		.byte	0x15
+ 2935 0460 00        		.byte	0x0
+ 2936 0461 05        		.uleb128 0x5
+ 2937 0462 02        		.byte	0x2
+ 2938 0463 0000 0000 		.long	.LM128
+ 2939 0467 15        		.byte	0x15
+ 2940 0468 00        		.byte	0x0
+ 2941 0469 05        		.uleb128 0x5
+ 2942 046a 02        		.byte	0x2
+ 2943 046b 0000 0000 		.long	.LM129
+ 2944 046f 15        		.byte	0x15
+ 2945 0470 00        		.byte	0x0
+ 2946 0471 05        		.uleb128 0x5
+ 2947 0472 02        		.byte	0x2
+ 2948 0473 0000 0000 		.long	.LM130
+ 2949 0477 17        		.byte	0x17
+ 2950 0478 00        		.byte	0x0
+ 2951 0479 05        		.uleb128 0x5
+ 2952 047a 02        		.byte	0x2
+ 2953 047b 0000 0000 		.long	.LM131
+ 2954 047f 15        		.byte	0x15
+ 2955 0480 00        		.byte	0x0
+ 2956 0481 05        		.uleb128 0x5
+ 2957 0482 02        		.byte	0x2
+ 2958 0483 0000 0000 		.long	.LM132
+ 2959 0487 17        		.byte	0x17
+ 2960 0488 00        		.byte	0x0
+ 2961 0489 05        		.uleb128 0x5
+ 2962 048a 02        		.byte	0x2
+ 2963 048b 0000 0000 		.long	.LM133
+ 2964 048f 19        		.byte	0x19
+ 2965 0490 00        		.byte	0x0
+ 2966 0491 05        		.uleb128 0x5
+ 2967 0492 02        		.byte	0x2
+ 2968 0493 0000 0000 		.long	.LM134
+ 2969 0497 15        		.byte	0x15
+ 2970 0498 00        		.byte	0x0
+ 2971 0499 05        		.uleb128 0x5
+ 2972 049a 02        		.byte	0x2
+ 2973 049b 0000 0000 		.long	.LM135
+ 2974 049f 91        		.byte	0x91
+ 2975 04a0 00        		.byte	0x0
+ 2976 04a1 05        		.uleb128 0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 54
+
+
+ 2977 04a2 02        		.byte	0x2
+ 2978 04a3 0000 0000 		.long	.LM136
+ 2979 04a7 03        		.byte	0x3
+ 2980 04a8 847D      		.sleb128 -380
+ 2981 04aa 01        		.byte	0x1
+ 2982 04ab 00        		.byte	0x0
+ 2983 04ac 05        		.uleb128 0x5
+ 2984 04ad 02        		.byte	0x2
+ 2985 04ae 0000 0000 		.long	.LM137
+ 2986 04b2 1C        		.byte	0x1c
+ 2987 04b3 00        		.byte	0x0
+ 2988 04b4 05        		.uleb128 0x5
+ 2989 04b5 02        		.byte	0x2
+ 2990 04b6 0000 0000 		.long	.LM138
+ 2991 04ba 15        		.byte	0x15
+ 2992 04bb 00        		.byte	0x0
+ 2993 04bc 05        		.uleb128 0x5
+ 2994 04bd 02        		.byte	0x2
+ 2995 04be 0000 0000 		.long	.LM139
+ 2996 04c2 15        		.byte	0x15
+ 2997 04c3 00        		.byte	0x0
+ 2998 04c4 05        		.uleb128 0x5
+ 2999 04c5 02        		.byte	0x2
+ 3000 04c6 0000 0000 		.long	.LM140
+ 3001 04ca 15        		.byte	0x15
+ 3002 04cb 00        		.byte	0x0
+ 3003 04cc 05        		.uleb128 0x5
+ 3004 04cd 02        		.byte	0x2
+ 3005 04ce 0000 0000 		.long	.LM141
+ 3006 04d2 15        		.byte	0x15
+ 3007 04d3 00        		.byte	0x0
+ 3008 04d4 05        		.uleb128 0x5
+ 3009 04d5 02        		.byte	0x2
+ 3010 04d6 0000 0000 		.long	.LM142
+ 3011 04da 16        		.byte	0x16
+ 3012 04db 00        		.byte	0x0
+ 3013 04dc 05        		.uleb128 0x5
+ 3014 04dd 02        		.byte	0x2
+ 3015 04de 0000 0000 		.long	.LM143
+ 3016 04e2 15        		.byte	0x15
+ 3017 04e3 00        		.byte	0x0
+ 3018 04e4 05        		.uleb128 0x5
+ 3019 04e5 02        		.byte	0x2
+ 3020 04e6 0000 0000 		.long	.LM144
+ 3021 04ea 15        		.byte	0x15
+ 3022 04eb 00        		.byte	0x0
+ 3023 04ec 05        		.uleb128 0x5
+ 3024 04ed 02        		.byte	0x2
+ 3025 04ee 0000 0000 		.long	.LM145
+ 3026 04f2 15        		.byte	0x15
+ 3027 04f3 00        		.byte	0x0
+ 3028 04f4 05        		.uleb128 0x5
+ 3029 04f5 02        		.byte	0x2
+ 3030 04f6 0000 0000 		.long	.LM146
+ 3031 04fa 15        		.byte	0x15
+ 3032 04fb 00        		.byte	0x0
+ 3033 04fc 05        		.uleb128 0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 55
+
+
+ 3034 04fd 02        		.byte	0x2
+ 3035 04fe 0000 0000 		.long	.LM147
+ 3036 0502 15        		.byte	0x15
+ 3037 0503 00        		.byte	0x0
+ 3038 0504 05        		.uleb128 0x5
+ 3039 0505 02        		.byte	0x2
+ 3040 0506 0000 0000 		.long	.LM148
+ 3041 050a 03        		.byte	0x3
+ 3042 050b C402      		.sleb128 324
+ 3043 050d 01        		.byte	0x1
+ 3044 050e 00        		.byte	0x0
+ 3045 050f 05        		.uleb128 0x5
+ 3046 0510 02        		.byte	0x2
+ 3047 0511 0000 0000 		.long	.LM149
+ 3048 0515 16        		.byte	0x16
+ 3049 0516 00        		.byte	0x0
+ 3050 0517 05        		.uleb128 0x5
+ 3051 0518 02        		.byte	0x2
+ 3052 0519 0000 0000 		.long	.LM150
+ 3053 051d 15        		.byte	0x15
+ 3054 051e 00        		.byte	0x0
+ 3055 051f 05        		.uleb128 0x5
+ 3056 0520 02        		.byte	0x2
+ 3057 0521 0000 0000 		.long	.LM151
+ 3058 0525 15        		.byte	0x15
+ 3059 0526 00        		.byte	0x0
+ 3060 0527 05        		.uleb128 0x5
+ 3061 0528 02        		.byte	0x2
+ 3062 0529 0000 0000 		.long	.LM152
+ 3063 052d 03        		.byte	0x3
+ 3064 052e D67D      		.sleb128 -298
+ 3065 0530 01        		.byte	0x1
+ 3066 0531 00        		.byte	0x0
+ 3067 0532 05        		.uleb128 0x5
+ 3068 0533 02        		.byte	0x2
+ 3069 0534 0000 0000 		.long	.LM153
+ 3070 0538 16        		.byte	0x16
+ 3071 0539 00        		.byte	0x0
+ 3072 053a 05        		.uleb128 0x5
+ 3073 053b 02        		.byte	0x2
+ 3074 053c 0000 0000 		.long	.LM154
+ 3075 0540 15        		.byte	0x15
+ 3076 0541 00        		.byte	0x0
+ 3077 0542 05        		.uleb128 0x5
+ 3078 0543 02        		.byte	0x2
+ 3079 0544 0000 0000 		.long	.LM155
+ 3080 0548 16        		.byte	0x16
+ 3081 0549 00        		.byte	0x0
+ 3082 054a 05        		.uleb128 0x5
+ 3083 054b 02        		.byte	0x2
+ 3084 054c 0000 0000 		.long	.LM156
+ 3085 0550 15        		.byte	0x15
+ 3086 0551 00        		.byte	0x0
+ 3087 0552 05        		.uleb128 0x5
+ 3088 0553 02        		.byte	0x2
+ 3089 0554 0000 0000 		.long	.LM157
+ 3090 0558 03        		.byte	0x3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 56
+
+
+ 3091 0559 6E        		.sleb128 -18
+ 3092 055a 01        		.byte	0x1
+ 3093 055b 00        		.byte	0x0
+ 3094 055c 05        		.uleb128 0x5
+ 3095 055d 02        		.byte	0x2
+ 3096 055e 0000 0000 		.long	.LM158
+ 3097 0562 15        		.byte	0x15
+ 3098 0563 00        		.byte	0x0
+ 3099 0564 05        		.uleb128 0x5
+ 3100 0565 02        		.byte	0x2
+ 3101 0566 0000 0000 		.long	.LM159
+ 3102 056a 16        		.byte	0x16
+ 3103 056b 00        		.byte	0x0
+ 3104 056c 05        		.uleb128 0x5
+ 3105 056d 02        		.byte	0x2
+ 3106 056e 0000 0000 		.long	.LM160
+ 3107 0572 15        		.byte	0x15
+ 3108 0573 00        		.byte	0x0
+ 3109 0574 05        		.uleb128 0x5
+ 3110 0575 02        		.byte	0x2
+ 3111 0576 0000 0000 		.long	.LM161
+ 3112 057a 15        		.byte	0x15
+ 3113 057b 00        		.byte	0x0
+ 3114 057c 05        		.uleb128 0x5
+ 3115 057d 02        		.byte	0x2
+ 3116 057e 0000 0000 		.long	.LM162
+ 3117 0582 16        		.byte	0x16
+ 3118 0583 00        		.byte	0x0
+ 3119 0584 05        		.uleb128 0x5
+ 3120 0585 02        		.byte	0x2
+ 3121 0586 0000 0000 		.long	.LM163
+ 3122 058a 15        		.byte	0x15
+ 3123 058b 00        		.byte	0x0
+ 3124 058c 05        		.uleb128 0x5
+ 3125 058d 02        		.byte	0x2
+ 3126 058e 0000 0000 		.long	.LM164
+ 3127 0592 16        		.byte	0x16
+ 3128 0593 00        		.byte	0x0
+ 3129 0594 05        		.uleb128 0x5
+ 3130 0595 02        		.byte	0x2
+ 3131 0596 0000 0000 		.long	.LM165
+ 3132 059a 03        		.byte	0x3
+ 3133 059b 68        		.sleb128 -24
+ 3134 059c 01        		.byte	0x1
+ 3135 059d 00        		.byte	0x0
+ 3136 059e 05        		.uleb128 0x5
+ 3137 059f 02        		.byte	0x2
+ 3138 05a0 0000 0000 		.long	.LM166
+ 3139 05a4 15        		.byte	0x15
+ 3140 05a5 00        		.byte	0x0
+ 3141 05a6 05        		.uleb128 0x5
+ 3142 05a7 02        		.byte	0x2
+ 3143 05a8 0000 0000 		.long	.LM167
+ 3144 05ac 16        		.byte	0x16
+ 3145 05ad 00        		.byte	0x0
+ 3146 05ae 05        		.uleb128 0x5
+ 3147 05af 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 57
+
+
+ 3148 05b0 0000 0000 		.long	.LM168
+ 3149 05b4 15        		.byte	0x15
+ 3150 05b5 00        		.byte	0x0
+ 3151 05b6 05        		.uleb128 0x5
+ 3152 05b7 02        		.byte	0x2
+ 3153 05b8 0000 0000 		.long	.LM169
+ 3154 05bc 15        		.byte	0x15
+ 3155 05bd 00        		.byte	0x0
+ 3156 05be 05        		.uleb128 0x5
+ 3157 05bf 02        		.byte	0x2
+ 3158 05c0 0000 0000 		.long	.LM170
+ 3159 05c4 16        		.byte	0x16
+ 3160 05c5 00        		.byte	0x0
+ 3161 05c6 05        		.uleb128 0x5
+ 3162 05c7 02        		.byte	0x2
+ 3163 05c8 0000 0000 		.long	.LM171
+ 3164 05cc 16        		.byte	0x16
+ 3165 05cd 00        		.byte	0x0
+ 3166 05ce 05        		.uleb128 0x5
+ 3167 05cf 02        		.byte	0x2
+ 3168 05d0 0000 0000 		.long	.LM172
+ 3169 05d4 15        		.byte	0x15
+ 3170 05d5 00        		.byte	0x0
+ 3171 05d6 05        		.uleb128 0x5
+ 3172 05d7 02        		.byte	0x2
+ 3173 05d8 0000 0000 		.long	.LM173
+ 3174 05dc 16        		.byte	0x16
+ 3175 05dd 00        		.byte	0x0
+ 3176 05de 05        		.uleb128 0x5
+ 3177 05df 02        		.byte	0x2
+ 3178 05e0 0000 0000 		.long	.LM174
+ 3179 05e4 2E        		.byte	0x2e
+ 3180 05e5 00        		.byte	0x0
+ 3181 05e6 05        		.uleb128 0x5
+ 3182 05e7 02        		.byte	0x2
+ 3183 05e8 0000 0000 		.long	.LM175
+ 3184 05ec 16        		.byte	0x16
+ 3185 05ed 00        		.byte	0x0
+ 3186 05ee 05        		.uleb128 0x5
+ 3187 05ef 02        		.byte	0x2
+ 3188 05f0 0000 0000 		.long	.LM176
+ 3189 05f4 15        		.byte	0x15
+ 3190 05f5 00        		.byte	0x0
+ 3191 05f6 05        		.uleb128 0x5
+ 3192 05f7 02        		.byte	0x2
+ 3193 05f8 0000 0000 		.long	.LM177
+ 3194 05fc 1A        		.byte	0x1a
+ 3195 05fd 00        		.byte	0x0
+ 3196 05fe 05        		.uleb128 0x5
+ 3197 05ff 02        		.byte	0x2
+ 3198 0600 0000 0000 		.long	.LM178
+ 3199 0604 18        		.byte	0x18
+ 3200 0605 00        		.byte	0x0
+ 3201 0606 05        		.uleb128 0x5
+ 3202 0607 02        		.byte	0x2
+ 3203 0608 0000 0000 		.long	.LM179
+ 3204 060c 15        		.byte	0x15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 58
+
+
+ 3205 060d 00        		.byte	0x0
+ 3206 060e 05        		.uleb128 0x5
+ 3207 060f 02        		.byte	0x2
+ 3208 0610 0000 0000 		.long	.LM180
+ 3209 0614 19        		.byte	0x19
+ 3210 0615 00        		.byte	0x0
+ 3211 0616 05        		.uleb128 0x5
+ 3212 0617 02        		.byte	0x2
+ 3213 0618 0000 0000 		.long	.LM181
+ 3214 061c 15        		.byte	0x15
+ 3215 061d 00        		.byte	0x0
+ 3216 061e 05        		.uleb128 0x5
+ 3217 061f 02        		.byte	0x2
+ 3218 0620 0000 0000 		.long	.LM182
+ 3219 0624 16        		.byte	0x16
+ 3220 0625 00        		.byte	0x0
+ 3221 0626 05        		.uleb128 0x5
+ 3222 0627 02        		.byte	0x2
+ 3223 0628 0000 0000 		.long	.LM183
+ 3224 062c 15        		.byte	0x15
+ 3225 062d 00        		.byte	0x0
+ 3226 062e 05        		.uleb128 0x5
+ 3227 062f 02        		.byte	0x2
+ 3228 0630 0000 0000 		.long	.LM184
+ 3229 0634 15        		.byte	0x15
+ 3230 0635 00        		.byte	0x0
+ 3231 0636 05        		.uleb128 0x5
+ 3232 0637 02        		.byte	0x2
+ 3233 0638 0000 0000 		.long	.LM185
+ 3234 063c 16        		.byte	0x16
+ 3235 063d 00        		.byte	0x0
+ 3236 063e 05        		.uleb128 0x5
+ 3237 063f 02        		.byte	0x2
+ 3238 0640 0000 0000 		.long	.LM186
+ 3239 0644 16        		.byte	0x16
+ 3240 0645 00        		.byte	0x0
+ 3241 0646 05        		.uleb128 0x5
+ 3242 0647 02        		.byte	0x2
+ 3243 0648 0000 0000 		.long	.Letext0
+ 3244 064c 00        		.byte	0x0
+ 3245 064d 01        		.uleb128 0x1
+ 3246 064e 01        		.byte	0x1
+ 3247               	.LELT0:
+ 3248 064f 1600 0000 		.section	.debug_str,"MS",@progbits,1
+ 3248      0200 1000 
+ 3248      0000 0101 
+ 3248      FB0E 0A00 
+ 3248      0101 0101 
+ 3249               	.LASF59:
+ 3250 0000 474E 5520 		.string	"GNU C 4.3.3"
+ 3250      4320 342E 
+ 3250      332E 3300 
+ 3251               	.LASF57:
+ 3252 000c 6C65 6442 		.string	"ledBrightnessMin"
+ 3252      7269 6768 
+ 3252      746E 6573 
+ 3252      734D 696E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 59
+
+
+ 3252      00
+ 3253               	.LASF47:
+ 3254 001d 7363 726F 		.string	"scrollLockLED"
+ 3254      6C6C 4C6F 
+ 3254      636B 4C45 
+ 3254      4400 
+ 3255               	.LASF15:
+ 3256 002b 6265 796F 		.string	"beyondFNDelayCounter"
+ 3256      6E64 464E 
+ 3256      4465 6C61 
+ 3256      7943 6F75 
+ 3256      6E74 6572 
+ 3257               	.LASF11:
+ 3258 0040 7368 6F72 		.string	"short int"
+ 3258      7420 696E 
+ 3258      7400 
+ 3259               	.LASF23:
+ 3260 004a 7072 6576 		.string	"prevSCRLED"
+ 3260      5343 524C 
+ 3260      4544 00
+ 3261               	.LASF44:
+ 3262 0055 646F 776E 		.string	"downLevelLife"
+ 3262      4C65 7665 
+ 3262      6C4C 6966 
+ 3262      6500 
+ 3263               	.LASF51:
+ 3264 0063 7077 6D44 		.string	"pwmDir"
+ 3264      6972 00
+ 3265               	.LASF55:
+ 3266 006a 5F6C 6564 		.string	"_ledBrightnessMax"
+ 3266      4272 6967 
+ 3266      6874 6E65 
+ 3266      7373 4D61 
+ 3266      7800 
+ 3267               	.LASF21:
+ 3268 007c 7365 744C 		.string	"setLEDState"
+ 3268      4544 5374 
+ 3268      6174 6500 
+ 3269               	.LASF39:
+ 3270 0088 674C 6564 		.string	"gLedBrightness"
+ 3270      4272 6967 
+ 3270      6874 6E65 
+ 3270      7373 00
+ 3271               	.LASF43:
+ 3272 0097 646F 776E 		.string	"downLevelMax"
+ 3272      4C65 7665 
+ 3272      6C4D 6178 
+ 3272      00
+ 3273               	.LASF25:
+ 3274 00a4 6170 706C 		.string	"applyKeyDownForFullLED"
+ 3274      794B 6579 
+ 3274      446F 776E 
+ 3274      466F 7246 
+ 3274      756C 6C4C 
+ 3275               	.LASF2:
+ 3276 00bb 7569 6E74 		.string	"uint8_t"
+ 3276      385F 7400 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 60
+
+
+ 3277               	.LASF42:
+ 3278 00c3 646F 776E 		.string	"downLevel"
+ 3278      4C65 7665 
+ 3278      6C00 
+ 3279               	.LASF33:
+ 3280 00cd 7265 6E64 		.string	"renderLED"
+ 3280      6572 4C45 
+ 3280      4400 
+ 3281               	.LASF46:
+ 3282 00d7 4C45 4473 		.string	"LEDstate"
+ 3282      7461 7465 
+ 3282      00
+ 3283               	.LASF35:
+ 3284 00e0 7761 6B65 		.string	"wakeUpLED"
+ 3284      5570 4C45 
+ 3284      4400 
+ 3285               	.LASF26:
+ 3286 00ea 7853 7461 		.string	"xState"
+ 3286      7465 00
+ 3287               	.LASF60:
+ 3288 00f1 6C65 6472 		.string	"ledrender.c"
+ 3288      656E 6465 
+ 3288      722E 6300 
+ 3289               	.LASF62:
+ 3290 00fd 6765 744C 		.string	"getLEDState"
+ 3290      4544 5374 
+ 3290      6174 6500 
+ 3291               	.LASF7:
+ 3292 0109 6C6F 6E67 		.string	"long long int"
+ 3292      206C 6F6E 
+ 3292      6720 696E 
+ 3292      7400 
+ 3293               	.LASF5:
+ 3294 0117 6C6F 6E67 		.string	"long int"
+ 3294      2069 6E74 
+ 3294      00
+ 3295               	.LASF54:
+ 3296 0120 6C65 6453 		.string	"ledStateCount"
+ 3296      7461 7465 
+ 3296      436F 756E 
+ 3296      7400 
+ 3297               	.LASF24:
+ 3298 012e 636C 6561 		.string	"clearLEDInited"
+ 3298      724C 4544 
+ 3298      496E 6974 
+ 3298      6564 00
+ 3299               	.LASF37:
+ 3300 013d 7265 6475 		.string	"reduceLedBrightness"
+ 3300      6365 4C65 
+ 3300      6442 7269 
+ 3300      6768 746E 
+ 3300      6573 7300 
+ 3301               	.LASF27:
+ 3302 0151 7856 616C 		.string	"xValue"
+ 3302      7565 00
+ 3303               	.LASF16:
+ 3304 0158 6265 796F 		.string	"beyondFNLEDState"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 61
+
+
+ 3304      6E64 464E 
+ 3304      4C45 4453 
+ 3304      7461 7465 
+ 3304      00
+ 3305               	.LASF13:
+ 3306 0169 6265 796F 		.string	"beyondFNCountDelay"
+ 3306      6E64 464E 
+ 3306      436F 756E 
+ 3306      7444 656C 
+ 3306      6179 00
+ 3307               	.LASF1:
+ 3308 017c 756E 7369 		.string	"unsigned char"
+ 3308      676E 6564 
+ 3308      2063 6861 
+ 3308      7200 
+ 3309               	.LASF41:
+ 3310 018a 646F 776E 		.string	"downLevelStay"
+ 3310      4C65 7665 
+ 3310      6C53 7461 
+ 3310      7900 
+ 3311               	.LASF20:
+ 3312 0198 636F 756E 		.string	"counter"
+ 3312      7465 7200 
+ 3313               	.LASF12:
+ 3314 01a0 6265 796F 		.string	"beyondFNCountMAX"
+ 3314      6E64 464E 
+ 3314      436F 756E 
+ 3314      744D 4158 
+ 3314      00
+ 3315               	.LASF48:
+ 3316 01b1 5F66 756C 		.string	"_fullLEDMode"
+ 3316      6C4C 4544 
+ 3316      4D6F 6465 
+ 3316      00
+ 3317               	.LASF34:
+ 3318 01be 7849 7342 		.string	"xIsBeyondFN"
+ 3318      6579 6F6E 
+ 3318      6446 4E00 
+ 3319               	.LASF17:
+ 3320 01ca 626C 696E 		.string	"blinkBeyondFNLED"
+ 3320      6B42 6579 
+ 3320      6F6E 6446 
+ 3320      4E4C 4544 
+ 3320      00
+ 3321               	.LASF40:
+ 3322 01db 696E 6974 		.string	"initFullLEDState"
+ 3322      4675 6C6C 
+ 3322      4C45 4453 
+ 3322      7461 7465 
+ 3322      00
+ 3323               	.LASF0:
+ 3324 01ec 7369 676E 		.string	"signed char"
+ 3324      6564 2063 
+ 3324      6861 7200 
+ 3325               	.LASF8:
+ 3326 01f8 6C6F 6E67 		.string	"long long unsigned int"
+ 3326      206C 6F6E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 62
+
+
+ 3326      6720 756E 
+ 3326      7369 676E 
+ 3326      6564 2069 
+ 3327               	.LASF19:
+ 3328 020f 636F 756E 		.string	"countMAX"
+ 3328      744D 4158 
+ 3328      00
+ 3329               	.LASF36:
+ 3330 0218 6368 616E 		.string	"changeFullLedState"
+ 3330      6765 4675 
+ 3330      6C6C 4C65 
+ 3330      6453 7461 
+ 3330      7465 00
+ 3331               	.LASF4:
+ 3332 022b 756E 7369 		.string	"unsigned int"
+ 3332      676E 6564 
+ 3332      2069 6E74 
+ 3332      00
+ 3333               	.LASF3:
+ 3334 0238 7569 6E74 		.string	"uint16_t"
+ 3334      3136 5F74 
+ 3334      00
+ 3335               	.LASF49:
+ 3336 0241 5F66 756C 		.string	"_fullLEDMode_saved"
+ 3336      6C4C 4544 
+ 3336      4D6F 6465 
+ 3336      5F73 6176 
+ 3336      6564 00
+ 3337               	.LASF52:
+ 3338 0254 7370 6565 		.string	"speed"
+ 3338      6400 
+ 3339               	.LASF50:
+ 3340 025a 7077 6D43 		.string	"pwmCounter"
+ 3340      6F75 6E74 
+ 3340      6572 00
+ 3341               	.LASF64:
+ 3342 0265 7365 7446 		.string	"setFullLEDState"
+ 3342      756C 6C4C 
+ 3342      4544 5374 
+ 3342      6174 6500 
+ 3343               	.LASF10:
+ 3344 0275 7368 6F72 		.string	"short unsigned int"
+ 3344      7420 756E 
+ 3344      7369 676E 
+ 3344      6564 2069 
+ 3344      6E74 00
+ 3345               	.LASF14:
+ 3346 0288 6265 796F 		.string	"beyondFNCounter"
+ 3346      6E64 464E 
+ 3346      436F 756E 
+ 3346      7465 7200 
+ 3347               	.LASF38:
+ 3348 0298 696E 6372 		.string	"increaseLedBrightness"
+ 3348      6561 7365 
+ 3348      4C65 6442 
+ 3348      7269 6768 
+ 3348      746E 6573 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 63
+
+
+ 3349               	.LASF9:
+ 3350 02ae 6368 6172 		.string	"char"
+ 3350      00
+ 3351               	.LASF61:
+ 3352 02b3 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
+ 3352      6573 6B74 
+ 3352      6F70 5C6B 
+ 3352      6579 626F 
+ 3352      6172 645C 
+ 3353               	.LASF45:
+ 3354 02ed 6C65 6449 		.string	"ledInited"
+ 3354      6E69 7465 
+ 3354      6400 
+ 3355               	.LASF31:
+ 3356 02f7 7772 6974 		.string	"writeLEDMode"
+ 3356      654C 4544 
+ 3356      4D6F 6465 
+ 3356      00
+ 3357               	.LASF28:
+ 3358 0304 6756 616C 		.string	"gVal"
+ 3358      00
+ 3359               	.LASF53:
+ 3360 0309 5F69 7344 		.string	"_isDidSleep"
+ 3360      6964 536C 
+ 3360      6565 7000 
+ 3361               	.LASF6:
+ 3362 0315 6C6F 6E67 		.string	"long unsigned int"
+ 3362      2075 6E73 
+ 3362      6967 6E65 
+ 3362      6420 696E 
+ 3362      7400 
+ 3363               	.LASF22:
+ 3364 0327 7365 744C 		.string	"setLEDIndicate"
+ 3364      4544 496E 
+ 3364      6469 6361 
+ 3364      7465 00
+ 3365               	.LASF32:
+ 3366 0336 6661 6465 		.string	"fadeLED"
+ 3366      4C45 4400 
+ 3367               	.LASF30:
+ 3368 033e 646F 536C 		.string	"doSleep"
+ 3368      6565 7000 
+ 3369               	.LASF63:
+ 3370 0346 6765 7442 		.string	"getBrightness"
+ 3370      7269 6768 
+ 3370      746E 6573 
+ 3370      7300 
+ 3371               	.LASF56:
+ 3372 0354 5F6C 6564 		.string	"_ledBrightnessMax_saved"
+ 3372      4272 6967 
+ 3372      6874 6E65 
+ 3372      7373 4D61 
+ 3372      785F 7361 
+ 3373               	.LASF29:
+ 3374 036c 736C 6565 		.string	"sleepLED"
+ 3374      704C 4544 
+ 3374      00
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 64
+
+
+ 3375               	.LASF18:
+ 3376 0375 626C 696E 		.string	"blinkScrollLockLED"
+ 3376      6B53 6372 
+ 3376      6F6C 6C4C 
+ 3376      6F63 6B4C 
+ 3376      4544 00
+ 3377               	.LASF58:
+ 3378 0388 6C65 6442 		.string	"ledBrightnessStep"
+ 3378      7269 6768 
+ 3378      746E 6573 
+ 3378      7353 7465 
+ 3378      7000 
+ 3379               	.global __do_copy_data
+ 3380               	.global __do_clear_bss
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s 			page 65
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ledrender.c
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:18     .text:00000000 setLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:993    .bss:00000016 LEDstate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:33     .text:00000006 getLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:46     .text:0000000c clearLEDInited
+                             .bss:00000000 ledInited
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:60     .text:00000012 setLEDIndicate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:994    .bss:00000017 prevSCRLED.1815
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:977    .bss:00000005 scrollLockLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:142    .text:00000074 applyKeyDownForFullLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:980    .bss:0000000a _fullLEDMode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:989    .bss:00000011 downLevelStay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:991    .bss:00000014 downLevel
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:990    .bss:00000013 downLevelLife
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:203    .text:000000e0 getBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:986    .data:00000001 _ledBrightnessMax
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:232    .text:00000102 sleepLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:988    .bss:0000000f pwmCounter
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:992    .bss:00000015 _isDidSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:271    .text:00000132 doSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:322    .text:00000190 renderLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:970    .bss:00000001 beyondFNDelayCounter.1903
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:976    .bss:00000003 beyondFNCounter.1902
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:974    .data:00000000 beyondFNLEDState.1904
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:978    .bss:00000006 counter.1929
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:979    .bss:00000008 ledStateCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:981    .bss:0000000b _fullLEDMode_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:982    .bss:0000000c _ledBrightnessMax_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:983    .bss:0000000d pwmDir
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:739    .text:00000494 setFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:804    .text:000004fa wakeUpLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:820    .text:00000504 changeFullLedState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:845    .text:00000526 reduceLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:880    .text:00000554 increaseLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccjUUsMx.s:923    .text:00000584 initFullLEDState
+
+UNDEFINED SYMBOLS
+__divmodhi4
+timer1PWMBSet
+isSleep
+__eewr_byte_m32
+timer1Init
+timer1PWMInit
+timer1PWMBOn
+__eerd_byte_m32
+__do_copy_data
+__do_clear_bss

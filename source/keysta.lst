@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 1
 
 
    1               		.file	"keysta.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
   55               	.LFB8:
   56               	.LM8:
   57               	/* prologue: function */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 2
 
 
   58               	/* frame size = 0 */
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  112               	.LM21:
  113 004e 8091 0000 		lds r24,kbd_state
  114 0052 8130      		cpi r24,lo8(1)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 3
 
 
  115 0054 01F0      		breq .L11
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  169 009c 929A      		sbi 50-32,2
  170 009e 0895      		ret
  171               	.L15:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 4
 
 
  172               	.LBE43:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  226 00f6 8091 0000 		lds r24,rx_byte
  227 00fa 8695      		lsr r24
  228 00fc 8093 0000 		sts rx_byte,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 5
 
 
  229               	.LM44:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  283               	.L42:
  284 0158 8093 0000 		sts kbd_flags,r24
  285 015c 00C0      		rjmp .L17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 6
 
 
  286               	.L51:
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  340 0196 8093 0000 		sts kbd_state,r24
  341 019a 0895      		ret
  342               	.L29:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 7
 
 
  343               	.LM69:
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  397               	.LBB56:
  398               	.LBB57:
  399               	.LM79:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 8
 
 
  400 01ee 8B98      		cbi 49-32,3
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  454 022a 8091 0000 		lds r24,kbd_flags
  455 022e 8061      		ori r24,lo8(16)
  456 0230 8093 0000 		sts kbd_flags,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 9
 
 
  457 0234 00C0      		rjmp .L30
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  511               	.LM104:
  512 0264 82E0      		ldi r24,lo8(2)
  513 0266 0E94 0000 		call timer2SetPrescaler
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 10
 
 
  514               	.LM105:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  568 0038 0000 0000 		.long	.LFB9
  569 003c 1C02 0000 		.long	.LFE9-.LFB9
  570               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 11
 
 
  571               	.LEFDE4:
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  625 0049 04        		.byte	0x4
  626 004a 07        		.byte	0x7
  627 004b 0000 0000 		.long	.LASF4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 12
 
 
  628 004f 02        		.uleb128 0x2
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  682 00b5 0000 0000 		.long	.LASF19
  683 00b9 12        		.sleb128 18
  684 00ba 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 13
 
 
  685 00bb 0000 0000 		.long	.LASF20
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  739 0127 0000 0000 		.long	.LASF38
  740 012b 2E        		.sleb128 46
  741 012c 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 14
 
 
  742 012d 0000 0000 		.long	.LASF39
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  796 0190 0000 0000 		.long	.LFE8
  797 0194 02        		.byte	0x2
  798 0195 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 15
 
 
  799 0196 20        		.uleb128 0x20
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  853 0217 0B        		.uleb128 0xb
  854 0218 4E01 0000 		.long	0x14e
  855 021c 0000 0000 		.long	.LBB52
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 16
 
 
  856 0220 0000 0000 		.long	.LBE52
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  910 02a3 0000 0000 		.long	.LBB66
  911 02a7 0000 0000 		.long	.LBE66
  912 02ab 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 17
 
 
  913 02ac 5D        		.byte	0x5d
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  967 031e 50        		.byte	0x50
  968 031f CE02 0000 		.long	0x2ce
  969 0323 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 18
 
 
  970 0324 05        		.byte	0x5
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1024 0031 0B        		.uleb128 0xb
  1025 0032 3B        		.uleb128 0x3b
  1026 0033 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 19
 
 
  1027 0034 01        		.uleb128 0x1
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1081 006a 03        		.uleb128 0x3
  1082 006b 0E        		.uleb128 0xe
  1083 006c 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 20
 
 
  1084 006d 0B        		.uleb128 0xb
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1138 00a3 1D        		.uleb128 0x1d
  1139 00a4 00        		.byte	0x0
  1140 00a5 31        		.uleb128 0x31
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 21
 
 
  1141 00a6 13        		.uleb128 0x13
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1195 00dc 0B        		.uleb128 0xb
  1196 00dd 3B        		.uleb128 0x3b
  1197 00de 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 22
 
 
  1198 00df 49        		.uleb128 0x49
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1241 000a 01        		.byte	0x1
  1242 000b 01        		.byte	0x1
  1243 000c F6        		.byte	0xf6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 23
 
 
  1244 000d F5        		.byte	0xf5
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1296 005d 15        		.byte	0x15
  1297 005e 00        		.byte	0x0
  1298 005f 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 24
 
 
  1299 0060 02        		.byte	0x2
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1353 00b8 15        		.byte	0x15
  1354 00b9 00        		.byte	0x0
  1355 00ba 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 25
 
 
  1356 00bb 02        		.byte	0x2
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1410 0113 1A        		.byte	0x1a
  1411 0114 00        		.byte	0x0
  1412 0115 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 26
 
 
  1413 0116 02        		.byte	0x2
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1467 016e 15        		.byte	0x15
  1468 016f 00        		.byte	0x0
  1469 0170 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 27
 
 
  1470 0171 02        		.byte	0x2
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1524 01c8 05        		.uleb128 0x5
  1525 01c9 02        		.byte	0x2
  1526 01ca 0000 0000 		.long	.LM52
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 28
 
 
  1527 01ce 16        		.byte	0x16
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1581 0224 15        		.byte	0x15
  1582 0225 00        		.byte	0x0
  1583 0226 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 29
 
 
  1584 0227 02        		.byte	0x2
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1638 027d 02        		.byte	0x2
  1639 027e 0000 0000 		.long	.LM73
  1640 0282 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 30
 
 
  1641 0283 AE7E      		.sleb128 -210
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1695 02d7 0000 0000 		.long	.LM83
  1696 02db 15        		.byte	0x15
  1697 02dc 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 31
 
 
  1698 02dd 05        		.uleb128 0x5
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1752 0333 05        		.uleb128 0x5
  1753 0334 02        		.byte	0x2
  1754 0335 0000 0000 		.long	.LM94
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 32
 
 
  1755 0339 FC        		.byte	0xfc
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1809 038e 15        		.byte	0x15
  1810 038f 00        		.byte	0x0
  1811 0390 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 33
 
 
  1812 0391 02        		.byte	0x2
@@ -1970,258 +1970,258 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 1
  1845 0032 4944 4C45 		.string	"IDLE_END"
  1845      5F45 4E44 
  1845      00
- 1846               	.LASF56:
- 1847 003b 7478 6368 		.string	"txchar"
- 1847      6172 00
- 1848               	.LASF8:
- 1849 0042 7368 6F72 		.string	"short int"
- 1849      7420 696E 
- 1849      7400 
- 1850               	.LASF58:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 34
+ 1846               	.LASF26:
+ 1847 003b 5258 5F53 		.string	"RX_SENT_ACK"
+ 1847      454E 545F 
+ 1847      4143 4B00 
+ 1848               	.LASF56:
+ 1849 0047 7478 6368 		.string	"txchar"
+ 1849      6172 00
+ 1850               	.LASF8:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 34
 
 
- 1851 004c 7469 6D65 		.string	"timerAction"
- 1851      7241 6374 
- 1851      696F 6E00 
- 1852               	.LASF29:
- 1853 0058 5458 5F44 		.string	"TX_DATA1"
- 1853      4154 4131 
- 1853      00
- 1854               	.LASF30:
- 1855 0061 5458 5F44 		.string	"TX_DATA2"
- 1855      4154 4132 
+ 1851 004e 7368 6F72 		.string	"short int"
+ 1851      7420 696E 
+ 1851      7400 
+ 1852               	.LASF58:
+ 1853 0058 7469 6D65 		.string	"timerAction"
+ 1853      7241 6374 
+ 1853      696F 6E00 
+ 1854               	.LASF29:
+ 1855 0064 5458 5F44 		.string	"TX_DATA1"
+ 1855      4154 4131 
  1855      00
- 1856               	.LASF31:
- 1857 006a 5458 5F44 		.string	"TX_DATA3"
- 1857      4154 4133 
+ 1856               	.LASF30:
+ 1857 006d 5458 5F44 		.string	"TX_DATA2"
+ 1857      4154 4132 
  1857      00
- 1858               	.LASF32:
- 1859 0073 5458 5F44 		.string	"TX_DATA4"
- 1859      4154 4134 
+ 1858               	.LASF31:
+ 1859 0076 5458 5F44 		.string	"TX_DATA3"
+ 1859      4154 4133 
  1859      00
- 1860               	.LASF33:
- 1861 007c 5458 5F44 		.string	"TX_DATA5"
- 1861      4154 4135 
+ 1860               	.LASF32:
+ 1861 007f 5458 5F44 		.string	"TX_DATA4"
+ 1861      4154 4134 
  1861      00
- 1862               	.LASF34:
- 1863 0085 5458 5F44 		.string	"TX_DATA6"
- 1863      4154 4136 
+ 1862               	.LASF33:
+ 1863 0088 5458 5F44 		.string	"TX_DATA5"
+ 1863      4154 4135 
  1863      00
- 1864               	.LASF35:
- 1865 008e 5458 5F44 		.string	"TX_DATA7"
- 1865      4154 4137 
+ 1864               	.LASF34:
+ 1865 0091 5458 5F44 		.string	"TX_DATA6"
+ 1865      4154 4136 
  1865      00
- 1866               	.LASF28:
- 1867 0097 5458 5F53 		.string	"TX_START"
- 1867      5441 5254 
+ 1866               	.LASF35:
+ 1867 009a 5458 5F44 		.string	"TX_DATA7"
+ 1867      4154 4137 
  1867      00
- 1868               	.LASF11:
- 1869 00a0 4944 4C45 		.string	"IDLE_WAIT_REL"
- 1869      5F57 4149 
- 1869      545F 5245 
- 1869      4C00 
- 1870               	.LASF53:
- 1871 00ae 6B65 7973 		.string	"keysta.c"
- 1871      7461 2E63 
- 1871      00
- 1872               	.LASF51:
- 1873 00b7 6B62 645F 		.string	"kbd_state"
- 1873      7374 6174 
- 1873      6500 
- 1874               	.LASF41:
- 1875 00c1 636C 6F63 		.string	"clockHigh"
- 1875      6B48 6967 
- 1875      6800 
- 1876               	.LASF43:
- 1877 00cb 636C 6F63 		.string	"clockLow"
- 1877      6B4C 6F77 
- 1877      00
- 1878               	.LASF54:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 35
+ 1868               	.LASF28:
+ 1869 00a3 5458 5F53 		.string	"TX_START"
+ 1869      5441 5254 
+ 1869      00
+ 1870               	.LASF11:
+ 1871 00ac 4944 4C45 		.string	"IDLE_WAIT_REL"
+ 1871      5F57 4149 
+ 1871      545F 5245 
+ 1871      4C00 
+ 1872               	.LASF53:
+ 1873 00ba 6B65 7973 		.string	"keysta.c"
+ 1873      7461 2E63 
+ 1873      00
+ 1874               	.LASF51:
+ 1875 00c3 6B62 645F 		.string	"kbd_state"
+ 1875      7374 6174 
+ 1875      6500 
+ 1876               	.LASF41:
+ 1877 00cd 636C 6F63 		.string	"clockHigh"
+ 1877      6B48 6967 
+ 1877      6800 
+ 1878               	.LASF43:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 35
 
 
- 1879 00d4 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
- 1879      6974 325C 
- 1879      7073 3261 
- 1879      7672 555C 
- 1879      2E67 6974 
- 1880               	.LASF5:
- 1881 00f0 6C6F 6E67 		.string	"long long int"
- 1881      206C 6F6E 
- 1881      6720 696E 
- 1881      7400 
- 1882               	.LASF3:
- 1883 00fe 6C6F 6E67 		.string	"long int"
- 1883      2069 6E74 
- 1883      00
- 1884               	.LASF47:
- 1885 0107 7478 5F62 		.string	"tx_byte"
- 1885      7974 6500 
+ 1879 00d7 636C 6F63 		.string	"clockLow"
+ 1879      6B4C 6F77 
+ 1879      00
+ 1880               	.LASF40:
+ 1881 00e0 6461 7461 		.string	"dataHigh"
+ 1881      4869 6768 
+ 1881      00
+ 1882               	.LASF5:
+ 1883 00e9 6C6F 6E67 		.string	"long long int"
+ 1883      206C 6F6E 
+ 1883      6720 696E 
+ 1883      7400 
+ 1884               	.LASF3:
+ 1885 00f7 6C6F 6E67 		.string	"long int"
+ 1885      2069 6E74 
+ 1885      00
  1886               	.LASF49:
- 1887 010f 7061 7269 		.string	"parity"
+ 1887 0100 7061 7269 		.string	"parity"
  1887      7479 00
  1888               	.LASF1:
- 1889 0116 756E 7369 		.string	"unsigned char"
+ 1889 0107 756E 7369 		.string	"unsigned char"
  1889      676E 6564 
  1889      2063 6861 
  1889      7200 
  1890               	.LASF0:
- 1891 0124 7369 676E 		.string	"signed char"
+ 1891 0115 7369 676E 		.string	"signed char"
  1891      6564 2063 
  1891      6861 7200 
  1892               	.LASF6:
- 1893 0130 6C6F 6E67 		.string	"long long unsigned int"
+ 1893 0121 6C6F 6E67 		.string	"long long unsigned int"
  1893      206C 6F6E 
  1893      6720 756E 
  1893      7369 676E 
  1893      6564 2069 
  1894               	.LASF2:
- 1895 0147 756E 7369 		.string	"unsigned int"
+ 1895 0138 756E 7369 		.string	"unsigned int"
  1895      676E 6564 
  1895      2069 6E74 
  1895      00
- 1896               	.LASF40:
- 1897 0154 6461 7461 		.string	"dataHigh"
- 1897      4869 6768 
- 1897      00
+ 1896               	.LASF47:
+ 1897 0145 7478 5F62 		.string	"tx_byte"
+ 1897      7974 6500 
  1898               	.LASF19:
- 1899 015d 5258 5F44 		.string	"RX_DATA3"
+ 1899 014d 5258 5F44 		.string	"RX_DATA3"
  1899      4154 4133 
  1899      00
  1900               	.LASF7:
- 1901 0166 7368 6F72 		.string	"short unsigned int"
+ 1901 0156 7368 6F72 		.string	"short unsigned int"
  1901      7420 756E 
  1901      7369 676E 
  1901      6564 2069 
  1901      6E74 00
  1902               	.LASF20:
- 1903 0179 5258 5F44 		.string	"RX_DATA4"
+ 1903 0169 5258 5F44 		.string	"RX_DATA4"
  1903      4154 4134 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 36
-
-
  1903      00
  1904               	.LASF9:
- 1905 0182 6368 6172 		.string	"char"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 36
+
+
+ 1905 0172 6368 6172 		.string	"char"
  1905      00
- 1906               	.LASF26:
- 1907 0187 5258 5F53 		.string	"RX_SENT_ACK"
- 1907      454E 545F 
- 1907      4143 4B00 
+ 1906               	.LASF54:
+ 1907 0177 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
+ 1907      6573 6B74 
+ 1907      6F70 5C6B 
+ 1907      6579 626F 
+ 1907      6172 645C 
  1908               	.LASF12:
- 1909 0193 4944 4C45 		.string	"IDLE_OK_TO_TX"
+ 1909 01b1 4944 4C45 		.string	"IDLE_OK_TO_TX"
  1909      5F4F 4B5F 
  1909      544F 5F54 
  1909      5800 
  1910               	.LASF24:
- 1911 01a1 5258 5F50 		.string	"RX_PARITY"
+ 1911 01bf 5258 5F50 		.string	"RX_PARITY"
  1911      4152 4954 
  1911      5900 
  1912               	.LASF46:
- 1913 01ab 7278 5F62 		.string	"rx_byte"
+ 1913 01c9 7278 5F62 		.string	"rx_byte"
  1913      7974 6500 
  1914               	.LASF42:
- 1915 01b3 6461 7461 		.string	"dataLow"
+ 1915 01d1 6461 7461 		.string	"dataLow"
  1915      4C6F 7700 
  1916               	.LASF36:
- 1917 01bb 5458 5F50 		.string	"TX_PARITY"
+ 1917 01d9 5458 5F50 		.string	"TX_PARITY"
  1917      4152 4954 
  1917      5900 
  1918               	.LASF4:
- 1919 01c5 6C6F 6E67 		.string	"long unsigned int"
+ 1919 01e3 6C6F 6E67 		.string	"long unsigned int"
  1919      2075 6E73 
  1919      6967 6E65 
  1919      6420 696E 
  1919      7400 
  1920               	.LASF50:
- 1921 01d7 6B62 645F 		.string	"kbd_flags"
+ 1921 01f5 6B62 645F 		.string	"kbd_flags"
  1921      666C 6167 
  1921      7300 
  1922               	.LASF38:
- 1923 01e1 5458 5F41 		.string	"TX_AFTER_STOP"
+ 1923 01ff 5458 5F41 		.string	"TX_AFTER_STOP"
  1923      4654 4552 
  1923      5F53 544F 
  1923      5000 
  1924               	.LASF48:
- 1925 01ef 7478 5F73 		.string	"tx_shift"
+ 1925 020d 7478 5F73 		.string	"tx_shift"
  1925      6869 6674 
  1925      00
  1926               	.LASF39:
- 1927 01f8 5458 5F45 		.string	"TX_END"
+ 1927 0216 5458 5F45 		.string	"TX_END"
  1927      4E44 00
  1928               	.LASF45:
- 1929 01ff 6B62 645F 		.string	"kbd_init"
+ 1929 021d 6B62 645F 		.string	"kbd_init"
  1929      696E 6974 
  1929      00
  1930               	.LASF27:
- 1931 0208 5258 5F45 		.string	"RX_END"
+ 1931 0226 5258 5F45 		.string	"RX_END"
  1931      4E44 00
  1932               	.LASF25:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 37
 
 
- 1933 020f 5258 5F53 		.string	"RX_STOP"
+ 1933 022d 5258 5F53 		.string	"RX_STOP"
  1933      544F 5000 
  1934               	.LASF57:
- 1935 0217 6B62 645F 		.string	"kbd_get_rx_char"
+ 1935 0235 6B62 645F 		.string	"kbd_get_rx_char"
  1935      6765 745F 
  1935      7278 5F63 
  1935      6861 7200 
  1936               	.LASF16:
- 1937 0227 5258 5F44 		.string	"RX_DATA0"
+ 1937 0245 5258 5F44 		.string	"RX_DATA0"
  1937      4154 4130 
  1937      00
  1938               	.LASF17:
- 1939 0230 5258 5F44 		.string	"RX_DATA1"
+ 1939 024e 5258 5F44 		.string	"RX_DATA1"
  1939      4154 4131 
  1939      00
  1940               	.LASF18:
- 1941 0239 5258 5F44 		.string	"RX_DATA2"
+ 1941 0257 5258 5F44 		.string	"RX_DATA2"
  1941      4154 4132 
  1941      00
  1942               	.LASF55:
- 1943 0242 656E 756D 		.string	"enum_state"
+ 1943 0260 656E 756D 		.string	"enum_state"
  1943      5F73 7461 
  1943      7465 00
  1944               	.LASF10:
- 1945 024d 4944 4C45 		.string	"IDLE_START"
+ 1945 026b 4944 4C45 		.string	"IDLE_START"
  1945      5F53 5441 
  1945      5254 00
  1946               	.LASF21:
- 1947 0258 5258 5F44 		.string	"RX_DATA5"
+ 1947 0276 5258 5F44 		.string	"RX_DATA5"
  1947      4154 4135 
  1947      00
  1948               	.LASF22:
- 1949 0261 5258 5F44 		.string	"RX_DATA6"
+ 1949 027f 5258 5F44 		.string	"RX_DATA6"
  1949      4154 4136 
  1949      00
  1950               	.LASF23:
- 1951 026a 5258 5F44 		.string	"RX_DATA7"
+ 1951 0288 5258 5F44 		.string	"RX_DATA7"
  1951      4154 4137 
  1951      00
  1952               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keysta.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:18     .text:00000000 kbd_set_tx
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:527    .bss:00000001 tx_byte
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:18     .text:00000000 kbd_set_tx
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:527    .bss:00000001 tx_byte
                             *COM*:00000001 kbd_flags
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:54     .text:0000001e kbd_get_rx_char
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:54     .text:0000001e kbd_get_rx_char
                              .bss:00000000 rx_byte
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:83     .text:00000032 timerAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:83     .text:00000032 timerAction
                             *COM*:00000001 kbd_state
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:529    .bss:00000003 parity
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:528    .bss:00000002 tx_shift
-C:\Users\ADMINI~1\AppData\Local\Temp/ccmgeMmi.s:483    .text:0000024e kbd_init
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:529    .bss:00000003 parity
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:528    .bss:00000002 tx_shift
+C:\Users\ADMINI~1\AppData\Local\Temp/ccgp9oC2.s:483    .text:0000024e kbd_init
 
 UNDEFINED SYMBOLS
 timer2Init

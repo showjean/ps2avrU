@@ -1,6 +1,8 @@
 #ifndef PRINT
 #define PRINT
 
+#include "keymain.h"
+
 #ifdef RELEASE
 
 #else

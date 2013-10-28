@@ -1,6 +1,8 @@
 #ifndef HARDWARD_INFO_H
 #define HARDWARD_INFO_H
 
+#include "global.h"
+
 // PB0-PB7 : col1 .. col8
 // PA0-PA7 : row1 .. row8
 // PC7-PC0 : row9 .. row16

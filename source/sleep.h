@@ -9,39 +9,12 @@
 #define SLEEP_COUNT_MAX 30000
 #endif
 
-long int _sleepCount = 0;
-uint8_t _isSleep = 0;
+extern void countSleep(void);
 
-void countSleep(void){
-	if(_isSleep) return; 
-	
-	++_sleepCount;
+extern void wakeUp(void);
 
-	if(_sleepCount >= SLEEP_COUNT_MAX){
-		_sleepCount = 0;
-		sleep();
-	}
-}
+extern void sleep(void);
 
-void wakeUp(void){
-	if(_isSleep){
-		_isSleep = 0;
-
-		wakeUpLED();
-	}
-	_sleepCount = 0;
-}
-
-void sleep(void){
-	if(_isSleep == 0){
-		_isSleep = 1;
-
-		sleepLED();
-	}
-}
-
-uint8_t isSleep(void){
-	return _isSleep;
-}
+extern uint8_t isSleep(void);
 
 #endif

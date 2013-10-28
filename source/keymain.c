@@ -7,7 +7,7 @@
  * License: GNU GPL v2
  */
 
-#define RELEASE	// if you want to debug mode, comment this line.
+#include "keymain.h"
 
 #include "timer.h"
 #include "global.h"
@@ -26,8 +26,8 @@
 #include <string.h>
 
 #include "keymap.h" 
-#include "keymapper.h"
 #include "hardwareinfo.h"
+#include "keymapper.h"
 #include "ledrender.h"
 #include "ps2main.h"
 #include "usbmain.h"
@@ -71,13 +71,13 @@ void clearTimers(void) {
 
 	// timer0, timer1 reset;
 	cbi(TIMSK, TOIE0);	// disable TCNT0 overflow
-	TCNT0 = 0;
+	// TCNT0 = 0;
 	cbi(TIMSK, TOIE1);	// disable TCNT1 overflow
-	TCNT1H = 0;
-	TCNT1L = 0;
+	// TCNT1H = 0;
+	// TCNT1L = 0;
 	// timer2 reset
 	cbi(TIMSK, TOIE2);	// disable TCNT2 overflow
-	TCNT2 = 0; //0xEC;
+	// TCNT2 = 0; //0xEC;
 }
 
 /**
@@ -148,14 +148,6 @@ uint8_t getUserSelectedInterface(uint8_t pin, uint8_t pinNumber){
 
 int main(void) {
 
-
-	// 시간을 지체하면 특정 상황시 usb의 인식이 되지 않으므로 되도록 빨리 진행한다.
-
-    // blink, to indicate power-on
-	// turnOnLED(LEDNUM | LEDCAPS);
-	// _delay_ms(100);
-	// turnOffLED(LEDNUM | LEDCAPS);
-
 	enable_printf();
 
     INTERFACE = 255;
@@ -163,80 +155,59 @@ int main(void) {
 
 
 	// for interface select
-    initHardware(0);
+    // initHardware(0);
+    DDRCOLUMNS 	= 0xFF;	// all outputs for cols
+	PORTCOLUMNS	= 0xFF;	// pull-up
+	DDRROWS1	= 0x00;	// all inputs for rows
+	DDRROWS2	= 0x00;
+	PORTROWS1	= 0xFF;	// all rows pull-up.
+	PORTROWS2	= 0xFF;	
+  
+	DDRD        = 0b00000000; // row 17 input (PD7)
+	PORTD       = 0b10000000; // row 17 pull up (PD7)
+    _delay_us_m(1); 
 
 	uint8_t _countDie = 0;
-	while(setCurrentMatrix() == 0 && ++_countDie < 30){
+	while(getLiveMatrix() == 0 && ++_countDie < 30){
 		// waiting during clear debounce
 	}
 
 	// DEBUG_PRINT(("_countDie : %d \n", _countDie));
 
-	if(1){
-		// DEBUG_PRINT(("checking.... \n"));
-		uint8_t row, col, cur, keyidx;
-		uint8_t gModifier = 0; 
+	
+	// DEBUG_PRINT(("checking.... \n"));
+	uint8_t row, col, cur, keyidx;
+	uint8_t gModifier = 0; 
 
-		// debounce cleared => compare last matrix and current matrix
-		for(col=0;col<8;col++)
-		{		
-			for(row=0;row<17;row++)
-			{
-				cur  = currentMatrix[row] & BV(col);
-				keyidx = getCurrentKeycode(0, row, col);
-				// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
-				if( cur ) {
-					if(keyidx == KEY_M) {
-						DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
-						readyKeyMappingOnBoot();
-					}else if(keyidx == KEY_U) {
-						DEBUG_PRINT(("KEY_U \n"));
-						ckeckNeedInterface |= (1 << 0);
-					}else if(keyidx == KEY_P) {
-						DEBUG_PRINT(("KEY_P \n"));
-						ckeckNeedInterface |= (1 << 1);
-					}
+	// debounce cleared => compare last matrix and current matrix
+	for(col=0;col<8;col++)
+	{		
+		for(row=0;row<17;row++)
+		{
+			cur  = currentMatrix[row] & BV(col);
+			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
+			if( cur ) {
+				keyidx = pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeycode(0, row, col);
+				if(keyidx == KEY_M) {
+					DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
+					readyKeyMappingOnBoot();
+				}else if(keyidx == KEY_U) {
+					DEBUG_PRINT(("KEY_U \n"));
+					ckeckNeedInterface |= (1 << 0);
+				}else if(keyidx == KEY_P) {
+					DEBUG_PRINT(("KEY_P \n"));
+					ckeckNeedInterface |= (1 << 1);
 				}
-
 			}
-			
+
 		}
+		
 	}
 
-	// for interface select
-	// KEY_U
-	/*DDRA  &= ~(1 << PINA5);      // PINA5(row5) input
-    PORTA |= (1 << PINA5);      // PINA5(pullUP)
-    // KEY_P
-	DDRC  &= ~(1 << PINC7);      // PINC7(row8) input
-    PORTC |= (1 << PINC7);      // PINC7(pullUP)
-    // col 0
-    DDRB  |= (1 << PINB0);      // PINB0(column0) output
-    PORTB &= ~(1 << PINB0);     // pull low
-
-    _delay_us_m(1);
-	if(!getUserSelectedInterface(PINA, PINA5)) ckeckNeedInterface |= (1 << 0);
-	
-	if(!getUserSelectedInterface(PINC, PINC7)) ckeckNeedInterface |= (1 << 1);
-*/
 	// DEBUG_PRINT(("ckeckNeedInterface %02x \n", ckeckNeedInterface));
-
-
-	// for keymapping (PINA5 & PINB4 = row5, col4 : KEY_M)
-	/*DDRA  &= ~(1 << PINA5);      // PINA5(row5) input
-    PORTA |= (1 << PINA5);      // PINA5(pullUP)
-    // col 4
-    DDRB  &= ~(1 << PINB0);		// input
-    PORTB |= (1 << PINB0);     // pullUP
-    DDRB  |= (1 << PINB4);      // PINB4(column4) output
-    PORTB &= ~(1 << PINB4);     // pull low
-    _delay_us_m(1);
-    if(!getUserSelectedInterface(PINA, PINA5)) readyKeyMappingOnBoot();
-    */
-
 	if(ckeckNeedInterface > 0){
 		INTERFACE = ckeckNeedInterface + 1; 
-	}
+	}    
 
 	DEBUG_PRINT(("user selected INTERFACE %02x \n", INTERFACE));
 
@@ -298,7 +269,7 @@ int main(void) {
 		}
 	}
 
-	// DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
+	DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
@@ -312,7 +283,7 @@ int main(void) {
 			turnOnLED(LEDNUM | LEDCAPS);
 			_delay_ms(100);
 			turnOffLED(LEDNUM | LEDCAPS);
-			
+
 			clearInterface();
 			initHardware(0);
    

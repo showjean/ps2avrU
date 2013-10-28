@@ -1,0 +1,1347 @@
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 1
+
+
+   1               		.file	"keymap.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.section	.debug_abbrev,"",@progbits
+   9               	.Ldebug_abbrev0:
+  10               		.section	.debug_info,"",@progbits
+  11               	.Ldebug_info0:
+  12               		.section	.debug_line,"",@progbits
+  13               	.Ldebug_line0:
+  14               		.text
+  15               	.Ltext0:
+  16               	.global	keycode_set2
+  17               		.section	.progmem.data,"a",@progbits
+  18               		.type	keycode_set2, @object
+  19               		.size	keycode_set2, 144
+  20               	keycode_set2:
+  21 0000 00        		.byte	0
+  22 0001 00        		.byte	0
+  23 0002 FC        		.byte	-4
+  24 0003 00        		.byte	0
+  25 0004 1C        		.byte	28
+  26 0005 32        		.byte	50
+  27 0006 21        		.byte	33
+  28 0007 23        		.byte	35
+  29 0008 24        		.byte	36
+  30 0009 2B        		.byte	43
+  31 000a 34        		.byte	52
+  32 000b 33        		.byte	51
+  33 000c 43        		.byte	67
+  34 000d 3B        		.byte	59
+  35 000e 42        		.byte	66
+  36 000f 4B        		.byte	75
+  37 0010 3A        		.byte	58
+  38 0011 31        		.byte	49
+  39 0012 44        		.byte	68
+  40 0013 4D        		.byte	77
+  41 0014 15        		.byte	21
+  42 0015 2D        		.byte	45
+  43 0016 1B        		.byte	27
+  44 0017 2C        		.byte	44
+  45 0018 3C        		.byte	60
+  46 0019 2A        		.byte	42
+  47 001a 1D        		.byte	29
+  48 001b 22        		.byte	34
+  49 001c 35        		.byte	53
+  50 001d 1A        		.byte	26
+  51 001e 16        		.byte	22
+  52 001f 1E        		.byte	30
+  53 0020 26        		.byte	38
+  54 0021 25        		.byte	37
+  55 0022 2E        		.byte	46
+  56 0023 36        		.byte	54
+  57 0024 3D        		.byte	61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 2
+
+
+  58 0025 3E        		.byte	62
+  59 0026 46        		.byte	70
+  60 0027 45        		.byte	69
+  61 0028 5A        		.byte	90
+  62 0029 76        		.byte	118
+  63 002a 66        		.byte	102
+  64 002b 0D        		.byte	13
+  65 002c 29        		.byte	41
+  66 002d 4E        		.byte	78
+  67 002e 55        		.byte	85
+  68 002f 54        		.byte	84
+  69 0030 5B        		.byte	91
+  70 0031 5D        		.byte	93
+  71 0032 5D        		.byte	93
+  72 0033 4C        		.byte	76
+  73 0034 52        		.byte	82
+  74 0035 0E        		.byte	14
+  75 0036 41        		.byte	65
+  76 0037 49        		.byte	73
+  77 0038 4A        		.byte	74
+  78 0039 58        		.byte	88
+  79 003a 05        		.byte	5
+  80 003b 06        		.byte	6
+  81 003c 04        		.byte	4
+  82 003d 0C        		.byte	12
+  83 003e 03        		.byte	3
+  84 003f 0B        		.byte	11
+  85 0040 83        		.byte	-125
+  86 0041 0A        		.byte	10
+  87 0042 01        		.byte	1
+  88 0043 09        		.byte	9
+  89 0044 78        		.byte	120
+  90 0045 07        		.byte	7
+  91 0046 7C        		.byte	124
+  92 0047 7E        		.byte	126
+  93 0048 7C        		.byte	124
+  94 0049 70        		.byte	112
+  95 004a 6C        		.byte	108
+  96 004b 7D        		.byte	125
+  97 004c 71        		.byte	113
+  98 004d 69        		.byte	105
+  99 004e 7A        		.byte	122
+ 100 004f 74        		.byte	116
+ 101 0050 6B        		.byte	107
+ 102 0051 72        		.byte	114
+ 103 0052 75        		.byte	117
+ 104 0053 77        		.byte	119
+ 105 0054 4A        		.byte	74
+ 106 0055 7C        		.byte	124
+ 107 0056 7B        		.byte	123
+ 108 0057 79        		.byte	121
+ 109 0058 5A        		.byte	90
+ 110 0059 69        		.byte	105
+ 111 005a 72        		.byte	114
+ 112 005b 7A        		.byte	122
+ 113 005c 6B        		.byte	107
+ 114 005d 73        		.byte	115
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 3
+
+
+ 115 005e 74        		.byte	116
+ 116 005f 6C        		.byte	108
+ 117 0060 75        		.byte	117
+ 118 0061 7D        		.byte	125
+ 119 0062 70        		.byte	112
+ 120 0063 71        		.byte	113
+ 121 0064 61        		.byte	97
+ 122 0065 2F        		.byte	47
+ 123 0066 00        		.byte	0
+ 124 0067 14        		.byte	20
+ 125 0068 12        		.byte	18
+ 126 0069 11        		.byte	17
+ 127 006a 1F        		.byte	31
+ 128 006b 14        		.byte	20
+ 129 006c 59        		.byte	89
+ 130 006d 11        		.byte	17
+ 131 006e 27        		.byte	39
+ 132 006f 00        		.byte	0
+ 133 0070 00        		.byte	0
+ 134 0071 37        		.byte	55
+ 135 0072 3F        		.byte	63
+ 136 0073 5E        		.byte	94
+ 137 0074 48        		.byte	72
+ 138 0075 10        		.byte	16
+ 139 0076 3A        		.byte	58
+ 140 0077 38        		.byte	56
+ 141 0078 30        		.byte	48
+ 142 0079 28        		.byte	40
+ 143 007a 20        		.byte	32
+ 144 007b 18        		.byte	24
+ 145 007c 4D        		.byte	77
+ 146 007d 15        		.byte	21
+ 147 007e 3B        		.byte	59
+ 148 007f 34        		.byte	52
+ 149 0080 23        		.byte	35
+ 150 0081 32        		.byte	50
+ 151 0082 21        		.byte	33
+ 152 0083 50        		.byte	80
+ 153 0084 2B        		.byte	43
+ 154 0085 40        		.byte	64
+ 155 0086 4B        		.byte	75
+ 156 0087 1C        		.byte	28
+ 157 0088 43        		.byte	67
+ 158 0089 22        		.byte	34
+ 159 008a 1D        		.byte	29
+ 160 008b 00        		.byte	0
+ 161 008c 00        		.byte	0
+ 162 008d F1        		.byte	-15
+ 163 008e F2        		.byte	-14
+ 164 008f 00        		.byte	0
+ 165               	.global	keycode_USB_multimedia
+ 166               		.type	keycode_USB_multimedia, @object
+ 167               		.size	keycode_USB_multimedia, 52
+ 168               	keycode_USB_multimedia:
+ 169 0090 0000      		.word	0
+ 170 0092 0000      		.word	0
+ 171 0094 0000      		.word	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 4
+
+
+ 172 0096 8A01      		.word	394
+ 173 0098 2102      		.word	545
+ 174 009a 2302      		.word	547
+ 175 009c 2402      		.word	548
+ 176 009e 2502      		.word	549
+ 177 00a0 2602      		.word	550
+ 178 00a2 2702      		.word	551
+ 179 00a4 2A02      		.word	554
+ 180 00a6 B500      		.word	181
+ 181 00a8 B600      		.word	182
+ 182 00aa B700      		.word	183
+ 183 00ac CD00      		.word	205
+ 184 00ae E200      		.word	226
+ 185 00b0 E900      		.word	233
+ 186 00b2 EA00      		.word	234
+ 187 00b4 8301      		.word	387
+ 188 00b6 9201      		.word	402
+ 189 00b8 9401      		.word	404
+ 190 00ba 0000      		.word	0
+ 191 00bc 0000      		.word	0
+ 192 00be 0000      		.word	0
+ 193 00c0 0000      		.word	0
+ 194 00c2 0000      		.word	0
+ 195               	.global	keycode_USB_extend
+ 196               		.type	keycode_USB_extend, @object
+ 197               		.size	keycode_USB_extend, 4
+ 198               	keycode_USB_extend:
+ 199 00c4 9100      		.word	145
+ 200 00c6 9000      		.word	144
+ 201               	.global	keycode_set2_special
+ 202               		.type	keycode_set2_special, @object
+ 203               		.size	keycode_set2_special, 3
+ 204               	keycode_set2_special:
+ 205 00c8 46        		.byte	70
+ 206 00c9 48        		.byte	72
+ 207 00ca 00        		.byte	0
+ 208               	.global	keycode_set2_makeonly
+ 209               		.type	keycode_set2_makeonly, @object
+ 210               		.size	keycode_set2_makeonly, 4
+ 211               	keycode_set2_makeonly:
+ 212 00cb 48        		.byte	72
+ 213 00cc 8E        		.byte	-114
+ 214 00cd 8D        		.byte	-115
+ 215 00ce 00        		.byte	0
+ 216               	.global	keycode_set2_make_break
+ 217               		.type	keycode_set2_make_break, @object
+ 218               		.size	keycode_set2_make_break, 4
+ 219               	keycode_set2_make_break:
+ 220 00cf 71        		.byte	113
+ 221 00d0 72        		.byte	114
+ 222 00d1 73        		.byte	115
+ 223 00d2 00        		.byte	0
+ 224               	.global	keycode_set2_extend
+ 225               		.type	keycode_set2_extend, @object
+ 226               		.size	keycode_set2_extend, 45
+ 227               	keycode_set2_extend:
+ 228 00d3 6A        		.byte	106
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 5
+
+
+ 229 00d4 6B        		.byte	107
+ 230 00d5 6E        		.byte	110
+ 231 00d6 6D        		.byte	109
+ 232 00d7 65        		.byte	101
+ 233 00d8 46        		.byte	70
+ 234 00d9 49        		.byte	73
+ 235 00da 4A        		.byte	74
+ 236 00db 4B        		.byte	75
+ 237 00dc 4C        		.byte	76
+ 238 00dd 4D        		.byte	77
+ 239 00de 4E        		.byte	78
+ 240 00df 52        		.byte	82
+ 241 00e0 50        		.byte	80
+ 242 00e1 4F        		.byte	79
+ 243 00e2 51        		.byte	81
+ 244 00e3 54        		.byte	84
+ 245 00e4 58        		.byte	88
+ 246 00e5 71        		.byte	113
+ 247 00e6 72        		.byte	114
+ 248 00e7 73        		.byte	115
+ 249 00e8 74        		.byte	116
+ 250 00e9 75        		.byte	117
+ 251 00ea 76        		.byte	118
+ 252 00eb 77        		.byte	119
+ 253 00ec 78        		.byte	120
+ 254 00ed 79        		.byte	121
+ 255 00ee 7A        		.byte	122
+ 256 00ef 7B        		.byte	123
+ 257 00f0 7C        		.byte	124
+ 258 00f1 7D        		.byte	125
+ 259 00f2 7E        		.byte	126
+ 260 00f3 7F        		.byte	127
+ 261 00f4 80        		.byte	-128
+ 262 00f5 81        		.byte	-127
+ 263 00f6 82        		.byte	-126
+ 264 00f7 83        		.byte	-125
+ 265 00f8 84        		.byte	-124
+ 266 00f9 85        		.byte	-123
+ 267 00fa 86        		.byte	-122
+ 268 00fb 87        		.byte	-121
+ 269 00fc 88        		.byte	-120
+ 270 00fd 89        		.byte	-119
+ 271 00fe 8A        		.byte	-118
+ 272 00ff 00        		.byte	0
+ 273               	.global	keycode_set2_proc_shift
+ 274               		.type	keycode_set2_proc_shift, @object
+ 275               		.size	keycode_set2_proc_shift, 15
+ 276               	keycode_set2_proc_shift:
+ 277 0100 49        		.byte	73
+ 278 0101 4C        		.byte	76
+ 279 0102 4A        		.byte	74
+ 280 0103 4D        		.byte	77
+ 281 0104 4B        		.byte	75
+ 282 0105 4E        		.byte	78
+ 283 0106 6A        		.byte	106
+ 284 0107 6E        		.byte	110
+ 285 0108 65        		.byte	101
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 6
+
+
+ 286 0109 50        		.byte	80
+ 287 010a 4F        		.byte	79
+ 288 010b 52        		.byte	82
+ 289 010c 51        		.byte	81
+ 290 010d 54        		.byte	84
+ 291 010e 00        		.byte	0
+ 292               	.global	keymap_code
+ 293               		.type	keymap_code, @object
+ 294               		.size	keymap_code, 408
+ 295               	keymap_code:
+ 296 010f 48        		.byte	72
+ 297 0110 00        		.byte	0
+ 298 0111 00        		.byte	0
+ 299 0112 00        		.byte	0
+ 300 0113 6B        		.byte	107
+ 301 0114 00        		.byte	0
+ 302 0115 67        		.byte	103
+ 303 0116 3E        		.byte	62
+ 304 0117 14        		.byte	20
+ 305 0118 2B        		.byte	43
+ 306 0119 04        		.byte	4
+ 307 011a 29        		.byte	41
+ 308 011b 1D        		.byte	29
+ 309 011c 00        		.byte	0
+ 310 011d 35        		.byte	53
+ 311 011e 1E        		.byte	30
+ 312 011f 1A        		.byte	26
+ 313 0120 39        		.byte	57
+ 314 0121 16        		.byte	22
+ 315 0122 00        		.byte	0
+ 316 0123 1B        		.byte	27
+ 317 0124 00        		.byte	0
+ 318 0125 3A        		.byte	58
+ 319 0126 1F        		.byte	31
+ 320 0127 08        		.byte	8
+ 321 0128 3C        		.byte	60
+ 322 0129 07        		.byte	7
+ 323 012a 3D        		.byte	61
+ 324 012b 06        		.byte	6
+ 325 012c 00        		.byte	0
+ 326 012d 3B        		.byte	59
+ 327 012e 20        		.byte	32
+ 328 012f 15        		.byte	21
+ 329 0130 17        		.byte	23
+ 330 0131 09        		.byte	9
+ 331 0132 0A        		.byte	10
+ 332 0133 19        		.byte	25
+ 333 0134 05        		.byte	5
+ 334 0135 22        		.byte	34
+ 335 0136 21        		.byte	33
+ 336 0137 18        		.byte	24
+ 337 0138 1C        		.byte	28
+ 338 0139 0D        		.byte	13
+ 339 013a 0B        		.byte	11
+ 340 013b 10        		.byte	16
+ 341 013c 11        		.byte	17
+ 342 013d 23        		.byte	35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 7
+
+
+ 343 013e 24        		.byte	36
+ 344 013f 0C        		.byte	12
+ 345 0140 30        		.byte	48
+ 346 0141 0E        		.byte	14
+ 347 0142 3F        		.byte	63
+ 348 0143 36        		.byte	54
+ 349 0144 00        		.byte	0
+ 350 0145 2E        		.byte	46
+ 351 0146 25        		.byte	37
+ 352 0147 12        		.byte	18
+ 353 0148 40        		.byte	64
+ 354 0149 0F        		.byte	15
+ 355 014a 00        		.byte	0
+ 356 014b 37        		.byte	55
+ 357 014c FE        		.byte	-2
+ 358 014d 41        		.byte	65
+ 359 014e 26        		.byte	38
+ 360 014f 13        		.byte	19
+ 361 0150 2F        		.byte	47
+ 362 0151 33        		.byte	51
+ 363 0152 34        		.byte	52
+ 364 0153 32        		.byte	50
+ 365 0154 38        		.byte	56
+ 366 0155 2D        		.byte	45
+ 367 0156 27        		.byte	39
+ 368 0157 47        		.byte	71
+ 369 0158 00        		.byte	0
+ 370 0159 00        		.byte	0
+ 371 015a 69        		.byte	105
+ 372 015b 00        		.byte	0
+ 373 015c 6D        		.byte	109
+ 374 015d 00        		.byte	0
+ 375 015e 46        		.byte	70
+ 376 015f 00        		.byte	0
+ 377 0160 2A        		.byte	42
+ 378 0161 31        		.byte	49
+ 379 0162 44        		.byte	68
+ 380 0163 28        		.byte	40
+ 381 0164 45        		.byte	69
+ 382 0165 42        		.byte	66
+ 383 0166 43        		.byte	67
+ 384 0167 00        		.byte	0
+ 385 0168 00        		.byte	0
+ 386 0169 00        		.byte	0
+ 387 016a 2C        		.byte	44
+ 388 016b 00        		.byte	0
+ 389 016c 51        		.byte	81
+ 390 016d 4C        		.byte	76
+ 391 016e 00        		.byte	0
+ 392 016f 00        		.byte	0
+ 393 0170 00        		.byte	0
+ 394 0171 00        		.byte	0
+ 395 0172 00        		.byte	0
+ 396 0173 00        		.byte	0
+ 397 0174 4F        		.byte	79
+ 398 0175 49        		.byte	73
+ 399 0176 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 8
+
+
+ 400 0177 00        		.byte	0
+ 401 0178 00        		.byte	0
+ 402 0179 00        		.byte	0
+ 403 017a 00        		.byte	0
+ 404 017b 00        		.byte	0
+ 405 017c 00        		.byte	0
+ 406 017d 4B        		.byte	75
+ 407 017e 4E        		.byte	78
+ 408 017f 00        		.byte	0
+ 409 0180 00        		.byte	0
+ 410 0181 00        		.byte	0
+ 411 0182 52        		.byte	82
+ 412 0183 00        		.byte	0
+ 413 0184 50        		.byte	80
+ 414 0185 4A        		.byte	74
+ 415 0186 4D        		.byte	77
+ 416 0187 00        		.byte	0
+ 417 0188 68        		.byte	104
+ 418 0189 6C        		.byte	108
+ 419 018a 00        		.byte	0
+ 420 018b 64        		.byte	100
+ 421 018c 00        		.byte	0
+ 422 018d 00        		.byte	0
+ 423 018e 00        		.byte	0
+ 424 018f 00        		.byte	0
+ 425 0190 6A        		.byte	106
+ 426 0191 6E        		.byte	110
+ 427 0192 00        		.byte	0
+ 428 0193 00        		.byte	0
+ 429 0194 00        		.byte	0
+ 430 0195 00        		.byte	0
+ 431 0196 00        		.byte	0
+ 432 0197 53        		.byte	83
+ 433 0198 00        		.byte	0
+ 434 0199 00        		.byte	0
+ 435 019a 00        		.byte	0
+ 436 019b 6B        		.byte	107
+ 437 019c 00        		.byte	0
+ 438 019d 67        		.byte	103
+ 439 019e 3E        		.byte	62
+ 440 019f 14        		.byte	20
+ 441 01a0 2B        		.byte	43
+ 442 01a1 04        		.byte	4
+ 443 01a2 29        		.byte	41
+ 444 01a3 1D        		.byte	29
+ 445 01a4 00        		.byte	0
+ 446 01a5 35        		.byte	53
+ 447 01a6 1E        		.byte	30
+ 448 01a7 1A        		.byte	26
+ 449 01a8 FD        		.byte	-3
+ 450 01a9 16        		.byte	22
+ 451 01aa 00        		.byte	0
+ 452 01ab 1B        		.byte	27
+ 453 01ac 00        		.byte	0
+ 454 01ad 3A        		.byte	58
+ 455 01ae 1F        		.byte	31
+ 456 01af 08        		.byte	8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 9
+
+
+ 457 01b0 3C        		.byte	60
+ 458 01b1 07        		.byte	7
+ 459 01b2 3D        		.byte	61
+ 460 01b3 06        		.byte	6
+ 461 01b4 00        		.byte	0
+ 462 01b5 3B        		.byte	59
+ 463 01b6 20        		.byte	32
+ 464 01b7 15        		.byte	21
+ 465 01b8 17        		.byte	23
+ 466 01b9 09        		.byte	9
+ 467 01ba 0A        		.byte	10
+ 468 01bb 19        		.byte	25
+ 469 01bc 05        		.byte	5
+ 470 01bd 22        		.byte	34
+ 471 01be 21        		.byte	33
+ 472 01bf 5C        		.byte	92
+ 473 01c0 1C        		.byte	28
+ 474 01c1 59        		.byte	89
+ 475 01c2 0B        		.byte	11
+ 476 01c3 62        		.byte	98
+ 477 01c4 11        		.byte	17
+ 478 01c5 23        		.byte	35
+ 479 01c6 5F        		.byte	95
+ 480 01c7 5D        		.byte	93
+ 481 01c8 30        		.byte	48
+ 482 01c9 5A        		.byte	90
+ 483 01ca 3F        		.byte	63
+ 484 01cb 62        		.byte	98
+ 485 01cc 00        		.byte	0
+ 486 01cd FA        		.byte	-6
+ 487 01ce 60        		.byte	96
+ 488 01cf 5E        		.byte	94
+ 489 01d0 40        		.byte	64
+ 490 01d1 5B        		.byte	91
+ 491 01d2 00        		.byte	0
+ 492 01d3 63        		.byte	99
+ 493 01d4 FE        		.byte	-2
+ 494 01d5 41        		.byte	65
+ 495 01d6 61        		.byte	97
+ 496 01d7 55        		.byte	85
+ 497 01d8 2F        		.byte	47
+ 498 01d9 56        		.byte	86
+ 499 01da 34        		.byte	52
+ 500 01db 32        		.byte	50
+ 501 01dc 57        		.byte	87
+ 502 01dd F9        		.byte	-7
+ 503 01de 54        		.byte	84
+ 504 01df 47        		.byte	71
+ 505 01e0 00        		.byte	0
+ 506 01e1 00        		.byte	0
+ 507 01e2 69        		.byte	105
+ 508 01e3 00        		.byte	0
+ 509 01e4 6D        		.byte	109
+ 510 01e5 00        		.byte	0
+ 511 01e6 46        		.byte	70
+ 512 01e7 00        		.byte	0
+ 513 01e8 2A        		.byte	42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 10
+
+
+ 514 01e9 31        		.byte	49
+ 515 01ea 44        		.byte	68
+ 516 01eb 58        		.byte	88
+ 517 01ec 45        		.byte	69
+ 518 01ed 42        		.byte	66
+ 519 01ee 43        		.byte	67
+ 520 01ef 00        		.byte	0
+ 521 01f0 00        		.byte	0
+ 522 01f1 00        		.byte	0
+ 523 01f2 FC        		.byte	-4
+ 524 01f3 00        		.byte	0
+ 525 01f4 51        		.byte	81
+ 526 01f5 4C        		.byte	76
+ 527 01f6 00        		.byte	0
+ 528 01f7 00        		.byte	0
+ 529 01f8 00        		.byte	0
+ 530 01f9 00        		.byte	0
+ 531 01fa 00        		.byte	0
+ 532 01fb 00        		.byte	0
+ 533 01fc 4F        		.byte	79
+ 534 01fd 49        		.byte	73
+ 535 01fe 00        		.byte	0
+ 536 01ff 00        		.byte	0
+ 537 0200 00        		.byte	0
+ 538 0201 00        		.byte	0
+ 539 0202 00        		.byte	0
+ 540 0203 00        		.byte	0
+ 541 0204 00        		.byte	0
+ 542 0205 4B        		.byte	75
+ 543 0206 4E        		.byte	78
+ 544 0207 00        		.byte	0
+ 545 0208 00        		.byte	0
+ 546 0209 00        		.byte	0
+ 547 020a 52        		.byte	82
+ 548 020b 00        		.byte	0
+ 549 020c 50        		.byte	80
+ 550 020d 4A        		.byte	74
+ 551 020e 4D        		.byte	77
+ 552 020f 00        		.byte	0
+ 553 0210 68        		.byte	104
+ 554 0211 6C        		.byte	108
+ 555 0212 00        		.byte	0
+ 556 0213 64        		.byte	100
+ 557 0214 00        		.byte	0
+ 558 0215 00        		.byte	0
+ 559 0216 00        		.byte	0
+ 560 0217 00        		.byte	0
+ 561 0218 6A        		.byte	106
+ 562 0219 6E        		.byte	110
+ 563 021a 00        		.byte	0
+ 564 021b 00        		.byte	0
+ 565 021c 00        		.byte	0
+ 566 021d 00        		.byte	0
+ 567 021e 00        		.byte	0
+ 568 021f 48        		.byte	72
+ 569 0220 00        		.byte	0
+ 570 0221 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 11
+
+
+ 571 0222 00        		.byte	0
+ 572 0223 6B        		.byte	107
+ 573 0224 00        		.byte	0
+ 574 0225 67        		.byte	103
+ 575 0226 3E        		.byte	62
+ 576 0227 14        		.byte	20
+ 577 0228 2B        		.byte	43
+ 578 0229 04        		.byte	4
+ 579 022a 29        		.byte	41
+ 580 022b 1D        		.byte	29
+ 581 022c 00        		.byte	0
+ 582 022d 35        		.byte	53
+ 583 022e 1E        		.byte	30
+ 584 022f 1A        		.byte	26
+ 585 0230 39        		.byte	57
+ 586 0231 16        		.byte	22
+ 587 0232 00        		.byte	0
+ 588 0233 1B        		.byte	27
+ 589 0234 00        		.byte	0
+ 590 0235 3A        		.byte	58
+ 591 0236 1F        		.byte	31
+ 592 0237 08        		.byte	8
+ 593 0238 3C        		.byte	60
+ 594 0239 07        		.byte	7
+ 595 023a 3D        		.byte	61
+ 596 023b 06        		.byte	6
+ 597 023c 00        		.byte	0
+ 598 023d 3B        		.byte	59
+ 599 023e 20        		.byte	32
+ 600 023f 15        		.byte	21
+ 601 0240 17        		.byte	23
+ 602 0241 09        		.byte	9
+ 603 0242 0A        		.byte	10
+ 604 0243 19        		.byte	25
+ 605 0244 05        		.byte	5
+ 606 0245 22        		.byte	34
+ 607 0246 21        		.byte	33
+ 608 0247 18        		.byte	24
+ 609 0248 1C        		.byte	28
+ 610 0249 0D        		.byte	13
+ 611 024a 0B        		.byte	11
+ 612 024b 10        		.byte	16
+ 613 024c 11        		.byte	17
+ 614 024d 23        		.byte	35
+ 615 024e 24        		.byte	36
+ 616 024f 0C        		.byte	12
+ 617 0250 30        		.byte	48
+ 618 0251 0E        		.byte	14
+ 619 0252 3F        		.byte	63
+ 620 0253 36        		.byte	54
+ 621 0254 00        		.byte	0
+ 622 0255 2E        		.byte	46
+ 623 0256 25        		.byte	37
+ 624 0257 12        		.byte	18
+ 625 0258 40        		.byte	64
+ 626 0259 0F        		.byte	15
+ 627 025a 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 12
+
+
+ 628 025b 37        		.byte	55
+ 629 025c FE        		.byte	-2
+ 630 025d 41        		.byte	65
+ 631 025e 26        		.byte	38
+ 632 025f 13        		.byte	19
+ 633 0260 2F        		.byte	47
+ 634 0261 33        		.byte	51
+ 635 0262 34        		.byte	52
+ 636 0263 32        		.byte	50
+ 637 0264 38        		.byte	56
+ 638 0265 2D        		.byte	45
+ 639 0266 27        		.byte	39
+ 640 0267 47        		.byte	71
+ 641 0268 00        		.byte	0
+ 642 0269 00        		.byte	0
+ 643 026a 69        		.byte	105
+ 644 026b 00        		.byte	0
+ 645 026c 6D        		.byte	109
+ 646 026d 00        		.byte	0
+ 647 026e 46        		.byte	70
+ 648 026f 00        		.byte	0
+ 649 0270 2A        		.byte	42
+ 650 0271 31        		.byte	49
+ 651 0272 44        		.byte	68
+ 652 0273 28        		.byte	40
+ 653 0274 45        		.byte	69
+ 654 0275 42        		.byte	66
+ 655 0276 43        		.byte	67
+ 656 0277 00        		.byte	0
+ 657 0278 00        		.byte	0
+ 658 0279 00        		.byte	0
+ 659 027a 2C        		.byte	44
+ 660 027b 00        		.byte	0
+ 661 027c 51        		.byte	81
+ 662 027d 4C        		.byte	76
+ 663 027e 00        		.byte	0
+ 664 027f 00        		.byte	0
+ 665 0280 00        		.byte	0
+ 666 0281 00        		.byte	0
+ 667 0282 00        		.byte	0
+ 668 0283 00        		.byte	0
+ 669 0284 4F        		.byte	79
+ 670 0285 49        		.byte	73
+ 671 0286 00        		.byte	0
+ 672 0287 00        		.byte	0
+ 673 0288 00        		.byte	0
+ 674 0289 00        		.byte	0
+ 675 028a 00        		.byte	0
+ 676 028b 00        		.byte	0
+ 677 028c 00        		.byte	0
+ 678 028d 4B        		.byte	75
+ 679 028e 4E        		.byte	78
+ 680 028f 00        		.byte	0
+ 681 0290 00        		.byte	0
+ 682 0291 00        		.byte	0
+ 683 0292 52        		.byte	82
+ 684 0293 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 13
+
+
+ 685 0294 50        		.byte	80
+ 686 0295 4A        		.byte	74
+ 687 0296 4D        		.byte	77
+ 688 0297 00        		.byte	0
+ 689 0298 68        		.byte	104
+ 690 0299 6C        		.byte	108
+ 691 029a 00        		.byte	0
+ 692 029b 64        		.byte	100
+ 693 029c 00        		.byte	0
+ 694 029d 00        		.byte	0
+ 695 029e 00        		.byte	0
+ 696 029f 00        		.byte	0
+ 697 02a0 6A        		.byte	106
+ 698 02a1 6E        		.byte	110
+ 699 02a2 00        		.byte	0
+ 700 02a3 00        		.byte	0
+ 701 02a4 00        		.byte	0
+ 702 02a5 00        		.byte	0
+ 703 02a6 00        		.byte	0
+ 704               		.text
+ 705               	.Letext0:
+ 706               		.section	.debug_info
+ 707 0000 D401 0000 		.long	0x1d4
+ 708 0004 0200      		.word	0x2
+ 709 0006 0000 0000 		.long	.Ldebug_abbrev0
+ 710 000a 04        		.byte	0x4
+ 711 000b 01        		.uleb128 0x1
+ 712 000c 0000 0000 		.long	.LASF18
+ 713 0010 01        		.byte	0x1
+ 714 0011 0000 0000 		.long	.LASF19
+ 715 0015 0000 0000 		.long	.LASF20
+ 716 0019 0000 0000 		.long	.Ltext0
+ 717 001d 0000 0000 		.long	.Letext0
+ 718 0021 0000 0000 		.long	.Ldebug_line0
+ 719 0025 02        		.uleb128 0x2
+ 720 0026 01        		.byte	0x1
+ 721 0027 06        		.byte	0x6
+ 722 0028 0000 0000 		.long	.LASF0
+ 723 002c 03        		.uleb128 0x3
+ 724 002d 0000 0000 		.long	.LASF2
+ 725 0031 01        		.byte	0x1
+ 726 0032 7A        		.byte	0x7a
+ 727 0033 3700 0000 		.long	0x37
+ 728 0037 02        		.uleb128 0x2
+ 729 0038 01        		.byte	0x1
+ 730 0039 08        		.byte	0x8
+ 731 003a 0000 0000 		.long	.LASF1
+ 732 003e 04        		.uleb128 0x4
+ 733 003f 02        		.byte	0x2
+ 734 0040 05        		.byte	0x5
+ 735 0041 696E 7400 		.string	"int"
+ 736 0045 03        		.uleb128 0x3
+ 737 0046 0000 0000 		.long	.LASF3
+ 738 004a 01        		.byte	0x1
+ 739 004b 7C        		.byte	0x7c
+ 740 004c 5000 0000 		.long	0x50
+ 741 0050 02        		.uleb128 0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 14
+
+
+ 742 0051 02        		.byte	0x2
+ 743 0052 07        		.byte	0x7
+ 744 0053 0000 0000 		.long	.LASF4
+ 745 0057 02        		.uleb128 0x2
+ 746 0058 04        		.byte	0x4
+ 747 0059 05        		.byte	0x5
+ 748 005a 0000 0000 		.long	.LASF5
+ 749 005e 02        		.uleb128 0x2
+ 750 005f 04        		.byte	0x4
+ 751 0060 07        		.byte	0x7
+ 752 0061 0000 0000 		.long	.LASF6
+ 753 0065 02        		.uleb128 0x2
+ 754 0066 08        		.byte	0x8
+ 755 0067 05        		.byte	0x5
+ 756 0068 0000 0000 		.long	.LASF7
+ 757 006c 02        		.uleb128 0x2
+ 758 006d 08        		.byte	0x8
+ 759 006e 07        		.byte	0x7
+ 760 006f 0000 0000 		.long	.LASF8
+ 761 0073 05        		.uleb128 0x5
+ 762 0074 01        		.byte	0x1
+ 763 0075 06        		.byte	0x6
+ 764 0076 05        		.uleb128 0x5
+ 765 0077 01        		.byte	0x1
+ 766 0078 08        		.byte	0x8
+ 767 0079 06        		.uleb128 0x6
+ 768 007a 2C00 0000 		.long	0x2c
+ 769 007e 8900 0000 		.long	0x89
+ 770 0082 07        		.uleb128 0x7
+ 771 0083 8900 0000 		.long	0x89
+ 772 0087 8F        		.byte	0x8f
+ 773 0088 00        		.byte	0x0
+ 774 0089 05        		.uleb128 0x5
+ 775 008a 02        		.byte	0x2
+ 776 008b 07        		.byte	0x7
+ 777 008c 08        		.uleb128 0x8
+ 778 008d 0000 0000 		.long	.LASF9
+ 779 0091 02        		.byte	0x2
+ 780 0092 0B        		.byte	0xb
+ 781 0093 9E00 0000 		.long	0x9e
+ 782 0097 01        		.byte	0x1
+ 783 0098 05        		.byte	0x5
+ 784 0099 03        		.byte	0x3
+ 785 009a 0000 0000 		.long	keycode_set2
+ 786 009e 09        		.uleb128 0x9
+ 787 009f 7900 0000 		.long	0x79
+ 788 00a3 06        		.uleb128 0x6
+ 789 00a4 4500 0000 		.long	0x45
+ 790 00a8 B300 0000 		.long	0xb3
+ 791 00ac 07        		.uleb128 0x7
+ 792 00ad 8900 0000 		.long	0x89
+ 793 00b1 19        		.byte	0x19
+ 794 00b2 00        		.byte	0x0
+ 795 00b3 08        		.uleb128 0x8
+ 796 00b4 0000 0000 		.long	.LASF10
+ 797 00b8 02        		.byte	0x2
+ 798 00b9 2E        		.byte	0x2e
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 15
+
+
+ 799 00ba C500 0000 		.long	0xc5
+ 800 00be 01        		.byte	0x1
+ 801 00bf 05        		.byte	0x5
+ 802 00c0 03        		.byte	0x3
+ 803 00c1 0000 0000 		.long	keycode_USB_multimedia
+ 804 00c5 09        		.uleb128 0x9
+ 805 00c6 A300 0000 		.long	0xa3
+ 806 00ca 06        		.uleb128 0x6
+ 807 00cb 4500 0000 		.long	0x45
+ 808 00cf DA00 0000 		.long	0xda
+ 809 00d3 07        		.uleb128 0x7
+ 810 00d4 8900 0000 		.long	0x89
+ 811 00d8 01        		.byte	0x1
+ 812 00d9 00        		.byte	0x0
+ 813 00da 08        		.uleb128 0x8
+ 814 00db 0000 0000 		.long	.LASF11
+ 815 00df 02        		.byte	0x2
+ 816 00e0 35        		.byte	0x35
+ 817 00e1 EC00 0000 		.long	0xec
+ 818 00e5 01        		.byte	0x1
+ 819 00e6 05        		.byte	0x5
+ 820 00e7 03        		.byte	0x3
+ 821 00e8 0000 0000 		.long	keycode_USB_extend
+ 822 00ec 09        		.uleb128 0x9
+ 823 00ed CA00 0000 		.long	0xca
+ 824 00f1 06        		.uleb128 0x6
+ 825 00f2 2C00 0000 		.long	0x2c
+ 826 00f6 0101 0000 		.long	0x101
+ 827 00fa 07        		.uleb128 0x7
+ 828 00fb 8900 0000 		.long	0x89
+ 829 00ff 02        		.byte	0x2
+ 830 0100 00        		.byte	0x0
+ 831 0101 08        		.uleb128 0x8
+ 832 0102 0000 0000 		.long	.LASF12
+ 833 0106 02        		.byte	0x2
+ 834 0107 3A        		.byte	0x3a
+ 835 0108 1301 0000 		.long	0x113
+ 836 010c 01        		.byte	0x1
+ 837 010d 05        		.byte	0x5
+ 838 010e 03        		.byte	0x3
+ 839 010f 0000 0000 		.long	keycode_set2_special
+ 840 0113 09        		.uleb128 0x9
+ 841 0114 F100 0000 		.long	0xf1
+ 842 0118 06        		.uleb128 0x6
+ 843 0119 2C00 0000 		.long	0x2c
+ 844 011d 2801 0000 		.long	0x128
+ 845 0121 07        		.uleb128 0x7
+ 846 0122 8900 0000 		.long	0x89
+ 847 0126 03        		.byte	0x3
+ 848 0127 00        		.byte	0x0
+ 849 0128 08        		.uleb128 0x8
+ 850 0129 0000 0000 		.long	.LASF13
+ 851 012d 02        		.byte	0x2
+ 852 012e 3E        		.byte	0x3e
+ 853 012f 3A01 0000 		.long	0x13a
+ 854 0133 01        		.byte	0x1
+ 855 0134 05        		.byte	0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 16
+
+
+ 856 0135 03        		.byte	0x3
+ 857 0136 0000 0000 		.long	keycode_set2_makeonly
+ 858 013a 09        		.uleb128 0x9
+ 859 013b 1801 0000 		.long	0x118
+ 860 013f 08        		.uleb128 0x8
+ 861 0140 0000 0000 		.long	.LASF14
+ 862 0144 02        		.byte	0x2
+ 863 0145 42        		.byte	0x42
+ 864 0146 5101 0000 		.long	0x151
+ 865 014a 01        		.byte	0x1
+ 866 014b 05        		.byte	0x5
+ 867 014c 03        		.byte	0x3
+ 868 014d 0000 0000 		.long	keycode_set2_make_break
+ 869 0151 09        		.uleb128 0x9
+ 870 0152 1801 0000 		.long	0x118
+ 871 0156 06        		.uleb128 0x6
+ 872 0157 2C00 0000 		.long	0x2c
+ 873 015b 6601 0000 		.long	0x166
+ 874 015f 07        		.uleb128 0x7
+ 875 0160 8900 0000 		.long	0x89
+ 876 0164 2C        		.byte	0x2c
+ 877 0165 00        		.byte	0x0
+ 878 0166 08        		.uleb128 0x8
+ 879 0167 0000 0000 		.long	.LASF15
+ 880 016b 02        		.byte	0x2
+ 881 016c 46        		.byte	0x46
+ 882 016d 7801 0000 		.long	0x178
+ 883 0171 01        		.byte	0x1
+ 884 0172 05        		.byte	0x5
+ 885 0173 03        		.byte	0x3
+ 886 0174 0000 0000 		.long	keycode_set2_extend
+ 887 0178 09        		.uleb128 0x9
+ 888 0179 5601 0000 		.long	0x156
+ 889 017d 06        		.uleb128 0x6
+ 890 017e 2C00 0000 		.long	0x2c
+ 891 0182 8D01 0000 		.long	0x18d
+ 892 0186 07        		.uleb128 0x7
+ 893 0187 8900 0000 		.long	0x89
+ 894 018b 0E        		.byte	0xe
+ 895 018c 00        		.byte	0x0
+ 896 018d 08        		.uleb128 0x8
+ 897 018e 0000 0000 		.long	.LASF16
+ 898 0192 02        		.byte	0x2
+ 899 0193 51        		.byte	0x51
+ 900 0194 9F01 0000 		.long	0x19f
+ 901 0198 01        		.byte	0x1
+ 902 0199 05        		.byte	0x5
+ 903 019a 03        		.byte	0x3
+ 904 019b 0000 0000 		.long	keycode_set2_proc_shift
+ 905 019f 09        		.uleb128 0x9
+ 906 01a0 7D01 0000 		.long	0x17d
+ 907 01a4 06        		.uleb128 0x6
+ 908 01a5 2C00 0000 		.long	0x2c
+ 909 01a9 C001 0000 		.long	0x1c0
+ 910 01ad 07        		.uleb128 0x7
+ 911 01ae 8900 0000 		.long	0x89
+ 912 01b2 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 17
+
+
+ 913 01b3 07        		.uleb128 0x7
+ 914 01b4 8900 0000 		.long	0x89
+ 915 01b8 10        		.byte	0x10
+ 916 01b9 07        		.uleb128 0x7
+ 917 01ba 8900 0000 		.long	0x89
+ 918 01be 07        		.byte	0x7
+ 919 01bf 00        		.byte	0x0
+ 920 01c0 08        		.uleb128 0x8
+ 921 01c1 0000 0000 		.long	.LASF17
+ 922 01c5 02        		.byte	0x2
+ 923 01c6 58        		.byte	0x58
+ 924 01c7 D201 0000 		.long	0x1d2
+ 925 01cb 01        		.byte	0x1
+ 926 01cc 05        		.byte	0x5
+ 927 01cd 03        		.byte	0x3
+ 928 01ce 0000 0000 		.long	keymap_code
+ 929 01d2 09        		.uleb128 0x9
+ 930 01d3 A401 0000 		.long	0x1a4
+ 931 01d7 00        		.byte	0x0
+ 932               		.section	.debug_abbrev
+ 933 0000 01        		.uleb128 0x1
+ 934 0001 11        		.uleb128 0x11
+ 935 0002 01        		.byte	0x1
+ 936 0003 25        		.uleb128 0x25
+ 937 0004 0E        		.uleb128 0xe
+ 938 0005 13        		.uleb128 0x13
+ 939 0006 0B        		.uleb128 0xb
+ 940 0007 03        		.uleb128 0x3
+ 941 0008 0E        		.uleb128 0xe
+ 942 0009 1B        		.uleb128 0x1b
+ 943 000a 0E        		.uleb128 0xe
+ 944 000b 11        		.uleb128 0x11
+ 945 000c 01        		.uleb128 0x1
+ 946 000d 12        		.uleb128 0x12
+ 947 000e 01        		.uleb128 0x1
+ 948 000f 10        		.uleb128 0x10
+ 949 0010 06        		.uleb128 0x6
+ 950 0011 00        		.byte	0x0
+ 951 0012 00        		.byte	0x0
+ 952 0013 02        		.uleb128 0x2
+ 953 0014 24        		.uleb128 0x24
+ 954 0015 00        		.byte	0x0
+ 955 0016 0B        		.uleb128 0xb
+ 956 0017 0B        		.uleb128 0xb
+ 957 0018 3E        		.uleb128 0x3e
+ 958 0019 0B        		.uleb128 0xb
+ 959 001a 03        		.uleb128 0x3
+ 960 001b 0E        		.uleb128 0xe
+ 961 001c 00        		.byte	0x0
+ 962 001d 00        		.byte	0x0
+ 963 001e 03        		.uleb128 0x3
+ 964 001f 16        		.uleb128 0x16
+ 965 0020 00        		.byte	0x0
+ 966 0021 03        		.uleb128 0x3
+ 967 0022 0E        		.uleb128 0xe
+ 968 0023 3A        		.uleb128 0x3a
+ 969 0024 0B        		.uleb128 0xb
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 18
+
+
+ 970 0025 3B        		.uleb128 0x3b
+ 971 0026 0B        		.uleb128 0xb
+ 972 0027 49        		.uleb128 0x49
+ 973 0028 13        		.uleb128 0x13
+ 974 0029 00        		.byte	0x0
+ 975 002a 00        		.byte	0x0
+ 976 002b 04        		.uleb128 0x4
+ 977 002c 24        		.uleb128 0x24
+ 978 002d 00        		.byte	0x0
+ 979 002e 0B        		.uleb128 0xb
+ 980 002f 0B        		.uleb128 0xb
+ 981 0030 3E        		.uleb128 0x3e
+ 982 0031 0B        		.uleb128 0xb
+ 983 0032 03        		.uleb128 0x3
+ 984 0033 08        		.uleb128 0x8
+ 985 0034 00        		.byte	0x0
+ 986 0035 00        		.byte	0x0
+ 987 0036 05        		.uleb128 0x5
+ 988 0037 24        		.uleb128 0x24
+ 989 0038 00        		.byte	0x0
+ 990 0039 0B        		.uleb128 0xb
+ 991 003a 0B        		.uleb128 0xb
+ 992 003b 3E        		.uleb128 0x3e
+ 993 003c 0B        		.uleb128 0xb
+ 994 003d 00        		.byte	0x0
+ 995 003e 00        		.byte	0x0
+ 996 003f 06        		.uleb128 0x6
+ 997 0040 01        		.uleb128 0x1
+ 998 0041 01        		.byte	0x1
+ 999 0042 49        		.uleb128 0x49
+ 1000 0043 13        		.uleb128 0x13
+ 1001 0044 01        		.uleb128 0x1
+ 1002 0045 13        		.uleb128 0x13
+ 1003 0046 00        		.byte	0x0
+ 1004 0047 00        		.byte	0x0
+ 1005 0048 07        		.uleb128 0x7
+ 1006 0049 21        		.uleb128 0x21
+ 1007 004a 00        		.byte	0x0
+ 1008 004b 49        		.uleb128 0x49
+ 1009 004c 13        		.uleb128 0x13
+ 1010 004d 2F        		.uleb128 0x2f
+ 1011 004e 0B        		.uleb128 0xb
+ 1012 004f 00        		.byte	0x0
+ 1013 0050 00        		.byte	0x0
+ 1014 0051 08        		.uleb128 0x8
+ 1015 0052 34        		.uleb128 0x34
+ 1016 0053 00        		.byte	0x0
+ 1017 0054 03        		.uleb128 0x3
+ 1018 0055 0E        		.uleb128 0xe
+ 1019 0056 3A        		.uleb128 0x3a
+ 1020 0057 0B        		.uleb128 0xb
+ 1021 0058 3B        		.uleb128 0x3b
+ 1022 0059 0B        		.uleb128 0xb
+ 1023 005a 49        		.uleb128 0x49
+ 1024 005b 13        		.uleb128 0x13
+ 1025 005c 3F        		.uleb128 0x3f
+ 1026 005d 0C        		.uleb128 0xc
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 19
+
+
+ 1027 005e 02        		.uleb128 0x2
+ 1028 005f 0A        		.uleb128 0xa
+ 1029 0060 00        		.byte	0x0
+ 1030 0061 00        		.byte	0x0
+ 1031 0062 09        		.uleb128 0x9
+ 1032 0063 26        		.uleb128 0x26
+ 1033 0064 00        		.byte	0x0
+ 1034 0065 49        		.uleb128 0x49
+ 1035 0066 13        		.uleb128 0x13
+ 1036 0067 00        		.byte	0x0
+ 1037 0068 00        		.byte	0x0
+ 1038 0069 00        		.byte	0x0
+ 1039               		.section	.debug_pubnames,"",@progbits
+ 1040 0000 E400 0000 		.long	0xe4
+ 1041 0004 0200      		.word	0x2
+ 1042 0006 0000 0000 		.long	.Ldebug_info0
+ 1043 000a D801 0000 		.long	0x1d8
+ 1044 000e 8C00 0000 		.long	0x8c
+ 1045 0012 6B65 7963 		.string	"keycode_set2"
+ 1045      6F64 655F 
+ 1045      7365 7432 
+ 1045      00
+ 1046 001f B300 0000 		.long	0xb3
+ 1047 0023 6B65 7963 		.string	"keycode_USB_multimedia"
+ 1047      6F64 655F 
+ 1047      5553 425F 
+ 1047      6D75 6C74 
+ 1047      696D 6564 
+ 1048 003a DA00 0000 		.long	0xda
+ 1049 003e 6B65 7963 		.string	"keycode_USB_extend"
+ 1049      6F64 655F 
+ 1049      5553 425F 
+ 1049      6578 7465 
+ 1049      6E64 00
+ 1050 0051 0101 0000 		.long	0x101
+ 1051 0055 6B65 7963 		.string	"keycode_set2_special"
+ 1051      6F64 655F 
+ 1051      7365 7432 
+ 1051      5F73 7065 
+ 1051      6369 616C 
+ 1052 006a 2801 0000 		.long	0x128
+ 1053 006e 6B65 7963 		.string	"keycode_set2_makeonly"
+ 1053      6F64 655F 
+ 1053      7365 7432 
+ 1053      5F6D 616B 
+ 1053      656F 6E6C 
+ 1054 0084 3F01 0000 		.long	0x13f
+ 1055 0088 6B65 7963 		.string	"keycode_set2_make_break"
+ 1055      6F64 655F 
+ 1055      7365 7432 
+ 1055      5F6D 616B 
+ 1055      655F 6272 
+ 1056 00a0 6601 0000 		.long	0x166
+ 1057 00a4 6B65 7963 		.string	"keycode_set2_extend"
+ 1057      6F64 655F 
+ 1057      7365 7432 
+ 1057      5F65 7874 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 20
+
+
+ 1057      656E 6400 
+ 1058 00b8 8D01 0000 		.long	0x18d
+ 1059 00bc 6B65 7963 		.string	"keycode_set2_proc_shift"
+ 1059      6F64 655F 
+ 1059      7365 7432 
+ 1059      5F70 726F 
+ 1059      635F 7368 
+ 1060 00d4 C001 0000 		.long	0x1c0
+ 1061 00d8 6B65 796D 		.string	"keymap_code"
+ 1061      6170 5F63 
+ 1061      6F64 6500 
+ 1062 00e4 0000 0000 		.long	0x0
+ 1063               		.section	.debug_line
+ 1064 0000 6500 0000 		.long	.LELT0-.LSLT0
+ 1065               	.LSLT0:
+ 1066 0004 0200      		.word	0x2
+ 1067 0006 5500 0000 		.long	.LELTP0-.LASLTP0
+ 1068               	.LASLTP0:
+ 1069 000a 01        		.byte	0x1
+ 1070 000b 01        		.byte	0x1
+ 1071 000c F6        		.byte	0xf6
+ 1072 000d F5        		.byte	0xf5
+ 1073 000e 0A        		.byte	0xa
+ 1074 000f 00        		.byte	0x0
+ 1075 0010 01        		.byte	0x1
+ 1076 0011 01        		.byte	0x1
+ 1077 0012 01        		.byte	0x1
+ 1078 0013 01        		.byte	0x1
+ 1079 0014 00        		.byte	0x0
+ 1080 0015 00        		.byte	0x0
+ 1081 0016 00        		.byte	0x0
+ 1082 0017 01        		.byte	0x1
+ 1083 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
+ 1083      696E 6176 
+ 1083      722D 3230 
+ 1083      3130 3031 
+ 1083      3130 2F6C 
+ 1084 0044 00        		.byte	0
+ 1085 0045 00        		.byte	0x0
+ 1086 0046 7374 6469 		.string	"stdint.h"
+ 1086      6E74 2E68 
+ 1086      00
+ 1087 004f 01        		.uleb128 0x1
+ 1088 0050 00        		.uleb128 0x0
+ 1089 0051 00        		.uleb128 0x0
+ 1090 0052 6B65 796D 		.string	"keymap.c"
+ 1090      6170 2E63 
+ 1090      00
+ 1091 005b 00        		.uleb128 0x0
+ 1092 005c 00        		.uleb128 0x0
+ 1093 005d 00        		.uleb128 0x0
+ 1094 005e 00        		.byte	0x0
+ 1095               	.LELTP0:
+ 1096 005f 00        		.byte	0x0
+ 1097 0060 05        		.uleb128 0x5
+ 1098 0061 02        		.byte	0x2
+ 1099 0062 0000 0000 		.long	.Letext0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 21
+
+
+ 1100 0066 00        		.byte	0x0
+ 1101 0067 01        		.uleb128 0x1
+ 1102 0068 01        		.byte	0x1
+ 1103               	.LELT0:
+ 1104 0069 1600 0000 		.section	.debug_str,"MS",@progbits,1
+ 1104      0200 1000 
+ 1104      0000 0101 
+ 1104      FB0E 0A00 
+ 1104      0101 0101 
+ 1105               	.LASF7:
+ 1106 0000 6C6F 6E67 		.string	"long long int"
+ 1106      206C 6F6E 
+ 1106      6720 696E 
+ 1106      7400 
+ 1107               	.LASF15:
+ 1108 000e 6B65 7963 		.string	"keycode_set2_extend"
+ 1108      6F64 655F 
+ 1108      7365 7432 
+ 1108      5F65 7874 
+ 1108      656E 6400 
+ 1109               	.LASF10:
+ 1110 0022 6B65 7963 		.string	"keycode_USB_multimedia"
+ 1110      6F64 655F 
+ 1110      5553 425F 
+ 1110      6D75 6C74 
+ 1110      696D 6564 
+ 1111               	.LASF16:
+ 1112 0039 6B65 7963 		.string	"keycode_set2_proc_shift"
+ 1112      6F64 655F 
+ 1112      7365 7432 
+ 1112      5F70 726F 
+ 1112      635F 7368 
+ 1113               	.LASF19:
+ 1114 0051 6B65 796D 		.string	"keymap.c"
+ 1114      6170 2E63 
+ 1114      00
+ 1115               	.LASF13:
+ 1116 005a 6B65 7963 		.string	"keycode_set2_makeonly"
+ 1116      6F64 655F 
+ 1116      7365 7432 
+ 1116      5F6D 616B 
+ 1116      656F 6E6C 
+ 1117               	.LASF6:
+ 1118 0070 6C6F 6E67 		.string	"long unsigned int"
+ 1118      2075 6E73 
+ 1118      6967 6E65 
+ 1118      6420 696E 
+ 1118      7400 
+ 1119               	.LASF8:
+ 1120 0082 6C6F 6E67 		.string	"long long unsigned int"
+ 1120      206C 6F6E 
+ 1120      6720 756E 
+ 1120      7369 676E 
+ 1120      6564 2069 
+ 1121               	.LASF20:
+ 1122 0099 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
+ 1122      6573 6B74 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 22
+
+
+ 1122      6F70 5C6B 
+ 1122      6579 626F 
+ 1122      6172 645C 
+ 1123               	.LASF2:
+ 1124 00d3 7569 6E74 		.string	"uint8_t"
+ 1124      385F 7400 
+ 1125               	.LASF1:
+ 1126 00db 756E 7369 		.string	"unsigned char"
+ 1126      676E 6564 
+ 1126      2063 6861 
+ 1126      7200 
+ 1127               	.LASF11:
+ 1128 00e9 6B65 7963 		.string	"keycode_USB_extend"
+ 1128      6F64 655F 
+ 1128      5553 425F 
+ 1128      6578 7465 
+ 1128      6E64 00
+ 1129               	.LASF12:
+ 1130 00fc 6B65 7963 		.string	"keycode_set2_special"
+ 1130      6F64 655F 
+ 1130      7365 7432 
+ 1130      5F73 7065 
+ 1130      6369 616C 
+ 1131               	.LASF5:
+ 1132 0111 6C6F 6E67 		.string	"long int"
+ 1132      2069 6E74 
+ 1132      00
+ 1133               	.LASF14:
+ 1134 011a 6B65 7963 		.string	"keycode_set2_make_break"
+ 1134      6F64 655F 
+ 1134      7365 7432 
+ 1134      5F6D 616B 
+ 1134      655F 6272 
+ 1135               	.LASF0:
+ 1136 0132 7369 676E 		.string	"signed char"
+ 1136      6564 2063 
+ 1136      6861 7200 
+ 1137               	.LASF3:
+ 1138 013e 7569 6E74 		.string	"uint16_t"
+ 1138      3136 5F74 
+ 1138      00
+ 1139               	.LASF17:
+ 1140 0147 6B65 796D 		.string	"keymap_code"
+ 1140      6170 5F63 
+ 1140      6F64 6500 
+ 1141               	.LASF18:
+ 1142 0153 474E 5520 		.string	"GNU C 4.3.3"
+ 1142      4320 342E 
+ 1142      332E 3300 
+ 1143               	.LASF4:
+ 1144 015f 756E 7369 		.string	"unsigned int"
+ 1144      676E 6564 
+ 1144      2069 6E74 
+ 1144      00
+ 1145               	.LASF9:
+ 1146 016c 6B65 7963 		.string	"keycode_set2"
+ 1146      6F64 655F 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 23
+
+
+ 1146      7365 7432 
+ 1146      00
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s 			page 24
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 keymap.c
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:20     .progmem.data:00000000 keycode_set2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:168    .progmem.data:00000090 keycode_USB_multimedia
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:198    .progmem.data:000000c4 keycode_USB_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:204    .progmem.data:000000c8 keycode_set2_special
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:211    .progmem.data:000000cb keycode_set2_makeonly
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:219    .progmem.data:000000cf keycode_set2_make_break
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:227    .progmem.data:000000d3 keycode_set2_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:276    .progmem.data:00000100 keycode_set2_proc_shift
+C:\Users\ADMINI~1\AppData\Local\Temp/ccU8sjOd.s:295    .progmem.data:0000010f keymap_code
+
+NO UNDEFINED SYMBOLS
