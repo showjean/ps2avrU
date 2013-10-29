@@ -236,7 +236,7 @@ void pushKey(uint8_t keyidx, uint8_t isDown)
 }
 
 // push the keycodes into the queue by its key index, and isDown
-void putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
+uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	uint8_t gFN = applyFN(keyidx, isDown);
 
@@ -245,14 +245,16 @@ void putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 		
 		putKeyCode(keyidx, col, row, isDown);
 
-		return;
+		return 0;
 	}
 
 	// fn키를 키매핑에 적용하려면 위치 주의;
-	if(gFN == 0) return;
+	if(gFN == 0) return 0;
 
 
 	pushKey(keyidx, isDown);
+
+	return 1;
 }
 
 // return : key modified
@@ -283,6 +285,7 @@ int scanKeyPS2(void) {
 	uint8_t row, col, prev, cur, keyidx;
 	uint8_t keymap = getLayer();
 	uint8_t gModifier = 0; 
+	uint8_t gResultPutKey = 1;
 
 	// debounce cleared => compare last matrix and current matrix
 	for(col=0;col<8;col++)
@@ -311,9 +314,9 @@ int scanKeyPS2(void) {
 			// if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {
 			if( prev != cur && keyidx != KEY_NONE ) {
 				if(cur) {
-					putKey(keyidx, 1, col, row);
+					gResultPutKey &= putKey(keyidx, 1, col, row);
 				}else{
-					putKey(keyidx, 0, col, row);
+					gResultPutKey &= putKey(keyidx, 0, col, row);
 				}
 
 			}
@@ -325,7 +328,7 @@ int scanKeyPS2(void) {
 	for(row=0;row<17;row++)
 		prevMatrix[row] = currentMatrix[row];
 
-	return 1;
+	return gResultPutKey;
 }
 
 void prepareKeyMappingPs2(void)

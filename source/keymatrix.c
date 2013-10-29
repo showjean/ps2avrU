@@ -101,14 +101,20 @@ uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 			return 0;
 		}else if(keyidx == KEY_LED_UP){
 			increaseLedBrightness();
+			return 0;
 		}else if(keyidx == KEY_LED_DOWN){
 			reduceLedBrightness();
+			return 0;
+		}else if(keyidx >= KEY_MAX){
+			return 0;
 		}
 	}else{	// isDown : false
 		if(keyidx ==  KEY_BEYOND_FN){	// beyond_fn 			 
 			 return 0;
 		}else if(keyidx == EXTRA_FN){
 			_isExtraFNDown = 0;
+		}else if(keyidx >= KEY_MAX){
+			return 0;
 		}
 	}
 
