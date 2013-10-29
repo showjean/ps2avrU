@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 1
 
 
    1               		.file	"macrobuffer.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
   55               	.LM5:
   56 0042 E050      		subi r30,lo8(-(QUEUE_M))
   57 0044 F040      		sbci r31,hi8(-(QUEUE_M))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 2
 
 
   58 0046 2083      		st Z,r18
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  112 0098 01F4      		brne .L12
  113 009a 41E0      		ldi r20,lo8(1)
  114               	.L12:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 3
 
 
  115               	.LM13:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  169               	.global	charToKey
  170               		.type	charToKey, @function
  171               	charToKey:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 4
 
 
  172               	.LFB11:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  226 011a 00F0      		brlo .+2
  227 011c 00C0      		rjmp .L26
  228 011e E050      		subi r30,lo8(-(gs(.L61)))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 5
 
 
  229 0120 F040      		sbci r31,hi8(-(gs(.L61)))
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  283 0050 0000      		.word gs(.L26)
  284 0052 0000      		.word gs(.L26)
  285 0054 0000      		.word gs(.L26)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 6
 
 
  286 0056 0000      		.word gs(.L26)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  340 012e 2EE1      		ldi r18,lo8(30)
  341 0130 00C0      		rjmp .L65
  342               	.L50:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 7
 
 
  343 0132 2FE1      		ldi r18,lo8(31)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  397               	.L51:
  398               	.LM41:
  399 016a 2FE2      		ldi r18,lo8(47)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 8
 
 
  400 016c 00C0      		rjmp .L62
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  454               	.LM55:
  455 01a2 27E3      		ldi r18,lo8(55)
  456 01a4 00C0      		rjmp .L62
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 9
 
 
  457               	.L48:
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  511               		.size	toString, .-toString
  512               	.global	clearMacroPressedBuffer
  513               		.type	clearMacroPressedBuffer, @function
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 10
 
 
  514               	clearMacroPressedBuffer:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  568               	.L73:
  569               	.LM71:
  570 0222 FE01      		movw r30,r28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 11
 
 
  571 0224 0190      		ld __tmp_reg__,Z+
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  621      0000 0000 
  622               		.lcomm gStr.2023,3
  623               		.lcomm _isMacroProcessEnd,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 12
 
 
  624               		.lcomm frontm,2
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  678 0058 0000 0000 		.long	.LFB9
  679 005c 0600 0000 		.long	.LFE9-.LFB9
  680               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 13
 
 
  681               	.LEFDE8:
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  735 002d 1201 0000 		.long	.LVL5-.Ltext0
  736 0031 0100      		.word	0x1
  737 0033 69        		.byte	0x69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 14
 
 
  738 0034 1201 0000 		.long	.LVL5-.Ltext0
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  792 00a5 93        		.byte	0x93
  793 00a6 01        		.uleb128 0x1
  794 00a7 67        		.byte	0x67
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 15
 
 
  795 00a8 93        		.byte	0x93
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  849 0068 05        		.uleb128 0x5
  850 0069 01        		.byte	0x1
  851 006a 06        		.byte	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 16
 
 
  852 006b 05        		.uleb128 0x5
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  906 00d1 0000 0000 		.long	.LASF22
  907 00d5 0F        		.sleb128 15
  908 00d6 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 17
 
 
  909 00d7 0000 0000 		.long	.LASF23
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  963 0143 0000 0000 		.long	.LASF41
  964 0147 22        		.sleb128 34
  965 0148 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 18
 
 
  966 0149 0000 0000 		.long	.LASF42
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1020 01b5 0000 0000 		.long	.LASF60
  1021 01b9 35        		.sleb128 53
  1022 01ba 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 19
 
 
  1023 01bb 0000 0000 		.long	.LASF61
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1077 022f 0000 0000 		.long	.LASF79
  1078 0233 C800      		.sleb128 72
  1079 0235 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 20
 
 
  1080 0236 0000 0000 		.long	.LASF80
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1134 02b4 0000 0000 		.long	.LASF98
  1135 02b8 DB00      		.sleb128 91
  1136 02ba 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 21
 
 
  1137 02bb 0000 0000 		.long	.LASF99
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1191 0339 0000 0000 		.long	.LASF117
  1192 033d EE00      		.sleb128 110
  1193 033f 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 22
 
 
  1194 0340 0000 0000 		.long	.LASF118
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1248 03be 0000 0000 		.long	.LASF136
  1249 03c2 8101      		.sleb128 129
  1250 03c4 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 23
 
 
  1251 03c5 0000 0000 		.long	.LASF137
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1305 043c 10        		.byte	0x10
  1306 043d 4100 0000 		.long	0x41
  1307 0441 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 24
 
 
  1308 0442 23        		.byte	0x23
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1362 04ab 20        		.uleb128 0x20
  1363 04ac 0F        		.uleb128 0xf
  1364 04ad 5E04 0000 		.long	0x45e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 25
 
 
  1365 04b1 0000 0000 		.long	.LFB6
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1419 051d 2704 0000 		.long	0x427
  1420 0521 0000 0000 		.long	.LLST7
  1421 0525 12        		.uleb128 0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 26
 
 
  1422 0526 6B65 7900 		.string	"key"
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1476 059e 01        		.byte	0x1
  1477 059f 59        		.byte	0x59
  1478 05a0 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 27
 
 
  1479 05a1 11        		.uleb128 0x11
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1533 0616 00        		.byte	0x0
  1534 0617 13        		.uleb128 0x13
  1535 0618 0000 0000 		.long	.LASF172
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 28
 
 
  1536 061c 01        		.byte	0x1
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1590 000e 01        		.uleb128 0x1
  1591 000f 10        		.uleb128 0x10
  1592 0010 06        		.uleb128 0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 29
 
 
  1593 0011 00        		.byte	0x0
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1647 0047 0B        		.uleb128 0xb
  1648 0048 01        		.uleb128 0x1
  1649 0049 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 30
 
 
  1650 004a 00        		.byte	0x0
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1704 0080 00        		.byte	0x0
  1705 0081 3F        		.uleb128 0x3f
  1706 0082 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 31
 
 
  1707 0083 03        		.uleb128 0x3
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1761 00b9 00        		.byte	0x0
  1762 00ba 3F        		.uleb128 0x3f
  1763 00bb 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 32
 
 
  1764 00bc 03        		.uleb128 0x3
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1818 00f2 0B        		.uleb128 0xb
  1819 00f3 3B        		.uleb128 0x3b
  1820 00f4 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 33
 
 
  1821 00f5 27        		.uleb128 0x27
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1875 012b 49        		.uleb128 0x49
  1876 012c 13        		.uleb128 0x13
  1877 012d 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 34
 
 
  1878 012e 00        		.byte	0x0
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1932 0164 21        		.uleb128 0x21
  1933 0165 00        		.byte	0x0
  1934 0166 49        		.uleb128 0x49
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 35
 
 
  1935 0167 13        		.uleb128 0x13
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  1975 0069 3105 0000 		.long	0x531
  1976 006d 746F 5374 		.string	"toString"
  1976      7269 6E67 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 36
 
 
  1976      00
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2017 0044 00        		.byte	0
  2018 0045 00        		.byte	0x0
  2019 0046 6D61 6372 		.string	"macrobuffer.c"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 37
 
 
  2019      6F62 7566 
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2064 00ab 02        		.byte	0x2
  2065 00ac 0000 0000 		.long	.LM6
  2066 00b0 17        		.byte	0x17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 38
 
 
  2067 00b1 00        		.byte	0x0
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2121 0108 16        		.byte	0x16
  2122 0109 00        		.byte	0x0
  2123 010a 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 39
 
 
  2124 010b 02        		.byte	0x2
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2178 0162 05        		.uleb128 0x5
  2179 0163 02        		.byte	0x2
  2180 0164 0000 0000 		.long	.LM29
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 40
 
 
  2181 0168 17        		.byte	0x17
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2235 01bc 0000 0000 		.long	.LM40
  2236 01c0 16        		.byte	0x16
  2237 01c1 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 41
 
 
  2238 01c2 05        		.uleb128 0x5
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2292 0219 00        		.byte	0x0
  2293 021a 05        		.uleb128 0x5
  2294 021b 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 42
 
 
  2295 021c 0000 0000 		.long	.LM52
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2349 0274 00        		.byte	0x0
  2350 0275 05        		.uleb128 0x5
  2351 0276 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 43
 
 
  2352 0277 0000 0000 		.long	.LM63
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2406 02cb 05        		.uleb128 0x5
  2407 02cc 02        		.byte	0x2
  2408 02cd 0000 0000 		.long	.LM73
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 44
 
 
  2409 02d1 16        		.byte	0x16
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2447      4C00 
  2448               	.LASF74:
  2449 0042 4B45 595F 		.string	"KEY_F10"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 45
 
 
  2449      4631 3000 
@@ -2659,715 +2659,715 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 1
  2459 006a 4B45 595F 		.string	"KEY_STOP"
  2459      5354 4F50 
  2459      00
- 2460               	.LASF84:
- 2461 0073 4B45 595F 		.string	"KEY_END"
- 2461      454E 4400 
- 2462               	.LASF6:
- 2463 007b 6C6F 6E67 		.string	"long long unsigned int"
- 2463      206C 6F6E 
- 2463      6720 756E 
- 2463      7369 676E 
- 2463      6564 2069 
- 2464               	.LASF49:
- 2465 0092 4B45 595F 		.string	"KEY_BKSP"
- 2465      424B 5350 
- 2465      00
- 2466               	.LASF83:
- 2467 009b 4B45 595F 		.string	"KEY_DEL"
- 2467      4445 4C00 
- 2468               	.LASF167:
- 2469 00a3 674B 6579 		.string	"gKey"
- 2469      00
- 2470               	.LASF132:
- 2471 00a8 4B45 595F 		.string	"KEY_PREV_TRK"
- 2471      5052 4556 
- 2471      5F54 524B 
+ 2460               	.LASF177:
+ 2461 0073 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
+ 2461      6974 325C 
+ 2461      7073 3261 
+ 2461      7672 555C 
+ 2461      2E67 6974 
+ 2462               	.LASF84:
+ 2463 008f 4B45 595F 		.string	"KEY_END"
+ 2463      454E 4400 
+ 2464               	.LASF6:
+ 2465 0097 6C6F 6E67 		.string	"long long unsigned int"
+ 2465      206C 6F6E 
+ 2465      6720 756E 
+ 2465      7369 676E 
+ 2465      6564 2069 
+ 2466               	.LASF49:
+ 2467 00ae 4B45 595F 		.string	"KEY_BKSP"
+ 2467      424B 5350 
+ 2467      00
+ 2468               	.LASF83:
+ 2469 00b7 4B45 595F 		.string	"KEY_DEL"
+ 2469      4445 4C00 
+ 2470               	.LASF167:
+ 2471 00bf 674B 6579 		.string	"gKey"
  2471      00
- 2472               	.LASF58:
- 2473 00b5 4B45 595F 		.string	"KEY_COLON"
- 2473      434F 4C4F 
- 2473      4E00 
- 2474               	.LASF153:
- 2475 00bf 6B65 7963 		.string	"keycode"
- 2475      6F64 6500 
- 2476               	.LASF120:
- 2477 00c7 4B45 595F 		.string	"KEY_POWER"
- 2477      504F 5745 
- 2477      5200 
- 2478               	.LASF8:
- 2479 00d1 4B45 595F 		.string	"KEY_ErrorRollOver"
- 2479      4572 726F 
- 2479      7252 6F6C 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 46
+ 2472               	.LASF132:
+ 2473 00c4 4B45 595F 		.string	"KEY_PREV_TRK"
+ 2473      5052 4556 
+ 2473      5F54 524B 
+ 2473      00
+ 2474               	.LASF58:
+ 2475 00d1 4B45 595F 		.string	"KEY_COLON"
+ 2475      434F 4C4F 
+ 2475      4E00 
+ 2476               	.LASF153:
+ 2477 00db 6B65 7963 		.string	"keycode"
+ 2477      6F64 6500 
+ 2478               	.LASF120:
+ 2479 00e3 4B45 595F 		.string	"KEY_POWER"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 46
 
 
- 2479      6C4F 7665 
- 2479      7200 
- 2480               	.LASF138:
- 2481 00e3 4B45 595F 		.string	"KEY_MEDIA"
- 2481      4D45 4449 
- 2481      4100 
- 2482               	.LASF5:
- 2483 00ed 6C6F 6E67 		.string	"long long int"
- 2483      206C 6F6E 
- 2483      6720 696E 
- 2483      7400 
- 2484               	.LASF2:
- 2485 00fb 7369 676E 		.string	"signed char"
- 2485      6564 2063 
- 2485      6861 7200 
- 2486               	.LASF93:
- 2487 0107 4B45 595F 		.string	"KEY_KP_MINUS"
- 2487      4B50 5F4D 
- 2487      494E 5553 
- 2487      00
- 2488               	.LASF136:
- 2489 0114 4B45 595F 		.string	"KEY_VOL_UP"
- 2489      564F 4C5F 
- 2489      5550 00
- 2490               	.LASF55:
- 2491 011f 4B45 595F 		.string	"KEY_RBR"
- 2491      5242 5200 
- 2492               	.LASF135:
- 2493 0127 4B45 595F 		.string	"KEY_MUTE"
- 2493      4D55 5445 
- 2493      00
- 2494               	.LASF163:
- 2495 0130 746F 5374 		.string	"toString"
- 2495      7269 6E67 
+ 2479      504F 5745 
+ 2479      5200 
+ 2480               	.LASF8:
+ 2481 00ed 4B45 595F 		.string	"KEY_ErrorRollOver"
+ 2481      4572 726F 
+ 2481      7252 6F6C 
+ 2481      6C4F 7665 
+ 2481      7200 
+ 2482               	.LASF138:
+ 2483 00ff 4B45 595F 		.string	"KEY_MEDIA"
+ 2483      4D45 4449 
+ 2483      4100 
+ 2484               	.LASF5:
+ 2485 0109 6C6F 6E67 		.string	"long long int"
+ 2485      206C 6F6E 
+ 2485      6720 696E 
+ 2485      7400 
+ 2486               	.LASF2:
+ 2487 0117 7369 676E 		.string	"signed char"
+ 2487      6564 2063 
+ 2487      6861 7200 
+ 2488               	.LASF93:
+ 2489 0123 4B45 595F 		.string	"KEY_KP_MINUS"
+ 2489      4B50 5F4D 
+ 2489      494E 5553 
+ 2489      00
+ 2490               	.LASF136:
+ 2491 0130 4B45 595F 		.string	"KEY_VOL_UP"
+ 2491      564F 4C5F 
+ 2491      5550 00
+ 2492               	.LASF55:
+ 2493 013b 4B45 595F 		.string	"KEY_RBR"
+ 2493      5242 5200 
+ 2494               	.LASF135:
+ 2495 0143 4B45 595F 		.string	"KEY_MUTE"
+ 2495      4D55 5445 
  2495      00
- 2496               	.LASF1:
- 2497 0139 6C6F 6E67 		.string	"long int"
- 2497      2069 6E74 
+ 2496               	.LASF163:
+ 2497 014c 746F 5374 		.string	"toString"
+ 2497      7269 6E67 
  2497      00
- 2498               	.LASF126:
- 2499 0142 4B45 595F 		.string	"KEY_WWW_BACK"
- 2499      5757 575F 
- 2499      4241 434B 
+ 2498               	.LASF1:
+ 2499 0155 6C6F 6E67 		.string	"long int"
+ 2499      2069 6E74 
  2499      00
- 2500               	.LASF57:
- 2501 014f 4B45 595F 		.string	"KEY_Europe1"
- 2501      4575 726F 
- 2501      7065 3100 
- 2502               	.LASF107:
- 2503 015b 4B45 595F 		.string	"KEY_Europe2"
+ 2500               	.LASF126:
+ 2501 015e 4B45 595F 		.string	"KEY_WWW_BACK"
+ 2501      5757 575F 
+ 2501      4241 434B 
+ 2501      00
+ 2502               	.LASF57:
+ 2503 016b 4B45 595F 		.string	"KEY_Europe1"
  2503      4575 726F 
- 2503      7065 3200 
- 2504               	.LASF91:
- 2505 0167 4B45 595F 		.string	"KEY_KP_SLASH"
- 2505      4B50 5F53 
- 2505      4C41 5348 
- 2505      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 47
+ 2503      7065 3100 
+ 2504               	.LASF107:
+ 2505 0177 4B45 595F 		.string	"KEY_Europe2"
+ 2505      4575 726F 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 47
 
 
- 2506               	.LASF86:
- 2507 0174 4B45 595F 		.string	"KEY_RIGHT"
- 2507      5249 4748 
- 2507      5400 
- 2508               	.LASF60:
- 2509 017e 4B45 595F 		.string	"KEY_HASH"
- 2509      4841 5348 
- 2509      00
- 2510               	.LASF116:
- 2511 0187 4B45 595F 		.string	"KEY_RALT"
- 2511      5241 4C54 
+ 2505      7065 3200 
+ 2506               	.LASF91:
+ 2507 0183 4B45 595F 		.string	"KEY_KP_SLASH"
+ 2507      4B50 5F53 
+ 2507      4C41 5348 
+ 2507      00
+ 2508               	.LASF86:
+ 2509 0190 4B45 595F 		.string	"KEY_RIGHT"
+ 2509      5249 4748 
+ 2509      5400 
+ 2510               	.LASF60:
+ 2511 019a 4B45 595F 		.string	"KEY_HASH"
+ 2511      4841 5348 
  2511      00
- 2512               	.LASF130:
- 2513 0190 4B45 595F 		.string	"KEY_WWW_FAVORITE"
- 2513      5757 575F 
- 2513      4641 564F 
- 2513      5249 5445 
+ 2512               	.LASF116:
+ 2513 01a3 4B45 595F 		.string	"KEY_RALT"
+ 2513      5241 4C54 
  2513      00
- 2514               	.LASF165:
- 2515 01a1 636C 6561 		.string	"clearMacroPressedBuffer"
- 2515      724D 6163 
- 2515      726F 5072 
- 2515      6573 7365 
- 2515      6442 7566 
- 2516               	.LASF158:
- 2517 01b9 7365 744D 		.string	"setMacroProcessEnd"
- 2517      6163 726F 
- 2517      5072 6F63 
- 2517      6573 7345 
- 2517      6E64 00
- 2518               	.LASF129:
- 2519 01cc 4B45 595F 		.string	"KEY_WWW_REFRESH"
- 2519      5757 575F 
- 2519      5245 4652 
- 2519      4553 4800 
- 2520               	.LASF54:
- 2521 01dc 4B45 595F 		.string	"KEY_LBR"
- 2521      4C42 5200 
- 2522               	.LASF161:
- 2523 01e4 6368 6172 		.string	"character"
- 2523      6163 7465 
- 2523      7200 
- 2524               	.LASF80:
- 2525 01ee 4B45 595F 		.string	"KEY_INSERT"
- 2525      494E 5345 
- 2525      5254 00
- 2526               	.LASF175:
- 2527 01f9 474E 5520 		.string	"GNU C 4.3.3"
- 2527      4320 342E 
- 2527      332E 3300 
- 2528               	.LASF77:
- 2529 0205 4B45 595F 		.string	"KEY_PRNSCR"
- 2529      5052 4E53 
- 2529      4352 00
- 2530               	.LASF85:
- 2531 0210 4B45 595F 		.string	"KEY_PGDN"
- 2531      5047 444E 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 48
+ 2514               	.LASF130:
+ 2515 01ac 4B45 595F 		.string	"KEY_WWW_FAVORITE"
+ 2515      5757 575F 
+ 2515      4641 564F 
+ 2515      5249 5445 
+ 2515      00
+ 2516               	.LASF165:
+ 2517 01bd 636C 6561 		.string	"clearMacroPressedBuffer"
+ 2517      724D 6163 
+ 2517      726F 5072 
+ 2517      6573 7365 
+ 2517      6442 7566 
+ 2518               	.LASF158:
+ 2519 01d5 7365 744D 		.string	"setMacroProcessEnd"
+ 2519      6163 726F 
+ 2519      5072 6F63 
+ 2519      6573 7345 
+ 2519      6E64 00
+ 2520               	.LASF129:
+ 2521 01e8 4B45 595F 		.string	"KEY_WWW_REFRESH"
+ 2521      5757 575F 
+ 2521      5245 4652 
+ 2521      4553 4800 
+ 2522               	.LASF54:
+ 2523 01f8 4B45 595F 		.string	"KEY_LBR"
+ 2523      4C42 5200 
+ 2524               	.LASF161:
+ 2525 0200 6368 6172 		.string	"character"
+ 2525      6163 7465 
+ 2525      7200 
+ 2526               	.LASF80:
+ 2527 020a 4B45 595F 		.string	"KEY_INSERT"
+ 2527      494E 5345 
+ 2527      5254 00
+ 2528               	.LASF175:
+ 2529 0215 474E 5520 		.string	"GNU C 4.3.3"
+ 2529      4320 342E 
+ 2529      332E 3300 
+ 2530               	.LASF77:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 48
 
 
- 2531      00
- 2532               	.LASF117:
- 2533 0219 4B45 595F 		.string	"KEY_RGUI"
- 2533      5247 5549 
+ 2531 0221 4B45 595F 		.string	"KEY_PRNSCR"
+ 2531      5052 4E53 
+ 2531      4352 00
+ 2532               	.LASF85:
+ 2533 022c 4B45 595F 		.string	"KEY_PGDN"
+ 2533      5047 444E 
  2533      00
- 2534               	.LASF125:
- 2535 0222 4B45 595F 		.string	"KEY_WWW_HOME"
- 2535      5757 575F 
- 2535      484F 4D45 
+ 2534               	.LASF117:
+ 2535 0235 4B45 595F 		.string	"KEY_RGUI"
+ 2535      5247 5549 
  2535      00
- 2536               	.LASF152:
- 2537 022f 6D6F 6465 		.string	"mode"
+ 2536               	.LASF125:
+ 2537 023e 4B45 595F 		.string	"KEY_WWW_HOME"
+ 2537      5757 575F 
+ 2537      484F 4D45 
  2537      00
- 2538               	.LASF0:
- 2539 0234 756E 7369 		.string	"unsigned int"
- 2539      676E 6564 
- 2539      2069 6E74 
+ 2538               	.LASF152:
+ 2539 024b 6D6F 6465 		.string	"mode"
  2539      00
- 2540               	.LASF169:
- 2541 0241 6749 6478 		.string	"gIdx"
+ 2540               	.LASF0:
+ 2541 0250 756E 7369 		.string	"unsigned int"
+ 2541      676E 6564 
+ 2541      2069 6E74 
  2541      00
- 2542               	.LASF115:
- 2543 0246 4B45 595F 		.string	"KEY_RSHIFT"
- 2543      5253 4849 
- 2543      4654 00
- 2544               	.LASF78:
- 2545 0251 4B45 595F 		.string	"KEY_SCRLCK"
- 2545      5343 524C 
- 2545      434B 00
- 2546               	.LASF4:
- 2547 025c 6C6F 6E67 		.string	"long unsigned int"
- 2547      2075 6E73 
- 2547      6967 6E65 
- 2547      6420 696E 
- 2547      7400 
- 2548               	.LASF149:
- 2549 026e 4B45 595F 		.string	"KEY_HANGLE"
- 2549      4841 4E47 
- 2549      4C45 00
- 2550               	.LASF59:
- 2551 0279 4B45 595F 		.string	"KEY_QUOTE"
- 2551      5155 4F54 
- 2551      4500 
- 2552               	.LASF7:
- 2553 0283 4B45 595F 		.string	"KEY_NONE"
- 2553      4E4F 4E45 
- 2553      00
- 2554               	.LASF95:
- 2555 028c 4B45 595F 		.string	"KEY_KP_ENTER"
- 2555      4B50 5F45 
- 2555      4E54 4552 
+ 2542               	.LASF169:
+ 2543 025d 6749 6478 		.string	"gIdx"
+ 2543      00
+ 2544               	.LASF115:
+ 2545 0262 4B45 595F 		.string	"KEY_RSHIFT"
+ 2545      5253 4849 
+ 2545      4654 00
+ 2546               	.LASF78:
+ 2547 026d 4B45 595F 		.string	"KEY_SCRLCK"
+ 2547      5343 524C 
+ 2547      434B 00
+ 2548               	.LASF4:
+ 2549 0278 6C6F 6E67 		.string	"long unsigned int"
+ 2549      2075 6E73 
+ 2549      6967 6E65 
+ 2549      6420 696E 
+ 2549      7400 
+ 2550               	.LASF149:
+ 2551 028a 4B45 595F 		.string	"KEY_HANGLE"
+ 2551      4841 4E47 
+ 2551      4C45 00
+ 2552               	.LASF59:
+ 2553 0295 4B45 595F 		.string	"KEY_QUOTE"
+ 2553      5155 4F54 
+ 2553      4500 
+ 2554               	.LASF7:
+ 2555 029f 4B45 595F 		.string	"KEY_NONE"
+ 2555      4E4F 4E45 
  2555      00
- 2556               	.LASF87:
- 2557 0299 4B45 595F 		.string	"KEY_LEFT"
- 2557      4C45 4654 
+ 2556               	.LASF95:
+ 2557 02a8 4B45 595F 		.string	"KEY_KP_ENTER"
+ 2557      4B50 5F45 
+ 2557      4E54 4552 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 49
+
+
  2557      00
- 2558               	.LASF94:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 49
-
-
- 2559 02a2 4B45 595F 		.string	"KEY_KP_PLUS"
- 2559      4B50 5F50 
- 2559      4C55 5300 
- 2560               	.LASF170:
- 2561 02ae 674C 656E 		.string	"gLen"
- 2561      00
- 2562               	.LASF64:
- 2563 02b3 4B45 595F 		.string	"KEY_CAPS"
- 2563      4341 5053 
+ 2558               	.LASF87:
+ 2559 02b5 4B45 595F 		.string	"KEY_LEFT"
+ 2559      4C45 4654 
+ 2559      00
+ 2560               	.LASF94:
+ 2561 02be 4B45 595F 		.string	"KEY_KP_PLUS"
+ 2561      4B50 5F50 
+ 2561      4C55 5300 
+ 2562               	.LASF170:
+ 2563 02ca 674C 656E 		.string	"gLen"
  2563      00
- 2564               	.LASF156:
- 2565 02bc 6973 4D61 		.string	"isMacroProcessEnd"
- 2565      6372 6F50 
- 2565      726F 6365 
- 2565      7373 456E 
- 2565      6400 
- 2566               	.LASF62:
- 2567 02ce 4B45 595F 		.string	"KEY_DOT"
- 2567      444F 5400 
- 2568               	.LASF159:
- 2569 02d6 6974 656D 		.string	"item"
- 2569      00
- 2570               	.LASF144:
- 2571 02db 4B45 595F 		.string	"KEY_MINIMIZE"
- 2571      4D49 4E49 
- 2571      4D49 5A45 
+ 2564               	.LASF64:
+ 2565 02cf 4B45 595F 		.string	"KEY_CAPS"
+ 2565      4341 5053 
+ 2565      00
+ 2566               	.LASF156:
+ 2567 02d8 6973 4D61 		.string	"isMacroProcessEnd"
+ 2567      6372 6F50 
+ 2567      726F 6365 
+ 2567      7373 456E 
+ 2567      6400 
+ 2568               	.LASF62:
+ 2569 02ea 4B45 595F 		.string	"KEY_DOT"
+ 2569      444F 5400 
+ 2570               	.LASF159:
+ 2571 02f2 6974 656D 		.string	"item"
  2571      00
- 2572               	.LASF51:
- 2573 02e8 4B45 595F 		.string	"KEY_SPACE"
- 2573      5350 4143 
- 2573      4500 
- 2574               	.LASF121:
- 2575 02f2 4B45 595F 		.string	"KEY_SLEEP"
- 2575      534C 4545 
- 2575      5000 
- 2576               	.LASF146:
- 2577 02fc 4B45 595F 		.string	"KEY_Multimedia_end"
- 2577      4D75 6C74 
- 2577      696D 6564 
- 2577      6961 5F65 
- 2577      6E64 00
- 2578               	.LASF10:
- 2579 030f 4B45 595F 		.string	"KEY_ErrorUndefined"
- 2579      4572 726F 
- 2579      7255 6E64 
- 2579      6566 696E 
- 2579      6564 00
- 2580               	.LASF128:
- 2581 0322 4B45 595F 		.string	"KEY_WWW_STOP"
- 2581      5757 575F 
- 2581      5354 4F50 
- 2581      00
- 2582               	.LASF46:
- 2583 032f 4B45 595F 		.string	"KEY_0"
- 2583      3000 
- 2584               	.LASF37:
- 2585 0335 4B45 595F 		.string	"KEY_1"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 50
+ 2572               	.LASF144:
+ 2573 02f7 4B45 595F 		.string	"KEY_MINIMIZE"
+ 2573      4D49 4E49 
+ 2573      4D49 5A45 
+ 2573      00
+ 2574               	.LASF51:
+ 2575 0304 4B45 595F 		.string	"KEY_SPACE"
+ 2575      5350 4143 
+ 2575      4500 
+ 2576               	.LASF121:
+ 2577 030e 4B45 595F 		.string	"KEY_SLEEP"
+ 2577      534C 4545 
+ 2577      5000 
+ 2578               	.LASF146:
+ 2579 0318 4B45 595F 		.string	"KEY_Multimedia_end"
+ 2579      4D75 6C74 
+ 2579      696D 6564 
+ 2579      6961 5F65 
+ 2579      6E64 00
+ 2580               	.LASF10:
+ 2581 032b 4B45 595F 		.string	"KEY_ErrorUndefined"
+ 2581      4572 726F 
+ 2581      7255 6E64 
+ 2581      6566 696E 
+ 2581      6564 00
+ 2582               	.LASF128:
+ 2583 033e 4B45 595F 		.string	"KEY_WWW_STOP"
+ 2583      5757 575F 
+ 2583      5354 4F50 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 50
 
 
- 2585      3100 
- 2586               	.LASF38:
- 2587 033b 4B45 595F 		.string	"KEY_2"
- 2587      3200 
- 2588               	.LASF39:
- 2589 0341 4B45 595F 		.string	"KEY_3"
- 2589      3300 
- 2590               	.LASF40:
- 2591 0347 4B45 595F 		.string	"KEY_4"
- 2591      3400 
- 2592               	.LASF41:
- 2593 034d 4B45 595F 		.string	"KEY_5"
- 2593      3500 
- 2594               	.LASF42:
- 2595 0353 4B45 595F 		.string	"KEY_6"
- 2595      3600 
- 2596               	.LASF43:
- 2597 0359 4B45 595F 		.string	"KEY_7"
- 2597      3700 
- 2598               	.LASF44:
- 2599 035f 4B45 595F 		.string	"KEY_8"
- 2599      3800 
- 2600               	.LASF45:
- 2601 0365 4B45 595F 		.string	"KEY_9"
- 2601      3900 
- 2602               	.LASF52:
- 2603 036b 4B45 595F 		.string	"KEY_MINUS"
- 2603      4D49 4E55 
- 2603      5300 
- 2604               	.LASF122:
- 2605 0375 4B45 595F 		.string	"KEY_WAKE"
- 2605      5741 4B45 
- 2605      00
- 2606               	.LASF11:
- 2607 037e 4B45 595F 		.string	"KEY_A"
- 2607      4100 
- 2608               	.LASF12:
- 2609 0384 4B45 595F 		.string	"KEY_B"
- 2609      4200 
- 2610               	.LASF13:
- 2611 038a 4B45 595F 		.string	"KEY_C"
- 2611      4300 
- 2612               	.LASF14:
- 2613 0390 4B45 595F 		.string	"KEY_D"
- 2613      4400 
- 2614               	.LASF15:
- 2615 0396 4B45 595F 		.string	"KEY_E"
- 2615      4500 
- 2616               	.LASF16:
- 2617 039c 4B45 595F 		.string	"KEY_F"
- 2617      4600 
- 2618               	.LASF17:
- 2619 03a2 4B45 595F 		.string	"KEY_G"
- 2619      4700 
- 2620               	.LASF18:
- 2621 03a8 4B45 595F 		.string	"KEY_H"
- 2621      4800 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 51
+ 2583      00
+ 2584               	.LASF46:
+ 2585 034b 4B45 595F 		.string	"KEY_0"
+ 2585      3000 
+ 2586               	.LASF37:
+ 2587 0351 4B45 595F 		.string	"KEY_1"
+ 2587      3100 
+ 2588               	.LASF38:
+ 2589 0357 4B45 595F 		.string	"KEY_2"
+ 2589      3200 
+ 2590               	.LASF39:
+ 2591 035d 4B45 595F 		.string	"KEY_3"
+ 2591      3300 
+ 2592               	.LASF40:
+ 2593 0363 4B45 595F 		.string	"KEY_4"
+ 2593      3400 
+ 2594               	.LASF41:
+ 2595 0369 4B45 595F 		.string	"KEY_5"
+ 2595      3500 
+ 2596               	.LASF42:
+ 2597 036f 4B45 595F 		.string	"KEY_6"
+ 2597      3600 
+ 2598               	.LASF43:
+ 2599 0375 4B45 595F 		.string	"KEY_7"
+ 2599      3700 
+ 2600               	.LASF44:
+ 2601 037b 4B45 595F 		.string	"KEY_8"
+ 2601      3800 
+ 2602               	.LASF45:
+ 2603 0381 4B45 595F 		.string	"KEY_9"
+ 2603      3900 
+ 2604               	.LASF52:
+ 2605 0387 4B45 595F 		.string	"KEY_MINUS"
+ 2605      4D49 4E55 
+ 2605      5300 
+ 2606               	.LASF122:
+ 2607 0391 4B45 595F 		.string	"KEY_WAKE"
+ 2607      5741 4B45 
+ 2607      00
+ 2608               	.LASF11:
+ 2609 039a 4B45 595F 		.string	"KEY_A"
+ 2609      4100 
+ 2610               	.LASF12:
+ 2611 03a0 4B45 595F 		.string	"KEY_B"
+ 2611      4200 
+ 2612               	.LASF13:
+ 2613 03a6 4B45 595F 		.string	"KEY_C"
+ 2613      4300 
+ 2614               	.LASF14:
+ 2615 03ac 4B45 595F 		.string	"KEY_D"
+ 2615      4400 
+ 2616               	.LASF15:
+ 2617 03b2 4B45 595F 		.string	"KEY_E"
+ 2617      4500 
+ 2618               	.LASF16:
+ 2619 03b8 4B45 595F 		.string	"KEY_F"
+ 2619      4600 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 51
 
 
- 2622               	.LASF19:
- 2623 03ae 4B45 595F 		.string	"KEY_I"
- 2623      4900 
- 2624               	.LASF20:
- 2625 03b4 4B45 595F 		.string	"KEY_J"
- 2625      4A00 
- 2626               	.LASF21:
- 2627 03ba 4B45 595F 		.string	"KEY_K"
- 2627      4B00 
- 2628               	.LASF22:
- 2629 03c0 4B45 595F 		.string	"KEY_L"
- 2629      4C00 
- 2630               	.LASF23:
- 2631 03c6 4B45 595F 		.string	"KEY_M"
- 2631      4D00 
- 2632               	.LASF24:
- 2633 03cc 4B45 595F 		.string	"KEY_N"
- 2633      4E00 
- 2634               	.LASF25:
- 2635 03d2 4B45 595F 		.string	"KEY_O"
- 2635      4F00 
- 2636               	.LASF26:
- 2637 03d8 4B45 595F 		.string	"KEY_P"
- 2637      5000 
- 2638               	.LASF27:
- 2639 03de 4B45 595F 		.string	"KEY_Q"
- 2639      5100 
- 2640               	.LASF28:
- 2641 03e4 4B45 595F 		.string	"KEY_R"
- 2641      5200 
- 2642               	.LASF29:
- 2643 03ea 4B45 595F 		.string	"KEY_S"
- 2643      5300 
- 2644               	.LASF30:
- 2645 03f0 4B45 595F 		.string	"KEY_T"
- 2645      5400 
- 2646               	.LASF31:
- 2647 03f6 4B45 595F 		.string	"KEY_U"
- 2647      5500 
- 2648               	.LASF32:
- 2649 03fc 4B45 595F 		.string	"KEY_V"
- 2649      5600 
- 2650               	.LASF33:
- 2651 0402 4B45 595F 		.string	"KEY_W"
- 2651      5700 
- 2652               	.LASF34:
- 2653 0408 4B45 595F 		.string	"KEY_X"
- 2653      5800 
- 2654               	.LASF35:
- 2655 040e 4B45 595F 		.string	"KEY_Y"
- 2655      5900 
- 2656               	.LASF36:
- 2657 0414 4B45 595F 		.string	"KEY_Z"
- 2657      5A00 
- 2658               	.LASF178:
- 2659 041a 6973 456D 		.string	"isEmptyM"
- 2659      7074 794D 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 52
+ 2620               	.LASF17:
+ 2621 03be 4B45 595F 		.string	"KEY_G"
+ 2621      4700 
+ 2622               	.LASF18:
+ 2623 03c4 4B45 595F 		.string	"KEY_H"
+ 2623      4800 
+ 2624               	.LASF19:
+ 2625 03ca 4B45 595F 		.string	"KEY_I"
+ 2625      4900 
+ 2626               	.LASF20:
+ 2627 03d0 4B45 595F 		.string	"KEY_J"
+ 2627      4A00 
+ 2628               	.LASF21:
+ 2629 03d6 4B45 595F 		.string	"KEY_K"
+ 2629      4B00 
+ 2630               	.LASF22:
+ 2631 03dc 4B45 595F 		.string	"KEY_L"
+ 2631      4C00 
+ 2632               	.LASF23:
+ 2633 03e2 4B45 595F 		.string	"KEY_M"
+ 2633      4D00 
+ 2634               	.LASF24:
+ 2635 03e8 4B45 595F 		.string	"KEY_N"
+ 2635      4E00 
+ 2636               	.LASF25:
+ 2637 03ee 4B45 595F 		.string	"KEY_O"
+ 2637      4F00 
+ 2638               	.LASF26:
+ 2639 03f4 4B45 595F 		.string	"KEY_P"
+ 2639      5000 
+ 2640               	.LASF27:
+ 2641 03fa 4B45 595F 		.string	"KEY_Q"
+ 2641      5100 
+ 2642               	.LASF28:
+ 2643 0400 4B45 595F 		.string	"KEY_R"
+ 2643      5200 
+ 2644               	.LASF29:
+ 2645 0406 4B45 595F 		.string	"KEY_S"
+ 2645      5300 
+ 2646               	.LASF30:
+ 2647 040c 4B45 595F 		.string	"KEY_T"
+ 2647      5400 
+ 2648               	.LASF31:
+ 2649 0412 4B45 595F 		.string	"KEY_U"
+ 2649      5500 
+ 2650               	.LASF32:
+ 2651 0418 4B45 595F 		.string	"KEY_V"
+ 2651      5600 
+ 2652               	.LASF33:
+ 2653 041e 4B45 595F 		.string	"KEY_W"
+ 2653      5700 
+ 2654               	.LASF34:
+ 2655 0424 4B45 595F 		.string	"KEY_X"
+ 2655      5800 
+ 2656               	.LASF35:
+ 2657 042a 4B45 595F 		.string	"KEY_Y"
+ 2657      5900 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 52
 
 
- 2659      00
- 2660               	.LASF131:
- 2661 0423 4B45 595F 		.string	"KEY_NEXT_TRK"
- 2661      4E45 5854 
- 2661      5F54 524B 
+ 2658               	.LASF36:
+ 2659 0430 4B45 595F 		.string	"KEY_Z"
+ 2659      5A00 
+ 2660               	.LASF178:
+ 2661 0436 6973 456D 		.string	"isEmptyM"
+ 2661      7074 794D 
  2661      00
- 2662               	.LASF168:
- 2663 0430 6753 7472 		.string	"gStr"
+ 2662               	.LASF131:
+ 2663 043f 4B45 595F 		.string	"KEY_NEXT_TRK"
+ 2663      4E45 5854 
+ 2663      5F54 524B 
  2663      00
- 2664               	.LASF92:
- 2665 0435 4B45 595F 		.string	"KEY_KP_AST"
- 2665      4B50 5F41 
- 2665      5354 00
- 2666               	.LASF160:
- 2667 0440 7849 7345 		.string	"xIsEnd"
- 2667      6E64 00
- 2668               	.LASF137:
- 2669 0447 4B45 595F 		.string	"KEY_VOL_DOWN"
- 2669      564F 4C5F 
- 2669      444F 574E 
- 2669      00
- 2670               	.LASF145:
- 2671 0454 4B45 595F 		.string	"KEY_EJECT"
- 2671      454A 4543 
- 2671      5400 
- 2672               	.LASF118:
- 2673 045e 4B45 595F 		.string	"KEY_Modifiers_end"
- 2673      4D6F 6469 
- 2673      6669 6572 
- 2673      735F 656E 
- 2673      6400 
- 2674               	.LASF3:
- 2675 0470 756E 7369 		.string	"unsigned char"
- 2675      676E 6564 
- 2675      2063 6861 
- 2675      7200 
- 2676               	.LASF141:
- 2677 047e 4B45 595F 		.string	"KEY_SCREENSAVE"
- 2677      5343 5245 
- 2677      454E 5341 
- 2677      5645 00
- 2678               	.LASF150:
- 2679 048d 4B45 595F 		.string	"KEY_extend_end"
- 2679      6578 7465 
- 2679      6E64 5F65 
- 2679      6E64 00
- 2680               	.LASF61:
- 2681 049c 4B45 595F 		.string	"KEY_COMMA"
- 2681      434F 4D4D 
- 2681      4100 
- 2682               	.LASF166:
- 2683 04a6 706F 704D 		.string	"popMWithKey"
- 2683      5769 7468 
- 2683      4B65 7900 
- 2684               	.LASF50:
- 2685 04b2 4B45 595F 		.string	"KEY_TAB"
- 2685      5441 4200 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 53
+ 2664               	.LASF168:
+ 2665 044c 6753 7472 		.string	"gStr"
+ 2665      00
+ 2666               	.LASF92:
+ 2667 0451 4B45 595F 		.string	"KEY_KP_AST"
+ 2667      4B50 5F41 
+ 2667      5354 00
+ 2668               	.LASF160:
+ 2669 045c 7849 7345 		.string	"xIsEnd"
+ 2669      6E64 00
+ 2670               	.LASF137:
+ 2671 0463 4B45 595F 		.string	"KEY_VOL_DOWN"
+ 2671      564F 4C5F 
+ 2671      444F 574E 
+ 2671      00
+ 2672               	.LASF145:
+ 2673 0470 4B45 595F 		.string	"KEY_EJECT"
+ 2673      454A 4543 
+ 2673      5400 
+ 2674               	.LASF118:
+ 2675 047a 4B45 595F 		.string	"KEY_Modifiers_end"
+ 2675      4D6F 6469 
+ 2675      6669 6572 
+ 2675      735F 656E 
+ 2675      6400 
+ 2676               	.LASF3:
+ 2677 048c 756E 7369 		.string	"unsigned char"
+ 2677      676E 6564 
+ 2677      2063 6861 
+ 2677      7200 
+ 2678               	.LASF141:
+ 2679 049a 4B45 595F 		.string	"KEY_SCREENSAVE"
+ 2679      5343 5245 
+ 2679      454E 5341 
+ 2679      5645 00
+ 2680               	.LASF150:
+ 2681 04a9 4B45 595F 		.string	"KEY_extend_end"
+ 2681      6578 7465 
+ 2681      6E64 5F65 
+ 2681      6E64 00
+ 2682               	.LASF61:
+ 2683 04b8 4B45 595F 		.string	"KEY_COMMA"
+ 2683      434F 4D4D 
+ 2683      4100 
+ 2684               	.LASF166:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 53
 
 
- 2686               	.LASF88:
- 2687 04ba 4B45 595F 		.string	"KEY_DOWN"
- 2687      444F 574E 
- 2687      00
- 2688               	.LASF162:
- 2689 04c3 6368 6172 		.string	"charToKey"
- 2689      546F 4B65 
- 2689      7900 
- 2690               	.LASF53:
- 2691 04cd 4B45 595F 		.string	"KEY_EQUAL"
- 2691      4551 5541 
- 2691      4C00 
- 2692               	.LASF179:
- 2693 04d7 5F70 7265 		.string	"_pressedBuffer"
- 2693      7373 6564 
- 2693      4275 6666 
- 2693      6572 00
- 2694               	.LASF79:
- 2695 04e6 4B45 595F 		.string	"KEY_PAUSE"
- 2695      5041 5553 
- 2695      4500 
- 2696               	.LASF96:
- 2697 04f0 4B45 595F 		.string	"KEY_KP_1"
- 2697      4B50 5F31 
- 2697      00
- 2698               	.LASF97:
- 2699 04f9 4B45 595F 		.string	"KEY_KP_2"
- 2699      4B50 5F32 
+ 2685 04c2 706F 704D 		.string	"popMWithKey"
+ 2685      5769 7468 
+ 2685      4B65 7900 
+ 2686               	.LASF50:
+ 2687 04ce 4B45 595F 		.string	"KEY_TAB"
+ 2687      5441 4200 
+ 2688               	.LASF88:
+ 2689 04d6 4B45 595F 		.string	"KEY_DOWN"
+ 2689      444F 574E 
+ 2689      00
+ 2690               	.LASF162:
+ 2691 04df 6368 6172 		.string	"charToKey"
+ 2691      546F 4B65 
+ 2691      7900 
+ 2692               	.LASF53:
+ 2693 04e9 4B45 595F 		.string	"KEY_EQUAL"
+ 2693      4551 5541 
+ 2693      4C00 
+ 2694               	.LASF179:
+ 2695 04f3 5F70 7265 		.string	"_pressedBuffer"
+ 2695      7373 6564 
+ 2695      4275 6666 
+ 2695      6572 00
+ 2696               	.LASF79:
+ 2697 0502 4B45 595F 		.string	"KEY_PAUSE"
+ 2697      5041 5553 
+ 2697      4500 
+ 2698               	.LASF96:
+ 2699 050c 4B45 595F 		.string	"KEY_KP_1"
+ 2699      4B50 5F31 
  2699      00
- 2700               	.LASF98:
- 2701 0502 4B45 595F 		.string	"KEY_KP_3"
- 2701      4B50 5F33 
+ 2700               	.LASF97:
+ 2701 0515 4B45 595F 		.string	"KEY_KP_2"
+ 2701      4B50 5F32 
  2701      00
- 2702               	.LASF82:
- 2703 050b 4B45 595F 		.string	"KEY_PGUP"
- 2703      5047 5550 
+ 2702               	.LASF98:
+ 2703 051e 4B45 595F 		.string	"KEY_KP_3"
+ 2703      4B50 5F33 
  2703      00
- 2704               	.LASF9:
- 2705 0514 4B45 595F 		.string	"KEY_POSTFail"
- 2705      504F 5354 
- 2705      4661 696C 
+ 2704               	.LASF82:
+ 2705 0527 4B45 595F 		.string	"KEY_PGUP"
+ 2705      5047 5550 
  2705      00
- 2706               	.LASF101:
- 2707 0521 4B45 595F 		.string	"KEY_KP_6"
- 2707      4B50 5F36 
+ 2706               	.LASF9:
+ 2707 0530 4B45 595F 		.string	"KEY_POSTFail"
+ 2707      504F 5354 
+ 2707      4661 696C 
  2707      00
- 2708               	.LASF102:
- 2709 052a 4B45 595F 		.string	"KEY_KP_7"
- 2709      4B50 5F37 
+ 2708               	.LASF101:
+ 2709 053d 4B45 595F 		.string	"KEY_KP_6"
+ 2709      4B50 5F36 
  2709      00
- 2710               	.LASF103:
- 2711 0533 4B45 595F 		.string	"KEY_KP_8"
- 2711      4B50 5F38 
+ 2710               	.LASF102:
+ 2711 0546 4B45 595F 		.string	"KEY_KP_7"
+ 2711      4B50 5F37 
  2711      00
- 2712               	.LASF47:
- 2713 053c 4B45 595F 		.string	"KEY_ENTER"
- 2713      454E 5445 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 54
+ 2712               	.LASF103:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 54
 
 
- 2713      5200 
- 2714               	.LASF48:
- 2715 0546 4B45 595F 		.string	"KEY_ESC"
- 2715      4553 4300 
- 2716               	.LASF105:
- 2717 054e 4B45 595F 		.string	"KEY_KP_0"
- 2717      4B50 5F30 
- 2717      00
- 2718               	.LASF151:
- 2719 0557 6368 6172 		.string	"char"
+ 2713 054f 4B45 595F 		.string	"KEY_KP_8"
+ 2713      4B50 5F38 
+ 2713      00
+ 2714               	.LASF47:
+ 2715 0558 4B45 595F 		.string	"KEY_ENTER"
+ 2715      454E 5445 
+ 2715      5200 
+ 2716               	.LASF48:
+ 2717 0562 4B45 595F 		.string	"KEY_ESC"
+ 2717      4553 4300 
+ 2718               	.LASF105:
+ 2719 056a 4B45 595F 		.string	"KEY_KP_0"
+ 2719      4B50 5F30 
  2719      00
- 2720               	.LASF99:
- 2721 055c 4B45 595F 		.string	"KEY_KP_4"
- 2721      4B50 5F34 
+ 2720               	.LASF151:
+ 2721 0573 6368 6172 		.string	"char"
  2721      00
- 2722               	.LASF148:
- 2723 0565 4B45 595F 		.string	"KEY_HANJA"
- 2723      4841 4E4A 
- 2723      4100 
- 2724               	.LASF100:
- 2725 056f 4B45 595F 		.string	"KEY_KP_5"
- 2725      4B50 5F35 
- 2725      00
- 2726               	.LASF127:
- 2727 0578 4B45 595F 		.string	"KEY_WWW_FORWARD"
- 2727      5757 575F 
- 2727      464F 5257 
- 2727      4152 4400 
- 2728               	.LASF104:
- 2729 0588 4B45 595F 		.string	"KEY_KP_9"
- 2729      4B50 5F39 
- 2729      00
- 2730               	.LASF174:
- 2731 0591 6672 6F6E 		.string	"frontm"
- 2731      746D 00
- 2732               	.LASF124:
- 2733 0598 4B45 595F 		.string	"KEY_WWW_SEARCH"
- 2733      5757 575F 
- 2733      5345 4152 
- 2733      4348 00
- 2734               	.LASF123:
- 2735 05a7 4B45 595F 		.string	"KEY_EMAIL"
- 2735      454D 4149 
- 2735      4C00 
- 2736               	.LASF176:
- 2737 05b1 6D61 6372 		.string	"macrobuffer.c"
- 2737      6F62 7566 
- 2737      6665 722E 
- 2737      6300 
- 2738               	.LASF114:
- 2739 05bf 4B45 595F 		.string	"KEY_RCTRL"
- 2739      5243 5452 
- 2739      4C00 
- 2740               	.LASF172:
- 2741 05c9 5155 4555 		.string	"QUEUE_M"
- 2741      455F 4D00 
- 2742               	.LASF56:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 55
+ 2722               	.LASF99:
+ 2723 0578 4B45 595F 		.string	"KEY_KP_4"
+ 2723      4B50 5F34 
+ 2723      00
+ 2724               	.LASF148:
+ 2725 0581 4B45 595F 		.string	"KEY_HANJA"
+ 2725      4841 4E4A 
+ 2725      4100 
+ 2726               	.LASF100:
+ 2727 058b 4B45 595F 		.string	"KEY_KP_5"
+ 2727      4B50 5F35 
+ 2727      00
+ 2728               	.LASF127:
+ 2729 0594 4B45 595F 		.string	"KEY_WWW_FORWARD"
+ 2729      5757 575F 
+ 2729      464F 5257 
+ 2729      4152 4400 
+ 2730               	.LASF104:
+ 2731 05a4 4B45 595F 		.string	"KEY_KP_9"
+ 2731      4B50 5F39 
+ 2731      00
+ 2732               	.LASF174:
+ 2733 05ad 6672 6F6E 		.string	"frontm"
+ 2733      746D 00
+ 2734               	.LASF124:
+ 2735 05b4 4B45 595F 		.string	"KEY_WWW_SEARCH"
+ 2735      5757 575F 
+ 2735      5345 4152 
+ 2735      4348 00
+ 2736               	.LASF123:
+ 2737 05c3 4B45 595F 		.string	"KEY_EMAIL"
+ 2737      454D 4149 
+ 2737      4C00 
+ 2738               	.LASF176:
+ 2739 05cd 6D61 6372 		.string	"macrobuffer.c"
+ 2739      6F62 7566 
+ 2739      6665 722E 
+ 2739      6300 
+ 2740               	.LASF114:
+ 2741 05db 4B45 595F 		.string	"KEY_RCTRL"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 55
 
 
- 2743 05d1 4B45 595F 		.string	"KEY_BKSLASH"
- 2743      424B 534C 
- 2743      4153 4800 
- 2744               	.LASF171:
- 2745 05dd 5F69 734D 		.string	"_isMacroProcessEnd"
- 2745      6163 726F 
- 2745      5072 6F63 
- 2745      6573 7345 
- 2745      6E64 00
- 2746               	.LASF139:
- 2747 05f0 4B45 595F 		.string	"KEY_CALC"
- 2747      4341 4C43 
- 2747      00
- 2748               	.LASF177:
- 2749 05f9 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
- 2749      6573 6B74 
- 2749      6F70 5C6B 
- 2749      6579 626F 
- 2749      6172 645C 
+ 2741      5243 5452 
+ 2741      4C00 
+ 2742               	.LASF172:
+ 2743 05e5 5155 4555 		.string	"QUEUE_M"
+ 2743      455F 4D00 
+ 2744               	.LASF56:
+ 2745 05ed 4B45 595F 		.string	"KEY_BKSLASH"
+ 2745      424B 534C 
+ 2745      4153 4800 
+ 2746               	.LASF171:
+ 2747 05f9 5F69 734D 		.string	"_isMacroProcessEnd"
+ 2747      6163 726F 
+ 2747      5072 6F63 
+ 2747      6573 7345 
+ 2747      6E64 00
+ 2748               	.LASF139:
+ 2749 060c 4B45 595F 		.string	"KEY_CALC"
+ 2749      4341 4C43 
+ 2749      00
  2750               	.LASF112:
- 2751 0633 4B45 595F 		.string	"KEY_LALT"
+ 2751 0615 4B45 595F 		.string	"KEY_LALT"
  2751      4C41 4C54 
  2751      00
  2752               	.LASF65:
- 2753 063c 4B45 595F 		.string	"KEY_F1"
+ 2753 061e 4B45 595F 		.string	"KEY_F1"
  2753      4631 00
  2754               	.LASF66:
- 2755 0643 4B45 595F 		.string	"KEY_F2"
+ 2755 0625 4B45 595F 		.string	"KEY_F2"
  2755      4632 00
  2756               	.LASF67:
- 2757 064a 4B45 595F 		.string	"KEY_F3"
+ 2757 062c 4B45 595F 		.string	"KEY_F3"
  2757      4633 00
  2758               	.LASF68:
- 2759 0651 4B45 595F 		.string	"KEY_F4"
+ 2759 0633 4B45 595F 		.string	"KEY_F4"
  2759      4634 00
  2760               	.LASF69:
- 2761 0658 4B45 595F 		.string	"KEY_F5"
+ 2761 063a 4B45 595F 		.string	"KEY_F5"
  2761      4635 00
  2762               	.LASF70:
- 2763 065f 4B45 595F 		.string	"KEY_F6"
+ 2763 0641 4B45 595F 		.string	"KEY_F6"
  2763      4636 00
  2764               	.LASF71:
- 2765 0666 4B45 595F 		.string	"KEY_F7"
+ 2765 0648 4B45 595F 		.string	"KEY_F7"
  2765      4637 00
  2766               	.LASF72:
- 2767 066d 4B45 595F 		.string	"KEY_F8"
+ 2767 064f 4B45 595F 		.string	"KEY_F8"
  2767      4638 00
  2768               	.LASF154:
- 2769 0674 7569 6E74 		.string	"uint8_t"
+ 2769 0656 7569 6E74 		.string	"uint8_t"
  2769      385F 7400 
  2770               	.LASF81:
- 2771 067c 4B45 595F 		.string	"KEY_HOME"
+ 2771 065e 4B45 595F 		.string	"KEY_HOME"
  2771      484F 4D45 
  2771      00
  2772               	.LASF143:
- 2773 0685 4B45 595F 		.string	"KEY_REWIND"
+ 2773 0667 4B45 595F 		.string	"KEY_REWIND"
  2773      5245 5749 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 56
 
 
  2773      4E44 00
  2774               	.LASF147:
- 2775 0690 4B45 595F 		.string	"KEY_extend"
+ 2775 0672 4B45 595F 		.string	"KEY_extend"
  2775      6578 7465 
  2775      6E64 00
  2776               	.LASF108:
- 2777 069b 4B45 595F 		.string	"KEY_APPS"
+ 2777 067d 4B45 595F 		.string	"KEY_APPS"
  2777      4150 5053 
  2777      00
  2778               	.LASF89:
- 2779 06a4 4B45 595F 		.string	"KEY_UP"
+ 2779 0686 4B45 595F 		.string	"KEY_UP"
  2779      5550 00
  2780               	.LASF140:
- 2781 06ab 4B45 595F 		.string	"KEY_MYCOM"
+ 2781 068d 4B45 595F 		.string	"KEY_MYCOM"
  2781      4D59 434F 
  2781      4D00 
  2782               	.LASF73:
- 2783 06b5 4B45 595F 		.string	"KEY_F9"
+ 2783 0697 4B45 595F 		.string	"KEY_F9"
  2783      4639 00
  2784               	.LASF173:
- 2785 06bc 7265 6172 		.string	"rearm"
+ 2785 069e 7265 6172 		.string	"rearm"
  2785      6D00 
  2786               	.LASF155:
- 2787 06c2 706F 704D 		.string	"popM"
+ 2787 06a4 706F 704D 		.string	"popM"
  2787      00
  2788               	.LASF113:
- 2789 06c7 4B45 595F 		.string	"KEY_LGUI"
+ 2789 06a9 4B45 595F 		.string	"KEY_LGUI"
  2789      4C47 5549 
  2789      00
  2790               	.LASF119:
- 2791 06d0 4B45 595F 		.string	"KEY_Multimedia"
+ 2791 06b2 4B45 595F 		.string	"KEY_Multimedia"
  2791      4D75 6C74 
  2791      696D 6564 
  2791      6961 00
  2792               	.LASF109:
- 2793 06df 4B45 595F 		.string	"KEY_Modifiers"
+ 2793 06c1 4B45 595F 		.string	"KEY_Modifiers"
  2793      4D6F 6469 
  2793      6669 6572 
  2793      7300 
  2794               	.global __do_copy_data
  2795               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s 			page 57
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 macrobuffer.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:18     .text:00000000 pushM
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:624    .bss:00000026 rearm
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:623    .bss:00000024 frontm
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:625    .bss:00000028 QUEUE_M
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:64     .text:0000004a popM
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:99     .text:00000082 isEmptyM
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:123    .text:000000a0 isMacroProcessEnd
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:622    .bss:00000023 _isMacroProcessEnd
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:156    .text:000000d0 setMacroProcessEnd
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:171    .text:000000d6 charToKey
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:487    .text:000001c0 toString
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:18     .text:00000000 pushM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:624    .bss:00000026 rearm
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:623    .bss:00000024 frontm
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:625    .bss:00000028 QUEUE_M
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:64     .text:0000004a popM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:99     .text:00000082 isEmptyM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:123    .text:000000a0 isMacroProcessEnd
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:622    .bss:00000023 _isMacroProcessEnd
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:156    .text:000000d0 setMacroProcessEnd
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:171    .text:000000d6 charToKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:487    .text:000001c0 toString
                              .bss:00000020 gStr.2023
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:514    .text:000001dc clearMacroPressedBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:620    .bss:00000000 _pressedBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/cc1OWLPf.s:545    .text:00000202 popMWithKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:514    .text:000001dc clearMacroPressedBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:620    .bss:00000000 _pressedBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccDe0ygC.s:545    .text:00000202 popMWithKey
 
 UNDEFINED SYMBOLS
 __divmodhi4

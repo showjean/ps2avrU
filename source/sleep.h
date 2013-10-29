@@ -1,6 +1,7 @@
 #ifndef SLEEP_H
 #define SLEEP_H
 
+#include "keymain.h"
 #include "ledrender.h"
 
 #ifdef RELEASE

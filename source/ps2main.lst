@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 1
 
 
    1               		.file	"ps2main.c"
@@ -33,7 +33,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
   30               	.LM4:
   31 000a 81E0      		ldi r24,lo8(1)
   32               	.LVL1:
-  33 000c 8093 0000 		sts record.2186,r24
+  33 000c 8093 0000 		sts record.2176,r24
   34 0010 0895      		ret
   35               	.LVL2:
   36               	.L2:
@@ -48,17 +48,17 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
   45 001a 1092 0000 		sts lastMAKE_SIZE,__zero_reg__
   46               	.L11:
   47               	.LM8:
-  48 001e 1092 0000 		sts record.2186,__zero_reg__
+  48 001e 1092 0000 		sts record.2176,__zero_reg__
   49 0022 0895      		ret
   50               	.L5:
   51               	.LM9:
-  52 0024 8091 0000 		lds r24,record.2186
+  52 0024 8091 0000 		lds r24,record.2176
   53               	.LVL3:
   54 0028 8823      		tst r24
   55 002a 01F0      		breq .L6
   56               	.LM10:
   57 002c 8091 0000 		lds r24,lastMAKE_SIZE
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 2
 
 
   58 0030 E82F      		mov r30,r24
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  112 0090 8091 0000 		lds r24,rear
  113 0094 9091 0000 		lds r25,(rear)+1
  114 0098 2817      		cp r18,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 3
 
 
  115 009a 3907      		cpc r19,r25
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  169 00de 1092 0000 		sts (front)+1,__zero_reg__
  170 00e2 1092 0000 		sts front,__zero_reg__
  171 00e6 1092 0000 		sts (rear)+1,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 4
 
 
  172 00ea 1092 0000 		sts rear,__zero_reg__
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  226 0132 8260      		ori r24,lo8(2)
  227 0134 8083      		st Z,r24
  228               	.L25:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 5
 
 
  229               	.LBB10:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  283               	.LM39:
  284 016a FC01      		movw r30,r24
  285 016c E050      		subi r30,lo8(-(KFLA))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 6
 
 
  286 016e F040      		sbci r31,hi8(-(KFLA))
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  340               	.LVL22:
  341 01a2 01F4      		brne .L32
  342 01a4 20E0      		ldi r18,lo8(keycode_set2_proc_shift)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 7
 
 
  343 01a6 30E0      		ldi r19,hi8(keycode_set2_proc_shift)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  397 01d6 CF93      		push r28
  398 01d8 DF93      		push r29
  399               	/* prologue: function */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 8
 
 
  400               	/* frame size = 0 */
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  454 0226 0E94 0000 		call push
  455               	.LM58:
  456 022a 82E1      		ldi r24,lo8(18)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 9
 
 
  457 022c 0E94 0000 		call push
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  511               	.L46:
  512               	.LM74:
  513 0284 812F      		mov r24,r17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 10
 
 
  514               	.L53:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  568 02d2 80FF      		sbrs r24,0
  569 02d4 00C0      		rjmp .L50
  570               	.LM88:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 11
 
 
  571 02d6 80EE      		ldi r24,lo8(-32)
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  625               	hasMacroPs2:
  626               	.LFB19:
  627               	.LM98:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 12
 
 
  628               	/* prologue: function */
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  682 0346 F82E      		mov r15,r24
  683               	.LVL53:
  684               	.LM108:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 13
 
 
  685 0348 0E94 0000 		call isKeyMapping
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  739               	/* frame size = 0 */
  740               	.LM114:
  741 0392 0E94 0000 		call isEmptyM
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 14
 
 
  742 0396 8823      		tst r24
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  796               	.LM125:
  797 03e8 AC2E      		mov r10,r28
  798               	.LM126:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 15
 
 
  799 03ea FE01      		movw r30,r28
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  853 043e 01F0      		breq .L77
  854               	.LM134:
  855 0440 812F      		mov r24,r17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 16
 
 
  856 0442 61E0      		ldi r22,lo8(1)
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  910 0496 3F4F      		sbci r19,hi8(-(1))
  911               	.LM140:
  912 0498 2131      		cpi r18,17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 17
 
 
  913 049a 3105      		cpc r19,__zero_reg__
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  967 04d6 01F0      		breq .L90
  968               	.LVL82:
  969               	.LM145:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 18
 
 
  970 04d8 8093 0000 		sts lastSent,r24
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1024 0518 9924      		clr r9
  1025 051a 9394      		inc r9
  1026               	.LM158:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 19
 
 
  1027 051c B5E0      		ldi r27,lo8(5)
@@ -1132,13 +1132,13 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1075 0570 8091 0000 		lds r24,kbd_flags
  1076 0574 82FF      		sbrs r24,2
  1077 0576 00C0      		rjmp .L95
- 1078 0578 8091 0000 		lds r24,keyval.2375
- 1079 057c 9091 0000 		lds r25,(keyval.2375)+1
+ 1078 0578 8091 0000 		lds r24,keyval.2365
+ 1079 057c 9091 0000 		lds r25,(keyval.2365)+1
  1080 0580 8C3F      		cpi r24,252
  1081 0582 9105      		cpc r25,__zero_reg__
  1082 0584 01F0      		breq .L96
  1083               	.LBB18:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 20
 
 
  1084               	.LBB19:
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1138 05e6 00C0      		rjmp .L152
  1139               	.L114:
  1140 05e8 163F      		cpi r17,lo8(-10)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 21
 
 
  1141 05ea 01F0      		breq .L111
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1195 063e 00C0      		rjmp .L149
  1196               	.L150:
  1197               	.LM178:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 22
 
 
  1198 0640 853F      		cpi r24,lo8(-11)
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1252               	.LM184:
  1253 0690 220F      		lsl r18
  1254 0692 331F      		rol r19
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 23
 
 
  1255               	.LM185:
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1309               	.L149:
  1310               	.LM195:
  1311 06e4 8AEF      		ldi r24,lo8(-6)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 24
 
 
  1312 06e6 00C0      		rjmp .L145
@@ -1436,9 +1436,9 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1364 0740 0E94 0000 		call pop
  1365 0744 282F      		mov r18,r24
  1366 0746 30E0      		ldi r19,lo8(0)
- 1367 0748 3093 0000 		sts (keyval.2375)+1,r19
- 1368 074c 2093 0000 		sts keyval.2375,r18
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 25
+ 1367 0748 3093 0000 		sts (keyval.2365)+1,r19
+ 1368 074c 2093 0000 		sts keyval.2365,r18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 25
 
 
  1369               	.LM202:
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1423 07c8 1092 0000 		sts lastMAKE_IDX,__zero_reg__
  1424               	.LM210:
  1425 07cc 8CE0      		ldi r24,lo8(12)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 26
 
 
  1426 07ce 8093 0000 		sts m_state,r24
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1480               	.L137:
  1481               	.LM220:
  1482 083e 9091 0000 		lds r25,lastMAKE_IDX
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 27
 
 
  1483 0842 E92F      		mov r30,r25
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1537               	.LM225:
  1538 08c8 8BEA      		ldi r24,lo8(-85)
  1539 08ca 65E0      		ldi r22,lo8(5)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 28
 
 
  1540 08cc 00C0      		rjmp .L146
@@ -1662,10 +1662,10 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1578 0004 00        		.byte	0
  1579               		.lcomm lastMAKE_SIZE,1
  1580               		.lcomm lastMAKE_IDX,1
- 1581               		.lcomm keyval.2375,2
+ 1581               		.lcomm keyval.2365,2
  1582               		.lcomm front,2
  1583               		.lcomm rear,2
- 1584               		.lcomm record.2186,1
+ 1584               		.lcomm record.2176,1
  1585               		.lcomm QUEUE,200
  1586               		.lcomm lastMAKE_keyidx,1
  1587               		.lcomm lastMAKE,10
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1594               	.Lframe0:
  1595 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
  1596               	.LSCIE0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 29
 
 
  1597 0004 FFFF FFFF 		.long	0xffffffff
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1651 0064 0000 0000 		.long	.Lframe0
  1652 0068 0000 0000 		.long	.LFB14
  1653 006c 2201 0000 		.long	.LFE14-.LFB14
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 30
 
 
  1654               		.p2align	2
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1708 00d8 0000 0000 		.long	.LFB20
  1709 00dc F803 0000 		.long	.LFE20-.LFB20
  1710               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 31
 
 
  1711               	.LEFDE24:
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1765 006c 0600      		.word	0x6
  1766 006e 68        		.byte	0x68
  1767 006f 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 32
 
 
  1768 0070 01        		.uleb128 0x1
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1822 00d0 01        		.uleb128 0x1
  1823 00d1 69        		.byte	0x69
  1824 00d2 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 33
 
 
  1825 00d3 01        		.uleb128 0x1
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1879 0166 AA01 0000 		.long	.LVL23-.Ltext0
  1880 016a 0100      		.word	0x1
  1881 016c 68        		.byte	0x68
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 34
 
 
  1882 016d B601 0000 		.long	.LVL25-.Ltext0
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1936 01e5 01        		.uleb128 0x1
  1937 01e6 63        		.byte	0x63
  1938 01e7 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 35
 
 
  1939 01e8 01        		.uleb128 0x1
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  1993 0248 01        		.uleb128 0x1
  1994 0249 E202 0000 		.long	.LVL47-.Ltext0
  1995 024d E802 0000 		.long	.LVL48-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 36
 
 
  1996 0251 0600      		.word	0x6
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2050 02d1 E801 0000 		.long	.LVL31-.Ltext0
  2051 02d5 F402 0000 		.long	.LVL50-.Ltext0
  2052 02d9 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 37
 
 
  2053 02db 61        		.byte	0x61
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2107               	.LLST26:
  2108 036f E803 0000 		.long	.LVL65-.Ltext0
  2109 0373 BE04 0000 		.long	.LVL78-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 38
 
 
  2110 0377 0100      		.word	0x1
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2164 0402 0100      		.word	0x1
  2165 0404 61        		.byte	0x61
  2166 0405 C804 0000 		.long	.LVL80-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 39
 
 
  2167 0409 D004 0000 		.long	.LFE16-.Ltext0
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2221 049b 4606 0000 		.long	.LVL88-.Ltext0
  2222 049f 4806 0000 		.long	.LVL89-.Ltext0
  2223 04a3 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 40
 
 
  2224 04a5 68        		.byte	0x68
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2278 0514 8E06 0000 		.long	.LVL92-.Ltext0
  2279 0518 C806 0000 		.long	.LVL94-.Ltext0
  2280 051c 0600      		.word	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 41
 
 
  2281 051e 62        		.byte	0x62
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2335 0033 02        		.uleb128 0x2
  2336 0034 02        		.byte	0x2
  2337 0035 07        		.byte	0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 42
 
 
  2338 0036 0000 0000 		.long	.LASF2
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2392 0096 07        		.uleb128 0x7
  2393 0097 0000 0000 		.long	.LASF12
  2394 009b 00        		.sleb128 0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 43
 
 
  2395 009c 07        		.uleb128 0x7
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2449 0108 07        		.uleb128 0x7
  2450 0109 0000 0000 		.long	.LASF31
  2451 010d 13        		.sleb128 19
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 44
 
 
  2452 010e 07        		.uleb128 0x7
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2506 017a 07        		.uleb128 0x7
  2507 017b 0000 0000 		.long	.LASF50
  2508 017f 26        		.sleb128 38
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 45
 
 
  2509 0180 07        		.uleb128 0x7
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2563 01ec 07        		.uleb128 0x7
  2564 01ed 0000 0000 		.long	.LASF69
  2565 01f1 39        		.sleb128 57
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 46
 
 
  2566 01f2 07        		.uleb128 0x7
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2620 026a 07        		.uleb128 0x7
  2621 026b 0000 0000 		.long	.LASF88
  2622 026f CC00      		.sleb128 76
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 47
 
 
  2623 0271 07        		.uleb128 0x7
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2677 02ef 07        		.uleb128 0x7
  2678 02f0 0000 0000 		.long	.LASF107
  2679 02f4 DF00      		.sleb128 95
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 48
 
 
  2680 02f6 07        		.uleb128 0x7
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2734 0374 07        		.uleb128 0x7
  2735 0375 0000 0000 		.long	.LASF126
  2736 0379 F200      		.sleb128 114
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 49
 
 
  2737 037b 07        		.uleb128 0x7
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2791 03f9 07        		.uleb128 0x7
  2792 03fa 0000 0000 		.long	.LASF145
  2793 03fe 8501      		.sleb128 133
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 50
 
 
  2794 0400 07        		.uleb128 0x7
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2848 046d 4B65 7900 		.string	"Key"
  2849 0471 03        		.byte	0x3
  2850 0472 12        		.byte	0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 51
 
 
  2851 0473 4704 0000 		.long	0x447
@@ -3035,7 +3035,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2882 04b3 7200 0000 		.long	0x72
  2883 04b7 05        		.byte	0x5
  2884 04b8 03        		.byte	0x3
- 2885 04b9 0000 0000 		.long	record.2186
+ 2885 04b9 0000 0000 		.long	record.2176
  2886 04bd 00        		.byte	0x0
  2887 04be 0F        		.uleb128 0xf
  2888 04bf 01        		.byte	0x1
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2905 04e5 20        		.uleb128 0x20
  2906 04e6 0C        		.uleb128 0xc
  2907 04e7 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 52
 
 
  2908 04e8 0000 0000 		.long	.LASF159
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  2962 055f 00        		.byte	0x0
  2963 0560 13        		.uleb128 0x13
  2964 0561 0000 0000 		.long	.LBB11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 53
 
 
  2965 0565 0000 0000 		.long	.LBE11
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3019 05ec 12        		.uleb128 0x12
  3020 05ed 0000 0000 		.long	.LASF164
  3021 05f1 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 54
 
 
  3022 05f2 8E        		.byte	0x8e
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3076 066a 4C01      		.word	0x14c
  3077 066c 01        		.byte	0x1
  3078 066d 0000 0000 		.long	.LFB17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 55
 
 
  3079 0671 0000 0000 		.long	.LFE17
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3133 06e2 EF        		.byte	0xef
  3134 06e3 7200 0000 		.long	0x72
  3135 06e7 0000 0000 		.long	.LLST22
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 56
 
 
  3136 06eb 18        		.uleb128 0x18
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3190 076f 1D        		.uleb128 0x1d
  3191 0770 0000 0000 		.long	.LASF162
  3192 0774 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 57
 
 
  3193 0775 1B01      		.word	0x11b
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3247 07ef 0000 0000 		.long	.LASF180
  3248 07f3 01        		.byte	0x1
  3249 07f4 7A01      		.word	0x17a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 58
 
 
  3250 07f6 2500 0000 		.long	0x25
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3304 0886 01        		.byte	0x1
  3305 0887 3802      		.word	0x238
  3306 0889 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 59
 
 
  3307 088a 21        		.uleb128 0x21
@@ -3488,7 +3488,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3311 0892 6B00 0000 		.long	0x6b
  3312 0896 05        		.byte	0x5
  3313 0897 03        		.byte	0x3
- 3314 0898 0000 0000 		.long	keyval.2375
+ 3314 0898 0000 0000 		.long	keyval.2365
  3315 089c 00        		.byte	0x0
  3316 089d 22        		.uleb128 0x22
  3317 089e 7200 0000 		.long	0x72
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3361 08fd 23        		.uleb128 0x23
  3362 08fe AD08 0000 		.long	0x8ad
  3363 0902 09        		.byte	0x9
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 60
 
 
  3364 0903 00        		.byte	0x0
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3418 0978 8F        		.byte	0x8f
  3419 0979 00        		.byte	0x0
  3420 097a 24        		.uleb128 0x24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 61
 
 
  3421 097b 0000 0000 		.long	.LASF195
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3475 09ea 01        		.byte	0x1
  3476 09eb 01        		.byte	0x1
  3477 09ec 25        		.uleb128 0x25
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 62
 
 
  3478 09ed 8C09 0000 		.long	0x98c
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3532 0a59 22        		.uleb128 0x22
  3533 0a5a 7200 0000 		.long	0x72
  3534 0a5e 690A 0000 		.long	0xa69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 63
 
 
  3535 0a62 23        		.uleb128 0x23
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3589 0acb 28        		.uleb128 0x28
  3590 0acc 0000 0000 		.long	.LASF213
  3591 0ad0 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 64
 
 
  3592 0ad1 35        		.byte	0x35
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3646 002e 3A        		.uleb128 0x3a
  3647 002f 0B        		.uleb128 0xb
  3648 0030 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 65
 
 
  3649 0031 0B        		.uleb128 0xb
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3703 0067 3A        		.uleb128 0x3a
  3704 0068 0B        		.uleb128 0xb
  3705 0069 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 66
 
 
  3706 006a 0B        		.uleb128 0xb
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3760 00a0 12        		.uleb128 0x12
  3761 00a1 01        		.uleb128 0x1
  3762 00a2 40        		.uleb128 0x40
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 67
 
 
  3763 00a3 0A        		.uleb128 0xa
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3817 00d9 40        		.uleb128 0x40
  3818 00da 0A        		.uleb128 0xa
  3819 00db 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 68
 
 
  3820 00dc 00        		.byte	0x0
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3874 0112 34        		.uleb128 0x34
  3875 0113 00        		.byte	0x0
  3876 0114 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 69
 
 
  3877 0115 0E        		.uleb128 0xe
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3931 014b 11        		.uleb128 0x11
  3932 014c 01        		.uleb128 0x1
  3933 014d 12        		.uleb128 0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 70
 
 
  3934 014e 01        		.uleb128 0x1
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  3988 0184 40        		.uleb128 0x40
  3989 0185 0A        		.uleb128 0xa
  3990 0186 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 71
 
 
  3991 0187 13        		.uleb128 0x13
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4045 01bd 0B        		.uleb128 0xb
  4046 01be 3B        		.uleb128 0x3b
  4047 01bf 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 72
 
 
  4048 01c0 27        		.uleb128 0x27
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4102 01f6 49        		.uleb128 0x49
  4103 01f7 13        		.uleb128 0x13
  4104 01f8 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 73
 
 
  4105 01f9 13        		.uleb128 0x13
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4159 022f 0B        		.uleb128 0xb
  4160 0230 3B        		.uleb128 0x3b
  4161 0231 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 74
 
 
  4162 0232 49        		.uleb128 0x49
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4197      5332 00
  4198 00a9 A007 0000 		.long	0x7a0
  4199 00ad 7478 5F73 		.string	"tx_state"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 75
 
 
  4199      7461 7465 
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4242 0004 0200      		.word	0x2
  4243 0006 A000 0000 		.long	.LELTP0-.LASLTP0
  4244               	.LASLTP0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 76
 
 
  4245 000a 01        		.byte	0x1
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4282      696E 666F 
  4282      2E68 00
  4283 0097 00        		.uleb128 0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 77
 
 
  4284 0098 00        		.uleb128 0x0
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4336 00f1 18        		.byte	0x18
  4337 00f2 00        		.byte	0x0
  4338 00f3 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 78
 
 
  4339 00f4 02        		.byte	0x2
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4393 014b 05        		.uleb128 0x5
  4394 014c 02        		.byte	0x2
  4395 014d 0000 0000 		.long	.LM21
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 79
 
 
  4396 0151 01        		.byte	0x1
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4450 01a5 0000 0000 		.long	.LM32
  4451 01a9 01        		.byte	0x1
  4452 01aa 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 80
 
 
  4453 01ab 05        		.uleb128 0x5
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4507 0202 00        		.byte	0x0
  4508 0203 05        		.uleb128 0x5
  4509 0204 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 81
 
 
  4510 0205 0000 0000 		.long	.LM44
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4564 025c 02        		.byte	0x2
  4565 025d 0000 0000 		.long	.LM55
  4566 0261 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 82
 
 
  4567 0262 00        		.byte	0x0
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4621 02b9 15        		.byte	0x15
  4622 02ba 00        		.byte	0x0
  4623 02bb 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 83
 
 
  4624 02bc 02        		.byte	0x2
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4678 0313 05        		.uleb128 0x5
  4679 0314 02        		.byte	0x2
  4680 0315 0000 0000 		.long	.LM78
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 84
 
 
  4681 0319 16        		.byte	0x16
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4735 036d 0000 0000 		.long	.LM89
  4736 0371 16        		.byte	0x16
  4737 0372 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 85
 
 
  4738 0373 05        		.uleb128 0x5
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4792 03ca 00        		.byte	0x0
  4793 03cb 05        		.uleb128 0x5
  4794 03cc 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 86
 
 
  4795 03cd 0000 0000 		.long	.LM101
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4849 0422 0000 0000 		.long	.LM111
  4850 0426 17        		.byte	0x17
  4851 0427 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 87
 
 
  4852 0428 05        		.uleb128 0x5
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4906 047c 0000 0000 		.long	.LM122
  4907 0480 16        		.byte	0x16
  4908 0481 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 88
 
 
  4909 0482 05        		.uleb128 0x5
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  4963 04d9 00        		.byte	0x0
  4964 04da 05        		.uleb128 0x5
  4965 04db 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 89
 
 
  4966 04dc 0000 0000 		.long	.LM134
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5020 0531 05        		.uleb128 0x5
  5021 0532 02        		.byte	0x2
  5022 0533 0000 0000 		.long	.LM144
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 90
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 90
 
 
  5023 0537 16        		.byte	0x16
@@ -5398,7 +5398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5077 058c 05        		.uleb128 0x5
  5078 058d 02        		.byte	0x2
  5079 058e 0000 0000 		.long	.LM155
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 91
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 91
 
 
  5080 0592 18        		.byte	0x18
@@ -5458,7 +5458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5134 05e6 00        		.byte	0x0
  5135 05e7 05        		.uleb128 0x5
  5136 05e8 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 92
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 92
 
 
  5137 05e9 0000 0000 		.long	.LM165
@@ -5518,7 +5518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5191 0641 00        		.byte	0x0
  5192 0642 05        		.uleb128 0x5
  5193 0643 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 93
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 93
 
 
  5194 0644 0000 0000 		.long	.LM176
@@ -5578,7 +5578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5248 069b 02        		.byte	0x2
  5249 069c 0000 0000 		.long	.LM187
  5250 06a0 1C        		.byte	0x1c
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 94
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 94
 
 
  5251 06a1 00        		.byte	0x0
@@ -5638,7 +5638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5305 06f8 03        		.byte	0x3
  5306 06f9 D47C      		.sleb128 -428
  5307 06fb 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 95
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 95
 
 
  5308 06fc 00        		.byte	0x0
@@ -5698,7 +5698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5362 0751 02        		.byte	0x2
  5363 0752 0000 0000 		.long	.LM209
  5364 0756 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 96
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 96
 
 
  5365 0757 00        		.byte	0x0
@@ -5758,7 +5758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5419 07ad 00        		.byte	0x0
  5420 07ae 05        		.uleb128 0x5
  5421 07af 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 97
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 97
 
 
  5422 07b0 0000 0000 		.long	.LM220
@@ -5818,7 +5818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5472      0101 0101 
  5473               	.LASF116:
  5474 0000 4B45 595F 		.string	"KEY_LSHIFT"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 98
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 98
 
 
  5474      4C53 4849 
@@ -5878,7 +5878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5504      00
  5505               	.LASF172:
  5506 008c 7075 744B 		.string	"putKey"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 99
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 99
 
 
  5506      6579 00
@@ -5890,873 +5890,873 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 1
  5510 009e 4B45 595F 		.string	"KEY_STOP"
  5510      5354 4F50 
  5510      00
- 5511               	.LASF199:
- 5512 00a7 6B65 7963 		.string	"keycode_set2_extend"
- 5512      6F64 655F 
- 5512      7365 7432 
- 5512      5F65 7874 
- 5512      656E 6400 
- 5513               	.LASF89:
- 5514 00bb 4B45 595F 		.string	"KEY_END"
- 5514      454E 4400 
- 5515               	.LASF6:
- 5516 00c3 6C6F 6E67 		.string	"long long unsigned int"
- 5516      206C 6F6E 
- 5516      6720 756E 
- 5516      7369 676E 
- 5516      6564 2069 
- 5517               	.LASF54:
- 5518 00da 4B45 595F 		.string	"KEY_BKSP"
- 5518      424B 5350 
- 5518      00
- 5519               	.LASF88:
- 5520 00e3 4B45 595F 		.string	"KEY_DEL"
- 5520      4445 4C00 
- 5521               	.LASF173:
- 5522 00eb 674B 6579 		.string	"gKey"
- 5522      00
- 5523               	.LASF176:
- 5524 00f0 674D 6F64 		.string	"gModifier"
- 5524      6966 6965 
- 5524      7200 
- 5525               	.LASF137:
- 5526 00fa 4B45 595F 		.string	"KEY_PREV_TRK"
- 5526      5052 4556 
- 5526      5F54 524B 
- 5526      00
- 5527               	.LASF63:
- 5528 0107 4B45 595F 		.string	"KEY_COLON"
- 5528      434F 4C4F 
- 5528      4E00 
- 5529               	.LASF183:
- 5530 0111 6C65 6473 		.string	"ledstate"
- 5530      7461 7465 
- 5530      00
- 5531               	.LASF157:
- 5532 011a 6B65 7963 		.string	"keycode"
- 5532      6F64 6500 
- 5533               	.LASF125:
- 5534 0122 4B45 595F 		.string	"KEY_POWER"
- 5534      504F 5745 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 100
+ 5511               	.LASF216:
+ 5512 00a7 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
+ 5512      6974 325C 
+ 5512      7073 3261 
+ 5512      7672 555C 
+ 5512      2E67 6974 
+ 5513               	.LASF199:
+ 5514 00c3 6B65 7963 		.string	"keycode_set2_extend"
+ 5514      6F64 655F 
+ 5514      7365 7432 
+ 5514      5F65 7874 
+ 5514      656E 6400 
+ 5515               	.LASF89:
+ 5516 00d7 4B45 595F 		.string	"KEY_END"
+ 5516      454E 4400 
+ 5517               	.LASF6:
+ 5518 00df 6C6F 6E67 		.string	"long long unsigned int"
+ 5518      206C 6F6E 
+ 5518      6720 756E 
+ 5518      7369 676E 
+ 5518      6564 2069 
+ 5519               	.LASF54:
+ 5520 00f6 4B45 595F 		.string	"KEY_BKSP"
+ 5520      424B 5350 
+ 5520      00
+ 5521               	.LASF88:
+ 5522 00ff 4B45 595F 		.string	"KEY_DEL"
+ 5522      4445 4C00 
+ 5523               	.LASF173:
+ 5524 0107 674B 6579 		.string	"gKey"
+ 5524      00
+ 5525               	.LASF176:
+ 5526 010c 674D 6F64 		.string	"gModifier"
+ 5526      6966 6965 
+ 5526      7200 
+ 5527               	.LASF137:
+ 5528 0116 4B45 595F 		.string	"KEY_PREV_TRK"
+ 5528      5052 4556 
+ 5528      5F54 524B 
+ 5528      00
+ 5529               	.LASF63:
+ 5530 0123 4B45 595F 		.string	"KEY_COLON"
+ 5530      434F 4C4F 
+ 5530      4E00 
+ 5531               	.LASF183:
+ 5532 012d 6C65 6473 		.string	"ledstate"
+ 5532      7461 7465 
+ 5532      00
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 100
 
 
- 5534      5200 
- 5535               	.LASF13:
- 5536 012c 4B45 595F 		.string	"KEY_ErrorRollOver"
- 5536      4572 726F 
- 5536      7252 6F6C 
- 5536      6C4F 7665 
- 5536      7200 
- 5537               	.LASF143:
- 5538 013e 4B45 595F 		.string	"KEY_MEDIA"
- 5538      4D45 4449 
- 5538      4100 
- 5539               	.LASF7:
- 5540 0148 6C6F 6E67 		.string	"long long int"
- 5540      206C 6F6E 
- 5540      6720 696E 
- 5540      7400 
- 5541               	.LASF1:
- 5542 0156 7369 676E 		.string	"signed char"
- 5542      6564 2063 
- 5542      6861 7200 
- 5543               	.LASF98:
- 5544 0162 4B45 595F 		.string	"KEY_KP_MINUS"
- 5544      4B50 5F4D 
- 5544      494E 5553 
- 5544      00
- 5545               	.LASF196:
- 5546 016f 6B65 7963 		.string	"keycode_set2_special"
- 5546      6F64 655F 
- 5546      7365 7432 
- 5546      5F73 7065 
- 5546      6369 616C 
- 5547               	.LASF141:
- 5548 0184 4B45 595F 		.string	"KEY_VOL_UP"
- 5548      564F 4C5F 
- 5548      5550 00
- 5549               	.LASF170:
- 5550 018f 7072 6570 		.string	"prepareKeyMappingPs2"
- 5550      6172 654B 
- 5550      6579 4D61 
- 5550      7070 696E 
- 5550      6750 7332 
- 5551               	.LASF177:
- 5552 01a4 7478 5F73 		.string	"tx_state"
- 5552      7461 7465 
- 5552      00
- 5553               	.LASF60:
- 5554 01ad 4B45 595F 		.string	"KEY_RBR"
- 5554      5242 5200 
- 5555               	.LASF135:
- 5556 01b5 4B45 595F 		.string	"KEY_WWW_FAVORITE"
- 5556      5757 575F 
- 5556      4641 564F 
- 5556      5249 5445 
- 5556      00
- 5557               	.LASF217:
- 5558 01c6 6973 456D 		.string	"isEmpty"
- 5558      7074 7900 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 101
+ 5533               	.LASF157:
+ 5534 0136 6B65 7963 		.string	"keycode"
+ 5534      6F64 6500 
+ 5535               	.LASF125:
+ 5536 013e 4B45 595F 		.string	"KEY_POWER"
+ 5536      504F 5745 
+ 5536      5200 
+ 5537               	.LASF13:
+ 5538 0148 4B45 595F 		.string	"KEY_ErrorRollOver"
+ 5538      4572 726F 
+ 5538      7252 6F6C 
+ 5538      6C4F 7665 
+ 5538      7200 
+ 5539               	.LASF143:
+ 5540 015a 4B45 595F 		.string	"KEY_MEDIA"
+ 5540      4D45 4449 
+ 5540      4100 
+ 5541               	.LASF7:
+ 5542 0164 6C6F 6E67 		.string	"long long int"
+ 5542      206C 6F6E 
+ 5542      6720 696E 
+ 5542      7400 
+ 5543               	.LASF1:
+ 5544 0172 7369 676E 		.string	"signed char"
+ 5544      6564 2063 
+ 5544      6861 7200 
+ 5545               	.LASF98:
+ 5546 017e 4B45 595F 		.string	"KEY_KP_MINUS"
+ 5546      4B50 5F4D 
+ 5546      494E 5553 
+ 5546      00
+ 5547               	.LASF196:
+ 5548 018b 6B65 7963 		.string	"keycode_set2_special"
+ 5548      6F64 655F 
+ 5548      7365 7432 
+ 5548      5F73 7065 
+ 5548      6369 616C 
+ 5549               	.LASF141:
+ 5550 01a0 4B45 595F 		.string	"KEY_VOL_UP"
+ 5550      564F 4C5F 
+ 5550      5550 00
+ 5551               	.LASF170:
+ 5552 01ab 7072 6570 		.string	"prepareKeyMappingPs2"
+ 5552      6172 654B 
+ 5552      6579 4D61 
+ 5552      7070 696E 
+ 5552      6750 7332 
+ 5553               	.LASF177:
+ 5554 01c0 7478 5F73 		.string	"tx_state"
+ 5554      7461 7465 
+ 5554      00
+ 5555               	.LASF60:
+ 5556 01c9 4B45 595F 		.string	"KEY_RBR"
+ 5556      5242 5200 
+ 5557               	.LASF135:
+ 5558 01d1 4B45 595F 		.string	"KEY_WWW_FAVORITE"
+ 5558      5757 575F 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 101
 
 
- 5559               	.LASF5:
- 5560 01ce 6C6F 6E67 		.string	"long int"
- 5560      2069 6E74 
- 5560      00
- 5561               	.LASF131:
- 5562 01d7 4B45 595F 		.string	"KEY_WWW_BACK"
- 5562      5757 575F 
- 5562      4241 434B 
+ 5558      4641 564F 
+ 5558      5249 5445 
+ 5558      00
+ 5559               	.LASF217:
+ 5560 01e2 6973 456D 		.string	"isEmpty"
+ 5560      7074 7900 
+ 5561               	.LASF5:
+ 5562 01ea 6C6F 6E67 		.string	"long int"
+ 5562      2069 6E74 
  5562      00
- 5563               	.LASF62:
- 5564 01e4 4B45 595F 		.string	"KEY_Europe1"
- 5564      4575 726F 
- 5564      7065 3100 
- 5565               	.LASF112:
- 5566 01f0 4B45 595F 		.string	"KEY_Europe2"
+ 5563               	.LASF131:
+ 5564 01f3 4B45 595F 		.string	"KEY_WWW_BACK"
+ 5564      5757 575F 
+ 5564      4241 434B 
+ 5564      00
+ 5565               	.LASF62:
+ 5566 0200 4B45 595F 		.string	"KEY_Europe1"
  5566      4575 726F 
- 5566      7065 3200 
- 5567               	.LASF96:
- 5568 01fc 4B45 595F 		.string	"KEY_KP_SLASH"
- 5568      4B50 5F53 
- 5568      4C41 5348 
- 5568      00
- 5569               	.LASF91:
- 5570 0209 4B45 595F 		.string	"KEY_RIGHT"
- 5570      5249 4748 
- 5570      5400 
- 5571               	.LASF184:
- 5572 0213 6B65 7976 		.string	"keyval"
- 5572      616C 00
- 5573               	.LASF65:
- 5574 021a 4B45 595F 		.string	"KEY_HASH"
- 5574      4841 5348 
- 5574      00
- 5575               	.LASF121:
- 5576 0223 4B45 595F 		.string	"KEY_RALT"
- 5576      5241 4C54 
+ 5566      7065 3100 
+ 5567               	.LASF112:
+ 5568 020c 4B45 595F 		.string	"KEY_Europe2"
+ 5568      4575 726F 
+ 5568      7065 3200 
+ 5569               	.LASF96:
+ 5570 0218 4B45 595F 		.string	"KEY_KP_SLASH"
+ 5570      4B50 5F53 
+ 5570      4C41 5348 
+ 5570      00
+ 5571               	.LASF91:
+ 5572 0225 4B45 595F 		.string	"KEY_RIGHT"
+ 5572      5249 4748 
+ 5572      5400 
+ 5573               	.LASF184:
+ 5574 022f 6B65 7976 		.string	"keyval"
+ 5574      616C 00
+ 5575               	.LASF65:
+ 5576 0236 4B45 595F 		.string	"KEY_HASH"
+ 5576      4841 5348 
  5576      00
- 5577               	.LASF11:
- 5578 022c 7569 6E74 		.string	"uint16_t"
- 5578      3136 5F74 
+ 5577               	.LASF121:
+ 5578 023f 4B45 595F 		.string	"KEY_RALT"
+ 5578      5241 4C54 
  5578      00
- 5579               	.LASF134:
- 5580 0235 4B45 595F 		.string	"KEY_WWW_REFRESH"
- 5580      5757 575F 
- 5580      5245 4652 
- 5580      4553 4800 
- 5581               	.LASF201:
- 5582 0245 6B62 645F 		.string	"kbd_flags"
- 5582      666C 6167 
- 5582      7300 
- 5583               	.LASF164:
- 5584 024f 5F5F 7265 		.string	"__result"
- 5584      7375 6C74 
- 5584      00
- 5585               	.LASF212:
- 5586 0258 6C61 7374 		.string	"lastState"
- 5586      5374 6174 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 102
+ 5579               	.LASF11:
+ 5580 0248 7569 6E74 		.string	"uint16_t"
+ 5580      3136 5F74 
+ 5580      00
+ 5581               	.LASF134:
+ 5582 0251 4B45 595F 		.string	"KEY_WWW_REFRESH"
+ 5582      5757 575F 
+ 5582      5245 4652 
+ 5582      4553 4800 
+ 5583               	.LASF201:
+ 5584 0261 6B62 645F 		.string	"kbd_flags"
+ 5584      666C 6167 
+ 5584      7300 
+ 5585               	.LASF164:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 102
 
 
- 5586      6500 
- 5587               	.LASF59:
- 5588 0262 4B45 595F 		.string	"KEY_LBR"
- 5588      4C42 5200 
- 5589               	.LASF85:
- 5590 026a 4B45 595F 		.string	"KEY_INSERT"
- 5590      494E 5345 
- 5590      5254 00
- 5591               	.LASF214:
- 5592 0275 474E 5520 		.string	"GNU C 4.3.3"
- 5592      4320 342E 
- 5592      332E 3300 
- 5593               	.LASF82:
- 5594 0281 4B45 595F 		.string	"KEY_PRNSCR"
- 5594      5052 4E53 
- 5594      4352 00
- 5595               	.LASF90:
- 5596 028c 4B45 595F 		.string	"KEY_PGDN"
- 5596      5047 444E 
- 5596      00
- 5597               	.LASF122:
- 5598 0295 4B45 595F 		.string	"KEY_RGUI"
- 5598      5247 5549 
+ 5586 026b 5F5F 7265 		.string	"__result"
+ 5586      7375 6C74 
+ 5586      00
+ 5587               	.LASF212:
+ 5588 0274 6C61 7374 		.string	"lastState"
+ 5588      5374 6174 
+ 5588      6500 
+ 5589               	.LASF59:
+ 5590 027e 4B45 595F 		.string	"KEY_LBR"
+ 5590      4C42 5200 
+ 5591               	.LASF85:
+ 5592 0286 4B45 595F 		.string	"KEY_INSERT"
+ 5592      494E 5345 
+ 5592      5254 00
+ 5593               	.LASF214:
+ 5594 0291 474E 5520 		.string	"GNU C 4.3.3"
+ 5594      4320 342E 
+ 5594      332E 3300 
+ 5595               	.LASF82:
+ 5596 029d 4B45 595F 		.string	"KEY_PRNSCR"
+ 5596      5052 4E53 
+ 5596      4352 00
+ 5597               	.LASF90:
+ 5598 02a8 4B45 595F 		.string	"KEY_PGDN"
+ 5598      5047 444E 
  5598      00
- 5599               	.LASF130:
- 5600 029e 4B45 595F 		.string	"KEY_WWW_HOME"
- 5600      5757 575F 
- 5600      484F 4D45 
+ 5599               	.LASF122:
+ 5600 02b1 4B45 595F 		.string	"KEY_RGUI"
+ 5600      5247 5549 
  5600      00
- 5601               	.LASF156:
- 5602 02ab 6D6F 6465 		.string	"mode"
+ 5601               	.LASF130:
+ 5602 02ba 4B45 595F 		.string	"KEY_WWW_HOME"
+ 5602      5757 575F 
+ 5602      484F 4D45 
  5602      00
- 5603               	.LASF8:
- 5604 02b0 756E 7369 		.string	"unsigned int"
- 5604      676E 6564 
- 5604      2069 6E74 
+ 5603               	.LASF156:
+ 5604 02c7 6D6F 6465 		.string	"mode"
  5604      00
- 5605               	.LASF158:
- 5606 02bd 7075 7368 		.string	"push"
+ 5605               	.LASF8:
+ 5606 02cc 756E 7369 		.string	"unsigned int"
+ 5606      676E 6564 
+ 5606      2069 6E74 
  5606      00
- 5607               	.LASF191:
- 5608 02c2 6C61 7374 		.string	"lastMAKE_IDX"
- 5608      4D41 4B45 
- 5608      5F49 4458 
+ 5607               	.LASF158:
+ 5608 02d9 7075 7368 		.string	"push"
  5608      00
- 5609               	.LASF215:
- 5610 02cf 7073 326D 		.string	"ps2main.c"
- 5610      6169 6E2E 
- 5610      6300 
- 5611               	.LASF120:
- 5612 02d9 4B45 595F 		.string	"KEY_RSHIFT"
- 5612      5253 4849 
- 5612      4654 00
- 5613               	.LASF83:
- 5614 02e4 4B45 595F 		.string	"KEY_SCRLCK"
- 5614      5343 524C 
- 5614      434B 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 103
+ 5609               	.LASF191:
+ 5610 02de 6C61 7374 		.string	"lastMAKE_IDX"
+ 5610      4D41 4B45 
+ 5610      5F49 4458 
+ 5610      00
+ 5611               	.LASF215:
+ 5612 02eb 7073 326D 		.string	"ps2main.c"
+ 5612      6169 6E2E 
+ 5612      6300 
+ 5613               	.LASF120:
+ 5614 02f5 4B45 595F 		.string	"KEY_RSHIFT"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 103
 
 
- 5615               	.LASF4:
- 5616 02ef 6C6F 6E67 		.string	"long unsigned int"
- 5616      2075 6E73 
- 5616      6967 6E65 
- 5616      6420 696E 
- 5616      7400 
- 5617               	.LASF154:
- 5618 0301 4B45 595F 		.string	"KEY_HANGLE"
- 5618      4841 4E47 
- 5618      4C45 00
- 5619               	.LASF64:
- 5620 030c 4B45 595F 		.string	"KEY_QUOTE"
- 5620      5155 4F54 
- 5620      4500 
- 5621               	.LASF171:
- 5622 0316 696E 6974 		.string	"initInterfacePs2"
- 5622      496E 7465 
- 5622      7266 6163 
- 5622      6550 7332 
- 5622      00
- 5623               	.LASF12:
- 5624 0327 4B45 595F 		.string	"KEY_NONE"
- 5624      4E4F 4E45 
+ 5614      5253 4849 
+ 5614      4654 00
+ 5615               	.LASF83:
+ 5616 0300 4B45 595F 		.string	"KEY_SCRLCK"
+ 5616      5343 524C 
+ 5616      434B 00
+ 5617               	.LASF4:
+ 5618 030b 6C6F 6E67 		.string	"long unsigned int"
+ 5618      2075 6E73 
+ 5618      6967 6E65 
+ 5618      6420 696E 
+ 5618      7400 
+ 5619               	.LASF154:
+ 5620 031d 4B45 595F 		.string	"KEY_HANGLE"
+ 5620      4841 4E47 
+ 5620      4C45 00
+ 5621               	.LASF64:
+ 5622 0328 4B45 595F 		.string	"KEY_QUOTE"
+ 5622      5155 4F54 
+ 5622      4500 
+ 5623               	.LASF171:
+ 5624 0332 696E 6974 		.string	"initInterfacePs2"
+ 5624      496E 7465 
+ 5624      7266 6163 
+ 5624      6550 7332 
  5624      00
- 5625               	.LASF100:
- 5626 0330 4B45 595F 		.string	"KEY_KP_ENTER"
- 5626      4B50 5F45 
- 5626      4E54 4552 
+ 5625               	.LASF12:
+ 5626 0343 4B45 595F 		.string	"KEY_NONE"
+ 5626      4E4F 4E45 
  5626      00
- 5627               	.LASF92:
- 5628 033d 4B45 595F 		.string	"KEY_LEFT"
- 5628      4C45 4654 
+ 5627               	.LASF100:
+ 5628 034c 4B45 595F 		.string	"KEY_KP_ENTER"
+ 5628      4B50 5F45 
+ 5628      4E54 4552 
  5628      00
- 5629               	.LASF99:
- 5630 0346 4B45 595F 		.string	"KEY_KP_PLUS"
- 5630      4B50 5F50 
- 5630      4C55 5300 
- 5631               	.LASF2:
- 5632 0352 7368 6F72 		.string	"short unsigned int"
- 5632      7420 756E 
- 5632      7369 676E 
- 5632      6564 2069 
- 5632      6E74 00
- 5633               	.LASF189:
- 5634 0365 6C61 7374 		.string	"lastMAKE"
- 5634      4D41 4B45 
- 5634      00
- 5635               	.LASF69:
- 5636 036e 4B45 595F 		.string	"KEY_CAPS"
- 5636      4341 5053 
+ 5629               	.LASF92:
+ 5630 0359 4B45 595F 		.string	"KEY_LEFT"
+ 5630      4C45 4654 
+ 5630      00
+ 5631               	.LASF99:
+ 5632 0362 4B45 595F 		.string	"KEY_KP_PLUS"
+ 5632      4B50 5F50 
+ 5632      4C55 5300 
+ 5633               	.LASF2:
+ 5634 036e 7368 6F72 		.string	"short unsigned int"
+ 5634      7420 756E 
+ 5634      7369 676E 
+ 5634      6564 2069 
+ 5634      6E74 00
+ 5635               	.LASF189:
+ 5636 0381 6C61 7374 		.string	"lastMAKE"
+ 5636      4D41 4B45 
  5636      00
- 5637               	.LASF160:
- 5638 0377 6B65 796D 		.string	"keymap_init"
- 5638      6170 5F69 
- 5638      6E69 7400 
- 5639               	.LASF193:
- 5640 0383 5459 5045 		.string	"TYPEMATIC_DELAY"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 104
+ 5637               	.LASF69:
+ 5638 038a 4B45 595F 		.string	"KEY_CAPS"
+ 5638      4341 5053 
+ 5638      00
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 104
 
 
- 5640      4D41 5449 
- 5640      435F 4445 
- 5640      4C41 5900 
- 5641               	.LASF207:
- 5642 0393 7072 6576 		.string	"prevMatrix"
- 5642      4D61 7472 
- 5642      6978 00
- 5643               	.LASF67:
- 5644 039e 4B45 595F 		.string	"KEY_DOT"
- 5644      444F 5400 
- 5645               	.LASF192:
- 5646 03a6 6C6F 6F70 		.string	"loopCnt"
- 5646      436E 7400 
- 5647               	.LASF203:
- 5648 03ae 696E 7465 		.string	"interfaceReady"
- 5648      7266 6163 
- 5648      6552 6561 
- 5648      6479 00
- 5649               	.LASF181:
- 5650 03bd 7465 6D70 		.string	"temp_a"
- 5650      5F61 00
- 5651               	.LASF166:
- 5652 03c4 6974 656D 		.string	"item"
- 5652      00
- 5653               	.LASF149:
- 5654 03c9 4B45 595F 		.string	"KEY_MINIMIZE"
- 5654      4D49 4E49 
- 5654      4D49 5A45 
+ 5639               	.LASF160:
+ 5640 0393 6B65 796D 		.string	"keymap_init"
+ 5640      6170 5F69 
+ 5640      6E69 7400 
+ 5641               	.LASF193:
+ 5642 039f 5459 5045 		.string	"TYPEMATIC_DELAY"
+ 5642      4D41 5449 
+ 5642      435F 4445 
+ 5642      4C41 5900 
+ 5643               	.LASF207:
+ 5644 03af 7072 6576 		.string	"prevMatrix"
+ 5644      4D61 7472 
+ 5644      6978 00
+ 5645               	.LASF67:
+ 5646 03ba 4B45 595F 		.string	"KEY_DOT"
+ 5646      444F 5400 
+ 5647               	.LASF192:
+ 5648 03c2 6C6F 6F70 		.string	"loopCnt"
+ 5648      436E 7400 
+ 5649               	.LASF203:
+ 5650 03ca 696E 7465 		.string	"interfaceReady"
+ 5650      7266 6163 
+ 5650      6552 6561 
+ 5650      6479 00
+ 5651               	.LASF181:
+ 5652 03d9 7465 6D70 		.string	"temp_a"
+ 5652      5F61 00
+ 5653               	.LASF166:
+ 5654 03e0 6974 656D 		.string	"item"
  5654      00
- 5655               	.LASF56:
- 5656 03d6 4B45 595F 		.string	"KEY_SPACE"
- 5656      5350 4143 
- 5656      4500 
- 5657               	.LASF126:
- 5658 03e0 4B45 595F 		.string	"KEY_SLEEP"
- 5658      534C 4545 
- 5658      5000 
- 5659               	.LASF162:
- 5660 03ea 6B65 7969 		.string	"keyidx"
- 5660      6478 00
- 5661               	.LASF151:
- 5662 03f1 4B45 595F 		.string	"KEY_Multimedia_end"
- 5662      4D75 6C74 
- 5662      696D 6564 
- 5662      6961 5F65 
- 5662      6E64 00
- 5663               	.LASF15:
- 5664 0404 4B45 595F 		.string	"KEY_ErrorUndefined"
- 5664      4572 726F 
- 5664      7255 6E64 
- 5664      6566 696E 
- 5664      6564 00
- 5665               	.LASF133:
- 5666 0417 4B45 595F 		.string	"KEY_WWW_STOP"
- 5666      5757 575F 
- 5666      5354 4F50 
- 5666      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 105
+ 5655               	.LASF149:
+ 5656 03e5 4B45 595F 		.string	"KEY_MINIMIZE"
+ 5656      4D49 4E49 
+ 5656      4D49 5A45 
+ 5656      00
+ 5657               	.LASF56:
+ 5658 03f2 4B45 595F 		.string	"KEY_SPACE"
+ 5658      5350 4143 
+ 5658      4500 
+ 5659               	.LASF126:
+ 5660 03fc 4B45 595F 		.string	"KEY_SLEEP"
+ 5660      534C 4545 
+ 5660      5000 
+ 5661               	.LASF162:
+ 5662 0406 6B65 7969 		.string	"keyidx"
+ 5662      6478 00
+ 5663               	.LASF151:
+ 5664 040d 4B45 595F 		.string	"KEY_Multimedia_end"
+ 5664      4D75 6C74 
+ 5664      696D 6564 
+ 5664      6961 5F65 
+ 5664      6E64 00
+ 5665               	.LASF15:
+ 5666 0420 4B45 595F 		.string	"KEY_ErrorUndefined"
+ 5666      4572 726F 
+ 5666      7255 6E64 
+ 5666      6566 696E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 105
 
 
- 5667               	.LASF51:
- 5668 0424 4B45 595F 		.string	"KEY_0"
- 5668      3000 
- 5669               	.LASF42:
- 5670 042a 4B45 595F 		.string	"KEY_1"
- 5670      3100 
- 5671               	.LASF43:
- 5672 0430 4B45 595F 		.string	"KEY_2"
- 5672      3200 
- 5673               	.LASF44:
- 5674 0436 4B45 595F 		.string	"KEY_3"
- 5674      3300 
- 5675               	.LASF45:
- 5676 043c 4B45 595F 		.string	"KEY_4"
- 5676      3400 
- 5677               	.LASF46:
- 5678 0442 4B45 595F 		.string	"KEY_5"
- 5678      3500 
- 5679               	.LASF47:
- 5680 0448 4B45 595F 		.string	"KEY_6"
- 5680      3600 
- 5681               	.LASF48:
- 5682 044e 4B45 595F 		.string	"KEY_7"
- 5682      3700 
- 5683               	.LASF49:
- 5684 0454 4B45 595F 		.string	"KEY_8"
- 5684      3800 
- 5685               	.LASF50:
- 5686 045a 4B45 595F 		.string	"KEY_9"
- 5686      3900 
- 5687               	.LASF57:
- 5688 0460 4B45 595F 		.string	"KEY_MINUS"
- 5688      4D49 4E55 
- 5688      5300 
- 5689               	.LASF159:
- 5690 046a 636C 6561 		.string	"clear"
- 5690      7200 
- 5691               	.LASF140:
- 5692 0470 4B45 595F 		.string	"KEY_MUTE"
- 5692      4D55 5445 
- 5692      00
- 5693               	.LASF218:
- 5694 0479 7363 616E 		.string	"scanKeyPS2"
- 5694      4B65 7950 
- 5694      5332 00
- 5695               	.LASF127:
- 5696 0484 4B45 595F 		.string	"KEY_WAKE"
- 5696      5741 4B45 
- 5696      00
- 5697               	.LASF16:
- 5698 048d 4B45 595F 		.string	"KEY_A"
- 5698      4100 
- 5699               	.LASF17:
- 5700 0493 4B45 595F 		.string	"KEY_B"
- 5700      4200 
- 5701               	.LASF18:
- 5702 0499 4B45 595F 		.string	"KEY_C"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 106
+ 5666      6564 00
+ 5667               	.LASF133:
+ 5668 0433 4B45 595F 		.string	"KEY_WWW_STOP"
+ 5668      5757 575F 
+ 5668      5354 4F50 
+ 5668      00
+ 5669               	.LASF51:
+ 5670 0440 4B45 595F 		.string	"KEY_0"
+ 5670      3000 
+ 5671               	.LASF42:
+ 5672 0446 4B45 595F 		.string	"KEY_1"
+ 5672      3100 
+ 5673               	.LASF43:
+ 5674 044c 4B45 595F 		.string	"KEY_2"
+ 5674      3200 
+ 5675               	.LASF44:
+ 5676 0452 4B45 595F 		.string	"KEY_3"
+ 5676      3300 
+ 5677               	.LASF45:
+ 5678 0458 4B45 595F 		.string	"KEY_4"
+ 5678      3400 
+ 5679               	.LASF46:
+ 5680 045e 4B45 595F 		.string	"KEY_5"
+ 5680      3500 
+ 5681               	.LASF47:
+ 5682 0464 4B45 595F 		.string	"KEY_6"
+ 5682      3600 
+ 5683               	.LASF48:
+ 5684 046a 4B45 595F 		.string	"KEY_7"
+ 5684      3700 
+ 5685               	.LASF49:
+ 5686 0470 4B45 595F 		.string	"KEY_8"
+ 5686      3800 
+ 5687               	.LASF50:
+ 5688 0476 4B45 595F 		.string	"KEY_9"
+ 5688      3900 
+ 5689               	.LASF57:
+ 5690 047c 4B45 595F 		.string	"KEY_MINUS"
+ 5690      4D49 4E55 
+ 5690      5300 
+ 5691               	.LASF159:
+ 5692 0486 636C 6561 		.string	"clear"
+ 5692      7200 
+ 5693               	.LASF140:
+ 5694 048c 4B45 595F 		.string	"KEY_MUTE"
+ 5694      4D55 5445 
+ 5694      00
+ 5695               	.LASF218:
+ 5696 0495 7363 616E 		.string	"scanKeyPS2"
+ 5696      4B65 7950 
+ 5696      5332 00
+ 5697               	.LASF127:
+ 5698 04a0 4B45 595F 		.string	"KEY_WAKE"
+ 5698      5741 4B45 
+ 5698      00
+ 5699               	.LASF16:
+ 5700 04a9 4B45 595F 		.string	"KEY_A"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 106
 
 
- 5702      4300 
- 5703               	.LASF19:
- 5704 049f 4B45 595F 		.string	"KEY_D"
- 5704      4400 
- 5705               	.LASF20:
- 5706 04a5 4B45 595F 		.string	"KEY_E"
- 5706      4500 
- 5707               	.LASF21:
- 5708 04ab 4B45 595F 		.string	"KEY_F"
- 5708      4600 
- 5709               	.LASF22:
- 5710 04b1 4B45 595F 		.string	"KEY_G"
- 5710      4700 
- 5711               	.LASF23:
- 5712 04b7 4B45 595F 		.string	"KEY_H"
- 5712      4800 
- 5713               	.LASF24:
- 5714 04bd 4B45 595F 		.string	"KEY_I"
- 5714      4900 
- 5715               	.LASF25:
- 5716 04c3 4B45 595F 		.string	"KEY_J"
- 5716      4A00 
- 5717               	.LASF26:
- 5718 04c9 4B45 595F 		.string	"KEY_K"
- 5718      4B00 
- 5719               	.LASF27:
- 5720 04cf 4B45 595F 		.string	"KEY_L"
- 5720      4C00 
- 5721               	.LASF28:
- 5722 04d5 4B45 595F 		.string	"KEY_M"
- 5722      4D00 
- 5723               	.LASF29:
- 5724 04db 4B45 595F 		.string	"KEY_N"
- 5724      4E00 
- 5725               	.LASF30:
- 5726 04e1 4B45 595F 		.string	"KEY_O"
- 5726      4F00 
- 5727               	.LASF31:
- 5728 04e7 4B45 595F 		.string	"KEY_P"
- 5728      5000 
- 5729               	.LASF32:
- 5730 04ed 4B45 595F 		.string	"KEY_Q"
- 5730      5100 
- 5731               	.LASF33:
- 5732 04f3 4B45 595F 		.string	"KEY_R"
- 5732      5200 
- 5733               	.LASF34:
- 5734 04f9 4B45 595F 		.string	"KEY_S"
- 5734      5300 
- 5735               	.LASF35:
- 5736 04ff 4B45 595F 		.string	"KEY_T"
- 5736      5400 
- 5737               	.LASF36:
- 5738 0505 4B45 595F 		.string	"KEY_U"
- 5738      5500 
- 5739               	.LASF37:
- 5740 050b 4B45 595F 		.string	"KEY_V"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 107
+ 5700      4100 
+ 5701               	.LASF17:
+ 5702 04af 4B45 595F 		.string	"KEY_B"
+ 5702      4200 
+ 5703               	.LASF18:
+ 5704 04b5 4B45 595F 		.string	"KEY_C"
+ 5704      4300 
+ 5705               	.LASF19:
+ 5706 04bb 4B45 595F 		.string	"KEY_D"
+ 5706      4400 
+ 5707               	.LASF20:
+ 5708 04c1 4B45 595F 		.string	"KEY_E"
+ 5708      4500 
+ 5709               	.LASF21:
+ 5710 04c7 4B45 595F 		.string	"KEY_F"
+ 5710      4600 
+ 5711               	.LASF22:
+ 5712 04cd 4B45 595F 		.string	"KEY_G"
+ 5712      4700 
+ 5713               	.LASF23:
+ 5714 04d3 4B45 595F 		.string	"KEY_H"
+ 5714      4800 
+ 5715               	.LASF24:
+ 5716 04d9 4B45 595F 		.string	"KEY_I"
+ 5716      4900 
+ 5717               	.LASF25:
+ 5718 04df 4B45 595F 		.string	"KEY_J"
+ 5718      4A00 
+ 5719               	.LASF26:
+ 5720 04e5 4B45 595F 		.string	"KEY_K"
+ 5720      4B00 
+ 5721               	.LASF27:
+ 5722 04eb 4B45 595F 		.string	"KEY_L"
+ 5722      4C00 
+ 5723               	.LASF28:
+ 5724 04f1 4B45 595F 		.string	"KEY_M"
+ 5724      4D00 
+ 5725               	.LASF29:
+ 5726 04f7 4B45 595F 		.string	"KEY_N"
+ 5726      4E00 
+ 5727               	.LASF30:
+ 5728 04fd 4B45 595F 		.string	"KEY_O"
+ 5728      4F00 
+ 5729               	.LASF31:
+ 5730 0503 4B45 595F 		.string	"KEY_P"
+ 5730      5000 
+ 5731               	.LASF32:
+ 5732 0509 4B45 595F 		.string	"KEY_Q"
+ 5732      5100 
+ 5733               	.LASF33:
+ 5734 050f 4B45 595F 		.string	"KEY_R"
+ 5734      5200 
+ 5735               	.LASF34:
+ 5736 0515 4B45 595F 		.string	"KEY_S"
+ 5736      5300 
+ 5737               	.LASF35:
+ 5738 051b 4B45 595F 		.string	"KEY_T"
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 107
 
 
- 5740      5600 
- 5741               	.LASF38:
- 5742 0511 4B45 595F 		.string	"KEY_W"
- 5742      5700 
- 5743               	.LASF39:
- 5744 0517 4B45 595F 		.string	"KEY_X"
- 5744      5800 
- 5745               	.LASF40:
- 5746 051d 4B45 595F 		.string	"KEY_Y"
- 5746      5900 
- 5747               	.LASF41:
- 5748 0523 4B45 595F 		.string	"KEY_Z"
- 5748      5A00 
- 5749               	.LASF161:
- 5750 0529 7265 636F 		.string	"record"
- 5750      7264 00
- 5751               	.LASF202:
- 5752 0530 696E 7465 		.string	"interfaceCount"
- 5752      7266 6163 
- 5752      6543 6F75 
- 5752      6E74 00
- 5753               	.LASF136:
- 5754 053f 4B45 595F 		.string	"KEY_NEXT_TRK"
- 5754      4E45 5854 
- 5754      5F54 524B 
- 5754      00
- 5755               	.LASF97:
- 5756 054c 4B45 595F 		.string	"KEY_KP_AST"
- 5756      4B50 5F41 
- 5756      5354 00
- 5757               	.LASF142:
- 5758 0557 4B45 595F 		.string	"KEY_VOL_DOWN"
- 5758      564F 4C5F 
- 5758      444F 574E 
- 5758      00
- 5759               	.LASF150:
- 5760 0564 4B45 595F 		.string	"KEY_EJECT"
- 5760      454A 4543 
- 5760      5400 
- 5761               	.LASF123:
- 5762 056e 4B45 595F 		.string	"KEY_Modifiers_end"
- 5762      4D6F 6469 
- 5762      6669 6572 
- 5762      735F 656E 
- 5762      6400 
- 5763               	.LASF0:
- 5764 0580 756E 7369 		.string	"unsigned char"
- 5764      676E 6564 
- 5764      2063 6861 
- 5764      7200 
- 5765               	.LASF146:
- 5766 058e 4B45 595F 		.string	"KEY_SCREENSAVE"
- 5766      5343 5245 
- 5766      454E 5341 
- 5766      5645 00
- 5767               	.LASF155:
- 5768 059d 4B45 595F 		.string	"KEY_extend_end"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 108
+ 5738      5400 
+ 5739               	.LASF36:
+ 5740 0521 4B45 595F 		.string	"KEY_U"
+ 5740      5500 
+ 5741               	.LASF37:
+ 5742 0527 4B45 595F 		.string	"KEY_V"
+ 5742      5600 
+ 5743               	.LASF38:
+ 5744 052d 4B45 595F 		.string	"KEY_W"
+ 5744      5700 
+ 5745               	.LASF39:
+ 5746 0533 4B45 595F 		.string	"KEY_X"
+ 5746      5800 
+ 5747               	.LASF40:
+ 5748 0539 4B45 595F 		.string	"KEY_Y"
+ 5748      5900 
+ 5749               	.LASF41:
+ 5750 053f 4B45 595F 		.string	"KEY_Z"
+ 5750      5A00 
+ 5751               	.LASF161:
+ 5752 0545 7265 636F 		.string	"record"
+ 5752      7264 00
+ 5753               	.LASF202:
+ 5754 054c 696E 7465 		.string	"interfaceCount"
+ 5754      7266 6163 
+ 5754      6543 6F75 
+ 5754      6E74 00
+ 5755               	.LASF136:
+ 5756 055b 4B45 595F 		.string	"KEY_NEXT_TRK"
+ 5756      4E45 5854 
+ 5756      5F54 524B 
+ 5756      00
+ 5757               	.LASF97:
+ 5758 0568 4B45 595F 		.string	"KEY_KP_AST"
+ 5758      4B50 5F41 
+ 5758      5354 00
+ 5759               	.LASF142:
+ 5760 0573 4B45 595F 		.string	"KEY_VOL_DOWN"
+ 5760      564F 4C5F 
+ 5760      444F 574E 
+ 5760      00
+ 5761               	.LASF150:
+ 5762 0580 4B45 595F 		.string	"KEY_EJECT"
+ 5762      454A 4543 
+ 5762      5400 
+ 5763               	.LASF123:
+ 5764 058a 4B45 595F 		.string	"KEY_Modifiers_end"
+ 5764      4D6F 6469 
+ 5764      6669 6572 
+ 5764      735F 656E 
+ 5764      6400 
+ 5765               	.LASF0:
+ 5766 059c 756E 7369 		.string	"unsigned char"
+ 5766      676E 6564 
+ 5766      2063 6861 
+ 5766      7200 
+ 5767               	.LASF146:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 108
 
 
- 5768      6578 7465 
- 5768      6E64 5F65 
- 5768      6E64 00
- 5769               	.LASF178:
- 5770 05ac 6E65 7773 		.string	"newstate"
- 5770      7461 7465 
- 5770      00
- 5771               	.LASF66:
- 5772 05b5 4B45 595F 		.string	"KEY_COMMA"
- 5772      434F 4D4D 
- 5772      4100 
- 5773               	.LASF167:
- 5774 05bf 6973 446F 		.string	"isDown"
- 5774      776E 00
- 5775               	.LASF55:
- 5776 05c6 4B45 595F 		.string	"KEY_TAB"
- 5776      5441 4200 
- 5777               	.LASF198:
- 5778 05ce 6B65 7963 		.string	"keycode_set2_make_break"
- 5778      6F64 655F 
- 5778      7365 7432 
- 5778      5F6D 616B 
- 5778      655F 6272 
- 5779               	.LASF3:
- 5780 05e6 7368 6F72 		.string	"short int"
- 5780      7420 696E 
- 5780      7400 
- 5781               	.LASF208:
- 5782 05f0 6375 7272 		.string	"currentMatrix"
- 5782      656E 744D 
- 5782      6174 7269 
- 5782      7800 
- 5783               	.LASF188:
- 5784 05fe 6C61 7374 		.string	"lastMAKE_keyidx"
- 5784      4D41 4B45 
- 5784      5F6B 6579 
- 5784      6964 7800 
- 5785               	.LASF93:
- 5786 060e 4B45 595F 		.string	"KEY_DOWN"
- 5786      444F 574E 
- 5786      00
- 5787               	.LASF213:
- 5788 0617 4B46 4C41 		.string	"KFLA"
+ 5768 05aa 4B45 595F 		.string	"KEY_SCREENSAVE"
+ 5768      5343 5245 
+ 5768      454E 5341 
+ 5768      5645 00
+ 5769               	.LASF155:
+ 5770 05b9 4B45 595F 		.string	"KEY_extend_end"
+ 5770      6578 7465 
+ 5770      6E64 5F65 
+ 5770      6E64 00
+ 5771               	.LASF178:
+ 5772 05c8 6E65 7773 		.string	"newstate"
+ 5772      7461 7465 
+ 5772      00
+ 5773               	.LASF66:
+ 5774 05d1 4B45 595F 		.string	"KEY_COMMA"
+ 5774      434F 4D4D 
+ 5774      4100 
+ 5775               	.LASF167:
+ 5776 05db 6973 446F 		.string	"isDown"
+ 5776      776E 00
+ 5777               	.LASF55:
+ 5778 05e2 4B45 595F 		.string	"KEY_TAB"
+ 5778      5441 4200 
+ 5779               	.LASF198:
+ 5780 05ea 6B65 7963 		.string	"keycode_set2_make_break"
+ 5780      6F64 655F 
+ 5780      7365 7432 
+ 5780      5F6D 616B 
+ 5780      655F 6272 
+ 5781               	.LASF3:
+ 5782 0602 7368 6F72 		.string	"short int"
+ 5782      7420 696E 
+ 5782      7400 
+ 5783               	.LASF208:
+ 5784 060c 6375 7272 		.string	"currentMatrix"
+ 5784      656E 744D 
+ 5784      6174 7269 
+ 5784      7800 
+ 5785               	.LASF188:
+ 5786 061a 6C61 7374 		.string	"lastMAKE_keyidx"
+ 5786      4D41 4B45 
+ 5786      5F6B 6579 
+ 5786      6964 7800 
+ 5787               	.LASF93:
+ 5788 062a 4B45 595F 		.string	"KEY_DOWN"
+ 5788      444F 574E 
  5788      00
- 5789               	.LASF58:
- 5790 061c 4B45 595F 		.string	"KEY_EQUAL"
- 5790      4551 5541 
- 5790      4C00 
- 5791               	.LASF200:
- 5792 0626 6B65 7963 		.string	"keycode_set2_proc_shift"
- 5792      6F64 655F 
- 5792      7365 7432 
- 5792      5F70 726F 
- 5792      635F 7368 
- 5793               	.LASF84:
- 5794 063e 4B45 595F 		.string	"KEY_PAUSE"
- 5794      5041 5553 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 109
+ 5789               	.LASF213:
+ 5790 0633 4B46 4C41 		.string	"KFLA"
+ 5790      00
+ 5791               	.LASF58:
+ 5792 0638 4B45 595F 		.string	"KEY_EQUAL"
+ 5792      4551 5541 
+ 5792      4C00 
+ 5793               	.LASF200:
+ 5794 0642 6B65 7963 		.string	"keycode_set2_proc_shift"
+ 5794      6F64 655F 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 109
 
 
- 5794      4500 
- 5795               	.LASF101:
- 5796 0648 4B45 595F 		.string	"KEY_KP_1"
- 5796      4B50 5F31 
- 5796      00
- 5797               	.LASF102:
- 5798 0651 4B45 595F 		.string	"KEY_KP_2"
- 5798      4B50 5F32 
+ 5794      7365 7432 
+ 5794      5F70 726F 
+ 5794      635F 7368 
+ 5795               	.LASF84:
+ 5796 065a 4B45 595F 		.string	"KEY_PAUSE"
+ 5796      5041 5553 
+ 5796      4500 
+ 5797               	.LASF101:
+ 5798 0664 4B45 595F 		.string	"KEY_KP_1"
+ 5798      4B50 5F31 
  5798      00
- 5799               	.LASF103:
- 5800 065a 4B45 595F 		.string	"KEY_KP_3"
- 5800      4B50 5F33 
+ 5799               	.LASF102:
+ 5800 066d 4B45 595F 		.string	"KEY_KP_2"
+ 5800      4B50 5F32 
  5800      00
- 5801               	.LASF87:
- 5802 0663 4B45 595F 		.string	"KEY_PGUP"
- 5802      5047 5550 
+ 5801               	.LASF103:
+ 5802 0676 4B45 595F 		.string	"KEY_KP_3"
+ 5802      4B50 5F33 
  5802      00
- 5803               	.LASF14:
- 5804 066c 4B45 595F 		.string	"KEY_POSTFail"
- 5804      504F 5354 
- 5804      4661 696C 
+ 5803               	.LASF87:
+ 5804 067f 4B45 595F 		.string	"KEY_PGUP"
+ 5804      5047 5550 
  5804      00
- 5805               	.LASF106:
- 5806 0679 4B45 595F 		.string	"KEY_KP_6"
- 5806      4B50 5F36 
+ 5805               	.LASF14:
+ 5806 0688 4B45 595F 		.string	"KEY_POSTFail"
+ 5806      504F 5354 
+ 5806      4661 696C 
  5806      00
- 5807               	.LASF107:
- 5808 0682 4B45 595F 		.string	"KEY_KP_7"
- 5808      4B50 5F37 
+ 5807               	.LASF106:
+ 5808 0695 4B45 595F 		.string	"KEY_KP_6"
+ 5808      4B50 5F36 
  5808      00
- 5809               	.LASF108:
- 5810 068b 4B45 595F 		.string	"KEY_KP_8"
- 5810      4B50 5F38 
+ 5809               	.LASF107:
+ 5810 069e 4B45 595F 		.string	"KEY_KP_7"
+ 5810      4B50 5F37 
  5810      00
- 5811               	.LASF52:
- 5812 0694 4B45 595F 		.string	"KEY_ENTER"
- 5812      454E 5445 
- 5812      5200 
- 5813               	.LASF53:
- 5814 069e 4B45 595F 		.string	"KEY_ESC"
- 5814      4553 4300 
- 5815               	.LASF110:
- 5816 06a6 4B45 595F 		.string	"KEY_KP_0"
- 5816      4B50 5F30 
- 5816      00
- 5817               	.LASF197:
- 5818 06af 6B65 7963 		.string	"keycode_set2_makeonly"
- 5818      6F64 655F 
- 5818      7365 7432 
- 5818      5F6D 616B 
- 5818      656F 6E6C 
- 5819               	.LASF210:
- 5820 06c5 6D5F 7374 		.string	"m_state"
- 5820      6174 6500 
- 5821               	.LASF9:
- 5822 06cd 6368 6172 		.string	"char"
- 5822      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 110
+ 5811               	.LASF108:
+ 5812 06a7 4B45 595F 		.string	"KEY_KP_8"
+ 5812      4B50 5F38 
+ 5812      00
+ 5813               	.LASF52:
+ 5814 06b0 4B45 595F 		.string	"KEY_ENTER"
+ 5814      454E 5445 
+ 5814      5200 
+ 5815               	.LASF53:
+ 5816 06ba 4B45 595F 		.string	"KEY_ESC"
+ 5816      4553 4300 
+ 5817               	.LASF110:
+ 5818 06c2 4B45 595F 		.string	"KEY_KP_0"
+ 5818      4B50 5F30 
+ 5818      00
+ 5819               	.LASF197:
+ 5820 06cb 6B65 7963 		.string	"keycode_set2_makeonly"
+ 5820      6F64 655F 
+ 5820      7365 7432 
+ 5820      5F6D 616B 
+ 5820      656F 6E6C 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 110
 
 
- 5823               	.LASF153:
- 5824 06d2 4B45 595F 		.string	"KEY_HANJA"
- 5824      4841 4E4A 
- 5824      4100 
- 5825               	.LASF105:
- 5826 06dc 4B45 595F 		.string	"KEY_KP_5"
- 5826      4B50 5F35 
- 5826      00
- 5827               	.LASF205:
- 5828 06e5 6973 4265 		.string	"isBeyondFN"
- 5828      796F 6E64 
- 5828      464E 00
- 5829               	.LASF132:
- 5830 06f0 4B45 595F 		.string	"KEY_WWW_FORWARD"
- 5830      5757 575F 
- 5830      464F 5257 
- 5830      4152 4400 
- 5831               	.LASF109:
- 5832 0700 4B45 595F 		.string	"KEY_KP_9"
- 5832      4B50 5F39 
- 5832      00
- 5833               	.LASF179:
- 5834 0709 7073 325F 		.string	"ps2_main"
- 5834      6D61 696E 
+ 5821               	.LASF210:
+ 5822 06e1 6D5F 7374 		.string	"m_state"
+ 5822      6174 6500 
+ 5823               	.LASF9:
+ 5824 06e9 6368 6172 		.string	"char"
+ 5824      00
+ 5825               	.LASF153:
+ 5826 06ee 4B45 595F 		.string	"KEY_HANJA"
+ 5826      4841 4E4A 
+ 5826      4100 
+ 5827               	.LASF105:
+ 5828 06f8 4B45 595F 		.string	"KEY_KP_5"
+ 5828      4B50 5F35 
+ 5828      00
+ 5829               	.LASF205:
+ 5830 0701 6973 4265 		.string	"isBeyondFN"
+ 5830      796F 6E64 
+ 5830      464E 00
+ 5831               	.LASF132:
+ 5832 070c 4B45 595F 		.string	"KEY_WWW_FORWARD"
+ 5832      5757 575F 
+ 5832      464F 5257 
+ 5832      4152 4400 
+ 5833               	.LASF109:
+ 5834 071c 4B45 595F 		.string	"KEY_KP_9"
+ 5834      4B50 5F39 
  5834      00
- 5835               	.LASF104:
- 5836 0712 4B45 595F 		.string	"KEY_KP_4"
- 5836      4B50 5F34 
+ 5835               	.LASF179:
+ 5836 0725 7073 325F 		.string	"ps2_main"
+ 5836      6D61 696E 
  5836      00
- 5837               	.LASF128:
- 5838 071b 4B45 595F 		.string	"KEY_EMAIL"
- 5838      454D 4149 
- 5838      4C00 
- 5839               	.LASF190:
- 5840 0725 6C61 7374 		.string	"lastMAKE_SIZE"
- 5840      4D41 4B45 
- 5840      5F53 495A 
- 5840      4500 
- 5841               	.LASF206:
- 5842 0733 6D6F 646D 		.string	"modmask"
- 5842      6173 6B00 
- 5843               	.LASF186:
- 5844 073b 7265 6172 		.string	"rear"
- 5844      00
- 5845               	.LASF119:
- 5846 0740 4B45 595F 		.string	"KEY_RCTRL"
- 5846      5243 5452 
- 5846      4C00 
- 5847               	.LASF165:
- 5848 074a 7075 7368 		.string	"pushKey"
- 5848      4B65 7900 
- 5849               	.LASF61:
- 5850 0752 4B45 595F 		.string	"KEY_BKSLASH"
- 5850      424B 534C 
- 5850      4153 4800 
- 5851               	.LASF185:
- 5852 075e 5155 4555 		.string	"QUEUE"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 111
+ 5837               	.LASF104:
+ 5838 072e 4B45 595F 		.string	"KEY_KP_4"
+ 5838      4B50 5F34 
+ 5838      00
+ 5839               	.LASF128:
+ 5840 0737 4B45 595F 		.string	"KEY_EMAIL"
+ 5840      454D 4149 
+ 5840      4C00 
+ 5841               	.LASF190:
+ 5842 0741 6C61 7374 		.string	"lastMAKE_SIZE"
+ 5842      4D41 4B45 
+ 5842      5F53 495A 
+ 5842      4500 
+ 5843               	.LASF206:
+ 5844 074f 6D6F 646D 		.string	"modmask"
+ 5844      6173 6B00 
+ 5845               	.LASF186:
+ 5846 0757 7265 6172 		.string	"rear"
+ 5846      00
+ 5847               	.LASF119:
+ 5848 075c 4B45 595F 		.string	"KEY_RCTRL"
+ 5848      5243 5452 
+ 5848      4C00 
+ 5849               	.LASF165:
+ 5850 0766 7075 7368 		.string	"pushKey"
+ 5850      4B65 7900 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 111
 
 
- 5852      4500 
- 5853               	.LASF211:
- 5854 0764 6C61 7374 		.string	"lastSent"
- 5854      5365 6E74 
- 5854      00
- 5855               	.LASF144:
- 5856 076d 4B45 595F 		.string	"KEY_CALC"
- 5856      4341 4C43 
+ 5851               	.LASF61:
+ 5852 076e 4B45 595F 		.string	"KEY_BKSLASH"
+ 5852      424B 534C 
+ 5852      4153 4800 
+ 5853               	.LASF185:
+ 5854 077a 5155 4555 		.string	"QUEUE"
+ 5854      4500 
+ 5855               	.LASF211:
+ 5856 0780 6C61 7374 		.string	"lastSent"
+ 5856      5365 6E74 
  5856      00
- 5857               	.LASF187:
- 5858 0776 6672 6F6E 		.string	"front"
- 5858      7400 
- 5859               	.LASF175:
- 5860 077c 6B65 796D 		.string	"keymap"
- 5860      6170 00
- 5861               	.LASF169:
- 5862 0783 6861 734D 		.string	"hasMacroPs2"
- 5862      6163 726F 
- 5862      5073 3200 
- 5863               	.LASF216:
- 5864 078f 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
- 5864      6573 6B74 
- 5864      6F70 5C6B 
- 5864      6579 626F 
- 5864      6172 645C 
+ 5857               	.LASF144:
+ 5858 0789 4B45 595F 		.string	"KEY_CALC"
+ 5858      4341 4C43 
+ 5858      00
+ 5859               	.LASF187:
+ 5860 0792 6672 6F6E 		.string	"front"
+ 5860      7400 
+ 5861               	.LASF175:
+ 5862 0798 6B65 796D 		.string	"keymap"
+ 5862      6170 00
+ 5863               	.LASF169:
+ 5864 079f 6861 734D 		.string	"hasMacroPs2"
+ 5864      6163 726F 
+ 5864      5073 3200 
  5865               	.LASF117:
- 5866 07c9 4B45 595F 		.string	"KEY_LALT"
+ 5866 07ab 4B45 595F 		.string	"KEY_LALT"
  5866      4C41 4C54 
  5866      00
  5867               	.LASF70:
- 5868 07d2 4B45 595F 		.string	"KEY_F1"
+ 5868 07b4 4B45 595F 		.string	"KEY_F1"
  5868      4631 00
  5869               	.LASF71:
- 5870 07d9 4B45 595F 		.string	"KEY_F2"
+ 5870 07bb 4B45 595F 		.string	"KEY_F2"
  5870      4632 00
  5871               	.LASF72:
- 5872 07e0 4B45 595F 		.string	"KEY_F3"
+ 5872 07c2 4B45 595F 		.string	"KEY_F3"
  5872      4633 00
  5873               	.LASF73:
- 5874 07e7 4B45 595F 		.string	"KEY_F4"
+ 5874 07c9 4B45 595F 		.string	"KEY_F4"
  5874      4634 00
  5875               	.LASF74:
- 5876 07ee 4B45 595F 		.string	"KEY_F5"
+ 5876 07d0 4B45 595F 		.string	"KEY_F5"
  5876      4635 00
  5877               	.LASF75:
- 5878 07f5 4B45 595F 		.string	"KEY_F6"
+ 5878 07d7 4B45 595F 		.string	"KEY_F6"
  5878      4636 00
  5879               	.LASF76:
- 5880 07fc 4B45 595F 		.string	"KEY_F7"
+ 5880 07de 4B45 595F 		.string	"KEY_F7"
  5880      4637 00
  5881               	.LASF77:
- 5882 0803 4B45 595F 		.string	"KEY_F8"
+ 5882 07e5 4B45 595F 		.string	"KEY_F8"
  5882      4638 00
  5883               	.LASF10:
- 5884 080a 7569 6E74 		.string	"uint8_t"
+ 5884 07ec 7569 6E74 		.string	"uint8_t"
  5884      385F 7400 
  5885               	.LASF86:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 112
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 112
 
 
- 5886 0812 4B45 595F 		.string	"KEY_HOME"
+ 5886 07f4 4B45 595F 		.string	"KEY_HOME"
  5886      484F 4D45 
  5886      00
  5887               	.LASF194:
- 5888 081b 5459 5045 		.string	"TYPEMATIC_REPEAT"
+ 5888 07fd 5459 5045 		.string	"TYPEMATIC_REPEAT"
  5888      4D41 5449 
  5888      435F 5245 
  5888      5045 4154 
  5888      00
  5889               	.LASF148:
- 5890 082c 4B45 595F 		.string	"KEY_REWIND"
+ 5890 080e 4B45 595F 		.string	"KEY_REWIND"
  5890      5245 5749 
  5890      4E44 00
  5891               	.LASF152:
- 5892 0837 4B45 595F 		.string	"KEY_extend"
+ 5892 0819 4B45 595F 		.string	"KEY_extend"
  5892      6578 7465 
  5892      6E64 00
  5893               	.LASF113:
- 5894 0842 4B45 595F 		.string	"KEY_APPS"
+ 5894 0824 4B45 595F 		.string	"KEY_APPS"
  5894      4150 5053 
  5894      00
  5895               	.LASF129:
- 5896 084b 4B45 595F 		.string	"KEY_WWW_SEARCH"
+ 5896 082d 4B45 595F 		.string	"KEY_WWW_SEARCH"
  5896      5757 575F 
  5896      5345 4152 
  5896      4348 00
  5897               	.LASF94:
- 5898 085a 4B45 595F 		.string	"KEY_UP"
+ 5898 083c 4B45 595F 		.string	"KEY_UP"
  5898      5550 00
  5899               	.LASF145:
- 5900 0861 4B45 595F 		.string	"KEY_MYCOM"
+ 5900 0843 4B45 595F 		.string	"KEY_MYCOM"
  5900      4D59 434F 
  5900      4D00 
  5901               	.LASF78:
- 5902 086b 4B45 595F 		.string	"KEY_F9"
+ 5902 084d 4B45 595F 		.string	"KEY_F9"
  5902      4639 00
  5903               	.LASF118:
- 5904 0872 4B45 595F 		.string	"KEY_LGUI"
+ 5904 0854 4B45 595F 		.string	"KEY_LGUI"
  5904      4C47 5549 
  5904      00
  5905               	.LASF209:
- 5906 087b 7478 5363 		.string	"txScanCode"
+ 5906 085d 7478 5363 		.string	"txScanCode"
  5906      616E 436F 
  5906      6465 00
  5907               	.LASF124:
- 5908 0886 4B45 595F 		.string	"KEY_Multimedia"
+ 5908 0868 4B45 595F 		.string	"KEY_Multimedia"
  5908      4D75 6C74 
  5908      696D 6564 
  5908      6961 00
  5909               	.LASF114:
- 5910 0895 4B45 595F 		.string	"KEY_Modifiers"
+ 5910 0877 4B45 595F 		.string	"KEY_Modifiers"
  5910      4D6F 6469 
  5910      6669 6572 
  5910      7300 
  5911               	.global __do_copy_data
  5912               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 113
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 113
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ps2main.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:18     .text:00000000 push
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:18     .text:00000000 push
                              .bss:00000001 lastMAKE_SIZE
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1583   .bss:00000009 record.2186
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1586   .bss:000000d3 lastMAKE
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1582   .bss:00000007 rear
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1581   .bss:00000005 front
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1584   .bss:0000000a QUEUE
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:104    .text:00000088 pop
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:139    .text:000000c0 isEmpty
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:163    .text:000000de clear
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1579   .bss:00000002 lastMAKE_IDX
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1587   .bss:000000dd loopCnt
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:199    .text:00000116 keymap_init
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1583   .bss:00000009 record.2176
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1586   .bss:000000d3 lastMAKE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1582   .bss:00000007 rear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1581   .bss:00000005 front
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1584   .bss:0000000a QUEUE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:104    .text:00000088 pop
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:139    .text:000000c0 isEmpty
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:163    .text:000000de clear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1579   .bss:00000002 lastMAKE_IDX
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1587   .bss:000000dd loopCnt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:199    .text:00000116 keymap_init
                             *COM*:00000090 KFLA
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:392    .text:000001d4 pushKey
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1585   .bss:000000d2 lastMAKE_keyidx
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:392    .text:000001d4 pushKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1585   .bss:000000d2 lastMAKE_keyidx
                             *COM*:00000001 m_state
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:601    .text:000002f6 prepareKeyMappingPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:625    .text:00000310 hasMacroPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:645    .text:00000320 initInterfacePs2
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:664    .text:00000330 putKey
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:721    .text:00000376 scanKeyPS2
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:957    .text:000004d0 tx_state
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:601    .text:000002f6 prepareKeyMappingPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:625    .text:00000310 hasMacroPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:645    .text:00000320 initInterfacePs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:664    .text:00000330 putKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:721    .text:00000376 scanKeyPS2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:957    .text:000004d0 tx_state
                             *COM*:00000001 lastSent
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:986    .text:000004e8 ps2_main
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1580   .bss:00000003 keyval.2375
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1570   .data:00000000 TYPEMATIC_DELAY
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1574   .data:00000001 TYPEMATIC_REPEAT
-C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s:1565   .bss:00000000 txScanCode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:986    .text:000004e8 ps2_main
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1580   .bss:00000003 keyval.2365
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1570   .data:00000000 TYPEMATIC_DELAY
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1574   .data:00000001 TYPEMATIC_REPEAT
+C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s:1565   .bss:00000000 txScanCode
                             *COM*:00000001 lastState
 
 UNDEFINED SYMBOLS
@@ -6777,7 +6777,7 @@ isKeyMapping
 putKeyCode
 setMacroProcessEnd
 setCurrentMatrix
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc6GRTdp.s 			page 114
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrKbziT.s 			page 114
 
 
 popMWithKey

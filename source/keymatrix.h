@@ -16,12 +16,6 @@ extern uint8_t prevMatrix[17];
 extern uint8_t currentMatrix[17];  ///< contains current state of the keyboard
 extern uint8_t currentKeymap;
 
-extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
-extern uint8_t isReadyKeyMappingOnBoot(void);
-extern uint8_t applyMacro(uint8_t xKeyidx);
-extern uint8_t isKeyMapping(void);
-
-
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */

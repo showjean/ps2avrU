@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 1
 
 
    1               		.file	"sleep.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
   55               	/* frame size = 0 */
   56               	.LM8:
   57 001a 8091 0000 		lds r24,_isSleep
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 2
 
 
   58 001e 8823      		tst r24
@@ -76,10 +76,10 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
   70 0040 A093 0000 		sts (_sleepCount)+2,r26
   71 0044 B093 0000 		sts (_sleepCount)+3,r27
   72               	.LM10:
-  73 0048 8053      		subi r24,lo8(30000)
-  74 004a 9547      		sbci r25,hi8(30000)
-  75 004c A040      		sbci r26,hlo8(30000)
-  76 004e B040      		sbci r27,hhi8(30000)
+  73 0048 805E      		subi r24,lo8(300000)
+  74 004a 9349      		sbci r25,hi8(300000)
+  75 004c A440      		sbci r26,hlo8(300000)
+  76 004e B040      		sbci r27,hhi8(300000)
   77 0050 04F0      		brlt .L8
   78               	.LM11:
   79 0052 1092 0000 		sts _sleepCount,__zero_reg__
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  112 0088 0895      		ret
  113               	.LFE8:
  114               		.size	wakeUp, .-wakeUp
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 3
 
 
  115               		.lcomm _isSleep,1
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  169 0006 0000 0000 		.long	.Ldebug_abbrev0
  170 000a 04        		.byte	0x4
  171 000b 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 4
 
 
  172 000c 0000 0000 		.long	.LASF15
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  226 0075 02        		.uleb128 0x2
  227 0076 02        		.byte	0x2
  228 0077 07        		.byte	0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 5
 
 
  229 0078 0000 0000 		.long	.LASF8
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  283 00de 4C00 0000 		.long	0x4c
  284 00e2 05        		.byte	0x5
  285 00e3 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 6
 
 
  286 00e4 0000 0000 		.long	_sleepCount
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  340 002b 04        		.uleb128 0x4
  341 002c 24        		.uleb128 0x24
  342 002d 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 7
 
 
  343 002e 0B        		.uleb128 0xb
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  397 0064 01        		.uleb128 0x1
  398 0065 12        		.uleb128 0x12
  399 0066 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 8
 
 
  400 0067 40        		.uleb128 0x40
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  449 0004 0200      		.word	0x2
  450 0006 5400 0000 		.long	.LELTP0-.LASLTP0
  451               	.LASLTP0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 9
 
 
  452 000a 01        		.byte	0x1
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  499 007e 00        		.byte	0x0
  500 007f 05        		.uleb128 0x5
  501 0080 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 10
 
 
  502 0081 0000 0000 		.long	.LM5
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  556 00d8 00        		.byte	0x0
  557 00d9 05        		.uleb128 0x5
  558 00da 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 11
 
 
  559 00db 0000 0000 		.long	.LM16
@@ -655,83 +655,83 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 1
  591      7369 676E 
  591      6564 2069 
  592               	.LASF17:
- 593 0054 443A 5C64 		.string	"D:\\desktop\\keyboard\\firmware\\ps2avrU_goto_git\\.git\\source"
- 593      6573 6B74 
- 593      6F70 5C6B 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 12
+ 593 0054 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
+ 593      6974 325C 
+ 593      7073 3261 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 12
 
 
- 593      6579 626F 
- 593      6172 645C 
+ 593      7672 555C 
+ 593      2E67 6974 
  594               	.LASF18:
- 595 008e 7569 6E74 		.string	"uint8_t"
+ 595 0070 7569 6E74 		.string	"uint8_t"
  595      385F 7400 
  596               	.LASF1:
- 597 0096 756E 7369 		.string	"unsigned char"
+ 597 0078 756E 7369 		.string	"unsigned char"
  597      676E 6564 
  597      2063 6861 
  597      7200 
  598               	.LASF7:
- 599 00a4 6368 6172 		.string	"char"
+ 599 0086 6368 6172 		.string	"char"
  599      00
  600               	.LASF10:
- 601 00a9 736C 6565 		.string	"sleep"
+ 601 008b 736C 6565 		.string	"sleep"
  601      7000 
  602               	.LASF3:
- 603 00af 6C6F 6E67 		.string	"long int"
+ 603 0091 6C6F 6E67 		.string	"long int"
  603      2069 6E74 
  603      00
  604               	.LASF9:
- 605 00b8 7368 6F72 		.string	"short int"
+ 605 009a 7368 6F72 		.string	"short int"
  605      7420 696E 
  605      7400 
  606               	.LASF19:
- 607 00c2 6973 536C 		.string	"isSleep"
+ 607 00a4 6973 536C 		.string	"isSleep"
  607      6565 7000 
  608               	.LASF8:
- 609 00ca 7368 6F72 		.string	"short unsigned int"
+ 609 00ac 7368 6F72 		.string	"short unsigned int"
  609      7420 756E 
  609      7369 676E 
  609      6564 2069 
  609      6E74 00
  610               	.LASF0:
- 611 00dd 7369 676E 		.string	"signed char"
+ 611 00bf 7369 676E 		.string	"signed char"
  611      6564 2063 
  611      6861 7200 
  612               	.LASF15:
- 613 00e9 474E 5520 		.string	"GNU C 4.3.3"
+ 613 00cb 474E 5520 		.string	"GNU C 4.3.3"
  613      4320 342E 
  613      332E 3300 
  614               	.LASF12:
- 615 00f5 7761 6B65 		.string	"wakeUp"
+ 615 00d7 7761 6B65 		.string	"wakeUp"
  615      5570 00
  616               	.LASF2:
- 617 00fc 756E 7369 		.string	"unsigned int"
+ 617 00de 756E 7369 		.string	"unsigned int"
  617      676E 6564 
  617      2069 6E74 
  617      00
  618               	.LASF11:
- 619 0109 636F 756E 		.string	"countSleep"
+ 619 00eb 636F 756E 		.string	"countSleep"
  619      7453 6C65 
  619      6570 00
  620               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 sleep.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:18     .text:00000000 isSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:18     .text:00000000 isSleep
                              .bss:00000000 _isSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:31     .text:00000006 sleep
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:51     .text:0000001a countSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:115    .bss:00000001 _sleepCount
-C:\Users\ADMINI~1\AppData\Local\Temp/cc5QIqMK.s:91     .text:00000068 wakeUp
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:31     .text:00000006 sleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:51     .text:0000001a countSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:115    .bss:00000001 _sleepCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccMllkXh.s:91     .text:00000068 wakeUp
 
 UNDEFINED SYMBOLS
 sleepLED

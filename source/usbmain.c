@@ -244,6 +244,11 @@ static uint8_t _isInit = 0;     // set 1 when HID init
 
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 
+#define REPORT_ID_KEYBOARD      1
+#define REPORT_ID_MULTIMEDIA    2
+
+void initInterfaceUsb(void);
+
 /** USB report descriptor (length is defined in usbconfig.h). The report
  * descriptor has been created with usb.org's "HID Descriptor Tool" which can
  * be downloaded from http://www.usb.org/developers/hidpage/ (it's an .exe, but
@@ -302,14 +307,6 @@ PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] 
 };
 
 
-/* Originally used as a mask for the modifier bits, but now also
-   used for other x -> 2^x conversions (lookup table). */
-/*const unsigned short int modmask[16] = {
-	0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080,
-	0x0100, 0x0200, 0x0400, 0x0800, 0x1000, 0x2000, 0x4000, 0x8000
-};*/
-
-
 /**
  * This function is called whenever we receive a setup request via USB.
  * \param data[8] eight bytes of data we received
@@ -321,7 +318,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
     interfaceReady = 1;
 
     usbRequest_t *rq = (void *)data;
-    usbMsgPtr = reportBuffer;
+    usbMsgPtr = *reportBuffer;
 
     // DEBUG_PRINT(("USBRQ_TYPE : %d \n", (rq->bmRequestType & USBRQ_TYPE_MASK)));
 
@@ -345,7 +342,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
                 return 0xff; // Call usbFunctionWrite with data
             }
         } else if (rq->bRequest == USBRQ_HID_GET_IDLE) {
-            usbMsgPtr = &idleRate;
+            usbMsgPtr = idleRate;
             return 1;
         } else if (rq->bRequest == USBRQ_HID_SET_IDLE) {
 
@@ -358,7 +355,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
                 protocolVer = rq->wValue.bytes[1];
             }
         } else if(rq->bRequest == USBRQ_HID_SET_PROTOCOL) {
-            usbMsgPtr = &protocolVer;
+            usbMsgPtr = protocolVer;
             return 1;
         }
     } else {		
@@ -424,9 +421,9 @@ uint8_t makeReportBuffer(uint8_t keyidx){
         _isMultimediaPressed = 1;
 
         uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
-        reportBuffer[0] = 2;  // ReportID = 2
-        reportBuffer[1] = (uint8_t *)(gKeyidxMulti & 0xFF);
-        reportBuffer[2] = (uint8_t *)((gKeyidxMulti >> 8) & 0xFF);
+        reportBuffer[0] = REPORT_ID_MULTIMEDIA;  // ReportID = 2
+        reportBuffer[1] = (uint8_t)(gKeyidxMulti & 0xFF);
+        reportBuffer[2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
 
         return retval;
 
@@ -459,7 +456,7 @@ uint8_t makeReportBuffer(uint8_t keyidx){
 
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer
-    reportBuffer[0] = 1; // ReportID = 1
+    reportBuffer[0] = REPORT_ID_KEYBOARD; // ReportID = 1
 }
 
 uint8_t scanKeyUSB(void) {
@@ -533,7 +530,7 @@ uint8_t scanKeyUSB(void) {
 
 // 멀티미디어 키 up
     if(_isMultimediaPressed && reportBuffer[0] != 2){
-        reportBuffer[0] = 2;  // ReportID = 2 
+        reportBuffer[0] = REPORT_ID_MULTIMEDIA;  // ReportID = 2 
         reportBuffer[1] = 0;
         reportBuffer[2] = 0; 
         _isMultimediaPressed = 0;
@@ -560,7 +557,7 @@ uint8_t scanMacroUsb(void)
         popMWithKey();  // _pressedBuffer에 눌린 키들만 저장된다.        
         
         uint8_t i;
-        uint8_t gLen = strlen(_pressedBuffer);
+        uint8_t gLen = strlen((char *)_pressedBuffer);
         uint8_t gKeyidx;
         reportIndex = 2;
         for (i = 0; i < gLen; ++i)
@@ -571,7 +568,7 @@ uint8_t scanMacroUsb(void)
             if (gKeyidx > KEY_Modifiers && gKeyidx < KEY_Modifiers_end){
                 makeReportBuffer(gKeyidx);                
             }else{
-                gIdx = findIndex(_prevPressedBuffer, strlen(_prevPressedBuffer), gKeyidx);
+                gIdx = findIndex(_prevPressedBuffer, strlen((char *)_prevPressedBuffer), gKeyidx);
                 if(gIdx == -1){
                    makeReportBuffer(gKeyidx);
                 }
@@ -662,10 +659,10 @@ void usb_main(void) {
                 // DEBUG_PRINT(("hasMacroUsb\n"));
                 usbSetInterrupt(reportBuffer, 8);
             }else if(updateNeeded){
-                if(reportBuffer[0] == 2){   // report ID : 2
+                if(reportBuffer[0] == REPORT_ID_MULTIMEDIA){   // report ID : 2
                     // DEBUG_PRINT((" multi  reportBuffer : [0] = %d [1] = %d [2] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2]));
                     usbSetInterrupt(reportBuffer, 3);    
-                }else if(reportBuffer[0] == 1){ // report ID : 1
+                }else if(reportBuffer[0] == REPORT_ID_KEYBOARD){ // report ID : 1
                     // DEBUG_PRINT((" updateNeeded : [0] = %d [1] = %d [2] = %d [3] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2], reportBuffer[3]));
                     usbSetInterrupt(reportBuffer, 8);                
                 }

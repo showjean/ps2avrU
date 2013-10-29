@@ -176,8 +176,7 @@ int main(void) {
 
 	
 	// DEBUG_PRINT(("checking.... \n"));
-	uint8_t row, col, cur, keyidx;
-	uint8_t gModifier = 0; 
+	uint8_t row, col, cur, keyidx;	
 
 	// debounce cleared => compare last matrix and current matrix
 	for(col=0;col<8;col++)

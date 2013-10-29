@@ -20,6 +20,8 @@
 #include "keymatrix.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
+#include "ps2main.h"
+#include "usbmain.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -86,7 +88,7 @@ static uint8_t _bufferIndex;
 static int _editCount;	// 카운트가 1이상이어야만 eeprom에 write 한다.
 static uint8_t _isWorkingForEmpty = 0;	// 매크로 버퍼가 모두 소진된 후 진행할 내용이 있는지 확인;
 
-uint8_t _newKeyMap[17][8] = {0};
+uint8_t _newKeyMap[17][8]; // = {0};
 
 static uint8_t _currentLayer;
 static uint8_t _currentLayerAfter;
@@ -95,6 +97,17 @@ static uint8_t _currentLayerAfter;
 static uint8_t usingKeys[11] = {
     KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9, KEY_ESC	//, KEY_S, KEY_X, KEY_L, KEY_R           
 };
+
+// define functions
+void printPrepareString(void);
+void prepareKeyMapper(void);
+void saveCurrentLayerAfter(void);
+void printMapperMessageAfter(void);
+void clearMacroAfter(void);
+void printSelectMode(void);
+void readMacro(uint8_t xMacroIndex);
+
+//------------------------------------------------------///
 
 void setWillStartKeyMapping(void){
 	_isKeyMapping |= BV(0);	//set will start mapping
@@ -229,9 +242,9 @@ static uint8_t getDefaultKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
-	uint16_t gIdx;
+	int gIdx;
 	gIdx = EEPROM_MAPPING + (xRow * 8 + xCol) + (136 * xLayer);
-	gKeyIndex = eeprom_read_byte(gIdx);
+	gKeyIndex = eeprom_read_byte((uint8_t *)gIdx);
 	return gKeyIndex;
 }
 
@@ -304,7 +317,7 @@ static void printEnter(void)
     pushM(KEY_ENTER);
 }
 
-static void printString(char *xString)
+static void printString(const char *xString)
 {
 	char c;
 	char gChar[1];
@@ -332,7 +345,7 @@ static void printStringFromFlash(const char *str)
 
 static void printPrompt(void)
 {
-	char gStr[1];
+	// char gStr[1];
 
 	// 모든 프린트 작업중에는 입력을 받지 않도록;
 	_isWorkingForEmpty = 1;
@@ -457,7 +470,7 @@ void printMacroMessage(void){
 	_step = STEP_INPUT_COMMAND;
 }
 
-void printPrepareString(){
+void printPrepareString(void){
 	printStringFromFlash(str_prepare_message);
 	printEnter();
 }
@@ -470,7 +483,7 @@ void loadCurrentLayer(void)
 		for (j = 0; j < 8; ++j)
 		{
 			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
-			_newKeyMap[k][j] = eeprom_read_byte(gAddress);
+			_newKeyMap[k][j] = eeprom_read_byte((uint8_t *)gAddress);
 		}
 	}
 	_editCount = 0;
@@ -498,7 +511,7 @@ void saveCurrentLayerAfter(void)
 		{
 			gKeyCode = _newKeyMap[k][j];	// value
 			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
-			eeprom_write_byte(gAddress, gKeyCode);
+			eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
 		}
 	}
 	_editCount = 0;
@@ -564,7 +577,7 @@ void readMacro(uint8_t xMacroIndex){
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
-		gKeyCode = eeprom_read_byte(gAddress);
+		gKeyCode = eeprom_read_byte((uint8_t *)gAddress);
 		buffers[k] = gKeyCode;
 		if(gKeyCode > 0 && gKeyCode < 255){
 			pushM(gKeyCode);
@@ -585,7 +598,7 @@ void saveMacro(void){
 		gKeyCode = _macroInputBuffer[k];	// value
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
 		buffers[k] = gKeyCode;
-		eeprom_write_byte(gAddress, gKeyCode);
+		eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
 	}
 	// DEBUG_PRINT(("saveMacro  gAddress: %d \n", gAddress));
 	// DEBUG_PRINT(("saveMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
@@ -597,7 +610,7 @@ void clearMacroAfter(void){
 	int k;
 	for(k = 0; k < MACRO_SIZE_MAX * 12; ++k){
 		gAddress = EEPROM_MACRO + (k);	// key
-		eeprom_write_byte(gAddress, 0);
+		eeprom_write_byte((uint8_t *)gAddress, 0);
 	}
 	// DEBUG_PRINT(("clearMacro  gAddress: %d \n", gAddress));
 
@@ -683,7 +696,7 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		    append(_macroPressedBuffer, xKeyCode);
 		    
 		}else{
-			gLen = strlen(_macroPressedBuffer);
+			gLen = strlen((char *)_macroPressedBuffer);
 		    gIdx = findIndex(_macroPressedBuffer, gLen, xKeyCode);
 		    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
 		    if(gIdx == -1){

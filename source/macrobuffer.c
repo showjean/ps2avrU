@@ -50,7 +50,7 @@ Key popMWithKey(void) {
     }
 
     //
-    gLen = strlen(_pressedBuffer);
+    gLen = strlen((char *)_pressedBuffer);
     gIdx = findIndex(_pressedBuffer, gLen, gKey.keycode);
     // DEBUG_PRINT(("findIndex gIdx :: %d , len : %d \n", gIdx, gLen));
     if(gIdx > -1){

@@ -1,6 +1,8 @@
 #ifndef LEDRENDER_C
 #define LEDRENDER_C
 
+#include "timer.h"
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
