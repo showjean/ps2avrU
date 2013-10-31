@@ -703,7 +703,7 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		    	return;
 		    }
 		    delete(_macroPressedBuffer, gIdx);
-		    DEBUG_PRINT(("up idx : %d, buffer len : %d \n", gIdx, strlen(_macroPressedBuffer)));
+		    DEBUG_PRINT(("up idx : %d, buffer len : %d \n", gIdx, strlen((char *)_macroPressedBuffer)));
 		}
 
 		_macroInputBuffer[_macroBufferIndex] = xKeyCode;

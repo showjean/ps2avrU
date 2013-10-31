@@ -3,10 +3,8 @@
 
 #include "keymain.h"
 
-#ifdef RELEASE
-
-#else
-#define DEBUG
+#ifdef DEBUG_PRINT_H
+	#define DEBUG
 #endif
 
 #ifdef DEBUG

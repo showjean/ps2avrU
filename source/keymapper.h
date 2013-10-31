@@ -14,10 +14,10 @@
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
 
-#ifdef RELEASE
-#define KEY_MAPPING_COUNT_MAX 5000	//500	//
+#ifdef DEBUG_KEYMAPPER_H
+	#define KEY_MAPPING_COUNT_MAX 500
 #else
-#define KEY_MAPPING_COUNT_MAX 500
+	#define KEY_MAPPING_COUNT_MAX 5000
 #endif
 
 // mapping
