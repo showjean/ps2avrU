@@ -83,7 +83,7 @@ void increaseLedBrightness(void){
 	if(_fullLEDMode == 2){
 		setFullLEDState();
 	}
-	ledStateCount = 0;
+	ledStateCount = 1;
 }
 void reduceLedBrightness(void){
 	if(_ledBrightnessMax == ledBrightnessMin) return;
@@ -95,12 +95,12 @@ void reduceLedBrightness(void){
 	if(_fullLEDMode == 2){
 		setFullLEDState();
 	}
-	ledStateCount = 0;
+	ledStateCount = 1;
 }
 void changeFullLedState(void){
 	//LED 모드를 변경한다.
 	_fullLEDMode = (_fullLEDMode+1)%5;
-	ledStateCount = 0;
+	ledStateCount = 1;
 	//DEBUG_PRINT(("_fullLEDMode %02x\n ", _fullLEDMode));
 	setFullLEDState();
 }
@@ -210,7 +210,10 @@ void applyKeyDownForFullLED(void){
 
 static void writeLEDMode(void) {
 	// LED 모드 저장, 너무많은 eeprom접근을 막기위해 일정 간격으로 저장한다.
-	if(ledStateCount++ > 5000){
+	const countMAX = 1000;
+	if(ledStateCount > 0 && ++ledStateCount == countMAX){
+		// DEBUG_PRINT(("writeLEDMode : mode %d, br %d \n", _fullLEDMode, _ledBrightnessMax));
+		ledStateCount = 0;
 		if(_fullLEDMode != _fullLEDMode_saved){
 			_fullLEDMode_saved = _fullLEDMode;
 			eeprom_write_byte((uint8_t *)EEPROM_LED_MODE, _fullLEDMode);  // 1바이트 11번지 쓰기
@@ -378,6 +381,7 @@ void sleepLED(void){
 	// DEBUG_PRINT(("sleepLED \n"));
 	turnOffLED(LEDNUM);
 	turnOffLED(LEDCAPS);
+	turnOffLED(LEDSCROLL);
 	if(_fullLEDMode == 2 || _fullLEDMode == 4){
 		// 켜져 있는 상태일때;
 		pwmCounter = 0;

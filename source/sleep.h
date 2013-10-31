@@ -2,7 +2,6 @@
 #define SLEEP_H
 
 #include "keymain.h"
-#include "ledrender.h"
 
 #ifdef DEBUG_SLEEP_H
 	#define SLEEP_COUNT_MAX 30000
