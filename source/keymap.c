@@ -1,11 +1,11 @@
 #ifndef KEYMAP_C
 #define KEYMAP_C
 
-#define KEYMAP_A87
-// #define KEYMAP_THUMB
-// #define KEYMAP_MX_MINI
-
 #include "keymap.h"
+
+#if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI)
+	#define KEYMAP_A87
+#endif
 
 // for ps/2 interface
 const uint8_t PROGMEM keycode_set2[NUM_KEY] =	{ 
