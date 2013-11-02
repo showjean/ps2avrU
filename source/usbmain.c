@@ -430,7 +430,7 @@ uint8_t makeReportBuffer(uint8_t keyidx){
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[1] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
-        applyKeyMapping(reportBuffer[1]);
+        //applyKeyMapping(reportBuffer[1]);
         return retval;
     }
 
@@ -467,6 +467,7 @@ uint8_t scanKeyUSB(void) {
 
 	uint8_t row, col, prev, cur, keyidx, gKeymapping, gFN;
 	uint8_t keymap = getLayer();
+    static uint8_t prevModifier = 0;
 
 	// debounce counter expired, create report
 	reportIndex = 2; // reportBuffer[0] contains modifiers
@@ -528,8 +529,13 @@ uint8_t scanKeyUSB(void) {
 		}
 	}
 
+    if(reportBuffer[0] == REPORT_ID_KEYBOARD && reportBuffer[1] != prevModifier){
+        applyKeyMapping(reportBuffer[1]);
+        prevModifier = reportBuffer[1];
+    }
+
 // 멀티미디어 키 up
-    if(_isMultimediaPressed && reportBuffer[0] != 2){
+    if(_isMultimediaPressed && reportBuffer[0] != REPORT_ID_MULTIMEDIA){
         reportBuffer[0] = REPORT_ID_MULTIMEDIA;  // ReportID = 2 
         reportBuffer[1] = 0;
         reportBuffer[2] = 0; 

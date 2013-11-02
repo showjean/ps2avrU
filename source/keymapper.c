@@ -68,6 +68,7 @@ const char str_clear_all_macro[] PROGMEM = "clear...";
 static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
 static uint8_t enabledKeyMappingCount = 0;
 static int keyMappingCount = 0;
+static int keyMappingCountMax = KEY_MAPPING_COUNT_MAX;
 static uint8_t _keyMappingOnBoot = 0;
 
 uint8_t _macroIndex;
@@ -123,12 +124,16 @@ uint8_t isDeepKeyMapping(void){
 void applyKeyMapping(uint8_t xModi) {
 	if(isKeyMapping()) return;
 
+		DEBUG_PRINT(("xModi= %d, _isKeyMapping= %d \n", xModi, _isKeyMapping));
 	// 약 5초간 입력이 지속되면 키매핑 모드로
 	if(xModi == 0x07){
-		// DEBUG_PRINT(("xModi= %d, _isKeyMapping= %d \n", xModi, _isKeyMapping));
 		keyMappingCount = 0;
 		enabledKeyMappingCount = 1;
-	}else{
+
+		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+			keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+		}
+	}else{		
 		_isKeyMapping = 0;
 		enabledKeyMappingCount = 0;
 	}
@@ -145,6 +150,7 @@ void prepareKeyMapping(void){
 	    prepareKeyMappingUsb();
 	}else{
 		prepareKeyMappingPs2();
+		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;
 	}
 	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 
@@ -197,7 +203,7 @@ void stopKeyMapping(void){
 
 
 void countKeyMappingEnabled(void){	
-	if(!_isKeyMapping && enabledKeyMappingCount && ++keyMappingCount > KEY_MAPPING_COUNT_MAX){
+	if(!_isKeyMapping && enabledKeyMappingCount && ++keyMappingCount > keyMappingCountMax){
 		enabledKeyMappingCount = 0;
 		prepareKeyMapping();
 	}

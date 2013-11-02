@@ -284,7 +284,7 @@ int scanKeyPS2(void) {
 	
 	uint8_t row, col, prev, cur, keyidx;
 	uint8_t keymap = getLayer();
-	uint8_t gModifier = 0; 
+	static uint8_t gModifier = 0; 
 	uint8_t gResultPutKey = 1;
 
 	// debounce cleared => compare last matrix and current matrix
@@ -302,9 +302,12 @@ int scanKeyPS2(void) {
 				return 0;
 			}
 
-			if (cur && keyidx > KEY_Modifiers) { // Is this modifier keys? 
-                gModifier |= modmask[keyidx - (KEY_Modifiers + 1)];
-
+			if (prev != cur && keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { // Is this modifier keys? 
+				if(cur){
+                	gModifier |= modmask[keyidx - (KEY_Modifiers + 1)];
+                }else{
+                	gModifier &= ~(modmask[keyidx - (KEY_Modifiers + 1)]);
+                }
                 applyKeyMapping(gModifier);
             }
 
@@ -408,9 +411,9 @@ void ps2_main(void){
 		static int keyval=0;
 
 		// check that every key code for single keys are transmitted
-		if((kbd_flags & FLA_RX_BYTE)){
+		/*if((kbd_flags & FLA_RX_BYTE)){
 			DEBUG_PRINT((" kbd_flags & FLA_RX_BYTE %02x, %02x \n", kbd_flags, FLA_RX_BYTE));
-		}
+		}*/
 		if ((kbd_flags & FLA_RX_BYTE) && (keyval==SPLIT || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
 			// pokud law, the flag setting apart, take it and zanalyzuj
 			rxed = kbd_get_rx_char();		
@@ -419,54 +422,54 @@ void ps2_main(void){
 				default:
 					switch(rxed) {
 						case 0xEE: /* echo */
-							DEBUG_PRINT((" echo \n"));
+							// DEBUG_PRINT((" echo \n"));
 							tx_state(0xEE, m_state);
 							continue;
 						case 0xF2: /* read id */
-							DEBUG_PRINT((" read id \n"));
+							// DEBUG_PRINT((" read id \n"));
 							tx_state(0xFA, STA_WAIT_ID);
 							continue;
 						case 0xFF: /* reset */
-							DEBUG_PRINT((" reset \n"));
+							// DEBUG_PRINT((" reset \n"));
 							tx_state(0xFA, STA_WAIT_RESET);
 							continue;
 						case 0xFE: /* resend */
-							DEBUG_PRINT((" resend \n"));
+							// DEBUG_PRINT((" resend \n"));
 							tx_state(lastSent, m_state);
 							continue;
 						case 0xF0: /* scan code set */
-							DEBUG_PRINT((" scan code set \n"));
+							// DEBUG_PRINT((" scan code set \n"));
 							tx_state(0xFA, STA_WAIT_SCAN_SET);
 							continue;
 						case 0xED: /* led indicators */	
-							DEBUG_PRINT((" led indicators \n"));	
+							// DEBUG_PRINT((" led indicators \n"));	
 							tx_state(0xFA, STA_WAIT_LEDS);
 							continue;
 						case 0xF3:
-							DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+							// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
 							tx_state(0xFA, STA_WAIT_AUTOREP);
 							continue;
 						case 0xF4:		// enable
-							DEBUG_PRINT((" enable \n"));
+							// DEBUG_PRINT((" enable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF5:		// disable
-							DEBUG_PRINT((" disable \n"));
+							// DEBUG_PRINT((" disable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF6:		// Set Default
-							DEBUG_PRINT((" Set Default \n"));
+							// DEBUG_PRINT((" Set Default \n"));
 							TYPEMATIC_DELAY=1;
 							TYPEMATIC_REPEAT=5;
 							clear();
 						default:
-							DEBUG_PRINT((" default \n"));
+							// DEBUG_PRINT((" default \n"));
 							tx_state(0xFA, STA_NORMAL);
 							break;
 					}
 					continue;
 				case STA_RXCHAR:
-					DEBUG_PRINT((" STA_RXCHAR \n"));
+					// DEBUG_PRINT((" STA_RXCHAR \n"));
 					if (rxed == 0xF5)
 						tx_state(0xFA, STA_NORMAL);
 					else {
@@ -475,14 +478,14 @@ void ps2_main(void){
 					continue;
 
 				case STA_WAIT_SCAN_SET:
-					DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
+					// DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
 					// start point... ps2로 인식 후 처음 이곳을 한 번은 거쳐간다?
 
 					clear();
 					tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
 					continue;
 				case STA_WAIT_AUTOREP:
-					DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+					// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
 					TYPEMATIC_DELAY = (rxed&0b01100000)/0b00100000;
 
 					temp_a = (rxed&0b00000111);
