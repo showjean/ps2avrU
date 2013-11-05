@@ -653,9 +653,9 @@ void resetCurrentLayer(void)
 
 static uint8_t _macroDownCount = 0;
 void resetMacroInput(void){	
-	memset(_macroInputBuffer, 0, 32);
+	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);
 	_macroBufferIndex = 0;
-	memset(_macroPressedBuffer, 0, 32);
+	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
 void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
@@ -719,7 +719,7 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 		DEBUG_PRINT(("                                              _macroBufferIndex : %d \n", _macroBufferIndex));
 
-		// 32개를 채웠다면 종료;
+		// MACRO_SIZE_MAX개를 채웠다면 종료;
 		if(_macroBufferIndex >= MACRO_SIZE_MAX){
 			_step = STEP_INPUT_COMMAND;
 			// _macroIndex 위치에 저장;

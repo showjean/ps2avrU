@@ -19,8 +19,8 @@ typedef struct {
 
 
 #define MESSAGE_SIZE_MAX 256
-#define MACRO_SIZE_MAX 32
-#define MACRO_SIZE_MAX_HALF 16
+#define MACRO_SIZE_MAX 48
+#define MACRO_SIZE_MAX_HALF 24
 
 extern uint8_t _pressedBuffer[MACRO_SIZE_MAX];
 

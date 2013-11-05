@@ -373,7 +373,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
  * \param len number ob bytes received
  * \return 0x01
  */
- // function is now working in mac os 
+ // function is not working in mac os 
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
     //DEBUG_PRINT(("usbFunctionWrite len : %d \n", len));
     // DEBUG_PRINT(("data[0] : %d data[1] : %d data[2] : %d \n", data[0], data[1], data[2]));

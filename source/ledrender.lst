@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 1
 
 
    1               		.file	"ledrender.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
   55 0010 0895      		ret
   56               	.LFE14:
   57               		.size	clearLEDInited, .-clearLEDInited
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 2
 
 
   58               	.global	setLEDIndicate
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  112 0050 452B      		or r20,r21
  113 0052 01F4      		brne .L16
  114               	.LM23:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 3
 
 
  115 0054 85E0      		ldi r24,lo8(5)
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  169 00a0 70E0      		ldi r23,hi8(12)
  170 00a2 0E94 0000 		call __divmodhi4
  171 00a6 6093 0000 		sts downLevelLife,r22
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 4
 
 
  172 00aa 0895      		ret
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  226               	.LM42:
  227 0100 0895      		ret
  228               	.LFE19:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 5
 
 
  229               		.size	getBrightness, .-getBrightness
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  283 013c 8091 0000 		lds r24,pwmCounter
  284 0140 9091 0000 		lds r25,(pwmCounter)+1
  285 0144 68E0      		ldi r22,lo8(8)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 6
 
 
  286 0146 70E0      		ldi r23,hi8(8)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  340 01a4 8823      		tst r24
  341 01a6 01F0      		breq .L42
  342               	.LM63:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 7
 
 
  343 01a8 0E94 0000 		call doSleep
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  397 0202 9098      		cbi 50-32,0
  398               	.L73:
  399               	.LM76:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 8
 
 
  400 0204 1092 0000 		sts (beyondFNDelayCounter.1945)+1,__zero_reg__
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  454               	.LM87:
  455 0264 8091 0000 		lds r24,LEDstate
  456 0268 81FD      		sbrc r24,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 9
 
 
  457               	.L74:
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  511               	.LM99:
  512 02d2 89E0      		ldi r24,lo8(9)
  513 02d4 90E0      		ldi r25,hi8(9)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 10
 
 
  514 02d6 0E94 0000 		call __eewr_byte_m32
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  568 0338 01F0      		breq .L62
  569 033a 0397      		sbiw r24,3
  570 033c 01F4      		brne .L60
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 11
 
 
  571               	.L62:
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  625 03b8 8091 0000 		lds r24,pwmCounter
  626 03bc 9091 0000 		lds r25,(pwmCounter)+1
  627 03c0 0196      		adiw r24,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 12
 
 
  628 03c2 9093 0000 		sts (pwmCounter)+1,r25
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  682 042e 01F0      		breq .L71
  683               	.LM127:
  684 0430 8091 0000 		lds r24,pwmCounter
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 13
 
 
  685 0434 9091 0000 		lds r25,(pwmCounter)+1
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  739               	.LM137:
  740 049e 1F91      		pop r17
  741               	.LVL5:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 14
 
 
  742 04a0 0895      		ret
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  796 04ee 8091 0000 		lds r24,downLevel
  797 04f2 9FEF      		ldi r25,lo8(-1)
  798 04f4 899F      		mul r24,r25
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 15
 
 
  799 04f6 C001      		movw r24,r0
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  853               		.type	reduceLedBrightness, @function
  854               	reduceLedBrightness:
  855               	.LFB12:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 16
 
 
  856               	.LM159:
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  910               	.LM171:
  911 057e 8FEF      		ldi r24,lo8(-1)
  912               	.LVL8:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 17
 
 
  913               	.L96:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  967               	.LM185:
  968 05d6 8F3F      		cpi r24,lo8(-1)
  969 05d8 01F4      		brne .L102
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 18
 
 
  970               	.LM186:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1024 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
  1025               	.LASFDE0:
  1026 0014 0000 0000 		.long	.Lframe0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 19
 
 
  1027 0018 0000 0000 		.long	.LFB8
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1081               	.LASFDE14:
  1082 0084 0000 0000 		.long	.Lframe0
  1083 0088 0000 0000 		.long	.LFB25
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 20
 
 
  1084 008c 5E00 0000 		.long	.LFE25-.LFB25
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1138 00f4 0000 0000 		.long	.Lframe0
  1139 00f8 0000 0000 		.long	.LFB15
  1140 00fc 4E00 0000 		.long	.LFE15-.LFB15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 21
 
 
  1141               		.p2align	2
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1195 000a 04        		.byte	0x4
  1196 000b 01        		.uleb128 0x1
  1197 000c 0000 0000 		.long	.LASF58
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 22
 
 
  1198 0010 01        		.byte	0x1
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1252 0079 2500 0000 		.long	0x25
  1253 007d 04        		.uleb128 0x4
  1254 007e 0000 0000 		.long	.LASF11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 23
 
 
  1255 0082 02        		.byte	0x2
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1309 00ee 03        		.byte	0x3
  1310 00ef 0000 0000 		.long	beyondFNDelayCounter.1945
  1311 00f3 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 24
 
 
  1312 00f4 0000 0000 		.long	.LASF16
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1366 0164 90        		.byte	0x90
  1367 0165 20        		.uleb128 0x20
  1368 0166 7801 0000 		.long	0x178
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 25
 
 
  1369 016a 10        		.uleb128 0x10
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1423 01d3 0000 0000 		.long	.LFE17
  1424 01d7 02        		.byte	0x2
  1425 01d8 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 26
 
 
  1426 01d9 20        		.uleb128 0x20
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1480 0244 01        		.byte	0x1
  1481 0245 0000 0000 		.long	.LASF32
  1482 0249 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 27
 
 
  1483 024a A001      		.word	0x1a0
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1537 02d3 0000 0000 		.long	.LBE34
  1538 02d7 1D        		.uleb128 0x1d
  1539 02d8 4601 0000 		.long	0x146
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 28
 
 
  1540 02dc 00        		.byte	0x0
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1594 0341 0000 0000 		.long	.LASF37
  1595 0345 01        		.byte	0x1
  1596 0346 4A        		.byte	0x4a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 29
 
 
  1597 0347 01        		.byte	0x1
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1651 03b9 05        		.byte	0x5
  1652 03ba 03        		.byte	0x3
  1653 03bb 0000 0000 		.long	downLevelLife
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 30
 
 
  1654 03bf 13        		.uleb128 0x13
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1708 0431 03        		.byte	0x3
  1709 0432 0000 0000 		.long	pwmDir
  1710 0436 22        		.uleb128 0x22
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 31
 
 
  1711 0437 0000 0000 		.long	.LASF51
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1765 0003 25        		.uleb128 0x25
  1766 0004 0E        		.uleb128 0xe
  1767 0005 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 32
 
 
  1768 0006 0B        		.uleb128 0xb
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1822 003c 0B        		.uleb128 0xb
  1823 003d 00        		.byte	0x0
  1824 003e 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 33
 
 
  1825 003f 06        		.uleb128 0x6
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1879 0075 3A        		.uleb128 0x3a
  1880 0076 0B        		.uleb128 0xb
  1881 0077 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 34
 
 
  1882 0078 05        		.uleb128 0x5
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1936 00ae 3A        		.uleb128 0x3a
  1937 00af 0B        		.uleb128 0xb
  1938 00b0 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 35
 
 
  1939 00b1 0B        		.uleb128 0xb
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  1993 00e7 00        		.byte	0x0
  1994 00e8 00        		.byte	0x0
  1995 00e9 12        		.uleb128 0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 36
 
 
  1996 00ea 2E        		.uleb128 0x2e
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2050 0120 01        		.uleb128 0x1
  2051 0121 13        		.uleb128 0x13
  2052 0122 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 37
 
 
  2053 0123 00        		.byte	0x0
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2107 0159 01        		.byte	0x1
  2108 015a 3F        		.uleb128 0x3f
  2109 015b 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 38
 
 
  2110 015c 03        		.uleb128 0x3
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2164 0192 13        		.uleb128 0x13
  2165 0193 00        		.byte	0x0
  2166 0194 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 39
 
 
  2167 0195 1C        		.uleb128 0x1c
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2221 01cb 0A        		.uleb128 0xa
  2222 01cc 00        		.byte	0x0
  2223 01cd 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 40
 
 
  2224 01ce 21        		.uleb128 0x21
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2268 0054 C601 0000 		.long	0x1c6
  2269 0058 6170 706C 		.string	"applyKeyDownForFullLED"
  2269      794B 6579 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 41
 
 
  2269      446F 776E 
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2298 001c 0000 0000 		.long	0x0
  2299               		.section	.debug_ranges,"",@progbits
  2300               	.Ldebug_ranges0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 42
 
 
  2301 0000 AE01 0000 		.long	.LBB29-.Ltext0
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2347 006c 02        		.byte	0x2
  2348 006d 0000 0000 		.long	.LM2
  2349 0071 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 43
 
 
  2350 0072 00        		.byte	0x0
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2404 00c9 16        		.byte	0x16
  2405 00ca 00        		.byte	0x0
  2406 00cb 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 44
 
 
  2407 00cc 02        		.byte	0x2
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2461 0123 05        		.uleb128 0x5
  2462 0124 02        		.byte	0x2
  2463 0125 0000 0000 		.long	.LM25
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 45
 
 
  2464 0129 19        		.byte	0x19
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2518 017d 0000 0000 		.long	.LM36
  2519 0181 16        		.byte	0x16
  2520 0182 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 46
 
 
  2521 0183 05        		.uleb128 0x5
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2575 01da 00        		.byte	0x0
  2576 01db 05        		.uleb128 0x5
  2577 01dc 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 47
 
 
  2578 01dd 0000 0000 		.long	.LM48
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2632 0234 02        		.byte	0x2
  2633 0235 0000 0000 		.long	.LM59
  2634 0239 16        		.byte	0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 48
 
 
  2635 023a 00        		.byte	0x0
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2689 028f 02        		.byte	0x2
  2690 0290 0000 0000 		.long	.LM70
  2691 0294 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 49
 
 
  2692 0295 00        		.byte	0x0
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2746 02ec 1E        		.byte	0x1e
  2747 02ed 00        		.byte	0x0
  2748 02ee 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 50
 
 
  2749 02ef 02        		.byte	0x2
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2803 0347 01        		.byte	0x1
  2804 0348 00        		.byte	0x0
  2805 0349 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 51
 
 
  2806 034a 02        		.byte	0x2
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2860 03a1 05        		.uleb128 0x5
  2861 03a2 02        		.byte	0x2
  2862 03a3 0000 0000 		.long	.LM104
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 52
 
 
  2863 03a7 15        		.byte	0x15
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2917 03fb 0000 0000 		.long	.LM115
  2918 03ff 15        		.byte	0x15
  2919 0400 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 53
 
 
  2920 0401 05        		.uleb128 0x5
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  2974 0458 00        		.byte	0x0
  2975 0459 05        		.uleb128 0x5
  2976 045a 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 54
 
 
  2977 045b 0000 0000 		.long	.LM127
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3031 04b2 02        		.byte	0x2
  3032 04b3 0000 0000 		.long	.LM138
  3033 04b7 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 55
 
 
  3034 04b8 807D      		.sleb128 -384
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3088 050d 02        		.byte	0x2
  3089 050e 0000 0000 		.long	.LM149
  3090 0512 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 56
 
 
  3091 0513 00        		.byte	0x0
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3145 0569 6E        		.sleb128 -18
  3146 056a 01        		.byte	0x1
  3147 056b 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 57
 
 
  3148 056c 05        		.uleb128 0x5
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3202 05c0 0000 0000 		.long	.LM170
  3203 05c4 15        		.byte	0x15
  3204 05c5 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 58
 
 
  3205 05c6 05        		.uleb128 0x5
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3259 061d 00        		.byte	0x0
  3260 061e 05        		.uleb128 0x5
  3261 061f 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 59
 
 
  3262 0620 0000 0000 		.long	.LM182
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3306      00
  3307               	.LASF46:
  3308 001d 7363 726F 		.string	"scrollLockLED"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 60
 
 
  3308      6C6C 4C6F 
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3332      6572 4C45 
  3332      4400 
  3333               	.LASF45:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 61
 
 
  3334 00c5 4C45 4473 		.string	"LEDstate"
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3358      6E64 464E 
  3358      4C45 4453 
  3358      7461 7465 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 62
 
 
  3358      00
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3380      6720 756E 
  3380      7369 676E 
  3380      6564 2069 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 63
 
 
  3381               	.LASF19:
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3403               	.LASF9:
  3404 02b8 6368 6172 		.string	"char"
  3404      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 64
 
 
  3405               	.LASF54:
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3429               	.LASF18:
  3430 0357 626C 696E 		.string	"blinkScrollLockLED"
  3430      6B53 6372 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 65
 
 
  3430      6F6C 6C4C 
@@ -3852,51 +3852,51 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 1
  3432      7000 
  3433               	.global __do_copy_data
  3434               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s 			page 66
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ledrender.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:18     .text:00000000 setLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1005   .bss:00000016 LEDstate
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:33     .text:00000006 getLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:46     .text:0000000c clearLEDInited
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:18     .text:00000000 setLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1005   .bss:00000016 LEDstate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:33     .text:00000006 getLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:46     .text:0000000c clearLEDInited
                              .bss:00000000 ledInited
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:60     .text:00000012 setLEDIndicate
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1006   .bss:00000017 prevSCRLED.1857
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:989    .bss:00000005 scrollLockLED
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:142    .text:00000074 applyKeyDownForFullLED
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:992    .bss:0000000a _fullLEDMode
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1001   .bss:00000011 downLevelStay
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1003   .bss:00000014 downLevel
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1002   .bss:00000013 downLevelLife
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:203    .text:000000e0 getBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:998    .data:00000001 _ledBrightnessMax
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:232    .text:00000102 sleepLED
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1000   .bss:0000000f pwmCounter
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:1004   .bss:00000015 _isDidSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:273    .text:00000134 doSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:324    .text:00000192 renderLED
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:982    .bss:00000001 beyondFNDelayCounter.1945
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:988    .bss:00000003 beyondFNCounter.1944
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:986    .data:00000000 beyondFNLEDState.1946
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:990    .bss:00000006 counter.1971
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:991    .bss:00000008 ledStateCount
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:993    .bss:0000000b _fullLEDMode_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:994    .bss:0000000c _ledBrightnessMax_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:995    .bss:0000000d pwmDir
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:746    .text:000004a2 setFullLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:811    .text:00000508 wakeUpLED
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:827    .text:00000512 changeFullLedState
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:854    .text:00000538 reduceLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:891    .text:0000056a increaseLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/cczsefGb.s:936    .text:0000059e initFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:60     .text:00000012 setLEDIndicate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1006   .bss:00000017 prevSCRLED.1857
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:989    .bss:00000005 scrollLockLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:142    .text:00000074 applyKeyDownForFullLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:992    .bss:0000000a _fullLEDMode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1001   .bss:00000011 downLevelStay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1003   .bss:00000014 downLevel
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1002   .bss:00000013 downLevelLife
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:203    .text:000000e0 getBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:998    .data:00000001 _ledBrightnessMax
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:232    .text:00000102 sleepLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1000   .bss:0000000f pwmCounter
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:1004   .bss:00000015 _isDidSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:273    .text:00000134 doSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:324    .text:00000192 renderLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:982    .bss:00000001 beyondFNDelayCounter.1945
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:988    .bss:00000003 beyondFNCounter.1944
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:986    .data:00000000 beyondFNLEDState.1946
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:990    .bss:00000006 counter.1971
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:991    .bss:00000008 ledStateCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:993    .bss:0000000b _fullLEDMode_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:994    .bss:0000000c _ledBrightnessMax_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:995    .bss:0000000d pwmDir
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:746    .text:000004a2 setFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:811    .text:00000508 wakeUpLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:827    .text:00000512 changeFullLedState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:854    .text:00000538 reduceLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:891    .text:0000056a increaseLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccLzXwPD.s:936    .text:0000059e initFullLEDState
 
 UNDEFINED SYMBOLS
 __divmodhi4
