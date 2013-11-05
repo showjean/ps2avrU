@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 1
 
 
    1               		.file	"usbmain.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
   55               	.LVL5:
   56               	/* #NOAPP */
   57               	.LBE3:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 2
 
 
   58               	.LM6:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  112               	.LVL14:
  113 0072 E050      		subi r30,lo8(-(keycode_USB_extend-282))
  114 0074 F040      		sbci r31,hi8(-(keycode_USB_extend-282))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 3
 
 
  115               	/* #APP */
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  169               	/* epilogue start */
  170 00aa 0895      		ret
  171               	.LFE16:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 4
 
 
  172               		.size	hasMacroUsb, .-hasMacroUsb
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  226 00ec 0D90      		ld __tmp_reg__,X+
  227 00ee 0020      		tst __tmp_reg__
  228 00f0 01F4      		brne .-6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 5
 
 
  229 00f2 1197      		sbiw r26,1
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  283               	.L17:
  284               	.LM38:
  285 0146 40E0      		ldi r20,lo8(_pressedBuffer)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 6
 
 
  286 0148 50E0      		ldi r21,hi8(_pressedBuffer)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  340 0192 3F92      		push r3
  341 0194 5F92      		push r5
  342 0196 6F92      		push r6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 7
 
 
  343 0198 7F92      		push r7
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  397 01ec F101      		movw r30,r2
  398 01ee E050      		subi r30,lo8(-(currentMatrix))
  399 01f0 F040      		sbci r31,hi8(-(currentMatrix))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 8
 
 
  400 01f2 F080      		ld r15,Z
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  454               	.L32:
  455 0244 0E94 0000 		call isKeyMapping
  456 0248 8823      		tst r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 9
 
 
  457 024a 01F0      		breq .L33
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  511 029c C816      		cp r12,r24
  512 029e D104      		cpc r13,__zero_reg__
  513 02a0 01F0      		breq .L37
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 10
 
 
  514               	.L27:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  568 0308 D901      		movw r26,r18
  569 030a A050      		subi r26,lo8(-(currentMatrix))
  570 030c B040      		sbci r27,hi8(-(currentMatrix))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 11
 
 
  571 030e 8C91      		ld r24,X
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  625               	.LM86:
  626 0350 11E0      		ldi r17,lo8(1)
  627               	.LVL56:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 12
 
 
  628 0352 00C0      		rjmp .L32
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  682               	.LM94:
  683 039e 1F91      		pop r17
  684               	.LVL60:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 13
 
 
  685 03a0 0F91      		pop r16
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  739 03e8 8823      		tst r24
  740 03ea 01F0      		breq .L54
  741               	.LM106:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 14
 
 
  742 03ec 1092 0000 		sts _isInit,__zero_reg__
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  796 0444 8091 0000 		lds r24,isBeyondFN
  797 0448 0E94 0000 		call renderLED
  798               	.LM120:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 15
 
 
  799 044c 0E94 0000 		call hasMacroUsb
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  853               		.size	initInterfaceUsb, .-initInterfaceUsb
  854               	.global	usbFunctionSetup
  855               		.type	usbFunctionSetup, @function
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 16
 
 
  856               	usbFunctionSetup:
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  910               	.LM144:
  911 04ce 0E94 0000 		call initInterfaceUsb
  912               	.LM145:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 17
 
 
  913 04d2 8B81      		ldd r24,Y+3
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  967 0516 8130      		cpi r24,lo8(1)
  968 0518 01F4      		brne .L79
  969               	.LM155:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 18
 
 
  970 051a 8181      		ldd r24,Z+1
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1024 0022 91        		.byte	-111
  1025 0023 02        		.byte	2
  1026 0024 95        		.byte	-107
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 19
 
 
  1027 0025 01        		.byte	1
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1081 0000 00        		.skip 1,0
  1082               		.lcomm _isInit,1
  1083               		.lcomm _needRelease,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 20
 
 
  1084               		.lcomm prevModifier.2297,1
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1138 0048 0000 0000 		.long	.LFB15
  1139 004c CE00 0000 		.long	.LFE15-.LFB15
  1140               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 21
 
 
  1141               	.LEFDE6:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1195 0000 0000 0000 		.long	.LVL0-.Ltext0
  1196 0004 0A00 0000 		.long	.LVL1-.Ltext0
  1197 0008 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 22
 
 
  1198 000a 68        		.byte	0x68
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1252 007b 62        		.byte	0x62
  1253 007c 93        		.byte	0x93
  1254 007d 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 23
 
 
  1255 007e 63        		.byte	0x63
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1309 00ec 0600      		.word	0x6
  1310 00ee 5E        		.byte	0x5e
  1311 00ef 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 24
 
 
  1312 00f0 01        		.uleb128 0x1
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1366 017e 0000 0000 		.long	0x0
  1367               	.LLST14:
  1368 0182 E201 0000 		.long	.LVL31-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 25
 
 
  1369 0186 3E03 0000 		.long	.LVL52-.Ltext0
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1423 021a 61        		.byte	0x61
  1424 021b 3002 0000 		.long	.LVL36-.Ltext0
  1425 021f 3602 0000 		.long	.LVL37-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 26
 
 
  1426 0223 0100      		.word	0x1
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1480 02b6 61        		.byte	0x61
  1481 02b7 D203 0000 		.long	.LVL66-.Ltext0
  1482 02bb D603 0000 		.long	.LVL67-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 27
 
 
  1483 02bf 0100      		.word	0x1
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1537 032f 01        		.uleb128 0x1
  1538 0330 2405 0000 		.long	.LVL76-.Ltext0
  1539 0334 2C05 0000 		.long	.LFE9-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 28
 
 
  1540 0338 0600      		.word	0x6
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1594 0049 04        		.byte	0x4
  1595 004a 05        		.byte	0x5
  1596 004b 0000 0000 		.long	.LASF5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 29
 
 
  1597 004f 02        		.uleb128 0x2
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1651 00af 0000 0000 		.long	.LASF16
  1652 00b3 04        		.sleb128 4
  1653 00b4 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 30
 
 
  1654 00b5 0000 0000 		.long	.LASF17
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1708 0121 0000 0000 		.long	.LASF35
  1709 0125 17        		.sleb128 23
  1710 0126 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 31
 
 
  1711 0127 0000 0000 		.long	.LASF36
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1765 0193 0000 0000 		.long	.LASF54
  1766 0197 2A        		.sleb128 42
  1767 0198 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 32
 
 
  1768 0199 0000 0000 		.long	.LASF55
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1822 0205 0000 0000 		.long	.LASF73
  1823 0209 3D        		.sleb128 61
  1824 020a 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 33
 
 
  1825 020b 0000 0000 		.long	.LASF74
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1879 0287 0000 0000 		.long	.LASF92
  1880 028b D000      		.sleb128 80
  1881 028d 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 34
 
 
  1882 028e 0000 0000 		.long	.LASF93
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1936 030c 0000 0000 		.long	.LASF111
  1937 0310 E300      		.sleb128 99
  1938 0312 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 35
 
 
  1939 0313 0000 0000 		.long	.LASF112
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  1993 0391 0000 0000 		.long	.LASF130
  1994 0395 F600      		.sleb128 118
  1995 0397 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 36
 
 
  1996 0398 0000 0000 		.long	.LASF131
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2050 0416 0000 0000 		.long	.LASF149
  2051 041a 8901      		.sleb128 137
  2052 041c 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 37
 
 
  2053 041d 0000 0000 		.long	.LASF150
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2107 048c 0000 0000 		.long	.LASF157
  2108 0490 03        		.byte	0x3
  2109 0491 9402      		.word	0x294
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 38
 
 
  2110 0493 4704 0000 		.long	0x447
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2164 0508 03        		.byte	0x3
  2165 0509 A502      		.word	0x2a5
  2166 050b CD04 0000 		.long	0x4cd
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 39
 
 
  2167 050f 02        		.byte	0x2
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2221 0584 0000 0000 		.long	.LASF170
  2222 0588 01        		.byte	0x1
  2223 0589 A701      		.word	0x1a7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 40
 
 
  2224 058b 7D00 0000 		.long	0x7d
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2278 060c 0000 0000 		.long	.LFE13
  2279 0610 02        		.byte	0x2
  2280 0611 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 41
 
 
  2281 0612 20        		.uleb128 0x20
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2335 068e 17        		.uleb128 0x17
  2336 068f 0000 0000 		.long	.LASF169
  2337 0693 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 42
 
 
  2338 0694 CF01      		.word	0x1cf
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2392 071e 0000 0000 		.long	.LASF183
  2393 0722 01        		.byte	0x1
  2394 0723 D601      		.word	0x1d6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 43
 
 
  2395 0725 7200 0000 		.long	0x72
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2449 0796 0000 0000 		.long	.LASF189
  2450 079a 01        		.byte	0x1
  2451 079b 3C01      		.word	0x13c
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 44
 
 
  2452 079d 01        		.byte	0x1
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2506 081c 02        		.byte	0x2
  2507 081d 2500 0000 		.long	0x25
  2508 0821 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 45
 
 
  2509 0822 7200 0000 		.long	0x72
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2563 0897 0000 0000 		.long	.LASF197
  2564 089b 01        		.byte	0x1
  2565 089c F5        		.byte	0xf5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 46
 
 
  2566 089d 8608 0000 		.long	0x886
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2620 0911 01        		.byte	0x1
  2621 0912 05        		.byte	0x5
  2622 0913 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 47
 
 
  2623 0914 0000 0000 		.long	usbDescriptorHidReport
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2677 0981 0C        		.uleb128 0xc
  2678 0982 7200 0000 		.long	0x72
  2679 0986 9109 0000 		.long	0x991
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 48
 
 
  2680 098a 0D        		.uleb128 0xd
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2734 0009 1B        		.uleb128 0x1b
  2735 000a 0E        		.uleb128 0xe
  2736 000b 11        		.uleb128 0x11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 49
 
 
  2737 000c 01        		.uleb128 0x1
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2791 0042 0B        		.uleb128 0xb
  2792 0043 0B        		.uleb128 0xb
  2793 0044 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 50
 
 
  2794 0045 0B        		.uleb128 0xb
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2848 007b 05        		.uleb128 0x5
  2849 007c 49        		.uleb128 0x49
  2850 007d 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 51
 
 
  2851 007e 38        		.uleb128 0x38
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2905 00b4 13        		.uleb128 0x13
  2906 00b5 00        		.byte	0x0
  2907 00b6 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 52
 
 
  2908 00b7 10        		.uleb128 0x10
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  2962 00ed 05        		.uleb128 0x5
  2963 00ee 00        		.byte	0x0
  2964 00ef 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 53
 
 
  2965 00f0 0E        		.uleb128 0xe
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3019 0126 13        		.uleb128 0x13
  3020 0127 02        		.uleb128 0x2
  3021 0128 06        		.uleb128 0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 54
 
 
  3022 0129 00        		.byte	0x0
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3076 015f 05        		.uleb128 0x5
  3077 0160 49        		.uleb128 0x49
  3078 0161 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 55
 
 
  3079 0162 00        		.byte	0x0
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3133 0198 00        		.byte	0x0
  3134 0199 1E        		.uleb128 0x1e
  3135 019a 0F        		.uleb128 0xf
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 56
 
 
  3136 019b 00        		.byte	0x0
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3190 01d1 0C        		.uleb128 0xc
  3191 01d2 3C        		.uleb128 0x3c
  3192 01d3 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 57
 
 
  3193 01d4 00        		.byte	0x0
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3243      00
  3244 0023 E505 0000 		.long	0x5e5
  3245 0027 6861 734D 		.string	"hasMacroUsb"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 58
 
 
  3245      6163 726F 
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3265      6465 7800 
  3266 00f9 CB09 0000 		.long	0x9cb
  3267 00fd 5F69 734D 		.string	"_isMultimediaPressed"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 59
 
 
  3267      756C 7469 
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3310      6E74 2E68 
  3310      00
  3311 0063 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 60
 
 
  3312 0064 00        		.uleb128 0x0
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3354 00cd 05        		.uleb128 0x5
  3355 00ce 02        		.byte	0x2
  3356 00cf 0000 0000 		.long	.LM4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 61
 
 
  3357 00d3 15        		.byte	0x15
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3411 0127 0000 0000 		.long	.LM15
  3412 012b 16        		.byte	0x16
  3413 012c 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 62
 
 
  3414 012d 05        		.uleb128 0x5
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3468 0182 0000 0000 		.long	.LM26
  3469 0186 15        		.byte	0x15
  3470 0187 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 63
 
 
  3471 0188 05        		.uleb128 0x5
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3525 01df 00        		.byte	0x0
  3526 01e0 05        		.uleb128 0x5
  3527 01e1 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 64
 
 
  3528 01e2 0000 0000 		.long	.LM38
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3582 023a 00        		.byte	0x0
  3583 023b 05        		.uleb128 0x5
  3584 023c 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 65
 
 
  3585 023d 0000 0000 		.long	.LM49
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3639 0294 02        		.byte	0x2
  3640 0295 0000 0000 		.long	.LM60
  3641 0299 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 66
 
 
  3642 029a 00        		.byte	0x0
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3696 02ee 02        		.byte	0x2
  3697 02ef 0000 0000 		.long	.LM71
  3698 02f3 18        		.byte	0x18
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 67
 
 
  3699 02f4 00        		.byte	0x0
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3753 034b 17        		.byte	0x17
  3754 034c 00        		.byte	0x0
  3755 034d 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 68
 
 
  3756 034e 02        		.byte	0x2
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3810 03a5 5B        		.byte	0x5b
  3811 03a6 00        		.byte	0x0
  3812 03a7 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 69
 
 
  3813 03a8 02        		.byte	0x2
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3867 0400 18        		.byte	0x18
  3868 0401 00        		.byte	0x0
  3869 0402 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 70
 
 
  3870 0403 02        		.byte	0x2
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3924 045a 05        		.uleb128 0x5
  3925 045b 02        		.byte	0x2
  3926 045c 0000 0000 		.long	.LM116
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 71
 
 
  3927 0460 15        		.byte	0x15
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  3981 04b6 15        		.byte	0x15
  3982 04b7 00        		.byte	0x0
  3983 04b8 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 72
 
 
  3984 04b9 02        		.byte	0x2
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4038 0511 19        		.byte	0x19
  4039 0512 00        		.byte	0x0
  4040 0513 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 73
 
 
  4041 0514 02        		.byte	0x2
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4095 056b 05        		.uleb128 0x5
  4096 056c 02        		.byte	0x2
  4097 056d 0000 0000 		.long	.LM149
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 74
 
 
  4098 0571 16        		.byte	0x16
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4152 05c4 1600 0000 		.section	.debug_str,"MS",@progbits,1
  4152      0200 1000 
  4152      0000 0101 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 75
 
 
  4152      FB0E 0A00 
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4180      00
  4181               	.LASF195:
  4182 008b 6578 7065 		.string	"expectReport"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 76
 
 
  4182      6374 5265 
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4206      5052 4556 
  4206      5F54 524B 
  4206      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 77
 
 
  4207               	.LASF63:
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4230      7400 
  4231               	.LASF213:
  4232 01d4 5F69 734D 		.string	"_isMultimediaPressed"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 78
 
 
  4232      756C 7469 
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4257               	.LASF134:
  4258 0269 4B45 595F 		.string	"KEY_WWW_REFRESH"
  4258      5757 575F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 79
 
 
  4258      5245 4652 
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4284      5247 5549 
  4284      00
  4285               	.LASF130:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 80
 
 
  4286 0309 4B45 595F 		.string	"KEY_WWW_HOME"
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4311               	.LASF99:
  4312 0395 4B45 595F 		.string	"KEY_KP_PLUS"
  4312      4B50 5F50 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 81
 
 
  4312      4C55 5300 
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4337               	.LASF56:
  4338 0433 4B45 595F 		.string	"KEY_SPACE"
  4338      5350 4143 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 82
 
 
  4338      4500 
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4367               	.LASF49:
  4368 04bf 4B45 595F 		.string	"KEY_8"
  4368      3800 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 83
 
 
  4369               	.LASF50:
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4403               	.LASF29:
  4404 0535 4B45 595F 		.string	"KEY_N"
  4404      4E00 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 84
 
 
  4405               	.LASF30:
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4436      4E45 5854 
  4436      5F54 524B 
  4436      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 85
 
 
  4437               	.LASF177:
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4462      6579 4D61 
  4462      7070 696E 
  4462      6755 7362 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 86
 
 
  4463               	.LASF3:
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4490 06e2 4B45 595F 		.string	"KEY_POSTFail"
  4490      504F 5354 
  4490      4661 696C 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 87
 
 
  4490      00
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4518      4C00 
  4519               	.LASF203:
  4520 076f 7573 6254 		.string	"usbTxStatus1"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 88
 
 
  4520      7853 7461 
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4548      4633 00
  4549               	.LASF73:
  4550 07fb 4B45 595F 		.string	"KEY_F4"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 89
 
 
  4550      4634 00
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4581               	.LASF202:
  4582 0886 7573 6244 		.string	"usbDescriptorHidReport"
  4582      6573 6372 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 90
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 90
 
 
  4582      6970 746F 
@@ -5370,38 +5370,38 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 1
  4592      7300 
  4593               	.global __do_copy_data
  4594               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 91
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 91
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbmain.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:18     .text:00000000 makeReportBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1080   .bss:00000000 _isMultimediaPressed
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1085   .bss:00000005 reportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:18     .text:00000000 makeReportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1080   .bss:00000000 _isMultimediaPressed
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1085   .bss:00000005 reportBuffer
                             *COM*:00000001 reportIndex
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:148    .text:00000090 hasMacroUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1082   .bss:00000002 _needRelease
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:175    .text:000000ac clearReportBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:198    .text:000000c2 scanMacroUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1092   .bss:0000000e _prevPressedBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:336    .text:00000190 scanKeyUSB
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1083   .bss:00000003 prevModifier.2297
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:633    .text:00000354 usb_main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1091   .bss:0000000d idleRate
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:148    .text:00000090 hasMacroUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1082   .bss:00000002 _needRelease
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:175    .text:000000ac clearReportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:198    .text:000000c2 scanMacroUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1092   .bss:0000000e _prevPressedBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:336    .text:00000190 scanKeyUSB
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1083   .bss:00000003 prevModifier.2297
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:633    .text:00000354 usb_main
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1091   .bss:0000000d idleRate
                              .bss:00000001 _isInit
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:817    .text:00000462 prepareKeyMappingUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:837    .text:00000472 initInterfaceUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:856    .text:00000482 usbFunctionSetup
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1084   .bss:00000004 expectReport
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:1089   .data:00000000 protocolVer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:952    .text:00000506 usbFunctionWrite
-C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s:989    .progmem.data:00000000 usbDescriptorHidReport
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:817    .text:00000462 prepareKeyMappingUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:837    .text:00000472 initInterfaceUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:856    .text:00000482 usbFunctionSetup
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1084   .bss:00000004 expectReport
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:1089   .data:00000000 protocolVer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:952    .text:00000506 usbFunctionWrite
+C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s:989    .progmem.data:00000000 usbDescriptorHidReport
 
 UNDEFINED SYMBOLS
 keycode_USB_multimedia
@@ -5430,7 +5430,7 @@ interfaceCount
 usbPoll
 usbTxStatus1
 usbSetInterrupt
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccojSUHN.s 			page 92
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc9J5r6C.s 			page 92
 
 
 startKeyMappingOnBoot
