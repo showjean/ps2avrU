@@ -14,11 +14,12 @@
 
 #define KEY_FN          254
 #define KEY_LED         253
-#define KEY_BEYOND_FN   252
+#define KEY_BEYOND_FN   252     // fn2 toggle
 #define KEY_NOR         251         // beyond_fn에서 0 레이어로 점프, 0레이어의 같은 위치의 키값도 전송된다.
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
-#define KEY_MAX         KEY_LED_DOWN     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_FN2         248
+#define KEY_MAX         KEY_FN2     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 enum {  // for macro
     KEY_MAC1 = 201,

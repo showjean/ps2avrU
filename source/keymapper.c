@@ -60,7 +60,7 @@ const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
 
 const char str_select_number[] PROGMEM = "input Macro Index (01~12, must 2 numbers) : ";
 const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
-const char str_input_macro[] PROGMEM = "input key (max 16 keys, stop : press ESC during 1 sec)";
+const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC during 1 sec)";
 const char str_invalid_macro_number[] PROGMEM = "invalid Index, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
 

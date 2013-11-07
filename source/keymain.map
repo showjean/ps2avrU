@@ -204,7 +204,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x4896
+.text           0x00000000     0x48b2
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -449,134 +449,134 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00002b4e                popM
                 0x00002ba4                isMacroProcessEnd
  .text          0x00002d62        0x0 keymap.o
- .text          0x00002d62      0x324 keymatrix.o
-                0x00002fe2                applyFN
+ .text          0x00002d62      0x330 keymatrix.o
+                0x00002fee                applyFN
                 0x00002ecc                getLayer
                 0x00002d86                isAllKeyRelease
                 0x00002da2                getLiveMatrix
                 0x00002d62                clearMatrix
                 0x00002eae                setCurrentMatrix
- .text          0x00003086      0x908 ps2main.o
-                0x000033b6                putKey
-                0x00003582                tx_state
-                0x0000337c                prepareKeyMappingPs2
-                0x0000325a                pushKey
-                0x00003164                clear
-                0x00003402                scanKeyPS2
-                0x0000319c                keymap_init
-                0x0000310e                pop
-                0x00003396                hasMacroPs2
-                0x0000359a                ps2_main
-                0x00003146                isEmpty
-                0x00003086                push
-                0x000033a6                initInterfacePs2
- .text          0x0000398e      0x52c usbmain.o
-                0x00003ce2                usb_main
-                0x00003a3a                clearReportBuffer
-                0x00003df0                prepareKeyMappingUsb
-                0x00003a1e                hasMacroUsb
-                0x00003e10                usbFunctionSetup
-                0x00003e00                initInterfaceUsb
-                0x0000398e                makeReportBuffer
-                0x00003b1e                scanKeyUSB
-                0x00003a50                scanMacroUsb
-                0x00003e94                usbFunctionWrite
- .text          0x00003eba       0x38 udelay.o
-                0x00003eba                _delay_us_m
- .text          0x00003ef2      0x210 keymain.o
-                0x00003ef8                setUsbOff
-                0x00003efe                getUserSelectedInterface
-                0x00003f84                main
-                0x00003ef2                setUsbOn
-                0x00003f10                clearTimers
-                0x00003f70                clearInterface
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memmove.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega32.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega32.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
- .text          0x00004102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x00004102                . = ALIGN (0x2)
+ .text          0x00003092      0x918 ps2main.o
+                0x000033c2                putKey
+                0x0000358e                tx_state
+                0x00003388                prepareKeyMappingPs2
+                0x00003266                pushKey
+                0x00003170                clear
+                0x0000340e                scanKeyPS2
+                0x000031a8                keymap_init
+                0x0000311a                pop
+                0x000033a2                hasMacroPs2
+                0x000035a6                ps2_main
+                0x00003152                isEmpty
+                0x00003092                push
+                0x000033b2                initInterfacePs2
+ .text          0x000039aa      0x52c usbmain.o
+                0x00003cfe                usb_main
+                0x00003a56                clearReportBuffer
+                0x00003e0c                prepareKeyMappingUsb
+                0x00003a3a                hasMacroUsb
+                0x00003e2c                usbFunctionSetup
+                0x00003e1c                initInterfaceUsb
+                0x000039aa                makeReportBuffer
+                0x00003b3a                scanKeyUSB
+                0x00003a6c                scanMacroUsb
+                0x00003eb0                usbFunctionWrite
+ .text          0x00003ed6       0x38 udelay.o
+                0x00003ed6                _delay_us_m
+ .text          0x00003f0e      0x210 keymain.o
+                0x00003f14                setUsbOff
+                0x00003f1a                getUserSelectedInterface
+                0x00003fa0                main
+                0x00003f0e                setUsbOn
+                0x00003f2c                clearTimers
+                0x00003f8c                clearInterface
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memmove.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega32.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega32.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .text          0x0000411e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x0000411e                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00004102       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00004102                __mulsi3
- .text.libgcc   0x00004140       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                0x00004140                __udivmodqi4
- .text.libgcc   0x00004158       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
-                0x00004158                __udivmodhi4
- .text.libgcc   0x00004180       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
-                0x00004180                __divmodhi4
-                0x00004180                _div
- .text.libgcc   0x000041a6       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x000041a6                __udivmodsi4
- .text.libgcc   0x000041ea       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
-                0x000041ea                __divmodsi4
- .text.libgcc   0x00004220        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00004220        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00004220        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000411e       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x0000411e                __mulsi3
+ .text.libgcc   0x0000415c       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+                0x0000415c                __udivmodqi4
+ .text.libgcc   0x00004174       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x00004174                __udivmodhi4
+ .text.libgcc   0x0000419c       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                0x0000419c                __divmodhi4
+                0x0000419c                _div
+ .text.libgcc   0x000041c2       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x000041c2                __udivmodsi4
+ .text.libgcc   0x00004206       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                0x00004206                __divmodsi4
+ .text.libgcc   0x0000423c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000423c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000423c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
  .text.avr-libc
-                0x00004220       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
-                0x00004220                memcpy
+                0x0000423c       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                0x0000423c                memcpy
  .text.avr-libc
-                0x00004232       0x24 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memmove.o)
-                0x00004232                memmove
+                0x0000424e       0x24 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memmove.o)
+                0x0000424e                memmove
  .text.avr-libc
-                0x00004256       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
-                0x00004256                itoa
+                0x00004272       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00004272                itoa
  .text.avr-libc
-                0x00004298       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00004298                sprintf
+                0x000042b4       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x000042b4                sprintf
  .text.avr-libc
-                0x000042e0      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x000042e0                vfprintf
+                0x000042fc      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000042fc                vfprintf
  .text.avr-libc
-                0x0000469a       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega32.o)
-                0x0000469a                __eerd_byte_m32
+                0x000046b6       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega32.o)
+                0x000046b6                __eerd_byte_m32
  .text.avr-libc
-                0x000046aa       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega32.o)
-                0x000046ac                __eewr_r18_m32
-                0x000046aa                __eewr_byte_m32
+                0x000046c6       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega32.o)
+                0x000046c8                __eewr_r18_m32
+                0x000046c6                __eewr_byte_m32
  .text.avr-libc
-                0x000046c4       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x000046c4                strnlen_P
+                0x000046e0       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x000046e0                strnlen_P
  .text.avr-libc
-                0x000046da       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x000046da                strnlen
+                0x000046f6       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x000046f6                strnlen
  .text.avr-libc
-                0x000046f0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x000046f0                strrev
+                0x0000470c       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x0000470c                strrev
  .text.avr-libc
-                0x00004710       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00004710                fputc
+                0x0000472c       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x0000472c                fputc
  .text.avr-libc
-                0x00004768       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00004768                __ultoa_invert
- .text.libgcc   0x00004824       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x00004824                __prologue_saves__
- .text.libgcc   0x0000485c       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x0000485c                __epilogue_restores__
-                0x00004892                . = ALIGN (0x2)
+                0x00004784       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00004784                __ultoa_invert
+ .text.libgcc   0x00004840       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00004840                __prologue_saves__
+ .text.libgcc   0x00004878       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00004878                __epilogue_restores__
+                0x000048ae                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00004892        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00004892                exit
-                0x00004892                _exit
+ .fini9         0x000048ae        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x000048ae                exit
+                0x000048ae                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -595,11 +595,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00004892        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x000048ae        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00004896                _etext = .
+                0x000048b2                _etext = .
 
-.data           0x00800060       0x62 load address 0x00004896
+.data           0x00800060       0x62 load address 0x000048b2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -674,7 +674,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .bss           0x00800245        0x0 keymap.o
  .bss           0x00800245        0x3 keymatrix.o
                 0x00800245                isBeyondFN
-                0x00800246                currentKeymap
+                0x00800246                _currentKeymap
  .bss           0x00800248       0xe2 ps2main.o
                 0x00800248                txScanCode
  .bss           0x0080032a       0x3e usbmain.o
@@ -744,8 +744,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  COMMON         0x00800538        0x1 usbmain.o
                 0x00800538                reportIndex
                 0x00800539                PROVIDE (__bss_end, .)
-                0x00004896                __data_load_start = LOADADDR (.data)
-                0x000048f8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000048b2                __data_load_start = LOADADDR (.data)
+                0x00004914                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800539        0x0
                 0x00800539                PROVIDE (__noinit_start, .)
@@ -833,7 +833,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000180       0x20 keymain.o
 
 .debug_pubnames
-                0x00000000     0x11d1
+                0x00000000     0x11d2
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000      0x302 ../avrlib/timer.o
@@ -854,15 +854,15 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x00000d3d       0xe8 keymap.o
  .debug_pubnames
-                0x00000e25       0xc4 keymatrix.o
+                0x00000e25       0xc5 keymatrix.o
  .debug_pubnames
-                0x00000ee9      0x106 ps2main.o
+                0x00000eea      0x106 ps2main.o
  .debug_pubnames
-                0x00000fef      0x116 usbmain.o
+                0x00000ff0      0x116 usbmain.o
  .debug_pubnames
-                0x00001105       0x22 udelay.o
+                0x00001106       0x22 udelay.o
  .debug_pubnames
-                0x00001127       0xaa keymain.o
+                0x00001128       0xaa keymain.o
 
 .debug_info     0x00000000     0x5c51
  *(.debug_info)
@@ -901,7 +901,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_abbrev  0x000013ec       0x79 udelay.o
  .debug_abbrev  0x00001465      0x208 keymain.o
 
-.debug_line     0x00000000     0x3f0e
+.debug_line     0x00000000     0x3f26
  *(.debug_line)
  .debug_line    0x00000000      0x5db ../avrlib/timer.o
  .debug_line    0x000005db      0x3cb keysta.o
@@ -913,11 +913,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_line    0x000023f2      0x13b ps2avru_util.o
  .debug_line    0x0000252d      0x30e macrobuffer.o
  .debug_line    0x0000283b       0x83 keymap.o
- .debug_line    0x000028be      0x392 keymatrix.o
- .debug_line    0x00002c50      0x829 ps2main.o
- .debug_line    0x00003479      0x5de usbmain.o
- .debug_line    0x00003a57       0x62 udelay.o
- .debug_line    0x00003ab9      0x455 keymain.o
+ .debug_line    0x000028be      0x39a keymatrix.o
+ .debug_line    0x00002c58      0x839 ps2main.o
+ .debug_line    0x00003491      0x5de usbmain.o
+ .debug_line    0x00003a6f       0x62 udelay.o
+ .debug_line    0x00003ad1      0x455 keymain.o
 
 .debug_frame    0x00000000      0xa10
  *(.debug_frame)
@@ -935,7 +935,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_frame   0x00000970       0x20 udelay.o
  .debug_frame   0x00000990       0x80 keymain.o
 
-.debug_str      0x00000000     0x1e77
+.debug_str      0x00000000     0x1e78
  *(.debug_str)
  .debug_str     0x00000000      0x384 ../avrlib/timer.o
                                 0x3bd (size before relaxing)
@@ -957,15 +957,15 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                                 0x6cf (size before relaxing)
  .debug_str     0x00001936       0xaf keymap.o
                                 0x15b (size before relaxing)
- .debug_str     0x000019e5       0xd5 keymatrix.o
-                                0x6dc (size before relaxing)
- .debug_str     0x00001aba      0x18f ps2main.o
+ .debug_str     0x000019e5       0xd6 keymatrix.o
+                                0x6dd (size before relaxing)
+ .debug_str     0x00001abb      0x18f ps2main.o
                                 0x893 (size before relaxing)
- .debug_str     0x00001c49      0x168 usbmain.o
+ .debug_str     0x00001c4a      0x168 usbmain.o
                                 0x8de (size before relaxing)
- .debug_str     0x00001db1       0x15 udelay.o
+ .debug_str     0x00001db2       0x15 udelay.o
                                  0xda (size before relaxing)
- .debug_str     0x00001dc6       0xb1 keymain.o
+ .debug_str     0x00001dc7       0xb1 keymain.o
                                 0x767 (size before relaxing)
 
 .debug_loc      0x00000000     0x17c1
@@ -1105,6 +1105,7 @@ __vector_9                                        ../avrlib/timer.o
                                                   c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
 __vector_default                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
 __vectors                                         c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+_currentKeymap                                    keymatrix.o
 _delay_us_m                                       udelay.o
                                                   keymain.o
                                                   keymatrix.o
@@ -1154,7 +1155,6 @@ clearTimers                                       keymain.o
 countKeyMappingEnabled                            keymapper.o
 countSleep                                        sleep.o
                                                   usbmain.o
-currentKeymap                                     keymatrix.o
 currentMatrix                                     keymain.o
                                                   usbmain.o
                                                   ps2main.o

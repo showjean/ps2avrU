@@ -28,7 +28,7 @@ uint8_t isBeyondFN = 0;	 //KEY_BEYOND_FN state
 // 17*8 bit matrix
 uint8_t prevMatrix[17];
 uint8_t currentMatrix[17];  ///< contains current state of the keyboard
-uint8_t currentKeymap = 0;
+uint8_t _currentKeymap = 0;
 
 
 /* ------------------------------------------------------------------------- */
@@ -130,10 +130,10 @@ uint8_t getLayer(void) {
 
 	for(col=0;col<8;col++)
 		for(row=0;row<17;row++){			
-			//keyidx = pgm_read_byte(&keymap_code[currentKeymap][row][col]);
-			keyidx = getCurrentKeycode(currentKeymap, row, col);
+			//keyidx = pgm_read_byte(&keymap_code[_currentKeymap][row][col]);
+			keyidx = getCurrentKeycode(_currentKeymap, row, col);
 
-			if(keyidx == KEY_FN || (keyidx == KEY_NOR && currentKeymap == 2)) {
+			if(keyidx == KEY_FN || keyidx == KEY_FN2 || (keyidx == KEY_NOR && _currentKeymap == 2)) {
 				cur = 0;
 				DDRCOLUMNS  = BV(col);		// 해당 col을 출력으로 설정, 나머지 입력
 				PORTCOLUMNS = ~BV(col);	// 해당 col output low, 나머지 컬럼을 풀업 저항
@@ -162,10 +162,12 @@ uint8_t getLayer(void) {
 				if(cur){
 					// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
 					if(keyidx == KEY_FN){
-						//currentKeymap = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
+						//_currentKeymap = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
 						return 1;
+					}else if(keyidx == KEY_FN2){
+						return 2;					
 					}else if(keyidx == KEY_NOR){
-						// currentKeymap은 2를 유지하면서 스캔할 레이어만 0으로 반환;
+						// _currentKeymap은 2를 유지하면서 스캔할 레이어만 0으로 반환;
 						return 0;
 					}
 				}
@@ -173,11 +175,11 @@ uint8_t getLayer(void) {
 		}
 	
 	if(isBeyondFN == 1) {
-		currentKeymap = 2;
+		_currentKeymap = 2;
 		return 2;
 	}
 		
-	currentKeymap = 0;
+	_currentKeymap = 0;
 	return 0;
 }
 
