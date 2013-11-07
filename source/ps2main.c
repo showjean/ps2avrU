@@ -422,49 +422,50 @@ void ps2_main(void){
 				default:
 					switch(rxed) {
 						case 0xEE: /* echo */
-							// DEBUG_PRINT((" echo \n"));
+							DEBUG_PRINT((" echo \n"));
 							tx_state(0xEE, m_state);
 							continue;
 						case 0xF2: /* read id */
-							// DEBUG_PRINT((" read id \n"));
+							DEBUG_PRINT((" read id \n"));
 							tx_state(0xFA, STA_WAIT_ID);
 							continue;
 						case 0xFF: /* reset */
-							// DEBUG_PRINT((" reset \n"));
+							DEBUG_PRINT((" reset \n"));
 							tx_state(0xFA, STA_WAIT_RESET);
 							continue;
 						case 0xFE: /* resend */
-							// DEBUG_PRINT((" resend \n"));
+							DEBUG_PRINT((" resend \n"));
 							tx_state(lastSent, m_state);
 							continue;
 						case 0xF0: /* scan code set */
-							// DEBUG_PRINT((" scan code set \n"));
+							DEBUG_PRINT((" scan code set \n"));
 							tx_state(0xFA, STA_WAIT_SCAN_SET);
 							continue;
 						case 0xED: /* led indicators */	
-							// DEBUG_PRINT((" led indicators \n"));	
+							DEBUG_PRINT((" led indicators \n"));	
 							tx_state(0xFA, STA_WAIT_LEDS);
 							continue;
 						case 0xF3:
-							// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+							DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
 							tx_state(0xFA, STA_WAIT_AUTOREP);
 							continue;
 						case 0xF4:		// enable
-							// DEBUG_PRINT((" enable \n"));
+							DEBUG_PRINT((" enable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF5:		// disable
-							// DEBUG_PRINT((" disable \n"));
+							DEBUG_PRINT((" disable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF6:		// Set Default
-							// DEBUG_PRINT((" Set Default \n"));
+							DEBUG_PRINT((" Set Default \n"));
 							TYPEMATIC_DELAY=1;
 							TYPEMATIC_REPEAT=5;
 							clear();
 						default:
-							// DEBUG_PRINT((" default \n"));
+							DEBUG_PRINT((" default \n"));
 							tx_state(0xFA, STA_NORMAL);
+							initInterfacePs2();
 							break;
 					}
 					continue;
@@ -503,9 +504,8 @@ void ps2_main(void){
 					continue;
 				case STA_WAIT_LEDS:
 					// Reflect LED states to PD0~2
-
 					initInterfacePs2();
-
+					
 					uint8_t ledstate = 0;
 
 					// scroll lock
