@@ -2,7 +2,7 @@
 #define KEYMATRIX_C
 
 #include "timer.h"
-#include "keymap.h"
+#include "print.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -13,6 +13,7 @@
 #include <string.h>
 #include "udelay.h"
 
+#include "keymap.h"
 #include "keymatrix.h"
 #include "hardwareinfo.h"
 #include "ledrender.h"
@@ -76,7 +77,8 @@ uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 
 	if(keyidx == KEY_FN) return 0;
 
-	if(isDown) {	
+	if(isDown) {
+        setDualAction(keyidx);	
 		applyKeyDownForFullLED();
 
 		if((keyidx ==  KEY_BEYOND_FN) || (_isExtraFNDown && keyidx == BEYOND_FN_CANCEL_KEY)){	// beyond_fn을 활성화;
@@ -105,17 +107,18 @@ uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 		}else if(keyidx == KEY_LED_DOWN){
 			reduceLedBrightness();
 			return 0;
-		}else if(keyidx >= KEY_MAX){
+		}/*else if(keyidx >= KEY_MAX){
 			return 0;
-		}
-	}else{	// isDown : false
+		}*/
+	}else{	// up 
+
 		if(keyidx ==  KEY_BEYOND_FN){	// beyond_fn 			 
 			 return 0;
 		}else if(keyidx == EXTRA_FN){
 			_isExtraFNDown = 0;
-		}else if(keyidx >= KEY_MAX){
+		}/*else if(keyidx >= KEY_MAX){
 			return 0;
-		}
+		}*/
 	}
 
 	return 1;
@@ -132,6 +135,10 @@ uint8_t getLayer(void) {
 		for(row=0;row<17;row++){			
 			//keyidx = pgm_read_byte(&keymap_code[_currentKeymap][row][col]);
 			keyidx = getCurrentKeycode(_currentKeymap, row, col);
+
+			if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) { 
+		        keyidx = dualActionMaskDown[keyidx - (KEY_dualAction + 1)];
+		    }
 
 			if(keyidx == KEY_FN || keyidx == KEY_FN2 || (keyidx == KEY_NOR && _currentKeymap == 2)) {
 				cur = 0;

@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 1
 
 
    1               		.file	"keymap.c"
@@ -16,1332 +16,2341 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 1
   13               	.Ldebug_line0:
   14               		.text
   15               	.Ltext0:
-  16               	.global	keycode_set2
-  17               		.section	.progmem.data,"a",@progbits
-  18               		.type	keycode_set2, @object
-  19               		.size	keycode_set2, 144
-  20               	keycode_set2:
-  21 0000 00        		.byte	0
-  22 0001 00        		.byte	0
-  23 0002 FC        		.byte	-4
-  24 0003 00        		.byte	0
-  25 0004 1C        		.byte	28
-  26 0005 32        		.byte	50
-  27 0006 21        		.byte	33
-  28 0007 23        		.byte	35
-  29 0008 24        		.byte	36
-  30 0009 2B        		.byte	43
-  31 000a 34        		.byte	52
-  32 000b 33        		.byte	51
-  33 000c 43        		.byte	67
-  34 000d 3B        		.byte	59
-  35 000e 42        		.byte	66
-  36 000f 4B        		.byte	75
-  37 0010 3A        		.byte	58
-  38 0011 31        		.byte	49
-  39 0012 44        		.byte	68
-  40 0013 4D        		.byte	77
-  41 0014 15        		.byte	21
-  42 0015 2D        		.byte	45
-  43 0016 1B        		.byte	27
-  44 0017 2C        		.byte	44
-  45 0018 3C        		.byte	60
-  46 0019 2A        		.byte	42
-  47 001a 1D        		.byte	29
-  48 001b 22        		.byte	34
-  49 001c 35        		.byte	53
-  50 001d 1A        		.byte	26
-  51 001e 16        		.byte	22
-  52 001f 1E        		.byte	30
-  53 0020 26        		.byte	38
-  54 0021 25        		.byte	37
-  55 0022 2E        		.byte	46
-  56 0023 36        		.byte	54
-  57 0024 3D        		.byte	61
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 2
+  16               	.global	isCanceledDualAction
+  17               		.type	isCanceledDualAction, @function
+  18               	isCanceledDualAction:
+  19               	.LFB4:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8091 0000 		lds r24,_isCanceledDualAction
+  25               	/* epilogue start */
+  26 0004 0895      		ret
+  27               	.LFE4:
+  28               		.size	isCanceledDualAction, .-isCanceledDualAction
+  29               	.global	setDualAction
+  30               		.type	setDualAction, @function
+  31               	setDualAction:
+  32               	.LFB6:
+  33               	.LM3:
+  34               	.LVL0:
+  35               	/* prologue: function */
+  36               	/* frame size = 0 */
+  37 0006 982F      		mov r25,r24
+  38               	.LM4:
+  39 0008 865D      		subi r24,lo8(-(42))
+  40               	.LVL1:
+  41 000a 8031      		cpi r24,lo8(16)
+  42 000c 00F4      		brsh .L4
+  43 000e 8091 0000 		lds r24,_isActiveDualAction
+  44 0012 8823      		tst r24
+  45 0014 01F4      		brne .L4
+  46               	.LM5:
+  47 0016 9093 0000 		sts dualActionKeyIndex,r25
+  48               	.LM6:
+  49 001a 81E0      		ldi r24,lo8(1)
+  50 001c 8093 0000 		sts _isActiveDualAction,r24
+  51 0020 0895      		ret
+  52               	.L4:
+  53               	.LM7:
+  54 0022 8091 0000 		lds r24,dualActionKeyIndex
+  55 0026 8823      		tst r24
+  56 0028 01F0      		breq .L6
+  57               	.LM8:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 2
 
 
-  58 0025 3E        		.byte	62
-  59 0026 46        		.byte	70
-  60 0027 45        		.byte	69
-  61 0028 5A        		.byte	90
-  62 0029 76        		.byte	118
-  63 002a 66        		.byte	102
-  64 002b 0D        		.byte	13
-  65 002c 29        		.byte	41
-  66 002d 4E        		.byte	78
-  67 002e 55        		.byte	85
-  68 002f 54        		.byte	84
-  69 0030 5B        		.byte	91
-  70 0031 5D        		.byte	93
-  71 0032 5D        		.byte	93
-  72 0033 4C        		.byte	76
-  73 0034 52        		.byte	82
-  74 0035 0E        		.byte	14
-  75 0036 41        		.byte	65
-  76 0037 49        		.byte	73
-  77 0038 4A        		.byte	74
-  78 0039 58        		.byte	88
-  79 003a 05        		.byte	5
-  80 003b 06        		.byte	6
-  81 003c 04        		.byte	4
-  82 003d 0C        		.byte	12
-  83 003e 03        		.byte	3
-  84 003f 0B        		.byte	11
-  85 0040 83        		.byte	-125
-  86 0041 0A        		.byte	10
-  87 0042 01        		.byte	1
-  88 0043 09        		.byte	9
-  89 0044 78        		.byte	120
-  90 0045 07        		.byte	7
-  91 0046 7C        		.byte	124
-  92 0047 7E        		.byte	126
-  93 0048 7C        		.byte	124
-  94 0049 70        		.byte	112
-  95 004a 6C        		.byte	108
-  96 004b 7D        		.byte	125
-  97 004c 71        		.byte	113
-  98 004d 69        		.byte	105
-  99 004e 7A        		.byte	122
- 100 004f 74        		.byte	116
- 101 0050 6B        		.byte	107
- 102 0051 72        		.byte	114
- 103 0052 75        		.byte	117
- 104 0053 77        		.byte	119
- 105 0054 4A        		.byte	74
- 106 0055 7C        		.byte	124
- 107 0056 7B        		.byte	123
- 108 0057 79        		.byte	121
- 109 0058 5A        		.byte	90
- 110 0059 69        		.byte	105
- 111 005a 72        		.byte	114
- 112 005b 7A        		.byte	122
- 113 005c 6B        		.byte	107
- 114 005d 73        		.byte	115
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 3
+  58 002a 81E0      		ldi r24,lo8(1)
+  59 002c 8093 0000 		sts _isCanceledDualAction,r24
+  60               	.L6:
+  61 0030 0895      		ret
+  62               	.LFE6:
+  63               		.size	setDualAction, .-setDualAction
+  64               	.global	getDualActionDownKeyIdex
+  65               		.type	getDualActionDownKeyIdex, @function
+  66               	getDualActionDownKeyIdex:
+  67               	.LFB7:
+  68               	.LM9:
+  69               	.LVL2:
+  70               	/* prologue: function */
+  71               	/* frame size = 0 */
+  72 0032 E82F      		mov r30,r24
+  73               	.LM10:
+  74 0034 865D      		subi r24,lo8(-(42))
+  75               	.LVL3:
+  76 0036 8031      		cpi r24,lo8(16)
+  77 0038 00F4      		brsh .L8
+  78 003a 8091 0000 		lds r24,_isCanceledDualAction
+  79 003e 8823      		tst r24
+  80 0040 01F0      		breq .L8
+  81               	.LM11:
+  82 0042 F0E0      		ldi r31,lo8(0)
+  83               	.LVL4:
+  84 0044 E050      		subi r30,lo8(-(dualActionMaskDown-214))
+  85 0046 F040      		sbci r31,hi8(-(dualActionMaskDown-214))
+  86               	.LVL5:
+  87 0048 E081      		ld r30,Z
+  88               	.LVL6:
+  89               	.L8:
+  90               	.LM12:
+  91 004a 8E2F      		mov r24,r30
+  92               	/* epilogue start */
+  93 004c 0895      		ret
+  94               	.LFE7:
+  95               		.size	getDualActionDownKeyIdex, .-getDualActionDownKeyIdex
+  96               	.global	applyDualAction
+  97               		.type	applyDualAction, @function
+  98               	applyDualAction:
+  99               	.LFB5:
+ 100               	.LM13:
+ 101 004e 1F93      		push r17
+ 102               	/* prologue: function */
+ 103               	/* frame size = 0 */
+ 104               	.LM14:
+ 105 0050 0E94 0000 		call isAllKeyRelease
+ 106 0054 892B      		or r24,r25
+ 107 0056 01F0      		breq .L12
+ 108               	.LM15:
+ 109 0058 1092 0000 		sts _isActiveDualAction,__zero_reg__
+ 110               	.LM16:
+ 111 005c 1092 0000 		sts _isCanceledDualAction,__zero_reg__
+ 112               	.LM17:
+ 113 0060 E091 0000 		lds r30,dualActionKeyIndex
+ 114 0064 EE23      		tst r30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 3
 
 
- 115 005e 74        		.byte	116
- 116 005f 6C        		.byte	108
- 117 0060 75        		.byte	117
- 118 0061 7D        		.byte	125
- 119 0062 70        		.byte	112
- 120 0063 71        		.byte	113
- 121 0064 61        		.byte	97
- 122 0065 2F        		.byte	47
- 123 0066 00        		.byte	0
- 124 0067 14        		.byte	20
- 125 0068 12        		.byte	18
- 126 0069 11        		.byte	17
- 127 006a 1F        		.byte	31
- 128 006b 14        		.byte	20
- 129 006c 59        		.byte	89
- 130 006d 11        		.byte	17
- 131 006e 27        		.byte	39
- 132 006f 00        		.byte	0
- 133 0070 00        		.byte	0
- 134 0071 37        		.byte	55
- 135 0072 3F        		.byte	63
- 136 0073 5E        		.byte	94
- 137 0074 48        		.byte	72
- 138 0075 10        		.byte	16
- 139 0076 3A        		.byte	58
- 140 0077 38        		.byte	56
- 141 0078 30        		.byte	48
- 142 0079 28        		.byte	40
- 143 007a 20        		.byte	32
- 144 007b 18        		.byte	24
- 145 007c 4D        		.byte	77
- 146 007d 15        		.byte	21
- 147 007e 3B        		.byte	59
- 148 007f 34        		.byte	52
- 149 0080 23        		.byte	35
- 150 0081 32        		.byte	50
- 151 0082 21        		.byte	33
- 152 0083 50        		.byte	80
- 153 0084 2B        		.byte	43
- 154 0085 40        		.byte	64
- 155 0086 4B        		.byte	75
- 156 0087 1C        		.byte	28
- 157 0088 43        		.byte	67
- 158 0089 22        		.byte	34
- 159 008a 1D        		.byte	29
- 160 008b 00        		.byte	0
- 161 008c 00        		.byte	0
- 162 008d F1        		.byte	-15
- 163 008e F2        		.byte	-14
- 164 008f 00        		.byte	0
- 165               	.global	keycode_USB_multimedia
- 166               		.type	keycode_USB_multimedia, @object
- 167               		.size	keycode_USB_multimedia, 52
- 168               	keycode_USB_multimedia:
- 169 0090 0000      		.word	0
- 170 0092 0000      		.word	0
- 171 0094 0000      		.word	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 4
+ 115 0066 01F0      		breq .L12
+ 116               	.LBB4:
+ 117               	.LM18:
+ 118 0068 F0E0      		ldi r31,lo8(0)
+ 119 006a E050      		subi r30,lo8(-(dualActionMaskUp-214))
+ 120 006c F040      		sbci r31,hi8(-(dualActionMaskUp-214))
+ 121 006e 1081      		ld r17,Z
+ 122               	.LVL7:
+ 123               	.LM19:
+ 124 0070 812F      		mov r24,r17
+ 125 0072 0E94 0000 		call pushM
+ 126               	.LM20:
+ 127 0076 812F      		mov r24,r17
+ 128 0078 0E94 0000 		call pushM
+ 129               	.LM21:
+ 130 007c 1092 0000 		sts dualActionKeyIndex,__zero_reg__
+ 131               	.L12:
+ 132               	/* epilogue start */
+ 133               	.LBE4:
+ 134               	.LM22:
+ 135 0080 1F91      		pop r17
+ 136               	.LVL8:
+ 137 0082 0895      		ret
+ 138               	.LFE5:
+ 139               		.size	applyDualAction, .-applyDualAction
+ 140               	.global	dualActionMaskDown
+ 141               		.data
+ 142               		.type	dualActionMaskDown, @object
+ 143               		.size	dualActionMaskDown, 16
+ 144               	dualActionMaskDown:
+ 145 0000 FE        		.byte	-2
+ 146 0001 FE        		.byte	-2
+ 147 0002 F8        		.byte	-8
+ 148 0003 F8        		.byte	-8
+ 149 0004 6C        		.byte	108
+ 150 0005 6C        		.byte	108
+ 151 0006 68        		.byte	104
+ 152 0007 68        		.byte	104
+ 153 0008 6D        		.byte	109
+ 154 0009 6D        		.byte	109
+ 155 000a 69        		.byte	105
+ 156 000b 69        		.byte	105
+ 157 000c 6B        		.byte	107
+ 158 000d 6B        		.byte	107
+ 159 000e 67        		.byte	103
+ 160 000f 67        		.byte	103
+ 161               	.global	dualActionMaskUp
+ 162               		.type	dualActionMaskUp, @object
+ 163               		.size	dualActionMaskUp, 16
+ 164               	dualActionMaskUp:
+ 165 0010 8E        		.byte	-114
+ 166 0011 8D        		.byte	-115
+ 167 0012 8E        		.byte	-114
+ 168 0013 8D        		.byte	-115
+ 169 0014 8E        		.byte	-114
+ 170 0015 8D        		.byte	-115
+ 171 0016 8E        		.byte	-114
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 4
 
 
- 172 0096 8A01      		.word	394
- 173 0098 2102      		.word	545
- 174 009a 2302      		.word	547
- 175 009c 2402      		.word	548
- 176 009e 2502      		.word	549
- 177 00a0 2602      		.word	550
- 178 00a2 2702      		.word	551
- 179 00a4 2A02      		.word	554
- 180 00a6 B500      		.word	181
- 181 00a8 B600      		.word	182
- 182 00aa B700      		.word	183
- 183 00ac CD00      		.word	205
- 184 00ae E200      		.word	226
- 185 00b0 E900      		.word	233
- 186 00b2 EA00      		.word	234
- 187 00b4 8301      		.word	387
- 188 00b6 9201      		.word	402
- 189 00b8 9401      		.word	404
- 190 00ba 0000      		.word	0
- 191 00bc 0000      		.word	0
- 192 00be 0000      		.word	0
- 193 00c0 0000      		.word	0
- 194 00c2 0000      		.word	0
- 195               	.global	keycode_USB_extend
- 196               		.type	keycode_USB_extend, @object
- 197               		.size	keycode_USB_extend, 4
- 198               	keycode_USB_extend:
- 199 00c4 9100      		.word	145
- 200 00c6 9000      		.word	144
- 201               	.global	keycode_set2_special
- 202               		.type	keycode_set2_special, @object
- 203               		.size	keycode_set2_special, 3
- 204               	keycode_set2_special:
- 205 00c8 46        		.byte	70
- 206 00c9 48        		.byte	72
- 207 00ca 00        		.byte	0
- 208               	.global	keycode_set2_makeonly
- 209               		.type	keycode_set2_makeonly, @object
- 210               		.size	keycode_set2_makeonly, 4
- 211               	keycode_set2_makeonly:
- 212 00cb 48        		.byte	72
- 213 00cc 8E        		.byte	-114
- 214 00cd 8D        		.byte	-115
- 215 00ce 00        		.byte	0
- 216               	.global	keycode_set2_make_break
- 217               		.type	keycode_set2_make_break, @object
- 218               		.size	keycode_set2_make_break, 4
- 219               	keycode_set2_make_break:
- 220 00cf 71        		.byte	113
- 221 00d0 72        		.byte	114
- 222 00d1 73        		.byte	115
- 223 00d2 00        		.byte	0
- 224               	.global	keycode_set2_extend
- 225               		.type	keycode_set2_extend, @object
- 226               		.size	keycode_set2_extend, 45
- 227               	keycode_set2_extend:
- 228 00d3 6A        		.byte	106
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 5
+ 172 0017 8D        		.byte	-115
+ 173 0018 8E        		.byte	-114
+ 174 0019 8D        		.byte	-115
+ 175 001a 8E        		.byte	-114
+ 176 001b 8D        		.byte	-115
+ 177 001c 8E        		.byte	-114
+ 178 001d 8D        		.byte	-115
+ 179 001e 8E        		.byte	-114
+ 180 001f 8D        		.byte	-115
+ 181               	.global	dualActionKeyIndex
+ 182               	.global	dualActionKeyIndex
+ 183               		.section .bss
+ 184               		.type	dualActionKeyIndex, @object
+ 185               		.size	dualActionKeyIndex, 1
+ 186               	dualActionKeyIndex:
+ 187 0000 00        		.skip 1,0
+ 188               	.global	keycode_set2
+ 189               		.section	.progmem.data,"a",@progbits
+ 190               		.type	keycode_set2, @object
+ 191               		.size	keycode_set2, 144
+ 192               	keycode_set2:
+ 193 0000 00        		.byte	0
+ 194 0001 00        		.byte	0
+ 195 0002 FC        		.byte	-4
+ 196 0003 00        		.byte	0
+ 197 0004 1C        		.byte	28
+ 198 0005 32        		.byte	50
+ 199 0006 21        		.byte	33
+ 200 0007 23        		.byte	35
+ 201 0008 24        		.byte	36
+ 202 0009 2B        		.byte	43
+ 203 000a 34        		.byte	52
+ 204 000b 33        		.byte	51
+ 205 000c 43        		.byte	67
+ 206 000d 3B        		.byte	59
+ 207 000e 42        		.byte	66
+ 208 000f 4B        		.byte	75
+ 209 0010 3A        		.byte	58
+ 210 0011 31        		.byte	49
+ 211 0012 44        		.byte	68
+ 212 0013 4D        		.byte	77
+ 213 0014 15        		.byte	21
+ 214 0015 2D        		.byte	45
+ 215 0016 1B        		.byte	27
+ 216 0017 2C        		.byte	44
+ 217 0018 3C        		.byte	60
+ 218 0019 2A        		.byte	42
+ 219 001a 1D        		.byte	29
+ 220 001b 22        		.byte	34
+ 221 001c 35        		.byte	53
+ 222 001d 1A        		.byte	26
+ 223 001e 16        		.byte	22
+ 224 001f 1E        		.byte	30
+ 225 0020 26        		.byte	38
+ 226 0021 25        		.byte	37
+ 227 0022 2E        		.byte	46
+ 228 0023 36        		.byte	54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 5
 
 
- 229 00d4 6B        		.byte	107
- 230 00d5 6E        		.byte	110
- 231 00d6 6D        		.byte	109
- 232 00d7 65        		.byte	101
- 233 00d8 46        		.byte	70
- 234 00d9 49        		.byte	73
- 235 00da 4A        		.byte	74
- 236 00db 4B        		.byte	75
- 237 00dc 4C        		.byte	76
- 238 00dd 4D        		.byte	77
- 239 00de 4E        		.byte	78
- 240 00df 52        		.byte	82
- 241 00e0 50        		.byte	80
- 242 00e1 4F        		.byte	79
- 243 00e2 51        		.byte	81
- 244 00e3 54        		.byte	84
- 245 00e4 58        		.byte	88
- 246 00e5 71        		.byte	113
- 247 00e6 72        		.byte	114
- 248 00e7 73        		.byte	115
- 249 00e8 74        		.byte	116
- 250 00e9 75        		.byte	117
- 251 00ea 76        		.byte	118
- 252 00eb 77        		.byte	119
- 253 00ec 78        		.byte	120
- 254 00ed 79        		.byte	121
- 255 00ee 7A        		.byte	122
- 256 00ef 7B        		.byte	123
- 257 00f0 7C        		.byte	124
- 258 00f1 7D        		.byte	125
- 259 00f2 7E        		.byte	126
- 260 00f3 7F        		.byte	127
- 261 00f4 80        		.byte	-128
- 262 00f5 81        		.byte	-127
- 263 00f6 82        		.byte	-126
- 264 00f7 83        		.byte	-125
- 265 00f8 84        		.byte	-124
- 266 00f9 85        		.byte	-123
- 267 00fa 86        		.byte	-122
- 268 00fb 87        		.byte	-121
- 269 00fc 88        		.byte	-120
- 270 00fd 89        		.byte	-119
- 271 00fe 8A        		.byte	-118
- 272 00ff 00        		.byte	0
- 273               	.global	keycode_set2_proc_shift
- 274               		.type	keycode_set2_proc_shift, @object
- 275               		.size	keycode_set2_proc_shift, 15
- 276               	keycode_set2_proc_shift:
- 277 0100 49        		.byte	73
- 278 0101 4C        		.byte	76
- 279 0102 4A        		.byte	74
- 280 0103 4D        		.byte	77
- 281 0104 4B        		.byte	75
- 282 0105 4E        		.byte	78
- 283 0106 6A        		.byte	106
- 284 0107 6E        		.byte	110
- 285 0108 65        		.byte	101
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 6
+ 229 0024 3D        		.byte	61
+ 230 0025 3E        		.byte	62
+ 231 0026 46        		.byte	70
+ 232 0027 45        		.byte	69
+ 233 0028 5A        		.byte	90
+ 234 0029 76        		.byte	118
+ 235 002a 66        		.byte	102
+ 236 002b 0D        		.byte	13
+ 237 002c 29        		.byte	41
+ 238 002d 4E        		.byte	78
+ 239 002e 55        		.byte	85
+ 240 002f 54        		.byte	84
+ 241 0030 5B        		.byte	91
+ 242 0031 5D        		.byte	93
+ 243 0032 5D        		.byte	93
+ 244 0033 4C        		.byte	76
+ 245 0034 52        		.byte	82
+ 246 0035 0E        		.byte	14
+ 247 0036 41        		.byte	65
+ 248 0037 49        		.byte	73
+ 249 0038 4A        		.byte	74
+ 250 0039 58        		.byte	88
+ 251 003a 05        		.byte	5
+ 252 003b 06        		.byte	6
+ 253 003c 04        		.byte	4
+ 254 003d 0C        		.byte	12
+ 255 003e 03        		.byte	3
+ 256 003f 0B        		.byte	11
+ 257 0040 83        		.byte	-125
+ 258 0041 0A        		.byte	10
+ 259 0042 01        		.byte	1
+ 260 0043 09        		.byte	9
+ 261 0044 78        		.byte	120
+ 262 0045 07        		.byte	7
+ 263 0046 7C        		.byte	124
+ 264 0047 7E        		.byte	126
+ 265 0048 7C        		.byte	124
+ 266 0049 70        		.byte	112
+ 267 004a 6C        		.byte	108
+ 268 004b 7D        		.byte	125
+ 269 004c 71        		.byte	113
+ 270 004d 69        		.byte	105
+ 271 004e 7A        		.byte	122
+ 272 004f 74        		.byte	116
+ 273 0050 6B        		.byte	107
+ 274 0051 72        		.byte	114
+ 275 0052 75        		.byte	117
+ 276 0053 77        		.byte	119
+ 277 0054 4A        		.byte	74
+ 278 0055 7C        		.byte	124
+ 279 0056 7B        		.byte	123
+ 280 0057 79        		.byte	121
+ 281 0058 5A        		.byte	90
+ 282 0059 69        		.byte	105
+ 283 005a 72        		.byte	114
+ 284 005b 7A        		.byte	122
+ 285 005c 6B        		.byte	107
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 6
 
 
- 286 0109 50        		.byte	80
- 287 010a 4F        		.byte	79
- 288 010b 52        		.byte	82
- 289 010c 51        		.byte	81
- 290 010d 54        		.byte	84
- 291 010e 00        		.byte	0
- 292               	.global	keymap_code
- 293               		.type	keymap_code, @object
- 294               		.size	keymap_code, 408
- 295               	keymap_code:
- 296 010f 48        		.byte	72
- 297 0110 00        		.byte	0
- 298 0111 00        		.byte	0
- 299 0112 00        		.byte	0
- 300 0113 6B        		.byte	107
- 301 0114 00        		.byte	0
- 302 0115 67        		.byte	103
- 303 0116 3E        		.byte	62
- 304 0117 14        		.byte	20
- 305 0118 2B        		.byte	43
- 306 0119 04        		.byte	4
- 307 011a 29        		.byte	41
- 308 011b 1D        		.byte	29
- 309 011c 00        		.byte	0
- 310 011d 35        		.byte	53
- 311 011e 1E        		.byte	30
- 312 011f 1A        		.byte	26
- 313 0120 39        		.byte	57
- 314 0121 16        		.byte	22
- 315 0122 00        		.byte	0
- 316 0123 1B        		.byte	27
- 317 0124 00        		.byte	0
- 318 0125 3A        		.byte	58
- 319 0126 1F        		.byte	31
- 320 0127 08        		.byte	8
- 321 0128 3C        		.byte	60
- 322 0129 07        		.byte	7
- 323 012a 3D        		.byte	61
- 324 012b 06        		.byte	6
- 325 012c 00        		.byte	0
- 326 012d 3B        		.byte	59
- 327 012e 20        		.byte	32
- 328 012f 15        		.byte	21
- 329 0130 17        		.byte	23
- 330 0131 09        		.byte	9
- 331 0132 0A        		.byte	10
- 332 0133 19        		.byte	25
- 333 0134 05        		.byte	5
- 334 0135 22        		.byte	34
- 335 0136 21        		.byte	33
- 336 0137 18        		.byte	24
- 337 0138 1C        		.byte	28
- 338 0139 0D        		.byte	13
- 339 013a 0B        		.byte	11
- 340 013b 10        		.byte	16
- 341 013c 11        		.byte	17
- 342 013d 23        		.byte	35
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 7
+ 286 005d 73        		.byte	115
+ 287 005e 74        		.byte	116
+ 288 005f 6C        		.byte	108
+ 289 0060 75        		.byte	117
+ 290 0061 7D        		.byte	125
+ 291 0062 70        		.byte	112
+ 292 0063 71        		.byte	113
+ 293 0064 61        		.byte	97
+ 294 0065 2F        		.byte	47
+ 295 0066 00        		.byte	0
+ 296 0067 14        		.byte	20
+ 297 0068 12        		.byte	18
+ 298 0069 11        		.byte	17
+ 299 006a 1F        		.byte	31
+ 300 006b 14        		.byte	20
+ 301 006c 59        		.byte	89
+ 302 006d 11        		.byte	17
+ 303 006e 27        		.byte	39
+ 304 006f 00        		.byte	0
+ 305 0070 00        		.byte	0
+ 306 0071 37        		.byte	55
+ 307 0072 3F        		.byte	63
+ 308 0073 5E        		.byte	94
+ 309 0074 48        		.byte	72
+ 310 0075 10        		.byte	16
+ 311 0076 3A        		.byte	58
+ 312 0077 38        		.byte	56
+ 313 0078 30        		.byte	48
+ 314 0079 28        		.byte	40
+ 315 007a 20        		.byte	32
+ 316 007b 18        		.byte	24
+ 317 007c 4D        		.byte	77
+ 318 007d 15        		.byte	21
+ 319 007e 3B        		.byte	59
+ 320 007f 34        		.byte	52
+ 321 0080 23        		.byte	35
+ 322 0081 32        		.byte	50
+ 323 0082 21        		.byte	33
+ 324 0083 50        		.byte	80
+ 325 0084 2B        		.byte	43
+ 326 0085 40        		.byte	64
+ 327 0086 4B        		.byte	75
+ 328 0087 1C        		.byte	28
+ 329 0088 43        		.byte	67
+ 330 0089 22        		.byte	34
+ 331 008a 1D        		.byte	29
+ 332 008b 00        		.byte	0
+ 333 008c 00        		.byte	0
+ 334 008d F1        		.byte	-15
+ 335 008e F2        		.byte	-14
+ 336 008f 00        		.byte	0
+ 337               	.global	keycode_USB_multimedia
+ 338               		.type	keycode_USB_multimedia, @object
+ 339               		.size	keycode_USB_multimedia, 52
+ 340               	keycode_USB_multimedia:
+ 341 0090 0000      		.word	0
+ 342 0092 0000      		.word	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 7
 
 
- 343 013e 24        		.byte	36
- 344 013f 0C        		.byte	12
- 345 0140 30        		.byte	48
- 346 0141 0E        		.byte	14
- 347 0142 3F        		.byte	63
- 348 0143 36        		.byte	54
- 349 0144 00        		.byte	0
- 350 0145 2E        		.byte	46
- 351 0146 25        		.byte	37
- 352 0147 12        		.byte	18
- 353 0148 40        		.byte	64
- 354 0149 0F        		.byte	15
- 355 014a 00        		.byte	0
- 356 014b 37        		.byte	55
- 357 014c FE        		.byte	-2
- 358 014d 41        		.byte	65
- 359 014e 26        		.byte	38
- 360 014f 13        		.byte	19
- 361 0150 2F        		.byte	47
- 362 0151 33        		.byte	51
- 363 0152 34        		.byte	52
- 364 0153 32        		.byte	50
- 365 0154 38        		.byte	56
- 366 0155 2D        		.byte	45
- 367 0156 27        		.byte	39
- 368 0157 47        		.byte	71
- 369 0158 00        		.byte	0
- 370 0159 00        		.byte	0
- 371 015a 69        		.byte	105
- 372 015b 64        		.byte	100
- 373 015c 6D        		.byte	109
- 374 015d 00        		.byte	0
- 375 015e F8        		.byte	-8
- 376 015f 00        		.byte	0
- 377 0160 2A        		.byte	42
- 378 0161 31        		.byte	49
- 379 0162 44        		.byte	68
- 380 0163 28        		.byte	40
- 381 0164 45        		.byte	69
- 382 0165 42        		.byte	66
- 383 0166 43        		.byte	67
- 384 0167 C9        		.byte	-55
- 385 0168 53        		.byte	83
- 386 0169 5F        		.byte	95
- 387 016a 2C        		.byte	44
- 388 016b 5C        		.byte	92
- 389 016c 51        		.byte	81
- 390 016d 4C        		.byte	76
- 391 016e 00        		.byte	0
- 392 016f CA        		.byte	-54
- 393 0170 54        		.byte	84
- 394 0171 60        		.byte	96
- 395 0172 5D        		.byte	93
- 396 0173 5A        		.byte	90
- 397 0174 4F        		.byte	79
- 398 0175 49        		.byte	73
- 399 0176 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 8
+ 343 0094 0000      		.word	0
+ 344 0096 8A01      		.word	394
+ 345 0098 2102      		.word	545
+ 346 009a 2302      		.word	547
+ 347 009c 2402      		.word	548
+ 348 009e 2502      		.word	549
+ 349 00a0 2602      		.word	550
+ 350 00a2 2702      		.word	551
+ 351 00a4 2A02      		.word	554
+ 352 00a6 B500      		.word	181
+ 353 00a8 B600      		.word	182
+ 354 00aa B700      		.word	183
+ 355 00ac CD00      		.word	205
+ 356 00ae E200      		.word	226
+ 357 00b0 E900      		.word	233
+ 358 00b2 EA00      		.word	234
+ 359 00b4 8301      		.word	387
+ 360 00b6 9201      		.word	402
+ 361 00b8 9401      		.word	404
+ 362 00ba 0000      		.word	0
+ 363 00bc 0000      		.word	0
+ 364 00be 0000      		.word	0
+ 365 00c0 0000      		.word	0
+ 366 00c2 0000      		.word	0
+ 367               	.global	keycode_USB_extend
+ 368               		.type	keycode_USB_extend, @object
+ 369               		.size	keycode_USB_extend, 4
+ 370               	keycode_USB_extend:
+ 371 00c4 9100      		.word	145
+ 372 00c6 9000      		.word	144
+ 373               	.global	keycode_set2_special
+ 374               		.type	keycode_set2_special, @object
+ 375               		.size	keycode_set2_special, 3
+ 376               	keycode_set2_special:
+ 377 00c8 46        		.byte	70
+ 378 00c9 48        		.byte	72
+ 379 00ca 00        		.byte	0
+ 380               	.global	keycode_set2_makeonly
+ 381               		.type	keycode_set2_makeonly, @object
+ 382               		.size	keycode_set2_makeonly, 4
+ 383               	keycode_set2_makeonly:
+ 384 00cb 48        		.byte	72
+ 385 00cc 8E        		.byte	-114
+ 386 00cd 8D        		.byte	-115
+ 387 00ce 00        		.byte	0
+ 388               	.global	keycode_set2_make_break
+ 389               		.type	keycode_set2_make_break, @object
+ 390               		.size	keycode_set2_make_break, 4
+ 391               	keycode_set2_make_break:
+ 392 00cf 71        		.byte	113
+ 393 00d0 72        		.byte	114
+ 394 00d1 73        		.byte	115
+ 395 00d2 00        		.byte	0
+ 396               	.global	keycode_set2_extend
+ 397               		.type	keycode_set2_extend, @object
+ 398               		.size	keycode_set2_extend, 45
+ 399               	keycode_set2_extend:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 8
 
 
- 400 0177 CB        		.byte	-53
- 401 0178 55        		.byte	85
- 402 0179 61        		.byte	97
- 403 017a 5E        		.byte	94
- 404 017b 5B        		.byte	91
- 405 017c 00        		.byte	0
- 406 017d 4B        		.byte	75
- 407 017e 4E        		.byte	78
- 408 017f CC        		.byte	-52
- 409 0180 56        		.byte	86
- 410 0181 57        		.byte	87
- 411 0182 52        		.byte	82
- 412 0183 58        		.byte	88
- 413 0184 50        		.byte	80
- 414 0185 4A        		.byte	74
- 415 0186 4D        		.byte	77
- 416 0187 62        		.byte	98
- 417 0188 68        		.byte	104
- 418 0189 6C        		.byte	108
- 419 018a 59        		.byte	89
- 420 018b 63        		.byte	99
- 421 018c 00        		.byte	0
- 422 018d 00        		.byte	0
- 423 018e 00        		.byte	0
- 424 018f 00        		.byte	0
- 425 0190 6A        		.byte	106
- 426 0191 6E        		.byte	110
- 427 0192 00        		.byte	0
- 428 0193 00        		.byte	0
- 429 0194 00        		.byte	0
- 430 0195 00        		.byte	0
- 431 0196 00        		.byte	0
- 432 0197 53        		.byte	83
- 433 0198 00        		.byte	0
- 434 0199 00        		.byte	0
- 435 019a 00        		.byte	0
- 436 019b 6B        		.byte	107
- 437 019c 00        		.byte	0
- 438 019d 67        		.byte	103
- 439 019e 3E        		.byte	62
- 440 019f 14        		.byte	20
- 441 01a0 2B        		.byte	43
- 442 01a1 04        		.byte	4
- 443 01a2 29        		.byte	41
- 444 01a3 1D        		.byte	29
- 445 01a4 00        		.byte	0
- 446 01a5 35        		.byte	53
- 447 01a6 1E        		.byte	30
- 448 01a7 1A        		.byte	26
- 449 01a8 FD        		.byte	-3
- 450 01a9 16        		.byte	22
- 451 01aa 00        		.byte	0
- 452 01ab 1B        		.byte	27
- 453 01ac 00        		.byte	0
- 454 01ad 3A        		.byte	58
- 455 01ae 1F        		.byte	31
- 456 01af 08        		.byte	8
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 9
+ 400 00d3 6A        		.byte	106
+ 401 00d4 6B        		.byte	107
+ 402 00d5 6E        		.byte	110
+ 403 00d6 6D        		.byte	109
+ 404 00d7 65        		.byte	101
+ 405 00d8 46        		.byte	70
+ 406 00d9 49        		.byte	73
+ 407 00da 4A        		.byte	74
+ 408 00db 4B        		.byte	75
+ 409 00dc 4C        		.byte	76
+ 410 00dd 4D        		.byte	77
+ 411 00de 4E        		.byte	78
+ 412 00df 52        		.byte	82
+ 413 00e0 50        		.byte	80
+ 414 00e1 4F        		.byte	79
+ 415 00e2 51        		.byte	81
+ 416 00e3 54        		.byte	84
+ 417 00e4 58        		.byte	88
+ 418 00e5 71        		.byte	113
+ 419 00e6 72        		.byte	114
+ 420 00e7 73        		.byte	115
+ 421 00e8 74        		.byte	116
+ 422 00e9 75        		.byte	117
+ 423 00ea 76        		.byte	118
+ 424 00eb 77        		.byte	119
+ 425 00ec 78        		.byte	120
+ 426 00ed 79        		.byte	121
+ 427 00ee 7A        		.byte	122
+ 428 00ef 7B        		.byte	123
+ 429 00f0 7C        		.byte	124
+ 430 00f1 7D        		.byte	125
+ 431 00f2 7E        		.byte	126
+ 432 00f3 7F        		.byte	127
+ 433 00f4 80        		.byte	-128
+ 434 00f5 81        		.byte	-127
+ 435 00f6 82        		.byte	-126
+ 436 00f7 83        		.byte	-125
+ 437 00f8 84        		.byte	-124
+ 438 00f9 85        		.byte	-123
+ 439 00fa 86        		.byte	-122
+ 440 00fb 87        		.byte	-121
+ 441 00fc 88        		.byte	-120
+ 442 00fd 89        		.byte	-119
+ 443 00fe 8A        		.byte	-118
+ 444 00ff 00        		.byte	0
+ 445               	.global	keycode_set2_proc_shift
+ 446               		.type	keycode_set2_proc_shift, @object
+ 447               		.size	keycode_set2_proc_shift, 15
+ 448               	keycode_set2_proc_shift:
+ 449 0100 49        		.byte	73
+ 450 0101 4C        		.byte	76
+ 451 0102 4A        		.byte	74
+ 452 0103 4D        		.byte	77
+ 453 0104 4B        		.byte	75
+ 454 0105 4E        		.byte	78
+ 455 0106 6A        		.byte	106
+ 456 0107 6E        		.byte	110
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 9
 
 
- 457 01b0 3C        		.byte	60
- 458 01b1 07        		.byte	7
- 459 01b2 3D        		.byte	61
- 460 01b3 06        		.byte	6
- 461 01b4 00        		.byte	0
- 462 01b5 3B        		.byte	59
- 463 01b6 20        		.byte	32
- 464 01b7 15        		.byte	21
- 465 01b8 17        		.byte	23
- 466 01b9 09        		.byte	9
- 467 01ba 0A        		.byte	10
- 468 01bb 19        		.byte	25
- 469 01bc 05        		.byte	5
- 470 01bd 22        		.byte	34
- 471 01be 21        		.byte	33
- 472 01bf 5C        		.byte	92
- 473 01c0 1C        		.byte	28
- 474 01c1 59        		.byte	89
- 475 01c2 0B        		.byte	11
- 476 01c3 62        		.byte	98
- 477 01c4 11        		.byte	17
- 478 01c5 23        		.byte	35
- 479 01c6 5F        		.byte	95
- 480 01c7 5D        		.byte	93
- 481 01c8 30        		.byte	48
- 482 01c9 5A        		.byte	90
- 483 01ca 3F        		.byte	63
- 484 01cb 62        		.byte	98
- 485 01cc 00        		.byte	0
- 486 01cd FA        		.byte	-6
- 487 01ce 60        		.byte	96
- 488 01cf 5E        		.byte	94
- 489 01d0 40        		.byte	64
- 490 01d1 5B        		.byte	91
- 491 01d2 00        		.byte	0
- 492 01d3 63        		.byte	99
- 493 01d4 FE        		.byte	-2
- 494 01d5 41        		.byte	65
- 495 01d6 61        		.byte	97
- 496 01d7 55        		.byte	85
- 497 01d8 2F        		.byte	47
- 498 01d9 56        		.byte	86
- 499 01da 34        		.byte	52
- 500 01db 32        		.byte	50
- 501 01dc 57        		.byte	87
- 502 01dd F9        		.byte	-7
- 503 01de 54        		.byte	84
- 504 01df 47        		.byte	71
- 505 01e0 00        		.byte	0
- 506 01e1 00        		.byte	0
- 507 01e2 69        		.byte	105
- 508 01e3 64        		.byte	100
- 509 01e4 6D        		.byte	109
- 510 01e5 00        		.byte	0
- 511 01e6 46        		.byte	70
- 512 01e7 00        		.byte	0
- 513 01e8 2A        		.byte	42
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 10
+ 457 0108 65        		.byte	101
+ 458 0109 50        		.byte	80
+ 459 010a 4F        		.byte	79
+ 460 010b 52        		.byte	82
+ 461 010c 51        		.byte	81
+ 462 010d 54        		.byte	84
+ 463 010e 00        		.byte	0
+ 464               	.global	keymap_code
+ 465               		.type	keymap_code, @object
+ 466               		.size	keymap_code, 408
+ 467               	keymap_code:
+ 468 010f 48        		.byte	72
+ 469 0110 00        		.byte	0
+ 470 0111 00        		.byte	0
+ 471 0112 00        		.byte	0
+ 472 0113 6B        		.byte	107
+ 473 0114 00        		.byte	0
+ 474 0115 67        		.byte	103
+ 475 0116 3E        		.byte	62
+ 476 0117 14        		.byte	20
+ 477 0118 2B        		.byte	43
+ 478 0119 04        		.byte	4
+ 479 011a 29        		.byte	41
+ 480 011b 1D        		.byte	29
+ 481 011c 00        		.byte	0
+ 482 011d 35        		.byte	53
+ 483 011e 1E        		.byte	30
+ 484 011f 1A        		.byte	26
+ 485 0120 39        		.byte	57
+ 486 0121 16        		.byte	22
+ 487 0122 00        		.byte	0
+ 488 0123 1B        		.byte	27
+ 489 0124 00        		.byte	0
+ 490 0125 3A        		.byte	58
+ 491 0126 1F        		.byte	31
+ 492 0127 08        		.byte	8
+ 493 0128 3C        		.byte	60
+ 494 0129 07        		.byte	7
+ 495 012a 3D        		.byte	61
+ 496 012b 06        		.byte	6
+ 497 012c 00        		.byte	0
+ 498 012d 3B        		.byte	59
+ 499 012e 20        		.byte	32
+ 500 012f 15        		.byte	21
+ 501 0130 17        		.byte	23
+ 502 0131 09        		.byte	9
+ 503 0132 0A        		.byte	10
+ 504 0133 19        		.byte	25
+ 505 0134 05        		.byte	5
+ 506 0135 22        		.byte	34
+ 507 0136 21        		.byte	33
+ 508 0137 18        		.byte	24
+ 509 0138 1C        		.byte	28
+ 510 0139 0D        		.byte	13
+ 511 013a 0B        		.byte	11
+ 512 013b 10        		.byte	16
+ 513 013c 11        		.byte	17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 10
 
 
- 514 01e9 31        		.byte	49
- 515 01ea 44        		.byte	68
- 516 01eb 58        		.byte	88
- 517 01ec 45        		.byte	69
- 518 01ed 42        		.byte	66
- 519 01ee 43        		.byte	67
- 520 01ef C9        		.byte	-55
- 521 01f0 53        		.byte	83
- 522 01f1 5F        		.byte	95
- 523 01f2 FC        		.byte	-4
- 524 01f3 5C        		.byte	92
- 525 01f4 51        		.byte	81
- 526 01f5 4C        		.byte	76
- 527 01f6 00        		.byte	0
- 528 01f7 CA        		.byte	-54
- 529 01f8 54        		.byte	84
- 530 01f9 60        		.byte	96
- 531 01fa 5D        		.byte	93
- 532 01fb 5A        		.byte	90
- 533 01fc 4F        		.byte	79
- 534 01fd 49        		.byte	73
- 535 01fe 00        		.byte	0
- 536 01ff CB        		.byte	-53
- 537 0200 55        		.byte	85
- 538 0201 61        		.byte	97
- 539 0202 5E        		.byte	94
- 540 0203 5B        		.byte	91
- 541 0204 00        		.byte	0
- 542 0205 4B        		.byte	75
- 543 0206 4E        		.byte	78
- 544 0207 CC        		.byte	-52
- 545 0208 56        		.byte	86
- 546 0209 57        		.byte	87
- 547 020a 52        		.byte	82
- 548 020b 58        		.byte	88
- 549 020c 50        		.byte	80
- 550 020d 4A        		.byte	74
- 551 020e 4D        		.byte	77
- 552 020f 62        		.byte	98
- 553 0210 68        		.byte	104
- 554 0211 6C        		.byte	108
- 555 0212 59        		.byte	89
- 556 0213 63        		.byte	99
- 557 0214 00        		.byte	0
- 558 0215 00        		.byte	0
- 559 0216 00        		.byte	0
- 560 0217 00        		.byte	0
- 561 0218 6A        		.byte	106
- 562 0219 6E        		.byte	110
- 563 021a 00        		.byte	0
- 564 021b 00        		.byte	0
- 565 021c 00        		.byte	0
- 566 021d 00        		.byte	0
- 567 021e 00        		.byte	0
- 568 021f 04        		.byte	4
- 569 0220 00        		.byte	0
- 570 0221 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 11
+ 514 013d 23        		.byte	35
+ 515 013e 24        		.byte	36
+ 516 013f 0C        		.byte	12
+ 517 0140 30        		.byte	48
+ 518 0141 0E        		.byte	14
+ 519 0142 3F        		.byte	63
+ 520 0143 36        		.byte	54
+ 521 0144 00        		.byte	0
+ 522 0145 2E        		.byte	46
+ 523 0146 25        		.byte	37
+ 524 0147 12        		.byte	18
+ 525 0148 40        		.byte	64
+ 526 0149 0F        		.byte	15
+ 527 014a 00        		.byte	0
+ 528 014b 37        		.byte	55
+ 529 014c FE        		.byte	-2
+ 530 014d 41        		.byte	65
+ 531 014e 26        		.byte	38
+ 532 014f 13        		.byte	19
+ 533 0150 2F        		.byte	47
+ 534 0151 33        		.byte	51
+ 535 0152 34        		.byte	52
+ 536 0153 32        		.byte	50
+ 537 0154 38        		.byte	56
+ 538 0155 2D        		.byte	45
+ 539 0156 27        		.byte	39
+ 540 0157 47        		.byte	71
+ 541 0158 00        		.byte	0
+ 542 0159 00        		.byte	0
+ 543 015a 69        		.byte	105
+ 544 015b 64        		.byte	100
+ 545 015c 6D        		.byte	109
+ 546 015d 00        		.byte	0
+ 547 015e 46        		.byte	70
+ 548 015f 00        		.byte	0
+ 549 0160 2A        		.byte	42
+ 550 0161 31        		.byte	49
+ 551 0162 44        		.byte	68
+ 552 0163 28        		.byte	40
+ 553 0164 45        		.byte	69
+ 554 0165 42        		.byte	66
+ 555 0166 43        		.byte	67
+ 556 0167 C9        		.byte	-55
+ 557 0168 53        		.byte	83
+ 558 0169 5F        		.byte	95
+ 559 016a 2C        		.byte	44
+ 560 016b 5C        		.byte	92
+ 561 016c 51        		.byte	81
+ 562 016d 4C        		.byte	76
+ 563 016e 00        		.byte	0
+ 564 016f CA        		.byte	-54
+ 565 0170 54        		.byte	84
+ 566 0171 60        		.byte	96
+ 567 0172 5D        		.byte	93
+ 568 0173 5A        		.byte	90
+ 569 0174 4F        		.byte	79
+ 570 0175 49        		.byte	73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 11
 
 
- 571 0222 00        		.byte	0
- 572 0223 6B        		.byte	107
- 573 0224 00        		.byte	0
- 574 0225 67        		.byte	103
- 575 0226 3E        		.byte	62
- 576 0227 14        		.byte	20
- 577 0228 2B        		.byte	43
- 578 0229 04        		.byte	4
- 579 022a 29        		.byte	41
- 580 022b 1D        		.byte	29
- 581 022c 00        		.byte	0
- 582 022d 35        		.byte	53
- 583 022e 1E        		.byte	30
- 584 022f 1A        		.byte	26
- 585 0230 39        		.byte	57
- 586 0231 16        		.byte	22
- 587 0232 00        		.byte	0
- 588 0233 1B        		.byte	27
- 589 0234 00        		.byte	0
- 590 0235 3A        		.byte	58
- 591 0236 1F        		.byte	31
- 592 0237 08        		.byte	8
- 593 0238 3C        		.byte	60
- 594 0239 07        		.byte	7
- 595 023a 3D        		.byte	61
- 596 023b 06        		.byte	6
- 597 023c 00        		.byte	0
- 598 023d 3B        		.byte	59
- 599 023e 20        		.byte	32
- 600 023f 15        		.byte	21
- 601 0240 17        		.byte	23
- 602 0241 09        		.byte	9
- 603 0242 0A        		.byte	10
- 604 0243 19        		.byte	25
- 605 0244 05        		.byte	5
- 606 0245 22        		.byte	34
- 607 0246 21        		.byte	33
- 608 0247 18        		.byte	24
- 609 0248 1C        		.byte	28
- 610 0249 0D        		.byte	13
- 611 024a 0B        		.byte	11
- 612 024b 10        		.byte	16
- 613 024c 11        		.byte	17
- 614 024d 23        		.byte	35
- 615 024e 24        		.byte	36
- 616 024f 0C        		.byte	12
- 617 0250 30        		.byte	48
- 618 0251 0E        		.byte	14
- 619 0252 3F        		.byte	63
- 620 0253 36        		.byte	54
- 621 0254 00        		.byte	0
- 622 0255 2E        		.byte	46
- 623 0256 25        		.byte	37
- 624 0257 12        		.byte	18
- 625 0258 40        		.byte	64
- 626 0259 0F        		.byte	15
- 627 025a 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 12
+ 571 0176 00        		.byte	0
+ 572 0177 CB        		.byte	-53
+ 573 0178 55        		.byte	85
+ 574 0179 61        		.byte	97
+ 575 017a 5E        		.byte	94
+ 576 017b 5B        		.byte	91
+ 577 017c 00        		.byte	0
+ 578 017d 4B        		.byte	75
+ 579 017e 4E        		.byte	78
+ 580 017f CC        		.byte	-52
+ 581 0180 56        		.byte	86
+ 582 0181 57        		.byte	87
+ 583 0182 52        		.byte	82
+ 584 0183 58        		.byte	88
+ 585 0184 50        		.byte	80
+ 586 0185 4A        		.byte	74
+ 587 0186 4D        		.byte	77
+ 588 0187 62        		.byte	98
+ 589 0188 68        		.byte	104
+ 590 0189 6C        		.byte	108
+ 591 018a 59        		.byte	89
+ 592 018b 63        		.byte	99
+ 593 018c 00        		.byte	0
+ 594 018d 00        		.byte	0
+ 595 018e 00        		.byte	0
+ 596 018f 00        		.byte	0
+ 597 0190 6A        		.byte	106
+ 598 0191 6E        		.byte	110
+ 599 0192 00        		.byte	0
+ 600 0193 00        		.byte	0
+ 601 0194 00        		.byte	0
+ 602 0195 00        		.byte	0
+ 603 0196 00        		.byte	0
+ 604 0197 53        		.byte	83
+ 605 0198 00        		.byte	0
+ 606 0199 00        		.byte	0
+ 607 019a 00        		.byte	0
+ 608 019b 6B        		.byte	107
+ 609 019c 00        		.byte	0
+ 610 019d 67        		.byte	103
+ 611 019e 3E        		.byte	62
+ 612 019f 14        		.byte	20
+ 613 01a0 2B        		.byte	43
+ 614 01a1 04        		.byte	4
+ 615 01a2 29        		.byte	41
+ 616 01a3 1D        		.byte	29
+ 617 01a4 00        		.byte	0
+ 618 01a5 35        		.byte	53
+ 619 01a6 1E        		.byte	30
+ 620 01a7 1A        		.byte	26
+ 621 01a8 FD        		.byte	-3
+ 622 01a9 16        		.byte	22
+ 623 01aa 00        		.byte	0
+ 624 01ab 1B        		.byte	27
+ 625 01ac 00        		.byte	0
+ 626 01ad 3A        		.byte	58
+ 627 01ae 1F        		.byte	31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 12
 
 
- 628 025b 37        		.byte	55
- 629 025c FE        		.byte	-2
- 630 025d 41        		.byte	65
- 631 025e 26        		.byte	38
- 632 025f 13        		.byte	19
- 633 0260 2F        		.byte	47
- 634 0261 33        		.byte	51
- 635 0262 34        		.byte	52
- 636 0263 32        		.byte	50
- 637 0264 38        		.byte	56
- 638 0265 2D        		.byte	45
- 639 0266 27        		.byte	39
- 640 0267 47        		.byte	71
- 641 0268 00        		.byte	0
- 642 0269 00        		.byte	0
- 643 026a 69        		.byte	105
- 644 026b 64        		.byte	100
- 645 026c 6D        		.byte	109
- 646 026d 00        		.byte	0
- 647 026e F8        		.byte	-8
- 648 026f 00        		.byte	0
- 649 0270 2A        		.byte	42
- 650 0271 31        		.byte	49
- 651 0272 44        		.byte	68
- 652 0273 28        		.byte	40
- 653 0274 45        		.byte	69
- 654 0275 42        		.byte	66
- 655 0276 43        		.byte	67
- 656 0277 C9        		.byte	-55
- 657 0278 53        		.byte	83
- 658 0279 5F        		.byte	95
- 659 027a 2C        		.byte	44
- 660 027b 5C        		.byte	92
- 661 027c 51        		.byte	81
- 662 027d 4C        		.byte	76
- 663 027e 00        		.byte	0
- 664 027f CA        		.byte	-54
- 665 0280 54        		.byte	84
- 666 0281 60        		.byte	96
- 667 0282 5D        		.byte	93
- 668 0283 5A        		.byte	90
- 669 0284 4F        		.byte	79
- 670 0285 49        		.byte	73
- 671 0286 00        		.byte	0
- 672 0287 CB        		.byte	-53
- 673 0288 55        		.byte	85
- 674 0289 61        		.byte	97
- 675 028a 5E        		.byte	94
- 676 028b 5B        		.byte	91
- 677 028c 00        		.byte	0
- 678 028d 4B        		.byte	75
- 679 028e 4E        		.byte	78
- 680 028f CC        		.byte	-52
- 681 0290 56        		.byte	86
- 682 0291 57        		.byte	87
- 683 0292 52        		.byte	82
- 684 0293 58        		.byte	88
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 13
+ 628 01af 08        		.byte	8
+ 629 01b0 3C        		.byte	60
+ 630 01b1 07        		.byte	7
+ 631 01b2 3D        		.byte	61
+ 632 01b3 06        		.byte	6
+ 633 01b4 00        		.byte	0
+ 634 01b5 3B        		.byte	59
+ 635 01b6 20        		.byte	32
+ 636 01b7 15        		.byte	21
+ 637 01b8 17        		.byte	23
+ 638 01b9 09        		.byte	9
+ 639 01ba 0A        		.byte	10
+ 640 01bb 19        		.byte	25
+ 641 01bc 05        		.byte	5
+ 642 01bd 22        		.byte	34
+ 643 01be 21        		.byte	33
+ 644 01bf 5C        		.byte	92
+ 645 01c0 1C        		.byte	28
+ 646 01c1 59        		.byte	89
+ 647 01c2 0B        		.byte	11
+ 648 01c3 62        		.byte	98
+ 649 01c4 11        		.byte	17
+ 650 01c5 23        		.byte	35
+ 651 01c6 5F        		.byte	95
+ 652 01c7 5D        		.byte	93
+ 653 01c8 30        		.byte	48
+ 654 01c9 5A        		.byte	90
+ 655 01ca 3F        		.byte	63
+ 656 01cb 62        		.byte	98
+ 657 01cc 00        		.byte	0
+ 658 01cd FA        		.byte	-6
+ 659 01ce 60        		.byte	96
+ 660 01cf 5E        		.byte	94
+ 661 01d0 40        		.byte	64
+ 662 01d1 5B        		.byte	91
+ 663 01d2 00        		.byte	0
+ 664 01d3 63        		.byte	99
+ 665 01d4 FE        		.byte	-2
+ 666 01d5 41        		.byte	65
+ 667 01d6 61        		.byte	97
+ 668 01d7 55        		.byte	85
+ 669 01d8 2F        		.byte	47
+ 670 01d9 56        		.byte	86
+ 671 01da 34        		.byte	52
+ 672 01db 32        		.byte	50
+ 673 01dc 57        		.byte	87
+ 674 01dd F9        		.byte	-7
+ 675 01de 54        		.byte	84
+ 676 01df 47        		.byte	71
+ 677 01e0 00        		.byte	0
+ 678 01e1 00        		.byte	0
+ 679 01e2 69        		.byte	105
+ 680 01e3 64        		.byte	100
+ 681 01e4 6D        		.byte	109
+ 682 01e5 00        		.byte	0
+ 683 01e6 46        		.byte	70
+ 684 01e7 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 13
 
 
- 685 0294 50        		.byte	80
- 686 0295 4A        		.byte	74
- 687 0296 4D        		.byte	77
- 688 0297 62        		.byte	98
- 689 0298 68        		.byte	104
- 690 0299 6C        		.byte	108
- 691 029a 59        		.byte	89
- 692 029b 63        		.byte	99
- 693 029c 00        		.byte	0
- 694 029d 00        		.byte	0
- 695 029e 00        		.byte	0
- 696 029f 00        		.byte	0
- 697 02a0 6A        		.byte	106
- 698 02a1 6E        		.byte	110
- 699 02a2 00        		.byte	0
- 700 02a3 00        		.byte	0
- 701 02a4 00        		.byte	0
- 702 02a5 00        		.byte	0
- 703 02a6 00        		.byte	0
- 704               		.text
- 705               	.Letext0:
- 706               		.section	.debug_info
- 707 0000 D401 0000 		.long	0x1d4
- 708 0004 0200      		.word	0x2
- 709 0006 0000 0000 		.long	.Ldebug_abbrev0
- 710 000a 04        		.byte	0x4
- 711 000b 01        		.uleb128 0x1
- 712 000c 0000 0000 		.long	.LASF18
- 713 0010 01        		.byte	0x1
- 714 0011 0000 0000 		.long	.LASF19
- 715 0015 0000 0000 		.long	.LASF20
- 716 0019 0000 0000 		.long	.Ltext0
- 717 001d 0000 0000 		.long	.Letext0
- 718 0021 0000 0000 		.long	.Ldebug_line0
- 719 0025 02        		.uleb128 0x2
- 720 0026 01        		.byte	0x1
- 721 0027 06        		.byte	0x6
- 722 0028 0000 0000 		.long	.LASF0
- 723 002c 03        		.uleb128 0x3
- 724 002d 0000 0000 		.long	.LASF2
- 725 0031 01        		.byte	0x1
- 726 0032 7A        		.byte	0x7a
- 727 0033 3700 0000 		.long	0x37
- 728 0037 02        		.uleb128 0x2
- 729 0038 01        		.byte	0x1
- 730 0039 08        		.byte	0x8
- 731 003a 0000 0000 		.long	.LASF1
- 732 003e 04        		.uleb128 0x4
- 733 003f 02        		.byte	0x2
- 734 0040 05        		.byte	0x5
- 735 0041 696E 7400 		.string	"int"
- 736 0045 03        		.uleb128 0x3
- 737 0046 0000 0000 		.long	.LASF3
- 738 004a 01        		.byte	0x1
- 739 004b 7C        		.byte	0x7c
- 740 004c 5000 0000 		.long	0x50
- 741 0050 02        		.uleb128 0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 14
+ 685 01e8 2A        		.byte	42
+ 686 01e9 31        		.byte	49
+ 687 01ea 44        		.byte	68
+ 688 01eb 58        		.byte	88
+ 689 01ec 45        		.byte	69
+ 690 01ed 42        		.byte	66
+ 691 01ee 43        		.byte	67
+ 692 01ef C9        		.byte	-55
+ 693 01f0 53        		.byte	83
+ 694 01f1 5F        		.byte	95
+ 695 01f2 FC        		.byte	-4
+ 696 01f3 5C        		.byte	92
+ 697 01f4 51        		.byte	81
+ 698 01f5 4C        		.byte	76
+ 699 01f6 00        		.byte	0
+ 700 01f7 CA        		.byte	-54
+ 701 01f8 54        		.byte	84
+ 702 01f9 60        		.byte	96
+ 703 01fa 5D        		.byte	93
+ 704 01fb 5A        		.byte	90
+ 705 01fc 4F        		.byte	79
+ 706 01fd 49        		.byte	73
+ 707 01fe 00        		.byte	0
+ 708 01ff CB        		.byte	-53
+ 709 0200 55        		.byte	85
+ 710 0201 61        		.byte	97
+ 711 0202 5E        		.byte	94
+ 712 0203 5B        		.byte	91
+ 713 0204 00        		.byte	0
+ 714 0205 4B        		.byte	75
+ 715 0206 4E        		.byte	78
+ 716 0207 CC        		.byte	-52
+ 717 0208 56        		.byte	86
+ 718 0209 57        		.byte	87
+ 719 020a 52        		.byte	82
+ 720 020b 58        		.byte	88
+ 721 020c 50        		.byte	80
+ 722 020d 4A        		.byte	74
+ 723 020e 4D        		.byte	77
+ 724 020f 62        		.byte	98
+ 725 0210 68        		.byte	104
+ 726 0211 6C        		.byte	108
+ 727 0212 59        		.byte	89
+ 728 0213 63        		.byte	99
+ 729 0214 00        		.byte	0
+ 730 0215 00        		.byte	0
+ 731 0216 00        		.byte	0
+ 732 0217 00        		.byte	0
+ 733 0218 6A        		.byte	106
+ 734 0219 6E        		.byte	110
+ 735 021a 00        		.byte	0
+ 736 021b 00        		.byte	0
+ 737 021c 00        		.byte	0
+ 738 021d 00        		.byte	0
+ 739 021e 00        		.byte	0
+ 740 021f 48        		.byte	72
+ 741 0220 00        		.byte	0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 14
 
 
- 742 0051 02        		.byte	0x2
- 743 0052 07        		.byte	0x7
- 744 0053 0000 0000 		.long	.LASF4
- 745 0057 02        		.uleb128 0x2
- 746 0058 04        		.byte	0x4
- 747 0059 05        		.byte	0x5
- 748 005a 0000 0000 		.long	.LASF5
- 749 005e 02        		.uleb128 0x2
- 750 005f 04        		.byte	0x4
- 751 0060 07        		.byte	0x7
- 752 0061 0000 0000 		.long	.LASF6
- 753 0065 02        		.uleb128 0x2
- 754 0066 08        		.byte	0x8
- 755 0067 05        		.byte	0x5
- 756 0068 0000 0000 		.long	.LASF7
- 757 006c 02        		.uleb128 0x2
- 758 006d 08        		.byte	0x8
- 759 006e 07        		.byte	0x7
- 760 006f 0000 0000 		.long	.LASF8
- 761 0073 05        		.uleb128 0x5
- 762 0074 01        		.byte	0x1
- 763 0075 06        		.byte	0x6
- 764 0076 05        		.uleb128 0x5
- 765 0077 01        		.byte	0x1
- 766 0078 08        		.byte	0x8
- 767 0079 06        		.uleb128 0x6
- 768 007a 2C00 0000 		.long	0x2c
- 769 007e 8900 0000 		.long	0x89
- 770 0082 07        		.uleb128 0x7
- 771 0083 8900 0000 		.long	0x89
- 772 0087 8F        		.byte	0x8f
- 773 0088 00        		.byte	0x0
- 774 0089 05        		.uleb128 0x5
- 775 008a 02        		.byte	0x2
- 776 008b 07        		.byte	0x7
- 777 008c 08        		.uleb128 0x8
- 778 008d 0000 0000 		.long	.LASF9
- 779 0091 02        		.byte	0x2
- 780 0092 0B        		.byte	0xb
- 781 0093 9E00 0000 		.long	0x9e
- 782 0097 01        		.byte	0x1
- 783 0098 05        		.byte	0x5
- 784 0099 03        		.byte	0x3
- 785 009a 0000 0000 		.long	keycode_set2
- 786 009e 09        		.uleb128 0x9
- 787 009f 7900 0000 		.long	0x79
- 788 00a3 06        		.uleb128 0x6
- 789 00a4 4500 0000 		.long	0x45
- 790 00a8 B300 0000 		.long	0xb3
- 791 00ac 07        		.uleb128 0x7
- 792 00ad 8900 0000 		.long	0x89
- 793 00b1 19        		.byte	0x19
- 794 00b2 00        		.byte	0x0
- 795 00b3 08        		.uleb128 0x8
- 796 00b4 0000 0000 		.long	.LASF10
- 797 00b8 02        		.byte	0x2
- 798 00b9 2E        		.byte	0x2e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 15
+ 742 0221 00        		.byte	0
+ 743 0222 00        		.byte	0
+ 744 0223 6B        		.byte	107
+ 745 0224 00        		.byte	0
+ 746 0225 67        		.byte	103
+ 747 0226 3E        		.byte	62
+ 748 0227 14        		.byte	20
+ 749 0228 2B        		.byte	43
+ 750 0229 04        		.byte	4
+ 751 022a 29        		.byte	41
+ 752 022b 1D        		.byte	29
+ 753 022c 00        		.byte	0
+ 754 022d 35        		.byte	53
+ 755 022e 1E        		.byte	30
+ 756 022f 1A        		.byte	26
+ 757 0230 39        		.byte	57
+ 758 0231 16        		.byte	22
+ 759 0232 00        		.byte	0
+ 760 0233 1B        		.byte	27
+ 761 0234 00        		.byte	0
+ 762 0235 3A        		.byte	58
+ 763 0236 1F        		.byte	31
+ 764 0237 08        		.byte	8
+ 765 0238 3C        		.byte	60
+ 766 0239 07        		.byte	7
+ 767 023a 3D        		.byte	61
+ 768 023b 06        		.byte	6
+ 769 023c 00        		.byte	0
+ 770 023d 3B        		.byte	59
+ 771 023e 20        		.byte	32
+ 772 023f 15        		.byte	21
+ 773 0240 17        		.byte	23
+ 774 0241 09        		.byte	9
+ 775 0242 0A        		.byte	10
+ 776 0243 19        		.byte	25
+ 777 0244 05        		.byte	5
+ 778 0245 22        		.byte	34
+ 779 0246 21        		.byte	33
+ 780 0247 18        		.byte	24
+ 781 0248 1C        		.byte	28
+ 782 0249 0D        		.byte	13
+ 783 024a 0B        		.byte	11
+ 784 024b 10        		.byte	16
+ 785 024c 11        		.byte	17
+ 786 024d 23        		.byte	35
+ 787 024e 24        		.byte	36
+ 788 024f 0C        		.byte	12
+ 789 0250 30        		.byte	48
+ 790 0251 0E        		.byte	14
+ 791 0252 3F        		.byte	63
+ 792 0253 36        		.byte	54
+ 793 0254 00        		.byte	0
+ 794 0255 2E        		.byte	46
+ 795 0256 25        		.byte	37
+ 796 0257 12        		.byte	18
+ 797 0258 40        		.byte	64
+ 798 0259 0F        		.byte	15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 15
 
 
- 799 00ba C500 0000 		.long	0xc5
- 800 00be 01        		.byte	0x1
- 801 00bf 05        		.byte	0x5
- 802 00c0 03        		.byte	0x3
- 803 00c1 0000 0000 		.long	keycode_USB_multimedia
- 804 00c5 09        		.uleb128 0x9
- 805 00c6 A300 0000 		.long	0xa3
- 806 00ca 06        		.uleb128 0x6
- 807 00cb 4500 0000 		.long	0x45
- 808 00cf DA00 0000 		.long	0xda
- 809 00d3 07        		.uleb128 0x7
- 810 00d4 8900 0000 		.long	0x89
- 811 00d8 01        		.byte	0x1
- 812 00d9 00        		.byte	0x0
- 813 00da 08        		.uleb128 0x8
- 814 00db 0000 0000 		.long	.LASF11
- 815 00df 02        		.byte	0x2
- 816 00e0 35        		.byte	0x35
- 817 00e1 EC00 0000 		.long	0xec
- 818 00e5 01        		.byte	0x1
- 819 00e6 05        		.byte	0x5
- 820 00e7 03        		.byte	0x3
- 821 00e8 0000 0000 		.long	keycode_USB_extend
- 822 00ec 09        		.uleb128 0x9
- 823 00ed CA00 0000 		.long	0xca
- 824 00f1 06        		.uleb128 0x6
- 825 00f2 2C00 0000 		.long	0x2c
- 826 00f6 0101 0000 		.long	0x101
- 827 00fa 07        		.uleb128 0x7
- 828 00fb 8900 0000 		.long	0x89
- 829 00ff 02        		.byte	0x2
- 830 0100 00        		.byte	0x0
- 831 0101 08        		.uleb128 0x8
- 832 0102 0000 0000 		.long	.LASF12
- 833 0106 02        		.byte	0x2
- 834 0107 3A        		.byte	0x3a
- 835 0108 1301 0000 		.long	0x113
- 836 010c 01        		.byte	0x1
- 837 010d 05        		.byte	0x5
- 838 010e 03        		.byte	0x3
- 839 010f 0000 0000 		.long	keycode_set2_special
- 840 0113 09        		.uleb128 0x9
- 841 0114 F100 0000 		.long	0xf1
- 842 0118 06        		.uleb128 0x6
- 843 0119 2C00 0000 		.long	0x2c
- 844 011d 2801 0000 		.long	0x128
- 845 0121 07        		.uleb128 0x7
- 846 0122 8900 0000 		.long	0x89
- 847 0126 03        		.byte	0x3
- 848 0127 00        		.byte	0x0
- 849 0128 08        		.uleb128 0x8
- 850 0129 0000 0000 		.long	.LASF13
- 851 012d 02        		.byte	0x2
- 852 012e 3E        		.byte	0x3e
- 853 012f 3A01 0000 		.long	0x13a
- 854 0133 01        		.byte	0x1
- 855 0134 05        		.byte	0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 16
+ 799 025a 00        		.byte	0
+ 800 025b 37        		.byte	55
+ 801 025c FE        		.byte	-2
+ 802 025d 41        		.byte	65
+ 803 025e 26        		.byte	38
+ 804 025f 13        		.byte	19
+ 805 0260 2F        		.byte	47
+ 806 0261 33        		.byte	51
+ 807 0262 34        		.byte	52
+ 808 0263 32        		.byte	50
+ 809 0264 38        		.byte	56
+ 810 0265 2D        		.byte	45
+ 811 0266 27        		.byte	39
+ 812 0267 47        		.byte	71
+ 813 0268 00        		.byte	0
+ 814 0269 00        		.byte	0
+ 815 026a 69        		.byte	105
+ 816 026b 64        		.byte	100
+ 817 026c 6D        		.byte	109
+ 818 026d 00        		.byte	0
+ 819 026e 46        		.byte	70
+ 820 026f 00        		.byte	0
+ 821 0270 2A        		.byte	42
+ 822 0271 31        		.byte	49
+ 823 0272 44        		.byte	68
+ 824 0273 28        		.byte	40
+ 825 0274 45        		.byte	69
+ 826 0275 42        		.byte	66
+ 827 0276 43        		.byte	67
+ 828 0277 C9        		.byte	-55
+ 829 0278 53        		.byte	83
+ 830 0279 5F        		.byte	95
+ 831 027a 2C        		.byte	44
+ 832 027b 5C        		.byte	92
+ 833 027c 51        		.byte	81
+ 834 027d 4C        		.byte	76
+ 835 027e 00        		.byte	0
+ 836 027f CA        		.byte	-54
+ 837 0280 54        		.byte	84
+ 838 0281 60        		.byte	96
+ 839 0282 5D        		.byte	93
+ 840 0283 5A        		.byte	90
+ 841 0284 4F        		.byte	79
+ 842 0285 49        		.byte	73
+ 843 0286 00        		.byte	0
+ 844 0287 CB        		.byte	-53
+ 845 0288 55        		.byte	85
+ 846 0289 61        		.byte	97
+ 847 028a 5E        		.byte	94
+ 848 028b 5B        		.byte	91
+ 849 028c 00        		.byte	0
+ 850 028d 4B        		.byte	75
+ 851 028e 4E        		.byte	78
+ 852 028f CC        		.byte	-52
+ 853 0290 56        		.byte	86
+ 854 0291 57        		.byte	87
+ 855 0292 52        		.byte	82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 16
 
 
- 856 0135 03        		.byte	0x3
- 857 0136 0000 0000 		.long	keycode_set2_makeonly
- 858 013a 09        		.uleb128 0x9
- 859 013b 1801 0000 		.long	0x118
- 860 013f 08        		.uleb128 0x8
- 861 0140 0000 0000 		.long	.LASF14
- 862 0144 02        		.byte	0x2
- 863 0145 42        		.byte	0x42
- 864 0146 5101 0000 		.long	0x151
- 865 014a 01        		.byte	0x1
- 866 014b 05        		.byte	0x5
- 867 014c 03        		.byte	0x3
- 868 014d 0000 0000 		.long	keycode_set2_make_break
- 869 0151 09        		.uleb128 0x9
- 870 0152 1801 0000 		.long	0x118
- 871 0156 06        		.uleb128 0x6
- 872 0157 2C00 0000 		.long	0x2c
- 873 015b 6601 0000 		.long	0x166
- 874 015f 07        		.uleb128 0x7
- 875 0160 8900 0000 		.long	0x89
- 876 0164 2C        		.byte	0x2c
- 877 0165 00        		.byte	0x0
- 878 0166 08        		.uleb128 0x8
- 879 0167 0000 0000 		.long	.LASF15
- 880 016b 02        		.byte	0x2
- 881 016c 46        		.byte	0x46
- 882 016d 7801 0000 		.long	0x178
- 883 0171 01        		.byte	0x1
- 884 0172 05        		.byte	0x5
- 885 0173 03        		.byte	0x3
- 886 0174 0000 0000 		.long	keycode_set2_extend
- 887 0178 09        		.uleb128 0x9
- 888 0179 5601 0000 		.long	0x156
- 889 017d 06        		.uleb128 0x6
- 890 017e 2C00 0000 		.long	0x2c
- 891 0182 8D01 0000 		.long	0x18d
- 892 0186 07        		.uleb128 0x7
- 893 0187 8900 0000 		.long	0x89
- 894 018b 0E        		.byte	0xe
- 895 018c 00        		.byte	0x0
- 896 018d 08        		.uleb128 0x8
- 897 018e 0000 0000 		.long	.LASF16
- 898 0192 02        		.byte	0x2
- 899 0193 51        		.byte	0x51
- 900 0194 9F01 0000 		.long	0x19f
- 901 0198 01        		.byte	0x1
- 902 0199 05        		.byte	0x5
- 903 019a 03        		.byte	0x3
- 904 019b 0000 0000 		.long	keycode_set2_proc_shift
- 905 019f 09        		.uleb128 0x9
- 906 01a0 7D01 0000 		.long	0x17d
- 907 01a4 06        		.uleb128 0x6
- 908 01a5 2C00 0000 		.long	0x2c
- 909 01a9 C001 0000 		.long	0x1c0
- 910 01ad 07        		.uleb128 0x7
- 911 01ae 8900 0000 		.long	0x89
- 912 01b2 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 17
+ 856 0293 58        		.byte	88
+ 857 0294 50        		.byte	80
+ 858 0295 4A        		.byte	74
+ 859 0296 4D        		.byte	77
+ 860 0297 62        		.byte	98
+ 861 0298 68        		.byte	104
+ 862 0299 6C        		.byte	108
+ 863 029a 59        		.byte	89
+ 864 029b 63        		.byte	99
+ 865 029c 00        		.byte	0
+ 866 029d 00        		.byte	0
+ 867 029e 00        		.byte	0
+ 868 029f 00        		.byte	0
+ 869 02a0 6A        		.byte	106
+ 870 02a1 6E        		.byte	110
+ 871 02a2 00        		.byte	0
+ 872 02a3 00        		.byte	0
+ 873 02a4 00        		.byte	0
+ 874 02a5 00        		.byte	0
+ 875 02a6 00        		.byte	0
+ 876               		.lcomm _isActiveDualAction,1
+ 877               		.lcomm _isCanceledDualAction,1
+ 878               		.section	.debug_frame,"",@progbits
+ 879               	.Lframe0:
+ 880 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
+ 881               	.LSCIE0:
+ 882 0004 FFFF FFFF 		.long	0xffffffff
+ 883 0008 01        		.byte	0x1
+ 884 0009 00        		.string	""
+ 885 000a 01        		.uleb128 0x1
+ 886 000b 7F        		.sleb128 -1
+ 887 000c 24        		.byte	0x24
+ 888 000d 0C        		.byte	0xc
+ 889 000e 20        		.uleb128 0x20
+ 890 000f 00        		.uleb128 0x0
+ 891               		.p2align	2
+ 892               	.LECIE0:
+ 893               	.LSFDE0:
+ 894 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
+ 895               	.LASFDE0:
+ 896 0014 0000 0000 		.long	.Lframe0
+ 897 0018 0000 0000 		.long	.LFB4
+ 898 001c 0600 0000 		.long	.LFE4-.LFB4
+ 899               		.p2align	2
+ 900               	.LEFDE0:
+ 901               	.LSFDE2:
+ 902 0020 0C00 0000 		.long	.LEFDE2-.LASFDE2
+ 903               	.LASFDE2:
+ 904 0024 0000 0000 		.long	.Lframe0
+ 905 0028 0000 0000 		.long	.LFB6
+ 906 002c 2C00 0000 		.long	.LFE6-.LFB6
+ 907               		.p2align	2
+ 908               	.LEFDE2:
+ 909               	.LSFDE4:
+ 910 0030 0C00 0000 		.long	.LEFDE4-.LASFDE4
+ 911               	.LASFDE4:
+ 912 0034 0000 0000 		.long	.Lframe0
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 17
 
 
- 913 01b3 07        		.uleb128 0x7
- 914 01b4 8900 0000 		.long	0x89
- 915 01b8 10        		.byte	0x10
- 916 01b9 07        		.uleb128 0x7
- 917 01ba 8900 0000 		.long	0x89
- 918 01be 07        		.byte	0x7
- 919 01bf 00        		.byte	0x0
- 920 01c0 08        		.uleb128 0x8
- 921 01c1 0000 0000 		.long	.LASF17
- 922 01c5 02        		.byte	0x2
- 923 01c6 58        		.byte	0x58
- 924 01c7 D201 0000 		.long	0x1d2
- 925 01cb 01        		.byte	0x1
- 926 01cc 05        		.byte	0x5
- 927 01cd 03        		.byte	0x3
- 928 01ce 0000 0000 		.long	keymap_code
- 929 01d2 09        		.uleb128 0x9
- 930 01d3 A401 0000 		.long	0x1a4
- 931 01d7 00        		.byte	0x0
- 932               		.section	.debug_abbrev
- 933 0000 01        		.uleb128 0x1
- 934 0001 11        		.uleb128 0x11
- 935 0002 01        		.byte	0x1
- 936 0003 25        		.uleb128 0x25
- 937 0004 0E        		.uleb128 0xe
- 938 0005 13        		.uleb128 0x13
- 939 0006 0B        		.uleb128 0xb
- 940 0007 03        		.uleb128 0x3
- 941 0008 0E        		.uleb128 0xe
- 942 0009 1B        		.uleb128 0x1b
- 943 000a 0E        		.uleb128 0xe
- 944 000b 11        		.uleb128 0x11
- 945 000c 01        		.uleb128 0x1
- 946 000d 12        		.uleb128 0x12
- 947 000e 01        		.uleb128 0x1
- 948 000f 10        		.uleb128 0x10
- 949 0010 06        		.uleb128 0x6
- 950 0011 00        		.byte	0x0
- 951 0012 00        		.byte	0x0
- 952 0013 02        		.uleb128 0x2
- 953 0014 24        		.uleb128 0x24
- 954 0015 00        		.byte	0x0
- 955 0016 0B        		.uleb128 0xb
- 956 0017 0B        		.uleb128 0xb
- 957 0018 3E        		.uleb128 0x3e
- 958 0019 0B        		.uleb128 0xb
- 959 001a 03        		.uleb128 0x3
- 960 001b 0E        		.uleb128 0xe
- 961 001c 00        		.byte	0x0
- 962 001d 00        		.byte	0x0
- 963 001e 03        		.uleb128 0x3
- 964 001f 16        		.uleb128 0x16
- 965 0020 00        		.byte	0x0
- 966 0021 03        		.uleb128 0x3
- 967 0022 0E        		.uleb128 0xe
- 968 0023 3A        		.uleb128 0x3a
- 969 0024 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 18
+ 913 0038 0000 0000 		.long	.LFB7
+ 914 003c 1C00 0000 		.long	.LFE7-.LFB7
+ 915               		.p2align	2
+ 916               	.LEFDE4:
+ 917               	.LSFDE6:
+ 918 0040 0C00 0000 		.long	.LEFDE6-.LASFDE6
+ 919               	.LASFDE6:
+ 920 0044 0000 0000 		.long	.Lframe0
+ 921 0048 0000 0000 		.long	.LFB5
+ 922 004c 3600 0000 		.long	.LFE5-.LFB5
+ 923               		.p2align	2
+ 924               	.LEFDE6:
+ 925               		.text
+ 926               	.Letext0:
+ 927               		.section	.debug_loc,"",@progbits
+ 928               	.Ldebug_loc0:
+ 929               	.LLST2:
+ 930 0000 0600 0000 		.long	.LVL0-.Ltext0
+ 931 0004 0A00 0000 		.long	.LVL1-.Ltext0
+ 932 0008 0100      		.word	0x1
+ 933 000a 68        		.byte	0x68
+ 934 000b 0A00 0000 		.long	.LVL1-.Ltext0
+ 935 000f 3200 0000 		.long	.LFE6-.Ltext0
+ 936 0013 0100      		.word	0x1
+ 937 0015 69        		.byte	0x69
+ 938 0016 0000 0000 		.long	0x0
+ 939 001a 0000 0000 		.long	0x0
+ 940               	.LLST4:
+ 941 001e 3200 0000 		.long	.LVL2-.Ltext0
+ 942 0022 3600 0000 		.long	.LVL3-.Ltext0
+ 943 0026 0100      		.word	0x1
+ 944 0028 68        		.byte	0x68
+ 945 0029 3600 0000 		.long	.LVL3-.Ltext0
+ 946 002d 4400 0000 		.long	.LVL4-.Ltext0
+ 947 0031 0100      		.word	0x1
+ 948 0033 6E        		.byte	0x6e
+ 949 0034 4400 0000 		.long	.LVL4-.Ltext0
+ 950 0038 4E00 0000 		.long	.LFE7-.Ltext0
+ 951 003c 0600      		.word	0x6
+ 952 003e 6E        		.byte	0x6e
+ 953 003f 93        		.byte	0x93
+ 954 0040 01        		.uleb128 0x1
+ 955 0041 6F        		.byte	0x6f
+ 956 0042 93        		.byte	0x93
+ 957 0043 01        		.uleb128 0x1
+ 958 0044 0000 0000 		.long	0x0
+ 959 0048 0000 0000 		.long	0x0
+ 960               	.LLST6:
+ 961 004c 7000 0000 		.long	.LVL7-.Ltext0
+ 962 0050 8200 0000 		.long	.LVL8-.Ltext0
+ 963 0054 0100      		.word	0x1
+ 964 0056 61        		.byte	0x61
+ 965 0057 0000 0000 		.long	0x0
+ 966 005b 0000 0000 		.long	0x0
+ 967               		.section	.debug_info
+ 968 0000 7803 0000 		.long	0x378
+ 969 0004 0200      		.word	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 18
 
 
- 970 0025 3B        		.uleb128 0x3b
- 971 0026 0B        		.uleb128 0xb
- 972 0027 49        		.uleb128 0x49
- 973 0028 13        		.uleb128 0x13
- 974 0029 00        		.byte	0x0
- 975 002a 00        		.byte	0x0
- 976 002b 04        		.uleb128 0x4
- 977 002c 24        		.uleb128 0x24
- 978 002d 00        		.byte	0x0
- 979 002e 0B        		.uleb128 0xb
- 980 002f 0B        		.uleb128 0xb
- 981 0030 3E        		.uleb128 0x3e
- 982 0031 0B        		.uleb128 0xb
- 983 0032 03        		.uleb128 0x3
- 984 0033 08        		.uleb128 0x8
- 985 0034 00        		.byte	0x0
- 986 0035 00        		.byte	0x0
- 987 0036 05        		.uleb128 0x5
- 988 0037 24        		.uleb128 0x24
- 989 0038 00        		.byte	0x0
- 990 0039 0B        		.uleb128 0xb
- 991 003a 0B        		.uleb128 0xb
- 992 003b 3E        		.uleb128 0x3e
- 993 003c 0B        		.uleb128 0xb
- 994 003d 00        		.byte	0x0
- 995 003e 00        		.byte	0x0
- 996 003f 06        		.uleb128 0x6
- 997 0040 01        		.uleb128 0x1
- 998 0041 01        		.byte	0x1
- 999 0042 49        		.uleb128 0x49
- 1000 0043 13        		.uleb128 0x13
- 1001 0044 01        		.uleb128 0x1
- 1002 0045 13        		.uleb128 0x13
- 1003 0046 00        		.byte	0x0
- 1004 0047 00        		.byte	0x0
- 1005 0048 07        		.uleb128 0x7
- 1006 0049 21        		.uleb128 0x21
- 1007 004a 00        		.byte	0x0
- 1008 004b 49        		.uleb128 0x49
- 1009 004c 13        		.uleb128 0x13
- 1010 004d 2F        		.uleb128 0x2f
- 1011 004e 0B        		.uleb128 0xb
- 1012 004f 00        		.byte	0x0
- 1013 0050 00        		.byte	0x0
- 1014 0051 08        		.uleb128 0x8
- 1015 0052 34        		.uleb128 0x34
- 1016 0053 00        		.byte	0x0
- 1017 0054 03        		.uleb128 0x3
- 1018 0055 0E        		.uleb128 0xe
- 1019 0056 3A        		.uleb128 0x3a
- 1020 0057 0B        		.uleb128 0xb
- 1021 0058 3B        		.uleb128 0x3b
- 1022 0059 0B        		.uleb128 0xb
- 1023 005a 49        		.uleb128 0x49
- 1024 005b 13        		.uleb128 0x13
- 1025 005c 3F        		.uleb128 0x3f
- 1026 005d 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 19
+ 970 0006 0000 0000 		.long	.Ldebug_abbrev0
+ 971 000a 04        		.byte	0x4
+ 972 000b 01        		.uleb128 0x1
+ 973 000c 0000 0000 		.long	.LASF47
+ 974 0010 01        		.byte	0x1
+ 975 0011 0000 0000 		.long	.LASF48
+ 976 0015 0000 0000 		.long	.LASF49
+ 977 0019 0000 0000 		.long	.Ltext0
+ 978 001d 0000 0000 		.long	.Letext0
+ 979 0021 0000 0000 		.long	.Ldebug_line0
+ 980 0025 02        		.uleb128 0x2
+ 981 0026 01        		.byte	0x1
+ 982 0027 06        		.byte	0x6
+ 983 0028 0000 0000 		.long	.LASF0
+ 984 002c 03        		.uleb128 0x3
+ 985 002d 0000 0000 		.long	.LASF2
+ 986 0031 02        		.byte	0x2
+ 987 0032 7A        		.byte	0x7a
+ 988 0033 3700 0000 		.long	0x37
+ 989 0037 02        		.uleb128 0x2
+ 990 0038 01        		.byte	0x1
+ 991 0039 08        		.byte	0x8
+ 992 003a 0000 0000 		.long	.LASF1
+ 993 003e 04        		.uleb128 0x4
+ 994 003f 02        		.byte	0x2
+ 995 0040 05        		.byte	0x5
+ 996 0041 696E 7400 		.string	"int"
+ 997 0045 03        		.uleb128 0x3
+ 998 0046 0000 0000 		.long	.LASF3
+ 999 004a 02        		.byte	0x2
+ 1000 004b 7C        		.byte	0x7c
+ 1001 004c 5000 0000 		.long	0x50
+ 1002 0050 02        		.uleb128 0x2
+ 1003 0051 02        		.byte	0x2
+ 1004 0052 07        		.byte	0x7
+ 1005 0053 0000 0000 		.long	.LASF4
+ 1006 0057 02        		.uleb128 0x2
+ 1007 0058 04        		.byte	0x4
+ 1008 0059 05        		.byte	0x5
+ 1009 005a 0000 0000 		.long	.LASF5
+ 1010 005e 02        		.uleb128 0x2
+ 1011 005f 04        		.byte	0x4
+ 1012 0060 07        		.byte	0x7
+ 1013 0061 0000 0000 		.long	.LASF6
+ 1014 0065 02        		.uleb128 0x2
+ 1015 0066 08        		.byte	0x8
+ 1016 0067 05        		.byte	0x5
+ 1017 0068 0000 0000 		.long	.LASF7
+ 1018 006c 02        		.uleb128 0x2
+ 1019 006d 08        		.byte	0x8
+ 1020 006e 07        		.byte	0x7
+ 1021 006f 0000 0000 		.long	.LASF8
+ 1022 0073 05        		.uleb128 0x5
+ 1023 0074 01        		.byte	0x1
+ 1024 0075 06        		.byte	0x6
+ 1025 0076 05        		.uleb128 0x5
+ 1026 0077 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 19
 
 
- 1027 005e 02        		.uleb128 0x2
- 1028 005f 0A        		.uleb128 0xa
- 1029 0060 00        		.byte	0x0
- 1030 0061 00        		.byte	0x0
- 1031 0062 09        		.uleb128 0x9
- 1032 0063 26        		.uleb128 0x26
- 1033 0064 00        		.byte	0x0
- 1034 0065 49        		.uleb128 0x49
- 1035 0066 13        		.uleb128 0x13
- 1036 0067 00        		.byte	0x0
- 1037 0068 00        		.byte	0x0
- 1038 0069 00        		.byte	0x0
- 1039               		.section	.debug_pubnames,"",@progbits
- 1040 0000 E400 0000 		.long	0xe4
- 1041 0004 0200      		.word	0x2
- 1042 0006 0000 0000 		.long	.Ldebug_info0
- 1043 000a D801 0000 		.long	0x1d8
- 1044 000e 8C00 0000 		.long	0x8c
- 1045 0012 6B65 7963 		.string	"keycode_set2"
- 1045      6F64 655F 
- 1045      7365 7432 
- 1045      00
- 1046 001f B300 0000 		.long	0xb3
- 1047 0023 6B65 7963 		.string	"keycode_USB_multimedia"
- 1047      6F64 655F 
- 1047      5553 425F 
- 1047      6D75 6C74 
- 1047      696D 6564 
- 1048 003a DA00 0000 		.long	0xda
- 1049 003e 6B65 7963 		.string	"keycode_USB_extend"
- 1049      6F64 655F 
- 1049      5553 425F 
- 1049      6578 7465 
- 1049      6E64 00
- 1050 0051 0101 0000 		.long	0x101
- 1051 0055 6B65 7963 		.string	"keycode_set2_special"
- 1051      6F64 655F 
- 1051      7365 7432 
- 1051      5F73 7065 
- 1051      6369 616C 
- 1052 006a 2801 0000 		.long	0x128
- 1053 006e 6B65 7963 		.string	"keycode_set2_makeonly"
- 1053      6F64 655F 
- 1053      7365 7432 
- 1053      5F6D 616B 
- 1053      656F 6E6C 
- 1054 0084 3F01 0000 		.long	0x13f
- 1055 0088 6B65 7963 		.string	"keycode_set2_make_break"
- 1055      6F64 655F 
- 1055      7365 7432 
- 1055      5F6D 616B 
- 1055      655F 6272 
- 1056 00a0 6601 0000 		.long	0x166
- 1057 00a4 6B65 7963 		.string	"keycode_set2_extend"
- 1057      6F64 655F 
- 1057      7365 7432 
- 1057      5F65 7874 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 20
+ 1027 0078 08        		.byte	0x8
+ 1028 0079 06        		.uleb128 0x6
+ 1029 007a 02        		.byte	0x2
+ 1030 007b 03        		.byte	0x3
+ 1031 007c 18        		.byte	0x18
+ 1032 007d 0001 0000 		.long	0x100
+ 1033 0081 07        		.uleb128 0x7
+ 1034 0082 0000 0000 		.long	.LASF9
+ 1035 0086 D501      		.sleb128 213
+ 1036 0088 07        		.uleb128 0x7
+ 1037 0089 0000 0000 		.long	.LASF10
+ 1038 008d D601      		.sleb128 214
+ 1039 008f 07        		.uleb128 0x7
+ 1040 0090 0000 0000 		.long	.LASF11
+ 1041 0094 D701      		.sleb128 215
+ 1042 0096 07        		.uleb128 0x7
+ 1043 0097 0000 0000 		.long	.LASF12
+ 1044 009b D801      		.sleb128 216
+ 1045 009d 07        		.uleb128 0x7
+ 1046 009e 0000 0000 		.long	.LASF13
+ 1047 00a2 D901      		.sleb128 217
+ 1048 00a4 07        		.uleb128 0x7
+ 1049 00a5 0000 0000 		.long	.LASF14
+ 1050 00a9 DA01      		.sleb128 218
+ 1051 00ab 07        		.uleb128 0x7
+ 1052 00ac 0000 0000 		.long	.LASF15
+ 1053 00b0 DB01      		.sleb128 219
+ 1054 00b2 07        		.uleb128 0x7
+ 1055 00b3 0000 0000 		.long	.LASF16
+ 1056 00b7 DC01      		.sleb128 220
+ 1057 00b9 07        		.uleb128 0x7
+ 1058 00ba 0000 0000 		.long	.LASF17
+ 1059 00be DD01      		.sleb128 221
+ 1060 00c0 07        		.uleb128 0x7
+ 1061 00c1 0000 0000 		.long	.LASF18
+ 1062 00c5 DE01      		.sleb128 222
+ 1063 00c7 07        		.uleb128 0x7
+ 1064 00c8 0000 0000 		.long	.LASF19
+ 1065 00cc DF01      		.sleb128 223
+ 1066 00ce 07        		.uleb128 0x7
+ 1067 00cf 0000 0000 		.long	.LASF20
+ 1068 00d3 E001      		.sleb128 224
+ 1069 00d5 07        		.uleb128 0x7
+ 1070 00d6 0000 0000 		.long	.LASF21
+ 1071 00da E101      		.sleb128 225
+ 1072 00dc 07        		.uleb128 0x7
+ 1073 00dd 0000 0000 		.long	.LASF22
+ 1074 00e1 E201      		.sleb128 226
+ 1075 00e3 07        		.uleb128 0x7
+ 1076 00e4 0000 0000 		.long	.LASF23
+ 1077 00e8 E301      		.sleb128 227
+ 1078 00ea 07        		.uleb128 0x7
+ 1079 00eb 0000 0000 		.long	.LASF24
+ 1080 00ef E401      		.sleb128 228
+ 1081 00f1 07        		.uleb128 0x7
+ 1082 00f2 0000 0000 		.long	.LASF25
+ 1083 00f6 E501      		.sleb128 229
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 20
 
 
- 1057      656E 6400 
- 1058 00b8 8D01 0000 		.long	0x18d
- 1059 00bc 6B65 7963 		.string	"keycode_set2_proc_shift"
- 1059      6F64 655F 
- 1059      7365 7432 
- 1059      5F70 726F 
- 1059      635F 7368 
- 1060 00d4 C001 0000 		.long	0x1c0
- 1061 00d8 6B65 796D 		.string	"keymap_code"
- 1061      6170 5F63 
- 1061      6F64 6500 
- 1062 00e4 0000 0000 		.long	0x0
- 1063               		.section	.debug_line
- 1064 0000 6500 0000 		.long	.LELT0-.LSLT0
- 1065               	.LSLT0:
- 1066 0004 0200      		.word	0x2
- 1067 0006 5500 0000 		.long	.LELTP0-.LASLTP0
- 1068               	.LASLTP0:
- 1069 000a 01        		.byte	0x1
- 1070 000b 01        		.byte	0x1
- 1071 000c F6        		.byte	0xf6
- 1072 000d F5        		.byte	0xf5
- 1073 000e 0A        		.byte	0xa
- 1074 000f 00        		.byte	0x0
- 1075 0010 01        		.byte	0x1
- 1076 0011 01        		.byte	0x1
- 1077 0012 01        		.byte	0x1
- 1078 0013 01        		.byte	0x1
- 1079 0014 00        		.byte	0x0
- 1080 0015 00        		.byte	0x0
- 1081 0016 00        		.byte	0x0
- 1082 0017 01        		.byte	0x1
- 1083 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
- 1083      696E 6176 
- 1083      722D 3230 
- 1083      3130 3031 
- 1083      3130 2F6C 
- 1084 0044 00        		.byte	0
- 1085 0045 00        		.byte	0x0
- 1086 0046 7374 6469 		.string	"stdint.h"
- 1086      6E74 2E68 
- 1086      00
- 1087 004f 01        		.uleb128 0x1
- 1088 0050 00        		.uleb128 0x0
- 1089 0051 00        		.uleb128 0x0
- 1090 0052 6B65 796D 		.string	"keymap.c"
- 1090      6170 2E63 
- 1090      00
- 1091 005b 00        		.uleb128 0x0
- 1092 005c 00        		.uleb128 0x0
- 1093 005d 00        		.uleb128 0x0
- 1094 005e 00        		.byte	0x0
- 1095               	.LELTP0:
- 1096 005f 00        		.byte	0x0
- 1097 0060 05        		.uleb128 0x5
- 1098 0061 02        		.byte	0x2
- 1099 0062 0000 0000 		.long	.Letext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 21
+ 1084 00f8 07        		.uleb128 0x7
+ 1085 00f9 0000 0000 		.long	.LASF26
+ 1086 00fd E601      		.sleb128 230
+ 1087 00ff 00        		.byte	0x0
+ 1088 0100 02        		.uleb128 0x2
+ 1089 0101 01        		.byte	0x1
+ 1090 0102 06        		.byte	0x6
+ 1091 0103 0000 0000 		.long	.LASF27
+ 1092 0107 08        		.uleb128 0x8
+ 1093 0108 01        		.byte	0x1
+ 1094 0109 0000 0000 		.long	.LASF50
+ 1095 010d 01        		.byte	0x1
+ 1096 010e 3B        		.byte	0x3b
+ 1097 010f 01        		.byte	0x1
+ 1098 0110 2C00 0000 		.long	0x2c
+ 1099 0114 01        		.byte	0x1
+ 1100 0115 09        		.uleb128 0x9
+ 1101 0116 0701 0000 		.long	0x107
+ 1102 011a 0000 0000 		.long	.LFB4
+ 1103 011e 0000 0000 		.long	.LFE4
+ 1104 0122 02        		.byte	0x2
+ 1105 0123 90        		.byte	0x90
+ 1106 0124 20        		.uleb128 0x20
+ 1107 0125 0A        		.uleb128 0xa
+ 1108 0126 01        		.byte	0x1
+ 1109 0127 0000 0000 		.long	.LASF30
+ 1110 012b 01        		.byte	0x1
+ 1111 012c 50        		.byte	0x50
+ 1112 012d 01        		.byte	0x1
+ 1113 012e 0000 0000 		.long	.LFB6
+ 1114 0132 0000 0000 		.long	.LFE6
+ 1115 0136 02        		.byte	0x2
+ 1116 0137 90        		.byte	0x90
+ 1117 0138 20        		.uleb128 0x20
+ 1118 0139 4D01 0000 		.long	0x14d
+ 1119 013d 0B        		.uleb128 0xb
+ 1120 013e 0000 0000 		.long	.LASF28
+ 1121 0142 01        		.byte	0x1
+ 1122 0143 50        		.byte	0x50
+ 1123 0144 2C00 0000 		.long	0x2c
+ 1124 0148 0000 0000 		.long	.LLST2
+ 1125 014c 00        		.byte	0x0
+ 1126 014d 0C        		.uleb128 0xc
+ 1127 014e 01        		.byte	0x1
+ 1128 014f 0000 0000 		.long	.LASF51
+ 1129 0153 01        		.byte	0x1
+ 1130 0154 5D        		.byte	0x5d
+ 1131 0155 01        		.byte	0x1
+ 1132 0156 2C00 0000 		.long	0x2c
+ 1133 015a 0000 0000 		.long	.LFB7
+ 1134 015e 0000 0000 		.long	.LFE7
+ 1135 0162 02        		.byte	0x2
+ 1136 0163 90        		.byte	0x90
+ 1137 0164 20        		.uleb128 0x20
+ 1138 0165 7901 0000 		.long	0x179
+ 1139 0169 0B        		.uleb128 0xb
+ 1140 016a 0000 0000 		.long	.LASF29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 21
 
 
- 1100 0066 00        		.byte	0x0
- 1101 0067 01        		.uleb128 0x1
- 1102 0068 01        		.byte	0x1
- 1103               	.LELT0:
- 1104 0069 1600 0000 		.section	.debug_str,"MS",@progbits,1
- 1104      0200 1000 
- 1104      0000 0101 
- 1104      FB0E 0A00 
- 1104      0101 0101 
- 1105               	.LASF7:
- 1106 0000 6C6F 6E67 		.string	"long long int"
- 1106      206C 6F6E 
- 1106      6720 696E 
- 1106      7400 
- 1107               	.LASF15:
- 1108 000e 6B65 7963 		.string	"keycode_set2_extend"
- 1108      6F64 655F 
- 1108      7365 7432 
- 1108      5F65 7874 
- 1108      656E 6400 
- 1109               	.LASF10:
- 1110 0022 6B65 7963 		.string	"keycode_USB_multimedia"
- 1110      6F64 655F 
- 1110      5553 425F 
- 1110      6D75 6C74 
- 1110      696D 6564 
- 1111               	.LASF16:
- 1112 0039 6B65 7963 		.string	"keycode_set2_proc_shift"
- 1112      6F64 655F 
- 1112      7365 7432 
- 1112      5F70 726F 
- 1112      635F 7368 
- 1113               	.LASF19:
- 1114 0051 6B65 796D 		.string	"keymap.c"
- 1114      6170 2E63 
- 1114      00
- 1115               	.LASF13:
- 1116 005a 6B65 7963 		.string	"keycode_set2_makeonly"
- 1116      6F64 655F 
- 1116      7365 7432 
- 1116      5F6D 616B 
- 1116      656F 6E6C 
- 1117               	.LASF6:
- 1118 0070 6C6F 6E67 		.string	"long unsigned int"
- 1118      2075 6E73 
- 1118      6967 6E65 
- 1118      6420 696E 
- 1118      7400 
- 1119               	.LASF8:
- 1120 0082 6C6F 6E67 		.string	"long long unsigned int"
- 1120      206C 6F6E 
- 1120      6720 756E 
- 1120      7369 676E 
- 1120      6564 2069 
- 1121               	.LASF20:
- 1122 0099 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
- 1122      6974 325C 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 22
+ 1141 016e 01        		.byte	0x1
+ 1142 016f 5D        		.byte	0x5d
+ 1143 0170 2C00 0000 		.long	0x2c
+ 1144 0174 0000 0000 		.long	.LLST4
+ 1145 0178 00        		.byte	0x0
+ 1146 0179 0A        		.uleb128 0xa
+ 1147 017a 01        		.byte	0x1
+ 1148 017b 0000 0000 		.long	.LASF31
+ 1149 017f 01        		.byte	0x1
+ 1150 0180 41        		.byte	0x41
+ 1151 0181 01        		.byte	0x1
+ 1152 0182 0000 0000 		.long	.LFB5
+ 1153 0186 0000 0000 		.long	.LFE5
+ 1154 018a 02        		.byte	0x2
+ 1155 018b 90        		.byte	0x90
+ 1156 018c 20        		.uleb128 0x20
+ 1157 018d AB01 0000 		.long	0x1ab
+ 1158 0191 0D        		.uleb128 0xd
+ 1159 0192 0000 0000 		.long	.LBB4
+ 1160 0196 0000 0000 		.long	.LBE4
+ 1161 019a 0E        		.uleb128 0xe
+ 1162 019b 0000 0000 		.long	.LASF32
+ 1163 019f 01        		.byte	0x1
+ 1164 01a0 49        		.byte	0x49
+ 1165 01a1 2C00 0000 		.long	0x2c
+ 1166 01a5 0000 0000 		.long	.LLST6
+ 1167 01a9 00        		.byte	0x0
+ 1168 01aa 00        		.byte	0x0
+ 1169 01ab 0F        		.uleb128 0xf
+ 1170 01ac 0000 0000 		.long	.LASF33
+ 1171 01b0 01        		.byte	0x1
+ 1172 01b1 39        		.byte	0x39
+ 1173 01b2 2C00 0000 		.long	0x2c
+ 1174 01b6 05        		.byte	0x5
+ 1175 01b7 03        		.byte	0x3
+ 1176 01b8 0000 0000 		.long	_isCanceledDualAction
+ 1177 01bc 0F        		.uleb128 0xf
+ 1178 01bd 0000 0000 		.long	.LASF34
+ 1179 01c1 01        		.byte	0x1
+ 1180 01c2 3F        		.byte	0x3f
+ 1181 01c3 2C00 0000 		.long	0x2c
+ 1182 01c7 05        		.byte	0x5
+ 1183 01c8 03        		.byte	0x3
+ 1184 01c9 0000 0000 		.long	_isActiveDualAction
+ 1185 01cd 10        		.uleb128 0x10
+ 1186 01ce 0000 0000 		.long	.LASF35
+ 1187 01d2 01        		.byte	0x1
+ 1188 01d3 32        		.byte	0x32
+ 1189 01d4 2C00 0000 		.long	0x2c
+ 1190 01d8 01        		.byte	0x1
+ 1191 01d9 05        		.byte	0x5
+ 1192 01da 03        		.byte	0x3
+ 1193 01db 0000 0000 		.long	dualActionKeyIndex
+ 1194 01df 11        		.uleb128 0x11
+ 1195 01e0 2C00 0000 		.long	0x2c
+ 1196 01e4 EF01 0000 		.long	0x1ef
+ 1197 01e8 12        		.uleb128 0x12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 22
 
 
- 1122      7073 3261 
- 1122      7672 555C 
- 1122      2E67 6974 
- 1123               	.LASF2:
- 1124 00b5 7569 6E74 		.string	"uint8_t"
- 1124      385F 7400 
- 1125               	.LASF1:
- 1126 00bd 756E 7369 		.string	"unsigned char"
- 1126      676E 6564 
- 1126      2063 6861 
- 1126      7200 
- 1127               	.LASF11:
- 1128 00cb 6B65 7963 		.string	"keycode_USB_extend"
- 1128      6F64 655F 
- 1128      5553 425F 
- 1128      6578 7465 
- 1128      6E64 00
- 1129               	.LASF12:
- 1130 00de 6B65 7963 		.string	"keycode_set2_special"
- 1130      6F64 655F 
- 1130      7365 7432 
- 1130      5F73 7065 
- 1130      6369 616C 
- 1131               	.LASF5:
- 1132 00f3 6C6F 6E67 		.string	"long int"
- 1132      2069 6E74 
- 1132      00
- 1133               	.LASF14:
- 1134 00fc 6B65 7963 		.string	"keycode_set2_make_break"
- 1134      6F64 655F 
- 1134      7365 7432 
- 1134      5F6D 616B 
- 1134      655F 6272 
- 1135               	.LASF0:
- 1136 0114 7369 676E 		.string	"signed char"
- 1136      6564 2063 
- 1136      6861 7200 
- 1137               	.LASF3:
- 1138 0120 7569 6E74 		.string	"uint16_t"
- 1138      3136 5F74 
- 1138      00
- 1139               	.LASF17:
- 1140 0129 6B65 796D 		.string	"keymap_code"
- 1140      6170 5F63 
- 1140      6F64 6500 
- 1141               	.LASF18:
- 1142 0135 474E 5520 		.string	"GNU C 4.3.3"
- 1142      4320 342E 
- 1142      332E 3300 
- 1143               	.LASF4:
- 1144 0141 756E 7369 		.string	"unsigned int"
- 1144      676E 6564 
- 1144      2069 6E74 
- 1144      00
- 1145               	.LASF9:
- 1146 014e 6B65 7963 		.string	"keycode_set2"
- 1146      6F64 655F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 23
+ 1198 01e9 EF01 0000 		.long	0x1ef
+ 1199 01ed 8F        		.byte	0x8f
+ 1200 01ee 00        		.byte	0x0
+ 1201 01ef 05        		.uleb128 0x5
+ 1202 01f0 02        		.byte	0x2
+ 1203 01f1 07        		.byte	0x7
+ 1204 01f2 10        		.uleb128 0x10
+ 1205 01f3 0000 0000 		.long	.LASF36
+ 1206 01f7 01        		.byte	0x1
+ 1207 01f8 65        		.byte	0x65
+ 1208 01f9 0402 0000 		.long	0x204
+ 1209 01fd 01        		.byte	0x1
+ 1210 01fe 05        		.byte	0x5
+ 1211 01ff 03        		.byte	0x3
+ 1212 0200 0000 0000 		.long	keycode_set2
+ 1213 0204 13        		.uleb128 0x13
+ 1214 0205 DF01 0000 		.long	0x1df
+ 1215 0209 11        		.uleb128 0x11
+ 1216 020a 4500 0000 		.long	0x45
+ 1217 020e 1902 0000 		.long	0x219
+ 1218 0212 12        		.uleb128 0x12
+ 1219 0213 EF01 0000 		.long	0x1ef
+ 1220 0217 19        		.byte	0x19
+ 1221 0218 00        		.byte	0x0
+ 1222 0219 10        		.uleb128 0x10
+ 1223 021a 0000 0000 		.long	.LASF37
+ 1224 021e 01        		.byte	0x1
+ 1225 021f 88        		.byte	0x88
+ 1226 0220 2B02 0000 		.long	0x22b
+ 1227 0224 01        		.byte	0x1
+ 1228 0225 05        		.byte	0x5
+ 1229 0226 03        		.byte	0x3
+ 1230 0227 0000 0000 		.long	keycode_USB_multimedia
+ 1231 022b 13        		.uleb128 0x13
+ 1232 022c 0902 0000 		.long	0x209
+ 1233 0230 11        		.uleb128 0x11
+ 1234 0231 4500 0000 		.long	0x45
+ 1235 0235 4002 0000 		.long	0x240
+ 1236 0239 12        		.uleb128 0x12
+ 1237 023a EF01 0000 		.long	0x1ef
+ 1238 023e 01        		.byte	0x1
+ 1239 023f 00        		.byte	0x0
+ 1240 0240 10        		.uleb128 0x10
+ 1241 0241 0000 0000 		.long	.LASF38
+ 1242 0245 01        		.byte	0x1
+ 1243 0246 8F        		.byte	0x8f
+ 1244 0247 5202 0000 		.long	0x252
+ 1245 024b 01        		.byte	0x1
+ 1246 024c 05        		.byte	0x5
+ 1247 024d 03        		.byte	0x3
+ 1248 024e 0000 0000 		.long	keycode_USB_extend
+ 1249 0252 13        		.uleb128 0x13
+ 1250 0253 3002 0000 		.long	0x230
+ 1251 0257 11        		.uleb128 0x11
+ 1252 0258 2C00 0000 		.long	0x2c
+ 1253 025c 6702 0000 		.long	0x267
+ 1254 0260 12        		.uleb128 0x12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 23
 
 
- 1146      7365 7432 
- 1146      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s 			page 24
+ 1255 0261 EF01 0000 		.long	0x1ef
+ 1256 0265 02        		.byte	0x2
+ 1257 0266 00        		.byte	0x0
+ 1258 0267 10        		.uleb128 0x10
+ 1259 0268 0000 0000 		.long	.LASF39
+ 1260 026c 01        		.byte	0x1
+ 1261 026d 94        		.byte	0x94
+ 1262 026e 7902 0000 		.long	0x279
+ 1263 0272 01        		.byte	0x1
+ 1264 0273 05        		.byte	0x5
+ 1265 0274 03        		.byte	0x3
+ 1266 0275 0000 0000 		.long	keycode_set2_special
+ 1267 0279 13        		.uleb128 0x13
+ 1268 027a 5702 0000 		.long	0x257
+ 1269 027e 11        		.uleb128 0x11
+ 1270 027f 2C00 0000 		.long	0x2c
+ 1271 0283 8E02 0000 		.long	0x28e
+ 1272 0287 12        		.uleb128 0x12
+ 1273 0288 EF01 0000 		.long	0x1ef
+ 1274 028c 03        		.byte	0x3
+ 1275 028d 00        		.byte	0x0
+ 1276 028e 10        		.uleb128 0x10
+ 1277 028f 0000 0000 		.long	.LASF40
+ 1278 0293 01        		.byte	0x1
+ 1279 0294 98        		.byte	0x98
+ 1280 0295 A002 0000 		.long	0x2a0
+ 1281 0299 01        		.byte	0x1
+ 1282 029a 05        		.byte	0x5
+ 1283 029b 03        		.byte	0x3
+ 1284 029c 0000 0000 		.long	keycode_set2_makeonly
+ 1285 02a0 13        		.uleb128 0x13
+ 1286 02a1 7E02 0000 		.long	0x27e
+ 1287 02a5 10        		.uleb128 0x10
+ 1288 02a6 0000 0000 		.long	.LASF41
+ 1289 02aa 01        		.byte	0x1
+ 1290 02ab 9C        		.byte	0x9c
+ 1291 02ac B702 0000 		.long	0x2b7
+ 1292 02b0 01        		.byte	0x1
+ 1293 02b1 05        		.byte	0x5
+ 1294 02b2 03        		.byte	0x3
+ 1295 02b3 0000 0000 		.long	keycode_set2_make_break
+ 1296 02b7 13        		.uleb128 0x13
+ 1297 02b8 7E02 0000 		.long	0x27e
+ 1298 02bc 11        		.uleb128 0x11
+ 1299 02bd 2C00 0000 		.long	0x2c
+ 1300 02c1 CC02 0000 		.long	0x2cc
+ 1301 02c5 12        		.uleb128 0x12
+ 1302 02c6 EF01 0000 		.long	0x1ef
+ 1303 02ca 2C        		.byte	0x2c
+ 1304 02cb 00        		.byte	0x0
+ 1305 02cc 10        		.uleb128 0x10
+ 1306 02cd 0000 0000 		.long	.LASF42
+ 1307 02d1 01        		.byte	0x1
+ 1308 02d2 A0        		.byte	0xa0
+ 1309 02d3 DE02 0000 		.long	0x2de
+ 1310 02d7 01        		.byte	0x1
+ 1311 02d8 05        		.byte	0x5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 24
+
+
+ 1312 02d9 03        		.byte	0x3
+ 1313 02da 0000 0000 		.long	keycode_set2_extend
+ 1314 02de 13        		.uleb128 0x13
+ 1315 02df BC02 0000 		.long	0x2bc
+ 1316 02e3 11        		.uleb128 0x11
+ 1317 02e4 2C00 0000 		.long	0x2c
+ 1318 02e8 F302 0000 		.long	0x2f3
+ 1319 02ec 12        		.uleb128 0x12
+ 1320 02ed EF01 0000 		.long	0x1ef
+ 1321 02f1 0E        		.byte	0xe
+ 1322 02f2 00        		.byte	0x0
+ 1323 02f3 10        		.uleb128 0x10
+ 1324 02f4 0000 0000 		.long	.LASF43
+ 1325 02f8 01        		.byte	0x1
+ 1326 02f9 AB        		.byte	0xab
+ 1327 02fa 0503 0000 		.long	0x305
+ 1328 02fe 01        		.byte	0x1
+ 1329 02ff 05        		.byte	0x5
+ 1330 0300 03        		.byte	0x3
+ 1331 0301 0000 0000 		.long	keycode_set2_proc_shift
+ 1332 0305 13        		.uleb128 0x13
+ 1333 0306 E302 0000 		.long	0x2e3
+ 1334 030a 11        		.uleb128 0x11
+ 1335 030b 2C00 0000 		.long	0x2c
+ 1336 030f 2603 0000 		.long	0x326
+ 1337 0313 12        		.uleb128 0x12
+ 1338 0314 EF01 0000 		.long	0x1ef
+ 1339 0318 02        		.byte	0x2
+ 1340 0319 12        		.uleb128 0x12
+ 1341 031a EF01 0000 		.long	0x1ef
+ 1342 031e 10        		.byte	0x10
+ 1343 031f 12        		.uleb128 0x12
+ 1344 0320 EF01 0000 		.long	0x1ef
+ 1345 0324 07        		.byte	0x7
+ 1346 0325 00        		.byte	0x0
+ 1347 0326 10        		.uleb128 0x10
+ 1348 0327 0000 0000 		.long	.LASF44
+ 1349 032b 01        		.byte	0x1
+ 1350 032c B2        		.byte	0xb2
+ 1351 032d 3803 0000 		.long	0x338
+ 1352 0331 01        		.byte	0x1
+ 1353 0332 05        		.byte	0x5
+ 1354 0333 03        		.byte	0x3
+ 1355 0334 0000 0000 		.long	keymap_code
+ 1356 0338 13        		.uleb128 0x13
+ 1357 0339 0A03 0000 		.long	0x30a
+ 1358 033d 11        		.uleb128 0x11
+ 1359 033e 2C00 0000 		.long	0x2c
+ 1360 0342 4D03 0000 		.long	0x34d
+ 1361 0346 12        		.uleb128 0x12
+ 1362 0347 EF01 0000 		.long	0x1ef
+ 1363 034b 0F        		.byte	0xf
+ 1364 034c 00        		.byte	0x0
+ 1365 034d 10        		.uleb128 0x10
+ 1366 034e 0000 0000 		.long	.LASF45
+ 1367 0352 01        		.byte	0x1
+ 1368 0353 0D        		.byte	0xd
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 25
+
+
+ 1369 0354 5F03 0000 		.long	0x35f
+ 1370 0358 01        		.byte	0x1
+ 1371 0359 05        		.byte	0x5
+ 1372 035a 03        		.byte	0x3
+ 1373 035b 0000 0000 		.long	dualActionMaskDown
+ 1374 035f 13        		.uleb128 0x13
+ 1375 0360 3D03 0000 		.long	0x33d
+ 1376 0364 10        		.uleb128 0x10
+ 1377 0365 0000 0000 		.long	.LASF46
+ 1378 0369 01        		.byte	0x1
+ 1379 036a 1F        		.byte	0x1f
+ 1380 036b 7603 0000 		.long	0x376
+ 1381 036f 01        		.byte	0x1
+ 1382 0370 05        		.byte	0x5
+ 1383 0371 03        		.byte	0x3
+ 1384 0372 0000 0000 		.long	dualActionMaskUp
+ 1385 0376 13        		.uleb128 0x13
+ 1386 0377 3D03 0000 		.long	0x33d
+ 1387 037b 00        		.byte	0x0
+ 1388               		.section	.debug_abbrev
+ 1389 0000 01        		.uleb128 0x1
+ 1390 0001 11        		.uleb128 0x11
+ 1391 0002 01        		.byte	0x1
+ 1392 0003 25        		.uleb128 0x25
+ 1393 0004 0E        		.uleb128 0xe
+ 1394 0005 13        		.uleb128 0x13
+ 1395 0006 0B        		.uleb128 0xb
+ 1396 0007 03        		.uleb128 0x3
+ 1397 0008 0E        		.uleb128 0xe
+ 1398 0009 1B        		.uleb128 0x1b
+ 1399 000a 0E        		.uleb128 0xe
+ 1400 000b 11        		.uleb128 0x11
+ 1401 000c 01        		.uleb128 0x1
+ 1402 000d 12        		.uleb128 0x12
+ 1403 000e 01        		.uleb128 0x1
+ 1404 000f 10        		.uleb128 0x10
+ 1405 0010 06        		.uleb128 0x6
+ 1406 0011 00        		.byte	0x0
+ 1407 0012 00        		.byte	0x0
+ 1408 0013 02        		.uleb128 0x2
+ 1409 0014 24        		.uleb128 0x24
+ 1410 0015 00        		.byte	0x0
+ 1411 0016 0B        		.uleb128 0xb
+ 1412 0017 0B        		.uleb128 0xb
+ 1413 0018 3E        		.uleb128 0x3e
+ 1414 0019 0B        		.uleb128 0xb
+ 1415 001a 03        		.uleb128 0x3
+ 1416 001b 0E        		.uleb128 0xe
+ 1417 001c 00        		.byte	0x0
+ 1418 001d 00        		.byte	0x0
+ 1419 001e 03        		.uleb128 0x3
+ 1420 001f 16        		.uleb128 0x16
+ 1421 0020 00        		.byte	0x0
+ 1422 0021 03        		.uleb128 0x3
+ 1423 0022 0E        		.uleb128 0xe
+ 1424 0023 3A        		.uleb128 0x3a
+ 1425 0024 0B        		.uleb128 0xb
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 26
+
+
+ 1426 0025 3B        		.uleb128 0x3b
+ 1427 0026 0B        		.uleb128 0xb
+ 1428 0027 49        		.uleb128 0x49
+ 1429 0028 13        		.uleb128 0x13
+ 1430 0029 00        		.byte	0x0
+ 1431 002a 00        		.byte	0x0
+ 1432 002b 04        		.uleb128 0x4
+ 1433 002c 24        		.uleb128 0x24
+ 1434 002d 00        		.byte	0x0
+ 1435 002e 0B        		.uleb128 0xb
+ 1436 002f 0B        		.uleb128 0xb
+ 1437 0030 3E        		.uleb128 0x3e
+ 1438 0031 0B        		.uleb128 0xb
+ 1439 0032 03        		.uleb128 0x3
+ 1440 0033 08        		.uleb128 0x8
+ 1441 0034 00        		.byte	0x0
+ 1442 0035 00        		.byte	0x0
+ 1443 0036 05        		.uleb128 0x5
+ 1444 0037 24        		.uleb128 0x24
+ 1445 0038 00        		.byte	0x0
+ 1446 0039 0B        		.uleb128 0xb
+ 1447 003a 0B        		.uleb128 0xb
+ 1448 003b 3E        		.uleb128 0x3e
+ 1449 003c 0B        		.uleb128 0xb
+ 1450 003d 00        		.byte	0x0
+ 1451 003e 00        		.byte	0x0
+ 1452 003f 06        		.uleb128 0x6
+ 1453 0040 04        		.uleb128 0x4
+ 1454 0041 01        		.byte	0x1
+ 1455 0042 0B        		.uleb128 0xb
+ 1456 0043 0B        		.uleb128 0xb
+ 1457 0044 3A        		.uleb128 0x3a
+ 1458 0045 0B        		.uleb128 0xb
+ 1459 0046 3B        		.uleb128 0x3b
+ 1460 0047 0B        		.uleb128 0xb
+ 1461 0048 01        		.uleb128 0x1
+ 1462 0049 13        		.uleb128 0x13
+ 1463 004a 00        		.byte	0x0
+ 1464 004b 00        		.byte	0x0
+ 1465 004c 07        		.uleb128 0x7
+ 1466 004d 28        		.uleb128 0x28
+ 1467 004e 00        		.byte	0x0
+ 1468 004f 03        		.uleb128 0x3
+ 1469 0050 0E        		.uleb128 0xe
+ 1470 0051 1C        		.uleb128 0x1c
+ 1471 0052 0D        		.uleb128 0xd
+ 1472 0053 00        		.byte	0x0
+ 1473 0054 00        		.byte	0x0
+ 1474 0055 08        		.uleb128 0x8
+ 1475 0056 2E        		.uleb128 0x2e
+ 1476 0057 00        		.byte	0x0
+ 1477 0058 3F        		.uleb128 0x3f
+ 1478 0059 0C        		.uleb128 0xc
+ 1479 005a 03        		.uleb128 0x3
+ 1480 005b 0E        		.uleb128 0xe
+ 1481 005c 3A        		.uleb128 0x3a
+ 1482 005d 0B        		.uleb128 0xb
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 27
+
+
+ 1483 005e 3B        		.uleb128 0x3b
+ 1484 005f 0B        		.uleb128 0xb
+ 1485 0060 27        		.uleb128 0x27
+ 1486 0061 0C        		.uleb128 0xc
+ 1487 0062 49        		.uleb128 0x49
+ 1488 0063 13        		.uleb128 0x13
+ 1489 0064 20        		.uleb128 0x20
+ 1490 0065 0B        		.uleb128 0xb
+ 1491 0066 00        		.byte	0x0
+ 1492 0067 00        		.byte	0x0
+ 1493 0068 09        		.uleb128 0x9
+ 1494 0069 2E        		.uleb128 0x2e
+ 1495 006a 00        		.byte	0x0
+ 1496 006b 31        		.uleb128 0x31
+ 1497 006c 13        		.uleb128 0x13
+ 1498 006d 11        		.uleb128 0x11
+ 1499 006e 01        		.uleb128 0x1
+ 1500 006f 12        		.uleb128 0x12
+ 1501 0070 01        		.uleb128 0x1
+ 1502 0071 40        		.uleb128 0x40
+ 1503 0072 0A        		.uleb128 0xa
+ 1504 0073 00        		.byte	0x0
+ 1505 0074 00        		.byte	0x0
+ 1506 0075 0A        		.uleb128 0xa
+ 1507 0076 2E        		.uleb128 0x2e
+ 1508 0077 01        		.byte	0x1
+ 1509 0078 3F        		.uleb128 0x3f
+ 1510 0079 0C        		.uleb128 0xc
+ 1511 007a 03        		.uleb128 0x3
+ 1512 007b 0E        		.uleb128 0xe
+ 1513 007c 3A        		.uleb128 0x3a
+ 1514 007d 0B        		.uleb128 0xb
+ 1515 007e 3B        		.uleb128 0x3b
+ 1516 007f 0B        		.uleb128 0xb
+ 1517 0080 27        		.uleb128 0x27
+ 1518 0081 0C        		.uleb128 0xc
+ 1519 0082 11        		.uleb128 0x11
+ 1520 0083 01        		.uleb128 0x1
+ 1521 0084 12        		.uleb128 0x12
+ 1522 0085 01        		.uleb128 0x1
+ 1523 0086 40        		.uleb128 0x40
+ 1524 0087 0A        		.uleb128 0xa
+ 1525 0088 01        		.uleb128 0x1
+ 1526 0089 13        		.uleb128 0x13
+ 1527 008a 00        		.byte	0x0
+ 1528 008b 00        		.byte	0x0
+ 1529 008c 0B        		.uleb128 0xb
+ 1530 008d 05        		.uleb128 0x5
+ 1531 008e 00        		.byte	0x0
+ 1532 008f 03        		.uleb128 0x3
+ 1533 0090 0E        		.uleb128 0xe
+ 1534 0091 3A        		.uleb128 0x3a
+ 1535 0092 0B        		.uleb128 0xb
+ 1536 0093 3B        		.uleb128 0x3b
+ 1537 0094 0B        		.uleb128 0xb
+ 1538 0095 49        		.uleb128 0x49
+ 1539 0096 13        		.uleb128 0x13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 28
+
+
+ 1540 0097 02        		.uleb128 0x2
+ 1541 0098 06        		.uleb128 0x6
+ 1542 0099 00        		.byte	0x0
+ 1543 009a 00        		.byte	0x0
+ 1544 009b 0C        		.uleb128 0xc
+ 1545 009c 2E        		.uleb128 0x2e
+ 1546 009d 01        		.byte	0x1
+ 1547 009e 3F        		.uleb128 0x3f
+ 1548 009f 0C        		.uleb128 0xc
+ 1549 00a0 03        		.uleb128 0x3
+ 1550 00a1 0E        		.uleb128 0xe
+ 1551 00a2 3A        		.uleb128 0x3a
+ 1552 00a3 0B        		.uleb128 0xb
+ 1553 00a4 3B        		.uleb128 0x3b
+ 1554 00a5 0B        		.uleb128 0xb
+ 1555 00a6 27        		.uleb128 0x27
+ 1556 00a7 0C        		.uleb128 0xc
+ 1557 00a8 49        		.uleb128 0x49
+ 1558 00a9 13        		.uleb128 0x13
+ 1559 00aa 11        		.uleb128 0x11
+ 1560 00ab 01        		.uleb128 0x1
+ 1561 00ac 12        		.uleb128 0x12
+ 1562 00ad 01        		.uleb128 0x1
+ 1563 00ae 40        		.uleb128 0x40
+ 1564 00af 0A        		.uleb128 0xa
+ 1565 00b0 01        		.uleb128 0x1
+ 1566 00b1 13        		.uleb128 0x13
+ 1567 00b2 00        		.byte	0x0
+ 1568 00b3 00        		.byte	0x0
+ 1569 00b4 0D        		.uleb128 0xd
+ 1570 00b5 0B        		.uleb128 0xb
+ 1571 00b6 01        		.byte	0x1
+ 1572 00b7 11        		.uleb128 0x11
+ 1573 00b8 01        		.uleb128 0x1
+ 1574 00b9 12        		.uleb128 0x12
+ 1575 00ba 01        		.uleb128 0x1
+ 1576 00bb 00        		.byte	0x0
+ 1577 00bc 00        		.byte	0x0
+ 1578 00bd 0E        		.uleb128 0xe
+ 1579 00be 34        		.uleb128 0x34
+ 1580 00bf 00        		.byte	0x0
+ 1581 00c0 03        		.uleb128 0x3
+ 1582 00c1 0E        		.uleb128 0xe
+ 1583 00c2 3A        		.uleb128 0x3a
+ 1584 00c3 0B        		.uleb128 0xb
+ 1585 00c4 3B        		.uleb128 0x3b
+ 1586 00c5 0B        		.uleb128 0xb
+ 1587 00c6 49        		.uleb128 0x49
+ 1588 00c7 13        		.uleb128 0x13
+ 1589 00c8 02        		.uleb128 0x2
+ 1590 00c9 06        		.uleb128 0x6
+ 1591 00ca 00        		.byte	0x0
+ 1592 00cb 00        		.byte	0x0
+ 1593 00cc 0F        		.uleb128 0xf
+ 1594 00cd 34        		.uleb128 0x34
+ 1595 00ce 00        		.byte	0x0
+ 1596 00cf 03        		.uleb128 0x3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 29
+
+
+ 1597 00d0 0E        		.uleb128 0xe
+ 1598 00d1 3A        		.uleb128 0x3a
+ 1599 00d2 0B        		.uleb128 0xb
+ 1600 00d3 3B        		.uleb128 0x3b
+ 1601 00d4 0B        		.uleb128 0xb
+ 1602 00d5 49        		.uleb128 0x49
+ 1603 00d6 13        		.uleb128 0x13
+ 1604 00d7 02        		.uleb128 0x2
+ 1605 00d8 0A        		.uleb128 0xa
+ 1606 00d9 00        		.byte	0x0
+ 1607 00da 00        		.byte	0x0
+ 1608 00db 10        		.uleb128 0x10
+ 1609 00dc 34        		.uleb128 0x34
+ 1610 00dd 00        		.byte	0x0
+ 1611 00de 03        		.uleb128 0x3
+ 1612 00df 0E        		.uleb128 0xe
+ 1613 00e0 3A        		.uleb128 0x3a
+ 1614 00e1 0B        		.uleb128 0xb
+ 1615 00e2 3B        		.uleb128 0x3b
+ 1616 00e3 0B        		.uleb128 0xb
+ 1617 00e4 49        		.uleb128 0x49
+ 1618 00e5 13        		.uleb128 0x13
+ 1619 00e6 3F        		.uleb128 0x3f
+ 1620 00e7 0C        		.uleb128 0xc
+ 1621 00e8 02        		.uleb128 0x2
+ 1622 00e9 0A        		.uleb128 0xa
+ 1623 00ea 00        		.byte	0x0
+ 1624 00eb 00        		.byte	0x0
+ 1625 00ec 11        		.uleb128 0x11
+ 1626 00ed 01        		.uleb128 0x1
+ 1627 00ee 01        		.byte	0x1
+ 1628 00ef 49        		.uleb128 0x49
+ 1629 00f0 13        		.uleb128 0x13
+ 1630 00f1 01        		.uleb128 0x1
+ 1631 00f2 13        		.uleb128 0x13
+ 1632 00f3 00        		.byte	0x0
+ 1633 00f4 00        		.byte	0x0
+ 1634 00f5 12        		.uleb128 0x12
+ 1635 00f6 21        		.uleb128 0x21
+ 1636 00f7 00        		.byte	0x0
+ 1637 00f8 49        		.uleb128 0x49
+ 1638 00f9 13        		.uleb128 0x13
+ 1639 00fa 2F        		.uleb128 0x2f
+ 1640 00fb 0B        		.uleb128 0xb
+ 1641 00fc 00        		.byte	0x0
+ 1642 00fd 00        		.byte	0x0
+ 1643 00fe 13        		.uleb128 0x13
+ 1644 00ff 26        		.uleb128 0x26
+ 1645 0100 00        		.byte	0x0
+ 1646 0101 49        		.uleb128 0x49
+ 1647 0102 13        		.uleb128 0x13
+ 1648 0103 00        		.byte	0x0
+ 1649 0104 00        		.byte	0x0
+ 1650 0105 00        		.byte	0x0
+ 1651               		.section	.debug_pubnames,"",@progbits
+ 1652 0000 8301 0000 		.long	0x183
+ 1653 0004 0200      		.word	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 30
+
+
+ 1654 0006 0000 0000 		.long	.Ldebug_info0
+ 1655 000a 7C03 0000 		.long	0x37c
+ 1656 000e 1501 0000 		.long	0x115
+ 1657 0012 6973 4361 		.string	"isCanceledDualAction"
+ 1657      6E63 656C 
+ 1657      6564 4475 
+ 1657      616C 4163 
+ 1657      7469 6F6E 
+ 1658 0027 2501 0000 		.long	0x125
+ 1659 002b 7365 7444 		.string	"setDualAction"
+ 1659      7561 6C41 
+ 1659      6374 696F 
+ 1659      6E00 
+ 1660 0039 4D01 0000 		.long	0x14d
+ 1661 003d 6765 7444 		.string	"getDualActionDownKeyIdex"
+ 1661      7561 6C41 
+ 1661      6374 696F 
+ 1661      6E44 6F77 
+ 1661      6E4B 6579 
+ 1662 0056 7901 0000 		.long	0x179
+ 1663 005a 6170 706C 		.string	"applyDualAction"
+ 1663      7944 7561 
+ 1663      6C41 6374 
+ 1663      696F 6E00 
+ 1664 006a CD01 0000 		.long	0x1cd
+ 1665 006e 6475 616C 		.string	"dualActionKeyIndex"
+ 1665      4163 7469 
+ 1665      6F6E 4B65 
+ 1665      7949 6E64 
+ 1665      6578 00
+ 1666 0081 F201 0000 		.long	0x1f2
+ 1667 0085 6B65 7963 		.string	"keycode_set2"
+ 1667      6F64 655F 
+ 1667      7365 7432 
+ 1667      00
+ 1668 0092 1902 0000 		.long	0x219
+ 1669 0096 6B65 7963 		.string	"keycode_USB_multimedia"
+ 1669      6F64 655F 
+ 1669      5553 425F 
+ 1669      6D75 6C74 
+ 1669      696D 6564 
+ 1670 00ad 4002 0000 		.long	0x240
+ 1671 00b1 6B65 7963 		.string	"keycode_USB_extend"
+ 1671      6F64 655F 
+ 1671      5553 425F 
+ 1671      6578 7465 
+ 1671      6E64 00
+ 1672 00c4 6702 0000 		.long	0x267
+ 1673 00c8 6B65 7963 		.string	"keycode_set2_special"
+ 1673      6F64 655F 
+ 1673      7365 7432 
+ 1673      5F73 7065 
+ 1673      6369 616C 
+ 1674 00dd 8E02 0000 		.long	0x28e
+ 1675 00e1 6B65 7963 		.string	"keycode_set2_makeonly"
+ 1675      6F64 655F 
+ 1675      7365 7432 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 31
+
+
+ 1675      5F6D 616B 
+ 1675      656F 6E6C 
+ 1676 00f7 A502 0000 		.long	0x2a5
+ 1677 00fb 6B65 7963 		.string	"keycode_set2_make_break"
+ 1677      6F64 655F 
+ 1677      7365 7432 
+ 1677      5F6D 616B 
+ 1677      655F 6272 
+ 1678 0113 CC02 0000 		.long	0x2cc
+ 1679 0117 6B65 7963 		.string	"keycode_set2_extend"
+ 1679      6F64 655F 
+ 1679      7365 7432 
+ 1679      5F65 7874 
+ 1679      656E 6400 
+ 1680 012b F302 0000 		.long	0x2f3
+ 1681 012f 6B65 7963 		.string	"keycode_set2_proc_shift"
+ 1681      6F64 655F 
+ 1681      7365 7432 
+ 1681      5F70 726F 
+ 1681      635F 7368 
+ 1682 0147 2603 0000 		.long	0x326
+ 1683 014b 6B65 796D 		.string	"keymap_code"
+ 1683      6170 5F63 
+ 1683      6F64 6500 
+ 1684 0157 4D03 0000 		.long	0x34d
+ 1685 015b 6475 616C 		.string	"dualActionMaskDown"
+ 1685      4163 7469 
+ 1685      6F6E 4D61 
+ 1685      736B 446F 
+ 1685      776E 00
+ 1686 016e 6403 0000 		.long	0x364
+ 1687 0172 6475 616C 		.string	"dualActionMaskUp"
+ 1687      4163 7469 
+ 1687      6F6E 4D61 
+ 1687      736B 5570 
+ 1687      00
+ 1688 0183 0000 0000 		.long	0x0
+ 1689               		.section	.debug_aranges,"",@progbits
+ 1690 0000 1C00 0000 		.long	0x1c
+ 1691 0004 0200      		.word	0x2
+ 1692 0006 0000 0000 		.long	.Ldebug_info0
+ 1693 000a 04        		.byte	0x4
+ 1694 000b 00        		.byte	0x0
+ 1695 000c 0000      		.word	0x0
+ 1696 000e 0000      		.word	0x0
+ 1697 0010 0000 0000 		.long	.Ltext0
+ 1698 0014 8400 0000 		.long	.Letext0-.Ltext0
+ 1699 0018 0000 0000 		.long	0x0
+ 1700 001c 0000 0000 		.long	0x0
+ 1701               		.section	.debug_line
+ 1702 0000 2301 0000 		.long	.LELT0-.LSLT0
+ 1703               	.LSLT0:
+ 1704 0004 0200      		.word	0x2
+ 1705 0006 6100 0000 		.long	.LELTP0-.LASLTP0
+ 1706               	.LASLTP0:
+ 1707 000a 01        		.byte	0x1
+ 1708 000b 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 32
+
+
+ 1709 000c F6        		.byte	0xf6
+ 1710 000d F5        		.byte	0xf5
+ 1711 000e 0A        		.byte	0xa
+ 1712 000f 00        		.byte	0x0
+ 1713 0010 01        		.byte	0x1
+ 1714 0011 01        		.byte	0x1
+ 1715 0012 01        		.byte	0x1
+ 1716 0013 01        		.byte	0x1
+ 1717 0014 00        		.byte	0x0
+ 1718 0015 00        		.byte	0x0
+ 1719 0016 00        		.byte	0x0
+ 1720 0017 01        		.byte	0x1
+ 1721 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
+ 1721      696E 6176 
+ 1721      722D 3230 
+ 1721      3130 3031 
+ 1721      3130 2F6C 
+ 1722 0044 00        		.byte	0
+ 1723 0045 00        		.byte	0x0
+ 1724 0046 6B65 796D 		.string	"keymap.c"
+ 1724      6170 2E63 
+ 1724      00
+ 1725 004f 00        		.uleb128 0x0
+ 1726 0050 00        		.uleb128 0x0
+ 1727 0051 00        		.uleb128 0x0
+ 1728 0052 7374 6469 		.string	"stdint.h"
+ 1728      6E74 2E68 
+ 1728      00
+ 1729 005b 01        		.uleb128 0x1
+ 1730 005c 00        		.uleb128 0x0
+ 1731 005d 00        		.uleb128 0x0
+ 1732 005e 6B65 796D 		.string	"keymap.h"
+ 1732      6170 2E68 
+ 1732      00
+ 1733 0067 00        		.uleb128 0x0
+ 1734 0068 00        		.uleb128 0x0
+ 1735 0069 00        		.uleb128 0x0
+ 1736 006a 00        		.byte	0x0
+ 1737               	.LELTP0:
+ 1738 006b 00        		.byte	0x0
+ 1739 006c 05        		.uleb128 0x5
+ 1740 006d 02        		.byte	0x2
+ 1741 006e 0000 0000 		.long	.LM1
+ 1742 0072 4E        		.byte	0x4e
+ 1743 0073 00        		.byte	0x0
+ 1744 0074 05        		.uleb128 0x5
+ 1745 0075 02        		.byte	0x2
+ 1746 0076 0000 0000 		.long	.LM2
+ 1747 007a 16        		.byte	0x16
+ 1748 007b 00        		.byte	0x0
+ 1749 007c 05        		.uleb128 0x5
+ 1750 007d 02        		.byte	0x2
+ 1751 007e 0000 0000 		.long	.LM3
+ 1752 0082 27        		.byte	0x27
+ 1753 0083 00        		.byte	0x0
+ 1754 0084 05        		.uleb128 0x5
+ 1755 0085 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 33
+
+
+ 1756 0086 0000 0000 		.long	.LM4
+ 1757 008a 15        		.byte	0x15
+ 1758 008b 00        		.byte	0x0
+ 1759 008c 05        		.uleb128 0x5
+ 1760 008d 02        		.byte	0x2
+ 1761 008e 0000 0000 		.long	.LM5
+ 1762 0092 15        		.byte	0x15
+ 1763 0093 00        		.byte	0x0
+ 1764 0094 05        		.uleb128 0x5
+ 1765 0095 02        		.byte	0x2
+ 1766 0096 0000 0000 		.long	.LM6
+ 1767 009a 15        		.byte	0x15
+ 1768 009b 00        		.byte	0x0
+ 1769 009c 05        		.uleb128 0x5
+ 1770 009d 02        		.byte	0x2
+ 1771 009e 0000 0000 		.long	.LM7
+ 1772 00a2 16        		.byte	0x16
+ 1773 00a3 00        		.byte	0x0
+ 1774 00a4 05        		.uleb128 0x5
+ 1775 00a5 02        		.byte	0x2
+ 1776 00a6 0000 0000 		.long	.LM8
+ 1777 00aa 18        		.byte	0x18
+ 1778 00ab 00        		.byte	0x0
+ 1779 00ac 05        		.uleb128 0x5
+ 1780 00ad 02        		.byte	0x2
+ 1781 00ae 0000 0000 		.long	.LM9
+ 1782 00b2 18        		.byte	0x18
+ 1783 00b3 00        		.byte	0x0
+ 1784 00b4 05        		.uleb128 0x5
+ 1785 00b5 02        		.byte	0x2
+ 1786 00b6 0000 0000 		.long	.LM10
+ 1787 00ba 15        		.byte	0x15
+ 1788 00bb 00        		.byte	0x0
+ 1789 00bc 05        		.uleb128 0x5
+ 1790 00bd 02        		.byte	0x2
+ 1791 00be 0000 0000 		.long	.LM11
+ 1792 00c2 15        		.byte	0x15
+ 1793 00c3 00        		.byte	0x0
+ 1794 00c4 05        		.uleb128 0x5
+ 1795 00c5 02        		.byte	0x2
+ 1796 00c6 0000 0000 		.long	.LM12
+ 1797 00ca 17        		.byte	0x17
+ 1798 00cb 00        		.byte	0x0
+ 1799 00cc 05        		.uleb128 0x5
+ 1800 00cd 02        		.byte	0x2
+ 1801 00ce 0000 0000 		.long	.LM13
+ 1802 00d2 03        		.byte	0x3
+ 1803 00d3 5F        		.sleb128 -33
+ 1804 00d4 01        		.byte	0x1
+ 1805 00d5 00        		.byte	0x0
+ 1806 00d6 05        		.uleb128 0x5
+ 1807 00d7 02        		.byte	0x2
+ 1808 00d8 0000 0000 		.long	.LM14
+ 1809 00dc 15        		.byte	0x15
+ 1810 00dd 00        		.byte	0x0
+ 1811 00de 05        		.uleb128 0x5
+ 1812 00df 02        		.byte	0x2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 34
+
+
+ 1813 00e0 0000 0000 		.long	.LM15
+ 1814 00e4 16        		.byte	0x16
+ 1815 00e5 00        		.byte	0x0
+ 1816 00e6 05        		.uleb128 0x5
+ 1817 00e7 02        		.byte	0x2
+ 1818 00e8 0000 0000 		.long	.LM16
+ 1819 00ec 15        		.byte	0x15
+ 1820 00ed 00        		.byte	0x0
+ 1821 00ee 05        		.uleb128 0x5
+ 1822 00ef 02        		.byte	0x2
+ 1823 00f0 0000 0000 		.long	.LM17
+ 1824 00f4 16        		.byte	0x16
+ 1825 00f5 00        		.byte	0x0
+ 1826 00f6 05        		.uleb128 0x5
+ 1827 00f7 02        		.byte	0x2
+ 1828 00f8 0000 0000 		.long	.LM18
+ 1829 00fc 16        		.byte	0x16
+ 1830 00fd 00        		.byte	0x0
+ 1831 00fe 05        		.uleb128 0x5
+ 1832 00ff 02        		.byte	0x2
+ 1833 0100 0000 0000 		.long	.LM19
+ 1834 0104 15        		.byte	0x15
+ 1835 0105 00        		.byte	0x0
+ 1836 0106 05        		.uleb128 0x5
+ 1837 0107 02        		.byte	0x2
+ 1838 0108 0000 0000 		.long	.LM20
+ 1839 010c 15        		.byte	0x15
+ 1840 010d 00        		.byte	0x0
+ 1841 010e 05        		.uleb128 0x5
+ 1842 010f 02        		.byte	0x2
+ 1843 0110 0000 0000 		.long	.LM21
+ 1844 0114 15        		.byte	0x15
+ 1845 0115 00        		.byte	0x0
+ 1846 0116 05        		.uleb128 0x5
+ 1847 0117 02        		.byte	0x2
+ 1848 0118 0000 0000 		.long	.LM22
+ 1849 011c 16        		.byte	0x16
+ 1850 011d 00        		.byte	0x0
+ 1851 011e 05        		.uleb128 0x5
+ 1852 011f 02        		.byte	0x2
+ 1853 0120 0000 0000 		.long	.Letext0
+ 1854 0124 00        		.byte	0x0
+ 1855 0125 01        		.uleb128 0x1
+ 1856 0126 01        		.byte	0x1
+ 1857               	.LELT0:
+ 1858 0127 1600 0000 		.section	.debug_str,"MS",@progbits,1
+ 1858      0200 1000 
+ 1858      0000 0101 
+ 1858      FB0E 0A00 
+ 1858      0101 0101 
+ 1859               	.LASF15:
+ 1860 0000 4B45 595F 		.string	"KEY_RSHIFT_HANJA"
+ 1860      5253 4849 
+ 1860      4654 5F48 
+ 1860      414E 4A41 
+ 1860      00
+ 1861               	.LASF46:
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 35
+
+
+ 1862 0011 6475 616C 		.string	"dualActionMaskUp"
+ 1862      4163 7469 
+ 1862      6F6E 4D61 
+ 1862      736B 5570 
+ 1862      00
+ 1863               	.LASF36:
+ 1864 0022 6B65 7963 		.string	"keycode_set2"
+ 1864      6F64 655F 
+ 1864      7365 7432 
+ 1864      00
+ 1865               	.LASF24:
+ 1866 002f 4B45 595F 		.string	"KEY_LCTRL_HANGLE"
+ 1866      4C43 5452 
+ 1866      4C5F 4841 
+ 1866      4E47 4C45 
+ 1866      00
+ 1867               	.LASF33:
+ 1868 0040 5F69 7343 		.string	"_isCanceledDualAction"
+ 1868      616E 6365 
+ 1868      6C65 6444 
+ 1868      7561 6C41 
+ 1868      6374 696F 
+ 1869               	.LASF38:
+ 1870 0056 6B65 7963 		.string	"keycode_USB_extend"
+ 1870      6F64 655F 
+ 1870      5553 425F 
+ 1870      6578 7465 
+ 1870      6E64 00
+ 1871               	.LASF25:
+ 1872 0069 4B45 595F 		.string	"KEY_LCTRL_HANJA"
+ 1872      4C43 5452 
+ 1872      4C5F 4841 
+ 1872      4E4A 4100 
+ 1873               	.LASF13:
+ 1874 0079 4B45 595F 		.string	"KEY_FN2_HANJA"
+ 1874      464E 325F 
+ 1874      4841 4E4A 
+ 1874      4100 
+ 1875               	.LASF29:
+ 1876 0087 7841 6374 		.string	"xActionIndex"
+ 1876      696F 6E49 
+ 1876      6E64 6578 
+ 1876      00
+ 1877               	.LASF23:
+ 1878 0094 4B45 595F 		.string	"KEY_RCTRL_HANJA"
+ 1878      5243 5452 
+ 1878      4C5F 4841 
+ 1878      4E4A 4100 
+ 1879               	.LASF11:
+ 1880 00a4 4B45 595F 		.string	"KEY_FN_HANJA"
+ 1880      464E 5F48 
+ 1880      414E 4A41 
+ 1880      00
+ 1881               	.LASF20:
+ 1882 00b1 4B45 595F 		.string	"KEY_LALT_HANGLE"
+ 1882      4C41 4C54 
+ 1882      5F48 414E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 36
+
+
+ 1882      474C 4500 
+ 1883               	.LASF1:
+ 1884 00c1 756E 7369 		.string	"unsigned char"
+ 1884      676E 6564 
+ 1884      2063 6861 
+ 1884      7200 
+ 1885               	.LASF35:
+ 1886 00cf 6475 616C 		.string	"dualActionKeyIndex"
+ 1886      4163 7469 
+ 1886      6F6E 4B65 
+ 1886      7949 6E64 
+ 1886      6578 00
+ 1887               	.LASF42:
+ 1888 00e2 6B65 7963 		.string	"keycode_set2_extend"
+ 1888      6F64 655F 
+ 1888      7365 7432 
+ 1888      5F65 7874 
+ 1888      656E 6400 
+ 1889               	.LASF43:
+ 1890 00f6 6B65 7963 		.string	"keycode_set2_proc_shift"
+ 1890      6F64 655F 
+ 1890      7365 7432 
+ 1890      5F70 726F 
+ 1890      635F 7368 
+ 1891               	.LASF22:
+ 1892 010e 4B45 595F 		.string	"KEY_RCTRL_HANGLE"
+ 1892      5243 5452 
+ 1892      4C5F 4841 
+ 1892      4E47 4C45 
+ 1892      00
+ 1893               	.LASF16:
+ 1894 011f 4B45 595F 		.string	"KEY_LSHIFT_HANGLE"
+ 1894      4C53 4849 
+ 1894      4654 5F48 
+ 1894      414E 474C 
+ 1894      4500 
+ 1895               	.LASF47:
+ 1896 0131 474E 5520 		.string	"GNU C 4.3.3"
+ 1896      4320 342E 
+ 1896      332E 3300 
+ 1897               	.LASF34:
+ 1898 013d 5F69 7341 		.string	"_isActiveDualAction"
+ 1898      6374 6976 
+ 1898      6544 7561 
+ 1898      6C41 6374 
+ 1898      696F 6E00 
+ 1899               	.LASF45:
+ 1900 0151 6475 616C 		.string	"dualActionMaskDown"
+ 1900      4163 7469 
+ 1900      6F6E 4D61 
+ 1900      736B 446F 
+ 1900      776E 00
+ 1901               	.LASF6:
+ 1902 0164 6C6F 6E67 		.string	"long unsigned int"
+ 1902      2075 6E73 
+ 1902      6967 6E65 
+ 1902      6420 696E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 37
+
+
+ 1902      7400 
+ 1903               	.LASF14:
+ 1904 0176 4B45 595F 		.string	"KEY_RSHIFT_HANGLE"
+ 1904      5253 4849 
+ 1904      4654 5F48 
+ 1904      414E 474C 
+ 1904      4500 
+ 1905               	.LASF50:
+ 1906 0188 6973 4361 		.string	"isCanceledDualAction"
+ 1906      6E63 656C 
+ 1906      6564 4475 
+ 1906      616C 4163 
+ 1906      7469 6F6E 
+ 1907               	.LASF41:
+ 1908 019d 6B65 7963 		.string	"keycode_set2_make_break"
+ 1908      6F64 655F 
+ 1908      7365 7432 
+ 1908      5F6D 616B 
+ 1908      655F 6272 
+ 1909               	.LASF51:
+ 1910 01b5 6765 7444 		.string	"getDualActionDownKeyIdex"
+ 1910      7561 6C41 
+ 1910      6374 696F 
+ 1910      6E44 6F77 
+ 1910      6E4B 6579 
+ 1911               	.LASF10:
+ 1912 01ce 4B45 595F 		.string	"KEY_FN_HANGLE"
+ 1912      464E 5F48 
+ 1912      414E 474C 
+ 1912      4500 
+ 1913               	.LASF17:
+ 1914 01dc 4B45 595F 		.string	"KEY_LSHIFT_HANJA"
+ 1914      4C53 4849 
+ 1914      4654 5F48 
+ 1914      414E 4A41 
+ 1914      00
+ 1915               	.LASF4:
+ 1916 01ed 756E 7369 		.string	"unsigned int"
+ 1916      676E 6564 
+ 1916      2069 6E74 
+ 1916      00
+ 1917               	.LASF8:
+ 1918 01fa 6C6F 6E67 		.string	"long long unsigned int"
+ 1918      206C 6F6E 
+ 1918      6720 756E 
+ 1918      7369 676E 
+ 1918      6564 2069 
+ 1919               	.LASF2:
+ 1920 0211 7569 6E74 		.string	"uint8_t"
+ 1920      385F 7400 
+ 1921               	.LASF44:
+ 1922 0219 6B65 796D 		.string	"keymap_code"
+ 1922      6170 5F63 
+ 1922      6F64 6500 
+ 1923               	.LASF7:
+ 1924 0225 6C6F 6E67 		.string	"long long int"
+ 1924      206C 6F6E 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 38
+
+
+ 1924      6720 696E 
+ 1924      7400 
+ 1925               	.LASF31:
+ 1926 0233 6170 706C 		.string	"applyDualAction"
+ 1926      7944 7561 
+ 1926      6C41 6374 
+ 1926      696F 6E00 
+ 1927               	.LASF27:
+ 1928 0243 6368 6172 		.string	"char"
+ 1928      00
+ 1929               	.LASF18:
+ 1930 0248 4B45 595F 		.string	"KEY_RALT_HANGLE"
+ 1930      5241 4C54 
+ 1930      5F48 414E 
+ 1930      474C 4500 
+ 1931               	.LASF37:
+ 1932 0258 6B65 7963 		.string	"keycode_USB_multimedia"
+ 1932      6F64 655F 
+ 1932      5553 425F 
+ 1932      6D75 6C74 
+ 1932      696D 6564 
+ 1933               	.LASF21:
+ 1934 026f 4B45 595F 		.string	"KEY_LALT_HANJA"
+ 1934      4C41 4C54 
+ 1934      5F48 414E 
+ 1934      4A41 00
+ 1935               	.LASF26:
+ 1936 027e 4B45 595F 		.string	"KEY_dualAction_end"
+ 1936      6475 616C 
+ 1936      4163 7469 
+ 1936      6F6E 5F65 
+ 1936      6E64 00
+ 1937               	.LASF9:
+ 1938 0291 4B45 595F 		.string	"KEY_dualAction"
+ 1938      6475 616C 
+ 1938      4163 7469 
+ 1938      6F6E 00
+ 1939               	.LASF3:
+ 1940 02a0 7569 6E74 		.string	"uint16_t"
+ 1940      3136 5F74 
+ 1940      00
+ 1941               	.LASF49:
+ 1942 02a9 443A 5C67 		.string	"D:\\git2\\ps2avrU\\.git\\source"
+ 1942      6974 325C 
+ 1942      7073 3261 
+ 1942      7672 555C 
+ 1942      2E67 6974 
+ 1943               	.LASF30:
+ 1944 02c5 7365 7444 		.string	"setDualAction"
+ 1944      7561 6C41 
+ 1944      6374 696F 
+ 1944      6E00 
+ 1945               	.LASF39:
+ 1946 02d3 6B65 7963 		.string	"keycode_set2_special"
+ 1946      6F64 655F 
+ 1946      7365 7432 
+ 1946      5F73 7065 
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 39
+
+
+ 1946      6369 616C 
+ 1947               	.LASF19:
+ 1948 02e8 4B45 595F 		.string	"KEY_RALT_HANJA"
+ 1948      5241 4C54 
+ 1948      5F48 414E 
+ 1948      4A41 00
+ 1949               	.LASF5:
+ 1950 02f7 6C6F 6E67 		.string	"long int"
+ 1950      2069 6E74 
+ 1950      00
+ 1951               	.LASF40:
+ 1952 0300 6B65 7963 		.string	"keycode_set2_makeonly"
+ 1952      6F64 655F 
+ 1952      7365 7432 
+ 1952      5F6D 616B 
+ 1952      656F 6E6C 
+ 1953               	.LASF32:
+ 1954 0316 6741 6374 		.string	"gActionIdx"
+ 1954      696F 6E49 
+ 1954      6478 00
+ 1955               	.LASF0:
+ 1956 0321 7369 676E 		.string	"signed char"
+ 1956      6564 2063 
+ 1956      6861 7200 
+ 1957               	.LASF12:
+ 1958 032d 4B45 595F 		.string	"KEY_FN2_HANGLE"
+ 1958      464E 325F 
+ 1958      4841 4E47 
+ 1958      4C45 00
+ 1959               	.LASF28:
+ 1960 033c 6B65 7969 		.string	"keyidx"
+ 1960      6478 00
+ 1961               	.LASF48:
+ 1962 0343 6B65 796D 		.string	"keymap.c"
+ 1962      6170 2E63 
+ 1962      00
+ 1963               	.global __do_copy_data
+ 1964               	.global __do_clear_bss
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keymap.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:20     .progmem.data:00000000 keycode_set2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:168    .progmem.data:00000090 keycode_USB_multimedia
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:198    .progmem.data:000000c4 keycode_USB_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:204    .progmem.data:000000c8 keycode_set2_special
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:211    .progmem.data:000000cb keycode_set2_makeonly
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:219    .progmem.data:000000cf keycode_set2_make_break
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:227    .progmem.data:000000d3 keycode_set2_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:276    .progmem.data:00000100 keycode_set2_proc_shift
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpzPBr1.s:295    .progmem.data:0000010f keymap_code
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:18     .text:00000000 isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:876    .bss:00000002 _isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:31     .text:00000006 setDualAction
+                             .bss:00000001 _isActiveDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:186    .bss:00000000 dualActionKeyIndex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:66     .text:00000032 getDualActionDownKeyIdex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:144    .data:00000000 dualActionMaskDown
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:98     .text:0000004e applyDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:164    .data:00000010 dualActionMaskUp
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:192    .progmem.data:00000000 keycode_set2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:340    .progmem.data:00000090 keycode_USB_multimedia
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:370    .progmem.data:000000c4 keycode_USB_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:376    .progmem.data:000000c8 keycode_set2_special
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:383    .progmem.data:000000cb keycode_set2_makeonly
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:391    .progmem.data:000000cf keycode_set2_make_break
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:399    .progmem.data:000000d3 keycode_set2_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:448    .progmem.data:00000100 keycode_set2_proc_shift
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdmPEgI.s:467    .progmem.data:0000010f keymap_code
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+isAllKeyRelease
+pushM
+__do_copy_data
+__do_clear_bss

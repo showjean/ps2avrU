@@ -2,10 +2,100 @@
 #define KEYMAP_C
 
 #include "keymap.h"
+#include "print.h"
+#include "macrobuffer.h"
 
 #if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI)
 	#define KEYMAP_A87
 #endif
+
+
+const uint8_t dualActionMaskDown[] = {
+    KEY_FN, // FN
+    KEY_FN, // FN
+    KEY_FN2, // FN2
+    KEY_FN2, // FN2
+    KEY_RSHIFT,
+    KEY_RSHIFT,    
+    KEY_LSHIFT,
+    KEY_LSHIFT,
+    KEY_RALT,
+    KEY_RALT,
+    KEY_LALT,
+    KEY_LALT,
+    KEY_RCTRL,
+    KEY_RCTRL,
+    KEY_LCTRL,
+    KEY_LCTRL
+};
+const uint8_t dualActionMaskUp[] = {
+    KEY_HANGLE, // hangle
+    KEY_HANJA,	// hanja
+    KEY_HANGLE, // hangle
+    KEY_HANJA,	// hanja
+    KEY_HANGLE,
+    KEY_HANJA,	// hanja    
+    KEY_HANGLE,
+    KEY_HANJA,
+    KEY_HANGLE,
+    KEY_HANJA,
+    KEY_HANGLE,
+    KEY_HANJA,
+    KEY_HANGLE,
+    KEY_HANJA,
+    KEY_HANGLE,
+    KEY_HANJA
+};
+
+uint8_t dualActionKeyIndex = 0;
+
+/*void setActiveDualAction(void){
+	_isActiveDualAction = 1;
+}*/
+
+
+static uint8_t _isCanceledDualAction = 0;
+uint8_t isCanceledDualAction(void)
+{
+	return _isCanceledDualAction;
+}
+
+static uint8_t _isActiveDualAction = 0;
+// 모든키가 release 되었을 때 작동 시켜 준다.
+void applyDualAction(void){
+	if(!isAllKeyRelease()) return;
+
+	_isActiveDualAction = 0;
+	_isCanceledDualAction = 0;
+
+    if(dualActionKeyIndex > 0 && !_isCanceledDualAction){
+        // 듀얼액션이 저장되어 있을 때 아무키도 눌리지 않은 리포트가 간다면 액션!
+       	uint8_t gActionIdx = dualActionMaskUp[dualActionKeyIndex - (KEY_dualAction + 1)];
+        pushM(gActionIdx);
+        pushM(gActionIdx);
+        dualActionKeyIndex = 0;
+    }
+}
+
+void setDualAction(uint8_t keyidx){
+	if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end && !_isActiveDualAction){
+        dualActionKeyIndex = keyidx;
+        _isActiveDualAction = 1;
+		// DEBUG_PRINT(("dualActionKeyIndex: %d \n", dualActionKeyIndex));
+    }else if(dualActionKeyIndex > 0){
+        // 듀얼액션이 저장되어 있을 때 아무 키나 눌리면 액션 중지;    
+        // DEBUG_PRINT(("dualActionKeyIndex reset : %d\n", dualActionKeyIndex));    
+        //dualActionKeyIndex = 0; 
+        _isCanceledDualAction = 1;       
+    }
+}
+// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
+uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex){
+	if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end && isCanceledDualAction()){
+        return dualActionMaskDown[xActionIndex - (KEY_dualAction + 1)];        
+    }
+    return xActionIndex;
+}
 
 // for ps/2 interface
 const uint8_t PROGMEM keycode_set2[NUM_KEY] =	{ 
@@ -101,7 +191,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 		{ KEY_I,		KEY_RBR,	KEY_K,		KEY_F6, 	KEY_COMMA,	KEY_NONE,	KEY_EQUAL,	KEY_8 },	// ROW6
 		{ KEY_O,		KEY_F7, 	KEY_L,		KEY_NONE,	KEY_DOT,	KEY_FN,		KEY_F8, 	KEY_9 },	// ROW7
 		{ KEY_P,		KEY_LBR,	KEY_COLON,	KEY_QUOTE,	KEY_Europe1,KEY_SLASH,	KEY_MINUS,	KEY_0}, 	// ROW8
-		{ KEY_SCRLCK,	KEY_NONE,	KEY_NONE,	KEY_LALT,	KEY_Europe2,KEY_RALT,	KEY_NONE,	KEY_FN2},// ROW9
+		{ KEY_SCRLCK,	KEY_NONE,	KEY_NONE,	KEY_LALT,	KEY_Europe2,KEY_RALT,	KEY_NONE,	KEY_PRNSCR},// ROW9
 		{ KEY_NONE, 	KEY_BKSP,	KEY_BKSLASH,KEY_F11,	KEY_ENTER,	KEY_F12,	KEY_F9, 	KEY_F10},	// ROW10
 		{ KEY_MAC1, 	KEY_NUMLOCK,KEY_KP_7,	KEY_SPACE,	KEY_KP_4,	KEY_DOWN,	KEY_DEL,	KEY_NONE }, // ROW11
 		{ KEY_MAC2, 	KEY_KP_SLASH,KEY_KP_8,	KEY_KP_5,	KEY_KP_2,	KEY_RIGHT,	KEY_INSERT, KEY_NONE }, // ROW12
@@ -136,7 +226,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 	{	
 		// set 3 : BEYOND_FN
 		// COL0			COL1		COL2		COL3		COL4		COL5		COL6		COL7
-		{ KEY_A,	KEY_NONE,	KEY_NONE,	KEY_NONE,	KEY_RCTRL,	KEY_NONE,	KEY_LCTRL,	KEY_F5 },	// ROW0
+		{ KEY_PAUSE,	KEY_NONE,	KEY_NONE,	KEY_NONE,	KEY_RCTRL,	KEY_NONE,	KEY_LCTRL,	KEY_F5 },	// ROW0
 		{ KEY_Q,		KEY_TAB,	KEY_A,		KEY_ESC,	KEY_Z,		KEY_NONE,	KEY_HASH,	KEY_1 },	// ROW1
 		{ KEY_W,		KEY_CAPS,	KEY_S,		KEY_NONE,	KEY_X,		KEY_NONE,	KEY_F1, 	KEY_2 },	// ROW2
 		{ KEY_E,		KEY_F3, 	KEY_D,		KEY_F4, 	KEY_C,		KEY_NONE,	KEY_F2, 	KEY_3 },	// ROW3
@@ -145,7 +235,7 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 		{ KEY_I,		KEY_RBR,	KEY_K,		KEY_F6, 	KEY_COMMA,	KEY_NONE,	KEY_EQUAL,	KEY_8 },	// ROW6
 		{ KEY_O,		KEY_F7, 	KEY_L,		KEY_NONE,	KEY_DOT,	KEY_FN,		KEY_F8, 	KEY_9 },	// ROW7
 		{ KEY_P,		KEY_LBR,	KEY_COLON,	KEY_QUOTE,	KEY_Europe1,KEY_SLASH,	KEY_MINUS,	KEY_0}, 	// ROW8
-		{ KEY_SCRLCK,	KEY_NONE,	KEY_NONE,	KEY_LALT,	KEY_Europe2,KEY_RALT,	KEY_NONE,	KEY_FN2},// ROW9
+		{ KEY_SCRLCK,	KEY_NONE,	KEY_NONE,	KEY_LALT,	KEY_Europe2,KEY_RALT,	KEY_NONE,	KEY_PRNSCR},// ROW9
 		{ KEY_NONE, 	KEY_BKSP,	KEY_BKSLASH,KEY_F11,	KEY_ENTER,	KEY_F12,	KEY_F9, 	KEY_F10},	// ROW10
 		{ KEY_MAC1, 	KEY_NUMLOCK,KEY_KP_7,	KEY_SPACE,	KEY_KP_4,	KEY_DOWN,	KEY_DEL,	KEY_NONE }, // ROW11
 		{ KEY_MAC2, 	KEY_KP_SLASH,KEY_KP_8,	KEY_KP_5,	KEY_KP_2,	KEY_RIGHT,	KEY_INSERT, KEY_NONE }, // ROW12

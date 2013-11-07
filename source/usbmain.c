@@ -415,6 +415,11 @@ uint8_t reportIndex; // reportBuffer[0] contains modifiers
 uint8_t _isMultimediaPressed = 0;
 uint8_t makeReportBuffer(uint8_t keyidx){
     uint8_t retval = 0;
+
+   
+    // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
+    keyidx = getDualActionDownKeyIdex(keyidx);      
+
     if(keyidx >= KEY_MAX){
         return retval;
     }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
@@ -426,7 +431,6 @@ uint8_t makeReportBuffer(uint8_t keyidx){
         reportBuffer[2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
 
         return retval;
-
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[1] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
@@ -498,6 +502,12 @@ uint8_t scanKeyUSB(void) {
 					gFN = applyFN(keyidx, 1);
                     wakeUp();
 
+                    if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+                        // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
+                        makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex));
+                        dualActionKeyIndex = 0;
+                    }
+
 				}else{
 					// key up
 					gFN = applyFN(keyidx, 0);
@@ -518,12 +528,11 @@ uint8_t scanKeyUSB(void) {
             
             // fn키를 키매핑에 적용하려면 위치 주의;
             if(gFN == 0) continue;
-            
-				
+
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                 // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval = makeReportBuffer(keyidx);
+               retval |= makeReportBuffer(keyidx);
 			}
 			
 		}
@@ -546,6 +555,9 @@ uint8_t scanKeyUSB(void) {
 	
 	for(row=0;row<17;++row)
 		prevMatrix[row] = currentMatrix[row];
+
+    // 키 상태가 변경되었는데 그것이 모두 누르지 않았을 경우 적용;    
+    applyDualAction();
 
     if(gKeymapping == 1) return 0;
 	
@@ -670,7 +682,7 @@ void usb_main(void) {
                     usbSetInterrupt(reportBuffer, 3);    
                 }else if(reportBuffer[0] == REPORT_ID_KEYBOARD){ // report ID : 1
                     // DEBUG_PRINT((" updateNeeded : [0] = %d [1] = %d [2] = %d [3] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2], reportBuffer[3]));
-                    usbSetInterrupt(reportBuffer, 8);                
+                    usbSetInterrupt(reportBuffer, 8); 
                 }
                 updateNeeded = 0;
             }

@@ -19,7 +19,34 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
-#define KEY_MAX         KEY_FN2     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+
+// dual action 
+enum {
+    KEY_dualAction = 213,
+    KEY_FN_HANGLE,      // 누른 상태에서 다른 키를 조합하면 Fn키로 작동하고 아니면 한/영키로 작동;
+    KEY_FN_HANJA,
+    KEY_FN2_HANGLE,
+    KEY_FN2_HANJA,
+    KEY_RSHIFT_HANGLE,
+    KEY_RSHIFT_HANJA,
+    KEY_LSHIFT_HANGLE,
+    KEY_LSHIFT_HANJA,
+    KEY_RALT_HANGLE,
+    KEY_RALT_HANJA,
+    KEY_LALT_HANGLE,
+    KEY_LALT_HANJA,
+    KEY_RCTRL_HANGLE,
+    KEY_RCTRL_HANJA,
+    KEY_LCTRL_HANGLE,
+    KEY_LCTRL_HANJA,
+    KEY_dualAction_end  // 230
+};
+#define KEY_MAX         KEY_dualAction     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+
+// #define DUAL_ACTION_SIZE    32
+// extern uint8_t dualActionBuffer[DUAL_ACTION_SIZE];
+extern uint8_t dualActionKeyIndex;
+
 
 enum {  // for macro
     KEY_MAC1 = 201,
@@ -171,9 +198,7 @@ enum {
 
     KEY_extend,
     KEY_HANJA,  KEY_HANGLE,
-    KEY_extend_end
-
-    // 144(0x90)
+    KEY_extend_end    // 143(0x8F)
 };
 
 // for ps/2 interface
@@ -202,5 +227,13 @@ extern const uint8_t PROGMEM keycode_set2_extend[];
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 
 extern const uint8_t PROGMEM keymap_code[3][17][8];
+
+
+extern const uint8_t dualActionMaskDown[];
+extern const uint8_t dualActionMaskUp[];
+extern void applyDualAction(void);
+extern void setDualAction(uint8_t keyidx);
+extern uint8_t isCanceledDualAction(void);
+extern uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex);
 
 #endif

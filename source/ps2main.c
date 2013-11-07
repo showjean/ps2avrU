@@ -153,6 +153,12 @@ void keymap_init(void)
 
 void pushKey(uint8_t keyidx, uint8_t isDown)
 {
+
+     // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
+    keyidx = getDualActionDownKeyIdex(keyidx);
+
+    if(keyidx >= KEY_MAX) return;
+
 	// if prev and current state are different,
 	uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
 
@@ -237,8 +243,15 @@ void pushKey(uint8_t keyidx, uint8_t isDown)
 
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
-
 	uint8_t gFN = applyFN(keyidx, isDown);
+
+	if(isDown){
+		if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+            // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
+            pushKey(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
+            dualActionKeyIndex = 0;
+        }
+	}
 
 	// 키매핑 진행중;
 	if(isKeyMapping()){
@@ -250,7 +263,6 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
-
 
 	pushKey(keyidx, isDown);
 
@@ -327,6 +339,9 @@ int scanKeyPS2(void) {
 		}
 		
 	}
+
+	// 키 상태가 변경되었는데 그것이 모두 누르지 않았을 경우 적용;    
+    applyDualAction();
 	
 	for(row=0;row<17;row++)
 		prevMatrix[row] = currentMatrix[row];
@@ -422,48 +437,48 @@ void ps2_main(void){
 				default:
 					switch(rxed) {
 						case 0xEE: /* echo */
-							DEBUG_PRINT((" echo \n"));
+							// DEBUG_PRINT((" echo \n"));
 							tx_state(0xEE, m_state);
 							continue;
 						case 0xF2: /* read id */
-							DEBUG_PRINT((" read id \n"));
+							// DEBUG_PRINT((" read id \n"));
 							tx_state(0xFA, STA_WAIT_ID);
 							continue;
 						case 0xFF: /* reset */
-							DEBUG_PRINT((" reset \n"));
+							// DEBUG_PRINT((" reset \n"));
 							tx_state(0xFA, STA_WAIT_RESET);
 							continue;
 						case 0xFE: /* resend */
-							DEBUG_PRINT((" resend \n"));
+							// DEBUG_PRINT((" resend \n"));
 							tx_state(lastSent, m_state);
 							continue;
 						case 0xF0: /* scan code set */
-							DEBUG_PRINT((" scan code set \n"));
+							// DEBUG_PRINT((" scan code set \n"));
 							tx_state(0xFA, STA_WAIT_SCAN_SET);
 							continue;
 						case 0xED: /* led indicators */	
-							DEBUG_PRINT((" led indicators \n"));	
+							// DEBUG_PRINT((" led indicators \n"));	
 							tx_state(0xFA, STA_WAIT_LEDS);
 							continue;
 						case 0xF3:
-							DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+							// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
 							tx_state(0xFA, STA_WAIT_AUTOREP);
 							continue;
 						case 0xF4:		// enable
-							DEBUG_PRINT((" enable \n"));
+							// DEBUG_PRINT((" enable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF5:		// disable
-							DEBUG_PRINT((" disable \n"));
+							// DEBUG_PRINT((" disable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF6:		// Set Default
-							DEBUG_PRINT((" Set Default \n"));
+							// DEBUG_PRINT((" Set Default \n"));
 							TYPEMATIC_DELAY=1;
 							TYPEMATIC_REPEAT=5;
 							clear();
 						default:
-							DEBUG_PRINT((" default \n"));
+							// DEBUG_PRINT((" default \n"));
 							tx_state(0xFA, STA_NORMAL);
 							initInterfacePs2();
 							break;
