@@ -44,6 +44,8 @@ static long loopCnt;
 static uint8_t TYPEMATIC_DELAY=2;
 static long TYPEMATIC_REPEAT=5;
 
+static uint8_t _prevLayer = 0;
+
 unsigned char txScanCode = 0; // scancode being urrently transmitted
 unsigned char m_state;
 unsigned char lastSent;
@@ -294,10 +296,37 @@ int scanKeyPS2(void) {
 	// debounce cleared and changed
 	if(!setCurrentMatrix()) return 0;
 	
-	uint8_t row, col, prev, cur, keyidx;
-	uint8_t keymap = getLayer();
+	uint8_t row, col, prev, cur, keyidx, prevKeyidx;
+	uint8_t layer = getLayer();
 	static uint8_t gModifier = 0; 
 	uint8_t gResultPutKey = 1;
+
+	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
+	if(_prevLayer != layer){
+		for(col=0;col<8;col++)
+		{		
+			for(row=0;row<17;row++)
+			{
+				prev = prevMatrix[row] & BV(col);
+				cur  = currentMatrix[row] & BV(col);
+				prevKeyidx = getCurrentKeycode(_prevLayer, row, col);
+				keyidx = getCurrentKeycode(layer, row, col);
+
+	            // 이전 상태에서(press/up) 변화가 있을 경우;
+				if( prevKeyidx != keyidx && keyidx != KEY_NONE ) {
+					if(prev){
+						putKey(prevKeyidx, 0, col, row);
+						if(cur){
+							putKey(keyidx, 1, col, row);
+						}
+					}
+				}
+
+			}
+			
+		}
+	}
+	_prevLayer = layer;
 
 	// debounce cleared => compare last matrix and current matrix
 	for(col=0;col<8;col++)
@@ -306,8 +335,8 @@ int scanKeyPS2(void) {
 		{
 			prev = prevMatrix[row] & BV(col);
 			cur  = currentMatrix[row] & BV(col);
-			// keyidx = pgm_read_byte(&keymap_code[keymap][row][col]);
-			keyidx = getCurrentKeycode(keymap, row, col);
+			// keyidx = pgm_read_byte(&keymap_code[layer][row][col]);
+			keyidx = getCurrentKeycode(layer, row, col);
 
 			if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
 				// 매크로 실행됨;
@@ -340,7 +369,7 @@ int scanKeyPS2(void) {
 		
 	}
 
-	// 키 상태가 변경되었는데 그것이 모두 누르지 않았을 경우 적용;    
+	// 모든키가 release 되었을 때 작동 시켜 준다.   
     applyDualAction();
 	
 	for(row=0;row<17;row++)

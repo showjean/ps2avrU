@@ -556,7 +556,7 @@ uint8_t scanKeyUSB(void) {
 	for(row=0;row<17;++row)
 		prevMatrix[row] = currentMatrix[row];
 
-    // 키 상태가 변경되었는데 그것이 모두 누르지 않았을 경우 적용;    
+    // 모든키가 release 되었을 때 작동 시켜 준다.  
     applyDualAction();
 
     if(gKeymapping == 1) return 0;
