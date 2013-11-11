@@ -155,7 +155,7 @@ int main(void) {
 
 
 	// for interface select
-    // initHardware(0);
+    // initHardware(0);	//여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
     DDRCOLUMNS 	= 0xFF;	// all outputs for cols
 	PORTCOLUMNS	= 0xFF;	// pull-up
 	DDRROWS1	= 0x00;	// all inputs for rows
@@ -186,6 +186,12 @@ int main(void) {
 			cur  = currentMatrix[row] & BV(col);
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
 			if( cur ) {
+#ifdef ENABLE_BOOTMAPPER
+				if(row == 1 && col == 1){	// bootmapper start
+					setToBootMapper();
+					continue;
+				}
+#endif
 				keyidx = pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeycode(0, row, col);
 				if(keyidx == KEY_M) {
 					DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));

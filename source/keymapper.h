@@ -83,6 +83,13 @@ extern void readyKeyMappingOnBoot(void);
 
 extern void startKeyMappingOnBoot(void);
 
+#ifdef ENABLE_BOOTMAPPER
+// bootmapper
+extern void trace(uint8_t xRow, uint8_t xCol);
+extern void setToBootMapper(void);
+extern uint8_t isBootMapper(void);
+#endif
+
 /**
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
 */

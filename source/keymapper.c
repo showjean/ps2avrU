@@ -107,6 +107,7 @@ void printMapperMessageAfter(void);
 void clearMacroAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
+static void printString(const char *xString);
 
 //------------------------------------------------------///
 
@@ -177,11 +178,38 @@ void readyKeyMappingOnBoot(void)
 
 void startKeyMappingOnBoot(void)
 {
-	if(_keyMappingOnBoot == 1){
+
+#ifdef ENABLE_BOOTMAPPER	
+	if(isBootMapper()) {
+		_keyMappingOnBoot = 0;
+		return;
+	}
+#endif
+	if(_keyMappingOnBoot == 1)
+	{
 		prepareKeyMapping();
 		_keyMappingOnBoot = 0;
 	}
 }
+
+#ifdef ENABLE_BOOTMAPPER
+// bootmapper
+static uint8_t _isBootMapper = 0;
+void setToBootMapper(void){
+	_isBootMapper = 1;
+}
+uint8_t isBootMapper(void){
+	return _isBootMapper;
+}
+void trace(uint8_t xRow, uint8_t xCol){
+	// DEBUG_PRINT(("trace : row= %d, col= %d \n", xRow, xCol));
+	printString("-");
+	printString(toString(xCol));
+	printString(",");
+	printString(toString(xRow));	
+	printString("=");
+}
+#endif
 
 /**
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.

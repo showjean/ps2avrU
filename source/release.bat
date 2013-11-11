@@ -9,6 +9,10 @@ del keymain_(thumb)(face).hex
 ren keymain.hex keymain_(thumb)(face).hex
 ::pause;
 make clean
+make -f makefile.bootmapper
+del keymain_(bootmapper).hex
+ren keymain.hex keymain_(bootmapper).hex
+make clean
 make -f makefile.mxmini
 del keymain_(mxmini).hex
 ren keymain.hex keymain_(mxmini).hex

@@ -9,4 +9,6 @@
 	#define DEBUG_PRINT_H
 #endif
 
+#define ENABLE_BOOTMAPPER	// use bootmapper
+
 #endif

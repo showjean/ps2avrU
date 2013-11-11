@@ -5,7 +5,7 @@
 #include "print.h"
 #include "macrobuffer.h"
 
-#if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI)
+#if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI||KEYMAP_BOOT_MAPPER)
 	#define KEYMAP_A87
 #endif
 
@@ -176,6 +176,9 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 
 
 const uint8_t PROGMEM keymap_code[3][17][8] =  {
+	#ifdef KEYMAP_BOOT_MAPPER
+	0
+	#endif
 
 	#ifdef KEYMAP_A87
 	// a.87 ps2avr, a.87U, mx-miniU, a.87U ex

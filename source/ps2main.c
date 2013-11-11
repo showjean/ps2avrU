@@ -153,7 +153,7 @@ void keymap_init(void)
 /* -----------------------------    Function  PS/2 ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-void pushKey(uint8_t keyidx, uint8_t isDown)
+void pushKeyCode(uint8_t keyidx, uint8_t isDown)
 {
 
      // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
@@ -245,12 +245,13 @@ void pushKey(uint8_t keyidx, uint8_t isDown)
 
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
+
 	uint8_t gFN = applyFN(keyidx, isDown);
 
 	if(isDown){
 		if(dualActionKeyIndex > 0 && isCanceledDualAction()){
             // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
-            pushKey(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
+            pushKeyCode(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
             dualActionKeyIndex = 0;
         }
 	}
@@ -266,7 +267,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
 
-	pushKey(keyidx, isDown);
+	pushKeyCode(keyidx, isDown);
 
 	return 1;
 }
@@ -283,10 +284,10 @@ int scanKeyPS2(void) {
         gKey = popMWithKey();
         if(gKey.mode == 1){	// down
         	// DEBUG_PRINT(("macro down : %d \n", gKey.keycode));
-        	pushKey(gKey.keycode, 1);
+        	pushKeyCode(gKey.keycode, 1);
         	push(NO_REPEAT);	// set no repeat
         }else{	// up
-        	pushKey(gKey.keycode, 0);
+        	pushKeyCode(gKey.keycode, 0);
         	// DEBUG_PRINT(("macro up : %d \n", gKey.keycode));
         }
 
@@ -359,6 +360,12 @@ int scanKeyPS2(void) {
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			// if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {
 			if( prev != cur && keyidx != KEY_NONE ) {
+#ifdef ENABLE_BOOTMAPPER                
+                if(isBootMapper()){
+                    if(cur) trace(row, col);
+                    break;
+                }
+#endif	
 				if(cur) {
 					gResultPutKey &= putKey(keyidx, 1, col, row);
 				}else{
@@ -382,9 +389,9 @@ int scanKeyPS2(void) {
 
 void prepareKeyMappingPs2(void)
 {
- 	pushKey(KEY_LSHIFT, 0); 
- 	pushKey(KEY_LCTRL, 0); 
- 	pushKey(KEY_LALT, 0); 
+ 	pushKeyCode(KEY_LSHIFT, 0); 
+ 	pushKeyCode(KEY_LCTRL, 0); 
+ 	pushKeyCode(KEY_LALT, 0); 
 }
 
 

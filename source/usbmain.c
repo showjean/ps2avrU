@@ -497,6 +497,12 @@ uint8_t scanKeyUSB(void) {
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			//if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {                
             if( prev != cur && keyidx != KEY_NONE ) {
+#ifdef ENABLE_BOOTMAPPER                
+                if(isBootMapper()){
+                    if(cur) trace(row, col);
+                    break;
+                }
+#endif
 				if(cur) {
 					// key down
 					gFN = applyFN(keyidx, 1);
@@ -509,7 +515,7 @@ uint8_t scanKeyUSB(void) {
                     }
 
 				}else{
-					// key up
+                    // key up
 					gFN = applyFN(keyidx, 0);
 				}
 			}
