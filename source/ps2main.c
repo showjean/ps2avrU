@@ -309,6 +309,8 @@ int scanKeyPS2(void) {
 			{
 				prev = prevMatrix[row] & BV(col);
 				cur  = currentMatrix[row] & BV(col);
+				if(!prev) continue;
+				
 				prevKeyidx = getCurrentKeycode(_prevLayer, row, col);
 				keyidx = getCurrentKeycode(layer, row, col);
 
