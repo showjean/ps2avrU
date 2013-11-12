@@ -7,6 +7,7 @@
 #define PS2MAIN_H
 
 #include "global.h"
+#include <avr/io.h>
 
 /* This controls what to do when a character has been recieved from the
    host, and when we want to send a character to the host. Note that
@@ -31,8 +32,8 @@
 #define NO_REPEAT  0xFD
 #define SPLIT      0xFC
 
+extern void pushKeyCode(uint8_t keyidx, uint8_t isDown);
 extern void prepareKeyMappingPs2(void);
-
 extern void ps2_main(void);
 
 #endif

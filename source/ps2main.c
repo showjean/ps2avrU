@@ -161,6 +161,16 @@ void pushKeyCode(uint8_t keyidx, uint8_t isDown)
 
     if(keyidx >= KEY_MAX) return;
 
+	static uint8_t gModifier = 0; 
+	if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { // Is this modifier keys? 
+		if(isDown){
+        	gModifier |= modmask[keyidx - (KEY_Modifiers + 1)];
+        }else{
+        	gModifier &= ~(modmask[keyidx - (KEY_Modifiers + 1)]);
+        }
+        applyKeyMapping(gModifier);
+    }
+
 	// if prev and current state are different,
 	uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
 
@@ -249,11 +259,12 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	uint8_t gFN = applyFN(keyidx, isDown);
 
 	if(isDown){
-		if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+		/*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
             // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
             pushKeyCode(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
             dualActionKeyIndex = 0;
-        }
+        }*/
+        applyDualActionDown(pushKeyCode, 1);
 	}
 
 	// 키매핑 진행중;
@@ -299,7 +310,6 @@ int scanKeyPS2(void) {
 	
 	uint8_t row, col, prev, cur, keyidx, prevKeyidx;
 	uint8_t layer = getLayer();
-	static uint8_t gModifier = 0; 
 	uint8_t gResultPutKey = 1;
 
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
@@ -346,15 +356,6 @@ int scanKeyPS2(void) {
 				return 0;
 			}
 
-			if (prev != cur && keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { // Is this modifier keys? 
-				if(cur){
-                	gModifier |= modmask[keyidx - (KEY_Modifiers + 1)];
-                }else{
-                	gModifier &= ~(modmask[keyidx - (KEY_Modifiers + 1)]);
-                }
-                applyKeyMapping(gModifier);
-            }
-
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
             // 이전 상태에서(press/up) 변화가 있을 경우;
@@ -379,7 +380,9 @@ int scanKeyPS2(void) {
 	}
 
 	// 모든키가 release 되었을 때 작동 시켜 준다.   
-    applyDualAction();
+	/*if(isAllKeyRelease()){
+    	applyDualAction();
+	}*/
 	
 	for(row=0;row<17;row++)
 		prevMatrix[row] = currentMatrix[row];

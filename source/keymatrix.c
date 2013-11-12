@@ -76,9 +76,9 @@ uint8_t isAllKeyRelease(void)
 uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 
 	if(keyidx == KEY_FN) return 0;
+    setDualAction(keyidx, isDown);	
 
 	if(isDown) {
-        setDualAction(keyidx);	
 		applyKeyDownForFullLED();
 
 		if((keyidx ==  KEY_BEYOND_FN) || (_isExtraFNDown && keyidx == BEYOND_FN_CANCEL_KEY)){	// beyond_fn을 활성화;

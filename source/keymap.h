@@ -43,10 +43,6 @@ enum {
 };
 #define KEY_MAX         KEY_dualAction     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
-// #define DUAL_ACTION_SIZE    32
-// extern uint8_t dualActionBuffer[DUAL_ACTION_SIZE];
-extern uint8_t dualActionKeyIndex;
-
 
 enum {  // for macro
     KEY_MAC1 = 201,
@@ -229,10 +225,11 @@ extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 extern const uint8_t PROGMEM keymap_code[3][17][8];
 
 
+extern uint8_t dualActionKeyIndex;
 extern const uint8_t dualActionMaskDown[];
 extern const uint8_t dualActionMaskUp[];
-extern void applyDualAction(void);
-extern void setDualAction(uint8_t keyidx);
+extern void applyDualActionDown(void (*func)(uint8_t, uint8_t), uint8_t isDown);
+extern void setDualAction(uint8_t keyidx, uint8_t isDown);
 extern uint8_t isCanceledDualAction(void);
 extern uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex);
 

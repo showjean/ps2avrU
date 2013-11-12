@@ -413,12 +413,14 @@ void prepareKeyMappingUsb(void)
 /* ------------------------------------------------------------------------- */
 uint8_t reportIndex; // reportBuffer[0] contains modifiers
 uint8_t _isMultimediaPressed = 0;
-uint8_t makeReportBuffer(uint8_t keyidx){
+uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     uint8_t retval = 0;
 
    
     // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
     keyidx = getDualActionDownKeyIdex(keyidx);      
+
+    // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
     if(keyidx >= KEY_MAX){
         return retval;
@@ -467,7 +469,7 @@ uint8_t scanKeyUSB(void) {
     uint8_t retval = 0;
 
 	// debounce cleared
-    if (!setCurrentMatrix()) return retval;
+    if (!setCurrentMatrix()) return retval;    
 
 	uint8_t row, col, prev, cur, keyidx, gKeymapping, gFN;
 	uint8_t keymap = getLayer();
@@ -508,11 +510,12 @@ uint8_t scanKeyUSB(void) {
 					gFN = applyFN(keyidx, 1);
                     wakeUp();
 
-                    if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+                    /*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
                         // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
-                        makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex));
+                        makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
                         dualActionKeyIndex = 0;
-                    }
+                    }*/
+                    applyDualActionDown(makeReportBuffer, 1);
 
 				}else{
                     // key up
@@ -537,8 +540,8 @@ uint8_t scanKeyUSB(void) {
 
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
-                // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBuffer(keyidx);
+               //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
+               retval |= makeReportBuffer(keyidx, 1);
 			}
 			
 		}
@@ -557,13 +560,16 @@ uint8_t scanKeyUSB(void) {
         _isMultimediaPressed = 0;
     }
 
+    // 모든키가 release 되었을 때 작동 시켜 준다.  
+   /* if((reportBuffer[0] == REPORT_ID_KEYBOARD && reportBuffer[1] == 0 && reportBuffer[2] == 0)
+    || reportBuffer[0] == REPORT_ID_MULTIMEDIA && reportBuffer[1] == 0){
+        applyDualAction();
+    }*/
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
 	for(row=0;row<17;++row)
 		prevMatrix[row] = currentMatrix[row];
 
-    // 모든키가 release 되었을 때 작동 시켜 준다.  
-    applyDualAction();
 
     if(gKeymapping == 1) return 0;
 	
@@ -590,11 +596,11 @@ uint8_t scanMacroUsb(void)
             // modi 가 아닌 놈들 중에 이미 press 리포트를 한 녀석은 다시 리포트에 포함 시키지 않는다.
             // 항상 이전 pressedBuffer를 가지고 있으면 된다.
             if (gKeyidx > KEY_Modifiers && gKeyidx < KEY_Modifiers_end){
-                makeReportBuffer(gKeyidx);                
+                makeReportBuffer(gKeyidx, 1);                
             }else{
                 gIdx = findIndex(_prevPressedBuffer, strlen((char *)_prevPressedBuffer), gKeyidx);
                 if(gIdx == -1){
-                   makeReportBuffer(gKeyidx);
+                   makeReportBuffer(gKeyidx, 1);
                 }
             }
         }

@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 1
 
 
    1               		.file	"keymain.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
   55               	/* frame size = 0 */
   56               	.LM10:
   57 000c 21E0      		ldi r18,lo8(1)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 2
 
 
   58 000e 30E0      		ldi r19,hi8(1)
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  112               	.LM20:
  113               	.LVL4:
  114               	/* prologue: function */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 3
 
 
  115               	/* frame size = 0 */
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  169               	.LBE22:
  170               	.LBE21:
  171               	.LFE12:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 4
 
 
  172               		.size	initHardware, .-initHardware
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  226               	.LM50:
  227 00b4 8BBB      		out 59-32,r24
  228               	.LM51:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 5
 
 
  229 00b6 85BB      		out 53-32,r24
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  283               	.LM61:
  284 00fa 0E94 0000 		call readyKeyMappingOnBoot
  285               	.LVL11:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 6
 
 
  286 00fe 00C0      		rjmp .L20
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  340 0144 0A94      	2:	dec r0
  341 0146 02F4      		brpl 1b
  342 0148 E82E      		mov r14,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 7
 
 
  343 014a 80E0      		ldi r24,lo8(keymap_code)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  397 0194 2091 0000 		lds r18,INTERFACE
  398 0198 2430      		cpi r18,lo8(4)
  399 019a 00F0      		brlo .L44
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 8
 
 
  400 019c 80E0      		ldi r24,lo8(0)
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  454               	.LBE26:
  455               	.LBE25:
  456               	.LBE24:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 9
 
 
  457               	.LM90:
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  511               	.LVL32:
  512 020e 8C7F      		andi r24,lo8(-4)
  513 0210 82BB      		out 50-32,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 10
 
 
  514               	.LM100:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  568 0020 0C00 0000 		.long	.LEFDE2-.LASFDE2
  569               	.LASFDE2:
  570 0024 0000 0000 		.long	.Lframe0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 11
 
 
  571 0028 0000 0000 		.long	.LFB9
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  625 000f 0000 0000 		.long	0x0
  626               	.LLST5:
  627 0013 2200 0000 		.long	.LVL2-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 12
 
 
  628 0017 4200 0000 		.long	.LVL3-.Ltext0
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  682 00a9 0001 0000 		.long	.LVL12-.Ltext0
  683 00ad 1001 0000 		.long	.LVL13-.Ltext0
  684 00b1 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 13
 
 
  685 00b3 68        		.byte	0x68
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  739 0010 01        		.byte	0x1
  740 0011 0000 0000 		.long	.LASF185
  741 0015 0000 0000 		.long	.LASF186
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 14
 
 
  742 0019 0000 0000 		.long	.Ltext0
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  796 0082 04        		.byte	0x4
  797 0083 7A        		.byte	0x7a
  798 0084 3000 0000 		.long	0x30
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 15
 
 
  799 0088 05        		.uleb128 0x5
@@ -855,7 +855,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  810 0099 07        		.uleb128 0x7
  811 009a 02        		.byte	0x2
  812 009b 05        		.byte	0x5
- 813 009c 42        		.byte	0x42
+ 813 009c 3E        		.byte	0x3e
  814 009d 5204 0000 		.long	0x452
  815 00a1 08        		.uleb128 0x8
  816 00a2 0000 0000 		.long	.LASF12
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  853 00ee 0C        		.sleb128 12
  854 00ef 08        		.uleb128 0x8
  855 00f0 0000 0000 		.long	.LASF25
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 16
 
 
  856 00f4 0D        		.sleb128 13
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  910 0160 1F        		.sleb128 31
  911 0161 08        		.uleb128 0x8
  912 0162 0000 0000 		.long	.LASF44
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 17
 
 
  913 0166 20        		.sleb128 32
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  967 01d2 32        		.sleb128 50
  968 01d3 08        		.uleb128 0x8
  969 01d4 0000 0000 		.long	.LASF63
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 18
 
 
  970 01d8 33        		.sleb128 51
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1024 0249 C500      		.sleb128 69
  1025 024b 08        		.uleb128 0x8
  1026 024c 0000 0000 		.long	.LASF82
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 19
 
 
  1027 0250 C600      		.sleb128 70
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1081 02ce D800      		.sleb128 88
  1082 02d0 08        		.uleb128 0x8
  1083 02d1 0000 0000 		.long	.LASF101
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 20
 
 
  1084 02d5 D900      		.sleb128 89
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1138 0353 EB00      		.sleb128 107
  1139 0355 08        		.uleb128 0x8
  1140 0356 0000 0000 		.long	.LASF120
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 21
 
 
  1141 035a EC00      		.sleb128 108
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1195 03d8 FE00      		.sleb128 126
  1196 03da 08        		.uleb128 0x8
  1197 03db 0000 0000 		.long	.LASF139
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 22
 
 
  1198 03df FF00      		.sleb128 127
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1252 0459 01        		.byte	0x1
  1253 045a 03        		.byte	0x3
  1254 045b 6B04 0000 		.long	0x46b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 23
 
 
  1255 045f 0A        		.uleb128 0xa
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1309 04bc 0000 0000 		.long	.LASF164
  1310 04c0 0F        		.uleb128 0xf
  1311 04c1 6B04 0000 		.long	0x46b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 24
 
 
  1312 04c5 0000 0000 		.long	.LFB8
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1366 0537 01        		.byte	0x1
  1367 0538 0000 0000 		.long	.LFB11
  1368 053c 0000 0000 		.long	.LFE11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 25
 
 
  1369 0540 02        		.byte	0x2
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1423 05b2 0000 0000 		.long	.LASF170
  1424 05b6 01        		.byte	0x1
  1425 05b7 95        		.byte	0x95
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 26
 
 
  1426 05b8 01        		.byte	0x1
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1480 0633 0000 0000 		.long	.LBB23
  1481 0637 0000 0000 		.long	.LBE23
  1482 063b 5A06 0000 		.long	0x65a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 27
 
 
  1483 063f 0D        		.uleb128 0xd
@@ -1618,10 +1618,10 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1537 06b5 25        		.uleb128 0x25
  1538 06b6 0000 0000 		.long	.LASF179
  1539 06ba 05        		.byte	0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 28
 
 
- 1540 06bb E5        		.byte	0xe5
+ 1540 06bb E1        		.byte	0xe1
  1541 06bc C206 0000 		.long	0x6c2
  1542 06c0 01        		.byte	0x1
  1543 06c1 01        		.byte	0x1
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1594 0005 13        		.uleb128 0x13
  1595 0006 0B        		.uleb128 0xb
  1596 0007 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 29
 
 
  1597 0008 0E        		.uleb128 0xe
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1651 003e 0B        		.uleb128 0xb
  1652 003f 49        		.uleb128 0x49
  1653 0040 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 30
 
 
  1654 0041 00        		.byte	0x0
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1708 0077 0E        		.uleb128 0xe
  1709 0078 3A        		.uleb128 0x3a
  1710 0079 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 31
 
 
  1711 007a 3B        		.uleb128 0x3b
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1765 00b0 00        		.byte	0x0
  1766 00b1 00        		.byte	0x0
  1767 00b2 0F        		.uleb128 0xf
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 32
 
 
  1768 00b3 2E        		.uleb128 0x2e
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1822 00e9 00        		.byte	0x0
  1823 00ea 03        		.uleb128 0x3
  1824 00eb 0E        		.uleb128 0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 33
 
 
  1825 00ec 3A        		.uleb128 0x3a
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1879 0122 0B        		.uleb128 0xb
  1880 0123 3B        		.uleb128 0x3b
  1881 0124 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 34
 
 
  1882 0125 27        		.uleb128 0x27
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1936 015b 0C        		.uleb128 0xc
  1937 015c 11        		.uleb128 0x11
  1938 015d 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 35
 
 
  1939 015e 12        		.uleb128 0x12
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  1993 0194 59        		.uleb128 0x59
  1994 0195 05        		.uleb128 0x5
  1995 0196 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 36
 
 
  1996 0197 00        		.byte	0x0
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2050 01cd 01        		.uleb128 0x1
  2051 01ce 01        		.byte	0x1
  2052 01cf 49        		.uleb128 0x49
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 37
 
 
  2053 01d0 13        		.uleb128 0x13
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2107 0206 00        		.byte	0x0
  2108 0207 00        		.byte	0x0
  2109               		.section	.debug_pubnames,"",@progbits
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 38
 
 
  2110 0000 A600 0000 		.long	0xa6
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2142 0014 2202 0000 		.long	.Letext0-.Ltext0
  2143 0018 0000 0000 		.long	0x0
  2144 001c 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 39
 
 
  2145               		.section	.debug_ranges,"",@progbits
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2189      3130 2F6C 
  2190 0080 00        		.byte	0
  2191 0081 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 40
 
 
  2192 0082 6B65 796D 		.string	"keymain.c"
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2227 00fa 05        		.uleb128 0x5
  2228 00fb 02        		.byte	0x2
  2229 00fc 0000 0000 		.long	.LM1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 41
 
 
  2230 0100 3F        		.byte	0x3f
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2284 0154 0000 0000 		.long	.LM12
  2285 0158 03        		.byte	0x3
  2286 0159 AD7F      		.sleb128 -83
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 42
 
 
  2287 015b 01        		.byte	0x1
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2341 01af 0000 0000 		.long	.LM23
  2342 01b3 15        		.byte	0x15
  2343 01b4 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 43
 
 
  2344 01b5 05        		.uleb128 0x5
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2398 020c B47F      		.sleb128 -76
  2399 020e 01        		.byte	0x1
  2400 020f 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 44
 
 
  2401 0210 05        		.uleb128 0x5
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2455 0267 00        		.byte	0x0
  2456 0268 05        		.uleb128 0x5
  2457 0269 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 45
 
 
  2458 026a 0000 0000 		.long	.LM46
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2512 02c1 02        		.byte	0x2
  2513 02c2 0000 0000 		.long	.LM57
  2514 02c6 16        		.byte	0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 46
 
 
  2515 02c7 00        		.byte	0x0
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2569 031b 02        		.byte	0x2
  2570 031c 0000 0000 		.long	.LM68
  2571 0320 18        		.byte	0x18
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 47
 
 
  2572 0321 00        		.byte	0x0
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2626 0378 1F        		.byte	0x1f
  2627 0379 00        		.byte	0x0
  2628 037a 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 48
 
 
  2629 037b 02        		.byte	0x2
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2683 03d0 02        		.byte	0x2
  2684 03d1 0000 0000 		.long	.LM90
  2685 03d5 04        		.byte	0x4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 49
 
 
  2686 03d6 01        		.uleb128 0x1
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2740 0428 BE        		.byte	0xbe
  2741 0429 00        		.byte	0x0
  2742 042a 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 50
 
 
  2743 042b 02        		.byte	0x2
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2780 0047 4B45 595F 		.string	"KEY_LCTRL"
  2780      4C43 5452 
  2780      4C00 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 51
 
 
  2781               	.LASF79:
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2808      7266 6163 
  2808      6500 
  2809               	.LASF137:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 52
 
 
  2810 00f5 4B45 595F 		.string	"KEY_PREV_TRK"
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2834 0186 4B45 595F 		.string	"KEY_WWW_BACK"
  2834      5757 575F 
  2834      4241 434B 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 53
 
 
  2834      00
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2861               	.LASF85:
  2862 0226 4B45 595F 		.string	"KEY_INSERT"
  2862      494E 5345 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 54
 
 
  2862      5254 00
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2888 02ba 4B45 595F 		.string	"KEY_HANGLE"
  2888      4841 4E47 
  2888      4C45 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 55
 
 
  2889               	.LASF64:
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2914      4D49 5A45 
  2914      00
  2915               	.LASF176:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 56
 
 
  2916 0358 7072 6576 		.string	"prevPIND"
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2943               	.LASF46:
  2944 03e2 4B45 595F 		.string	"KEY_5"
  2944      3500 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 57
 
 
  2945               	.LASF47:
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  2979               	.LASF26:
  2980 0458 4B45 595F 		.string	"KEY_K"
  2980      4B00 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 58
 
 
  2981               	.LASF27:
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3014      00
  3015               	.LASF97:
  3016 04d4 4B45 595F 		.string	"KEY_KP_AST"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 59
 
 
  3016      4B50 5F41 
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3040 056c 636F 756E 		.string	"counter"
  3040      7465 7200 
  3041               	.LASF93:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 60
 
 
  3042 0574 4B45 595F 		.string	"KEY_DOWN"
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3068      00
  3069               	.LASF171:
  3070 05f8 696E 744E 		.string	"intNum"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 61
 
 
  3070      756D 00
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3098 067f 4B45 595F 		.string	"KEY_F1"
  3098      4631 00
  3099               	.LASF71:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 62
 
 
  3100 0686 4B45 595F 		.string	"KEY_F2"
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3131               	.LASF118:
  3132 070e 4B45 595F 		.string	"KEY_LGUI"
  3132      4C47 5549 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 63
 
 
  3132      00
@@ -3754,27 +3754,27 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 1
  3146      636B 7300 
  3147               	.global __do_copy_data
  3148               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s 			page 64
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keymain.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:18     .text:00000000 setUsbOn
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:34     .text:00000006 setUsbOff
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:50     .text:0000000c getUserSelectedInterface
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:73     .text:0000001e clearTimers
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:110    .text:00000044 initHardware
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:175    .text:0000007e clearInterface
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:530    .bss:00000000 interfaceCount
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:536    .bss:00000002 interfaceReady
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:200    .text:00000092 main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccV3zvmd.s:542    .data:00000000 INTERFACE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:18     .text:00000000 setUsbOn
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:34     .text:00000006 setUsbOff
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:50     .text:0000000c getUserSelectedInterface
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:73     .text:0000001e clearTimers
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:110    .text:00000044 initHardware
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:175    .text:0000007e clearInterface
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:530    .bss:00000000 interfaceCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:536    .bss:00000002 interfaceReady
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:200    .text:00000092 main
+C:\Users\ADMINI~1\AppData\Local\Temp/ccWO0bOo.s:542    .data:00000000 INTERFACE
 
 UNDEFINED SYMBOLS
 timerDetach
