@@ -96,7 +96,7 @@ static void initHardware(uint8_t xIsUSB) {
     // PD3 : D- / Data
     // PD4 : FULL LED
     // PD5 : 3.6V switch TR
-	// PD6 : reserved
+	// PD6 : SCRL
     // PD7 : row17
 	
 
@@ -109,13 +109,17 @@ static void initHardware(uint8_t xIsUSB) {
 	PORTROWS1	= 0xFF;	// all rows pull-up.
 	PORTROWS2	= 0xFF;	
   
-	DDRD        = 0x1F; // 0b00011111 all pins output except row 17, 3.6V TR
-	PORTD       = 0xE0; // 0b11100000 pull up row 17, 3.6V TR
+	DDRD        = 0x5F; // 0b01011111 all pins output except row 17, 3.6V TR
+	PORTD       = 0xA0; // 0b10100000 pull up row 17, 3.6V TR
+
+	// led pin
+	DDRD |= (LEDNUM | LEDCAPS | LEDSCROLL | LEDFULLLED);	// output;
+	PORTD &= ~(LEDNUM | LEDCAPS | LEDSCROLL | LEDFULLLED);	// low
     
     if(xIsUSB){
     	// USB Reset by device only required on Watchdog Reset	                        
 	    _delay_us_m(11);      // delay >10ms for USB reset
-		DDRD        = 0x13; //0b00010011  remove USB reset condition
+		DDRD        &= ~((1 << 2)|(1 << 3));//0x53; //0b00010011  remove USB reset condition
 
 	    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
 	    TCCR0 = 5;          // timer 0 prescaler: 1024

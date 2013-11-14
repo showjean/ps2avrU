@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 1
 
 
    1               		.file	"usbmain.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
   55 0024 1D92      		st X+,__zero_reg__
   56 0026 8A95      	        dec r24
   57 0028 01F4      		brne .-6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 2
 
 
   58               	.LM6:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  112 0056 8093 0000 		sts _isMultimediaPressed,r24
  113               	.LBB3:
  114               	.LM16:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 3
 
 
  115 005a E92F      		mov r30,r25
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  169 009e 01F0      		breq .L12
  170               	.LM23:
  171 00a0 2091 0000 		lds r18,reportIndex
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 4
 
 
  172 00a4 2830      		cpi r18,lo8(8)
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  226 00d6 AF92      		push r10
  227 00d8 BF92      		push r11
  228 00da CF92      		push r12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 5
 
 
  229 00dc DF92      		push r13
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  283 0130 00F0      		brlo .L26
  284               	.L20:
  285               	.LM39:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 6
 
 
  286 0132 F501      		movw r30,r10
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  340               	.LVL27:
  341               	.L24:
  342               	.LM48:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 7
 
 
  343 0190 81E0      		ldi r24,lo8(1)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  397 01de 82E0      		ldi r24,lo8(2)
  398 01e0 8093 0000 		sts reportIndex,r24
  399               	.LM53:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 8
 
 
  400 01e4 0E94 0000 		call clearReportBuffer
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  454 0234 1123      		tst r17
  455 0236 01F4      		brne .+2
  456 0238 00C0      		rjmp .L32
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 9
 
 
  457               	.LM62:
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  511 0292 0E94 0000 		call putKeyCode
  512 0296 81E0      		ldi r24,lo8(1)
  513 0298 8983      		std Y+1,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 10
 
 
  514               	.LVL43:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  568 02e8 991F      		rol r25
  569 02ea 0A94      	2:	dec r0
  570 02ec 02F4      		brpl 1b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 11
 
 
  571 02ee 882E      		mov r8,r24
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  625 0356 01F4      		brne .L47
  626               	.LM89:
  627 0358 E981      		ldd r30,Y+1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 12
 
 
  628 035a E130      		cpi r30,lo8(1)
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  682               	.LM94:
  683 0390 EF92      		push r14
  684 0392 FF92      		push r15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 13
 
 
  685 0394 0F93      		push r16
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  739               	.L52:
  740               	.LM102:
  741 03e4 0E94 0000 		call usbPoll
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 14
 
 
  742               	.LM103:
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  796 0436 0E94 0000 		call usbSetInterrupt
  797               	.LM116:
  798 043a 0E94 0000 		call startKeyMappingOnBoot
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 15
 
 
  799 043e 00C0      		rjmp .L57
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  853               	.LM129:
  854 0494 81E0      		ldi r24,lo8(1)
  855               	.L65:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 16
 
 
  856 0496 0E94 0000 		call setMacroProcessEnd
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  910 04d2 01F4      		brne .L72
  911 04d4 88E0      		ldi r24,lo8(8)
  912 04d6 00C0      		rjmp .L73
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 17
 
 
  913               	.L72:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  967 052a 80E0      		ldi r24,lo8(0)
  968               	.L73:
  969               	/* epilogue start */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 18
 
 
  970               	.LM156:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1024 0007 01        		.byte	1
  1025 0008 05        		.byte	5
  1026 0009 07        		.byte	7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 19
 
 
  1027 000a 19        		.byte	25
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1081 0040 A1        		.byte	-95
  1082 0041 01        		.byte	1
  1083 0042 85        		.byte	-123
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 20
 
 
  1084 0043 02        		.byte	2
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1138 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
  1139               	.LASFDE0:
  1140 0014 0000 0000 		.long	.Lframe0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 21
 
 
  1141 0018 0000 0000 		.long	.LFB16
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1195               	.LASFDE14:
  1196 0084 0000 0000 		.long	.Lframe0
  1197 0088 0000 0000 		.long	.LFB10
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 22
 
 
  1198 008c 1000 0000 		.long	.LFE10-.LFB10
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1252 004b D600 0000 		.long	.LFE12-.Ltext0
  1253 004f 0600      		.word	0x6
  1254 0051 69        		.byte	0x69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 23
 
 
  1255 0052 93        		.byte	0x93
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1309 00ba 0000 0000 		.long	0x0
  1310 00be 0000 0000 		.long	0x0
  1311               	.LLST8:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 24
 
 
  1312 00c2 B400 0000 		.long	.LVL16-.Ltext0
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1366 0134 8001 0000 		.long	.LVL26-.Ltext0
  1367 0138 0100      		.word	0x1
  1368 013a 61        		.byte	0x61
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 25
 
 
  1369 013b 9001 0000 		.long	.LVL27-.Ltext0
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1423 01d1 0100      		.word	0x1
  1424 01d3 5E        		.byte	0x5e
  1425 01d4 8C03 0000 		.long	.LVL58-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 26
 
 
  1426 01d8 9003 0000 		.long	.LFE14-.Ltext0
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1480               	.LLST21:
  1481 026d DE01 0000 		.long	.LVL31-.Ltext0
  1482 0271 8603 0000 		.long	.LVL57-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 27
 
 
  1483 0275 0100      		.word	0x1
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1537               	.LLST27:
  1538 0309 AE04 0000 		.long	.LVL72-.Ltext0
  1539 030d BA04 0000 		.long	.LVL73-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 28
 
 
  1540 0311 0600      		.word	0x6
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1594 0379 0100      		.word	0x1
  1595 037b 66        		.byte	0x66
  1596 037c 5005 0000 		.long	.LVL79-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 29
 
 
  1597 0380 5805 0000 		.long	.LFE9-.Ltext0
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1651 0064 02        		.uleb128 0x2
  1652 0065 01        		.byte	0x1
  1653 0066 06        		.byte	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 30
 
 
  1654 0067 0000 0000 		.long	.LASF9
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1708 00d6 0000 0000 		.long	.LASF21
  1709 00da DE01      		.sleb128 222
  1710 00dc 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 31
 
 
  1711 00dd 0000 0000 		.long	.LASF22
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1765 014e 0000 0000 		.long	.LASF38
  1766 0152 08        		.sleb128 8
  1767 0153 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 32
 
 
  1768 0154 0000 0000 		.long	.LASF39
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1822 01c0 0000 0000 		.long	.LASF57
  1823 01c4 1B        		.sleb128 27
  1824 01c5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 33
 
 
  1825 01c6 0000 0000 		.long	.LASF58
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1879 0232 0000 0000 		.long	.LASF76
  1880 0236 2E        		.sleb128 46
  1881 0237 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 34
 
 
  1882 0238 0000 0000 		.long	.LASF77
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1936 02a5 0000 0000 		.long	.LASF95
  1937 02a9 C100      		.sleb128 65
  1938 02ab 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 35
 
 
  1939 02ac 0000 0000 		.long	.LASF96
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  1993 032a 0000 0000 		.long	.LASF114
  1994 032e D400      		.sleb128 84
  1995 0330 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 36
 
 
  1996 0331 0000 0000 		.long	.LASF115
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2050 03af 0000 0000 		.long	.LASF133
  2051 03b3 E700      		.sleb128 103
  2052 03b5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 37
 
 
  2053 03b6 0000 0000 		.long	.LASF134
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2107 0434 0000 0000 		.long	.LASF152
  2108 0438 FA00      		.sleb128 122
  2109 043a 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 38
 
 
  2110 043b 0000 0000 		.long	.LASF153
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2164 04b9 0000 0000 		.long	.LASF171
  2165 04bd 8D01      		.sleb128 141
  2166 04bf 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 39
 
 
  2167 04c0 0000 0000 		.long	.LASF172
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2221 0530 04        		.byte	0x4
  2222 0531 9E02      		.word	0x29e
  2223 0533 5D00 0000 		.long	0x5d
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 40
 
 
  2224 0537 10        		.uleb128 0x10
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2278 05a6 23        		.byte	0x23
  2279 05a7 04        		.uleb128 0x4
  2280 05a8 0A        		.uleb128 0xa
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 41
 
 
  2281 05a9 0000 0000 		.long	.LASF185
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2335 0615 0000 0000 		.long	.LFB12
  2336 0619 0000 0000 		.long	.LFE12
  2337 061d 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 42
 
 
  2338 061e 90        		.byte	0x90
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2392 06a9 0000 0000 		.long	.LLST8
  2393 06ad 19        		.uleb128 0x19
  2394 06ae 0000 0000 		.long	.LASF194
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 43
 
 
  2395 06b2 01        		.byte	0x1
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2449 072f 0000 0000 		.long	.LFE14
  2450 0733 02        		.byte	0x2
  2451 0734 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 44
 
 
  2452 0735 20        		.uleb128 0x20
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2506 07be 01        		.byte	0x1
  2507 07bf DB01      		.word	0x1db
  2508 07c1 7200 0000 		.long	0x72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 45
 
 
  2509 07c5 0000 0000 		.long	.LLST21
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2563 083d 0000 0000 		.long	.LFE8
  2564 0841 02        		.byte	0x2
  2565 0842 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 46
 
 
  2566 0843 20        		.uleb128 0x20
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2620 08c2 0F05 0000 		.long	0x50f
  2621 08c6 07        		.byte	0x7
  2622 08c7 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 47
 
 
  2623 08c8 20        		.uleb128 0x20
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2677 093a 0000 0000 		.long	_prevPressedBuffer
  2678 093e 1C        		.uleb128 0x1c
  2679 093f 0000 0000 		.long	.LASF217
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 48
 
 
  2680 0943 01        		.byte	0x1
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2734 09b4 25        		.uleb128 0x25
  2735 09b5 0000 0000 		.long	.LASF222
  2736 09b9 04        		.byte	0x4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 49
 
 
  2737 09ba 9602      		.word	0x296
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2791 0a27 00        		.byte	0x0
  2792 0a28 22        		.uleb128 0x22
  2793 0a29 0000 0000 		.long	.LASF228
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 50
 
 
  2794 0a2d 06        		.byte	0x6
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2848 000f 10        		.uleb128 0x10
  2849 0010 06        		.uleb128 0x6
  2850 0011 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 51
 
 
  2851 0012 00        		.byte	0x0
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2905 0048 01        		.uleb128 0x1
  2906 0049 13        		.uleb128 0x13
  2907 004a 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 52
 
 
  2908 004b 00        		.byte	0x0
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  2962 0081 00        		.byte	0x0
  2963 0082 0B        		.uleb128 0xb
  2964 0083 35        		.uleb128 0x35
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 53
 
 
  2965 0084 00        		.byte	0x0
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3019 00ba 03        		.uleb128 0x3
  3020 00bb 0E        		.uleb128 0xe
  3021 00bc 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 54
 
 
  3022 00bd 0B        		.uleb128 0xb
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3076 00f3 3B        		.uleb128 0x3b
  3077 00f4 05        		.uleb128 0x5
  3078 00f5 27        		.uleb128 0x27
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 55
 
 
  3079 00f6 0C        		.uleb128 0xc
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3133 012c 3A        		.uleb128 0x3a
  3134 012d 0B        		.uleb128 0xb
  3135 012e 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 56
 
 
  3136 012f 05        		.uleb128 0x5
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3190 0165 34        		.uleb128 0x34
  3191 0166 00        		.byte	0x0
  3192 0167 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 57
 
 
  3193 0168 08        		.uleb128 0x8
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3247 019e 49        		.uleb128 0x49
  3248 019f 13        		.uleb128 0x13
  3249 01a0 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 58
 
 
  3250 01a1 00        		.byte	0x0
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3304 01d7 26        		.uleb128 0x26
  3305 01d8 00        		.byte	0x0
  3306 01d9 49        		.uleb128 0x49
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 59
 
 
  3307 01da 13        		.uleb128 0x13
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3355 0038 7072 6570 		.string	"prepareKeyMappingUsb"
  3355      6172 654B 
  3355      6579 4D61 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 60
 
 
  3355      7070 696E 
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3375      7373 6564 
  3376 0112 0000 0000 		.long	0x0
  3377               		.section	.debug_aranges,"",@progbits
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 61
 
 
  3378 0000 1C00 0000 		.long	0x1c
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3422      6170 2E68 
  3422      00
  3423 006f 00        		.uleb128 0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 62
 
 
  3424 0070 00        		.uleb128 0x0
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3468 00d7 00        		.byte	0x0
  3469 00d8 05        		.uleb128 0x5
  3470 00d9 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 63
 
 
  3471 00da 0000 0000 		.long	.LM5
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3525 0132 00        		.byte	0x0
  3526 0133 05        		.uleb128 0x5
  3527 0134 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 64
 
 
  3528 0135 0000 0000 		.long	.LM16
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3582 018c 02        		.byte	0x2
  3583 018d 0000 0000 		.long	.LM27
  3584 0191 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 65
 
 
  3585 0192 00        		.byte	0x0
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3639 01e9 17        		.byte	0x17
  3640 01ea 00        		.byte	0x0
  3641 01eb 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 66
 
 
  3642 01ec 02        		.byte	0x2
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3696 0244 01        		.byte	0x1
  3697 0245 00        		.byte	0x0
  3698 0246 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 67
 
 
  3699 0247 02        		.byte	0x2
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3753 029e 05        		.uleb128 0x5
  3754 029f 02        		.byte	0x2
  3755 02a0 0000 0000 		.long	.LM61
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 68
 
 
  3756 02a4 23        		.byte	0x23
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3810 02f8 0000 0000 		.long	.LM72
  3811 02fc 16        		.byte	0x16
  3812 02fd 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 69
 
 
  3813 02fe 05        		.uleb128 0x5
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3867 0352 0000 0000 		.long	.LM83
  3868 0356 15        		.byte	0x15
  3869 0357 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 70
 
 
  3870 0358 05        		.uleb128 0x5
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3924 03af 00        		.byte	0x0
  3925 03b0 05        		.uleb128 0x5
  3926 03b1 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 71
 
 
  3927 03b2 0000 0000 		.long	.LM95
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  3981 0407 0000 0000 		.long	.LM105
  3982 040b 17        		.byte	0x17
  3983 040c 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 72
 
 
  3984 040d 05        		.uleb128 0x5
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4038 0464 00        		.byte	0x0
  4039 0465 05        		.uleb128 0x5
  4040 0466 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 73
 
 
  4041 0467 0000 0000 		.long	.LM117
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4095 04be 02        		.byte	0x2
  4096 04bf 0000 0000 		.long	.LM128
  4097 04c3 16        		.byte	0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 74
 
 
  4098 04c4 00        		.byte	0x0
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4152 0518 0000 0000 		.long	.LM138
  4153 051c 16        		.byte	0x16
  4154 051d 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 75
 
 
  4155 051e 05        		.uleb128 0x5
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4209 0575 00        		.byte	0x0
  4210 0576 05        		.uleb128 0x5
  4211 0577 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 76
 
 
  4212 0578 0000 0000 		.long	.LM150
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4266 05cf 02        		.byte	0x2
  4267 05d0 0000 0000 		.long	.LM161
  4268 05d4 16        		.byte	0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 77
 
 
  4269 05d5 00        		.byte	0x0
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4300      4E55 4D4C 
  4300      4F43 4B00 
  4301               	.LASF22:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 78
 
 
  4302 0069 4B45 595F 		.string	"KEY_RALT_HANJA"
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4328      454E 4400 
  4329               	.LASF6:
  4330 0107 6C6F 6E67 		.string	"long long unsigned int"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 79
 
 
  4330      206C 6F6E 
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4352      414E 474C 
  4352      4500 
  4353               	.LASF161:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 80
 
 
  4354 01ac 4B45 595F 		.string	"KEY_MEDIA"
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4377               	.LASF5:
  4378 024c 6C6F 6E67 		.string	"long int"
  4378      2069 6E74 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 81
 
 
  4378      00
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4404      7375 6C74 
  4404      00
  4405               	.LASF77:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 82
 
 
  4406 02e1 4B45 595F 		.string	"KEY_LBR"
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4430 0375 756E 7369 		.string	"unsigned int"
  4430      676E 6564 
  4430      2069 6E74 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 83
 
 
  4430      00
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4458 0406 6461 7461 		.string	"data"
  4458      00
  4459               	.LASF117:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 84
 
 
  4460 040b 4B45 595F 		.string	"KEY_KP_PLUS"
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4484      6174 7269 
  4484      7800 
  4485               	.LASF74:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 85
 
 
  4486 04a9 4B45 595F 		.string	"KEY_SPACE"
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4514 052f 4B45 595F 		.string	"KEY_7"
  4514      3700 
  4515               	.LASF67:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 86
 
 
  4516 0535 4B45 595F 		.string	"KEY_8"
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4550 05a5 4B45 595F 		.string	"KEY_dualAction"
  4550      6475 616C 
  4550      4163 7469 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 87
 
 
  4550      6F6E 00
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4582 062b 7265 706F 		.string	"reportBuffer"
  4582      7274 4275 
  4582      6666 6572 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 88
 
 
  4582      00
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4606      5343 5245 
  4606      454E 5341 
  4606      5645 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 89
 
 
  4607               	.LASF173:
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4632 076c 6252 6571 		.string	"bRequest"
  4632      7565 7374 
  4632      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 90
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 90
 
 
  4633               	.LASF215:
@@ -5398,7 +5398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4658      00
  4659               	.LASF70:
  4660 07ff 4B45 595F 		.string	"KEY_ENTER"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 91
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 91
 
 
  4660      454E 5445 
@@ -5458,7 +5458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4688      00
  4689               	.LASF137:
  4690 0886 4B45 595F 		.string	"KEY_RCTRL"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 92
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 92
 
 
  4690      5243 5452 
@@ -5518,7 +5518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4719               	.LASF95:
  4720 0911 4B45 595F 		.string	"KEY_F8"
  4720      4638 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 93
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 93
 
 
  4721               	.LASF10:
@@ -5578,7 +5578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4748 09ac 696E 6974 		.string	"initInterfaceUsb"
  4748      496E 7465 
  4748      7266 6163 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 94
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 94
 
 
  4748      6555 7362 
@@ -5612,38 +5612,38 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 1
  4760      00
  4761               	.global __do_copy_data
  4762               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 95
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 95
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbmain.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:18     .text:00000000 hasMacroUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1109   .bss:00000002 _needRelease
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:45     .text:0000001c clearReportBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1112   .bss:00000005 reportBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:68     .text:00000032 prepareKeyMappingUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1119   .bss:0000000e _prevPressedBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:88     .text:00000042 makeReportBuffer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1107   .bss:00000000 _isMultimediaPressed
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:18     .text:00000000 hasMacroUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1109   .bss:00000002 _needRelease
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:45     .text:0000001c clearReportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1112   .bss:00000005 reportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:68     .text:00000032 prepareKeyMappingUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1119   .bss:0000000e _prevPressedBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:88     .text:00000042 makeReportBuffer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1107   .bss:00000000 _isMultimediaPressed
                             *COM*:00000001 reportIndex
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:223    .text:000000d6 scanMacroUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:362    .text:000001a6 scanKeyUSB
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1110   .bss:00000003 prevModifier.2352
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:680    .text:00000390 usb_main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1118   .bss:0000000d idleRate
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:223    .text:000000d6 scanMacroUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:362    .text:000001a6 scanKeyUSB
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1110   .bss:00000003 prevModifier.2352
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:680    .text:00000390 usb_main
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1118   .bss:0000000d idleRate
                              .bss:00000001 _isInit
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:864    .text:0000049e initInterfaceUsb
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:883    .text:000004ae usbFunctionSetup
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1111   .bss:00000004 expectReport
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1116   .data:00000000 protocolVer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:979    .text:00000532 usbFunctionWrite
-C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s:1016   .progmem.data:00000000 usbDescriptorHidReport
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:864    .text:0000049e initInterfaceUsb
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:883    .text:000004ae usbFunctionSetup
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1111   .bss:00000004 expectReport
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1116   .data:00000000 protocolVer
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:979    .text:00000532 usbFunctionWrite
+C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s:1016   .progmem.data:00000000 usbDescriptorHidReport
 
 UNDEFINED SYMBOLS
 isEmptyM
@@ -5672,7 +5672,7 @@ applyKeyMapping
 usbInit
 INTERFACE
 interfaceReady
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccvIbYN4.s 			page 96
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc4GTO6C.s 			page 96
 
 
 interfaceCount
