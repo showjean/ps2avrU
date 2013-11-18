@@ -16,6 +16,7 @@
 #include "ledrender.h"
 #include "hardwareinfo.h"
 #include "sleep.h"
+#include "keymapper.h"
 
 static uint16_t downLevelStay = 0;
 static uint8_t downLevel = 0;
@@ -40,6 +41,8 @@ static uint8_t _ledBrightnessMax = 255;
 static uint8_t _ledBrightnessMax_saved = 0;	// 
 static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
+
+static int beyondFNCountDelay = 1800;
 
 void setLEDState(uint8_t xState){
 	LEDstate = xState;
@@ -139,6 +142,9 @@ void initFullLEDState(void) {
 
 	setFullLEDState();
 
+	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		beyondFNCountDelay = beyondFNCountDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}
 
 }
 
@@ -317,25 +323,36 @@ static void blinkBeyondFNLED(uint8_t xIsBeyondFN) {
 	static int beyondFNDelayCounter = 0;
 	static uint8_t beyondFNLEDState = 1;
 	const int beyondFNCountMAX = 200;
-	const int beyondFNCountDelay = 900;
-	
+	uint8_t led = LEDNUM;
+
+#ifdef ENABLE_BOOTMAPPER
+	if(isBootMapper()){
+		led = LEDCAPS;
+		DEBUG_PRINT(("isBootMapper(): %d \n", isBootMapper()));
+
+		xIsBeyondFN = 1;
+	}
+#endif
+
 	if(xIsBeyondFN == 1){
+		
+
 		beyondFNDelayCounter++;
 		if(beyondFNDelayCounter > beyondFNCountDelay){
 			beyondFNCounter++;
 			if(beyondFNCounter > beyondFNCountMAX){
 				if(getLEDState() & LED_STATE_NUM){	// Num Lock이 켜져 있을때는 커졌다 켜지고;
 					if(beyondFNLEDState == 1){
-						turnOffLED(LEDNUM);
+						turnOffLED(led);
 					}else{
-						turnOnLED(LEDNUM);
+						turnOnLED(led);
 						beyondFNDelayCounter = 0;
 					}
 				}else{	// Num Lock이 꺼져 있을 때는 켜졌다 꺼진다.
 					if(beyondFNLEDState == 1){
-						turnOnLED(LEDNUM);
+						turnOnLED(led);
 					}else{
-						turnOffLED(LEDNUM);
+						turnOffLED(led);
 						beyondFNDelayCounter = 0;
 					}
 				}

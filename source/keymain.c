@@ -119,7 +119,7 @@ static void initHardware(uint8_t xIsUSB) {
     if(xIsUSB){
     	// USB Reset by device only required on Watchdog Reset	                        
 	    _delay_us_m(11);      // delay >10ms for USB reset
-		DDRD        &= ~((1 << 2)|(1 << 3));//0x53; //0b00010011  remove USB reset condition
+		DDRD &= ~((1 << 2)|(1 << 3));//0x53; //0b00010011  remove USB reset condition
 
 	    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
 	    TCCR0 = 5;          // timer 0 prescaler: 1024
@@ -131,23 +131,6 @@ static void initHardware(uint8_t xIsUSB) {
  	}else{
  		setUsbOff();
  	}
-}
-
-uint8_t getUserSelectedInterface(uint8_t pin, uint8_t pinNumber){
-	int counter=0;
-	int userInterface;
-	userInterface = pin & BV(pinNumber);
-	while(counter<=10) {                            // PINA5 should be 0 for 10 cycles
-		if(userInterface != (pin & BV(pinNumber)))
-			counter=0;
-		else
-			counter++;
-
-		userInterface = (pin & BV(pinNumber));
-	}
-
-	// DEBUG_PRINT(("userInteprface %02x ", userInterface));
-	return userInterface;
 }
 
 int main(void) {

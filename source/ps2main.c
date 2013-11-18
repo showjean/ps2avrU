@@ -360,19 +360,20 @@ int scanKeyPS2(void) {
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			// if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {
-			if( prev != cur && keyidx != KEY_NONE ) {
+			if( prev != cur ) {
 #ifdef ENABLE_BOOTMAPPER                
                 if(isBootMapper()){
                     if(cur) trace(row, col);
                     break;
                 }
 #endif	
-				if(cur) {
-					gResultPutKey &= putKey(keyidx, 1, col, row);
-				}else{
-					gResultPutKey &= putKey(keyidx, 0, col, row);
+                if(keyidx != KEY_NONE){
+					if(cur) {
+						gResultPutKey &= putKey(keyidx, 1, col, row);
+					}else{
+						gResultPutKey &= putKey(keyidx, 0, col, row);
+					}
 				}
-
 			}
 
 		}

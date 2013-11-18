@@ -617,7 +617,7 @@ void readMacro(uint8_t xMacroIndex){
 			pushM(gKeyCode);
 		}
 	}
-	DEBUG_PRINT(("readMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
+	// DEBUG_PRINT(("readMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
 }
 
 void saveMacro(void){

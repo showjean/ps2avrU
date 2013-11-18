@@ -498,29 +498,32 @@ uint8_t scanKeyUSB(void) {
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			//if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {                
-            if( prev != cur && keyidx != KEY_NONE ) {
-#ifdef ENABLE_BOOTMAPPER                
+            if( prev != cur ) {
+                
+#ifdef ENABLE_BOOTMAPPER           
                 if(isBootMapper()){
                     if(cur) trace(row, col);
                     break;
                 }
-#endif
-				if(cur) {
-					// key down
-					gFN = applyFN(keyidx, 1);
-                    wakeUp();
+#endif      
+                if(keyidx != KEY_NONE){
+    				if(cur) {
+    					// key down
+    					gFN = applyFN(keyidx, 1);
+                        wakeUp();
 
-                    /*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
-                        // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
-                        makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
-                        dualActionKeyIndex = 0;
-                    }*/
-                    applyDualActionDown(makeReportBuffer, 1);
+                        /*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+                            // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
+                            makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
+                            dualActionKeyIndex = 0;
+                        }*/
+                        applyDualActionDown(makeReportBuffer, 1);
 
-				}else{
-                    // key up
-					gFN = applyFN(keyidx, 0);
-				}
+    				}else{
+                        // key up
+    					gFN = applyFN(keyidx, 0);
+    				}
+                }
 			}
 
             // 키매핑 진행중;
