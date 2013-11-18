@@ -479,12 +479,13 @@ uint8_t scanKeyUSB(void) {
 	reportIndex = 2; // reportBuffer[0] contains modifiers
     clearReportBuffer();
     gKeymapping = 0;
+    uint8_t *gMatrix = getCurrentMatrix();
 	for (col = 0; col < 8; ++col) { // process all rows for key-codes
 		for (row = 0; row < 17; ++row) { // check every bit on this row   
 
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = prevMatrix[row] & BV(col);
-			cur  = currentMatrix[row] & BV(col);
+			cur  = gMatrix[row] & BV(col);
 			// keyidx = pgm_read_byte(&keymap_code[keymap][row][col]);
             keyidx = getCurrentKeycode(keymap, row, col);						
 			gFN = 1;
@@ -499,7 +500,7 @@ uint8_t scanKeyUSB(void) {
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			//if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {                
             if( prev != cur ) {
-                
+
 #ifdef ENABLE_BOOTMAPPER           
                 if(isBootMapper()){
                     if(cur) trace(row, col);
@@ -571,7 +572,7 @@ uint8_t scanKeyUSB(void) {
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
 	for(row=0;row<17;++row)
-		prevMatrix[row] = currentMatrix[row];
+		prevMatrix[row] = gMatrix[row];
 
 
     if(gKeymapping == 1) return 0;

@@ -29,6 +29,11 @@ uint8_t isBeyondFN = 0;	 //KEY_BEYOND_FN state
 // 17*8 bit matrix
 uint8_t prevMatrix[17];
 uint8_t currentMatrix[17];  ///< contains current state of the keyboard
+
+#ifdef GHOST_KEY_PREVENTION
+	uint8_t ghostFilterMatrix[17];
+#endif
+
 uint8_t _currentLayer = 0;
 
 
@@ -242,7 +247,46 @@ uint8_t getLiveMatrix(void){
 		return 0;
 	}
 
+#ifdef GHOST_KEY_PREVENTION
+	// ghost-key prevention
+	// col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.
+	uint8_t ghost = 0;
+	uint8_t needDetection = 0;
+	uint8_t i;
+	for(row=0;row<17;row++)
+	{
+		if(needDetection > 1){
+			ghostFilterMatrix[row] &= currentMatrix[row] ^ ghost;	// r1:g1 = 0, r1:g0 = 1, r0:g1 = 0, r0:g0 = 0; 다른 것만 1로 만들 후 & 연산;
+		}else{
+			ghostFilterMatrix[row] = currentMatrix[row];
+		}
+
+		ghost |= ghostFilterMatrix[row];
+		DEBUG_PRINT(("currentMatrix[%d]= %02X, ghost=%02X, needDetection=%d  \n", row, ghostFilterMatrix[row], ghost, needDetection));
+		// 1비트(컬럼)만 입력이 있을 경우 외에 2비트 이상 입력이 있다면 표시;
+		// if(needDetection > 1) continue;
+		needDetection = 0;
+
+		for (i = 0; i < 8; ++i)
+		{
+			if(ghost & BV(i)){
+				++needDetection;
+			}
+		}
+	}
+#endif
+
 	return 1;
+}
+
+uint8_t *getCurrentMatrix(void){
+
+#ifdef GHOST_KEY_PREVENTION
+	return ghostFilterMatrix;
+#else
+	return currentMatrix;
+#endif
+
 }
 
 //curmatrix

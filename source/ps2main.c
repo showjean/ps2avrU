@@ -312,6 +312,7 @@ int scanKeyPS2(void) {
 	uint8_t layer = getLayer();
 	uint8_t gResultPutKey = 1;
 
+    uint8_t *gMatrix = getCurrentMatrix();
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 	if(_prevLayer != layer){
 		for(col=0;col<8;col++)
@@ -319,7 +320,7 @@ int scanKeyPS2(void) {
 			for(row=0;row<17;row++)
 			{
 				prev = prevMatrix[row] & BV(col);
-				cur  = currentMatrix[row] & BV(col);
+				cur  = gMatrix[row] & BV(col);
 				if(!prev) continue;
 				
 				prevKeyidx = getCurrentKeycode(_prevLayer, row, col);
@@ -347,7 +348,7 @@ int scanKeyPS2(void) {
 		for(row=0;row<17;row++)
 		{
 			prev = prevMatrix[row] & BV(col);
-			cur  = currentMatrix[row] & BV(col);
+			cur  = gMatrix[row] & BV(col);
 			// keyidx = pgm_read_byte(&keymap_code[layer][row][col]);
 			keyidx = getCurrentKeycode(layer, row, col);
 
@@ -386,7 +387,7 @@ int scanKeyPS2(void) {
 	}*/
 	
 	for(row=0;row<17;row++)
-		prevMatrix[row] = currentMatrix[row];
+		prevMatrix[row] = gMatrix[row];
 
 	return gResultPutKey;
 }

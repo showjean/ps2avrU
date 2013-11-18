@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 1
 
 
    1               		.file	"keymap.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
   55 0020 F0E0      		ldi r31,lo8(0)
   56               	.LVL3:
   57 0022 E050      		subi r30,lo8(-(dualActionMaskDown-214))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 2
 
 
   58 0024 F040      		sbci r31,hi8(-(dualActionMaskDown-214))
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  112               	.LFB7:
  113               	.LM13:
  114               	.LVL13:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 3
 
 
  115 0050 1F93      		push r17
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  169 00ac 01F4      		brne .L15
  170               	.LBB22:
  171               	.LM26:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 4
 
 
  172 00ae F0E0      		ldi r31,lo8(0)
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  226               		.type	dualActionMaskUp, @object
  227               		.size	dualActionMaskUp, 16
  228               	dualActionMaskUp:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 5
 
 
  229 0010 8E        		.byte	-114
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  283 001a 1D        		.byte	29
  284 001b 22        		.byte	34
  285 001c 35        		.byte	53
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 6
 
 
  286 001d 1A        		.byte	26
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  340 0053 77        		.byte	119
  341 0054 4A        		.byte	74
  342 0055 7C        		.byte	124
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 7
 
 
  343 0056 7B        		.byte	123
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  397 008c 00        		.byte	0
  398 008d F1        		.byte	-15
  399 008e F2        		.byte	-14
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 8
 
 
  400 008f 00        		.byte	0
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  454               		.size	keycode_set2_make_break, 4
  455               	keycode_set2_make_break:
  456 00cf 71        		.byte	113
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 9
 
 
  457 00d0 72        		.byte	114
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  511               		.size	keycode_set2_proc_shift, 15
  512               	keycode_set2_proc_shift:
  513 0100 49        		.byte	73
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 10
 
 
  514 0101 4C        		.byte	76
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  568 0133 19        		.byte	25
  569 0134 05        		.byte	5
  570 0135 22        		.byte	34
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 11
 
 
  571 0136 21        		.byte	33
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  625 016c 51        		.byte	81
  626 016d 4C        		.byte	76
  627 016e 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 12
 
 
  628 016f CA        		.byte	-54
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  682 01a5 35        		.byte	53
  683 01a6 1E        		.byte	30
  684 01a7 1A        		.byte	26
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 13
 
 
  685 01a8 FD        		.byte	-3
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  739 01de 54        		.byte	84
  740 01df 47        		.byte	71
  741 01e0 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 14
 
 
  742 01e1 00        		.byte	0
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  796 0217 00        		.byte	0
  797 0218 6A        		.byte	106
  798 0219 6E        		.byte	110
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 15
 
 
  799 021a 00        		.byte	0
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  853 0250 30        		.byte	48
  854 0251 0E        		.byte	14
  855 0252 3F        		.byte	63
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 16
 
 
  856 0253 36        		.byte	54
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  910 0289 61        		.byte	97
  911 028a 5E        		.byte	94
  912 028b 5B        		.byte	91
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 17
 
 
  913 028c 00        		.byte	0
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  967 0020 0C00 0000 		.long	.LEFDE2-.LASFDE2
  968               	.LASFDE2:
  969 0024 0000 0000 		.long	.Lframe0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 18
 
 
  970 0028 0000 0000 		.long	.LFB5
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1024               	.LLST3:
  1025 0038 0600 0000 		.long	.LVL0-.Ltext0
  1026 003c 2E00 0000 		.long	.LVL6-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 19
 
 
  1027 0040 0100      		.word	0x1
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1081 00c1 BC00 0000 		.long	.LVL16-.Ltext0
  1082 00c5 0100      		.word	0x1
  1083 00c7 69        		.byte	0x69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 20
 
 
  1084 00c8 C600 0000 		.long	.LVL17-.Ltext0
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1138 0045 03        		.uleb128 0x3
  1139 0046 0000 0000 		.long	.LASF3
  1140 004a 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 21
 
 
  1141 004b 7C        		.byte	0x7c
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1195 00b2 07        		.uleb128 0x7
  1196 00b3 0000 0000 		.long	.LASF16
  1197 00b7 DC01      		.sleb128 220
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 22
 
 
  1198 00b9 07        		.uleb128 0x7
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1252 012c 01        		.byte	0x1
  1253 012d 6D        		.byte	0x6d
  1254 012e 2C00 0000 		.long	0x2c
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 23
 
 
  1255 0132 0B        		.uleb128 0xb
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1309 01a7 01        		.byte	0x1
  1310 01a8 3F        		.byte	0x3f
  1311 01a9 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 24
 
 
  1312 01aa 2701 0000 		.long	0x127
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1366 0228 0000 0000 		.long	.LBE20
  1367 022c 01        		.byte	0x1
  1368 022d 68        		.byte	0x68
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 25
 
 
  1369 022e 18        		.uleb128 0x18
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1423 02a0 1B        		.uleb128 0x1b
  1424 02a1 4500 0000 		.long	0x45
  1425 02a5 B002 0000 		.long	0x2b0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 26
 
 
  1426 02a9 1C        		.uleb128 0x1c
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1480 031e 1C        		.uleb128 0x1c
  1481 031f 8602 0000 		.long	0x286
  1482 0323 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 27
 
 
  1483 0324 00        		.byte	0x0
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1537 0396 05        		.byte	0x5
  1538 0397 03        		.byte	0x3
  1539 0398 0000 0000 		.long	keycode_set2_proc_shift
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 28
 
 
  1540 039c 1E        		.uleb128 0x1e
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1594 040e 0000 0000 		.long	.LASF47
  1595 0412 01        		.byte	0x1
  1596 0413 1F        		.byte	0x1f
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 29
 
 
  1597 0414 1F04 0000 		.long	0x41f
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1651 002d 00        		.byte	0x0
  1652 002e 0B        		.uleb128 0xb
  1653 002f 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 30
 
 
  1654 0030 3E        		.uleb128 0x3e
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1708 0066 00        		.byte	0x0
  1709 0067 00        		.byte	0x0
  1710 0068 09        		.uleb128 0x9
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 31
 
 
  1711 0069 2E        		.uleb128 0x2e
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1765 009f 00        		.byte	0x0
  1766 00a0 0D        		.uleb128 0xd
  1767 00a1 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 32
 
 
  1768 00a2 01        		.byte	0x1
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1822 00d8 11        		.uleb128 0x11
  1823 00d9 05        		.uleb128 0x5
  1824 00da 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 33
 
 
  1825 00db 03        		.uleb128 0x3
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1879 0111 00        		.byte	0x0
  1880 0112 0B        		.uleb128 0xb
  1881 0113 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 34
 
 
  1882 0114 49        		.uleb128 0x49
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1936 014a 01        		.byte	0x1
  1937 014b 49        		.uleb128 0x49
  1938 014c 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 35
 
 
  1939 014d 01        		.uleb128 0x1
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  1985      6F77 6E00 
  1986 003f CB01 0000 		.long	0x1cb
  1987 0043 6765 7444 		.string	"getDualActionDownKeyIdex"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 36
 
 
  1987      7561 6C41 
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2005      5F70 726F 
  2005      635F 7368 
  2006 0134 BD03 0000 		.long	0x3bd
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 37
 
 
  2007 0138 6B65 796D 		.string	"keymap_code"
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2047 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
  2047      696E 6176 
  2047      722D 3230 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 38
 
 
  2047      3130 3031 
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2094 009b 00        		.byte	0x0
  2095 009c 05        		.uleb128 0x5
  2096 009d 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 39
 
 
  2097 009e 0000 0000 		.long	.LM7
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2151 00f2 0000 0000 		.long	.LM17
  2152 00f6 15        		.byte	0x15
  2153 00f7 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 40
 
 
  2154 00f8 05        		.uleb128 0x5
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2208 014c 0000 0000 		.long	.LM28
  2209 0150 15        		.byte	0x15
  2210 0151 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 41
 
 
  2211 0152 05        		.uleb128 0x5
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2243      4E47 4C45 
  2243      00
  2244               	.LASF34:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 42
 
 
  2245 0054 5F69 7343 		.string	"_isCanceledDualAction"
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2265 00f9 6B65 7963 		.string	"keycode_set2_extend"
  2265      6F64 655F 
  2265      7365 7432 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 43
 
 
  2265      5F65 7874 
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2285      6564 4475 
  2285      616C 4163 
  2285      7469 6F6E 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 44
 
 
  2286               	.LASF41:
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2307      6F64 6500 
  2308               	.LASF7:
  2309 0268 6C6F 6E67 		.string	"long long int"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 45
 
 
  2309      206C 6F6E 
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2330               	.LASF19:
  2331 031b 4B45 595F 		.string	"KEY_RALT_HANJA"
  2331      5241 4C54 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 46
 
 
  2331      5F48 414E 
@@ -2735,36 +2735,36 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 1
  2345      00
  2346               	.global __do_copy_data
  2347               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s 			page 47
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keymap.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:18     .text:00000000 isCanceledDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:941    .bss:00000003 _isCanceledDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:31     .text:00000006 applyDualActionDown
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:250    .bss:00000000 dualActionKeyIndex
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:208    .data:00000000 dualActionMaskDown
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:79     .text:00000034 getDualActionDownKeyIdex
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:111    .text:00000050 setDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:18     .text:00000000 isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:941    .bss:00000003 _isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:31     .text:00000006 applyDualActionDown
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:250    .bss:00000000 dualActionKeyIndex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:208    .data:00000000 dualActionMaskDown
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:79     .text:00000034 getDualActionDownKeyIdex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:111    .text:00000050 setDualAction
                              .bss:00000001 _dualActionCount
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:940    .bss:00000002 _isActiveDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:228    .data:00000010 dualActionMaskUp
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:256    .progmem.data:00000000 keycode_set2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:404    .progmem.data:00000090 keycode_USB_multimedia
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:434    .progmem.data:000000c4 keycode_USB_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:440    .progmem.data:000000c8 keycode_set2_special
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:447    .progmem.data:000000cb keycode_set2_makeonly
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:455    .progmem.data:000000cf keycode_set2_make_break
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:463    .progmem.data:000000d3 keycode_set2_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:512    .progmem.data:00000100 keycode_set2_proc_shift
-C:\Users\ADMINI~1\AppData\Local\Temp/ccWpsXw4.s:531    .progmem.data:0000010f keymap_code
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:940    .bss:00000002 _isActiveDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:228    .data:00000010 dualActionMaskUp
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:256    .progmem.data:00000000 keycode_set2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:404    .progmem.data:00000090 keycode_USB_multimedia
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:434    .progmem.data:000000c4 keycode_USB_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:440    .progmem.data:000000c8 keycode_set2_special
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:447    .progmem.data:000000cb keycode_set2_makeonly
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:455    .progmem.data:000000cf keycode_set2_make_break
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:463    .progmem.data:000000d3 keycode_set2_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:512    .progmem.data:00000100 keycode_set2_proc_shift
+C:\Users\ADMINI~1\AppData\Local\Temp/ccpnQ41r.s:531    .progmem.data:0000010f keymap_code
 
 UNDEFINED SYMBOLS
 pushM

@@ -13,7 +13,6 @@
 extern uint8_t isBeyondFN;//KEY_BEYOND_FN state
 extern const unsigned short int modmask[16];
 extern uint8_t prevMatrix[17];
-extern uint8_t currentMatrix[17];  ///< contains current state of the keyboard
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
@@ -32,6 +31,7 @@ extern uint8_t getLayer(void);
 extern uint8_t getLiveMatrix(void);
 //curmatrix
 extern uint8_t setCurrentMatrix(void);
+extern uint8_t *getCurrentMatrix(void);
 
 
 #endif

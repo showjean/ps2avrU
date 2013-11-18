@@ -13,6 +13,10 @@ make -f makefile.bootmapper
 del keymain_(bootmapper).hex
 ren keymain.hex keymain_(bootmapper).hex
 make clean
+make -f makefile_ghost.bootmapper
+del keymain_(bootmapper_ghost).hex
+ren keymain.hex keymain_(bootmapper_ghost).hex
+make clean
 make -f makefile.mxmini
 del keymain_(mxmini).hex
 ren keymain.hex keymain_(mxmini).hex

@@ -165,12 +165,14 @@ int main(void) {
 	// DEBUG_PRINT(("checking.... \n"));
 	uint8_t row, col, cur, keyidx;	
 
+	uint8_t *gMatrix = getCurrentMatrix();
+
 	// debounce cleared => compare last matrix and current matrix
 	for(col=0;col<8;col++)
 	{		
 		for(row=0;row<17;row++)
 		{
-			cur  = currentMatrix[row] & BV(col);
+			cur  = gMatrix[row] & BV(col);
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
 			if( cur ) {
 #ifdef ENABLE_BOOTMAPPER
