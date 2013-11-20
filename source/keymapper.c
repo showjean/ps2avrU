@@ -27,7 +27,9 @@ const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
 const char str_select_mode2[] PROGMEM =  "2:Macro";
 const char str_select_mode3[] PROGMEM =  "3:Exit";
+const char str_select_mode4[] PROGMEM =  "4:boot mapper";
 const char str_exit[] PROGMEM =  "good bye~";
+const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
 
 const char str_macro_message[] PROGMEM = "Macro";
 const char str_macro_1[] PROGMEM = "1:Select Macro Index";
@@ -81,7 +83,7 @@ uint8_t _isTiredEscapeKey = 0;
 
 static uint8_t _mode;
 static uint8_t _step;
-static uint8_t _stepAfterSave;	// save 후 실행될 step 저장;
+static uint8_t _stepAfterLayerSave;	// save 후 실행될 step 저장;
 static uint8_t _wait;			// 매크로 완료 후 실행될 작업 구분;
 static uint8_t _col, _row;
 static uint8_t _buffer[3];
@@ -107,7 +109,6 @@ void printMapperMessageAfter(void);
 void clearMacroAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
-static void printString(const char *xString);
 
 //------------------------------------------------------///
 
@@ -185,31 +186,13 @@ void startKeyMappingOnBoot(void)
 		return;
 	}
 #endif
+
 	if(_keyMappingOnBoot == 1)
 	{
 		prepareKeyMapping();
 		_keyMappingOnBoot = 0;
 	}
 }
-
-#ifdef ENABLE_BOOTMAPPER
-// bootmapper
-static uint8_t _isBootMapper = 0;
-void setToBootMapper(void){
-	_isBootMapper = 1;
-}
-uint8_t isBootMapper(void){
-	return _isBootMapper;
-}
-void trace(uint8_t xRow, uint8_t xCol){
-	// DEBUG_PRINT(("trace : row= %d, col= %d \n", xRow, xCol));
-	printString("-");
-	printString(toString(xCol));
-	printString(",");
-	printString(toString(xRow));	
-	printString("=");
-}
-#endif
 
 /**
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
@@ -351,7 +334,7 @@ static void printEnter(void)
     pushM(KEY_ENTER);
 }
 
-static void printString(const char *xString)
+void printString(const char *xString)
 {
 	char c;
 	char gChar[1];
@@ -427,6 +410,12 @@ static void printPrompt(void)
 			printStringFromFlash(str_input_macro);
 			printEnter();
 		break;
+		case STEP_BOOT_MAPPER:
+			printStringFromFlash(str_boot_mapper);
+			printEnter();
+			_step = STEP_NOTHING;
+			setToBootMapper();
+		break;
 		case STEP_EXIT:
 			printStringFromFlash(str_exit);
 			printEnter();
@@ -452,6 +441,8 @@ void printSelectMode(void){
 	printStringFromFlash(str_select_mode2);
 	printEnter();
 	printStringFromFlash(str_select_mode3);
+	printEnter();
+	printStringFromFlash(str_select_mode4);
 	printEnter();
 	
 	_step = STEP_SELECT_MODE;
@@ -550,11 +541,11 @@ void saveCurrentLayerAfter(void)
 	}
 	_editCount = 0;
 
-	if(_stepAfterSave == STEP_SAVE_END_MAPPING)
+	if(_stepAfterLayerSave == STEP_SAVE_END_MAPPING)
 	{
-		_step = _stepAfterSave;		
+		_step = _stepAfterLayerSave;		
 		stopKeyMapping();
-	}else if(_stepAfterSave == STEP_CHOOSE_LAYER)
+	}else if(_stepAfterLayerSave == STEP_CHOOSE_LAYER)
 	{	
 		printEnter();
 		printStringFromFlash(str_load_layer);
@@ -581,7 +572,7 @@ void saveCurrentLayer(void)
 	_isWorkingForEmpty = 1;
 
 	_wait = WAIT_SAVE;
-	_stepAfterSave = _step;
+	_stepAfterLayerSave = _step;
 	_step = STEP_NOTHING;
 }
 
@@ -795,6 +786,10 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				}else if(cmd == SEL_EXIT){
 					_mode = SEL_EXIT;
 					_step = STEP_EXIT;
+					stopKeyMapping();
+				}else if(cmd == SEL_BOOT_MAPPER){
+					_mode = SEL_BOOT_MAPPER;
+					_step = STEP_BOOT_MAPPER;
 					stopKeyMapping();
 				}
 			}else{

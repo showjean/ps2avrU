@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 1
 
 
    1               		.file	"ps2main.c"
@@ -33,7 +33,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
   30               	.LM4:
   31 000a 81E0      		ldi r24,lo8(1)
   32               	.LVL1:
-  33 000c 8093 0000 		sts record.2231,r24
+  33 000c 8093 0000 		sts record.2233,r24
   34 0010 0895      		ret
   35               	.LVL2:
   36               	.L2:
@@ -48,17 +48,17 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
   45 001a 1092 0000 		sts lastMAKE_SIZE,__zero_reg__
   46               	.L11:
   47               	.LM8:
-  48 001e 1092 0000 		sts record.2231,__zero_reg__
+  48 001e 1092 0000 		sts record.2233,__zero_reg__
   49 0022 0895      		ret
   50               	.L5:
   51               	.LM9:
-  52 0024 8091 0000 		lds r24,record.2231
+  52 0024 8091 0000 		lds r24,record.2233
   53               	.LVL3:
   54 0028 8823      		tst r24
   55 002a 01F0      		breq .L6
   56               	.LM10:
   57 002c 8091 0000 		lds r24,lastMAKE_SIZE
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 2
 
 
   58 0030 E82F      		mov r30,r24
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  112 0090 8091 0000 		lds r24,rear
  113 0094 9091 0000 		lds r25,(rear)+1
  114 0098 2817      		cp r18,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 3
 
 
  115 009a 3907      		cpc r19,r25
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  169 00de 1092 0000 		sts (front)+1,__zero_reg__
  170 00e2 1092 0000 		sts front,__zero_reg__
  171 00e6 1092 0000 		sts (rear)+1,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 4
 
 
  172 00ea 1092 0000 		sts rear,__zero_reg__
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  226 0132 8260      		ori r24,lo8(2)
  227 0134 8083      		st Z,r24
  228               	.L25:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 5
 
 
  229               	.LBB10:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  283               	.LM39:
  284 016a FC01      		movw r30,r24
  285 016c E050      		subi r30,lo8(-(KFLA))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 6
 
 
  286 016e F040      		sbci r31,hi8(-(KFLA))
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  340               	.LVL22:
  341 01a2 01F4      		brne .L32
  342 01a4 20E0      		ldi r18,lo8(keycode_set2_proc_shift)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 7
 
 
  343 01a6 30E0      		ldi r19,hi8(keycode_set2_proc_shift)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  397               	.LM49:
  398 01d4 0E94 0000 		call isEmptyM
  399 01d8 90E0      		ldi r25,lo8(0)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 8
 
 
  400 01da 8823      		tst r24
@@ -478,14 +478,14 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  454 020c 8756      		subi r24,lo8(-(-103))
  455               	.LVL33:
  456 020e 8830      		cpi r24,lo8(8)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 9
 
 
  457 0210 00F4      		brsh .L46
  458 0212 E12F      		mov r30,r17
  459 0214 F0E0      		ldi r31,lo8(0)
  460               	.LVL34:
- 461 0216 9091 0000 		lds r25,gModifier.2327
+ 461 0216 9091 0000 		lds r25,gModifier.2329
  462               	.LM60:
  463 021a FF20      		tst r15
  464 021c 01F0      		breq .L47
@@ -513,9 +513,9 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  486 0236 8095      		com r24
  487 0238 9823      		and r25,r24
  488               	.L60:
- 489 023a 9093 0000 		sts gModifier.2327,r25
+ 489 023a 9093 0000 		sts gModifier.2329,r25
  490               	.LM63:
- 491 023e 8091 0000 		lds r24,gModifier.2327
+ 491 023e 8091 0000 		lds r24,gModifier.2329
  492 0242 0E94 0000 		call applyKeyMapping
  493               	.LVL41:
  494               	.L46:
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  511               	.LM65:
  512 0252 FF20      		tst r15
  513 0254 01F4      		brne .+2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 10
 
 
  514 0256 00C0      		rjmp .L49
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  568 02b2 0E94 0000 		call push
  569               	.LM79:
  570 02b6 87E7      		ldi r24,lo8(119)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 11
 
 
  571 02b8 0E94 0000 		call push
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  625               	.LVL53:
  626 0308 E050      		subi r30,lo8(-(KFLA))
  627 030a F040      		sbci r31,hi8(-(KFLA))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 12
 
 
  628               	.LVL54:
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  682               	.L59:
  683               	/* epilogue start */
  684               	.LM107:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 13
 
 
  685 0358 DF91      		pop r29
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  739               	.LVL66:
  740 0394 F82E      		mov r15,r24
  741               	.LVL67:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 14
 
 
  742               	.LM115:
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  796 03d8 4F92      		push r4
  797 03da 5F92      		push r5
  798 03dc 6F92      		push r6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 15
 
 
  799 03de 7F92      		push r7
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  853 0438 00C0      		rjmp .L76
  854               	.L99:
  855               	.LM132:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 16
 
 
  856 043a 0E94 0000 		call getLayer
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  910 0494 60E0      		ldi r22,lo8(0)
  911 0496 4C2D      		mov r20,r12
  912 0498 2C2F      		mov r18,r28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 17
 
 
  913 049a 0E94 0000 		call putKey
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  967               	.L90:
  968               	.LM149:
  969 04f0 EC2E      		mov r14,r28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 18
 
 
  970               	.LM150:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1024 0548 61E0      		ldi r22,lo8(1)
  1025 054a 00C0      		rjmp .L98
  1026               	.L89:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 19
 
 
  1027               	.LM160:
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1081 05a0 2131      		cpi r18,17
  1082 05a2 3105      		cpc r19,__zero_reg__
  1083 05a4 01F4      		brne .L92
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 20
 
 
  1084               	.LM166:
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1138               	.L101:
  1139               	.LM171:
  1140 05e0 0E94 0000 		call kbd_set_tx
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 21
 
 
  1141               	.LVL100:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1195 0622 AB2E      		mov r10,r27
  1196 0624 B12C      		mov r11,__zero_reg__
  1197 0626 C12C      		mov r12,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 22
 
 
  1198 0628 D12C      		mov r13,__zero_reg__
@@ -1306,8 +1306,8 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1240 0670 8091 0000 		lds r24,kbd_flags
  1241 0674 82FF      		sbrs r24,2
  1242 0676 00C0      		rjmp .L106
- 1243 0678 8091 0000 		lds r24,keyval.2445
- 1244 067c 9091 0000 		lds r25,(keyval.2445)+1
+ 1243 0678 8091 0000 		lds r24,keyval.2447
+ 1244 067c 9091 0000 		lds r25,(keyval.2447)+1
  1245 0680 8C3F      		cpi r24,252
  1246 0682 9105      		cpc r25,__zero_reg__
  1247 0684 01F0      		breq .L107
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1252 068a 3091 0000 		lds r19,(front)+1
  1253 068e 8091 0000 		lds r24,rear
  1254 0692 9091 0000 		lds r25,(rear)+1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 23
 
 
  1255 0696 2817      		cp r18,r24
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1309 06f0 00C0      		rjmp .L159
  1310 06f2 153F      		cpi r17,lo8(-11)
  1311 06f4 01F4      		brne .L114
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 24
 
 
  1312 06f6 00C0      		rjmp .L159
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1366 0746 0E94 0000 		call tx_state
  1367               	.LM203:
  1368 074a 0E94 0000 		call initInterfacePs2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 25
 
 
  1369 074e 00C0      		rjmp .L154
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1423               	.LVL109:
  1424 079e 00C0      		rjmp .L131
  1425               	.L132:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 26
 
 
  1426               	.LM210:
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1480               	.LM220:
  1481 07f0 0E94 0000 		call setLEDIndicate
  1482               	.LVL115:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 27
 
 
  1483               	.L159:
@@ -1618,12 +1618,12 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1537               	.LM227:
  1538 0850 0E94 0000 		call pop
  1539 0854 282F      		mov r18,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 28
 
 
  1540 0856 30E0      		ldi r19,lo8(0)
- 1541 0858 3093 0000 		sts (keyval.2445)+1,r19
- 1542 085c 2093 0000 		sts keyval.2445,r18
+ 1541 0858 3093 0000 		sts (keyval.2447)+1,r19
+ 1542 085c 2093 0000 		sts keyval.2447,r18
  1543               	.LM228:
  1544 0860 2C3F      		cpi r18,252
  1545 0862 3105      		cpc r19,__zero_reg__
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1594 08d0 1092 0000 		sts (loopCnt)+2,__zero_reg__
  1595 08d4 1092 0000 		sts (loopCnt)+3,__zero_reg__
  1596               	.LM235:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 29
 
 
  1597 08d8 1092 0000 		sts lastMAKE_IDX,__zero_reg__
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1651 0946 8091 0000 		lds r24,lastMAKE_IDX
  1652 094a 8823      		tst r24
  1653 094c 01F0      		breq .L150
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 30
 
 
  1654               	.L148:
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1708 09d4 82E0      		ldi r24,lo8(2)
  1709 09d6 00C0      		rjmp .L156
  1710               	.L139:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 31
 
 
  1711               	.LM251:
@@ -1845,12 +1845,12 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1752 0004 00        		.byte	0
  1753               		.lcomm lastMAKE_SIZE,1
  1754               		.lcomm lastMAKE_IDX,1
- 1755               		.lcomm keyval.2445,2
+ 1755               		.lcomm keyval.2447,2
  1756               		.lcomm _prevLayer,1
- 1757               		.lcomm gModifier.2327,1
+ 1757               		.lcomm gModifier.2329,1
  1758               		.lcomm front,2
  1759               		.lcomm rear,2
- 1760               		.lcomm record.2231,1
+ 1760               		.lcomm record.2233,1
  1761               		.lcomm QUEUE,200
  1762               		.lcomm lastMAKE_keyidx,1
  1763               		.lcomm lastMAKE,10
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1765               		.comm m_state,1,1
  1766               		.comm lastSent,1,1
  1767               		.comm lastState,1,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 32
 
 
  1768               		.comm KFLA,144,1
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1822               		.p2align	2
  1823               	.LEFDE8:
  1824               	.LSFDE10:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 33
 
 
  1825 0060 0C00 0000 		.long	.LEFDE10-.LASFDE10
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1879               	.LEFDE22:
  1880               	.LSFDE24:
  1881 00d0 0C00 0000 		.long	.LEFDE24-.LASFDE24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 34
 
 
  1882               	.LASFDE24:
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1936 0061 69        		.byte	0x69
  1937 0062 93        		.byte	0x93
  1938 0063 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 35
 
 
  1939 0064 6201 0000 		.long	.LVL12-.Ltext0
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  1993 00c4 C201 0000 		.long	.LVL27-.Ltext0
  1994 00c8 D001 0000 		.long	.LVL28-.Ltext0
  1995 00cc 0600      		.word	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 36
 
 
  1996 00ce 68        		.byte	0x68
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2050 0157 8A01 0000 		.long	.LVL18-.Ltext0
  2051 015b 9201 0000 		.long	.LVL19-.Ltext0
  2052 015f 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 37
 
 
  2053 0161 68        		.byte	0x68
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2107 01ed 0600      		.word	0x6
  2108 01ef 68        		.byte	0x68
  2109 01f0 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 38
 
 
  2110 01f1 01        		.uleb128 0x1
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2164 025e 0600      		.word	0x6
  2165 0260 61        		.byte	0x61
  2166 0261 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 39
 
 
  2167 0262 01        		.uleb128 0x1
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2221 02c5 5803 0000 		.long	.LVL61-.Ltext0
  2222 02c9 0100      		.word	0x1
  2223 02cb 61        		.byte	0x61
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 40
 
 
  2224 02cc 5803 0000 		.long	.LVL61-.Ltext0
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2278 034e 9403 0000 		.long	.LVL66-.Ltext0
  2279 0352 CE03 0000 		.long	.LVL68-.Ltext0
  2280 0356 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 41
 
 
  2281 0358 61        		.byte	0x61
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2335 03eb 60        		.byte	0x60
  2336 03ec 0000 0000 		.long	0x0
  2337 03f0 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 42
 
 
  2338               	.LLST29:
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2392 047c 0000 0000 		.long	0x0
  2393 0480 0000 0000 		.long	0x0
  2394               	.LLST35:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 43
 
 
  2395 0484 D405 0000 		.long	.LVL98-.Ltext0
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2449 050f 93        		.byte	0x93
  2450 0510 01        		.uleb128 0x1
  2451 0511 65        		.byte	0x65
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 44
 
 
  2452 0512 93        		.byte	0x93
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2506 0578 0000 0000 		.long	0x0
  2507               	.LLST42:
  2508 057c E407 0000 		.long	.LVL113-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 45
 
 
  2509 0580 F007 0000 		.long	.LVL114-.Ltext0
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2563 0064 02        		.uleb128 0x2
  2564 0065 01        		.byte	0x1
  2565 0066 06        		.byte	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 46
 
 
  2566 0067 0000 0000 		.long	.LASF9
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2620 00d6 0000 0000 		.long	.LASF21
  2621 00da DE01      		.sleb128 222
  2622 00dc 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 47
 
 
  2623 00dd 0000 0000 		.long	.LASF22
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2677 014e 0000 0000 		.long	.LASF38
  2678 0152 08        		.sleb128 8
  2679 0153 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 48
 
 
  2680 0154 0000 0000 		.long	.LASF39
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2734 01c0 0000 0000 		.long	.LASF57
  2735 01c4 1B        		.sleb128 27
  2736 01c5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 49
 
 
  2737 01c6 0000 0000 		.long	.LASF58
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2791 0232 0000 0000 		.long	.LASF76
  2792 0236 2E        		.sleb128 46
  2793 0237 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 50
 
 
  2794 0238 0000 0000 		.long	.LASF77
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2848 02a5 0000 0000 		.long	.LASF95
  2849 02a9 C100      		.sleb128 65
  2850 02ab 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 51
 
 
  2851 02ac 0000 0000 		.long	.LASF96
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2905 032a 0000 0000 		.long	.LASF114
  2906 032e D400      		.sleb128 84
  2907 0330 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 52
 
 
  2908 0331 0000 0000 		.long	.LASF115
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  2962 03af 0000 0000 		.long	.LASF133
  2963 03b3 E700      		.sleb128 103
  2964 03b5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 53
 
 
  2965 03b6 0000 0000 		.long	.LASF134
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3019 0434 0000 0000 		.long	.LASF152
  3020 0438 FA00      		.sleb128 122
  3021 043a 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 54
 
 
  3022 043b 0000 0000 		.long	.LASF153
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3076 04b9 0000 0000 		.long	.LASF171
  3077 04bd 8D01      		.sleb128 141
  3078 04bf 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 55
 
 
  3079 04c0 0000 0000 		.long	.LASF172
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3133 0525 0000 0000 		.long	.LASF185
  3134 0529 01        		.byte	0x1
  3135 052a 3D        		.byte	0x3d
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 56
 
 
  3136 052b 7200 0000 		.long	0x72
@@ -3310,7 +3310,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3142 053a 7200 0000 		.long	0x72
  3143 053e 05        		.byte	0x5
  3144 053f 03        		.byte	0x3
- 3145 0540 0000 0000 		.long	record.2231
+ 3145 0540 0000 0000 		.long	record.2233
  3146 0544 00        		.byte	0x0
  3147 0545 0F        		.uleb128 0xf
  3148 0546 01        		.byte	0x1
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3190 0598 0000 0000 		.long	.LFB13
  3191 059c 0000 0000 		.long	.LFE13
  3192 05a0 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 57
 
 
  3193 05a1 90        		.byte	0x90
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3247 0623 7D00 0000 		.long	0x7d
  3248 0627 12        		.uleb128 0x12
  3249 0628 0000 0000 		.long	.LASF182
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 58
 
 
  3250 062c 01        		.byte	0x1
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3304 06a6 01        		.byte	0x1
  3305 06a7 0000 0000 		.long	.LFB18
  3306 06ab 0000 0000 		.long	.LFE18
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 59
 
 
  3307 06af 02        		.byte	0x2
@@ -3536,9 +3536,9 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3359 0722 7200 0000 		.long	0x72
  3360 0726 05        		.byte	0x5
  3361 0727 03        		.byte	0x3
- 3362 0728 0000 0000 		.long	gModifier.2327
+ 3362 0728 0000 0000 		.long	gModifier.2329
  3363 072c 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 60
 
 
  3364 072d 17        		.uleb128 0x17
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3418 07af 00        		.byte	0x0
  3419 07b0 18        		.uleb128 0x18
  3420 07b1 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 61
 
 
  3421 07b2 0000 0000 		.long	.LASF192
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3475 083b 3801      		.word	0x138
  3476 083d 7200 0000 		.long	0x72
  3477 0841 0000 0000 		.long	.LLST31
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 62
 
 
  3478 0845 1D        		.uleb128 0x1d
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3532 08bb 0000 0000 		.long	.LASF202
  3533 08bf 01        		.byte	0x1
  3534 08c0 BA01      		.word	0x1ba
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 63
 
 
  3535 08c2 2500 0000 		.long	0x25
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3589 0952 01        		.byte	0x1
  3590 0953 7802      		.word	0x278
  3591 0955 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 64
 
 
  3592 0956 23        		.uleb128 0x23
@@ -3788,7 +3788,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3596 095e 6B00 0000 		.long	0x6b
  3597 0962 05        		.byte	0x5
  3598 0963 03        		.byte	0x3
- 3599 0964 0000 0000 		.long	keyval.2445
+ 3599 0964 0000 0000 		.long	keyval.2447
  3600 0968 00        		.byte	0x0
  3601 0969 24        		.uleb128 0x24
  3602 096a 7200 0000 		.long	0x72
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3646 09c9 25        		.uleb128 0x25
  3647 09ca 7909 0000 		.long	0x979
  3648 09ce 09        		.byte	0x9
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 65
 
 
  3649 09cf 00        		.byte	0x0
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3703 0a41 05        		.byte	0x5
  3704 0a42 03        		.byte	0x3
  3705 0a43 0000 0000 		.long	_prevLayer
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 66
 
 
  3706 0a47 24        		.uleb128 0x24
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3760 0ab6 01        		.byte	0x1
  3761 0ab7 27        		.uleb128 0x27
  3762 0ab8 690A 0000 		.long	0xa69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 67
 
 
  3763 0abc 26        		.uleb128 0x26
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3817 0b25 0000 0000 		.long	.LASF229
  3818 0b29 07        		.byte	0x7
  3819 0b2a 0E        		.byte	0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 68
 
 
  3820 0b2b 310B 0000 		.long	0xb31
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3874 0b97 0000 0000 		.long	lastState
  3875 0b9b 2A        		.uleb128 0x2a
  3876 0b9c 0000 0000 		.long	.LASF235
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 69
 
 
  3877 0ba0 01        		.byte	0x1
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3931 002d 0E        		.uleb128 0xe
  3932 002e 3A        		.uleb128 0x3a
  3933 002f 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 70
 
 
  3934 0030 3B        		.uleb128 0x3b
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  3988 0066 0E        		.uleb128 0xe
  3989 0067 3A        		.uleb128 0x3a
  3990 0068 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 71
 
 
  3991 0069 3B        		.uleb128 0x3b
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4045 009f 01        		.uleb128 0x1
  4046 00a0 12        		.uleb128 0x12
  4047 00a1 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 72
 
 
  4048 00a2 40        		.uleb128 0x40
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4102 00d8 01        		.uleb128 0x1
  4103 00d9 40        		.uleb128 0x40
  4104 00da 0A        		.uleb128 0xa
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 73
 
 
  4105 00db 00        		.byte	0x0
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4159 0111 14        		.uleb128 0x14
  4160 0112 34        		.uleb128 0x34
  4161 0113 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 74
 
 
  4162 0114 03        		.uleb128 0x3
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4216 014a 0C        		.uleb128 0xc
  4217 014b 11        		.uleb128 0x11
  4218 014c 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 75
 
 
  4219 014d 12        		.uleb128 0x12
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4273 0183 05        		.uleb128 0x5
  4274 0184 49        		.uleb128 0x49
  4275 0185 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 76
 
 
  4276 0186 02        		.uleb128 0x2
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4330 01bc 00        		.byte	0x0
  4331 01bd 00        		.byte	0x0
  4332 01be 1F        		.uleb128 0x1f
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 77
 
 
  4333 01bf 05        		.uleb128 0x5
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4387 01f5 01        		.uleb128 0x1
  4388 01f6 58        		.uleb128 0x58
  4389 01f7 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 78
 
 
  4390 01f8 59        		.uleb128 0x59
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4444 022e 27        		.uleb128 0x27
  4445 022f 26        		.uleb128 0x26
  4446 0230 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 79
 
 
  4447 0231 49        		.uleb128 0x49
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4496 0045 8406 0000 		.long	0x684
  4497 0049 6861 734D 		.string	"hasMacroPs2"
  4497      6163 726F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 80
 
 
  4497      5073 3200 
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4526 0006 0000 0000 		.long	.Ldebug_info0
  4527 000a 04        		.byte	0x4
  4528 000b 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 81
 
 
  4529 000c 0000      		.word	0x0
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4576      6E74 2E68 
  4576      00
  4577 005c 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 82
 
 
  4578 005d 00        		.uleb128 0x0
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4620 00c5 0000 0000 		.long	.LM4
  4621 00c9 15        		.byte	0x15
  4622 00ca 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 83
 
 
  4623 00cb 05        		.uleb128 0x5
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4677 0122 00        		.byte	0x0
  4678 0123 05        		.uleb128 0x5
  4679 0124 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 84
 
 
  4680 0125 0000 0000 		.long	.LM16
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4734 017c 02        		.byte	0x2
  4735 017d 0000 0000 		.long	.LM27
  4736 0181 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 85
 
 
  4737 0182 00        		.byte	0x0
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4791 01d9 13        		.byte	0x13
  4792 01da 00        		.byte	0x0
  4793 01db 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 86
 
 
  4794 01dc 02        		.byte	0x2
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4848 0234 15        		.byte	0x15
  4849 0235 00        		.byte	0x0
  4850 0236 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 87
 
 
  4851 0237 02        		.byte	0x2
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4905 028c 02        		.byte	0x2
  4906 028d 0000 0000 		.long	.LM60
  4907 0291 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 88
 
 
  4908 0292 00        		.byte	0x0
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  4962 02e9 16        		.byte	0x16
  4963 02ea 00        		.byte	0x0
  4964 02eb 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 89
 
 
  4965 02ec 02        		.byte	0x2
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5019 0343 05        		.uleb128 0x5
  5020 0344 02        		.byte	0x2
  5021 0345 0000 0000 		.long	.LM83
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 90
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 90
 
 
  5022 0349 15        		.byte	0x15
@@ -5398,7 +5398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5076 039d 0000 0000 		.long	.LM94
  5077 03a1 15        		.byte	0x15
  5078 03a2 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 91
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 91
 
 
  5079 03a3 05        		.uleb128 0x5
@@ -5458,7 +5458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5133 03fa 00        		.byte	0x0
  5134 03fb 05        		.uleb128 0x5
  5135 03fc 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 92
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 92
 
 
  5136 03fd 0000 0000 		.long	.LM106
@@ -5518,7 +5518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5190 0455 00        		.byte	0x0
  5191 0456 05        		.uleb128 0x5
  5192 0457 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 93
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 93
 
 
  5193 0458 0000 0000 		.long	.LM117
@@ -5578,7 +5578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5247 04af 00        		.byte	0x0
  5248 04b0 05        		.uleb128 0x5
  5249 04b1 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 94
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 94
 
 
  5250 04b2 0000 0000 		.long	.LM128
@@ -5638,7 +5638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5304 0509 02        		.byte	0x2
  5305 050a 0000 0000 		.long	.LM139
  5306 050e 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 95
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 95
 
 
  5307 050f 00        		.byte	0x0
@@ -5698,7 +5698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5361 0563 02        		.byte	0x2
  5362 0564 0000 0000 		.long	.LM150
  5363 0568 1B        		.byte	0x1b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 96
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 96
 
 
  5364 0569 00        		.byte	0x0
@@ -5758,7 +5758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5418 05c0 03        		.byte	0x3
  5419 05c1 65        		.sleb128 -27
  5420 05c2 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 97
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 97
 
 
  5421 05c3 00        		.byte	0x0
@@ -5818,7 +5818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5475 0618 02        		.byte	0x2
  5476 0619 0000 0000 		.long	.LM172
  5477 061d 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 98
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 98
 
 
  5478 061e 00        		.byte	0x0
@@ -5878,7 +5878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5532 0674 00        		.byte	0x0
  5533 0675 05        		.uleb128 0x5
  5534 0676 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 99
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 99
 
 
  5535 0677 0000 0000 		.long	.LM183
@@ -5938,7 +5938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5589 06ce 17        		.byte	0x17
  5590 06cf 00        		.byte	0x0
  5591 06d0 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 100
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 100
 
 
  5592 06d1 02        		.byte	0x2
@@ -5998,7 +5998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5646 0728 05        		.uleb128 0x5
  5647 0729 02        		.byte	0x2
  5648 072a 0000 0000 		.long	.LM204
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 101
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 101
 
 
  5649 072e 1A        		.byte	0x1a
@@ -6058,7 +6058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5703 0782 0000 0000 		.long	.LM215
  5704 0786 18        		.byte	0x18
  5705 0787 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 102
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 102
 
 
  5706 0788 05        		.uleb128 0x5
@@ -6118,7 +6118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5760 07de 05        		.uleb128 0x5
  5761 07df 02        		.byte	0x2
  5762 07e0 0000 0000 		.long	.LM226
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 103
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 103
 
 
  5763 07e4 16        		.byte	0x16
@@ -6178,7 +6178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5817 0838 0000 0000 		.long	.LM237
  5818 083c 1D        		.byte	0x1d
  5819 083d 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 104
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 104
 
 
  5820 083e 05        		.uleb128 0x5
@@ -6238,7 +6238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5874 0894 05        		.uleb128 0x5
  5875 0895 02        		.byte	0x2
  5876 0896 0000 0000 		.long	.LM248
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 105
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 105
 
 
  5877 089a 17        		.byte	0x17
@@ -6298,7 +6298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5922      7365 7432 
  5922      00
  5923               	.LASF86:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 106
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 106
 
 
  5924 001f 4B45 595F 		.string	"KEY_SLASH"
@@ -6358,7 +6358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5950 00b6 4B45 595F 		.string	"KEY_F12"
  5950      4631 3200 
  5951               	.LASF227:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 107
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 107
 
 
  5952 00be 494E 5445 		.string	"INTERFACE"
@@ -6418,7 +6418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  5978 015d 674D 6F64 		.string	"gModifier"
  5978      6966 6965 
  5978      7200 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 108
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 108
 
 
  5979               	.LASF155:
@@ -6478,7 +6478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6002      564F 4C5F 
  6002      5550 00
  6003               	.LASF190:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 109
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 109
 
 
  6004 0202 7072 6570 		.string	"prepareKeyMappingPs2"
@@ -6538,7 +6538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6029               	.LASF139:
  6030 0296 4B45 595F 		.string	"KEY_RALT"
  6030      5241 4C54 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 110
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 110
 
 
  6030      00
@@ -6598,7 +6598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6058      5247 5549 
  6058      00
  6059               	.LASF148:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 111
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 111
 
 
  6060 032a 4B45 595F 		.string	"KEY_WWW_HOME"
@@ -6658,7 +6658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6084      4841 4E47 
  6084      4C45 00
  6085               	.LASF82:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 112
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 112
 
 
  6086 03bd 4B45 595F 		.string	"KEY_QUOTE"
@@ -6718,7 +6718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6110      4D61 7472 
  6110      6978 00
  6111               	.LASF85:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 113
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 113
 
 
  6112 0457 4B45 595F 		.string	"KEY_DOT"
@@ -6778,7 +6778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6138      3100 
  6139               	.LASF61:
  6140 04e9 4B45 595F 		.string	"KEY_2"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 114
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 114
 
 
  6140      3200 
@@ -6838,7 +6838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6174 055e 4B45 595F 		.string	"KEY_E"
  6174      4500 
  6175               	.LASF39:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 115
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 115
 
 
  6176 0564 4B45 595F 		.string	"KEY_F"
@@ -6898,7 +6898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6210      6475 616C 
  6210      4163 7469 
  6210      6F6E 5F65 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 116
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 116
 
 
  6210      6E64 00
@@ -6958,7 +6958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6236      735F 656E 
  6236      6400 
  6237               	.LASF0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 117
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 117
 
 
  6238 067a 756E 7369 		.string	"unsigned char"
@@ -7018,7 +7018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6262 0714 4B45 595F 		.string	"KEY_LALT_HANGLE"
  6262      4C41 4C54 
  6262      5F48 414E 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 118
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 118
 
 
  6262      474C 4500 
@@ -7078,7 +7078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6288      5200 
  6289               	.LASF71:
  6290 07a4 4B45 595F 		.string	"KEY_ESC"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 119
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 119
 
 
  6290      4553 4300 
@@ -7138,7 +7138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6316      4500 
  6317               	.LASF229:
  6318 0838 6D6F 646D 		.string	"modmask"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 120
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 120
 
 
  6318      6173 6B00 
@@ -7198,7 +7198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6348 08c0 4B45 595F 		.string	"KEY_F4"
  6348      4634 00
  6349               	.LASF92:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 121
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 121
 
 
  6350 08c7 4B45 595F 		.string	"KEY_F5"
@@ -7258,7 +7258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6378      4D00 
  6379               	.LASF31:
  6380 0958 4B45 595F 		.string	"KEY_ErrorRollOver"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 122
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 122
 
 
  6380      4572 726F 
@@ -7301,48 +7301,48 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 1
  6396      00
  6397               	.global __do_copy_data
  6398               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 123
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 123
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ps2main.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:18     .text:00000000 push
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:18     .text:00000000 push
                              .bss:00000001 lastMAKE_SIZE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1759   .bss:0000000b record.2231
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1762   .bss:000000d5 lastMAKE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1758   .bss:00000009 rear
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1757   .bss:00000007 front
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1760   .bss:0000000c QUEUE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:104    .text:00000088 pop
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:139    .text:000000c0 isEmpty
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:163    .text:000000de clear
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1753   .bss:00000002 lastMAKE_IDX
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1763   .bss:000000df loopCnt
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:199    .text:00000116 keymap_init
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1759   .bss:0000000b record.2233
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1762   .bss:000000d5 lastMAKE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1758   .bss:00000009 rear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1757   .bss:00000007 front
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1760   .bss:0000000c QUEUE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:104    .text:00000088 pop
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:139    .text:000000c0 isEmpty
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:163    .text:000000de clear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1753   .bss:00000002 lastMAKE_IDX
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1763   .bss:000000df loopCnt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:199    .text:00000116 keymap_init
                             *COM*:00000090 KFLA
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:392    .text:000001d4 hasMacroPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:412    .text:000001e4 initInterfacePs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:431    .text:000001f4 pushKeyCode
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1756   .bss:00000006 gModifier.2327
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1761   .bss:000000d4 lastMAKE_keyidx
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:392    .text:000001d4 hasMacroPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:412    .text:000001e4 initInterfacePs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:431    .text:000001f4 pushKeyCode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1756   .bss:00000006 gModifier.2329
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1761   .bss:000000d4 lastMAKE_keyidx
                             *COM*:00000001 m_state
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:698    .text:00000364 prepareKeyMappingPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:722    .text:0000037e putKey
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:793    .text:000003d8 scanKeyPS2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1755   .bss:00000005 _prevLayer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1124   .text:000005d4 tx_state
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:698    .text:00000364 prepareKeyMappingPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:722    .text:0000037e putKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:793    .text:000003d8 scanKeyPS2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1755   .bss:00000005 _prevLayer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1124   .text:000005d4 tx_state
                             *COM*:00000001 lastSent
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1153   .text:000005ec ps2_main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1754   .bss:00000003 keyval.2445
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1744   .data:00000000 TYPEMATIC_DELAY
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1748   .data:00000001 TYPEMATIC_REPEAT
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s:1739   .bss:00000000 txScanCode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1153   .text:000005ec ps2_main
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1754   .bss:00000003 keyval.2447
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1744   .data:00000000 TYPEMATIC_DELAY
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1748   .data:00000001 TYPEMATIC_REPEAT
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s:1739   .bss:00000000 txScanCode
                             *COM*:00000001 lastState
 
 UNDEFINED SYMBOLS
@@ -7361,7 +7361,7 @@ getDualActionDownKeyIdex
 modmask
 applyKeyMapping
 keycode_set2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDue4IF.s 			page 124
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsJTtcg.s 			page 124
 
 
 applyFN

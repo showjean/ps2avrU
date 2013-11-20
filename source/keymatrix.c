@@ -262,9 +262,8 @@ uint8_t getLiveMatrix(void){
 		}
 
 		ghost |= ghostFilterMatrix[row];
-		DEBUG_PRINT(("currentMatrix[%d]= %02X, ghost=%02X, needDetection=%d  \n", row, ghostFilterMatrix[row], ghost, needDetection));
+		// DEBUG_PRINT(("currentMatrix[%d]= %02X, ghost=%02X, needDetection=%d  \n", row, ghostFilterMatrix[row], ghost, needDetection));
 		// 1비트(컬럼)만 입력이 있을 경우 외에 2비트 이상 입력이 있다면 표시;
-		// if(needDetection > 1) continue;
 		needDetection = 0;
 
 		for (i = 0; i < 8; ++i)
@@ -300,10 +299,6 @@ uint8_t setCurrentMatrix(void){
 	enterFrameForMapper();	
 	
 	if(isReadyKeyMappingOnBoot()) return 0;
-
-	/*if(debounce != debounceMAX){
-		return 0;
-	}*/
 
 	// DEBUG_PRINT(("setCurrentMatrix return 1 \n"));
 

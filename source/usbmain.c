@@ -504,6 +504,7 @@ uint8_t scanKeyUSB(void) {
 #ifdef ENABLE_BOOTMAPPER           
                 if(isBootMapper()){
                     if(cur) trace(row, col);
+                    wakeUp();
                     break;
                 }
 #endif      

@@ -13,6 +13,7 @@
 #include "keymatrix.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
+#include "bootMapper.h"
 
 #ifdef DEBUG_KEYMAPPER_H
 	#define KEY_MAPPING_COUNT_MAX 500
@@ -38,6 +39,7 @@
 // exit
 #define STEP_EXIT 100
 #define STEP_BACK 110
+#define STEP_BOOT_MAPPER 120
 
 // wait
 #define WAIT_NOTHING 0
@@ -49,6 +51,7 @@
 #define SEL_MAPPING 1
 #define SEL_MACRO 2
 #define SEL_EXIT 3
+#define SEL_BOOT_MAPPER 4
 
 // 입력되는 키와 직접 매칭; (숫자 1키를 누르면 CMD_CHOOSE_LAYER...)
 // mapping
@@ -83,12 +86,7 @@ extern void readyKeyMappingOnBoot(void);
 
 extern void startKeyMappingOnBoot(void);
 
-#ifdef ENABLE_BOOTMAPPER
-// bootmapper
-extern void trace(uint8_t xRow, uint8_t xCol);
-extern void setToBootMapper(void);
-extern uint8_t isBootMapper(void);
-#endif
+extern void printString(const char *xString);
 
 /**
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
