@@ -41,6 +41,7 @@ uint8_t _currentLayer = 0;
 static uint8_t _isExtraFNDown = 0;
 static uint8_t debounceMAX = 5;
 static uint8_t debounce = 10;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+static uint8_t _isAllKeyRelease = 0;
 
 
 
@@ -67,14 +68,14 @@ void clearMatrix(void){
 uint8_t isAllKeyRelease(void)
 {
 	uint8_t cur, row;
-	cur = 1;
+	_isAllKeyRelease = 1;
 	for(row=0;row<17;row++) {
 		if(currentMatrix[row] > 0){
-			cur = 0;
+			_isAllKeyRelease = 0;
 			break;
 		}
 	}
-	return cur;
+	return _isAllKeyRelease;
 }
 
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
@@ -133,6 +134,7 @@ uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 // 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur;
+	static uint8_t isLazyLayer = 0;
 
 	// fn이 가장 우선, 다음 fn2
 
@@ -145,7 +147,9 @@ uint8_t getLayer(void) {
 		        keyidx = dualActionMaskDown[keyidx - (KEY_dualAction + 1)];
 		    }
 
-			if(keyidx == KEY_FN || keyidx == KEY_FN2 || (keyidx == KEY_NOR && _currentLayer == 2)) {
+			if(keyidx == KEY_LAZY_FN || keyidx == KEY_LAZY_FN2 
+				|| keyidx == KEY_FN || keyidx == KEY_FN2 
+				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
 				cur = 0;
 				DDRCOLUMNS  = BV(col);		// 해당 col을 출력으로 설정, 나머지 입력
 				PORTCOLUMNS = ~BV(col);	// 해당 col output low, 나머지 컬럼을 풀업 저항
@@ -177,7 +181,17 @@ uint8_t getLayer(void) {
 						//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
 						return 1;
 					}else if(keyidx == KEY_FN2){
-						return 2;					
+						return 2;	
+					}else if(keyidx == KEY_LAZY_FN){
+						if(_isAllKeyRelease){
+							isLazyLayer = 1;
+							return 1;	
+						}
+					}else if(keyidx == KEY_LAZY_FN2){
+						if(_isAllKeyRelease){
+							isLazyLayer = 2;
+							return 2;			
+						}		
 					}else if(keyidx == KEY_NOR){
 						// _currentLayer은 2를 유지하면서 스캔할 레이어만 0으로 반환;
 						return 0;
@@ -185,6 +199,12 @@ uint8_t getLayer(void) {
 				}
 			}
 		}
+
+	if(isAllKeyRelease()){
+		isLazyLayer = 0;
+	}
+
+	if(isLazyLayer > 0) return isLazyLayer;
 	
 	if(isBeyondFN == 1) {
 		_currentLayer = 2;

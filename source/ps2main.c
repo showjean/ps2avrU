@@ -380,11 +380,6 @@ int scanKeyPS2(void) {
 		}
 		
 	}
-
-	// 모든키가 release 되었을 때 작동 시켜 준다.   
-	/*if(isAllKeyRelease()){
-    	applyDualAction();
-	}*/
 	
 	for(row=0;row<17;row++)
 		prevMatrix[row] = gMatrix[row];

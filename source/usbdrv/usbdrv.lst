@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 1
 
 
    1               		.file	"usbdrv.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
   55               	/* frame size = 0 */
   56               	.LM8:
   57 0020 6091 0000 		lds r22,usbRxLen
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 2
 
 
   58 0024 6350      		subi r22,lo8(-(-3))
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  112               	.LBB68:
  113               	.LM19:
  114 0070 9A81      		ldd r25,Y+2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 3
 
 
  115               	.LVL3:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  169               	.LM31:
  170 00b0 8230      		cpi r24,lo8(2)
  171 00b2 01F4      		brne .L16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 4
 
 
  172               	.LM32:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  226 00fe 8093 0000 		sts usbMsgPtr,r24
  227 0102 20E1      		ldi r18,lo8(16)
  228               	.LVL22:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 5
 
 
  229 0104 00C0      		rjmp .L15
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  283 0144 80E0      		ldi r24,lo8(usbConfiguration)
  284 0146 90E0      		ldi r25,hi8(usbConfiguration)
  285               	.LVL34:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 6
 
 
  286 0148 00C0      		rjmp .L11
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  340               	.L26:
  341               	.LM56:
  342 017c 80E8      		ldi r24,lo8(-128)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 7
 
 
  343 017e 8093 0000 		sts usbMsgFlags,r24
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  397               	.LBE63:
  398               	.LM65:
  399 01ba 1092 0000 		sts usbRxLen,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 8
 
 
  400               	.L4:
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  454               		
  455               	 ;  0 "" 2
  456               	.LVL59:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 9
 
 
  457               	/* #NOAPP */
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  511 0240 612F      		mov r22,r17
  512               	.LVL69:
  513 0242 6C5F      		subi r22,lo8(-(4))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 10
 
 
  514               	.LM84:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  568 0274 8091 0000 		lds r24,usbTxStatus1
  569               	.LVL74:
  570 0278 84FF      		sbrs r24,4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 11
 
 
  571 027a 00C0      		rjmp .L48
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  625               		.size	usbDescriptorString0, 4
  626               	usbDescriptorString0:
  627 0000 04        		.byte	4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 12
 
 
  628 0001 03        		.byte	3
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  682 0041 01        		.byte	1
  683               	.global	usbDescriptorConfiguration
  684               		.type	usbDescriptorConfiguration, @object
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 13
 
 
  685               		.size	usbDescriptorConfiguration, 34
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  739               	.Lframe0:
  740 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
  741               	.LSCIE0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 14
 
 
  742 0004 FFFF FFFF 		.long	0xffffffff
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  796 0029 0100      		.word	0x1
  797 002b 62        		.byte	0x62
  798 002c C200 0000 		.long	.LVL12-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 15
 
 
  799 0030 C400 0000 		.long	.LVL13-.Ltext0
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  853 00c5 62        		.byte	0x62
  854 00c6 9201 0000 		.long	.LVL48-.Ltext0
  855 00ca 9801 0000 		.long	.LVL49-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 16
 
 
  856 00ce 0100      		.word	0x1
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  910 0147 69        		.byte	0x69
  911 0148 8401 0000 		.long	.LVL44-.Ltext0
  912 014c 9801 0000 		.long	.LVL49-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 17
 
 
  913 0150 0100      		.word	0x1
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  967 01e4 0100      		.word	0x1
  968 01e6 68        		.byte	0x68
  969 01e7 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 18
 
 
  970 01eb 0000 0000 		.long	0x0
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1024               	.LLST10:
  1025 0280 0602 0000 		.long	.LVL58-.Ltext0
  1026 0284 1202 0000 		.long	.LVL60-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 19
 
 
  1027 0288 0600      		.word	0x6
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1081 02e7 01        		.uleb128 0x1
  1082 02e8 2602 0000 		.long	.LVL64-.Ltext0
  1083 02ec 3A02 0000 		.long	.LVL67-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 20
 
 
  1084 02f0 0600      		.word	0x6
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1138 0368 AA02 0000 		.long	.LVL78-.Ltext0
  1139 036c 0600      		.word	0x6
  1140 036e 6E        		.byte	0x6e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 21
 
 
  1141 036f 93        		.byte	0x93
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1195 0058 04        		.byte	0x4
  1196 0059 05        		.byte	0x5
  1197 005a 0000 0000 		.long	.LASF5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 22
 
 
  1198 005e 02        		.uleb128 0x2
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1252 00be 0000 0000 		.long	.LASF10
  1253 00c2 03        		.byte	0x3
  1254 00c3 9402      		.word	0x294
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 23
 
 
  1255 00c5 7900 0000 		.long	0x79
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1309 013a 03        		.byte	0x3
  1310 013b A502      		.word	0x2a5
  1311 013d FF00 0000 		.long	0xff
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 24
 
 
  1312 0141 02        		.byte	0x2
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1366 01b1 14        		.uleb128 0x14
  1367 01b2 13        		.uleb128 0x13
  1368 01b3 0000 0000 		.long	.LASF23
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 25
 
 
  1369 01b7 01        		.byte	0x1
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1423 0223 13        		.uleb128 0x13
  1424 0224 0000 0000 		.long	.LASF23
  1425 0228 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 26
 
 
  1426 0229 7801      		.word	0x178
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1480 029a 12        		.uleb128 0x12
  1481 029b 6900      		.string	"i"
  1482 029d 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 27
 
 
  1483 029e FA01      		.word	0x1fa
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1537 030e 18        		.uleb128 0x18
  1538 030f 8103 0000 		.long	0x381
  1539 0313 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 28
 
 
  1540 0314 0000 0000 		.long	.LASF36
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1594 0382 13        		.uleb128 0x13
  1595 0383 0000 0000 		.long	.LASF38
  1596 0387 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 29
 
 
  1597 0388 E101      		.word	0x1e1
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1651 03f6 2D02      		.word	0x22d
  1652 03f8 3700 0000 		.long	0x37
  1653 03fc 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 30
 
 
  1654 03fd 1F        		.uleb128 0x1f
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1708 0469 0000 0000 		.long	.LBB61
  1709 046d 0000 0000 		.long	.LBE61
  1710 0471 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 31
 
 
  1711 0472 7102      		.word	0x271
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1765 04ee D901 0000 		.long	0x1d9
  1766 04f2 0000 0000 		.long	.LBB67
  1767 04f6 0000 0000 		.long	.LBE67
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 32
 
 
  1768 04fa 01        		.byte	0x1
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1822 058f 0000 0000 		.long	.LBE74
  1823 0593 29        		.uleb128 0x29
  1824 0594 B201 0000 		.long	0x1b2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 33
 
 
  1825 0598 0000 0000 		.long	.LLST7
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1879 0619 0000 0000 		.long	.LBE84
  1880 061d 1A        		.uleb128 0x1a
  1881 061e 9A02 0000 		.long	0x29a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 34
 
 
  1882 0622 29        		.uleb128 0x29
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1936 069b 3700 0000 		.long	0x37
  1937 069f 0000 0000 		.long	.LLST15
  1938 06a3 32        		.uleb128 0x32
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 35
 
 
  1939 06a4 FD03 0000 		.long	0x3fd
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  1993 071f 05        		.byte	0x5
  1994 0720 03        		.byte	0x3
  1995 0721 0000 0000 		.long	usbRxToken
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 36
 
 
  1996 0725 34        		.uleb128 0x34
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2050 0798 9E07 0000 		.long	0x79e
  2051 079c 01        		.byte	0x1
  2052 079d 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 37
 
 
  2053 079e 35        		.uleb128 0x35
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2107 0813 35        		.uleb128 0x35
  2108 0814 F107 0000 		.long	0x7f1
  2109 0818 0A        		.uleb128 0xa
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 38
 
 
  2110 0819 3E00 0000 		.long	0x3e
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2164 0889 03        		.byte	0x3
  2165 088a 0000 0000 		.long	usbDeviceAddr
  2166 088e 34        		.uleb128 0x34
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 39
 
 
  2167 088f 0000 0000 		.long	.LASF69
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2221 0006 0B        		.uleb128 0xb
  2222 0007 03        		.uleb128 0x3
  2223 0008 0E        		.uleb128 0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 40
 
 
  2224 0009 1B        		.uleb128 0x1b
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2278 003f 06        		.uleb128 0x6
  2279 0040 13        		.uleb128 0x13
  2280 0041 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 41
 
 
  2281 0042 03        		.uleb128 0x3
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2335 0078 01        		.uleb128 0x1
  2336 0079 13        		.uleb128 0x13
  2337 007a 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 42
 
 
  2338 007b 00        		.byte	0x0
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2392 00b1 03        		.uleb128 0x3
  2393 00b2 0E        		.uleb128 0xe
  2394 00b3 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 43
 
 
  2395 00b4 0B        		.uleb128 0xb
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2449 00ea 13        		.uleb128 0x13
  2450 00eb 34        		.uleb128 0x34
  2451 00ec 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 44
 
 
  2452 00ed 03        		.uleb128 0x3
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2506 0123 13        		.uleb128 0x13
  2507 0124 00        		.byte	0x0
  2508 0125 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 45
 
 
  2509 0126 19        		.uleb128 0x19
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2563 015c 00        		.byte	0x0
  2564 015d 00        		.byte	0x0
  2565 015e 1F        		.uleb128 0x1f
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 46
 
 
  2566 015f 2E        		.uleb128 0x2e
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2620 0195 00        		.byte	0x0
  2621 0196 23        		.uleb128 0x23
  2622 0197 2E        		.uleb128 0x2e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 47
 
 
  2623 0198 01        		.byte	0x1
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2677 01ce 31        		.uleb128 0x31
  2678 01cf 13        		.uleb128 0x13
  2679 01d0 11        		.uleb128 0x11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 48
 
 
  2680 01d1 01        		.uleb128 0x1
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2734 0207 11        		.uleb128 0x11
  2735 0208 01        		.uleb128 0x1
  2736 0209 12        		.uleb128 0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 49
 
 
  2737 020a 01        		.uleb128 0x1
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2791 0240 00        		.byte	0x0
  2792 0241 30        		.uleb128 0x30
  2793 0242 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 50
 
 
  2794 0243 00        		.byte	0x0
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2848 0279 02        		.uleb128 0x2
  2849 027a 0A        		.uleb128 0xa
  2850 027b 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 51
 
 
  2851 027c 00        		.byte	0x0
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2905 0012 7573 6249 		.string	"usbInit"
  2905      6E69 7400 
  2906 001a 7504 0000 		.long	0x475
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 52
 
 
  2907 001e 7573 6250 		.string	"usbPoll"
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2927      7475 7331 
  2927      00
  2928 0109 5808 0000 		.long	0x858
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 53
 
 
  2929 010d 7573 6252 		.string	"usbRxBuf"
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  2961 0008 A601 0000 		.long	.LBB79-.Ltext0
  2962 000c BA01 0000 		.long	.LBE79-.Ltext0
  2963 0010 6800 0000 		.long	.LBB78-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 54
 
 
  2964 0014 A001 0000 		.long	.LBE78-.Ltext0
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3007 006e 02        		.uleb128 0x2
  3008 006f 00        		.uleb128 0x0
  3009 0070 00        		.uleb128 0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 55
 
 
  3010 0071 00        		.byte	0x0
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3064 00c4 15        		.byte	0x15
  3065 00c5 00        		.byte	0x0
  3066 00c6 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 56
 
 
  3067 00c7 02        		.byte	0x2
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3121 011d 02        		.byte	0x2
  3122 011e 0000 0000 		.long	.LM20
  3123 0122 19        		.byte	0x19
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 57
 
 
  3124 0123 00        		.byte	0x0
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3178 0178 02        		.byte	0x2
  3179 0179 0000 0000 		.long	.LM31
  3180 017d 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 58
 
 
  3181 017e 00        		.byte	0x0
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3235 01d5 15        		.byte	0x15
  3236 01d6 00        		.byte	0x0
  3237 01d7 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 59
 
 
  3238 01d8 02        		.byte	0x2
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3292 0230 EE        		.byte	0xee
  3293 0231 00        		.byte	0x0
  3294 0232 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 60
 
 
  3295 0233 02        		.byte	0x2
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3349 028a 05        		.uleb128 0x5
  3350 028b 02        		.byte	0x2
  3351 028c 0000 0000 		.long	.LM65
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 61
 
 
  3352 0290 7F        		.byte	0x7f
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3406 02e4 15        		.byte	0x15
  3407 02e5 00        		.byte	0x0
  3408 02e6 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 62
 
 
  3409 02e7 02        		.byte	0x2
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3463 033b 02        		.byte	0x2
  3464 033c 0000 0000 		.long	.LM86
  3465 0340 19        		.byte	0x19
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 63
 
 
  3466 0341 00        		.byte	0x0
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3520 0396 00        		.byte	0x0
  3521 0397 05        		.uleb128 0x5
  3522 0398 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 64
 
 
  3523 0399 0000 0000 		.long	.LM97
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3566 0024 474E 5520 		.string	"GNU C 4.3.3"
  3566      4320 342E 
  3566      332E 3300 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 65
 
 
  3567               	.LASF30:
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3592 00bf 7573 6253 		.string	"usbSetInterrupt"
  3592      6574 496E 
  3592      7465 7272 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 66
 
 
  3592      7570 7400 
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3616      6963 5365 
  3616      7449 6E74 
  3616      6572 7275 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 67
 
 
  3617               	.LASF38:
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3642      2069 6E74 
  3642      00
  3643               	.LASF3:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 68
 
 
  3644 021a 7569 6E74 		.string	"uint16_t"
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3668      7842 7566 
  3668      00
  3669               	.LASF10:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 69
 
 
  3670 02ce 7573 6254 		.string	"usbTxStatus_t"
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3692      6573 6372 
  3692      6970 746F 
  3692      7253 7472 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 70
 
 
  3692      696E 6744 
@@ -4190,38 +4190,38 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 1
  3714      6500 
  3715               	.global __do_copy_data
  3716               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s 			page 71
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbdrv.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:18     .text:00000000 usbInit
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:18     .text:00000000 usbInit
                             *COM*:0000000c usbTxStatus1
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:48     .text:0000001a usbPoll
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:48     .text:0000001a usbPoll
                             *COM*:00000001 usbRxLen
                             *COM*:00000001 usbInputBufOffset
                             *COM*:00000016 usbRxBuf
                             *COM*:00000001 usbRxToken
                             *COM*:0000000b usbTxBuf
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:620    .data:00000000 usbTxLen
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:620    .data:00000000 usbTxLen
                              .bss:00000000 usbMsgFlags
                             *COM*:00000001 usbNewDeviceAddr
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:664    .progmem.data:00000030 usbDescriptorDevice
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:664    .progmem.data:00000030 usbDescriptorDevice
                             *COM*:00000002 usbMsgPtr
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:686    .progmem.data:00000042 usbDescriptorConfiguration
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:626    .progmem.data:00000000 usbDescriptorString0
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:634    .progmem.data:00000004 usbDescriptorStringVendor
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:652    .progmem.data:00000020 usbDescriptorStringDevice
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:686    .progmem.data:00000042 usbDescriptorConfiguration
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:626    .progmem.data:00000000 usbDescriptorString0
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:634    .progmem.data:00000004 usbDescriptorStringVendor
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:652    .progmem.data:00000020 usbDescriptorStringDevice
                             *COM*:00000001 usbConfiguration
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:724    .data:00000001 usbMsgLen
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:724    .data:00000001 usbMsgLen
                             *COM*:00000001 usbDeviceAddr
-C:\Users\ADMINI~1\AppData\Local\Temp/ccDZzg7b.s:556    .text:0000026e usbSetInterrupt
+C:\Users\ADMINI~1\AppData\Local\Temp/cceZVlVd.s:556    .text:0000026e usbSetInterrupt
                             *COM*:00000001 usbCurrentTok
 
 UNDEFINED SYMBOLS

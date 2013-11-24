@@ -19,6 +19,8 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
+#define KEY_LAZY_FN     247
+#define KEY_LAZY_FN2    246
 
 // dual action 
 enum {
