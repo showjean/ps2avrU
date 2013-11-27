@@ -138,7 +138,10 @@ const uint8_t PROGMEM keycode_set2[NUM_KEY] =	{
 	0x00,   //KEY_Multimedia_end                    
 
     0x00,  //KEY_extend 
-    0xF1, 0xF2, 0x37, 0x0F, 0x08, 0x10, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x48, 0x50, 0x57, 0x5F,
+    0xF1, 0xF2, 0x37, 0x0F, 0x08, 0x10, 0x18, 0x20, 0x28, 0x30, 
+    0x38, 0x40, 0x48, 0x50, 0x57, 0x5F, 0x6D, 0x00, 0x51, 0x13,
+    0x6A, 0x64, 0x67, 0x27, 0x00, 0x00, 0x00, 0x63, 0x62, 0x5F,
+    0x00, 0x00, 0x00, 0x00,
     0x00   //KEY_extend_end                   
 };
 
@@ -157,7 +160,10 @@ const uint16_t PROGMEM keycode_USB_multimedia[] =	{
 // KEY_APPS까지는 keycode 순서에 맞게 나열되어 있지만, 
 // KEY_extend는 배열 순서와는 다른 키코드를 갖는 usage page 07(keyboard)의 키코드를 정의.
 const uint16_t PROGMEM keycode_USB_extend[] =   { 
-    0x91, 0x90, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73
+    0x91, 0x90, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 
+    0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x85, 0x86, 0x87, 0x88, 
+    0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x92, 0x93, 0x94, 
+    0x95, 0x96, 0x97, 0x98
 };
 
 
@@ -223,15 +229,15 @@ const uint8_t PROGMEM keymap_code[3][17][8] =  {
 	{	
 		// set 2 : FN
 		// COL0			COL1		COL2		COL3		COL4		COL5		COL6		COL7
-		{ KEY_KBD_POWER,	KEY_NONE,	KEY_NONE,	KEY_NONE,	KEY_RCTRL,	KEY_NONE,	KEY_LCTRL,	KEY_F5 },	// ROW0
-		{ KEY_Q,		KEY_TAB,	KEY_A,		KEY_ESC,	KEY_Z,		KEY_NONE,	KEY_HASH,	KEY_F13 },	// ROW1
-		{ KEY_W,		KEY_LED,	KEY_S,		KEY_NONE,	KEY_X,		KEY_NONE,	KEY_F1, 	KEY_F14 },	// ROW2
-		{ KEY_E,		KEY_F3, 	KEY_D,		KEY_F4, 	KEY_C,		KEY_NONE,	KEY_F2, 	KEY_F15 },	// ROW3
-		{ KEY_R,		KEY_T,		KEY_F,		KEY_G,		KEY_V,		KEY_B,		KEY_F17,		KEY_F16 },	// ROW4
-		{ KEY_KP_4,		KEY_Y,		KEY_KP_1,	KEY_H,		KEY_KP_0,	KEY_N,		KEY_F18,		KEY_F19 },	// ROW5
-		{ KEY_KP_5,		KEY_RBR,	KEY_KP_2,	KEY_F6, 	KEY_KP_0,	KEY_NONE,	KEY_F24,	KEY_F20 },	// ROW6
-		{ KEY_KP_6,		KEY_F7, 	KEY_KP_3,	KEY_NONE,	KEY_KP_DOT,	KEY_FN,		KEY_F8, 	KEY_F21 },	// ROW7
-		{ KEY_KP_AST,	KEY_LBR,	KEY_KP_MINUS,KEY_QUOTE,	KEY_Europe1,KEY_KP_PLUS,KEY_F23,KEY_F22}, 	// ROW8
+				{ KEY_NUMLOCK,	KEY_NONE,	KEY_NONE,	KEY_NONE,	KEY_RCTRL,	KEY_NONE,	KEY_LCTRL,	KEY_F5 },	// ROW0
+		{ KEY_Q,		KEY_TAB,	KEY_A,		KEY_ESC,	KEY_Z,		KEY_NONE,	KEY_HASH,	KEY_1 },	// ROW1
+		{ KEY_W,		KEY_LED,	KEY_S,		KEY_NONE,	KEY_X,		KEY_NONE,	KEY_F1, 	KEY_2 },	// ROW2
+		{ KEY_E,		KEY_F3, 	KEY_D,		KEY_F4, 	KEY_C,		KEY_NONE,	KEY_F2, 	KEY_3 },	// ROW3
+		{ KEY_R,		KEY_T,		KEY_F,		KEY_G,		KEY_V,		KEY_B,		KEY_5,		KEY_4 },	// ROW4
+		{ KEY_KP_4,		KEY_Y,		KEY_KP_1,	KEY_H,		KEY_KP_0,	KEY_N,		KEY_6,		KEY_KP_7 },	// ROW5
+		{ KEY_KP_5,		KEY_RBR,	KEY_KP_2,	KEY_F6, 	KEY_KP_0,	KEY_NONE,	KEY_LED_UP,	KEY_KP_8 },	// ROW6
+		{ KEY_KP_6,		KEY_F7, 	KEY_KP_3,	KEY_NONE,	KEY_KP_DOT,	KEY_FN,		KEY_F8, 	KEY_KP_9 },	// ROW7
+		{ KEY_KP_AST,	KEY_LBR,	KEY_KP_MINUS,KEY_QUOTE,	KEY_Europe1,KEY_KP_PLUS,KEY_LED_DOWN,KEY_KP_SLASH}, 	// ROW8
 		{ KEY_SCRLCK,	KEY_NONE,	KEY_NONE,	KEY_LALT,	KEY_Europe2,KEY_RALT,	KEY_NONE,	KEY_PRNSCR},// ROW9
 		{ KEY_NONE, 	KEY_BKSP,	KEY_BKSLASH,KEY_F11,	KEY_KP_ENTER,KEY_F12,	KEY_F9, 	KEY_F10},	// ROW10
 		{ KEY_MAC1, 	KEY_NUMLOCK,KEY_KP_7,	KEY_BEYOND_FN,KEY_KP_4,	KEY_DOWN,	KEY_DEL,	KEY_NONE }, // ROW11

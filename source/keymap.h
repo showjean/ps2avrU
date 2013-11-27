@@ -10,7 +10,7 @@
 #define KFLA_PROC_SHIFT     0x10
 
 // Total 
-#define NUM_KEY 157     // 0~
+#define NUM_KEY 176     // 0~
 
 #define KEY_FN          254
 #define KEY_LED         253
@@ -195,7 +195,8 @@ enum {
  	KEY_Multimedia_end,
 
     KEY_extend,     // 140
-    KEY_HANJA,  KEY_HANGLE, 
+    KEY_HANJA,  
+    KEY_HANGLE, 
     KEY_KBD_POWER, 
     KEY_KP_EQUAL,
     KEY_F13,
@@ -203,14 +204,34 @@ enum {
     KEY_F15,
     KEY_F16,
     KEY_F17,
-    KEY_F18,
+    KEY_F18,            // 150
     KEY_F19,
     KEY_F20,
     KEY_F21,
     KEY_F22,
     KEY_F23,
-    KEY_F24,            
-    KEY_extend_end    // 156
+    KEY_F24,     
+    KEY_KP_COMMA,
+    KEY_EQUAL_SIGN, 
+    KEY_INT1,
+    KEY_INT2,           // 160
+    KEY_INT3,
+    KEY_INT4,
+    KEY_INT5,
+    KEY_INT6,
+    KEY_INT7,
+    KEY_INT8,
+    KEY_INT9,
+    // KEY_LANG1,   /* = KEY_HANGLE       */
+    // KEY_LANG2,   /* = KEY_HANJA      */
+    KEY_LANG3,          
+    KEY_LANG4,
+    KEY_LANG5,          // 170
+    KEY_LANG6,          
+    KEY_LANG7,
+    KEY_LANG8,
+    KEY_LANG9,                
+    KEY_extend_end    // 175
 };
 
 // for ps/2 interface
