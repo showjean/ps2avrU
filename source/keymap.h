@@ -10,7 +10,7 @@
 #define KFLA_PROC_SHIFT     0x10
 
 // Total 
-#define NUM_KEY 144
+#define NUM_KEY 157     // 0~
 
 #define KEY_FN          254
 #define KEY_LED         253
@@ -177,7 +177,7 @@ enum {
 
 	 /* These are NOT standard USB HID - handled specially in decoding, 
      so they will be mapped to the modifier byte in the USB report */
-	KEY_Modifiers,
+	KEY_Modifiers, // 102
 	KEY_LCTRL,    // 0x01
 	KEY_LSHIFT,   // 0x02
 	KEY_LALT,     // 0x04
@@ -194,16 +194,30 @@ enum {
 	KEY_MEDIA,	KEY_CALC,	KEY_MYCOM,	KEY_SCREENSAVE,	KEY_REC, KEY_REWIND, KEY_MINIMIZE, KEY_EJECT,
  	KEY_Multimedia_end,
 
-    KEY_extend,
-    KEY_HANJA,  KEY_HANGLE,
-    KEY_extend_end    // 143(0x8F)
+    KEY_extend,     // 140
+    KEY_HANJA,  KEY_HANGLE, 
+    KEY_KBD_POWER, 
+    KEY_KP_EQUAL,
+    KEY_F13,
+    KEY_F14,
+    KEY_F15,
+    KEY_F16,
+    KEY_F17,
+    KEY_F18,
+    KEY_F19,
+    KEY_F20,
+    KEY_F21,
+    KEY_F22,
+    KEY_F23,
+    KEY_F24,            
+    KEY_extend_end    // 156
 };
 
 // for ps/2 interface
 extern const uint8_t PROGMEM keycode_set2[NUM_KEY];
 
 // usage page 01(Generic Desktop) : KEY_POWER,  KEY_SLEEP,  KEY_WAKE
-// usage page 07(keyboard) : KEY_HANJA,   KEY_HANGLE
+// usage page 07(keyboard) : KEY_HANJA,   KEY_HANGLE, KEY_KBD_POWER
 /* usage page 0C(Consumer Devices) : KEY_WWW_SEARCH, KEY_WWW_HOME, KEY_WWW_BACK, KEY_WWW_FORWARD, KEY_WWW_STOP, KEY_WWW_REFRESH, KEY_WWW_FAVORITE,KEY_EMAIL,  
                                     KEY_NEXT_TRK, KEY_PREV_TRK, KEY_STOP, KEY_PLAY, KEY_MUTE, KEY_VOL_UP, KEY_VOL_DOWN, KEY_MEDIA,  KEY_CALC,   KEY_MYCOM */
 //
