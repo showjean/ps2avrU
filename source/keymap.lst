@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 1
 
 
    1               		.file	"keymap.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
   55 0020 F0E0      		ldi r31,lo8(0)
   56               	.LVL3:
   57 0022 E050      		subi r30,lo8(-(dualActionMaskDown-214))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 2
 
 
   58 0024 F040      		sbci r31,hi8(-(dualActionMaskDown-214))
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  112               	.LFB7:
  113               	.LM13:
  114               	.LVL13:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 3
 
 
  115 0050 1F93      		push r17
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  169 00ac 01F4      		brne .L15
  170               	.LBB22:
  171               	.LM26:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 4
 
 
  172 00ae F0E0      		ldi r31,lo8(0)
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  226               		.type	dualActionMaskUp, @object
  227               		.size	dualActionMaskUp, 16
  228               	dualActionMaskUp:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 5
 
 
  229 0010 8E        		.byte	-114
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  283 001a 1D        		.byte	29
  284 001b 22        		.byte	34
  285 001c 35        		.byte	53
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 6
 
 
  286 001d 1A        		.byte	26
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  340 0053 77        		.byte	119
  341 0054 4A        		.byte	74
  342 0055 7C        		.byte	124
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 7
 
 
  343 0056 7B        		.byte	123
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  397 008c 00        		.byte	0
  398 008d F1        		.byte	-15
  399 008e F2        		.byte	-14
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 8
 
 
  400 008f 37        		.byte	55
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  454 00d2 EA00      		.word	234
  455 00d4 8301      		.word	387
  456 00d6 9201      		.word	402
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 9
 
 
  457 00d8 9401      		.word	404
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  511               	keycode_set2_makeonly:
  512 012b 48        		.byte	72
  513 012c 8E        		.byte	-114
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 10
 
 
  514 012d 8D        		.byte	-115
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  568 015b 86        		.byte	-122
  569 015c 87        		.byte	-121
  570 015d 88        		.byte	-120
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 11
 
 
  571 015e 89        		.byte	-119
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  625 018c 3D        		.byte	61
  626 018d 06        		.byte	6
  627 018e 00        		.byte	0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 12
 
 
  628 018f 3B        		.byte	59
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  682 01c5 28        		.byte	40
  683 01c6 45        		.byte	69
  684 01c7 42        		.byte	66
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 13
 
 
  685 01c8 43        		.byte	67
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  739 01fe 00        		.byte	0
  740 01ff 67        		.byte	103
  741 0200 3E        		.byte	62
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 14
 
 
  742 0201 14        		.byte	20
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  796 0237 41        		.byte	65
  797 0238 61        		.byte	97
  798 0239 55        		.byte	85
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 15
 
 
  799 023a 2F        		.byte	47
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  853 0270 4D        		.byte	77
  854 0271 62        		.byte	98
  855 0272 68        		.byte	104
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 16
 
 
  856 0273 6C        		.byte	108
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  910 02a9 18        		.byte	24
  911 02aa 1C        		.byte	28
  912 02ab 0D        		.byte	13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 17
 
 
  913 02ac 0B        		.byte	11
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  967 02e2 54        		.byte	84
  968 02e3 60        		.byte	96
  969 02e4 5D        		.byte	93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 18
 
 
  970 02e5 5A        		.byte	90
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1024               	.LSFDE0:
  1025 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
  1026               	.LASFDE0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 19
 
 
  1027 0014 0000 0000 		.long	.Lframe0
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1081 0028 0600      		.word	0x6
  1082 002a 62        		.byte	0x62
  1083 002b 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 20
 
 
  1084 002c 01        		.uleb128 0x1
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1138 00a9 01        		.uleb128 0x1
  1139 00aa 0000 0000 		.long	0x0
  1140 00ae 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 21
 
 
  1141               	.LLST8:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1195 0033 3700 0000 		.long	0x37
  1196 0037 02        		.uleb128 0x2
  1197 0038 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 22
 
 
  1198 0039 08        		.byte	0x8
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1252 009d 07        		.uleb128 0x7
  1253 009e 0000 0000 		.long	.LASF13
  1254 00a2 D901      		.sleb128 217
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 23
 
 
  1255 00a4 07        		.uleb128 0x7
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1309 0117 0000 0000 		.long	.LASF52
  1310 011b 01        		.byte	0x1
  1311 011c 6D        		.byte	0x6d
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 24
 
 
  1312 011d 01        		.byte	0x1
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1366 018c 0000 0000 		.long	.LASF29
  1367 0190 01        		.byte	0x1
  1368 0191 3C        		.byte	0x3c
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 25
 
 
  1369 0192 2C00 0000 		.long	0x2c
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1423 0210 11        		.uleb128 0x11
  1424 0211 0000 0000 		.long	.LASF29
  1425 0215 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 26
 
 
  1426 0216 53        		.byte	0x53
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1480 028e 01        		.byte	0x1
  1481 028f 75        		.byte	0x75
  1482 0290 9B02 0000 		.long	0x29b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 27
 
 
  1483 0294 01        		.byte	0x1
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1537 0309 01        		.byte	0x1
  1538 030a 05        		.byte	0x5
  1539 030b 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 28
 
 
  1540 030c 0000 0000 		.long	keycode_set2_special
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1594 0381 0000 0000 		.long	keycode_set2_extend
  1595 0385 1E        		.uleb128 0x1e
  1596 0386 6303 0000 		.long	0x363
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 29
 
 
  1597 038a 1B        		.uleb128 0x1b
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1651 03ff 1C        		.uleb128 0x1c
  1652 0400 8602 0000 		.long	0x286
  1653 0404 0F        		.byte	0xf
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 30
 
 
  1654 0405 00        		.byte	0x0
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1708 001d 00        		.byte	0x0
  1709 001e 03        		.uleb128 0x3
  1710 001f 16        		.uleb128 0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 31
 
 
  1711 0020 00        		.byte	0x0
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1765 0056 2E        		.uleb128 0x2e
  1766 0057 00        		.byte	0x0
  1767 0058 3F        		.uleb128 0x3f
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 32
 
 
  1768 0059 0C        		.uleb128 0xc
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1822 008f 0C        		.uleb128 0xc
  1823 0090 2E        		.uleb128 0x2e
  1824 0091 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 33
 
 
  1825 0092 03        		.uleb128 0x3
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1879 00c8 3A        		.uleb128 0x3a
  1880 00c9 0B        		.uleb128 0xb
  1881 00ca 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 34
 
 
  1882 00cb 0B        		.uleb128 0xb
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1936 0101 01        		.byte	0x1
  1937 0102 27        		.uleb128 0x27
  1938 0103 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 35
 
 
  1939 0104 01        		.uleb128 0x1
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  1993 013a 34        		.uleb128 0x34
  1994 013b 00        		.byte	0x0
  1995 013c 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 36
 
 
  1996 013d 0E        		.uleb128 0xe
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2050               		.section	.debug_pubnames,"",@progbits
  2051 0000 8701 0000 		.long	0x187
  2052 0004 0200      		.word	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 37
 
 
  2053 0006 0000 0000 		.long	.Ldebug_info0
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2073 00e4 4C03 0000 		.long	0x34c
  2074 00e8 6B65 7963 		.string	"keycode_set2_make_break"
  2074      6F64 655F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 38
 
 
  2074      7365 7432 
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2104 0006 6100 0000 		.long	.LELTP0-.LASLTP0
  2105               	.LASLTP0:
  2106 000a 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 39
 
 
  2107 000b 01        		.byte	0x1
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2151 0082 18        		.byte	0x18
  2152 0083 00        		.byte	0x0
  2153 0084 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 40
 
 
  2154 0085 02        		.byte	0x2
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2208 00d9 02        		.byte	0x2
  2209 00da 0000 0000 		.long	.LM14
  2210 00de 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 41
 
 
  2211 00df 00        		.byte	0x0
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2265 0136 03        		.byte	0x3
  2266 0137 61        		.sleb128 -31
  2267 0138 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 42
 
 
  2268 0139 00        		.byte	0x0
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2310      00
  2311               	.LASF47:
  2312 0025 6475 616C 		.string	"dualActionMaskUp"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 43
 
 
  2312      4163 7469 
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2332 00c8 4B45 595F 		.string	"KEY_LALT_HANGLE"
  2332      4C41 4C54 
  2332      5F48 414E 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 44
 
 
  2332      474C 4500 
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2352      2075 6E73 
  2352      6967 6E65 
  2352      6420 696E 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 45
 
 
  2352      7400 
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2372      6564 2069 
  2373               	.LASF2:
  2374 023b 7569 6E74 		.string	"uint8_t"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 46
 
 
  2374      385F 7400 
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2396      776E 00
  2397               	.LASF3:
  2398 02e9 7569 6E74 		.string	"uint16_t"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 47
 
 
  2398      3136 5F74 
@@ -2811,36 +2811,36 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 1
  2418      00
  2419               	.global __do_copy_data
  2420               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s 			page 48
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keymap.c
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:18     .text:00000000 isCanceledDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:1007   .bss:00000003 _isCanceledDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:31     .text:00000006 applyDualActionDown
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:250    .bss:00000000 dualActionKeyIndex
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:208    .data:00000000 dualActionMaskDown
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:79     .text:00000034 getDualActionDownKeyIdex
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:111    .text:00000050 setDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:18     .text:00000000 isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:1007   .bss:00000003 _isCanceledDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:31     .text:00000006 applyDualActionDown
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:250    .bss:00000000 dualActionKeyIndex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:208    .data:00000000 dualActionMaskDown
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:79     .text:00000034 getDualActionDownKeyIdex
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:111    .text:00000050 setDualAction
                              .bss:00000001 _dualActionCount
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:1006   .bss:00000002 _isActiveDualAction
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:228    .data:00000010 dualActionMaskUp
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:256    .progmem.data:00000000 keycode_set2
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:436    .progmem.data:000000b0 keycode_USB_multimedia
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:466    .progmem.data:000000e4 keycode_USB_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:504    .progmem.data:00000128 keycode_set2_special
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:511    .progmem.data:0000012b keycode_set2_makeonly
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:519    .progmem.data:0000012f keycode_set2_make_break
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:528    .progmem.data:00000134 keycode_set2_extend
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:578    .progmem.data:00000162 keycode_set2_proc_shift
-C:\Users\ADMINI~1\AppData\Local\Temp/cc0XEzfK.s:597    .progmem.data:00000171 keymap_code
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:1006   .bss:00000002 _isActiveDualAction
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:228    .data:00000010 dualActionMaskUp
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:256    .progmem.data:00000000 keycode_set2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:436    .progmem.data:000000b0 keycode_USB_multimedia
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:466    .progmem.data:000000e4 keycode_USB_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:504    .progmem.data:00000128 keycode_set2_special
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:511    .progmem.data:0000012b keycode_set2_makeonly
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:519    .progmem.data:0000012f keycode_set2_make_break
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:528    .progmem.data:00000134 keycode_set2_extend
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:578    .progmem.data:00000162 keycode_set2_proc_shift
+C:\Users\ADMINI~1\AppData\Local\Temp/ccbsCg5f.s:597    .progmem.data:00000171 keymap_code
 
 UNDEFINED SYMBOLS
 pushM

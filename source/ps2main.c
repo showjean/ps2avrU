@@ -463,9 +463,12 @@ void ps2_main(void){
 
 		static int keyval=0;
 
-		// check that every key code for single keys are transmitted
-		/*if((kbd_flags & FLA_RX_BYTE)){
-			DEBUG_PRINT((" kbd_flags & FLA_RX_BYTE %02x, %02x \n", kbd_flags, FLA_RX_BYTE));
+		// check that every key code for single keys are transmitted		
+		/*if (kbd_flags & FLA_RX_BAD) {		// pokud je nastaveny flag spatneho prijmu, zrus ho 
+			// pokud flag is set back income withdrawn
+			cli();
+			kbd_flags &= ~FLA_RX_BAD;
+			sei();
 		}*/
 		if ((kbd_flags & FLA_RX_BYTE) && (keyval==SPLIT || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
 			// pokud law, the flag setting apart, take it and zanalyzuj

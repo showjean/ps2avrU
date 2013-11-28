@@ -7,13 +7,13 @@
 // PA0-PA7 : row1 .. row8
 // PC7-PC0 : row9 .. row16
 
-// PD0 : NUM
-// PD1 : CAPS
+// PD0 : LED NUM
+// PD1 : LED CAPS
 // PD2 : D+ / Clock
 // PD3 : D- / Data
 // PD4 : FULL LED
 // PD5 : 3.6V switch TR
-// PD6 : reserved
+// PD6 : LED SCROLL
 // PD7 : row17
 /* ----------------------- hardware I/O abstraction ------------------------ */
 #define PORTCOLUMNS PORTB  ///< port on which we read the state of the columns
@@ -30,17 +30,19 @@
 #define PINLEDS     PIND   ///< port on which the LEDs are connected
 #define DDRLEDS     DDRD   ///< port on which the LEDs are connected
 
-#define DIODE_DDR	DDRD
-#define DIODE_PORT	PORTD
-
 #define LEDNUM      (1 << 0)	//PIND0  ///< address of the num-lock LED
 #define LEDCAPS     (1 << 1)	//PIND1  ///< address of the caps-lock LED
 #define LEDSCROLL   (1 << 6)	//PIND6  ///< address of the scroll-lock LED  
 #define LEDFULLLED  (1 << 4)	//PIND4  ///< address of the full led controll pin
+
+#define DIODE_DDR	DDRD
+#define DIODE_PORT	PORTD
 #define DIODE_PIN	5	 		// 제너 다이오드를 컨트롤할 D 핀 중에 하나;
 //DATA+(clk) 	2
 //DATA-(dat) 	3
 
+
+/* --------------------------- interface & eeprom --------------------------------*/
 #define INTERFACE_PS2		0
 #define INTERFACE_PS2_USER	3
 #define INTERFACE_USB		1
@@ -51,7 +53,7 @@
 #define EEPROM_LED_MODE			11	// 1byte
 #define EEPROM_INTERFACE		12	// 1byte
 #define EEPROM_MAPPING			13	// ~420
-#define EEPROM_MACRO			421	// ~804
+#define EEPROM_MACRO			421	// ~996
 
 extern int interfaceCount;
 extern uint8_t interfaceReady;

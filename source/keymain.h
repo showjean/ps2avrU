@@ -10,5 +10,6 @@
 #endif
 
 #define ENABLE_BOOTMAPPER	// use bootmapper
+// #define GHOST_KEY_PREVENTION	//ghost key prevention
 
 #endif

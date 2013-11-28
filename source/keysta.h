@@ -3,6 +3,7 @@
 
 #define KEYSTA_H
 #include "common_inc.h"
+#include "hardwareconfig.h"
 
 /* Copyright Jamie Honan, 2001.  Distributed under the GPL.
    This program comes with ABSOLUTELY NO WARRANTY.
@@ -26,18 +27,29 @@
 #define LED_SCR_DDR			DDRD
 #define LED_SCR_PIN			4*/
 
-#define KEYB_CLOCK_PORT		PORTD
-#define KEYB_CLOCK_DDR		DDRD
-#define KEYB_CLOCK_PINS		PIND
-#define KEYB_CLOCK_PIN		2	/* for cbi / sbi instructions */
-#define KEYB_CLOCK_BIT		0x04	/* for and/or ops */
+// #define KEYB_CLOCK_PORT		PORTD
+// #define KEYB_CLOCK_DDR		DDRD
+// #define KEYB_CLOCK_PINS		PIND
+// #define KEYB_CLOCK_PIN		2	/* for cbi / sbi instructions */
+// #define KEYB_CLOCK_BIT		0x04	/* for and/or ops */
 
-#define KEYB_DATA_PORT		PORTD
-#define KEYB_DATA_DDR		DDRD
-#define KEYB_DATA_PINS		PIND
-#define KEYB_DATA_PIN      3
-#define KEYB_DATA_BIT      0x08
+// #define KEYB_DATA_PORT		PORTD
+// #define KEYB_DATA_DDR		DDRD
+// #define KEYB_DATA_PINS		PIND
+// #define KEYB_DATA_PIN      3
+// #define KEYB_DATA_BIT      0x08
 
+#define KEYB_CLOCK_PORT    P2U_PS2_PORT
+#define KEYB_CLOCK_DDR     P2U_PS2_DDR
+#define KEYB_CLOCK_PINS    P2U_PS2_PINS
+#define KEYB_CLOCK_PIN     P2U_PS2_CLOCK_PIN  /* for cbi / sbi instructions */
+#define KEYB_CLOCK_BIT     P2U_PS2_CLOCK_BIT  /* for and/or ops */
+
+#define KEYB_DATA_PORT     P2U_PS2_PORT
+#define KEYB_DATA_DDR      P2U_PS2_DDR
+#define KEYB_DATA_PINS     P2U_PS2_PINS
+#define KEYB_DATA_PIN      P2U_PS2_DATA_PIN
+#define KEYB_DATA_BIT      P2U_PS2_DATA_BIT
    
 void
 kbd_init(void);
