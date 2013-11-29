@@ -480,8 +480,8 @@ uint8_t scanKeyUSB(void) {
     clearReportBuffer();
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
-	for (col = 0; col < 8; ++col) { // process all rows for key-codes
-		for (row = 0; row < 17; ++row) { // check every bit on this row   
+	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
 
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = prevMatrix[row] & BV(col);
@@ -572,7 +572,7 @@ uint8_t scanKeyUSB(void) {
     }*/
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
-	for(row=0;row<17;++row)
+	for(row=0;row<ROWS;++row)
 		prevMatrix[row] = gMatrix[row];
 
 

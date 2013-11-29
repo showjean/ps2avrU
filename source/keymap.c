@@ -3,6 +3,7 @@
 
 #include "keymap.h"
 #include "print.h"
+#include "hardwareinfo.h"
 #include "macrobuffer.h"
 
 #if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI||KEYMAP_BOOT_MAPPER)
@@ -197,7 +198,7 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 	KEY_NONE };
 
 
-const uint8_t PROGMEM keymap_code[3][17][8] =  {
+const uint8_t PROGMEM keymap_code[LAYERS][ROWS][COLUMNS] =  {
 	#ifdef KEYMAP_BOOT_MAPPER
 	0
 	#endif

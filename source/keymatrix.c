@@ -27,11 +27,12 @@
 // for KEY_BEYOND_FN;
 uint8_t isBeyondFN = 0;	 //KEY_BEYOND_FN state
 // 17*8 bit matrix
-uint8_t prevMatrix[17];
-uint8_t currentMatrix[17];  ///< contains current state of the keyboard
+uint8_t prevMatrix[ROWS];
+uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 
 #ifdef GHOST_KEY_PREVENTION
-	uint8_t ghostFilterMatrix[17];
+	uint8_t ghostFilterMatrix[ROWS];
+	uint8_t findGhostKey(void);
 #endif
 
 uint8_t _currentLayer = 0;
@@ -57,7 +58,7 @@ const unsigned short int modmask[16] = {
 /* ------------------------------------------------------------------------- */
 void clearMatrix(void){
 	uint8_t row;
-	for(row=0;row<17;++row) {
+	for(row=0;row<ROWS;++row) {
 		prevMatrix[row] = 0;
 		currentMatrix[row] = 0;
 	}
@@ -67,9 +68,9 @@ void clearMatrix(void){
 
 uint8_t isAllKeyRelease(void)
 {
-	uint8_t cur, row;
+	uint8_t row;
 	_isAllKeyRelease = 1;
-	for(row=0;row<17;row++) {
+	for(row=0;row<ROWS;row++) {
 		if(currentMatrix[row] > 0){
 			_isAllKeyRelease = 0;
 			break;
@@ -138,8 +139,8 @@ uint8_t getLayer(void) {
 
 	// fn이 가장 우선, 다음 fn2
 
-	for(col=0;col<8;col++)
-		for(row=0;row<17;row++){			
+	for(col=0;col<COLUMNS;col++)
+		for(row=0;row<ROWS;row++){			
 			//keyidx = pgm_read_byte(&keymap_code[_currentLayer][row][col]);
 			keyidx = getCurrentKeycode(_currentLayer, row, col);
 
@@ -215,13 +216,48 @@ uint8_t getLayer(void) {
 	return 0;
 }
 
+#ifdef GHOST_KEY_PREVENTION
+uint8_t findGhostKey(void){
+	uint8_t col, row, gCol, gRow;
+	for(gRow=0;gRow<ROWS;gRow++)
+	{		
+		if(currentMatrix[gRow] == 0) continue;
+
+		for (gCol = 0; gCol < COLUMNS; ++gCol)
+		{			
+			if(currentMatrix[gRow] & BV(gCol)){
+				// matrix가 set 되었다.
+				// 현재 row보다 낮은 위치에 또 다른 set이 있는지 확인;
+				for(col = gCol+1; col < COLUMNS; ++col)
+				{
+					if(currentMatrix[gRow] & BV(col)){
+						//또다른 col에 set이 있다.
+						// 그렇다면, 같은 col의 하위 row에 또 다른 set이 있는지 확인;
+						for(row = gRow+1; row < ROWS; ++row)
+						{						
+							if((currentMatrix[row] & (1<<col))> 0) {
+								// DEBUG_PRINT(("GHOST_KEY_PREVENTION \n"));
+								// 고스트 키 확인;
+								return 1;
+							}
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	return 0;
+}
+#endif
+
 uint8_t getLiveMatrix(void){
 	uint8_t col, row;
 	uint8_t prev, cur;
 	
 	uint8_t isModified = 0;
 
-	for(col=0;col<8;col++)
+	for(col=0;col<COLUMNS;col++)
 	{
 		// Col -> set only one port as input and all others as output low
 		DDRCOLUMNS  = BV(col);
@@ -230,7 +266,7 @@ uint8_t getLiveMatrix(void){
 		_delay_us_m(1);
 		
 		// scan each rows
-		for(row=0;row<17;row++)
+		for(row=0;row<ROWS;row++)
 		{
 			if(row<8)	{				// for 0..7, PORTA 0 -> 7
 				cur = (~PINROWS1) & BV(row);
@@ -269,28 +305,20 @@ uint8_t getLiveMatrix(void){
 
 #ifdef GHOST_KEY_PREVENTION
 	// ghost-key prevention
-	// col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.
-	uint8_t ghost = 0;
-	uint8_t needDetection = 0;
-	uint8_t i;
-	for(row=0;row<17;row++)
-	{
-		if(needDetection > 1){
-			ghostFilterMatrix[row] &= currentMatrix[row] ^ ghost;	// r1:g1 = 0, r1:g0 = 1, r0:g1 = 0, r0:g0 = 0; 다른 것만 1로 만들 후 & 연산;
-		}else{
-			ghostFilterMatrix[row] = currentMatrix[row];
-		}
-
-		ghost |= ghostFilterMatrix[row];
-		// DEBUG_PRINT(("currentMatrix[%d]= %02X, ghost=%02X, needDetection=%d  \n", row, ghostFilterMatrix[row], ghost, needDetection));
-		// 1비트(컬럼)만 입력이 있을 경우 외에 2비트 이상 입력이 있다면 표시;
-		needDetection = 0;
-
-		for (i = 0; i < 8; ++i)
+	// col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.	
+	uint8_t hasGhostKey = 0;
+	hasGhostKey = findGhostKey();
+	
+	if(hasGhostKey > 0){
+		// DEBUG_PRINT(("GHOST_KEY_PREVENTION \n"));
+		for(row=0;row<ROWS;row++)
 		{
-			if(ghost & BV(i)){
-				++needDetection;
-			}
+			ghostFilterMatrix[row] = prevMatrix[row];
+		}
+	}else{
+		for(row=0;row<ROWS;row++)
+		{
+			ghostFilterMatrix[row] = currentMatrix[row];
 		}
 	}
 #endif

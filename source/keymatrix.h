@@ -12,7 +12,7 @@
 // for KEY_BEYOND_FN;
 extern uint8_t isBeyondFN;//KEY_BEYOND_FN state
 extern const unsigned short int modmask[16];
-extern uint8_t prevMatrix[17];
+extern uint8_t prevMatrix[ROWS];
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */

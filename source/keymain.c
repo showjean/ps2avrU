@@ -176,9 +176,9 @@ int main(void) {
 	uint8_t *gMatrix = getCurrentMatrix();
 
 	// debounce cleared => compare last matrix and current matrix
-	for(col=0;col<8;col++)
+	for(col=0;col<COLUMNS;col++)
 	{		
-		for(row=0;row<17;row++)
+		for(row=0;row<ROWS;row++)
 		{
 			cur  = gMatrix[row] & BV(col);
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	

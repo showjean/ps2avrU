@@ -2,6 +2,7 @@
 #define KEYMAP_H
 
 #include <avr/pgmspace.h>
+#include "hardwareinfo.h"
 
 #define KFLA_EXTEND         0x01
 #define KFLA_SPECIAL        0x02
@@ -259,7 +260,7 @@ extern const uint8_t PROGMEM keycode_set2_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 
-extern const uint8_t PROGMEM keymap_code[3][17][8];
+extern const uint8_t PROGMEM keymap_code[LAYERS][ROWS][COLUMNS];
 
 
 extern uint8_t dualActionKeyIndex;

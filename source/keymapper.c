@@ -91,7 +91,7 @@ static uint8_t _bufferIndex;
 static int _editCount;	// 카운트가 1이상이어야만 eeprom에 write 한다.
 static uint8_t _isWorkingForEmpty = 0;	// 매크로 버퍼가 모두 소진된 후 진행할 내용이 있는지 확인;
 
-uint8_t _newKeyMap[17][8]; // = {0};
+uint8_t _newKeyMap[ROWS][COLUMNS]; // = {0};
 
 static uint8_t _currentLayer;
 static uint8_t _currentLayerAfter;
@@ -504,8 +504,8 @@ void loadCurrentLayer(void)
 {	
 	uint16_t gAddress;
 	uint8_t k, j;
-	for(k = 0; k < 17; ++k){
-		for (j = 0; j < 8; ++j)
+	for(k = 0; k < ROWS; ++k){
+		for (j = 0; j < COLUMNS; ++j)
 		{
 			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
 			_newKeyMap[k][j] = eeprom_read_byte((uint8_t *)gAddress);
@@ -531,8 +531,8 @@ void saveCurrentLayerAfter(void)
 	uint8_t gKeyCode;
 	uint16_t gAddress;
 	uint8_t k, j;
-	for(k = 0; k < 17; ++k){
-		for (j = 0; j < 8; ++j)
+	for(k = 0; k < ROWS; ++k){
+		for (j = 0; j < COLUMNS; ++j)
 		{
 			gKeyCode = _newKeyMap[k][j];	// value
 			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
@@ -660,8 +660,8 @@ void resetCurrentLayer(void)
 	printEnter();
 	// 현재 레이어 기본값으로 복구;
 	uint8_t k, j; 
-	for(k = 0; k < 17; ++k){
-		for (j = 0; j < 8; ++j)
+	for(k = 0; k < ROWS; ++k){
+		for (j = 0; j < COLUMNS; ++j)
 		{
 			_newKeyMap[k][j] = 0;
 		}

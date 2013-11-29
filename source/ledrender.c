@@ -183,7 +183,6 @@ void initFullLEDState(void) {
 	//
 	// TIMSK |= (1<<TOIE1);	// enable TCNT1 overflow
 	
-	// timerAttach(TIMER1OUTCOMPAREA_INT, timerProcessA); 
 	timerAttach(TIMER1OUTCOMPAREA_INT, timerProcessCompareA); 
 	timerAttach(TIMER1OUTCOMPAREB_INT, timerProcessCompareB); 
 

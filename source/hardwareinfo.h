@@ -41,6 +41,9 @@
 //DATA+(clk) 	2
 //DATA-(dat) 	3
 
+#define LAYERS		3
+#define COLUMNS 	8
+#define ROWS 		17
 
 /* --------------------------- interface & eeprom --------------------------------*/
 #define INTERFACE_PS2		0
