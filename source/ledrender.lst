@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 1
 
 
    1               		.file	"ledrender.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
   55 0010 0895      		ret
   56               	.LFE14:
   57               		.size	clearLEDInited, .-clearLEDInited
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 2
 
 
   58               	.global	stopTimer
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  112               	.LFB18:
  113               	.LM19:
  114               	/* prologue: function */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 3
 
 
  115               	/* frame size = 0 */
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  169               	.L19:
  170 007a 8EBD      		out 78-32,r24
  171               	.L17:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 4
 
 
  172               	.LBE27:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  226 00ca 83E0      		ldi r24,lo8(3)
  227 00cc 8093 0000 		sts downLevel,r24
  228               	.LM41:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 5
 
 
  229 00d0 9430      		cpi r25,lo8(4)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  283 011a 8091 0000 		lds r24,_ledBrightnessMax
  284 011e 8E31      		cpi r24,lo8(30)
  285 0120 01F0      		breq .L34
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 6
 
 
  286               	.LM50:
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  340 0166 8091 0000 		lds r24,_fullLEDMode
  341               	.LVL6:
  342 016a 8230      		cpi r24,lo8(2)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 7
 
 
  343 016c 01F4      		brne .L39
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  397 01ac 01F4      		brne .L52
  398 01ae 00C0      		rjmp .L55
  399               	.L46:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 8
 
 
  400               	.LM75:
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  454 01f2 8093 0000 		sts downLevelStay,r24
  455               	.LM88:
  456 01f6 8091 0000 		lds r24,downLevel
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 9
 
 
  457 01fa 8C30      		cpi r24,lo8(12)
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  511 0254 AC01      		movw r20,r24
  512 0256 429F      		mul r20,r18
  513 0258 C001      		movw r24,r0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 10
 
 
  514 025a 439F      		mul r20,r19
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  568 02ba 9095      		com r25
  569 02bc 8195      		neg r24
  570 02be 9F4F      		sbci r25,lo8(-1)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 11
 
 
  571 02c0 8150      		subi r24,lo8(-(255))
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  625 0334 9091 0000 		lds r25,(downLevelStay)+1
  626 0338 0097      		sbiw r24,0
  627 033a 01F0      		breq .L72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 12
 
 
  628               	.LM113:
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  682 03aa 8091 0000 		lds r24,downLevelStay
  683 03ae 9091 0000 		lds r25,(downLevelStay)+1
  684 03b2 0097      		sbiw r24,0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 13
 
 
  685 03b4 01F0      		breq .L76
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  739               	.LM135:
  740 0426 1092 0000 		sts (pwmCounter)+1,__zero_reg__
  741 042a 1092 0000 		sts pwmCounter,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 14
 
 
  742               	.LM136:
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  796 0464 01F0      		breq .L88
  797 0466 8330      		cpi r24,lo8(3)
  798 0468 01F4      		brne .L89
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 15
 
 
  799               	.L88:
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  853 04b0 90E0      		ldi r25,lo8(0)
  854 04b2 0E94 0000 		call setPWM
  855               	.LM157:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 16
 
 
  856 04b6 87E0      		ldi r24,hi8(2040)
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  910 04fe 8823      		tst r24
  911 0500 01F0      		breq .L100
  912 0502 42E0      		ldi r20,lo8(2)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 17
 
 
  913               	.LVL12:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  967               	.LM177:
  968 0564 9130      		cpi r25,lo8(1)
  969 0566 01F4      		brne .L107
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 18
 
 
  970               	.LM178:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1024               	.LM188:
  1025 05c4 2530      		cpi r18,lo8(5)
  1026 05c6 01F0      		breq .L120
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 19
 
 
  1027 05c8 2330      		cpi r18,lo8(3)
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1081 0626 6817      		cp r22,r24
  1082 0628 01F0      		breq .L116
  1083               	.LM199:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 20
 
 
  1084 062a 6093 0000 		sts _fullLEDMode_saved,r22
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1138 0668 60E0      		ldi r22,lo8(gs(timerProcessCompareA))
  1139 066a 70E0      		ldi r23,hi8(gs(timerProcessCompareA))
  1140 066c 0E94 0000 		call timerAttach
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 21
 
 
  1141               	.LM210:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1195 06c6 89B7      		in r24,89-32
  1196 06c8 8061      		ori r24,lo8(16)
  1197 06ca 89BF      		out 89-32,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 22
 
 
  1198               	.LM224:
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1252               		.data
  1253               		.type	pwmMAX, @object
  1254               		.size	pwmMAX, 2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 23
 
 
  1255               	pwmMAX:
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1309 000b 7F        		.sleb128 -1
  1310 000c 24        		.byte	0x24
  1311 000d 0C        		.byte	0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 24
 
 
  1312 000e 20        		.uleb128 0x20
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1366               	.LASFDE12:
  1367 0074 0000 0000 		.long	.Lframe0
  1368 0078 0000 0000 		.long	.LFB18
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 25
 
 
  1369 007c 0400 0000 		.long	.LFE18-.LFB18
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1423 00e4 0000 0000 		.long	.Lframe0
  1424 00e8 0000 0000 		.long	.LFB23
  1425 00ec 6C00 0000 		.long	.LFE23-.LFB23
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 26
 
 
  1426               		.p2align	2
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1480 0158 0000 0000 		.long	.LFB32
  1481 015c 7801 0000 		.long	.LFE32-.LFB32
  1482               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 27
 
 
  1483               	.LEFDE40:
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1537 004e 93        		.byte	0x93
  1538 004f 01        		.uleb128 0x1
  1539 0050 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 28
 
 
  1540 0054 0000 0000 		.long	0x0
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1594 002e 06        		.byte	0x6
  1595 002f 0000 0000 		.long	.LASF1
  1596 0033 02        		.uleb128 0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 29
 
 
  1597 0034 02        		.byte	0x2
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1651 0094 01        		.byte	0x1
  1652 0095 7C        		.byte	0x7c
  1653 0096 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 30
 
 
  1654 0097 01        		.byte	0x1
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1708 0103 0000 0000 		.long	beyondFNDelayCounter.2480
  1709 0107 0D        		.uleb128 0xd
  1710 0108 0000 0000 		.long	.LASF17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 31
 
 
  1711 010c 01        		.byte	0x1
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1765 0178 01        		.byte	0x1
  1766 0179 33        		.byte	0x33
  1767 017a 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 32
 
 
  1768 017b 0000 0000 		.long	.LFB8
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1822 01ed 02        		.byte	0x2
  1823 01ee 90        		.byte	0x90
  1824 01ef 20        		.uleb128 0x20
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 33
 
 
  1825 01f0 12        		.uleb128 0x12
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1879 0262 01        		.byte	0x1
  1880 0263 0000 0000 		.long	.LFB10
  1881 0267 0000 0000 		.long	.LFE10
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 34
 
 
  1882 026b 02        		.byte	0x2
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1936 02d1 20        		.uleb128 0x20
  1937 02d2 E902 0000 		.long	0x2e9
  1938 02d6 0D        		.uleb128 0xd
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 35
 
 
  1939 02d7 0000 0000 		.long	.LASF37
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  1993 034c 6801 0000 		.long	0x168
  1994 0350 0000 0000 		.long	.LFB20
  1995 0354 0000 0000 		.long	.LFE20
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 36
 
 
  1996 0358 02        		.byte	0x2
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2050 03c3 1D        		.uleb128 0x1d
  2051 03c4 B000 0000 		.long	0xb0
  2052 03c8 0000 0000 		.long	.LBB28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 37
 
 
  2053 03cc 0000 0000 		.long	.LBE28
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2107 0451 A1        		.byte	0xa1
  2108 0452 01        		.byte	0x1
  2109 0453 0000 0000 		.long	.LFB21
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 38
 
 
  2110 0457 0000 0000 		.long	.LFE21
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2164 04cc 01        		.byte	0x1
  2165 04cd 1B        		.byte	0x1b
  2166 04ce 7200 0000 		.long	0x72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 39
 
 
  2167 04d2 05        		.byte	0x5
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2221 0544 05        		.byte	0x5
  2222 0545 03        		.byte	0x3
  2223 0546 0000 0000 		.long	_isDidSleep
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 40
 
 
  2224 054a 15        		.uleb128 0x15
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2278 05b9 77        		.byte	0x77
  2279 05ba C505 0000 		.long	0x5c5
  2280 05be 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 41
 
 
  2281 05bf 05        		.byte	0x5
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2335 001d 00        		.byte	0x0
  2336 001e 03        		.uleb128 0x3
  2337 001f 24        		.uleb128 0x24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 42
 
 
  2338 0020 00        		.byte	0x0
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2392 0056 0E        		.uleb128 0xe
  2393 0057 3A        		.uleb128 0x3a
  2394 0058 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 43
 
 
  2395 0059 3B        		.uleb128 0x3b
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2449 008f 34        		.uleb128 0x34
  2450 0090 00        		.byte	0x0
  2451 0091 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 44
 
 
  2452 0092 08        		.uleb128 0x8
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2506 00c8 0A        		.uleb128 0xa
  2507 00c9 01        		.uleb128 0x1
  2508 00ca 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 45
 
 
  2509 00cb 00        		.byte	0x0
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2563 0101 03        		.uleb128 0x3
  2564 0102 0E        		.uleb128 0xe
  2565 0103 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 46
 
 
  2566 0104 0B        		.uleb128 0xb
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2620 013a 40        		.uleb128 0x40
  2621 013b 0A        		.uleb128 0xa
  2622 013c 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 47
 
 
  2623 013d 00        		.byte	0x0
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2677 0173 40        		.uleb128 0x40
  2678 0174 0A        		.uleb128 0xa
  2679 0175 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 48
 
 
  2680 0176 13        		.uleb128 0x13
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2734 01ac 40        		.uleb128 0x40
  2735 01ad 0A        		.uleb128 0xa
  2736 01ae 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 49
 
 
  2737 01af 13        		.uleb128 0x13
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2791 01e5 01        		.uleb128 0x1
  2792 01e6 12        		.uleb128 0x12
  2793 01e7 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 50
 
 
  2794 01e8 00        		.byte	0x0
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2848 021e 3A        		.uleb128 0x3a
  2849 021f 0B        		.uleb128 0xb
  2850 0220 3B        		.uleb128 0x3b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 51
 
 
  2851 0221 0B        		.uleb128 0xb
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2886      6172 6541 
  2887 0090 0402 0000 		.long	0x204
  2888 0094 7365 7450 		.string	"setPWM"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 52
 
 
  2888      574D 00
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2911 0168 B305 0000 		.long	0x5b3
  2912 016c 7077 6D4D 		.string	"pwmMAX"
  2912      4158 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 53
 
 
  2913 0173 CA05 0000 		.long	0x5ca
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  2960 0045 00        		.byte	0x0
  2961 0046 6C65 6472 		.string	"ledrender.c"
  2961      656E 6465 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 54
 
 
  2961      722E 6300 
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3010 00ac 00        		.byte	0x0
  3011 00ad 05        		.uleb128 0x5
  3012 00ae 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 55
 
 
  3013 00af 0000 0000 		.long	.LM8
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3067 0106 02        		.byte	0x2
  3068 0107 0000 0000 		.long	.LM19
  3069 010b 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 56
 
 
  3070 010c 00        		.byte	0x0
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3124 0160 00        		.byte	0x0
  3125 0161 05        		.uleb128 0x5
  3126 0162 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 57
 
 
  3127 0163 0000 0000 		.long	.LM30
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3181 01bb 00        		.byte	0x0
  3182 01bc 05        		.uleb128 0x5
  3183 01bd 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 58
 
 
  3184 01be 0000 0000 		.long	.LM41
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3238 0215 00        		.byte	0x0
  3239 0216 05        		.uleb128 0x5
  3240 0217 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 59
 
 
  3241 0218 0000 0000 		.long	.LM52
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3295 026f 00        		.byte	0x0
  3296 0270 05        		.uleb128 0x5
  3297 0271 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 60
 
 
  3298 0272 0000 0000 		.long	.LM63
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3352 02c9 02        		.byte	0x2
  3353 02ca 0000 0000 		.long	.LM74
  3354 02ce 1B        		.byte	0x1b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 61
 
 
  3355 02cf 00        		.byte	0x0
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3409 0326 1B        		.byte	0x1b
  3410 0327 00        		.byte	0x0
  3411 0328 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 62
 
 
  3412 0329 02        		.byte	0x2
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3466 0380 05        		.uleb128 0x5
  3467 0381 02        		.byte	0x2
  3468 0382 0000 0000 		.long	.LM97
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 63
 
 
  3469 0386 01        		.byte	0x1
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3523 03da 0000 0000 		.long	.LM108
  3524 03de 15        		.byte	0x15
  3525 03df 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 64
 
 
  3526 03e0 05        		.uleb128 0x5
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3580 0437 00        		.byte	0x0
  3581 0438 05        		.uleb128 0x5
  3582 0439 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 65
 
 
  3583 043a 0000 0000 		.long	.LM120
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3637 0491 02        		.byte	0x2
  3638 0492 0000 0000 		.long	.LM131
  3639 0496 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 66
 
 
  3640 0497 00        		.byte	0x0
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3694 04ed 00        		.byte	0x0
  3695 04ee 05        		.uleb128 0x5
  3696 04ef 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 67
 
 
  3697 04f0 0000 0000 		.long	.LM142
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3751 0547 02        		.byte	0x2
  3752 0548 0000 0000 		.long	.LM153
  3753 054c 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 68
 
 
  3754 054d 00        		.byte	0x0
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3808 05a4 15        		.byte	0x15
  3809 05a5 00        		.byte	0x0
  3810 05a6 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 69
 
 
  3811 05a7 02        		.byte	0x2
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3865 05ff 15        		.byte	0x15
  3866 0600 00        		.byte	0x0
  3867 0601 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 70
 
 
  3868 0602 02        		.byte	0x2
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3922 0659 05        		.uleb128 0x5
  3923 065a 02        		.byte	0x2
  3924 065b 0000 0000 		.long	.LM187
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 71
 
 
  3925 065f 15        		.byte	0x15
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  3979 06b4 05        		.uleb128 0x5
  3980 06b5 02        		.byte	0x2
  3981 06b6 0000 0000 		.long	.LM198
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 72
 
 
  3982 06ba 15        		.byte	0x15
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4036 070e 02        		.byte	0x2
  4037 070f 0000 0000 		.long	.LM208
  4038 0713 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 73
 
 
  4039 0714 00        		.byte	0x0
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4093 076b 15        		.byte	0x15
  4094 076c 00        		.byte	0x0
  4095 076d 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 74
 
 
  4096 076e 02        		.byte	0x2
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4150 07c6 15        		.byte	0x15
  4151 07c7 00        		.byte	0x0
  4152 07c8 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 75
 
 
  4153 07c9 02        		.byte	0x2
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4189      6C4D 6178 
  4189      00
  4190               	.LASF6:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 76
 
 
  4191 0044 6C6F 6E67 		.string	"long long unsigned int"
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4213 00e6 6C6F 6E67 		.string	"long int"
  4213      2069 6E74 
  4213      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 77
 
 
  4214               	.LASF11:
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4237      4D6F 6465 
  4237      5F73 6176 
  4237      6564 00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 78
 
 
  4238               	.LASF63:
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4261      00
  4262               	.LASF65:
  4263 0232 6C65 6442 		.string	"ledBrightnessStep"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 79
 
 
  4263      7269 6768 
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4289      6C00 
  4290               	.LASF15:
  4291 02c7 6265 796F 		.string	"beyondFNCounter"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 80
 
 
  4291      6E64 464E 
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4313      7255 5C73 
  4313      6F75 7263 
  4314               	.LASF47:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 81
 
 
  4315 037d 696E 6974 		.string	"initFullLEDState"
@@ -4843,67 +4843,67 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 1
  4331      756C 6C4C 
  4332               	.global __do_copy_data
  4333               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 82
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ledrender.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:18     .text:00000000 setLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1297   .bss:0000001a LEDstate
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:33     .text:00000006 getLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:46     .text:0000000c clearLEDInited
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:18     .text:00000000 setLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1297   .bss:0000001a LEDstate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:33     .text:00000006 getLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:46     .text:0000000c clearLEDInited
                              .bss:00000004 ledInited
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:60     .text:00000012 stopTimer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:76     .text:0000001a startTimer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:92     .text:00000022 timerProcessCompareB
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1268   .bss:00000002 pwmValue
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:111    .text:00000032 timerProcessCompareA
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:125    .text:00000036 setPWM
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1299   .bss:0000001c prevPwmValue.2329
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:185    .text:0000008e setFullLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1284   .bss:0000000e _fullLEDMode
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1292   .bss:00000012 pwmCounter
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1293   .bss:00000014 pwmDir
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1290   .data:00000005 _ledBrightnessMax
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1294   .bss:00000016 downLevel
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1295   .bss:00000017 downLevelLife
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:250    .text:000000f4 changeFullLedState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1283   .bss:0000000c ledStateCount
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:277    .text:0000011a reduceLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:314    .text:0000014c increaseLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:359    .text:00000180 setLEDIndicate
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1298   .bss:0000001b prevSCRLED.2388
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1281   .bss:00000009 scrollLockLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:441    .text:000001e2 applyKeyDownForFullLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1296   .bss:00000018 downLevelStay
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:502    .text:0000024e getBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:530    .text:00000270 fadeLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:757    .text:00000440 fadePWM
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:771    .text:00000446 sleepLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1287   .bss:00000011 _isDidSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:812    .text:00000478 wakeUpLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:828    .text:00000482 doSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:884    .text:000004de renderLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1270   .bss:00000005 beyondFNDelayCounter.2480
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1274   .data:00000002 beyondFNCountDelay
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1280   .bss:00000007 beyondFNCounter.2479
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1278   .data:00000004 beyondFNLEDState.2481
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1282   .bss:0000000a counter.2514
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1285   .bss:0000000f _fullLEDMode_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1286   .bss:00000010 _ledBrightnessMax_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1123   .text:00000656 initFullLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1255   .data:00000000 pwmMAX
-C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s:1262   .bss:00000000 pwmMIN
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:60     .text:00000012 stopTimer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:76     .text:0000001a startTimer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:92     .text:00000022 timerProcessCompareB
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1268   .bss:00000002 pwmValue
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:111    .text:00000032 timerProcessCompareA
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:125    .text:00000036 setPWM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1299   .bss:0000001c prevPwmValue.2329
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:185    .text:0000008e setFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1284   .bss:0000000e _fullLEDMode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1292   .bss:00000012 pwmCounter
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1293   .bss:00000014 pwmDir
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1290   .data:00000005 _ledBrightnessMax
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1294   .bss:00000016 downLevel
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1295   .bss:00000017 downLevelLife
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:250    .text:000000f4 changeFullLedState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1283   .bss:0000000c ledStateCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:277    .text:0000011a reduceLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:314    .text:0000014c increaseLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:359    .text:00000180 setLEDIndicate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1298   .bss:0000001b prevSCRLED.2388
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1281   .bss:00000009 scrollLockLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:441    .text:000001e2 applyKeyDownForFullLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1296   .bss:00000018 downLevelStay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:502    .text:0000024e getBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:530    .text:00000270 fadeLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:757    .text:00000440 fadePWM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:771    .text:00000446 sleepLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1287   .bss:00000011 _isDidSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:812    .text:00000478 wakeUpLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:828    .text:00000482 doSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:884    .text:000004de renderLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1270   .bss:00000005 beyondFNDelayCounter.2480
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1274   .data:00000002 beyondFNCountDelay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1280   .bss:00000007 beyondFNCounter.2479
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1278   .data:00000004 beyondFNLEDState.2481
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1282   .bss:0000000a counter.2514
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1285   .bss:0000000f _fullLEDMode_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1286   .bss:00000010 _ledBrightnessMax_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1123   .text:00000656 initFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1255   .data:00000000 pwmMAX
+C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s:1262   .bss:00000000 pwmMIN
 
 UNDEFINED SYMBOLS
 __divmodhi4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccscEMFC.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccdNeibp.s 			page 83
 
 
 isSleep

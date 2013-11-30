@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 1
 
 
    1               		.file	"ps2main.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
   55 002a 01F0      		breq .L6
   56               	.LM10:
   57 002c 8091 0000 		lds r24,lastMAKE_SIZE
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 2
 
 
   58 0030 E82F      		mov r30,r24
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  112 0090 8091 0000 		lds r24,rear
  113 0094 9091 0000 		lds r25,(rear)+1
  114 0098 2817      		cp r18,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 3
 
 
  115 009a 3907      		cpc r19,r25
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  169 00de 1092 0000 		sts (front)+1,__zero_reg__
  170 00e2 1092 0000 		sts front,__zero_reg__
  171 00e6 1092 0000 		sts (rear)+1,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 4
 
 
  172 00ea 1092 0000 		sts rear,__zero_reg__
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  226 0132 8260      		ori r24,lo8(2)
  227 0134 8083      		st Z,r24
  228               	.L25:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 5
 
 
  229               	.LBB10:
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  283               	.LM39:
  284 016a FC01      		movw r30,r24
  285 016c E050      		subi r30,lo8(-(KFLA))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 6
 
 
  286 016e F040      		sbci r31,hi8(-(KFLA))
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  340               	.LVL22:
  341 01a2 01F4      		brne .L32
  342 01a4 20E0      		ldi r18,lo8(keycode_set2_proc_shift)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 7
 
 
  343 01a6 30E0      		ldi r19,hi8(keycode_set2_proc_shift)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  397               	.LM49:
  398 01d4 0E94 0000 		call isEmptyM
  399 01d8 90E0      		ldi r25,lo8(0)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 8
 
 
  400 01da 8823      		tst r24
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  454 020c 8756      		subi r24,lo8(-(-103))
  455               	.LVL33:
  456 020e 8830      		cpi r24,lo8(8)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 9
 
 
  457 0210 00F4      		brsh .L46
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  511               	.LM65:
  512 0252 FF20      		tst r15
  513 0254 01F4      		brne .+2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 10
 
 
  514 0256 00C0      		rjmp .L49
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  568 02b2 0E94 0000 		call push
  569               	.LM79:
  570 02b6 87E7      		ldi r24,lo8(119)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 11
 
 
  571 02b8 0E94 0000 		call push
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  625               	.LVL53:
  626 0308 E050      		subi r30,lo8(-(KFLA))
  627 030a F040      		sbci r31,hi8(-(KFLA))
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 12
 
 
  628               	.LVL54:
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  682               	.L59:
  683               	/* epilogue start */
  684               	.LM107:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 13
 
 
  685 0358 DF91      		pop r29
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  739               	.LVL66:
  740 0394 F82E      		mov r15,r24
  741               	.LVL67:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 14
 
 
  742               	.LM115:
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  796 03d8 4F92      		push r4
  797 03da 5F92      		push r5
  798 03dc 6F92      		push r6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 15
 
 
  799 03de 7F92      		push r7
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  853 0438 00C0      		rjmp .L76
  854               	.L99:
  855               	.LM132:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 16
 
 
  856 043a 0E94 0000 		call getLayer
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  910 0494 60E0      		ldi r22,lo8(0)
  911 0496 4C2D      		mov r20,r12
  912 0498 2C2F      		mov r18,r28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 17
 
 
  913 049a 0E94 0000 		call putKey
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  967               	.L90:
  968               	.LM149:
  969 04f0 EC2E      		mov r14,r28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 18
 
 
  970               	.LM150:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1024 0548 61E0      		ldi r22,lo8(1)
  1025 054a 00C0      		rjmp .L98
  1026               	.L89:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 19
 
 
  1027               	.LM160:
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1081 05a0 2131      		cpi r18,17
  1082 05a2 3105      		cpc r19,__zero_reg__
  1083 05a4 01F4      		brne .L92
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 20
 
 
  1084               	.LM166:
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1138               	.L101:
  1139               	.LM171:
  1140 05e0 0E94 0000 		call kbd_set_tx
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 21
 
 
  1141               	.LVL100:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1195 0622 AB2E      		mov r10,r27
  1196 0624 B12C      		mov r11,__zero_reg__
  1197 0626 C12C      		mov r12,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 22
 
 
  1198 0628 D12C      		mov r13,__zero_reg__
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1252 068a 3091 0000 		lds r19,(front)+1
  1253 068e 8091 0000 		lds r24,rear
  1254 0692 9091 0000 		lds r25,(rear)+1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 23
 
 
  1255 0696 2817      		cp r18,r24
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1309 06f0 00C0      		rjmp .L159
  1310 06f2 153F      		cpi r17,lo8(-11)
  1311 06f4 01F4      		brne .L114
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 24
 
 
  1312 06f6 00C0      		rjmp .L159
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1366 0746 0E94 0000 		call tx_state
  1367               	.LM203:
  1368 074a 0E94 0000 		call initInterfacePs2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 25
 
 
  1369 074e 00C0      		rjmp .L154
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1423               	.LVL109:
  1424 079e 00C0      		rjmp .L131
  1425               	.L132:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 26
 
 
  1426               	.LM210:
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1480               	.LM220:
  1481 07f0 0E94 0000 		call setLEDIndicate
  1482               	.LVL115:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 27
 
 
  1483               	.L159:
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1537               	.LM227:
  1538 0850 0E94 0000 		call pop
  1539 0854 282F      		mov r18,r24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 28
 
 
  1540 0856 30E0      		ldi r19,lo8(0)
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1594 08d0 1092 0000 		sts (loopCnt)+2,__zero_reg__
  1595 08d4 1092 0000 		sts (loopCnt)+3,__zero_reg__
  1596               	.LM235:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 29
 
 
  1597 08d8 1092 0000 		sts lastMAKE_IDX,__zero_reg__
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1651 0946 8091 0000 		lds r24,lastMAKE_IDX
  1652 094a 8823      		tst r24
  1653 094c 01F0      		breq .L150
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 30
 
 
  1654               	.L148:
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1708 09d4 82E0      		ldi r24,lo8(2)
  1709 09d6 00C0      		rjmp .L156
  1710               	.L139:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 31
 
 
  1711               	.LM251:
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1765               		.comm m_state,1,1
  1766               		.comm lastSent,1,1
  1767               		.comm lastState,1,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 32
 
 
  1768               		.comm KFLA,176,1
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1822               		.p2align	2
  1823               	.LEFDE8:
  1824               	.LSFDE10:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 33
 
 
  1825 0060 0C00 0000 		.long	.LEFDE10-.LASFDE10
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1879               	.LEFDE22:
  1880               	.LSFDE24:
  1881 00d0 0C00 0000 		.long	.LEFDE24-.LASFDE24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 34
 
 
  1882               	.LASFDE24:
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1936 0061 69        		.byte	0x69
  1937 0062 93        		.byte	0x93
  1938 0063 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 35
 
 
  1939 0064 6201 0000 		.long	.LVL12-.Ltext0
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  1993 00c4 C201 0000 		.long	.LVL27-.Ltext0
  1994 00c8 D001 0000 		.long	.LVL28-.Ltext0
  1995 00cc 0600      		.word	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 36
 
 
  1996 00ce 68        		.byte	0x68
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2050 0157 8A01 0000 		.long	.LVL18-.Ltext0
  2051 015b 9201 0000 		.long	.LVL19-.Ltext0
  2052 015f 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 37
 
 
  2053 0161 68        		.byte	0x68
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2107 01ed 0600      		.word	0x6
  2108 01ef 68        		.byte	0x68
  2109 01f0 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 38
 
 
  2110 01f1 01        		.uleb128 0x1
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2164 025e 0600      		.word	0x6
  2165 0260 61        		.byte	0x61
  2166 0261 93        		.byte	0x93
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 39
 
 
  2167 0262 01        		.uleb128 0x1
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2221 02c5 5803 0000 		.long	.LVL61-.Ltext0
  2222 02c9 0100      		.word	0x1
  2223 02cb 61        		.byte	0x61
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 40
 
 
  2224 02cc 5803 0000 		.long	.LVL61-.Ltext0
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2278 034e 9403 0000 		.long	.LVL66-.Ltext0
  2279 0352 CE03 0000 		.long	.LVL68-.Ltext0
  2280 0356 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 41
 
 
  2281 0358 61        		.byte	0x61
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2335 03eb 60        		.byte	0x60
  2336 03ec 0000 0000 		.long	0x0
  2337 03f0 0000 0000 		.long	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 42
 
 
  2338               	.LLST29:
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2392 047c 0000 0000 		.long	0x0
  2393 0480 0000 0000 		.long	0x0
  2394               	.LLST35:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 43
 
 
  2395 0484 D405 0000 		.long	.LVL98-.Ltext0
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2449 050f 93        		.byte	0x93
  2450 0510 01        		.uleb128 0x1
  2451 0511 65        		.byte	0x65
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 44
 
 
  2452 0512 93        		.byte	0x93
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2506 0578 0000 0000 		.long	0x0
  2507               	.LLST42:
  2508 057c E407 0000 		.long	.LVL113-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 45
 
 
  2509 0580 F007 0000 		.long	.LVL114-.Ltext0
@@ -2647,7 +2647,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2512 0587 0000 0000 		.long	0x0
  2513 058b 0000 0000 		.long	0x0
  2514               		.section	.debug_info
- 2515 0000 8D0C 0000 		.long	0xc8d
+ 2515 0000 8E0C 0000 		.long	0xc8e
  2516 0004 0200      		.word	0x2
  2517 0006 0000 0000 		.long	.Ldebug_abbrev0
  2518 000a 04        		.byte	0x4
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2563 0064 02        		.uleb128 0x2
  2564 0065 01        		.byte	0x1
  2565 0066 06        		.byte	0x6
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 46
 
 
  2566 0067 0000 0000 		.long	.LASF9
@@ -2725,7 +2725,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2587 008e 06        		.uleb128 0x6
  2588 008f 02        		.byte	0x2
  2589 0090 03        		.byte	0x3
- 2590 0091 1B        		.byte	0x1b
+ 2590 0091 1D        		.byte	0x1d
  2591 0092 1501 0000 		.long	0x115
  2592 0096 07        		.uleb128 0x7
  2593 0097 0000 0000 		.long	.LASF12
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2620 00d6 0000 0000 		.long	.LASF21
  2621 00da DE01      		.sleb128 222
  2622 00dc 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 47
 
 
  2623 00dd 0000 0000 		.long	.LASF22
@@ -2788,7 +2788,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2647 0115 06        		.uleb128 0x6
  2648 0116 02        		.byte	0x2
  2649 0117 03        		.byte	0x3
- 2650 0118 41        		.byte	0x41
+ 2650 0118 43        		.byte	0x43
  2651 0119 AE05 0000 		.long	0x5ae
  2652 011d 07        		.uleb128 0x7
  2653 011e 0000 0000 		.long	.LASF30
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2677 014e 0000 0000 		.long	.LASF38
  2678 0152 08        		.sleb128 8
  2679 0153 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 48
 
 
  2680 0154 0000 0000 		.long	.LASF39
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2734 01c0 0000 0000 		.long	.LASF57
  2735 01c4 1B        		.sleb128 27
  2736 01c5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 49
 
 
  2737 01c6 0000 0000 		.long	.LASF58
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2791 0232 0000 0000 		.long	.LASF76
  2792 0236 2E        		.sleb128 46
  2793 0237 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 50
 
 
  2794 0238 0000 0000 		.long	.LASF77
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2848 02a5 0000 0000 		.long	.LASF95
  2849 02a9 C100      		.sleb128 65
  2850 02ab 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 51
 
 
  2851 02ac 0000 0000 		.long	.LASF96
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2905 032a 0000 0000 		.long	.LASF114
  2906 032e D400      		.sleb128 84
  2907 0330 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 52
 
 
  2908 0331 0000 0000 		.long	.LASF115
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  2962 03af 0000 0000 		.long	.LASF133
  2963 03b3 E700      		.sleb128 103
  2964 03b5 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 53
 
 
  2965 03b6 0000 0000 		.long	.LASF134
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3019 0434 0000 0000 		.long	.LASF152
  3020 0438 FA00      		.sleb128 122
  3021 043a 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 54
 
 
  3022 043b 0000 0000 		.long	.LASF153
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3076 04b9 0000 0000 		.long	.LASF171
  3077 04bd 8D01      		.sleb128 141
  3078 04bf 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 55
 
 
  3079 04c0 0000 0000 		.long	.LASF172
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3133 053e 0000 0000 		.long	.LASF190
  3134 0542 A001      		.sleb128 160
  3135 0544 07        		.uleb128 0x7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 56
 
 
  3136 0545 0000 0000 		.long	.LASF191
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3190 05bd 7200 0000 		.long	0x72
  3191 05c1 02        		.byte	0x2
  3192 05c2 23        		.byte	0x23
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 57
 
 
  3193 05c3 00        		.uleb128 0x0
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3247 062c 5A        		.byte	0x5a
  3248 062d 01        		.byte	0x1
  3249 062e 7200 0000 		.long	0x72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 58
 
 
  3250 0632 0000 0000 		.long	.LFB9
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3304 06a0 0000 0000 		.long	.LBB10
  3305 06a4 0000 0000 		.long	.LBE10
  3306 06a8 C706 0000 		.long	0x6c7
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 59
 
 
  3307 06ac 14        		.uleb128 0x14
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3361 0730 0000 0000 		.long	.LASF214
  3362 0734 01        		.byte	0x1
  3363 0735 8E        		.byte	0x8e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 60
 
 
  3364 0736 7200 0000 		.long	0x72
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3418 07aa 0D        		.uleb128 0xd
  3419 07ab 0000 0000 		.long	.LASF212
  3420 07af 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 61
 
 
  3421 07b0 9C        		.byte	0x9c
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3475 0829 0101      		.word	0x101
  3476 082b 01        		.byte	0x1
  3477 082c 7200 0000 		.long	0x72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 62
 
 
  3478 0830 0000 0000 		.long	.LFB15
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3532 08b5 D305 0000 		.long	0x5d3
  3533 08b9 1B        		.uleb128 0x1b
  3534 08ba 726F 7700 		.string	"row"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 63
 
 
  3535 08be 01        		.byte	0x1
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3589 0948 7200 0000 		.long	0x72
  3590 094c 0C        		.uleb128 0xc
  3591 094d 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 64
 
 
  3592 094e 0000 0000 		.long	.LASF231
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3646 09c9 01        		.byte	0x1
  3647 09ca B801      		.word	0x1b8
  3648 09cc 6B00 0000 		.long	0x6b
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 65
 
 
  3649 09d0 0000 0000 		.long	.LLST40
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3703 0a58 00        		.byte	0x0
  3704 0a59 05        		.uleb128 0x5
  3705 0a5a 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 66
 
 
  3706 0a5b 07        		.byte	0x7
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3760 0acd 03        		.byte	0x3
  3761 0ace 0000 0000 		.long	lastMAKE_SIZE
  3762 0ad2 0E        		.uleb128 0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 67
 
 
  3763 0ad3 0000 0000 		.long	.LASF245
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3817 0b42 0000 0000 		.long	.LASF252
  3818 0b46 05        		.byte	0x5
  3819 0b47 40        		.byte	0x40
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 68
 
 
  3820 0b48 7200 0000 		.long	0x72
@@ -4034,7 +4034,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3830 0b5e 26        		.uleb128 0x26
  3831 0b5f 0000 0000 		.long	.LASF253
  3832 0b63 03        		.byte	0x3
- 3833 0b64 EF        		.byte	0xef
+ 3833 0b64 F1        		.byte	0xf1
  3834 0b65 6B0B 0000 		.long	0xb6b
  3835 0b69 01        		.byte	0x1
  3836 0b6a 01        		.byte	0x1
@@ -4048,146 +4048,146 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3844 0b7b 26        		.uleb128 0x26
  3845 0b7c 0000 0000 		.long	.LASF254
  3846 0b80 03        		.byte	0x3
- 3847 0b81 FD        		.byte	0xfd
+ 3847 0b81 FF        		.byte	0xff
  3848 0b82 880B 0000 		.long	0xb88
  3849 0b86 01        		.byte	0x1
  3850 0b87 01        		.byte	0x1
  3851 0b88 27        		.uleb128 0x27
  3852 0b89 700B 0000 		.long	0xb70
- 3853 0b8d 26        		.uleb128 0x26
+ 3853 0b8d 29        		.uleb128 0x29
  3854 0b8e 0000 0000 		.long	.LASF255
  3855 0b92 03        		.byte	0x3
- 3856 0b93 FF        		.byte	0xff
- 3857 0b94 9A0B 0000 		.long	0xb9a
- 3858 0b98 01        		.byte	0x1
- 3859 0b99 01        		.byte	0x1
- 3860 0b9a 27        		.uleb128 0x27
- 3861 0b9b 700B 0000 		.long	0xb70
- 3862 0b9f 29        		.uleb128 0x29
- 3863 0ba0 0000 0000 		.long	.LASF256
- 3864 0ba4 03        		.byte	0x3
- 3865 0ba5 0101      		.word	0x101
- 3866 0ba7 AD0B 0000 		.long	0xbad
- 3867 0bab 01        		.byte	0x1
- 3868 0bac 01        		.byte	0x1
- 3869 0bad 27        		.uleb128 0x27
- 3870 0bae 700B 0000 		.long	0xb70
- 3871 0bb2 29        		.uleb128 0x29
- 3872 0bb3 0000 0000 		.long	.LASF257
- 3873 0bb7 03        		.byte	0x3
- 3874 0bb8 0301      		.word	0x103
- 3875 0bba C00B 0000 		.long	0xbc0
- 3876 0bbe 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 69
+ 3856 0b93 0101      		.word	0x101
+ 3857 0b95 9B0B 0000 		.long	0xb9b
+ 3858 0b99 01        		.byte	0x1
+ 3859 0b9a 01        		.byte	0x1
+ 3860 0b9b 27        		.uleb128 0x27
+ 3861 0b9c 700B 0000 		.long	0xb70
+ 3862 0ba0 29        		.uleb128 0x29
+ 3863 0ba1 0000 0000 		.long	.LASF256
+ 3864 0ba5 03        		.byte	0x3
+ 3865 0ba6 0301      		.word	0x103
+ 3866 0ba8 AE0B 0000 		.long	0xbae
+ 3867 0bac 01        		.byte	0x1
+ 3868 0bad 01        		.byte	0x1
+ 3869 0bae 27        		.uleb128 0x27
+ 3870 0baf 700B 0000 		.long	0xb70
+ 3871 0bb3 29        		.uleb128 0x29
+ 3872 0bb4 0000 0000 		.long	.LASF257
+ 3873 0bb8 03        		.byte	0x3
+ 3874 0bb9 0501      		.word	0x105
+ 3875 0bbb C10B 0000 		.long	0xbc1
+ 3876 0bbf 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 69
 
 
- 3877 0bbf 01        		.byte	0x1
- 3878 0bc0 27        		.uleb128 0x27
- 3879 0bc1 700B 0000 		.long	0xb70
- 3880 0bc5 29        		.uleb128 0x29
- 3881 0bc6 0000 0000 		.long	.LASF258
- 3882 0bca 03        		.byte	0x3
- 3883 0bcb 0501      		.word	0x105
- 3884 0bcd D30B 0000 		.long	0xbd3
- 3885 0bd1 01        		.byte	0x1
- 3886 0bd2 01        		.byte	0x1
- 3887 0bd3 27        		.uleb128 0x27
- 3888 0bd4 700B 0000 		.long	0xb70
- 3889 0bd8 26        		.uleb128 0x26
- 3890 0bd9 0000 0000 		.long	.LASF259
- 3891 0bdd 06        		.byte	0x6
- 3892 0bde 55        		.byte	0x55
- 3893 0bdf E50B 0000 		.long	0xbe5
- 3894 0be3 01        		.byte	0x1
- 3895 0be4 01        		.byte	0x1
- 3896 0be5 2A        		.uleb128 0x2a
- 3897 0be6 2500 0000 		.long	0x25
- 3898 0bea 26        		.uleb128 0x26
- 3899 0beb 0000 0000 		.long	.LASF260
- 3900 0bef 07        		.byte	0x7
- 3901 0bf0 0D        		.byte	0xd
- 3902 0bf1 7200 0000 		.long	0x72
- 3903 0bf5 01        		.byte	0x1
- 3904 0bf6 01        		.byte	0x1
- 3905 0bf7 24        		.uleb128 0x24
- 3906 0bf8 3300 0000 		.long	0x33
- 3907 0bfc 070C 0000 		.long	0xc07
- 3908 0c00 25        		.uleb128 0x25
- 3909 0c01 590A 0000 		.long	0xa59
- 3910 0c05 0F        		.byte	0xf
- 3911 0c06 00        		.byte	0x0
- 3912 0c07 26        		.uleb128 0x26
- 3913 0c08 0000 0000 		.long	.LASF261
- 3914 0c0c 07        		.byte	0x7
- 3915 0c0d 0E        		.byte	0xe
- 3916 0c0e 140C 0000 		.long	0xc14
- 3917 0c12 01        		.byte	0x1
- 3918 0c13 01        		.byte	0x1
- 3919 0c14 27        		.uleb128 0x27
- 3920 0c15 F70B 0000 		.long	0xbf7
- 3921 0c19 24        		.uleb128 0x24
- 3922 0c1a 7200 0000 		.long	0x72
- 3923 0c1e 290C 0000 		.long	0xc29
- 3924 0c22 25        		.uleb128 0x25
- 3925 0c23 590A 0000 		.long	0xa59
- 3926 0c27 10        		.byte	0x10
- 3927 0c28 00        		.byte	0x0
- 3928 0c29 26        		.uleb128 0x26
- 3929 0c2a 0000 0000 		.long	.LASF262
- 3930 0c2e 07        		.byte	0x7
- 3931 0c2f 0F        		.byte	0xf
- 3932 0c30 190C 0000 		.long	0xc19
- 3933 0c34 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 70
+ 3877 0bc0 01        		.byte	0x1
+ 3878 0bc1 27        		.uleb128 0x27
+ 3879 0bc2 700B 0000 		.long	0xb70
+ 3880 0bc6 29        		.uleb128 0x29
+ 3881 0bc7 0000 0000 		.long	.LASF258
+ 3882 0bcb 03        		.byte	0x3
+ 3883 0bcc 0701      		.word	0x107
+ 3884 0bce D40B 0000 		.long	0xbd4
+ 3885 0bd2 01        		.byte	0x1
+ 3886 0bd3 01        		.byte	0x1
+ 3887 0bd4 27        		.uleb128 0x27
+ 3888 0bd5 700B 0000 		.long	0xb70
+ 3889 0bd9 26        		.uleb128 0x26
+ 3890 0bda 0000 0000 		.long	.LASF259
+ 3891 0bde 06        		.byte	0x6
+ 3892 0bdf 55        		.byte	0x55
+ 3893 0be0 E60B 0000 		.long	0xbe6
+ 3894 0be4 01        		.byte	0x1
+ 3895 0be5 01        		.byte	0x1
+ 3896 0be6 2A        		.uleb128 0x2a
+ 3897 0be7 2500 0000 		.long	0x25
+ 3898 0beb 26        		.uleb128 0x26
+ 3899 0bec 0000 0000 		.long	.LASF260
+ 3900 0bf0 07        		.byte	0x7
+ 3901 0bf1 0D        		.byte	0xd
+ 3902 0bf2 7200 0000 		.long	0x72
+ 3903 0bf6 01        		.byte	0x1
+ 3904 0bf7 01        		.byte	0x1
+ 3905 0bf8 24        		.uleb128 0x24
+ 3906 0bf9 3300 0000 		.long	0x33
+ 3907 0bfd 080C 0000 		.long	0xc08
+ 3908 0c01 25        		.uleb128 0x25
+ 3909 0c02 590A 0000 		.long	0xa59
+ 3910 0c06 0F        		.byte	0xf
+ 3911 0c07 00        		.byte	0x0
+ 3912 0c08 26        		.uleb128 0x26
+ 3913 0c09 0000 0000 		.long	.LASF261
+ 3914 0c0d 07        		.byte	0x7
+ 3915 0c0e 0E        		.byte	0xe
+ 3916 0c0f 150C 0000 		.long	0xc15
+ 3917 0c13 01        		.byte	0x1
+ 3918 0c14 01        		.byte	0x1
+ 3919 0c15 27        		.uleb128 0x27
+ 3920 0c16 F80B 0000 		.long	0xbf8
+ 3921 0c1a 24        		.uleb128 0x24
+ 3922 0c1b 7200 0000 		.long	0x72
+ 3923 0c1f 2A0C 0000 		.long	0xc2a
+ 3924 0c23 25        		.uleb128 0x25
+ 3925 0c24 590A 0000 		.long	0xa59
+ 3926 0c28 10        		.byte	0x10
+ 3927 0c29 00        		.byte	0x0
+ 3928 0c2a 26        		.uleb128 0x26
+ 3929 0c2b 0000 0000 		.long	.LASF262
+ 3930 0c2f 07        		.byte	0x7
+ 3931 0c30 0F        		.byte	0xf
+ 3932 0c31 1A0C 0000 		.long	0xc1a
+ 3933 0c35 01        		.byte	0x1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 70
 
 
- 3934 0c35 01        		.byte	0x1
- 3935 0c36 2B        		.uleb128 0x2b
- 3936 0c37 0000 0000 		.long	.LASF263
- 3937 0c3b 01        		.byte	0x1
- 3938 0c3c 31        		.byte	0x31
- 3939 0c3d 2500 0000 		.long	0x25
- 3940 0c41 01        		.byte	0x1
- 3941 0c42 05        		.byte	0x5
- 3942 0c43 03        		.byte	0x3
- 3943 0c44 0000 0000 		.long	txScanCode
- 3944 0c48 2B        		.uleb128 0x2b
- 3945 0c49 0000 0000 		.long	.LASF264
- 3946 0c4d 01        		.byte	0x1
- 3947 0c4e 32        		.byte	0x32
- 3948 0c4f 2500 0000 		.long	0x25
- 3949 0c53 01        		.byte	0x1
- 3950 0c54 05        		.byte	0x5
- 3951 0c55 03        		.byte	0x3
- 3952 0c56 0000 0000 		.long	m_state
- 3953 0c5a 2B        		.uleb128 0x2b
- 3954 0c5b 0000 0000 		.long	.LASF265
- 3955 0c5f 01        		.byte	0x1
- 3956 0c60 33        		.byte	0x33
- 3957 0c61 2500 0000 		.long	0x25
- 3958 0c65 01        		.byte	0x1
- 3959 0c66 05        		.byte	0x5
- 3960 0c67 03        		.byte	0x3
- 3961 0c68 0000 0000 		.long	lastSent
- 3962 0c6c 2B        		.uleb128 0x2b
- 3963 0c6d 0000 0000 		.long	.LASF266
- 3964 0c71 01        		.byte	0x1
- 3965 0c72 34        		.byte	0x34
- 3966 0c73 2500 0000 		.long	0x25
- 3967 0c77 01        		.byte	0x1
- 3968 0c78 05        		.byte	0x5
- 3969 0c79 03        		.byte	0x3
- 3970 0c7a 0000 0000 		.long	lastState
- 3971 0c7e 2B        		.uleb128 0x2b
- 3972 0c7f 0000 0000 		.long	.LASF267
- 3973 0c83 01        		.byte	0x1
- 3974 0c84 37        		.byte	0x37
- 3975 0c85 4E0B 0000 		.long	0xb4e
- 3976 0c89 01        		.byte	0x1
- 3977 0c8a 05        		.byte	0x5
- 3978 0c8b 03        		.byte	0x3
- 3979 0c8c 0000 0000 		.long	KFLA
- 3980 0c90 00        		.byte	0x0
+ 3934 0c36 01        		.byte	0x1
+ 3935 0c37 2B        		.uleb128 0x2b
+ 3936 0c38 0000 0000 		.long	.LASF263
+ 3937 0c3c 01        		.byte	0x1
+ 3938 0c3d 31        		.byte	0x31
+ 3939 0c3e 2500 0000 		.long	0x25
+ 3940 0c42 01        		.byte	0x1
+ 3941 0c43 05        		.byte	0x5
+ 3942 0c44 03        		.byte	0x3
+ 3943 0c45 0000 0000 		.long	txScanCode
+ 3944 0c49 2B        		.uleb128 0x2b
+ 3945 0c4a 0000 0000 		.long	.LASF264
+ 3946 0c4e 01        		.byte	0x1
+ 3947 0c4f 32        		.byte	0x32
+ 3948 0c50 2500 0000 		.long	0x25
+ 3949 0c54 01        		.byte	0x1
+ 3950 0c55 05        		.byte	0x5
+ 3951 0c56 03        		.byte	0x3
+ 3952 0c57 0000 0000 		.long	m_state
+ 3953 0c5b 2B        		.uleb128 0x2b
+ 3954 0c5c 0000 0000 		.long	.LASF265
+ 3955 0c60 01        		.byte	0x1
+ 3956 0c61 33        		.byte	0x33
+ 3957 0c62 2500 0000 		.long	0x25
+ 3958 0c66 01        		.byte	0x1
+ 3959 0c67 05        		.byte	0x5
+ 3960 0c68 03        		.byte	0x3
+ 3961 0c69 0000 0000 		.long	lastSent
+ 3962 0c6d 2B        		.uleb128 0x2b
+ 3963 0c6e 0000 0000 		.long	.LASF266
+ 3964 0c72 01        		.byte	0x1
+ 3965 0c73 34        		.byte	0x34
+ 3966 0c74 2500 0000 		.long	0x25
+ 3967 0c78 01        		.byte	0x1
+ 3968 0c79 05        		.byte	0x5
+ 3969 0c7a 03        		.byte	0x3
+ 3970 0c7b 0000 0000 		.long	lastState
+ 3971 0c7f 2B        		.uleb128 0x2b
+ 3972 0c80 0000 0000 		.long	.LASF267
+ 3973 0c84 01        		.byte	0x1
+ 3974 0c85 37        		.byte	0x37
+ 3975 0c86 4E0B 0000 		.long	0xb4e
+ 3976 0c8a 01        		.byte	0x1
+ 3977 0c8b 05        		.byte	0x5
+ 3978 0c8c 03        		.byte	0x3
+ 3979 0c8d 0000 0000 		.long	KFLA
+ 3980 0c91 00        		.byte	0x0
  3981               		.section	.debug_abbrev
  3982 0000 01        		.uleb128 0x1
  3983 0001 11        		.uleb128 0x11
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  3988 0006 0B        		.uleb128 0xb
  3989 0007 03        		.uleb128 0x3
  3990 0008 0E        		.uleb128 0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 71
 
 
  3991 0009 1B        		.uleb128 0x1b
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4045 003f 06        		.uleb128 0x6
  4046 0040 04        		.uleb128 0x4
  4047 0041 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 72
 
 
  4048 0042 0B        		.uleb128 0xb
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4102 0078 3B        		.uleb128 0x3b
  4103 0079 0B        		.uleb128 0xb
  4104 007a 49        		.uleb128 0x49
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 73
 
 
  4105 007b 13        		.uleb128 0x13
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4159 00b1 49        		.uleb128 0x49
  4160 00b2 13        		.uleb128 0x13
  4161 00b3 02        		.uleb128 0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 74
 
 
  4162 00b4 06        		.uleb128 0x6
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4216 00ea 11        		.uleb128 0x11
  4217 00eb 34        		.uleb128 0x34
  4218 00ec 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 75
 
 
  4219 00ed 03        		.uleb128 0x3
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4273 0123 12        		.uleb128 0x12
  4274 0124 01        		.uleb128 0x1
  4275 0125 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 76
 
 
  4276 0126 00        		.byte	0x0
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4330 015c 3B        		.uleb128 0x3b
  4331 015d 05        		.uleb128 0x5
  4332 015e 27        		.uleb128 0x27
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 77
 
 
  4333 015f 0C        		.uleb128 0xc
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4387 0195 02        		.uleb128 0x2
  4388 0196 06        		.uleb128 0x6
  4389 0197 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 78
 
 
  4390 0198 00        		.byte	0x0
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4444 01ce 2E        		.uleb128 0x2e
  4445 01cf 01        		.byte	0x1
  4446 01d0 3F        		.uleb128 0x3f
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 79
 
 
  4447 01d1 0C        		.uleb128 0xc
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4501 0207 02        		.uleb128 0x2
  4502 0208 0A        		.uleb128 0xa
  4503 0209 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 80
 
 
  4504 020a 00        		.byte	0x0
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4558 0240 0B        		.uleb128 0xb
  4559 0241 3B        		.uleb128 0x3b
  4560 0242 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 81
 
 
  4561 0243 49        		.uleb128 0x49
@@ -4838,7 +4838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4595 0000 0601 0000 		.long	0x106
  4596 0004 0200      		.word	0x2
  4597 0006 0000 0000 		.long	.Ldebug_info0
- 4598 000a 910C 0000 		.long	0xc91
+ 4598 000a 920C 0000 		.long	0xc92
  4599 000e EC05 0000 		.long	0x5ec
  4600 0012 7075 7368 		.string	"push"
  4600      00
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4610 0049 6861 734D 		.string	"hasMacroPs2"
  4610      6163 726F 
  4610      5073 3200 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 82
 
 
  4611 0055 7D07 0000 		.long	0x77d
@@ -4892,22 +4892,22 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4624 00be 7073 325F 		.string	"ps2_main"
  4624      6D61 696E 
  4624      00
- 4625 00c7 360C 0000 		.long	0xc36
+ 4625 00c7 370C 0000 		.long	0xc37
  4626 00cb 7478 5363 		.string	"txScanCode"
  4626      616E 436F 
  4626      6465 00
- 4627 00d6 480C 0000 		.long	0xc48
+ 4627 00d6 490C 0000 		.long	0xc49
  4628 00da 6D5F 7374 		.string	"m_state"
  4628      6174 6500 
- 4629 00e2 5A0C 0000 		.long	0xc5a
+ 4629 00e2 5B0C 0000 		.long	0xc5b
  4630 00e6 6C61 7374 		.string	"lastSent"
  4630      5365 6E74 
  4630      00
- 4631 00ef 6C0C 0000 		.long	0xc6c
+ 4631 00ef 6D0C 0000 		.long	0xc6d
  4632 00f3 6C61 7374 		.string	"lastState"
  4632      5374 6174 
  4632      6500 
- 4633 00fd 7E0C 0000 		.long	0xc7e
+ 4633 00fd 7F0C 0000 		.long	0xc7f
  4634 0101 4B46 4C41 		.string	"KFLA"
  4634      00
  4635 0106 0000 0000 		.long	0x0
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4640 000a 04        		.byte	0x4
  4641 000b 00        		.byte	0x0
  4642 000c 0000      		.word	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 83
 
 
  4643 000e 0000      		.word	0x0
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4689      00
  4690 005c 01        		.uleb128 0x1
  4691 005d 00        		.uleb128 0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 84
 
 
  4692 005e 00        		.uleb128 0x0
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4734 00c9 15        		.byte	0x15
  4735 00ca 00        		.byte	0x0
  4736 00cb 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 85
 
 
  4737 00cc 02        		.byte	0x2
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4791 0123 05        		.uleb128 0x5
  4792 0124 02        		.byte	0x2
  4793 0125 0000 0000 		.long	.LM16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 86
 
 
  4794 0129 15        		.byte	0x15
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4848 017d 0000 0000 		.long	.LM27
  4849 0181 15        		.byte	0x15
  4850 0182 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 87
 
 
  4851 0183 05        		.uleb128 0x5
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4905 01da 00        		.byte	0x0
  4906 01db 05        		.uleb128 0x5
  4907 01dc 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 88
 
 
  4908 01dd 0000 0000 		.long	.LM39
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  4962 0235 00        		.byte	0x0
  4963 0236 05        		.uleb128 0x5
  4964 0237 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 89
 
 
  4965 0238 0000 0000 		.long	.LM50
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5019 028d 0000 0000 		.long	.LM60
  5020 0291 15        		.byte	0x15
  5021 0292 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 90
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 90
 
 
  5022 0293 05        		.uleb128 0x5
@@ -5398,7 +5398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5076 02ea 00        		.byte	0x0
  5077 02eb 05        		.uleb128 0x5
  5078 02ec 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 91
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 91
 
 
  5079 02ed 0000 0000 		.long	.LM72
@@ -5458,7 +5458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5133 0344 02        		.byte	0x2
  5134 0345 0000 0000 		.long	.LM83
  5135 0349 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 92
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 92
 
 
  5136 034a 00        		.byte	0x0
@@ -5518,7 +5518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5190 03a1 15        		.byte	0x15
  5191 03a2 00        		.byte	0x0
  5192 03a3 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 93
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 93
 
 
  5193 03a4 02        		.byte	0x2
@@ -5578,7 +5578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5247 03fb 05        		.uleb128 0x5
  5248 03fc 02        		.byte	0x2
  5249 03fd 0000 0000 		.long	.LM106
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 94
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 94
 
 
  5250 0401 15        		.byte	0x15
@@ -5638,7 +5638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5304 0456 05        		.uleb128 0x5
  5305 0457 02        		.byte	0x2
  5306 0458 0000 0000 		.long	.LM117
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 95
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 95
 
 
  5307 045c 18        		.byte	0x18
@@ -5698,7 +5698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5361 04b0 05        		.uleb128 0x5
  5362 04b1 02        		.byte	0x2
  5363 04b2 0000 0000 		.long	.LM128
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 96
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 96
 
 
  5364 04b6 15        		.byte	0x15
@@ -5758,7 +5758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5418 050a 0000 0000 		.long	.LM139
  5419 050e 15        		.byte	0x15
  5420 050f 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 97
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 97
 
 
  5421 0510 05        		.uleb128 0x5
@@ -5818,7 +5818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5475 0564 0000 0000 		.long	.LM150
  5476 0568 1B        		.byte	0x1b
  5477 0569 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 98
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 98
 
 
  5478 056a 05        		.uleb128 0x5
@@ -5878,7 +5878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5532 05c1 65        		.sleb128 -27
  5533 05c2 01        		.byte	0x1
  5534 05c3 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 99
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 99
 
 
  5535 05c4 05        		.uleb128 0x5
@@ -5938,7 +5938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5589 0619 0000 0000 		.long	.LM172
  5590 061d 15        		.byte	0x15
  5591 061e 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 100
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 100
 
 
  5592 061f 05        		.uleb128 0x5
@@ -5998,7 +5998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5646 0675 05        		.uleb128 0x5
  5647 0676 02        		.byte	0x2
  5648 0677 0000 0000 		.long	.LM183
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 101
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 101
 
 
  5649 067b 15        		.byte	0x15
@@ -6058,7 +6058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5703 06cf 00        		.byte	0x0
  5704 06d0 05        		.uleb128 0x5
  5705 06d1 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 102
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 102
 
 
  5706 06d2 0000 0000 		.long	.LM193
@@ -6118,7 +6118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5760 0729 02        		.byte	0x2
  5761 072a 0000 0000 		.long	.LM204
  5762 072e 1A        		.byte	0x1a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 103
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 103
 
 
  5763 072f 00        		.byte	0x0
@@ -6178,7 +6178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5817 0786 18        		.byte	0x18
  5818 0787 00        		.byte	0x0
  5819 0788 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 104
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 104
 
 
  5820 0789 02        		.byte	0x2
@@ -6238,7 +6238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5874 07df 02        		.byte	0x2
  5875 07e0 0000 0000 		.long	.LM226
  5876 07e4 16        		.byte	0x16
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 105
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 105
 
 
  5877 07e5 00        		.byte	0x0
@@ -6298,7 +6298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5931 083c 1D        		.byte	0x1d
  5932 083d 00        		.byte	0x0
  5933 083e 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 106
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 106
 
 
  5934 083f 02        		.byte	0x2
@@ -6358,7 +6358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  5988 0895 02        		.byte	0x2
  5989 0896 0000 0000 		.long	.LM248
  5990 089a 17        		.byte	0x17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 107
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 107
 
 
  5991 089b 00        		.byte	0x0
@@ -6418,7 +6418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6035      00
  6036               	.LASF86:
  6037 001f 4B45 595F 		.string	"KEY_SLASH"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 108
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 108
 
 
  6037      534C 4153 
@@ -6478,7 +6478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6063 00ba 4B45 595F 		.string	"KEY_F11"
  6063      4631 3100 
  6064               	.LASF99:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 109
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 109
 
 
  6065 00c2 4B45 595F 		.string	"KEY_F12"
@@ -6538,7 +6538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6093      00
  6094               	.LASF106:
  6095 0162 4B45 595F 		.string	"KEY_DEL"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 110
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 110
 
 
  6095      4445 4C00 
@@ -6598,7 +6598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6120               	.LASF254:
  6121 01f4 6B65 7963 		.string	"keycode_set2_special"
  6121      6F64 655F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 111
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 111
 
 
  6121      7365 7432 
@@ -6658,7 +6658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6147      4C41 5348 
  6147      00
  6148               	.LASF109:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 112
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 112
 
 
  6149 029d 4B45 595F 		.string	"KEY_RIGHT"
@@ -6718,7 +6718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6175      6F64 6500 
  6176               	.LASF236:
  6177 0328 7465 6D70 		.string	"temp_b"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 113
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 113
 
 
  6177      5F62 00
@@ -6778,7 +6778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6205      484F 4D45 
  6205      00
  6206               	.LASF20:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 114
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 114
 
 
  6207 03b9 4B45 595F 		.string	"KEY_LSHIFT_HANJA"
@@ -6838,7 +6838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6231      4C45 00
  6232               	.LASF82:
  6233 0448 4B45 595F 		.string	"KEY_QUOTE"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 115
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 115
 
 
  6233      5155 4F54 
@@ -6898,7 +6898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6257      6978 00
  6258               	.LASF85:
  6259 04e2 4B45 595F 		.string	"KEY_DOT"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 116
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 116
 
 
  6259      444F 5400 
@@ -6958,7 +6958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6285 0575 4B45 595F 		.string	"KEY_0"
  6285      3000 
  6286               	.LASF60:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 117
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 117
 
 
  6287 057b 4B45 595F 		.string	"KEY_1"
@@ -7018,7 +7018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6320               	.LASF37:
  6321 05f0 4B45 595F 		.string	"KEY_D"
  6321      4400 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 118
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 118
 
 
  6322               	.LASF38:
@@ -7078,7 +7078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6357 0665 4B45 595F 		.string	"KEY_V"
  6357      5600 
  6358               	.LASF29:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 119
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 119
 
 
  6359 066b 4B45 595F 		.string	"KEY_dualAction_end"
@@ -7138,7 +7138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6385      5354 00
  6386               	.LASF160:
  6387 0703 4B45 595F 		.string	"KEY_VOL_DOWN"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 120
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 120
 
 
  6387      564F 4C5F 
@@ -7198,7 +7198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6411 07a2 7368 6F72 		.string	"short int"
  6411      7420 696E 
  6411      7400 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 121
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 121
 
 
  6412               	.LASF242:
@@ -7258,7 +7258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6437      4B50 5F36 
  6437      00
  6438               	.LASF125:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 122
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 122
 
 
  6439 0839 4B45 595F 		.string	"KEY_KP_7"
@@ -7318,7 +7318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6465      00
  6466               	.LASF122:
  6467 08c8 4B45 595F 		.string	"KEY_KP_4"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 123
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 123
 
 
  6467      4B50 5F34 
@@ -7378,7 +7378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6495 094d 4B45 595F 		.string	"KEY_INT3"
  6495      494E 5433 
  6495      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 124
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 124
 
 
  6496               	.LASF192:
@@ -7438,7 +7438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6525      4637 00
  6526               	.LASF95:
  6527 09d8 4B45 595F 		.string	"KEY_F8"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 125
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 125
 
 
  6527      4638 00
@@ -7498,7 +7498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6553      4572 726F 
  6553      7252 6F6C 
  6553      6C4F 7665 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 126
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 126
 
 
  6553      7200 
@@ -7546,48 +7546,48 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 1
  6573      00
  6574               	.global __do_copy_data
  6575               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 127
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 127
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ps2main.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:18     .text:00000000 push
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:18     .text:00000000 push
                              .bss:00000001 lastMAKE_SIZE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1759   .bss:0000000b record.2265
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1762   .bss:000000d5 lastMAKE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1758   .bss:00000009 rear
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1757   .bss:00000007 front
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1760   .bss:0000000c QUEUE
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:104    .text:00000088 pop
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:139    .text:000000c0 isEmpty
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:163    .text:000000de clear
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1753   .bss:00000002 lastMAKE_IDX
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1763   .bss:000000df loopCnt
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:199    .text:00000116 keymap_init
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1759   .bss:0000000b record.2265
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1762   .bss:000000d5 lastMAKE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1758   .bss:00000009 rear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1757   .bss:00000007 front
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1760   .bss:0000000c QUEUE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:104    .text:00000088 pop
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:139    .text:000000c0 isEmpty
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:163    .text:000000de clear
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1753   .bss:00000002 lastMAKE_IDX
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1763   .bss:000000df loopCnt
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:199    .text:00000116 keymap_init
                             *COM*:000000b0 KFLA
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:392    .text:000001d4 hasMacroPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:412    .text:000001e4 initInterfacePs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:431    .text:000001f4 pushKeyCode
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1756   .bss:00000006 gModifier.2361
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1761   .bss:000000d4 lastMAKE_keyidx
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:392    .text:000001d4 hasMacroPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:412    .text:000001e4 initInterfacePs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:431    .text:000001f4 pushKeyCode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1756   .bss:00000006 gModifier.2361
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1761   .bss:000000d4 lastMAKE_keyidx
                             *COM*:00000001 m_state
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:698    .text:00000364 prepareKeyMappingPs2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:722    .text:0000037e putKey
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:793    .text:000003d8 scanKeyPS2
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1755   .bss:00000005 _prevLayer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1124   .text:000005d4 tx_state
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:698    .text:00000364 prepareKeyMappingPs2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:722    .text:0000037e putKey
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:793    .text:000003d8 scanKeyPS2
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1755   .bss:00000005 _prevLayer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1124   .text:000005d4 tx_state
                             *COM*:00000001 lastSent
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1153   .text:000005ec ps2_main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1754   .bss:00000003 keyval.2479
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1744   .data:00000000 TYPEMATIC_DELAY
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1748   .data:00000001 TYPEMATIC_REPEAT
-C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s:1739   .bss:00000000 txScanCode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1153   .text:000005ec ps2_main
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1754   .bss:00000003 keyval.2479
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1744   .data:00000000 TYPEMATIC_DELAY
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1748   .data:00000001 TYPEMATIC_REPEAT
+C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s:1739   .bss:00000000 txScanCode
                             *COM*:00000001 lastState
 
 UNDEFINED SYMBOLS
@@ -7606,7 +7606,7 @@ getDualActionDownKeyIdex
 modmask
 applyKeyMapping
 keycode_set2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccpEaTHu.s 			page 128
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccoGSiVd.s 			page 128
 
 
 applyFN

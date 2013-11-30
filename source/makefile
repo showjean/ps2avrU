@@ -63,12 +63,17 @@ F_CPU = 12000000
 #assembler flags
 	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU)
 
+
 #compiler flags
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
 
 #linker flags
 	LDFLAGS = -Wl,-Map=$(TRG).map,--cref 
 #	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
+	KEYMAP_ADDRESS = 0x5000
+	LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
+	# MAIN_ADDRESS = 0x0200
+	# LDFLAGS += -Wl,--section-start=.text=$(MAIN_ADDRESS)
 
 	
 ########### you should not need to change the following line #############

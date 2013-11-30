@@ -198,7 +198,7 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 	KEY_NONE };
 
 
-const uint8_t PROGMEM keymap_code[LAYERS][ROWS][COLUMNS] =  {
+const uint8_t KEY_MATRIX_BASIC keymap_code[LAYERS][ROWS][COLUMNS] =  {
 	#ifdef KEYMAP_BOOT_MAPPER
 	0
 	#endif

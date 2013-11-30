@@ -638,6 +638,14 @@ void usb_main(void) {
 
 	uint8_t updateNeeded = 0;
     uint8_t idleCounter = 0;
+
+    uchar   i = 0;
+    usbDeviceDisconnect();  /* do this while interrupts are disabled */
+    do{             /* fake USB disconnect for > 250 ms */
+        // wdt_reset();
+        _delay_ms(1);
+    }while(--i);
+    usbDeviceConnect();
     
 	DEBUG_PRINT(("starting USB keyboard!!! \n"));
 
