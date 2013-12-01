@@ -153,13 +153,13 @@ void keymap_init(void)
 /* -----------------------------    Function  PS/2 ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-void pushKeyCode(uint8_t keyidx, uint8_t isDown)
+uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 {
 
      // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
     keyidx = getDualActionDownKeyIdex(keyidx);
 
-    if(keyidx >= KEY_MAX) return;
+    if(keyidx >= KEY_MAX) return 0;
 
 	static uint8_t gModifier = 0; 
 	if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { // Is this modifier keys? 
@@ -251,6 +251,7 @@ void pushKeyCode(uint8_t keyidx, uint8_t isDown)
 			push(SPLIT);
 		}
 	}
+	return 1;
 }
 
 // push the keycodes into the queue by its key index, and isDown

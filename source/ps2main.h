@@ -32,7 +32,7 @@
 #define NO_REPEAT  0xFD
 #define SPLIT      0xFC
 
-extern void pushKeyCode(uint8_t keyidx, uint8_t isDown);
+extern uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown);
 extern void prepareKeyMappingPs2(void);
 extern void ps2_main(void);
 

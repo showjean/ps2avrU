@@ -545,7 +545,7 @@ uint8_t scanKeyUSB(void) {
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBuffer(keyidx, 1);
+               makeReportBuffer(keyidx, 1);
 			}
 			
 		}
