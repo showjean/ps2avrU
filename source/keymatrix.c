@@ -140,8 +140,7 @@ uint8_t getLayer(void) {
 	// fn이 가장 우선, 다음 fn2
 
 	for(col=0;col<COLUMNS;col++)
-		for(row=0;row<ROWS;row++){			
-			//keyidx = pgm_read_byte(&keymap_code[_currentLayer][row][col]);
+		for(row=0;row<ROWS;row++){		
 			keyidx = getCurrentKeycode(_currentLayer, row, col);
 
 			if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) { 

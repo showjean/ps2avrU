@@ -447,7 +447,7 @@ static void blinkBeyondFNLED(uint8_t xIsBeyondFN) {
 	}
 }
 
-//
+#ifndef SCROLL_LOCK_LED_IS_APART
 static void blinkScrollLockLED(void) {
 	// for beyond fn
 	static int counter = 0;
@@ -474,6 +474,7 @@ static void blinkScrollLockLED(void) {
 		counter = 0;
 	}
 }
+#endif
 
 void sleepLED(void){
 	// DEBUG_PRINT(("sleepLED \n"));
@@ -523,8 +524,10 @@ void renderLED(uint8_t xIsBeyondFN) {
 	// for beyond fn
 	blinkBeyondFNLED(xIsBeyondFN);
 
+#ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led
 	blinkScrollLockLED();
+#endif
 
 	// LED 모드 저장.
 	writeLEDMode();

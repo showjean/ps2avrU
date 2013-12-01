@@ -189,7 +189,7 @@ int main(void) {
 					continue;
 				}
 #endif
-				keyidx = pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeycode(0, row, col);
+				keyidx = getKeyCode(0, row, col); //pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeycode(0, row, col);
 				if(keyidx == KEY_M) {
 					DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
 					readyKeyMappingOnBoot();

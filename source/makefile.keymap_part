@@ -27,20 +27,14 @@ F_CPU = 12000000
 #  Your "target" file is your C source file that is at the top level of your code.
 #  In other words, this is the file which contains your main() function.
 
-	TRG = keymain
+	TRG = keymap_part
 
 #put your C sourcefiles here 
 #  Here you must list any C source files which are used by your target file.
 #  They will be compiled in the order you list them, so it's probably best
 #  to list $(TRG).c, your top-level target file, last.
 
-	SRC = $(AVRLIB)/timer.c\
-			keysta.c \
-			usbdrv/usbdrv.c usbdrv/oddebug.c \
-			keymap.c \
-			ledrender.c sleep.c keymapper.c ps2avru_util.c \
-			macrobuffer.c keymatrix.c ps2main.c usbmain.c bootMapper.c\
-			udelay.c $(TRG).c \
+	SRC = $(TRG).c \
 
 
 #put additional assembler source file here
@@ -48,7 +42,7 @@ F_CPU = 12000000
 #  you would like to use from within your C programs.  The assembly code must be
 #  written in a special way to be usable as a function from your C code.
 
-	ASRC = usbdrv/usbdrvasm.s
+	ASRC = 
 
 #additional libraries and object files to link
 #  Libraries and object files are collections of functions which have already been
@@ -58,20 +52,21 @@ F_CPU = 12000000
 	LIB	=
 
 #additional includes to compile
-	INC	= usbdrv
+	INC	= 
 
 #assembler flags
 	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU)
 
 
 #compiler flags
-	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
+	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
 
 #linker flags
 	LDFLAGS = -Wl,-Map=$(TRG).map,--cref 
-#	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
-	# KEYMAP_ADDRESS = 0x6500
-	# LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
+	KEYMAP_ADDRESS = 0x6500
+	LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
+	MAIN_ADDRESS = 0x6700
+	LDFLAGS += -Wl,--section-start=.text=$(MAIN_ADDRESS)
 
 	
 ########### you should not need to change the following line #############

@@ -349,7 +349,6 @@ int scanKeyPS2(void) {
 		{
 			prev = prevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-			// keyidx = pgm_read_byte(&keymap_code[layer][row][col]);
 			keyidx = getCurrentKeycode(layer, row, col);
 
 			if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {

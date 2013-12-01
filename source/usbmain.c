@@ -486,7 +486,6 @@ uint8_t scanKeyUSB(void) {
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = prevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-			// keyidx = pgm_read_byte(&keymap_code[keymap][row][col]);
             keyidx = getCurrentKeycode(keymap, row, col);						
 			gFN = 1;
             

@@ -253,7 +253,7 @@ void enterFrameForMapper(void){
 
 static uint8_t getDefaultKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
-	return pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
+	return getKeyCode(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
 }
 
 static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
@@ -507,7 +507,7 @@ void loadCurrentLayer(void)
 	for(k = 0; k < ROWS; ++k){
 		for (j = 0; j < COLUMNS; ++j)
 		{
-			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
+			gAddress = EEPROM_MAPPING + (k * COLUMNS + j) + (ROWS * COLUMNS * _currentLayer);	// key
 			_newKeyMap[k][j] = eeprom_read_byte((uint8_t *)gAddress);
 		}
 	}
@@ -535,7 +535,7 @@ void saveCurrentLayerAfter(void)
 		for (j = 0; j < COLUMNS; ++j)
 		{
 			gKeyCode = _newKeyMap[k][j];	// value
-			gAddress = EEPROM_MAPPING + (k * 8 + j) + (136 * _currentLayer);	// key
+			gAddress = EEPROM_MAPPING + (k * COLUMNS + j) + (ROWS * COLUMNS * _currentLayer);	// key
 			eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
 		}
 	}

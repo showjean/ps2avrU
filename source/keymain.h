@@ -11,5 +11,6 @@
 
 #define ENABLE_BOOTMAPPER	// use bootmapper
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
+// #define SCROLL_LOCK_LED_IS_APART	// pd6 pin was connect
 
 #endif
