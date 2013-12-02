@@ -251,11 +251,19 @@ void enterFrameForMapper(void){
 
 }
 
+uint8_t isMacroKey(uint8_t xKeyidx){
+	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+// flashrom의 기본 키코드 반환(부트 매퍼);
 static uint8_t getDefaultKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	return getKeyCode(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
 }
-
+// eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
 static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
@@ -265,15 +273,7 @@ static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 	return gKeyIndex;
 }
 
-uint8_t isMacroKey(uint8_t xKeyidx){
-	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
-		return 1;
-	}else{
-		return 0;
-	}
-}
-
-uint8_t escapeMacroKeycode(uint8_t xKeyidx){
+static uint8_t escapeMacroKeycode(uint8_t xKeyidx){
 	if(isMacroKey(xKeyidx)){
 		return 0;
 	}
@@ -283,21 +283,24 @@ uint8_t escapeMacroKeycode(uint8_t xKeyidx){
 uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
-	if(_isKeyMapping ) {//&& _step != STEP_INPUT_MACRO){	// 키코드 입력 모드이거나 매크로 입력중이 아닐때 기본값을 이용한다.
-		// 기본 숫자키에 펌웨어로 매크로 키를 지정하면 제대로 작동되지 않는다.
-		// 또한 전혀 다른 레이아웃의 키보드에 와이어링한 기판이라면 매트릭스가 다를테니 기본값도 무의미하다. 이 경우 애초에 매핑도 하지 못하니 일단 제외.
-		gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
-		return gKeyIndex;
+	if(_isKeyMapping ) {	// 키매핑 중에는 달리 처리;
+		
+		if(isMacroInput()){			
+			// 매크로 입력 중에는 매핑된 키코드를 사용;
+			// 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
+			gKeyIndex = getMappingKeyCode(xLayer, xRow, xCol);	
+			gKeyIndex = escapeMacroKeycode(gKeyIndex);
+		}else{
+			// 키 매핑 중에는 숫자키만을 이용하므로, 기본 키맵을 이용하도록 한다.
+			gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
+
+			return gKeyIndex;
+		}
+	}else{
+		gKeyIndex = getMappingKeyCode(xLayer, xRow, xCol);	
 	}
 
-	gKeyIndex = getMappingKeyCode(xLayer, xRow, xCol);	
-	
-	if(_isKeyMapping && _step == STEP_INPUT_MACRO){
-		// 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
-		gKeyIndex = escapeMacroKeycode(gKeyIndex);
-	}
-
-	if(gKeyIndex == 0 || gKeyIndex >= 255){		
+	if(gKeyIndex < 1 || gKeyIndex > 254){		
 		gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
 	}
 

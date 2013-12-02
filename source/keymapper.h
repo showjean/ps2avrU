@@ -104,8 +104,6 @@ extern void enterFrameForMapper(void);
 
 extern uint8_t isMacroKey(uint8_t xKeyidx);
 
-extern uint8_t escapeMacroKeycode(uint8_t xKeyidx);
-
 extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 
 ////////////////////////////////////////////////////////////////////////////////////////
