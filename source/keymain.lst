@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 1
 
 
    1               		.file	"keymain.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
   55               	.LM8:
   56 001c 8D98      		cbi 49-32,5
   57               	.LM9:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 2
 
 
   58 001e 959A      		sbi 50-32,5
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  112               	.LM22:
  113 004a 1F91      		pop r17
  114               	.LVL5:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 3
 
 
  115 004c 0895      		ret
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  169 0084 0E94 0000 		call _delay_us_m
  170               	.LM40:
  171 0088 81B3      		in r24,49-32
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 4
 
 
  172 008a 837F      		andi r24,lo8(-13)
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  226               		.size	clearInterface, .-clearInterface
  227               		.data
  228               	.LC0:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 5
 
 
  229 0000 2E2E 2E2E 		.string	"...........readyKeyMappingOnBoot "
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  269               	.LM57:
  270 00e0 1BB8      		out 43-32,__zero_reg__
  271               	.LM58:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 6
 
 
  272 00e2 88E0      		ldi r24,lo8(8)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  326 012c 00C0      		rjmp .L23
  327               	.LVL12:
  328               	.L28:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 7
 
 
  329               	.LM73:
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  383               	.LM84:
  384 0178 8331      		cpi r24,lo8(19)
  385 017a 01F4      		brne .L24
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 8
 
 
  386               	.LM85:
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  440               	.LVL26:
  441 01ca ADB7      		in r26,__SP_L__
  442 01cc BEB7      		in r27,__SP_H__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 9
 
 
  443 01ce 1296      		adiw r26,1+1
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  497 0226 00C0      		rjmp .L35
  498               	.LM102:
  499 0228 92FD      		sbrc r25,2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 10
 
 
  500 022a 00C0      		rjmp .L55
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  554               	.LVL31:
  555 027a 0F90      		pop __tmp_reg__
  556 027c 0F90      		pop __tmp_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 11
 
 
  557 027e 0F90      		pop __tmp_reg__
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  611               	/* #NOAPP */
  612               	.LBE28:
  613               	.LBE29:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 12
 
 
  614               	.LM120:
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  668 0004 FFFF FFFF 		.long	0xffffffff
  669 0008 01        		.byte	0x1
  670 0009 00        		.string	""
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 13
 
 
  671 000a 01        		.uleb128 0x1
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  725               		.p2align	2
  726               	.LEFDE10:
  727               	.LSFDE12:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 14
 
 
  728 0070 0C00 0000 		.long	.LEFDE12-.LASFDE12
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  782 0063 68        		.byte	0x68
  783 0064 9E00 0000 		.long	.LVL8-.Ltext0
  784 0068 A400 0000 		.long	.LFE13-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 15
 
 
  785 006c 0100      		.word	0x1
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  839 00fd 2402 0000 		.long	.LVL29-.Ltext0
  840 0101 7A02 0000 		.long	.LVL31-.Ltext0
  841 0105 0100      		.word	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 16
 
 
  842 0107 69        		.byte	0x69
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  896 003f 02        		.byte	0x2
  897 0040 07        		.byte	0x7
  898 0041 0000 0000 		.long	.LASF2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 17
 
 
  899 0045 03        		.uleb128 0x3
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  953 00ab 23        		.byte	0x23
  954 00ac 00        		.uleb128 0x0
  955 00ad 08        		.uleb128 0x8
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 18
 
 
  956 00ae 0000 0000 		.long	.LASF12
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1010 0113 0C        		.uleb128 0xc
  1011 0114 00        		.byte	0x0
  1012 0115 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 19
 
 
  1013 0116 02        		.byte	0x2
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1067 017f 04        		.sleb128 4
  1068 0180 11        		.uleb128 0x11
  1069 0181 0000 0000 		.long	.LASF21
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 20
 
 
  1070 0185 05        		.sleb128 5
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1124 01f1 17        		.sleb128 23
  1125 01f2 11        		.uleb128 0x11
  1126 01f3 0000 0000 		.long	.LASF40
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 21
 
 
  1127 01f7 18        		.sleb128 24
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1181 0263 2A        		.sleb128 42
  1182 0264 11        		.uleb128 0x11
  1183 0265 0000 0000 		.long	.LASF59
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 22
 
 
  1184 0269 2B        		.sleb128 43
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1238 02d5 3D        		.sleb128 61
  1239 02d6 11        		.uleb128 0x11
  1240 02d7 0000 0000 		.long	.LASF78
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 23
 
 
  1241 02db 3E        		.sleb128 62
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1295 0357 D000      		.sleb128 80
  1296 0359 11        		.uleb128 0x11
  1297 035a 0000 0000 		.long	.LASF97
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 24
 
 
  1298 035e D100      		.sleb128 81
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1352 03dc E300      		.sleb128 99
  1353 03de 11        		.uleb128 0x11
  1354 03df 0000 0000 		.long	.LASF116
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 25
 
 
  1355 03e3 E400      		.sleb128 100
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1409 0461 F600      		.sleb128 118
  1410 0463 11        		.uleb128 0x11
  1411 0464 0000 0000 		.long	.LASF135
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 26
 
 
  1412 0468 F700      		.sleb128 119
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1466 04e6 8901      		.sleb128 137
  1467 04e8 11        		.uleb128 0x11
  1468 04e9 0000 0000 		.long	.LASF154
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 27
 
 
  1469 04ed 8A01      		.sleb128 138
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1523 056b 9C01      		.sleb128 156
  1524 056d 11        		.uleb128 0x11
  1525 056e 0000 0000 		.long	.LASF173
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 28
 
 
  1526 0572 9D01      		.sleb128 157
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1580 05f0 AF01      		.sleb128 175
  1581 05f2 00        		.byte	0x0
  1582 05f3 12        		.uleb128 0x12
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 29
 
 
  1583 05f4 0000 0000 		.long	.LASF194
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1637 0657 17        		.uleb128 0x17
  1638 0658 17        		.uleb128 0x17
  1639 0659 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 30
 
 
  1640 065a 03        		.uleb128 0x3
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1694 06cd E106 0000 		.long	0x6e1
  1695 06d1 1D        		.uleb128 0x1d
  1696 06d2 0000 0000 		.long	.LASF203
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 31
 
 
  1697 06d6 02        		.byte	0x2
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1751 074b 0000 0000 		.long	.LFE14
  1752 074f 02        		.byte	0x2
  1753 0750 90        		.byte	0x90
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 32
 
 
  1754 0751 20        		.uleb128 0x20
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1808 07bd 02        		.byte	0x2
  1809 07be E6        		.byte	0xe6
  1810 07bf 7D00 0000 		.long	0x7d
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 33
 
 
  1811 07c3 0000 0000 		.long	.LLST13
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1865 0842 00        		.byte	0x0
  1866 0843 2F        		.uleb128 0x2f
  1867 0844 0000 0000 		.long	.LASF211
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 34
 
 
  1868 0848 06        		.byte	0x6
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1922 0014 16        		.uleb128 0x16
  1923 0015 00        		.byte	0x0
  1924 0016 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 35
 
 
  1925 0017 08        		.uleb128 0x8
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  1979 004d 0B        		.uleb128 0xb
  1980 004e 01        		.uleb128 0x1
  1981 004f 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 36
 
 
  1982 0050 00        		.byte	0x0
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2036 0086 3B        		.uleb128 0x3b
  2037 0087 05        		.uleb128 0x5
  2038 0088 49        		.uleb128 0x49
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 37
 
 
  2039 0089 13        		.uleb128 0x13
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2093 00bf 0B        		.uleb128 0xb
  2094 00c0 3B        		.uleb128 0x3b
  2095 00c1 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 38
 
 
  2096 00c2 01        		.uleb128 0x1
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2150 00f8 27        		.uleb128 0x27
  2151 00f9 0C        		.uleb128 0xc
  2152 00fa 20        		.uleb128 0x20
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 39
 
 
  2153 00fb 0B        		.uleb128 0xb
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2207 0131 0A        		.uleb128 0xa
  2208 0132 01        		.uleb128 0x1
  2209 0133 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 40
 
 
  2210 0134 00        		.byte	0x0
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2264 016a 3B        		.uleb128 0x3b
  2265 016b 0B        		.uleb128 0xb
  2266 016c 27        		.uleb128 0x27
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 41
 
 
  2267 016d 0C        		.uleb128 0xc
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2321 01a3 12        		.uleb128 0x12
  2322 01a4 01        		.uleb128 0x1
  2323 01a5 58        		.uleb128 0x58
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 42
 
 
  2324 01a6 0B        		.uleb128 0xb
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2378 01dc 03        		.uleb128 0x3
  2379 01dd 0E        		.uleb128 0xe
  2380 01de 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 43
 
 
  2381 01df 0B        		.uleb128 0xb
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2435 0215 01        		.byte	0x1
  2436 0216 31        		.uleb128 0x31
  2437 0217 13        		.uleb128 0x13
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 44
 
 
  2438 0218 55        		.uleb128 0x55
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2492 024e 31        		.uleb128 0x31
  2493 024f 13        		.uleb128 0x13
  2494 0250 02        		.uleb128 0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 45
 
 
  2495 0251 06        		.uleb128 0x6
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2549 0004 0200      		.word	0x2
  2550 0006 0000 0000 		.long	.Ldebug_info0
  2551 000a 8808 0000 		.long	0x888
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 46
 
 
  2552 000e 9906 0000 		.long	0x699
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2588 0014 0000 0000 		.long	0x0
  2589 0018 8202 0000 		.long	.LBB25-.Ltext0
  2590 001c 8602 0000 		.long	.LBE25-.Ltext0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 47
 
 
  2591 0020 B402 0000 		.long	.LBB30-.Ltext0
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2632      6300 
  2633 0097 00        		.uleb128 0x0
  2634 0098 00        		.uleb128 0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 48
 
 
  2635 0099 00        		.uleb128 0x0
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2674 0107 02        		.byte	0x2
  2675 0108 0000 0000 		.long	.LM3
  2676 010c 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 49
 
 
  2677 010d 00        		.byte	0x0
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2731 0161 02        		.byte	0x2
  2732 0162 0000 0000 		.long	.LM14
  2733 0166 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 50
 
 
  2734 0167 00        		.byte	0x0
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2788 01be 15        		.byte	0x15
  2789 01bf 00        		.byte	0x0
  2790 01c0 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 51
 
 
  2791 01c1 02        		.byte	0x2
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2845 0218 05        		.uleb128 0x5
  2846 0219 02        		.byte	0x2
  2847 021a 0000 0000 		.long	.LM37
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 52
 
 
  2848 021e 15        		.byte	0x15
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2902 0273 05        		.uleb128 0x5
  2903 0274 02        		.byte	0x2
  2904 0275 0000 0000 		.long	.LM48
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 53
 
 
  2905 0279 15        		.byte	0x15
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  2959 02ce 15        		.byte	0x15
  2960 02cf 00        		.byte	0x0
  2961 02d0 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 54
 
 
  2962 02d1 02        		.byte	0x2
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3016 0328 15        		.byte	0x15
  3017 0329 00        		.byte	0x0
  3018 032a 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 55
 
 
  3019 032b 02        		.byte	0x2
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3073 0382 05        		.uleb128 0x5
  3074 0383 02        		.byte	0x2
  3075 0384 0000 0000 		.long	.LM81
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 56
 
 
  3076 0388 15        		.byte	0x15
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3130 03dc 05        		.uleb128 0x5
  3131 03dd 02        		.byte	0x2
  3132 03de 0000 0000 		.long	.LM92
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 57
 
 
  3133 03e2 17        		.byte	0x17
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3187 0436 0000 0000 		.long	.LM103
  3188 043a 15        		.byte	0x15
  3189 043b 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 58
 
 
  3190 043c 05        		.uleb128 0x5
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3244 0491 C0        		.byte	0xc0
  3245 0492 00        		.byte	0x0
  3246 0493 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 59
 
 
  3247 0494 02        		.byte	0x2
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3301 04e6 0000 0000 		.long	.LM123
  3302 04ea 16        		.byte	0x16
  3303 04eb 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 60
 
 
  3304 04ec 05        		.uleb128 0x5
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3341 0052 4B45 595F 		.string	"KEY_F14"
  3341      4631 3400 
  3342               	.LASF163:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 61
 
 
  3343 005a 4B45 595F 		.string	"KEY_F15"
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3372               	.LASF67:
  3373 00ec 4B45 595F 		.string	"KEY_COLON"
  3373      434F 4C4F 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 62
 
 
  3373      4E00 
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3399      5249 5445 
  3399      00
  3400               	.LASF5:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 63
 
 
  3401 018c 6C6F 6E67 		.string	"long int"
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3427      00
  3428               	.LASF125:
  3429 0218 4B45 595F 		.string	"KEY_RALT"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 64
 
 
  3429      5241 4C54 
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3457 02a5 7365 7455 		.string	"setUsbOff"
  3457      7362 4F66 
  3457      6600 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 65
 
 
  3458               	.LASF219:
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3483 033c 7369 7A65 		.string	"size"
  3483      00
  3484               	.LASF2:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 66
 
 
  3485 0341 7368 6F72 		.string	"short unsigned int"
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3511 03d1 4B45 595F 		.string	"KEY_Multimedia_end"
  3511      4D75 6C74 
  3511      696D 6564 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 67
 
 
  3511      6961 5F65 
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3541      4D49 4E55 
  3541      5300 
  3542               	.LASF144:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 68
 
 
  3543 0460 4B45 595F 		.string	"KEY_MUTE"
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3577      4F00 
  3578               	.LASF35:
  3579 04d2 4B45 595F 		.string	"KEY_P"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 69
 
 
  3579      5000 
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3611      5354 00
  3612               	.LASF146:
  3613 0555 4B45 595F 		.string	"KEY_VOL_DOWN"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 70
 
 
  3613      564F 4C5F 
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3639 05e7 4B45 595F 		.string	"KEY_PAUSE"
  3639      5041 5553 
  3639      4500 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 71
 
 
  3640               	.LASF105:
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3668               	.LASF109:
  3669 066e 4B45 595F 		.string	"KEY_KP_5"
  3669      4B50 5F35 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 72
 
 
  3669      00
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3695      494E 5431 
  3695      00
  3696               	.LASF176:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 73
 
 
  3697 0704 4B45 595F 		.string	"KEY_INT2"
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3727 077f 4B45 595F 		.string	"KEY_F7"
  3727      4637 00
  3728               	.LASF81:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 74
 
 
  3729 0786 4B45 595F 		.string	"KEY_F8"
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3757 0816 6D61 696E 		.string	"main"
  3757      00
  3758               	.LASF216:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 75
 
 
  3759 081b 6B65 796D 		.string	"keymain.c"
@@ -4474,28 +4474,28 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 1
  3771      636B 7300 
  3772               	.global __do_copy_data
  3773               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s 			page 76
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keymain.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:17     .text:00000000 uart_putchar
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:50     .text:0000001c setUsbOn
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:66     .text:00000022 setUsbOff
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:82     .text:00000028 clearTimers
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:119    .text:0000004e initHardware
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:204    .text:000000a4 clearInterface
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:641    .bss:00000000 interfaceCount
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:647    .bss:00000002 interfaceReady
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:241    .text:000000b8 main
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:657    .data:00000061 mystdout
-C:\Users\ADMINI~1\AppData\Local\Temp/ccSxsHok.s:653    .data:00000060 INTERFACE
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:17     .text:00000000 uart_putchar
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:50     .text:0000001c setUsbOn
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:66     .text:00000022 setUsbOff
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:82     .text:00000028 clearTimers
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:119    .text:0000004e initHardware
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:204    .text:000000a4 clearInterface
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:641    .bss:00000000 interfaceCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:647    .bss:00000002 interfaceReady
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:241    .text:000000b8 main
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:657    .data:00000061 mystdout
+C:\Users\ADMINI~1\AppData\Local\Temp/ccsxVA1a.s:653    .data:00000060 INTERFACE
 
 UNDEFINED SYMBOLS
 timerDetach

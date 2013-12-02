@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 1
 
 
    1               		.file	"ledrender.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
   55 0010 0895      		ret
   56               	.LFE15:
   57               		.size	clearLEDInited, .-clearLEDInited
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 2
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 2
 
 
   58               	.global	stopTimer
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  112               	.LFB19:
  113               	.LM19:
  114               	/* prologue: function */
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 3
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 3
 
 
  115               	/* frame size = 0 */
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  169               	.L19:
  170 007a 8EBD      		out 78-32,r24
  171               	.L17:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 4
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 4
 
 
  172               	.LBE27:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  226 00ca 83E0      		ldi r24,lo8(3)
  227 00cc 8093 0000 		sts downLevel,r24
  228               	.LM41:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 5
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 5
 
 
  229 00d0 9430      		cpi r25,lo8(4)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  283 011a 8091 0000 		lds r24,_ledBrightnessMax
  284 011e 8E31      		cpi r24,lo8(30)
  285 0120 01F0      		breq .L34
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 6
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 6
 
 
  286               	.LM50:
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  340 0166 8091 0000 		lds r24,_fullLEDMode
  341               	.LVL6:
  342 016a 8230      		cpi r24,lo8(2)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 7
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 7
 
 
  343 016c 01F4      		brne .L39
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  397 01ac 01F4      		brne .L52
  398 01ae 00C0      		rjmp .L55
  399               	.L46:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 8
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 8
 
 
  400               	.LM75:
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  454 01f2 8093 0000 		sts downLevelStay,r24
  455               	.LM88:
  456 01f6 8091 0000 		lds r24,downLevel
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 9
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 9
 
 
  457 01fa 8C30      		cpi r24,lo8(12)
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  511 0254 AC01      		movw r20,r24
  512 0256 429F      		mul r20,r18
  513 0258 C001      		movw r24,r0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 10
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 10
 
 
  514 025a 439F      		mul r20,r19
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  568 02ba 9095      		com r25
  569 02bc 8195      		neg r24
  570 02be 9F4F      		sbci r25,lo8(-1)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 11
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 11
 
 
  571 02c0 8150      		subi r24,lo8(-(255))
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  625 0334 9091 0000 		lds r25,(downLevelStay)+1
  626 0338 0097      		sbiw r24,0
  627 033a 01F0      		breq .L72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 12
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 12
 
 
  628               	.LM113:
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  682 03aa 8091 0000 		lds r24,downLevelStay
  683 03ae 9091 0000 		lds r25,(downLevelStay)+1
  684 03b2 0097      		sbiw r24,0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 13
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 13
 
 
  685 03b4 01F0      		breq .L76
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  739               	.LM135:
  740 0426 1092 0000 		sts (pwmCounter)+1,__zero_reg__
  741 042a 1092 0000 		sts pwmCounter,__zero_reg__
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 14
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 14
 
 
  742               	.LM136:
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  796 0464 01F0      		breq .L88
  797 0466 8330      		cpi r24,lo8(3)
  798 0468 01F4      		brne .L89
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 15
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 15
 
 
  799               	.L88:
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  853 04b0 90E0      		ldi r25,lo8(0)
  854 04b2 0E94 0000 		call setPWM
  855               	.LM157:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 16
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 16
 
 
  856 04b6 87E0      		ldi r24,hi8(2040)
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  910 04fe 8823      		tst r24
  911 0500 01F0      		breq .L100
  912 0502 42E0      		ldi r20,lo8(2)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 17
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 17
 
 
  913               	.LVL12:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  967               	.LM177:
  968 0564 9130      		cpi r25,lo8(1)
  969 0566 01F4      		brne .L107
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 18
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 18
 
 
  970               	.LM178:
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1024               	.LM188:
  1025 05c4 2530      		cpi r18,lo8(5)
  1026 05c6 01F0      		breq .L120
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 19
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 19
 
 
  1027 05c8 2330      		cpi r18,lo8(3)
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1081 0626 6817      		cp r22,r24
  1082 0628 01F0      		breq .L116
  1083               	.LM199:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 20
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 20
 
 
  1084 062a 6093 0000 		sts _fullLEDMode_saved,r22
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1134 065a 8823      		tst r24
  1135 065c 01F0      		breq .+2
  1136 065e 00C0      		rjmp .L125
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 21
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 21
 
 
  1137               	.LM208:
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1191               	.LM221:
  1192 06bc 8FB5      		in r24,79-32
  1193 06be 8F7E      		andi r24,lo8(-17)
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 22
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 22
 
 
  1194 06c0 8FBD      		out 79-32,r24
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1248               	.LM235:
  1249 071c 8091 0000 		lds r24,beyondFNCountDelay
  1250 0720 9091 0000 		lds r25,(beyondFNCountDelay)+1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 23
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 23
 
 
  1251 0724 9595      		asr r25
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1305               		.lcomm downLevelStay,2
  1306               		.lcomm LEDstate,1
  1307               		.lcomm prevSCRLED.2411,1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 24
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 24
 
 
  1308               		.type	prevPwmValue.2352, @object
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1362 0054 0000 0000 		.long	.Lframe0
  1363 0058 0000 0000 		.long	.LFB17
  1364 005c 0800 0000 		.long	.LFE17-.LFB17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 25
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 25
 
 
  1365               		.p2align	2
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1419 00c8 0000 0000 		.long	.LFB12
  1420 00cc 3400 0000 		.long	.LFE12-.LFB12
  1421               		.p2align	2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 26
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 26
 
 
  1422               	.LEFDE22:
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1476 013c 0A00 0000 		.long	.LFE31-.LFB31
  1477               		.p2align	2
  1478               	.LEFDE36:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 27
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 27
 
 
  1479               	.LSFDE38:
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1533 0033 93        		.byte	0x93
  1534 0034 01        		.uleb128 0x1
  1535 0035 69        		.byte	0x69
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 28
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 28
 
 
  1536 0036 93        		.byte	0x93
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1590 000a 04        		.byte	0x4
  1591 000b 01        		.uleb128 0x1
  1592 000c 0000 0000 		.long	.LASF77
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 29
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 29
 
 
  1593 0010 01        		.byte	0x1
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1647 0079 2500 0000 		.long	0x25
  1648 007d 04        		.uleb128 0x4
  1649 007e 0000 0000 		.long	.LASF11
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 30
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 30
 
 
  1650 0082 02        		.byte	0x2
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1704 00e1 06        		.uleb128 0x6
  1705 00e2 0A        		.uleb128 0xa
  1706 00e3 7075 7400 		.string	"put"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 31
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 31
 
 
  1707 00e7 03        		.byte	0x3
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1761 0150 01        		.byte	0x1
  1762 0151 0000 0000 		.long	.LASF16
  1763 0155 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 32
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 32
 
 
  1764 0156 7C        		.byte	0x7c
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1818 01c2 05        		.byte	0x5
  1819 01c3 03        		.byte	0x3
  1820 01c4 0000 0000 		.long	beyondFNDelayCounter.2503
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 33
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 33
 
 
  1821 01c8 16        		.uleb128 0x16
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1875 0234 01        		.byte	0x1
  1876 0235 0000 0000 		.long	.LASF31
  1877 0239 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 34
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 34
 
 
  1878 023a 33        		.byte	0x33
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1932 02a6 0000 0000 		.long	.LFB18
  1933 02aa 0000 0000 		.long	.LFE18
  1934 02ae 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 35
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 35
 
 
  1935 02af 90        		.byte	0x90
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  1989 0321 01        		.byte	0x1
  1990 0322 3A        		.byte	0x3a
  1991 0323 01        		.byte	0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 36
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 36
 
 
  1992 0324 0000 0000 		.long	.LFB11
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2046 0390 02        		.byte	0x2
  2047 0391 90        		.byte	0x90
  2048 0392 20        		.uleb128 0x20
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 37
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 37
 
 
  2049 0393 AA03 0000 		.long	0x3aa
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2103 040b 20        		.uleb128 0x20
  2104 040c 1A        		.uleb128 0x1a
  2105 040d 2902 0000 		.long	0x229
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 38
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 38
 
 
  2106 0411 0000 0000 		.long	.LFB21
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2160 047c 7200 0000 		.long	0x72
  2161 0480 0000 0000 		.long	.LLST24
  2162 0484 26        		.uleb128 0x26
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 39
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 39
 
 
  2163 0485 7101 0000 		.long	0x171
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2217 050d 0000 0000 		.long	.LASF51
  2218 0511 01        		.byte	0x1
  2219 0512 A1        		.byte	0xa1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 40
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 40
 
 
  2220 0513 01        		.byte	0x1
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2274 0588 1A        		.byte	0x1a
  2275 0589 7200 0000 		.long	0x72
  2276 058d 05        		.byte	0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 41
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 41
 
 
  2277 058e 03        		.byte	0x3
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2331 0600 6C05 0000 		.long	0x56c
  2332 0604 08        		.byte	0x8
  2333 0605 1E        		.uleb128 0x1e
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 42
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 42
 
 
  2334 0606 0000 0000 		.long	.LASF65
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2388 067b 30        		.uleb128 0x30
  2389 067c 00        		.byte	0x0
  2390 067d 31        		.uleb128 0x31
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 43
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 43
 
 
  2391 067e 0000 0000 		.long	.LASF72
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2445 000a 0E        		.uleb128 0xe
  2446 000b 11        		.uleb128 0x11
  2447 000c 01        		.uleb128 0x1
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 44
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 44
 
 
  2448 000d 12        		.uleb128 0x12
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2502 0043 0E        		.uleb128 0xe
  2503 0044 0B        		.uleb128 0xb
  2504 0045 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 45
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 45
 
 
  2505 0046 3A        		.uleb128 0x3a
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2559 007c 0D        		.uleb128 0xd
  2560 007d 00        		.byte	0x0
  2561 007e 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 46
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 46
 
 
  2562 007f 08        		.uleb128 0x8
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2616 00b5 3B        		.uleb128 0x3b
  2617 00b6 0B        		.uleb128 0xb
  2618 00b7 27        		.uleb128 0x27
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 47
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 47
 
 
  2619 00b8 0C        		.uleb128 0xc
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2673 00ee 13        		.uleb128 0x13
  2674 00ef 34        		.uleb128 0x34
  2675 00f0 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 48
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 48
 
 
  2676 00f1 03        		.uleb128 0x3
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2730 0127 0C        		.uleb128 0xc
  2731 0128 03        		.uleb128 0x3
  2732 0129 0E        		.uleb128 0xe
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 49
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 49
 
 
  2733 012a 3A        		.uleb128 0x3a
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2787 0160 0B        		.uleb128 0xb
  2788 0161 27        		.uleb128 0x27
  2789 0162 0C        		.uleb128 0xc
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 50
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 50
 
 
  2790 0163 11        		.uleb128 0x11
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2844 0199 2E        		.uleb128 0x2e
  2845 019a 00        		.byte	0x0
  2846 019b 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 51
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 51
 
 
  2847 019c 0E        		.uleb128 0xe
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2901 01d2 03        		.uleb128 0x3
  2902 01d3 0E        		.uleb128 0xe
  2903 01d4 3A        		.uleb128 0x3a
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 52
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 52
 
 
  2904 01d5 0B        		.uleb128 0xb
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  2958 020b 3F        		.uleb128 0x3f
  2959 020c 0C        		.uleb128 0xc
  2960 020d 03        		.uleb128 0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 53
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 53
 
 
  2961 020e 0E        		.uleb128 0xe
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3015 0244 00        		.byte	0x0
  3016 0245 2A        		.uleb128 0x2a
  3017 0246 34        		.uleb128 0x34
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 54
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 54
 
 
  3018 0247 00        		.byte	0x0
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3072 027d 13        		.uleb128 0x13
  3073 027e 1C        		.uleb128 0x1c
  3074 027f 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 55
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 55
 
 
  3075 0280 00        		.byte	0x0
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3129 02b6 0E        		.uleb128 0xe
  3130 02b7 3A        		.uleb128 0x3a
  3131 02b8 0B        		.uleb128 0xb
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 56
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 56
 
 
  3132 02b9 3B        		.uleb128 0x3b
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3168      436F 6D70 
  3168      6172 6541 
  3169 0090 C502 0000 		.long	0x2c5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 57
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 57
 
 
  3170 0094 7365 7450 		.string	"setPWM"
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3192      00
  3193 0168 9806 0000 		.long	0x698
  3194 016c 7077 6D4D 		.string	"pwmMAX"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 58
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 58
 
 
  3194      4158 00
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3241 0044 00        		.byte	0
  3242 0045 00        		.byte	0x0
  3243 0046 6C65 6472 		.string	"ledrender.c"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 59
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 59
 
 
  3243      656E 6465 
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3289 00b1 16        		.byte	0x16
  3290 00b2 00        		.byte	0x0
  3291 00b3 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 60
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 60
 
 
  3292 00b4 02        		.byte	0x2
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3346 010b 05        		.uleb128 0x5
  3347 010c 02        		.byte	0x2
  3348 010d 0000 0000 		.long	.LM17
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 61
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 61
 
 
  3349 0111 15        		.byte	0x15
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3403 0165 05        		.uleb128 0x5
  3404 0166 02        		.byte	0x2
  3405 0167 0000 0000 		.long	.LM28
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 62
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 62
 
 
  3406 016b 03        		.byte	0x3
@@ -3718,7 +3718,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3460 01c0 15        		.byte	0x15
  3461 01c1 00        		.byte	0x0
  3462 01c2 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 63
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 63
 
 
  3463 01c3 02        		.byte	0x2
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3517 021a 15        		.byte	0x15
  3518 021b 00        		.byte	0x0
  3519 021c 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 64
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 64
 
 
  3520 021d 02        		.byte	0x2
@@ -3838,7 +3838,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3574 0274 15        		.byte	0x15
  3575 0275 00        		.byte	0x0
  3576 0276 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 65
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 65
 
 
  3577 0277 02        		.byte	0x2
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3631 02ce 05        		.uleb128 0x5
  3632 02cf 02        		.byte	0x2
  3633 02d0 0000 0000 		.long	.LM72
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 66
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 66
 
 
  3634 02d4 18        		.byte	0x18
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3688 0328 0000 0000 		.long	.LM83
  3689 032c 15        		.byte	0x15
  3690 032d 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 67
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 67
 
 
  3691 032e 05        		.uleb128 0x5
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3745 0385 00        		.byte	0x0
  3746 0386 05        		.uleb128 0x5
  3747 0387 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 68
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 68
 
 
  3748 0388 0000 0000 		.long	.LM95
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3802 03df 02        		.byte	0x2
  3803 03e0 0000 0000 		.long	.LM106
  3804 03e4 15        		.byte	0x15
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 69
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 69
 
 
  3805 03e5 00        		.byte	0x0
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3859 043c 15        		.byte	0x15
  3860 043d 00        		.byte	0x0
  3861 043e 05        		.uleb128 0x5
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 70
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 70
 
 
  3862 043f 02        		.byte	0x2
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3916 0496 05        		.uleb128 0x5
  3917 0497 02        		.byte	0x2
  3918 0498 0000 0000 		.long	.LM129
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 71
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 71
 
 
  3919 049c 15        		.byte	0x15
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  3973 04f1 05        		.uleb128 0x5
  3974 04f2 02        		.byte	0x2
  3975 04f3 0000 0000 		.long	.LM140
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 72
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 72
 
 
  3976 04f7 15        		.byte	0x15
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4030 054c 05        		.uleb128 0x5
  4031 054d 02        		.byte	0x2
  4032 054e 0000 0000 		.long	.LM151
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 73
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 73
 
 
  4033 0552 16        		.byte	0x16
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4087 05a6 0000 0000 		.long	.LM162
  4088 05aa 15        		.byte	0x15
  4089 05ab 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 74
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 74
 
 
  4090 05ac 05        		.uleb128 0x5
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4144 0601 0000 0000 		.long	.LM173
  4145 0605 15        		.byte	0x15
  4146 0606 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 75
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 75
 
 
  4147 0607 05        		.uleb128 0x5
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4201 065e 00        		.byte	0x0
  4202 065f 05        		.uleb128 0x5
  4203 0660 02        		.byte	0x2
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 76
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 76
 
 
  4204 0661 0000 0000 		.long	.LM185
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4258 06b8 02        		.byte	0x2
  4259 06b9 0000 0000 		.long	.LM196
  4260 06bd 03        		.byte	0x3
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 77
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 77
 
 
  4261 06be DA7E      		.sleb128 -166
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4315 0712 0000 0000 		.long	.LM206
  4316 0716 03        		.byte	0x3
  4317 0717 877D      		.sleb128 -377
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 78
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 78
 
 
  4318 0719 01        		.byte	0x1
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4372 076d 0000 0000 		.long	.LM217
  4373 0771 15        		.byte	0x15
  4374 0772 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 79
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 79
 
 
  4375 0773 05        		.uleb128 0x5
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4429 07c8 0000 0000 		.long	.LM228
  4430 07cc 15        		.byte	0x15
  4431 07cd 00        		.byte	0x0
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 80
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 80
 
 
  4432 07ce 05        		.uleb128 0x5
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4478      6C4C 4544 
  4478      4D6F 6465 
  4478      00
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 81
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 81
 
 
  4479               	.LASF73:
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4502 00b4 7369 676E 		.string	"signed char"
  4502      6564 2063 
  4502      6861 7200 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 82
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 82
 
 
  4503               	.LASF36:
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4528 014e 6C6F 6E67 		.string	"long unsigned int"
  4528      2075 6E73 
  4528      6967 6E65 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 83
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 83
 
 
  4528      6420 696E 
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4550      744D 4158 
  4550      00
  4551               	.LASF76:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 84
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 84
 
 
  4552 0205 7077 6D56 		.string	"pwmValue"
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4580      7465 7200 
  4581               	.LASF62:
  4582 0290 7077 6D43 		.string	"pwmCounter"
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 85
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 85
 
 
  4582      6F75 6E74 
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4606      734D 696E 
  4606      00
  4607               	.LASF32:
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 86
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 86
 
 
  4608 032f 7365 7450 		.string	"setPWM"
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4632      6C6C 4C6F 
  4632      636B 4C45 
  4632      4400 
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 87
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 87
 
 
  4633               	.LASF71:
@@ -5184,67 +5184,67 @@ GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 1
  4640      756C 6C4C 
  4641               	.global __do_copy_data
  4642               	.global __do_clear_bss
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 88
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 88
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ledrender.c
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:2      *ABS*:0000003f __SREG__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:5      *ABS*:00000034 __CCP__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:18     .text:00000000 setLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1305   .bss:0000001a LEDstate
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:33     .text:00000006 getLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:46     .text:0000000c clearLEDInited
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:2      *ABS*:0000003f __SREG__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:3      *ABS*:0000003e __SP_H__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:4      *ABS*:0000003d __SP_L__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:5      *ABS*:00000034 __CCP__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:18     .text:00000000 setLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1305   .bss:0000001a LEDstate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:33     .text:00000006 getLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:46     .text:0000000c clearLEDInited
                              .bss:00000004 ledInited
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:60     .text:00000012 stopTimer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:76     .text:0000001a startTimer
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:92     .text:00000022 timerProcessCompareB
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1276   .bss:00000002 pwmValue
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:111    .text:00000032 timerProcessCompareA
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:125    .text:00000036 setPWM
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1310   .data:00000039 prevPwmValue.2352
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:185    .text:0000008e setFullLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1292   .bss:0000000e _fullLEDMode
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1300   .bss:00000012 pwmCounter
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1301   .bss:00000014 pwmDir
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1298   .data:00000038 _ledBrightnessMax
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1302   .bss:00000016 downLevel
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1303   .bss:00000017 downLevelLife
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:250    .text:000000f4 changeFullLedState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1291   .bss:0000000c ledStateCount
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:277    .text:0000011a reduceLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:314    .text:0000014c increaseLedBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:359    .text:00000180 setLEDIndicate
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1306   .bss:0000001b prevSCRLED.2411
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1289   .bss:00000009 scrollLockLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:441    .text:000001e2 applyKeyDownForFullLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1304   .bss:00000018 downLevelStay
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:502    .text:0000024e getBrightness
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:530    .text:00000270 fadeLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:757    .text:00000440 fadePWM
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:771    .text:00000446 sleepLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1295   .bss:00000011 _isDidSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:812    .text:00000478 wakeUpLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:828    .text:00000482 doSleep
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:884    .text:000004de renderLED
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1278   .bss:00000005 beyondFNDelayCounter.2503
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1282   .data:00000035 beyondFNCountDelay
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1288   .bss:00000007 beyondFNCounter.2502
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1286   .data:00000037 beyondFNLEDState.2504
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1290   .bss:0000000a counter.2537
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1293   .bss:0000000f _fullLEDMode_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1294   .bss:00000010 _ledBrightnessMax_saved
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1127   .text:00000656 initFullLEDState
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1263   .data:00000033 pwmMAX
-C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s:1270   .bss:00000000 pwmMIN
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:60     .text:00000012 stopTimer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:76     .text:0000001a startTimer
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:92     .text:00000022 timerProcessCompareB
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1276   .bss:00000002 pwmValue
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:111    .text:00000032 timerProcessCompareA
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:125    .text:00000036 setPWM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1310   .data:00000039 prevPwmValue.2352
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:185    .text:0000008e setFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1292   .bss:0000000e _fullLEDMode
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1300   .bss:00000012 pwmCounter
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1301   .bss:00000014 pwmDir
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1298   .data:00000038 _ledBrightnessMax
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1302   .bss:00000016 downLevel
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1303   .bss:00000017 downLevelLife
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:250    .text:000000f4 changeFullLedState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1291   .bss:0000000c ledStateCount
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:277    .text:0000011a reduceLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:314    .text:0000014c increaseLedBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:359    .text:00000180 setLEDIndicate
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1306   .bss:0000001b prevSCRLED.2411
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1289   .bss:00000009 scrollLockLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:441    .text:000001e2 applyKeyDownForFullLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1304   .bss:00000018 downLevelStay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:502    .text:0000024e getBrightness
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:530    .text:00000270 fadeLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:757    .text:00000440 fadePWM
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:771    .text:00000446 sleepLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1295   .bss:00000011 _isDidSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:812    .text:00000478 wakeUpLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:828    .text:00000482 doSleep
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:884    .text:000004de renderLED
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1278   .bss:00000005 beyondFNDelayCounter.2503
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1282   .data:00000035 beyondFNCountDelay
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1288   .bss:00000007 beyondFNCounter.2502
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1286   .data:00000037 beyondFNLEDState.2504
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1290   .bss:0000000a counter.2537
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1293   .bss:0000000f _fullLEDMode_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1294   .bss:00000010 _ledBrightnessMax_saved
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1127   .text:00000656 initFullLEDState
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1263   .data:00000033 pwmMAX
+C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s:1270   .bss:00000000 pwmMIN
 
 UNDEFINED SYMBOLS
 __divmodhi4
-GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccrNG6lP.s 			page 89
+GAS LISTING C:\Users\ADMINI~1\AppData\Local\Temp/ccCWPRrS.s 			page 89
 
 
 isSleep
