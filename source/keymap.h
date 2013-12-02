@@ -4,8 +4,6 @@
 #include <avr/pgmspace.h>
 #include "hardwareinfo.h"
 
-// #define KEY_MATRIX_BASIC __attribute__ ((section (".key_matrix_basic")))
-
 #define KFLA_EXTEND         0x01
 #define KFLA_SPECIAL        0x02
 #define KFLA_MAKEONLY       0x04
@@ -261,8 +259,6 @@ extern const uint8_t PROGMEM keycode_set2_make_break[];
 extern const uint8_t PROGMEM keycode_set2_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
-
-// extern const uint8_t KEY_MATRIX_BASIC keymap_code[LAYERS][ROWS][COLUMNS];
 
 extern uint8_t getKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 

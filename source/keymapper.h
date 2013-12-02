@@ -102,9 +102,9 @@ extern void countKeyMappingEnabled(void);
 
 extern void enterFrameForMapper(void);
 
-extern uint8_t isMacroKey(uint8_t xKeyCode);
+extern uint8_t isMacroKey(uint8_t xKeyidx);
 
-extern uint8_t escapeMacroKeycode(uint8_t xKeyCode);
+extern uint8_t escapeMacroKeycode(uint8_t xKeyidx);
 
 extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 
@@ -112,9 +112,11 @@ extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+// 매크로 등록중인지 확인;
+extern uint8_t isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 extern uint8_t applyMacro(uint8_t xKeyidx);
 
-extern void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+extern void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 
 #endif

@@ -512,12 +512,6 @@ uint8_t scanKeyUSB(void) {
     					// key down
     					gFN = applyFN(keyidx, 1);
                         wakeUp();
-
-                        /*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
-                            // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
-                            makeReportBuffer(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
-                            dualActionKeyIndex = 0;
-                        }*/
                         applyDualActionDown(makeReportBuffer, 1);
 
     				}else{
@@ -528,7 +522,7 @@ uint8_t scanKeyUSB(void) {
 			}
 
             // 키매핑 진행중;
-            if(prev != cur && isKeyMapping()){
+            if(prev != cur && isKeyMapping()){               
                 if(cur){
                     putKeyCode(keyidx, col, row, 1);
                 }else{

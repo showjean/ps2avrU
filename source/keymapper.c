@@ -265,19 +265,19 @@ static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 	return gKeyIndex;
 }
 
-uint8_t isMacroKey(uint8_t xKeyCode){
-	if(xKeyCode >= KEY_MAC1 && xKeyCode <= KEY_MAC12){
+uint8_t isMacroKey(uint8_t xKeyidx){
+	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-uint8_t escapeMacroKeycode(uint8_t xKeyCode){
-	if(isMacroKey(xKeyCode)){
+uint8_t escapeMacroKeycode(uint8_t xKeyidx){
+	if(isMacroKey(xKeyidx)){
 		return 0;
 	}
-	return xKeyCode;
+	return xKeyidx;
 }
 
 uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
@@ -670,6 +670,14 @@ void resetCurrentLayer(void)
 		
 }
 
+uint8_t isMacroInput(void){
+	if(_step == STEP_INPUT_MACRO){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 static uint8_t _macroDownCount = 0;
 void resetMacroInput(void){	
 	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);
@@ -677,11 +685,14 @@ void resetMacroInput(void){
 	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
-void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
-{
+void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
+{	
+    xKeyidx = getDualActionDownKeyIdex(xKeyidx);
+
+	if(xKeyidx >= KEY_MAX) return;		// 키값으로 변환할 수 없는 특수 키들은 중단;
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
-	// DEBUG_PRINT(("putKeyCode xKeyCode: %02x, xIsDown: %d, col: %d, row: %d \n", xKeyCode, xIsDown, xCol, xRow));
+	// DEBUG_PRINT(("putKeyCode xKeyidx: %02x, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
 
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(_step != STEP_INPUT_MACRO && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
@@ -693,14 +704,14 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
     int gIdx;
     int gLen;
 
-	gKeyIndex = findIndex(usingKeys, 11, xKeyCode);
+	gKeyIndex = findIndex(usingKeys, 11, xKeyidx);
 
 	if(_step == STEP_INPUT_MACRO){
 		if(_isTiredEscapeKey){
 			_isPressedEscapeKey = 0;
 			_isTiredEscapeKey = 0;
 
-			pushM(xKeyCode);
+			pushM(xKeyidx);
 			// 또는 ESC를 1초이상 누르면 종료;
 			_macroInputBuffer[_macroBufferIndex-1] = 0;	// 마지막 esc 눌림 제거;
 			saveMacro();
@@ -716,25 +727,25 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				return;
 			}
 			++_macroDownCount;
-		    DEBUG_PRINT(("down _macroDownCount : %d \n", _macroDownCount));
+		    DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
 		   
-		    append(_macroPressedBuffer, xKeyCode);
+		    append(_macroPressedBuffer, xKeyidx);
 		    
 		}else{
 			gLen = strlen((char *)_macroPressedBuffer);
-		    gIdx = findIndex(_macroPressedBuffer, gLen, xKeyCode);
+		    gIdx = findIndex(_macroPressedBuffer, gLen, xKeyidx);
 		    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
 		    if(gIdx == -1){
 		    	return;
 		    }
 		    delete(_macroPressedBuffer, gIdx);
-		    DEBUG_PRINT(("up idx : %d, buffer len : %d \n", gIdx, strlen((char *)_macroPressedBuffer)));
+		    DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
 		}
 
-		_macroInputBuffer[_macroBufferIndex] = xKeyCode;
+		_macroInputBuffer[_macroBufferIndex] = xKeyidx;
 		++_macroBufferIndex;
 
-		pushM(xKeyCode);
+		pushM(xKeyidx);
 
 		DEBUG_PRINT(("                                              _macroBufferIndex : %d \n", _macroBufferIndex));
 
@@ -764,7 +775,7 @@ void putKeyCode(uint8_t xKeyCode, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 
 	// 입력되는 키코드 값은 usb/ps2 모두 동일하다.
-	// DEBUG_PRINT(("keymapping xKeyCode: %02x, gKeyIndex: %d, col: %d, row: %d \n", xKeyCode, gKeyIndex, xCol, xRow));
+	// DEBUG_PRINT(("keymapping xKeyidx: %02x, gKeyIndex: %d, col: %d, row: %d \n", xKeyidx, gKeyIndex, xCol, xRow));
 	if(_step == STEP_INPUT_COMMAND || _step == STEP_SELECT_MODE){
 		if(gKeyIndex > -1 && gKeyIndex < 10){	// 0~9
 			_buffer[_bufferIndex] = gKeyIndex;
