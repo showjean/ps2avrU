@@ -142,7 +142,7 @@ void timerProcessCompareA(void){
 	turnOffLED(LEDFULLLED);
 }
 void setPWM(int xValue){
-	static int prevPwmValue = 0;
+	static int prevPwmValue = 1;
 
     pwmValue = xValue;
     if(pwmValue == 0 && prevPwmValue != 0){
@@ -184,7 +184,7 @@ void initFullLEDState(void) {
 	// TIMSK |= (1<<TOIE1);	// enable TCNT1 overflow
 	
 	timerAttach(TIMER1OUTCOMPAREA_INT, timerProcessCompareA); 
-	timerAttach(TIMER1OUTCOMPAREB_INT, timerProcessCompareB); 
+	timerAttach(TIMER1OUTCOMPAREB_INT, timerProcessCompareB); 	// like overflow
 
 	/*
 	커스텀 pwm을 위해서 timer를 사용할때 interupt 간격을 좁게 하면 USB의 작동이 잘 안된다.
