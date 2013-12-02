@@ -585,6 +585,8 @@ uint8_t scanMacroUsb(void)
 {
     if(!isEmptyM()){
         int gIdx;
+        uint8_t gModi;
+        gModi = reportBuffer[1];
         
         clearReportBuffer(); 
       
@@ -611,6 +613,9 @@ uint8_t scanMacroUsb(void)
         _needRelease = 1;
 
         memcpy (_prevPressedBuffer,_pressedBuffer,gLen+1);
+
+        // apply user modi keys
+        reportBuffer[1] |= gModi;
       
     }else if(_needRelease){ 
         clearReportBuffer();
