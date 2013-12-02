@@ -248,6 +248,7 @@ static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 #define REPORT_ID_MULTIMEDIA    2
 
 void initInterfaceUsb(void);
+void clearReportBuffer(void);
 
 /** USB report descriptor (length is defined in usbconfig.h). The report
  * descriptor has been created with usb.org's "HID Descriptor Tool" which can
@@ -436,7 +437,6 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[1] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
-        //applyKeyMapping(reportBuffer[1]);
         return retval;
     }
 
@@ -583,12 +583,30 @@ uint8_t scanKeyUSB(void) {
 static uint8_t _needRelease = 0;
 uint8_t scanMacroUsb(void)
 {
+    clearReportBuffer(); 
+
+    if(!isKeyMapping()){
+        uint8_t row, col, cur, keyidx;
+        uint8_t *gMatrix = getCurrentMatrix();
+        uint8_t keymap = getLayer();
+        for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+            for (row = 0; row < ROWS; ++row) { // check every bit on this row   
+               
+                cur  = gMatrix[row] & BV(col);           
+                // usb는 눌렸을 때만 버퍼에 저장한다.
+                if(cur){
+                    keyidx = getCurrentKeycode(keymap, row, col);
+                    if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) {
+                        reportBuffer[1] |= modmask[keyidx - (KEY_Modifiers + 1)];
+                    }
+                }
+                
+            }
+        }
+    }
+
     if(!isEmptyM()){
-        int gIdx;
-        uint8_t gModi;
-        gModi = reportBuffer[1];
-        
-        clearReportBuffer(); 
+        int gIdx;        
       
         popMWithKey();  // _pressedBuffer에 눌린 키들만 저장된다.        
         
@@ -613,14 +631,9 @@ uint8_t scanMacroUsb(void)
         _needRelease = 1;
 
         memcpy (_prevPressedBuffer,_pressedBuffer,gLen+1);
-
-        // apply user modi keys
-        reportBuffer[1] |= gModi;
       
     }else if(_needRelease){ 
-        clearReportBuffer();
         _needRelease = 0;
-
     }
 
     return 1;
