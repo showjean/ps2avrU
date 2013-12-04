@@ -37,7 +37,10 @@ static uint8_t _isDidSleep = 0;
 
 static int ledStateCount = 0;
 
-static uint8_t _ledBrightnessMax = 255; 
+#define PWM_MAX 0xFF
+volatile int pwmValue = 0;
+
+static uint8_t _ledBrightnessMax = PWM_MAX; 
 static uint8_t _ledBrightnessMax_saved = 0;	// 
 static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
@@ -74,16 +77,16 @@ static void setFullLEDState(void) {
 	}else if(_fullLEDMode == 3 || _fullLEDMode == 4){
 		downLevel = 3;
 		if(_fullLEDMode == 4) downLevel = 1; 	// 3으로 시작하면 효과가 별로 안 남.
-		downLevelLife = 255 * downLevel / downLevelMax;
+		downLevelLife = PWM_MAX * downLevel / downLevelMax;
 	}
 }
 
 void increaseLedBrightness(void){
-	if(_ledBrightnessMax == 255) return;
+	if(_ledBrightnessMax == PWM_MAX) return;
 
 	int gLedBrightness = _ledBrightnessMax + ledBrightnessStep;
-	if(gLedBrightness > 255){
-		_ledBrightnessMax = 255;
+	if(gLedBrightness > PWM_MAX){
+		_ledBrightnessMax = PWM_MAX;
 	}else{
 		_ledBrightnessMax = gLedBrightness;		
 	}
@@ -116,16 +119,12 @@ void clearLEDInited(void){
 	ledInited = 0;
 }
 
-volatile int pwmMAX = 0xFF;
-volatile int pwmMIN = 0;
-volatile int pwmValue = 0;
-// volatile int pwm = 0;
-
 void stopTimer(void){  
     TCCR1B &= ~((1<<CS12)|(1<<CS11)|(1<<CS10)); // No clock source (Timer/Counter stopped).
 }
 
 void startTimer(void){
+	if(pwmValue == 0) return;
     // 타이머, 카운터1번 컨트롤 분주비
     // TCCR1B |= (1<<CS10); //  clk/1 (From prescaler) 
     // TCCR1B |= (1<<CS11); //  clk/8 (From prescaler) 
@@ -177,12 +176,6 @@ void initFullLEDState(void) {
 	// timer1PWMInit(8);
 	// timer1PWMBOn();
 
-	// PORT    // input : 1 = pull up, output : 1= 5V(high), 0= 0V(low)
-	// DDR    // input = 0, ouput = 1
-
-	//
-	// TIMSK |= (1<<TOIE1);	// enable TCNT1 overflow
-	
 	timerAttach(TIMER1OUTCOMPAREA_INT, timerProcessCompareA); 
 	timerAttach(TIMER1OUTCOMPAREB_INT, timerProcessCompareB); 	// like overflow
 
@@ -197,7 +190,7 @@ void initFullLEDState(void) {
     TCCR1A &= ~(1<<WGM11);
     TCCR1B |= (1<<WGM12);
     TCCR1B |= (1<<WGM13);
-    ICR1 = pwmMAX;
+    ICR1 = PWM_MAX;
     //output compare value B
     OCR1A = 0;
     OCR1B = ICR1;
@@ -231,8 +224,6 @@ void initFullLEDState(void) {
 	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
 		beyondFNCountDelay = beyondFNCountDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
 	}
-
-	// TIMSK |= (1<<TOIE1);        // timer 1 enable
 
 }
 
@@ -287,7 +278,7 @@ void applyKeyDownForFullLED(void){
 		downLevelStay = 500; //511;
 		if(downLevel < downLevelMax){
 			downLevel++;
-			downLevelLife = 255 * downLevel / downLevelMax;
+			downLevelLife = PWM_MAX * downLevel / downLevelMax;
 				//DEBUG_PRINT(("increase downLevel : %d, life : %d\n", downLevel, downLevelLife));
 		}
 	}else if(_fullLEDMode == 4){
@@ -295,7 +286,7 @@ void applyKeyDownForFullLED(void){
 		downLevelStay = 500; //511;
 		if(downLevel > 0){
 			downLevel--;
-			downLevelLife = 255 * downLevel / downLevelMax;
+			downLevelLife = PWM_MAX * downLevel / downLevelMax;
 				//DEBUG_PRINT(("increase downLevel : %d, life : %d\n", downLevel, downLevelLife));
 		}
 	}
@@ -324,7 +315,7 @@ static void writeLEDMode(void) {
 }
 
 static int getBrightness(int xValue){
-	int gVal = xValue * _ledBrightnessMax / 255;
+	int gVal = xValue * _ledBrightnessMax / PWM_MAX;
 	//DEBUG_PRINT(("getBrightness : xValue : %d, val %d \n", xValue, gVal));
 	return gVal;
 }
@@ -337,12 +328,12 @@ static void fadeLED(void) {
 		if(pwmDir==0)
 			setPWM((uint8_t)(getBrightness(pwmCounter/speed)));
 		else if(pwmDir==2)
-			setPWM((uint8_t)(getBrightness(255-pwmCounter/speed)));
+			setPWM((uint8_t)(getBrightness(PWM_MAX-pwmCounter/speed)));
 		else if(pwmDir==1 || pwmDir==3)
 			pwmCounter++;
 
 		// pwmDir 0~3 : idle
-		if( pwmCounter>=255*speed) {
+		if( pwmCounter>=PWM_MAX*speed) {
 			pwmCounter=0;
 			pwmDir = (pwmDir+1)%4;
 		}
@@ -360,7 +351,7 @@ static void fadeLED(void) {
 				if(pwmCounter >= speed){
 					pwmCounter = 0;			
 					downLevelLife--;
-					downLevel = downLevelMax - (255-downLevelLife) / (255/downLevelMax);
+					downLevel = downLevelMax - (PWM_MAX-downLevelLife) / (PWM_MAX/downLevelMax);
 				}
 			}else{
 				downLevel = 0;
@@ -375,12 +366,12 @@ static void fadeLED(void) {
 			downLevelStay--;
 		}else{
 			// 시간이 흐르면 레벨을 증가 시킨다.
-			if(downLevelLife < 255){
+			if(downLevelLife < PWM_MAX){
 				pwmCounter++;
 				if(pwmCounter >= speed){
 					pwmCounter = 0;			
 					downLevelLife++;
-					downLevel = downLevelMax - (255-downLevelLife) / (255/downLevelMax);
+					downLevel = downLevelMax - (PWM_MAX-downLevelLife) / (PWM_MAX/downLevelMax);
 				}
 			}else{
 				downLevel = downLevelMax;
@@ -479,7 +470,7 @@ static void blinkScrollLockLED(void) {
 void sleepLED(void){
 	// DEBUG_PRINT(("sleepLED \n"));
 	turnOffLED(LEDNUM);
-	turnOffLED(LEDCAPS); 
+	turnOffLED(LEDCAPS);
 #ifdef LEDSCROLL
 	turnOffLED(LEDSCROLL);
 #endif
@@ -504,9 +495,9 @@ void wakeUpLED(void){
 
 void doSleep(void){
 	if(_isDidSleep == 1) return;
-	//DEBUG_PRINT(("pwmCounter %d \n", (uint16_t)(255-pwmCounter/speed)));
-	setPWM((uint8_t)(getBrightness(255-pwmCounter/speed)));
-	if(pwmCounter >= 255*speed) {		
+	//DEBUG_PRINT(("pwmCounter %d \n", (uint16_t)(PWM_MAX-pwmCounter/speed)));
+	setPWM((uint8_t)(getBrightness(PWM_MAX-pwmCounter/speed)));
+	if(pwmCounter >= PWM_MAX*speed) {		
 		setPWM(0);
 		turnOffLED(LEDFULLLED);
 		_isDidSleep = 1;
@@ -533,7 +524,6 @@ void renderLED(uint8_t xIsBeyondFN) {
 	writeLEDMode();
 
 	/* LED Fader */	
-	// fadeLED();
 	fadePWM();
 }
 #endif

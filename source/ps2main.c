@@ -155,6 +155,7 @@ void keymap_init(void)
 
 uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 {
+	if(keyidx == KEY_NONE) return 0;
 
      // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
     keyidx = getDualActionDownKeyIdex(keyidx);
@@ -259,12 +260,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	uint8_t gFN = applyFN(keyidx, isDown);
 
-	if(isDown){
-		/*if(dualActionKeyIndex > 0 && isCanceledDualAction()){
-            // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
-            pushKeyCode(getDualActionDownKeyIdex(dualActionKeyIndex), 1);
-            dualActionKeyIndex = 0;
-        }*/
+	if(isDown && keyidx != KEY_NONE){
         applyDualActionDown(pushKeyCode, 1);
 	}
 
@@ -314,6 +310,7 @@ int scanKeyPS2(void) {
 	uint8_t gResultPutKey = 1;
 
     uint8_t *gMatrix = getCurrentMatrix();
+    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 	if(_prevLayer != layer){
 		for(col=0;col<COLUMNS;col++)
@@ -368,12 +365,10 @@ int scanKeyPS2(void) {
                     break;
                 }
 #endif	
-                if(keyidx != KEY_NONE){
-					if(cur) {
-						gResultPutKey &= putKey(keyidx, 1, col, row);
-					}else{
-						gResultPutKey &= putKey(keyidx, 0, col, row);
-					}
+				if(cur) {
+					gResultPutKey &= putKey(keyidx, 1, col, row);
+				}else{
+					gResultPutKey &= putKey(keyidx, 0, col, row);
 				}
 			}
 

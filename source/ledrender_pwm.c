@@ -30,9 +30,9 @@ static uint8_t scrollLockLED = 0;
 static uint8_t _fullLEDMode = 0;	// 
 static uint8_t _fullLEDMode_saved = 0;	// 
 
-static int pwmCounter=0;
+static int pwmCounter = 0;
 static int pwmDir = 0;
-static const uint8_t speed=8;
+static const uint8_t speed = 8;
 static uint8_t _isDidSleep = 0;
 
 static int ledStateCount = 0;
@@ -43,6 +43,12 @@ static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
 
 static int beyondFNCountDelay = 1800;
+
+static void fadeLED(void);
+void setPWM(int xValue);
+
+void stopTimer(void){}
+void startTimer(void){}
 
 void setLEDState(uint8_t xState){
 	LEDstate = xState;
@@ -60,13 +66,13 @@ static void setFullLEDState(void) {
 		4 = key down level down
 	*/
 	if(_fullLEDMode == 0){
-		timer1PWMBSet(0);
+		setPWM(0);
 	}else if(_fullLEDMode == 1){
 		pwmCounter = 0;
 		pwmDir = 0;
-		// timer1PWMBSet(0);
+		// setPWM(0);
 	}else if(_fullLEDMode == 2){
-		timer1PWMBSet(_ledBrightnessMax);
+		setPWM(_ledBrightnessMax);
 	}else if(_fullLEDMode == 3 || _fullLEDMode == 4){
 		downLevel = 3;
 		if(_fullLEDMode == 4) downLevel = 1; 	// 3으로 시작하면 효과가 별로 안 남.
@@ -112,6 +118,13 @@ void clearLEDInited(void){
 	ledInited = 0;
 }
 
+void setPWM(int xValue){
+	timer1PWMBSet(xValue);
+}
+
+void fadePWM(void){
+	fadeLED();
+}
 void initFullLEDState(void) {
 
 	if(ledInited) return;
@@ -199,7 +212,7 @@ void setLEDIndicate(void) {
 void applyKeyDownForFullLED(void){
 	if(_fullLEDMode == 3){
 			// 키를 누르면 값을 증가 시킨다.
-		downLevelStay = 511;
+		downLevelStay = 500; //511;
 		if(downLevel < downLevelMax){
 			downLevel++;
 			downLevelLife = 255 * downLevel / downLevelMax;
@@ -207,7 +220,7 @@ void applyKeyDownForFullLED(void){
 		}
 	}else if(_fullLEDMode == 4){
 			// 키를 누르면 값을 감소 시킨다.
-		downLevelStay = 511;
+		downLevelStay = 500; //511;
 		if(downLevel > 0){
 			downLevel--;
 			downLevelLife = 255 * downLevel / downLevelMax;
@@ -219,7 +232,7 @@ void applyKeyDownForFullLED(void){
 
 static void writeLEDMode(void) {
 	// LED 모드 저장, 너무많은 eeprom접근을 막기위해 일정 간격으로 저장한다.
-	const countMAX = 1000;
+	const int countMAX = 1000;
 	if(ledStateCount > 0 && ++ledStateCount == countMAX){
 		// DEBUG_PRINT(("writeLEDMode : mode %d, br %d \n", _fullLEDMode, _ledBrightnessMax));
 		ledStateCount = 0;
@@ -250,9 +263,9 @@ static void fadeLED(void) {
 	if(_fullLEDMode == 1) {	
 
 		if(pwmDir==0)
-			timer1PWMBSet((uint16_t)(getBrightness(pwmCounter/speed)));
+			setPWM((uint8_t)(getBrightness(pwmCounter/speed)));
 		else if(pwmDir==2)
-			timer1PWMBSet((uint16_t)(getBrightness(255-pwmCounter/speed)));
+			setPWM((uint8_t)(getBrightness(255-pwmCounter/speed)));
 		else if(pwmDir==1 || pwmDir==3)
 			pwmCounter++;
 
@@ -262,13 +275,6 @@ static void fadeLED(void) {
 			pwmDir = (pwmDir+1)%4;
 		}
 		pwmCounter++;
-
-		/*if (kbd_flags & FLA_RX_BAD) {		// pokud je nastaveny flag spatneho prijmu, zrus ho 
-			// pokud flag is set back income withdrawn
-			cli();
-			kbd_flags &= ~FLA_RX_BAD;
-			sei();
-		}*/
 		
 	}else if(_fullLEDMode == 3){
 		
@@ -289,7 +295,7 @@ static void fadeLED(void) {
 				pwmCounter = 0;
 			}
 		}
-		timer1PWMBSet((uint16_t)(getBrightness(downLevelLife)));
+		setPWM((uint8_t)(getBrightness(downLevelLife)));
 
 	}else if(_fullLEDMode == 4){
 		// 일정시간 유지
@@ -309,7 +315,7 @@ static void fadeLED(void) {
 				pwmCounter = 0;
 			}
 		}
-		timer1PWMBSet((uint16_t)(getBrightness(downLevelLife)));
+		setPWM((uint8_t)(getBrightness(downLevelLife)));
 
 	}
 	else
@@ -331,7 +337,7 @@ static void blinkBeyondFNLED(uint8_t xIsBeyondFN) {
 #ifdef ENABLE_BOOTMAPPER
 	if(isBootMapper()){
 		led = LEDCAPS;
-		DEBUG_PRINT(("isBootMapper(): %d \n", isBootMapper()));
+		// DEBUG_PRINT(("isBootMapper(): %d \n", isBootMapper()));
 
 		xIsBeyondFN = 1;
 	}
@@ -369,7 +375,7 @@ static void blinkBeyondFNLED(uint8_t xIsBeyondFN) {
 	}
 }
 
-//
+#ifndef SCROLL_LOCK_LED_IS_APART
 static void blinkScrollLockLED(void) {
 	// for beyond fn
 	static int counter = 0;
@@ -396,6 +402,7 @@ static void blinkScrollLockLED(void) {
 		counter = 0;
 	}
 }
+#endif
 
 void sleepLED(void){
 	// DEBUG_PRINT(("sleepLED \n"));
@@ -426,9 +433,9 @@ void wakeUpLED(void){
 void doSleep(void){
 	if(_isDidSleep == 1) return;
 	//DEBUG_PRINT(("pwmCounter %d \n", (uint16_t)(255-pwmCounter/speed)));
-	timer1PWMBSet((uint16_t)(getBrightness(255-pwmCounter/speed)));
+	setPWM((uint8_t)(getBrightness(255-pwmCounter/speed)));
 	if(pwmCounter >= 255*speed) {		
-		timer1PWMBSet(0);
+		setPWM(0);
 		turnOffLED(LEDFULLLED);
 		_isDidSleep = 1;
 	}
@@ -445,14 +452,15 @@ void renderLED(uint8_t xIsBeyondFN) {
 	// for beyond fn
 	blinkBeyondFNLED(xIsBeyondFN);
 
+#ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led
 	blinkScrollLockLED();
+#endif
 
 	// LED 모드 저장.
 	writeLEDMode();
 
 	/* LED Fader */	
-	fadeLED();
-	
+	fadePWM();
 }
 #endif

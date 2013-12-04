@@ -31,4 +31,7 @@ extern void wakeUpLED(void);
 extern void doSleep(void);
 extern void renderLED(uint8_t xIsBeyondFN);
 
+extern void stopTimer(void);
+extern void startTimer(void);
+
 #endif

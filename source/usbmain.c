@@ -558,11 +558,6 @@ uint8_t scanKeyUSB(void) {
         _isMultimediaPressed = 0;
     }
 
-    // 모든키가 release 되었을 때 작동 시켜 준다.  
-   /* if((reportBuffer[0] == REPORT_ID_KEYBOARD && reportBuffer[1] == 0 && reportBuffer[2] == 0)
-    || reportBuffer[0] == REPORT_ID_MULTIMEDIA && reportBuffer[1] == 0){
-        applyDualAction();
-    }*/
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
 	for(row=0;row<ROWS;++row)

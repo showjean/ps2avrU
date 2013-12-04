@@ -9,6 +9,7 @@
 
 #include "usbdrv.h"
 #include "oddebug.h"
+#include "../ledrender.h"
 
 /*
 General Description:
@@ -218,6 +219,7 @@ static inline void  usbResetStall(void)
 #if USB_CFG_HAVE_INTRIN_ENDPOINT
 static void usbGenericSetInterrupt(uchar *data, uchar len, usbTxStatus_t *txStatus)
 {
+
 uchar   *p;
 char    i;
 
@@ -225,6 +227,7 @@ char    i;
     if(usbTxLen1 == USBPID_STALL)
         return;
 #endif
+stopTimer();
     if(txStatus->len & 0x10){   /* packet buffer was empty */
         txStatus->buffer[0] ^= USBPID_DATA0 ^ USBPID_DATA1; /* toggle token */
     }else{
@@ -238,6 +241,8 @@ char    i;
     usbCrc16Append(&txStatus->buffer[1], len);
     txStatus->len = len + 4;    /* len must be given including sync byte */
     DBG2(0x21 + (((int)txStatus >> 3) & 3), txStatus->buffer, len + 3);
+
+startTimer();
 }
 
 USB_PUBLIC void usbSetInterrupt(uchar *data, uchar len)
@@ -315,6 +320,7 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
     SWITCH_CASE(USBDESCR_DEVICE)    /* 1 */
         // disable TCNT1 overflow
         TIMSK &= ~(1 << TOIE1); //cbi(TIMSK, TOIE1);
+        stopTimer();
 
         GET_DESCRIPTOR(USB_CFG_DESCR_PROPS_DEVICE, usbDescriptorDevice)
     SWITCH_CASE(USBDESCR_CONFIG)    /* 2 */
@@ -348,6 +354,7 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
 
         // enable TCNT1 overflow
         TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
+        startTimer(); 
 #endif
     SWITCH_DEFAULT
         if(USB_CFG_DESCR_PROPS_UNKNOWN & USB_PROP_IS_DYNAMIC){
@@ -573,6 +580,8 @@ uchar           isReset = !notResetState;
 
 USB_PUBLIC void usbPoll(void)
 {
+    stopTimer();
+
 schar   len;
 uchar   i;
 
@@ -609,6 +618,8 @@ uchar   i;
     DBG1(0xff, 0, 0);
 isNotReset:
     usbHandleResetHook(i);
+
+    startTimer(); 
 }
 
 /* ------------------------------------------------------------------------- */
