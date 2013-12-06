@@ -15,7 +15,6 @@
 
 #include "print.h"
 #include "keymapper.h"
-#include "hardwareinfo.h"
 #include "keymap.h"
 #include "keymatrix.h"
 #include "ps2avru_util.h"

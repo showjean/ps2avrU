@@ -17,6 +17,8 @@ extern uint8_t prevMatrix[ROWS];
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
+extern void initMatrix(void);
+
 extern void clearMatrix(void);
 
 extern uint8_t isAllKeyRelease(void);

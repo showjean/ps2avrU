@@ -14,9 +14,22 @@
 
 #include "print.h"
 #include "ledrender.h"
-#include "hardwareinfo.h"
 #include "sleep.h"
 #include "keymapper.h"
+
+#define PORTLEDS    PORTD  ///< port on which the LEDs are connected
+#define PINLEDS     PIND   ///< port on which the LEDs are connected
+#define DDRLEDS     DDRD   ///< port on which the LEDs are connected
+
+#define LEDNUM      (1 << 0)	//PIND0  ///< address of the num-lock LED
+#define LEDCAPS     (1 << 1)	//PIND1  ///< address of the caps-lock LED
+#define LEDSCROLL   (1 << 6)	//PIND6  ///< address of the scroll-lock LED  
+#define LEDFULLLED  (1 << 4)	//PIND4  ///< address of the full led controll pin
+
+#define turnOnLED(pin)		PORTLEDS |= (pin);
+#define turnOffLED(pin)		PORTLEDS &= ~(pin);
+
+#define PWM_MAX 0xFF
 
 static uint16_t downLevelStay = 0;
 static uint8_t downLevel = 0;
@@ -37,7 +50,6 @@ static uint8_t _isDidSleep = 0;
 
 static int ledStateCount = 0;
 
-#define PWM_MAX 0xFF
 volatile int pwmValue = 0;
 
 static uint8_t _ledBrightnessMax = PWM_MAX; 
@@ -50,6 +62,23 @@ static int beyondFNCountDelay = 1800;
 static void fadeLED(void);
 void setPWM(int xValue);
 
+void initLED(void){	
+	// led pin
+	DDRD |= (LEDNUM | LEDCAPS | LEDFULLLED);	// output;
+	PORTD &= ~(LEDNUM | LEDCAPS | LEDFULLLED);	// low
+ 
+#ifdef LEDSCROLL
+   	DDRD |= (LEDSCROLL);	// output;
+	PORTD &= ~(LEDSCROLL);	// low
+#endif
+}
+
+void blinkOnce(void){
+	initLED();
+	turnOnLED(LEDNUM | LEDCAPS);
+	_delay_ms(100);
+	turnOffLED(LEDNUM | LEDCAPS);	
+}
 
 void setLEDState(uint8_t xState){
 	LEDstate = xState;

@@ -15,6 +15,8 @@
 
 AVRLIB = ../avrlib
 
+HARDWARE_INFO_H = hardwareinfo.h
+
 ########### change this lines according to your project ##################
 #put the name of the target mcu here (at90s8515, at90s8535, attiny22, atmega603 etc.)
 	MCU = atmega32
@@ -62,10 +64,11 @@ F_CPU = 12000000
 
 #assembler flags
 	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU)
-
+    ASFLAGS += -include $(HARDWARE_INFO_H)
 
 #compiler flags
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
+    CPFLAGS += -include $(HARDWARE_INFO_H)
 
 #linker flags
 	LDFLAGS = -Wl,-Map=$(TRG).map,--cref 

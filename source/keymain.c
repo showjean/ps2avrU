@@ -26,7 +26,7 @@
 #include <string.h>
 
 #include "keymap.h" 
-#include "hardwareinfo.h"
+// #include "hardwareinfo.h"
 #include "hardwareconfig.h"
 #include "keymapper.h"
 #include "ledrender.h"
@@ -43,7 +43,7 @@ uint8_t INTERFACE = 255;
 /* ------------------------------------------------------------------------- */
 
 void setUsbOn(void) {	
-	// TR에 전압을 연결하기 위해서 D5를 설정;
+	// TR에 전압을 연결하기 위해서 D5를 설정; input, pull up
 	// 이러면 제너다이오드가 GND와 연결되어 USB로 작동가능;
 	cbi(DIODE_DDR, DIODE_PIN); //DDRD  &= ~BV(DIODE_PIN);
 	sbi(DIODE_PORT, DIODE_PIN); //PORTD |= BV(DIODE_PIN);
@@ -86,48 +86,18 @@ void clearTimers(void) {
  * condition, start timer and blink LEDs.
  */
 static void initHardware(uint8_t xIsUSB) {
-	// initialize matrix ports - cols, rows
-	// PB0-PB7 : col0 .. col7
-	// PA0-PA7 : row0 .. row7
-	// PC7-PC0 : row8 .. row15
-	
-	// PD0 : NUM
-    // PD1 : CAPS
-    // PD2 : D+ / Clock
-    // PD3 : D- / Data
-    // PD4 : FULL LED
-    // PD5 : 3.6V switch TR
-	// PD6 : SCRL
-    // PD7 : row17
-	
 
-	// signal direction : col -> row
+	initMatrix();
 
-	DDRCOLUMNS 	= 0xFF;	// all outputs for cols
-	PORTCOLUMNS	= 0xFF;	// pull-up
-	DDRROWS1	= 0x00;	// all inputs for rows
-	DDRROWS2	= 0x00;
-	PORTROWS1	= 0xFF;	// all rows pull-up.
-	PORTROWS2	= 0xFF;	
-  
-	DDRD        = 0xFF; 
-	DDRD        &= ~((1<<PIND7)|(1<<DIODE_PIN)); // 0b01011111 all pins output except row 17, 3.6V TR
-	PORTD       = 0x00; 
-	PORTD 		|= (1<<PIND7)|(1<<DIODE_PIN);// 0b10100000 pull up row 17, 3.6V TR
+	initLED();
 
-	// led pin
-	DDRD |= (LEDNUM | LEDCAPS | LEDFULLLED);	// output;
-	PORTD &= ~(LEDNUM | LEDCAPS | LEDFULLLED);	// low
- 
-#ifdef LEDSCROLL
-   	DDRD |= (LEDSCROLL);	// output;
-	PORTD &= ~(LEDSCROLL);	// low
-#endif
+	P2U_USB_CFG_DDR |= ((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));	// input
+	P2U_PS2_PORT &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT)); // 
 
     if(xIsUSB){
     	// USB Reset by device only required on Watchdog Reset	                        
 	    _delay_us_m(11);      // delay >10ms for USB reset
-		DDRD &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));//0x53; //0b00010011  remove USB reset condition
+		P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// remove USB reset condition
 
 	    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
 	    TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
@@ -148,18 +118,11 @@ int main(void) {
     INTERFACE = 255;
 	uint8_t ckeckNeedInterface = 0;
 
-
 	// for interface select
     // initHardware(0);	//여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
-    DDRCOLUMNS 	= 0xFF;	// all outputs for cols
-	PORTCOLUMNS	= 0xFF;	// pull-up
-	DDRROWS1	= 0x00;	// all inputs for rows
-	DDRROWS2	= 0x00;
-	PORTROWS1	= 0xFF;	// all rows pull-up.
-	PORTROWS2	= 0xFF;	
-  
-	DDRD        = 0b00000000; // row 17 input (PD7)
-	PORTD       = 0b10000000; // row 17 pull up (PD7)
+
+	initMatrix();
+
     _delay_us_m(1); 
 
 	uint8_t _countDie = 0;
@@ -167,12 +130,7 @@ int main(void) {
 		// waiting during clear debounce
 	}
 
-	// DEBUG_PRINT(("_countDie : %d \n", _countDie));
-
-	
-	// DEBUG_PRINT(("checking.... \n"));
 	uint8_t row, col, cur, keyidx;	
-
 	uint8_t *gMatrix = getCurrentMatrix();
 
 	// debounce cleared => compare last matrix and current matrix
@@ -191,7 +149,7 @@ int main(void) {
 #endif
 				keyidx = getKeyCode(0, row, col); //pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeycode(0, row, col);
 				if(keyidx == KEY_M) {
-					DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
+					// DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
 					readyKeyMappingOnBoot();
 				}else if(keyidx == KEY_U) {
 					DEBUG_PRINT(("KEY_U \n"));
@@ -225,10 +183,10 @@ int main(void) {
 	}
 
 	// preparing auto detacting
-	DDRD    &= ~BV(2);	//0b00010011;	
-	PORTD	|= BV(2);	//0b11101100;
+	P2U_PS2_DDR    	&= ~BV(P2U_PS2_CLOCK_PIN);	//0b00010011;	
+	P2U_PS2_PORT	|= BV(P2U_PS2_CLOCK_PIN);	//0b11101100;
 	uint8_t debounce = 0;
-	uint8_t prevPIND = 0;
+	uint8_t prevPIN = 0;
 
 	// 인터페이스 선택이 없었다면 자동 인식 실행;
 	if(INTERFACE >= INTERFACE_CLEAR){
@@ -242,8 +200,8 @@ int main(void) {
 			ps/2  0xdc = 0b11011100 => 0xcc = 0b11001100
 			*/
 			
-			if((PIND&(BV(2))) == 0){
-				if((prevPIND&(BV(2))) == 0){
+			if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 0){
+				if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 0){
 					debounce++;
 					if(debounce > 5){
 						// usb
@@ -252,9 +210,9 @@ int main(void) {
 				}else{
 					debounce = 0;
 				}
-				prevPIND = PIND;
-			}else if((PIND&(BV(2))) == 4){
-				if((prevPIND&(BV(2))) == 4){
+				prevPIN = P2U_PS2_PINS;
+			}else if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 4){
+				if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 4){
 					debounce++;
 					if(debounce > 5){
 						// ps2
@@ -263,7 +221,7 @@ int main(void) {
 				}else{
 					debounce = 0;
 				}
-				prevPIND = PIND;
+				prevPIN = P2U_PS2_PINS;
 			}
 
 			if(INTERFACE < 2) break;
@@ -282,9 +240,7 @@ int main(void) {
 		}
 		
 		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
-			turnOnLED(LEDNUM | LEDCAPS);
-			_delay_ms(100);
-			turnOffLED(LEDNUM | LEDCAPS);
+			blinkOnce();
 
 			clearInterface();
 			initHardware(0);

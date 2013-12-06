@@ -14,7 +14,7 @@
 
 #include "print.h"
 #include "ledrender.h"
-#include "hardwareinfo.h"
+// #include "hardwareinfo.h"
 #include "sleep.h"
 #include "keymapper.h"
 

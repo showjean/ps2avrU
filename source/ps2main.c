@@ -24,7 +24,7 @@
 
 #include "keysta.h"
 
-#include "hardwareinfo.h"
+// #include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymapper.h"
@@ -416,18 +416,6 @@ uint8_t hasMacroPs2(void)
 /* ------------------------------------------------------------------------- */
 
 void ps2_main(void){
-
-	/*DDRCOLUMNS 	= 0xFF;	// all outputs for cols
-	PORTCOLUMNS	= 0xFF;	// pull-up
-
-	DDRROWS1	= 0x00;	// all inputs for rows
-	DDRROWS2	= 0x00;
-	DDRD    = 0b00010011;		// init led, ps2 on
-
-	PORTROWS1	= 0xFF;	// all rows pull-up.
-	PORTROWS2	= 0xFF;	
-	PORTD	= 0b11101100;	// led off,  ps2 on*/
-
 	// initialize speed port
 	unsigned char rxed;
 

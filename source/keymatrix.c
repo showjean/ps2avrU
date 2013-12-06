@@ -15,9 +15,21 @@
 
 #include "keymap.h"
 #include "keymatrix.h"
-#include "hardwareinfo.h"
+// #include "hardwareinfo.h"
 #include "ledrender.h"
 #include "keymapper.h"
+
+
+/* ----------------------- hardware I/O abstraction ------------------------ */
+#define PORTCOLUMNS PORTB  ///< port on which we read the state of the columns
+#define PINCOLUMNS  PINB   ///< port on which we read the state of the columns
+#define DDRCOLUMNS  DDRB   ///< port on which we read the state of the columns
+#define PORTROWS1   PORTA  ///< first port connected to the matrix rows
+#define PINROWS1    PINA   ///< first port connected to the matrix rows
+#define DDRROWS1    DDRA   ///< first port connected to the matrix rows
+#define PORTROWS2   PORTC  ///< second port connected to the matrix rows
+#define PINROWS2    PINC   ///< second port connected to the matrix rows
+#define DDRROWS2    DDRC   ///< second port connected to the matrix rows
 
 
 /* ------------------------------------------------------------------------- */
@@ -56,6 +68,34 @@ const unsigned short int modmask[16] = {
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
+void initMatrix(void){
+	// initialize matrix ports - cols, rows
+	// PB0-PB7 : col0 .. col7
+	// PA0-PA7 : row0 .. row7
+	// PC7-PC0 : row8 .. row15
+	
+	// PD0 : NUM
+    // PD1 : CAPS
+    // PD2 : D+ / Clock
+    // PD3 : D- / Data
+    // PD4 : FULL LED
+    // PD5 : 3.6V switch TR
+	// PD6 : SCRL
+    // PD7 : row17
+	
+
+	// signal direction : col -> row
+
+	DDRCOLUMNS 	= 0xFF;	// all outputs for cols
+	PORTCOLUMNS	= 0xFF;	// high
+	DDRROWS1	= 0x00;	// all inputs for rows
+	DDRROWS2	= 0x00;
+	PORTROWS1	= 0xFF;	// all rows pull-up.
+	PORTROWS2	= 0xFF;	
+  
+	DDRD        &= ~(1<<PIND7); // input row 17
+	PORTD 		|= (1<<PIND7);// pull up row 17
+}
 void clearMatrix(void){
 	uint8_t row;
 	for(row=0;row<ROWS;++row) {
@@ -95,11 +135,7 @@ uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
 				isBeyondFN ^= 1;
 			 }
 			 if(isBeyondFN == 0){
-				if(getLEDState() & LED_STATE_NUM) { 
-					turnOnLED(LEDNUM); 
-				}else{ 
-					turnOffLED(LEDNUM); 
-				}
+				setLEDIndicate();
 			 }
 			 return 0;
 		}else if(keyidx == EXTRA_FN){
@@ -150,6 +186,7 @@ uint8_t getLayer(void) {
 			if(keyidx == KEY_LAZY_FN || keyidx == KEY_LAZY_FN2 
 				|| keyidx == KEY_FN || keyidx == KEY_FN2 
 				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
+				
 				cur = 0;
 				DDRCOLUMNS  = BV(col);		// 해당 col을 출력으로 설정, 나머지 입력
 				PORTCOLUMNS = ~BV(col);	// 해당 col output low, 나머지 컬럼을 풀업 저항

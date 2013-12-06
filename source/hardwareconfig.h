@@ -11,6 +11,7 @@
 #define P2U_PS2_DATA_BIT      0x08
 
 /* ----------------------- USB ------------------------ */
+#define P2U_USB_CFG_DDR			    DDRD
 #define P2U_USB_CFG_IOPORTNAME      D
 #define P2U_USB_CFG_DMINUS_BIT      3
 #define P2U_USB_CFG_DPLUS_BIT       2

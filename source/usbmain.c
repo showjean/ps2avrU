@@ -225,7 +225,7 @@
 //#include <avr/wdt.h>
 #include "usbdrv/usbdrv.h"
 
-#include "hardwareinfo.h"
+// #include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymapper.h"
