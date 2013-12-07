@@ -14,9 +14,13 @@
 
 #include "print.h"
 #include "ledrender.h"
-// #include "hardwareinfo.h"
 #include "sleep.h"
 #include "keymapper.h"
+
+#define PWM_MAX 0xFF
+
+#define turnOnLED(pin)		PORTLEDS |= (pin);
+#define turnOffLED(pin)		PORTLEDS &= ~(pin);
 
 static uint16_t downLevelStay = 0;
 static uint8_t downLevel = 0;
@@ -49,6 +53,24 @@ void setPWM(int xValue);
 
 void stopTimer(void){}
 void startTimer(void){}
+
+void initLED(void){	
+	// led pin
+	DDRD |= (LEDNUM | LEDCAPS | LEDFULLLED);	// output;
+	PORTD &= ~(LEDNUM | LEDCAPS | LEDFULLLED);	// low
+ 
+#ifdef LEDSCROLL
+   	DDRD |= (LEDSCROLL);	// output;
+	PORTD &= ~(LEDSCROLL);	// low
+#endif
+}
+
+void blinkOnce(void){
+	initLED();
+	turnOnLED(LEDNUM | LEDCAPS);
+	_delay_ms(100);
+	turnOffLED(LEDNUM | LEDCAPS);	
+}
 
 void setLEDState(uint8_t xState){
 	LEDstate = xState;

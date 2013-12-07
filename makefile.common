@@ -13,7 +13,8 @@
 # I've added some extra comments above several of the makefile fields which
 # you will have to deal with.
 
-AVRLIB = ../avrlib
+	AVRLIB = $(TOP_DIR)/avrlib
+	COMMON_DIR = $(TOP_DIR)/source
 
 #put the name of the target file here (without extension)
 #  Your "target" file is your C source file that is at the top level of your code.
@@ -27,12 +28,19 @@ AVRLIB = ../avrlib
 #  to list $(TRG).c, your top-level target file, last.
 
 	SRC += $(AVRLIB)/timer.c\
-			keysta.c \
-			usbdrv/usbdrv.c usbdrv/oddebug.c \
-			keymap.c \
-			sleep.c keymapper.c ps2avru_util.c udelay.c \
-			macrobuffer.c ps2main.c usbmain.c bootMapper.c \
-			$(TRG).c \
+			$(COMMON_DIR)/keysta.c \
+			$(COMMON_DIR)/usbdrv/usbdrv.c \
+			$(COMMON_DIR)/usbdrv/oddebug.c \
+			$(COMMON_DIR)/keymap.c \
+			$(COMMON_DIR)/sleep.c \
+			$(COMMON_DIR)/keymapper.c \
+			$(COMMON_DIR)/ps2avru_util.c \
+			$(COMMON_DIR)/udelay.c \
+			$(COMMON_DIR)/macrobuffer.c \
+			$(COMMON_DIR)/ps2main.c \
+			$(COMMON_DIR)/usbmain.c \
+			$(COMMON_DIR)/bootMapper.c \
+			$(COMMON_DIR)/$(TRG).c \
 
 
 #put additional assembler source file here
@@ -40,7 +48,7 @@ AVRLIB = ../avrlib
 #  you would like to use from within your C programs.  The assembly code must be
 #  written in a special way to be usable as a function from your C code.
 
-	ASRC = usbdrv/usbdrvasm.s
+	ASRC = $(COMMON_DIR)/usbdrv/usbdrvasm.s
 
 #additional libraries and object files to link
 #  Libraries and object files are collections of functions which have already been
@@ -50,26 +58,27 @@ AVRLIB = ../avrlib
 	LIB	=
 
 #additional includes to compile
-	INC	= usbdrv
+	INC	= $(COMMON_DIR)/usbdrv
 
 #assembler flags
-	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU)
-    ASFLAGS += -include $(HARDWARE_INFO_H)
+	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU) -I$(COMMON_DIR)
+#	ASFLAGS += -include $(HARDWARE_INFO_H)
 
 #compiler flags
-	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
-    CPFLAGS += -include $(HARDWARE_INFO_H)
+	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
+#	CPFLAGS += -include $(HARDWARE_INFO_H)
 
 #linker flags
 	LDFLAGS = -Wl,-Map=$(TRG).map,--cref 
 #	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
-	# KEYMAP_ADDRESS = 0x6500
-	# LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
+# 	KEYMAP_ADDRESS = 0x6500
+# 	LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
 
 	
 ########### you should not need to change the following line #############
 include $(AVRLIB)/make/avrproj_make
-		  
+
+	  
 ###### dependecies, add any dependencies you need here ###################
 #  Dependencies tell the compiler which files in your code depend on which
 #  other files.  When you change a piece of code, the dependencies allow
@@ -105,3 +114,4 @@ prog: all
 	avrdude -c stk500v2 -P com3 -p atmega32 -U hfuse:w:0xD0:m -U lfuse:w:0x0F:m
 	avrdude -c stk500v2 -P com3 -p atmega32 -U flash:w:main.hex:i
 	pause;
+

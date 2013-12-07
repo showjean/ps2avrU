@@ -8,7 +8,7 @@
 #include <util/delay.h>
 
 #include "keymain.h"
-// #include "hardwareinfo.h"
+#include "hardwareinfo.h"
 #include "keymap.h"
 #include "keymatrix.h"
 #include "ps2avru_util.h"

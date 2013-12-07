@@ -1,9 +1,9 @@
 
 
 # Directory common source filess exist
-TOP_DIR = ./
+TOP_DIR = ../..
 TARGET = ps2avrU
-HARDWARE_INFO_H = hardwareinfo.h
+# HARDWARE_INFO_H = hardwareinfo.h
 
 ########### change this lines according to your project ##################
 #put the name of the target mcu here (at90s8515, at90s8535, attiny22, atmega603 etc.)
@@ -13,8 +13,8 @@ MCU = atmega32
 
 F_CPU = 12000000
 
-SRC = ledrender.c \
+SRC = ledrender_ps2avrU.c \
 	keymatrix.c
 
 
-include $(TOP_DIR)/common.mk
+include $(TOP_DIR)/makefile.common

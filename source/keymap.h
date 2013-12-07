@@ -2,7 +2,7 @@
 #define KEYMAP_H
 
 #include <avr/pgmspace.h>
-// #include "hardwareinfo.h"
+#include "hardwareinfo.h"
 
 #define KFLA_EXTEND         0x01
 #define KFLA_SPECIAL        0x02

@@ -1,7 +1,7 @@
 #ifndef LEDRENDER_H
 #define LEDRENDER_H
 
-// #include "hardwareinfo.h"
+#include "hardwareinfo.h"
 
 #define LED_STATE_NUM     0x01  ///< num LED on a boot-protocol keyboard
 #define LED_STATE_CAPS    0x02  ///< caps LED on a boot-protocol keyboard

@@ -26,7 +26,7 @@
 #include <string.h>
 
 #include "keymap.h" 
-// #include "hardwareinfo.h"
+#include "hardwareinfo.h"
 #include "hardwareconfig.h"
 #include "keymapper.h"
 #include "ledrender.h"
