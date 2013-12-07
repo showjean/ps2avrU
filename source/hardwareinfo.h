@@ -33,11 +33,4 @@
 #define EEPROM_MAPPING			13	// ~420
 #define EEPROM_MACRO			421	// ~996
 
-/* --------------------------- interface --------------------------------*/
-#define INTERFACE_PS2		0
-#define INTERFACE_PS2_USER	3
-#define INTERFACE_USB		1
-#define INTERFACE_USB_USER	2
-#define INTERFACE_CLEAR		4
-
 #endif

@@ -45,14 +45,14 @@ uint8_t INTERFACE = 255;
 void setUsbOn(void) {	
 	// TR에 전압을 연결하기 위해서 D5를 설정; input, pull up
 	// 이러면 제너다이오드가 GND와 연결되어 USB로 작동가능;
-	cbi(DIODE_DDR, DIODE_PIN); //DDRD  &= ~BV(DIODE_PIN);
-	sbi(DIODE_PORT, DIODE_PIN); //PORTD |= BV(DIODE_PIN);
+	cbi(DIODE_DDR, DIODE_PIN); //DIODE_DDR  &= ~BV(DIODE_PIN);
+	sbi(DIODE_PORT, DIODE_PIN); //DIODE_PORT |= BV(DIODE_PIN);
 }
 void setUsbOff(void) {		
 	// PS/2로 사용하기위해서 output low
 	// 이러면 제너다이오드가 GND와 연결이 차단된다.
-	sbi(DIODE_DDR, DIODE_PIN); //DDRD  |= (1 << DIODE_PIN);
-    cbi(DIODE_PORT, DIODE_PIN); //PORTD &= ~(1 << DIODE_PIN);
+	sbi(DIODE_DDR, DIODE_PIN); //DIODE_DDR  |= (1 << DIODE_PIN);
+    cbi(DIODE_PORT, DIODE_PIN); //DIODE_PORT &= ~(1 << DIODE_PIN);
 }
 
 void clearInterface(void){
@@ -72,13 +72,9 @@ void clearTimers(void) {
 
 	// timer0, timer1 reset;
 	cbi(TIMSK, TOIE0);	// disable TCNT0 overflow
-	// TCNT0 = 0;
 	cbi(TIMSK, TOIE1);	// disable TCNT1 overflow
-	// TCNT1H = 0;
-	// TCNT1L = 0;
 	// timer2 reset
 	cbi(TIMSK, TOIE2);	// disable TCNT2 overflow
-	// TCNT2 = 0; //0xEC;
 }
 
 /**
