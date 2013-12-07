@@ -77,7 +77,6 @@
 	
 ########### you should not need to change the following line #############
 include $(AVRLIB)/make/avrproj_make
-
 	  
 ###### dependecies, add any dependencies you need here ###################
 #  Dependencies tell the compiler which files in your code depend on which
@@ -115,3 +114,5 @@ prog: all
 	avrdude -c stk500v2 -P com3 -p atmega32 -U flash:w:main.hex:i
 	pause;
 
+rename: $(TRG).hex
+	cp $(TRG).hex $(RESULT).hex

@@ -2,7 +2,9 @@
 
 # Directory common source filess exist
 TOP_DIR = ../..
-TARGET = ps2avrU
+ifndef RESULT
+	RESULT = ps2avrU
+endif
 # HARDWARE_INFO_H = hardwareinfo.h
 
 ########### change this lines according to your project ##################
