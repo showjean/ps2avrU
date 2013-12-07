@@ -271,6 +271,11 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 		return 0;
 	}
+			
+	if(isDown && keyidx != KEY_NONE && applyMacro(keyidx)) {
+		// 매크로 실행됨;
+		return 0;
+	}
 
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
@@ -348,11 +353,6 @@ int scanKeyPS2(void) {
 			prev = prevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
 			keyidx = getCurrentKeycode(layer, row, col);
-
-			if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
-				// 매크로 실행됨;
-				return 0;
-			}
 
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 

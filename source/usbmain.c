@@ -232,20 +232,23 @@
 #include "macrobuffer.h"
 #include "sleep.h"
 
+#define REPORT_ID_KEYBOARD      1
+#define REPORT_ID_MULTIMEDIA    2
+#define REPORT_SIZE_KEYBOARD    8
+#define REPORT_SIZE_MULTIMEDIA  3
+
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-static uint8_t reportBuffer[8]; ///< buffer for HID reports
+static uint8_t reportBuffer[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
+// static uint8_t reportBufferPrev[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
 static uint8_t idleRate;        ///< in 4ms units
 static uint8_t protocolVer = 1; ///< 0 = boot protocol, 1 = report protocol
 static uint8_t expectReport = 0;       ///< flag to indicate if we expect an USB-report
 static uint8_t _isInit = 0;     // set 1 when HID init
 
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
-
-#define REPORT_ID_KEYBOARD      1
-#define REPORT_ID_MULTIMEDIA    2
 
 void initInterfaceUsb(void);
 void clearReportBuffer(void);
@@ -415,8 +418,7 @@ void prepareKeyMappingUsb(void)
 uint8_t reportIndex; // reportBuffer[0] contains modifiers
 uint8_t _isMultimediaPressed = 0;
 uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
-    uint8_t retval = 0;
-
+    uint8_t retval = 1;
    
     // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
     keyidx = getDualActionDownKeyIdex(keyidx);      
@@ -424,7 +426,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
     if(keyidx >= KEY_MAX){
-        return retval;
+        return 0;
     }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
         _isMultimediaPressed = 1;
 
@@ -441,16 +443,18 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     }
 
     if (keyidx != KEY_NONE) { // keycode should be added to report
-        if (reportIndex >= sizeof(reportBuffer)) { // too many keycodes
-            //DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
-            if (!retval & 0x02) { // Only fill buffer once
-                memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
-                retval |= 0x02; // continue decoding to get modifiers
-            }
+        if (reportIndex >= REPORT_SIZE_KEYBOARD) { // too many keycodes
+            // DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
+            // if (!retval & 0x02) { // Only fill buffer once
+                // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
+                /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후 
+                6번째 이전의 키 하나를 떼도 7키가 눌린것으로 판단 이전 6개의 키가 유지되는 버그가 있어서 매트릭스 순으로 6개를 처리하도록 방치;*/
+                // retval |= 0x02; // continue decoding to get modifiers
+            // }
         } else {
             // DEBUG_PRINT(("reportBuffer[reportIndex] : reportIndex = %d keyidx = %d \n", reportIndex, keyidx));
             if(keyidx > KEY_extend && keyidx < KEY_extend_end){
-                keyidx = pgm_read_word(&keycode_USB_extend[keyidx - (KEY_extend + 1)]); 
+                keyidx = pgm_read_byte(&keycode_USB_extend[keyidx - (KEY_extend + 1)]); 
             }
             reportBuffer[reportIndex] = keyidx; // set next available entry
             reportIndex++;
@@ -488,11 +492,6 @@ uint8_t scanKeyUSB(void) {
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeycode(keymap, row, col);						
 			gFN = 1;
-            
-            if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
-                // 매크로 실행됨;
-                return 0;
-            }
             
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
@@ -533,13 +532,18 @@ uint8_t scanKeyUSB(void) {
                 continue;
             }
             
+            if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
+                // 매크로 실행됨;
+                return 0;
+            }
+            
             // fn키를 키매핑에 적용하려면 위치 주의;
             if(gFN == 0) continue;
 
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               makeReportBuffer(keyidx, 1);
+               retval |= makeReportBuffer(keyidx, 1);
 			}
 			
 		}
@@ -565,6 +569,8 @@ uint8_t scanKeyUSB(void) {
 
 
     if(gKeymapping == 1) return 0;
+
+    // if (!retval & 0x02) memcpy(reportBufferPrev, reportBuffer, REPORT_SIZE_KEYBOARD);
 	
     return retval;
 }
@@ -697,7 +703,7 @@ void usb_main(void) {
             if(_isInit){
                 _isInit = 0;
                 clearReportBuffer();
-                usbSetInterrupt(reportBuffer, 8);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
@@ -706,14 +712,14 @@ void usb_main(void) {
             }else if(hasMacroUsb()){
                 scanMacroUsb();
                 // DEBUG_PRINT(("hasMacroUsb\n"));
-                usbSetInterrupt(reportBuffer, 8);
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
             }else if(updateNeeded){
                 if(reportBuffer[0] == REPORT_ID_MULTIMEDIA){   // report ID : 2
                     // DEBUG_PRINT((" multi  reportBuffer : [0] = %d [1] = %d [2] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2]));
-                    usbSetInterrupt(reportBuffer, 3);    
+                    usbSetInterrupt(reportBuffer, REPORT_SIZE_MULTIMEDIA);    
                 }else if(reportBuffer[0] == REPORT_ID_KEYBOARD){ // report ID : 1
                     // DEBUG_PRINT((" updateNeeded : [0] = %d [1] = %d [2] = %d [3] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2], reportBuffer[3]));
-                    usbSetInterrupt(reportBuffer, 8); 
+                    usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
                 }
                 updateNeeded = 0;
             }

@@ -248,7 +248,7 @@ extern const uint8_t PROGMEM keycode_set2[NUM_KEY];
 extern const uint16_t PROGMEM keycode_USB_multimedia[];
 // KEY_APPS까지는 keycode 순서에 맞게 나열되어 있지만, 
 // KEY_extend는 배열 순서와는 다른 키코드를 갖는 usage page 07(keyboard)의 키코드를 정의.
-extern const uint16_t PROGMEM keycode_USB_extend[];
+extern const uint8_t PROGMEM keycode_USB_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_special[];
 
