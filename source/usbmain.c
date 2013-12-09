@@ -580,7 +580,11 @@ uint8_t scanMacroUsb(void)
 {
     clearReportBuffer(); 
 
-    if(!isKeyMapping()){
+    if(!isKeyMapping()
+#ifdef ENABLE_BOOTMAPPER           
+        && !isBootMapper()
+#endif    
+        ){
         uint8_t row, col, cur, keyidx;
         uint8_t *gMatrix = getCurrentMatrix();
         uint8_t keymap = getLayer();

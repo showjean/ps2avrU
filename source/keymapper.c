@@ -691,13 +691,12 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {	
     xKeyidx = getDualActionDownKeyIdex(xKeyidx);
 
-	if(xKeyidx >= KEY_MAX) return;		// 키값으로 변환할 수 없는 특수 키들은 중단;
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
 	// DEBUG_PRINT(("putKeyCode xKeyidx: %02x, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
 
 	// 매핑 중에는 키 업만 실행 시킨다.
-	if(_step != STEP_INPUT_MACRO && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
+	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
 
 	uint8_t cmd,gLayer;
 	int gKeyCode;
@@ -708,7 +707,10 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 	gKeyIndex = findIndex(usingKeys, 11, xKeyidx);
 
-	if(_step == STEP_INPUT_MACRO){
+	if(isMacroInput()){
+
+		if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
+
 		if(_isTiredEscapeKey){
 			_isPressedEscapeKey = 0;
 			_isTiredEscapeKey = 0;
@@ -932,7 +934,8 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				gKeyCode = getDefaultKeyCode(_currentLayer, _row, _col);
 				printString(toString(gKeyCode));
 				printString(" mapping=");
-				gKeyCode = _newKeyMap[_row][_col]; //getMappingKeyCode(_currentLayer, _row, _col);
+				gKeyCode = _newKeyMap[_row][_col];
+				if(gKeyCode == 0xFF) gKeyCode = 0;
 				printString(toString(gKeyCode));
 				printString(")");
 				printEnter();
