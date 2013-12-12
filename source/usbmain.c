@@ -231,6 +231,7 @@
 #include "keymapper.h"
 #include "macrobuffer.h"
 #include "sleep.h"
+#include "enterframe.h"
 
 #define REPORT_ID_KEYBOARD      2
 #define REPORT_ID_MULTIMEDIA    3
@@ -723,6 +724,9 @@ void usb_main(void) {
     	}else{
             scanKeyUSB();   // for dummy
         }
+
+        // ps2avrU loop
+        enterFrame();
 
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {   

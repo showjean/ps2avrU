@@ -374,17 +374,11 @@ uint8_t *getCurrentMatrix(void){
 
 //curmatrix
 uint8_t setCurrentMatrix(void){	
-	
-	startKeyMapping();		
+			
 
 	uint8_t gClearMatrix = getLiveMatrix();
-
 	
-	enterFrameForMapper();	
-	
-	if(isReadyKeyMappingOnBoot()) return 0;
-
-	// DEBUG_PRINT(("setCurrentMatrix return 1 \n"));
+	// if(isReadyKeyMappingOnBoot()) return 0;
 
 	return gClearMatrix;
 }

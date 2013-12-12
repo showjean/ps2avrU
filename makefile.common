@@ -37,9 +37,10 @@
 			$(COMMON_DIR)/ps2avru_util.c \
 			$(COMMON_DIR)/udelay.c \
 			$(COMMON_DIR)/macrobuffer.c \
+			$(COMMON_DIR)/bootMapper.c \
+			$(COMMON_DIR)/enterframe.c \
 			$(COMMON_DIR)/ps2main.c \
 			$(COMMON_DIR)/usbmain.c \
-			$(COMMON_DIR)/bootMapper.c \
 			$(COMMON_DIR)/$(TRG).c \
 
 

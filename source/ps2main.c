@@ -29,6 +29,7 @@
 #include "ledrender.h"
 #include "keymapper.h"
 #include "macrobuffer.h"
+#include "enterframe.h"
 
 // Output buffer - circular queue
 #define QUEUE_SIZE 200
@@ -575,6 +576,9 @@ void ps2_main(void){
 					if(isEmpty()){
 						scanKeyPS2();
 					}
+
+			        // ps2avrU loop
+			        enterFrame();
 					renderLED(isBeyondFN);
 
 					keyval = pop();
@@ -603,11 +607,13 @@ void ps2_main(void){
 					break;
 				// typematic : repeat last key
 				case STA_REPEAT:
-
 					
 					if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
 						scanKeyPS2();
 					}
+
+			        // ps2avrU loop
+			        enterFrame();
 					renderLED(isBeyondFN);
 
 					if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal

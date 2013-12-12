@@ -236,6 +236,7 @@ int main(void) {
 		}
 		
 		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
+			initLED();
 			blinkOnce();
 
 			clearInterface();

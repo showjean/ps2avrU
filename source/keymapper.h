@@ -67,6 +67,12 @@
 // back
 #define CMD_BACK 6
 
+
+// quick swap index
+#define COUNT_TYPE_KEYMAPPER 			1
+#define COUNT_TYPE_QUICKSWAP_ALT_GUI 	2
+#define QUICKSWAP_ALT_GUI				1 	// bit index for eeprom write
+
 extern void setWillStartKeyMapping(void);
 
 extern uint8_t isKeyMapping(void);
@@ -105,6 +111,11 @@ extern void enterFrameForMapper(void);
 extern uint8_t isMacroKey(uint8_t xKeyidx);
 
 extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
+
+/**
+퀵 스왑 상태가 있는지 확인;
+*/
+// extern uint8_t hasQuickSwap(void);
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////

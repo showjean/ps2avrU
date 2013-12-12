@@ -65,7 +65,6 @@ void initLED(void){
 }
 
 void blinkOnce(void){
-	initLED();
 	turnOnLED(LEDNUM | LEDCAPS);
 	_delay_ms(100);
 	turnOffLED(LEDNUM | LEDCAPS);	
