@@ -22,6 +22,8 @@
 #include "ps2main.h"
 #include "usbmain.h"
 #include "ledrender.h"
+#include "keydownbuffer.h"
+#include "quickswap.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -68,12 +70,10 @@ const char str_clear_all_macro[] PROGMEM = "clear...";
 
 
 static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
-static uint8_t enabledKeyMappingCount = 0;
+static uint8_t enabledKeyMappingCount = COUNT_TYPE_NONE;
 static int keyMappingCount = 0;
 static int keyMappingCountMax = KEY_MAPPING_COUNT_MAX;
 static uint8_t _keyMappingOnBoot = 0;
-
-static uint8_t _isQuickSwap = 0;
 
 uint8_t _macroIndex;
 uint8_t _macroBufferIndex;
@@ -112,52 +112,52 @@ void clearMacroAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
 
-//------------------------------------------------------///
-
-void setWillStartKeyMapping(void){
-	_isKeyMapping |= BV(0);	//set will start mapping
-}
-
-uint8_t isKeyMapping(void){
-	return _isKeyMapping & BV(0);	// will start key mapping
-}
-uint8_t isDeepKeyMapping(void){
-	return _isKeyMapping & BV(1);	// did start key mapping
-}
-
-/*uint8_t hasQuickSwap(void){
-	if(_isQuickSwap == QUICKSWAP_ALT_GUI){
-		return QUICKSWAP_ALT_GUI;
-	}
-	return 0;
-}*/
-void applyKeyMapping(uint8_t xModi) {
-	if(isKeyMapping()) return;
-
-		DEBUG_PRINT(("xModi= %d, _isKeyMapping= %d \n", xModi, _isKeyMapping));
-	// 약 5초간 입력이 지속되면 키매핑 모드로
-	if(xModi == 0x07){	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT
-		keyMappingCount = 0;
-		enabledKeyMappingCount = COUNT_TYPE_KEYMAPPER;
-	/*}else if(xModi == 0x0C){	// KEY_LALT + KEY_LGUI
-		// guick swap
-		keyMappingCount = 0;
-		enabledKeyMappingCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;*/
-
-	}else{		
-		_isKeyMapping = 0;
-		enabledKeyMappingCount = 0;
-	}
+void initKeymapper(void){
 
 	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
 		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
 	}
 }
 
+//------------------------------------------------------///
+
+static void setWillStartKeyMapping(void){
+	_isKeyMapping |= BV(0);	//set will start mapping
+}
+
+uint8_t isKeyMapping(void){
+	return _isKeyMapping & BV(0);	// will start key mapping
+}
+static uint8_t isDeepKeyMapping(void){
+	return _isKeyMapping & BV(1);	// did start key mapping
+}
+
+static void applyKeyMapping(uint8_t xModi) {
+	static uint8_t prevModifier = 0;
+
+	if(isKeyMapping()) return;
+
+	if(xModi == prevModifier) return;
+
+	DEBUG_PRINT(("xModi= %d, _isKeyMapping= %d \n", xModi, _isKeyMapping));
+
+	// 약 5초간 입력이 지속되면 키매핑 모드로
+	if(xModi == 0x07 && enabledKeyMappingCount == COUNT_TYPE_NONE){	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT
+		keyMappingCount = 0;
+		enabledKeyMappingCount = COUNT_TYPE_COUNTING;
+	}else{		
+		_isKeyMapping = 0;
+		enabledKeyMappingCount = COUNT_TYPE_NONE;
+	}
+
+	prevModifier = xModi;
+
+}
+
 /**
  진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
 */
-void prepareKeyMapping(void){
+static void prepareKeyMapping(void){
 	setWillStartKeyMapping();	//set will start mapping
 
 	// 각 인터페이스 준비;
@@ -165,7 +165,6 @@ void prepareKeyMapping(void){
 	    prepareKeyMappingUsb();
 	}else{
 		prepareKeyMappingPs2();
-		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;
 	}
 	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 
@@ -209,7 +208,7 @@ void startKeyMappingOnBoot(void)
 /**
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
 */
-void startKeyMapping(void){
+static void startKeyMapping(void){
 	if(isKeyMapping() && !isDeepKeyMapping() && isAllKeyRelease()){
 		startKeyMappingDeep();
 	}
@@ -218,28 +217,24 @@ void startKeyMapping(void){
 /**
 키매핑을 종료하고 키보드 상태로 돌아간다.
 */
-void stopKeyMapping(void){
+static void stopKeyMapping(void){
 	_isKeyMapping = 0;
 	_wait = WAIT_NOTHING;
 	// DEBUG_PRINT(("stopKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 }
 
 
-void countKeyMappingEnabled(void){	
-	if(!_isKeyMapping && enabledKeyMappingCount && ++keyMappingCount > keyMappingCountMax){
-		/*if(enabledKeyMappingCount == COUNT_TYPE_QUICKSWAP_ALT_GUI){
-			_isQuickSwap = QUICKSWAP_ALT_GUI;
-			blinkOnce();
-			setLEDIndicate();
-		}else */if(enabledKeyMappingCount == COUNT_TYPE_KEYMAPPER){
-			prepareKeyMapping();			
-		}
-		enabledKeyMappingCount = 0;
+static void countKeyMappingEnabled(void){	
+	if(!_isKeyMapping && enabledKeyMappingCount == COUNT_TYPE_COUNTING && ++keyMappingCount > keyMappingCountMax){
+		prepareKeyMapping();			
+		enabledKeyMappingCount = COUNT_TYPE_KEYMAPPER;
 	}
 
 }
 
 void enterFrameForMapper(void){
+
+	applyKeyMapping(getModifierDownBuffer());
 
 	startKeyMapping();
 
@@ -272,7 +267,7 @@ void enterFrameForMapper(void){
 
 }
 
-uint8_t isMacroKey(uint8_t xKeyidx){
+static uint8_t isMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
 		return 1;
 	}else{
@@ -326,18 +321,7 @@ uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 		gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
 	}
 
-	//apply quick swap
-	// if(hasQuickSwap() == QUICKSWAP_ALT_GUI){
-	// 	if(gKeyIndex == KEY_LALT){
-	// 		gKeyIndex = KEY_LGUI;
-	// 	}else if(gKeyIndex == KEY_LGUI){
-	// 		gKeyIndex = KEY_LALT;
-	// 	}else if(gKeyIndex == KEY_RALT){
-	// 		gKeyIndex = KEY_RGUI;			
-	// 	}else if(gKeyIndex == KEY_RGUI){
-	// 		gKeyIndex = KEY_RALT;			
-	// 	}
-	// }
+	gKeyIndex = getQuickSwapKeyindex(gKeyIndex);
 
 	return gKeyIndex;
 }

@@ -14,6 +14,7 @@
 	#define DEBUG_KEYMAPPER_H
 	#define DEBUG_SLEEP_H
 	#define DEBUG_PRINT_H
+	#define DEBUG_QUICKSWAP_H
 #endif
 
 #define ENABLE_BOOTMAPPER	// use bootmapper	

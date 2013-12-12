@@ -5,6 +5,7 @@
 #include "print.h"
 #include "macrobuffer.h"
 #include "keymapper.h"
+#include "quickswap.h"
 
 #if !(KEYMAP_A87||KEYMAP_THUMB||KEYMAP_MX_MINI||KEYMAP_BOOT_MAPPER)
 	#define KEYMAP_A87
@@ -120,7 +121,7 @@ void setDualAction(uint8_t keyidx, uint8_t isDown){
 // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
 uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex){
 	if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end && isCanceledDualAction()){
-        return dualActionMaskDown[xActionIndex - (KEY_dualAction + 1)];        
+        return getQuickSwapKeyindex(dualActionMaskDown[xActionIndex - (KEY_dualAction + 1)]);        
     }
     return xActionIndex;
 }

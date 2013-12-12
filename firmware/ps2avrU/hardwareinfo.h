@@ -1,6 +1,8 @@
 #ifndef HARDWARE_INFO_H
 #define HARDWARE_INFO_H
 
+#include "eeprominfo.h"
+
 // PB0-PB7 : col1 .. col8
 // PA0-PA7 : row1 .. row8
 // PC7-PC0 : row9 .. row16
@@ -25,12 +27,5 @@
 #define ROWS 		17
 
 #define KEYMAP_ADDRESS			0x6500
-
-// eeprom address
-#define EEPROM_LED_BRIGHTNESS 	9	// 1byte
-#define EEPROM_LED_MODE			11	// 1byte
-#define EEPROM_INTERFACE		12	// 1byte
-#define EEPROM_MAPPING			13	// ~420
-#define EEPROM_MACRO			421	// ~996
 
 #endif

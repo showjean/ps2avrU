@@ -30,6 +30,7 @@
 #include "keymapper.h"
 #include "macrobuffer.h"
 #include "enterframe.h"
+#include "keydownbuffer.h"
 
 // Output buffer - circular queue
 #define QUEUE_SIZE 200
@@ -162,16 +163,6 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
     keyidx = getDualActionDownKeyIdex(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
-
-	static uint8_t gModifier = 0; 
-	if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { // Is this modifier keys? 
-		if(isDown){
-        	gModifier |= modmask[keyidx - (KEY_Modifiers + 1)];
-        }else{
-        	gModifier &= ~(modmask[keyidx - (KEY_Modifiers + 1)]);
-        }
-        applyKeyMapping(gModifier);
-    }
 
 	// if prev and current state are different,
 	uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
@@ -310,6 +301,8 @@ int scanKeyPS2(void) {
 	
 	// debounce cleared and changed
 	if(!setCurrentMatrix()) return 0;
+
+    clearDownBuffer();
 	
 	uint8_t row, col, prev, cur, keyidx, prevKeyidx;
 	uint8_t layer = getLayer();
@@ -371,6 +364,9 @@ int scanKeyPS2(void) {
 				}else{
 					gResultPutKey &= putKey(keyidx, 0, col, row);
 				}
+			}
+			if(cur){				
+				pushDownBuffer(keyidx);
 			}
 
 		}
@@ -577,7 +573,7 @@ void ps2_main(void){
 						scanKeyPS2();
 					}
 
-			        // ps2avrU loop
+			        // ps2avrU loop, must be scan matrix;
 			        enterFrame();
 					renderLED(isBeyondFN);
 
@@ -590,9 +586,6 @@ void ps2_main(void){
 	
 						loopCnt=0;
 
-						/*if(keyval != START_MAKE && keyval != END_MAKE && keyval != NO_REPEAT ){
-							DEBUG_PRINT(("keyval : %02x \n", keyval));
-						}*/
 					}else if(lastMAKE_SIZE>0) {		// means key is still pressed
 						loopCnt++;
 
@@ -612,7 +605,7 @@ void ps2_main(void){
 						scanKeyPS2();
 					}
 
-			        // ps2avrU loop
+			        // ps2avrU loop, must be scan matrix;
 			        enterFrame();
 					renderLED(isBeyondFN);
 

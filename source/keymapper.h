@@ -67,65 +67,52 @@
 // back
 #define CMD_BACK 6
 
+#define COUNT_TYPE_NONE		 	0
+#define COUNT_TYPE_COUNTING 	1
+#define COUNT_TYPE_KEYMAPPER 	2
 
-// quick swap index
-#define COUNT_TYPE_KEYMAPPER 			1
-#define COUNT_TYPE_QUICKSWAP_ALT_GUI 	2
-#define QUICKSWAP_ALT_GUI				1 	// bit index for eeprom write
-
-extern void setWillStartKeyMapping(void);
+extern void initKeymapper(void);
 
 extern uint8_t isKeyMapping(void);
-extern uint8_t isDeepKeyMapping(void);
 
-extern void applyKeyMapping(uint8_t xModi);
-
-/**
- 진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
-*/
-extern void prepareKeyMapping(void);
-
-extern uint8_t isReadyKeyMappingOnBoot(void);
-
-// 부팅시 키매핑 시작
+// 부팅시 키 매핑 시작
+// extern uint8_t isReadyKeyMappingOnBoot(void);
 extern void readyKeyMappingOnBoot(void);
-
 extern void startKeyMappingOnBoot(void);
 
 extern void printString(const char *xString);
 
-/**
-매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
-*/
-extern void startKeyMapping(void);
-
-/**
-키매핑을 종료하고 키보드 상태로 돌아간다.
-*/
-extern void stopKeyMapping(void);
-
-extern void countKeyMappingEnabled(void);
-
+// event loop
 extern void enterFrameForMapper(void);
 
-extern uint8_t isMacroKey(uint8_t xKeyidx);
-
 extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
-
-/**
-퀵 스왑 상태가 있는지 확인;
-*/
-// extern uint8_t hasQuickSwap(void);
-
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
 // 매크로 등록중인지 확인;
 extern uint8_t isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 extern uint8_t applyMacro(uint8_t xKeyidx);
 
 extern void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+// extern void setWillStartKeyMapping(void);
+// extern uint8_t isDeepKeyMapping(void);
+// extern void applyKeyMapping(uint8_t xModi);
+/**
+ 진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
+*/
+// extern void prepareKeyMapping(void);
+/**
+매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
+*/
+// extern void startKeyMapping(void);
+/**
+키매핑을 종료하고 키보드 상태로 돌아간다.
+*/
+// extern void stopKeyMapping(void);
+// extern void countKeyMappingEnabled(void);
+// extern uint8_t isMacroKey(uint8_t xKeyidx);
 
 #endif

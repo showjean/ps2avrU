@@ -15,9 +15,7 @@
 
 #include "keymap.h"
 #include "keymatrix.h"
-// #include "hardwareinfo.h"
 #include "ledrender.h"
-#include "keymapper.h"
 
 
 /* ----------------------- hardware I/O abstraction ------------------------ */

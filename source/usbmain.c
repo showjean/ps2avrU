@@ -232,6 +232,7 @@
 #include "macrobuffer.h"
 #include "sleep.h"
 #include "enterframe.h"
+#include "keydownbuffer.h"
 
 #define REPORT_ID_KEYBOARD      2
 #define REPORT_ID_MULTIMEDIA    3
@@ -363,7 +364,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
         } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
             // MAC OS X is not processing here
 
-            DEBUG_PRINT(("rq->wLength.word : %d rq->wValue : %d  rq->wIndex : %d\n", rq->wLength.word, rq->wValue, rq->wIndex));
+            // DEBUG_PRINT(("rq->wLength.word : %d rq->wValue : %d  rq->wIndex : %d\n", rq->wLength.word, rq->wValue, rq->wIndex));
             if (rq->wLength.word == 2) {    // report_id length
                 // We expect one byte reports
                 expectReport = 1;
@@ -403,7 +404,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
  */
  // function is not working in mac os 
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
-    DEBUG_PRINT(("data[0] : %d data[1] : %d data[2] : %d len : %d \n", data[0], data[1], data[2], len));
+    // DEBUG_PRINT(("data[0] : %d data[1] : %d data[2] : %d len : %d \n", data[0], data[1], data[2], len));
     // if (expectReport && (len == 1)) {
     if (expectReport && (len == 2) && data[0] == REPORT_ID_KEYBOARD) {
 		// setLEDState(data[0]); // Get the state of all LEDs
@@ -500,11 +501,12 @@ uint8_t scanKeyUSB(void) {
 
 	uint8_t row, col, prev, cur, keyidx, gKeymapping, gFN;
 	uint8_t keymap = getLayer();
-    static uint8_t prevModifier = 0;
 
 	// debounce counter expired, create report
 	reportIndex = 2;
     clearReportBuffer();
+    clearDownBuffer();
+
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
 	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
@@ -567,15 +569,11 @@ uint8_t scanKeyUSB(void) {
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
                retval |= makeReportBuffer(keyidx, 1);
+               pushDownBuffer(keyidx);
 			}
 			
 		}
 	}
-
-    if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_KEYBOARD && reportBuffer[KEYBOARD_MODIFIER_INDEX] != prevModifier){
-        applyKeyMapping(reportBuffer[KEYBOARD_MODIFIER_INDEX]);
-        prevModifier = reportBuffer[KEYBOARD_MODIFIER_INDEX];
-    }
 
 // 멀티미디어 키 up
     if(_isMultimediaPressed && reportBuffer[REPORT_ID_INDEX] != REPORT_ID_MULTIMEDIA){
@@ -603,6 +601,7 @@ uint8_t scanMacroUsb(void)
 {
     clearReportBuffer(); 
 
+    // 매크로 실행시 modifier 키를 함께 사용할 수 있도록 스캔;
     if(!isKeyMapping()
 #ifdef ENABLE_BOOTMAPPER           
         && !isBootMapper()
@@ -690,7 +689,6 @@ void usb_main(void) {
 
     sei();
     
-	//scanKeyUSB();
     while (1) {
 
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
@@ -725,7 +723,7 @@ void usb_main(void) {
             scanKeyUSB();   // for dummy
         }
 
-        // ps2avrU loop
+        // ps2avrU loop, must be scan matrix;
         enterFrame();
 
         // if an update is needed, send the report

@@ -29,6 +29,7 @@
 #include "hardwareinfo.h"
 #include "hardwareconfig.h"
 #include "keymapper.h"
+#include "quickswap.h"
 #include "ledrender.h"
 #include "ps2main.h"
 #include "usbmain.h"
@@ -226,6 +227,10 @@ int main(void) {
 	}
 
 	DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
+
+	// init
+	initKeymapper();
+	initQuickSwap();
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){

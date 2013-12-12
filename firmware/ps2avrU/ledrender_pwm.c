@@ -66,9 +66,27 @@ void initLED(void){
 }
 
 void blinkOnce(void){
-	turnOnLED(LEDNUM | LEDCAPS);
+	if (LEDstate & LED_STATE_NUM) { // light up num lock
+        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+    }else{
+        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//    	
+    }
+    if (LEDstate & LED_STATE_CAPS) { // light up caps lock
+        turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
+    } else {
+        turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
+    }
 	_delay_ms(100);
-	turnOffLED(LEDNUM | LEDCAPS);	
+	if (LEDstate & LED_STATE_NUM) { // light up num lock
+        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//   
+    }else{
+        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	// 	
+    }
+    if (LEDstate & LED_STATE_CAPS) { // light up caps lock
+        turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
+    } else {
+        turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
+    }	
 }
 
 void setLEDState(uint8_t xState){
