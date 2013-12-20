@@ -12,7 +12,7 @@
 #endif
 
 
-const uint8_t dualActionMaskDown[] = {
+const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_FN, // FN
     KEY_FN, // FN
     KEY_FN2, // FN2
@@ -30,7 +30,7 @@ const uint8_t dualActionMaskDown[] = {
     KEY_LCTRL,
     KEY_LCTRL
 };
-const uint8_t dualActionMaskUp[] = {
+const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE, // hangle
     KEY_HANJA,	// hanja
     KEY_HANGLE, // hangle
@@ -78,7 +78,7 @@ static void applyDualActionUp(void){
 
     if(dualActionKeyIndex > 0 && !isCanceledDualAction()){
         // 듀얼액션이 저장되어 있을 때 아무키도 눌리지 않은 리포트가 간다면 액션!
-       	uint8_t gUpIdx = dualActionMaskUp[dualActionKeyIndex - (KEY_dualAction + 1)];
+       	uint8_t gUpIdx = pgm_read_byte(&dualActionMaskUp[dualActionKeyIndex - (KEY_dualAction + 1)]);
         pushM(gUpIdx);
         pushM(gUpIdx);
         dualActionKeyIndex = 0;
@@ -121,7 +121,7 @@ void setDualAction(uint8_t keyidx, uint8_t isDown){
 // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
 uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex){
 	if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end && isCanceledDualAction()){
-        return getQuickSwapKeyindex(dualActionMaskDown[xActionIndex - (KEY_dualAction + 1)]);        
+        return getQuickSwapKeyindex(pgm_read_byte(&dualActionMaskDown[xActionIndex - (KEY_dualAction + 1)])); 
     }
     return xActionIndex;
 }

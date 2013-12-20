@@ -233,202 +233,20 @@
 #include "sleep.h"
 #include "enterframe.h"
 #include "keydownbuffer.h"
-
-#define REPORT_ID_KEYBOARD      1
-#define REPORT_ID_MULTIMEDIA    2
-#define REPORT_SIZE_KEYBOARD    8
-#define REPORT_SIZE_MULTIMEDIA  3
+#include "vusb.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
-// #define USE_MULTIMEDIA
 
-/* ------------------------------------------------------------------------- */
-/* ----------------------------- USB interface ----------------------------- */
-/* ------------------------------------------------------------------------- */
-
-static uint8_t reportBuffer[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
-// static uint8_t reportBufferPrev[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
-static uint8_t idleRate;        ///< in 4ms units
-static uint8_t protocolVer = 1; ///< 0 = boot protocol, 1 = report protocol
-static uint8_t expectReport = 0;       ///< flag to indicate if we expect an USB-report
 static uint8_t _isInit = 0;     // set 1 when HID init
 
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 
-void initInterfaceUsb(void);
 void clearReportBuffer(void);
 
-/** USB report descriptor (length is defined in usbconfig.h). The report
- * descriptor has been created with usb.org's "HID Descriptor Tool" which can
- * be downloaded from http://www.usb.org/developers/hidpage/ (it's an .exe, but
- * it even runs under Wine).
- */
-PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] = {
-
-    0x05, 0x01,   // USAGE_PAGE (Generic Desktop)
-    0x09, 0x06,   // USAGE (Keyboard)
-    0xa1, 0x01,   // COLLECTION (Application)
-#ifdef USE_MULTIMEDIA
-    0x85, REPORT_ID_KEYBOARD,               //Report ID
-#endif
-
-    /* modifiers */
-    0x05, 0x07,   //   USAGE_PAGE (Keyboard)
-    0x19, 0xe0,   //   USAGE_MINIMUM (Keyboard LeftControl)
-    0x29, 0xe7,   //   USAGE_MAXIMUM (Keyboard Right GUI)
-    0x15, 0x00,   //   LOGICAL_MINIMUM (0)
-    0x25, 0x01,   //   LOGICAL_MAXIMUM (1)
-    0x95, 0x08,   //   REPORT_COUNT (8)
-    0x75, 0x01,   //   REPORT_SIZE (1)
-    0x81, 0x02,   //   INPUT (Data,Var,Abs)
-    /* modifiers end */
-
-#ifndef USE_MULTIMEDIA
-    0x95, 0x01,   //   REPORT_COUNT (1)
-    0x75, 0x08,   //   REPORT_SIZE (8)
-    0x81, 0x03,   //   INPUT (Cnst,Var,Abs) 
-#endif    
-    // endpoint가 1개 일때는 [modi, reserved, keycode, ...] 순이었지만 
-    //endpoint가 2개일때는 [Report ID, modi, keycode, ...]순이므로 reserved 는 제거;
-
-    /* keyboard body */
-    0x05, 0x07,   //   USAGE_PAGE (Keyboard)
-    0x19, 0x00,   //   USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0xA4,   //   USAGE_MAXIMUM (Keyboard ExSel)
-    0x95, 0x06,   //   REPORT_COUNT (6)
-    0x75, 0x08,   //   REPORT_SIZE (8)
-    0x15, 0x00,   //   LOGICAL_MINIMUM (0)
-    0x26, 0xA4, 0x00,  //   LOGICAL_MAXIMUM (165)
-    0x81, 0x00,   //   INPUT (Data,Ary,Abs)
-    /* keyboard body end */
-
-    /* leds */
-    0x95, 0x05,   //   REPORT_COUNT (5)
-    0x75, 0x01,   //   REPORT_SIZE (1)
-    0x05, 0x08,   //   USAGE_PAGE (LEDs)
-    0x19, 0x01,   //   USAGE_MINIMUM (Num Lock)
-    0x29, 0x05,   //   USAGE_MAXIMUM (Kana)
-    0x91, 0x02,   //   OUTPUT (Data,Var,Abs)
-    0x95, 0x01,   //   REPORT_COUNT (1)
-    0x75, 0x03,   //   REPORT_SIZE (3)
-    0x91, 0x03,   //   OUTPUT (Cnst,Var,Abs)
-    /* leds end */
-
-#ifndef USE_MULTIMEDIA
-    0xc0                           // END_COLLECTION
-#else
-    0xc0,                          // END_COLLECTION
-    // length : 60
-
-    0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
-    0x09, 0x01,                    // USAGE (Consumer Control)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    
-    0x85, REPORT_ID_MULTIMEDIA,                    //   REPORT_ID
-
-    0x19, 0x00,                    //   USAGE_MINIMUM (Unassigned)
-    0x2a, 0x3c, 0x02,              //   USAGE_MAXIMUM (AC Format)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0x3c, 0x02,              //   LOGICAL_MAXIMUM (572)
-    0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x75, 0x10,                    //   REPORT_SIZE (16)
-    0x81, 0x00,                    //   INPUT (Data,Var,Abs)
-
-    0xc0                           // END_COLLECTION
-
-    // length : 25
-    // total length : 85
-#endif
-
-};
-
-
-/**
- * This function is called whenever we receive a setup request via USB.
- * \param data[8] eight bytes of data we received
- * \return number of bytes to use, or 0xff if usbFunctionWrite() should be
- * called
- */
-uint8_t usbFunctionSetup(uint8_t data[8]) {
-
-    interfaceReady = 1;
-
-    usbRequest_t *rq = (void *)data;
-    usbMsgPtr = *reportBuffer;
-
-    // DEBUG_PRINT(("USBRQ_TYPE : %d \n", (rq->bmRequestType & USBRQ_TYPE_MASK)));
-
-    if ((rq->bmRequestType & USBRQ_TYPE_MASK) == USBRQ_TYPE_CLASS) {
-
-        // DEBUG_PRINT(("rq->bRequest : %d \n", rq->bRequest));
-
-        // class request type
-        if (rq->bRequest == USBRQ_HID_GET_REPORT) {
-            // wValue: ReportType (highbyte), ReportID (lowbyte)
-            // DEBUG_PRINT(("rq->wValue[0] : %d rq->wValue[1] : %d \n", rq->wValue.bytes[0], rq->wValue.bytes[1]));
-            // we only have one report type, so don't look at wValue
-            return sizeof(reportBuffer);
-        } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
-            // MAC OS X is not processing here
-
-            // DEBUG_PRINT(("rq->wLength.word : %d rq->wValue : %d  rq->wIndex : %d\n", rq->wLength.word, rq->wValue, rq->wIndex));
-#ifdef USE_MULTIMEDIA            
-            if (rq->wLength.word == 2)     // report_id length
-#else
-            if (rq->wLength.word == 1)     // report_id length
-#endif                
-            {
-                // We expect one byte reports
-                expectReport = 1;
-                return 0xff; // Call usbFunctionWrite with data
-            }
-        } else if (rq->bRequest == USBRQ_HID_GET_IDLE) {
-            usbMsgPtr = idleRate;
-            return 1;
-        } else if (rq->bRequest == USBRQ_HID_SET_IDLE) {
-
-			// init full led
-            initInterfaceUsb();
-
-            idleRate = rq->wValue.bytes[1];
-        } else if (rq->bRequest == USBRQ_HID_GET_PROTOCOL) {
-            if (rq->wValue.bytes[1] < 1) {
-                protocolVer = rq->wValue.bytes[1];
-            }
-        } else if(rq->bRequest == USBRQ_HID_SET_PROTOCOL) {
-            usbMsgPtr = protocolVer;
-            return 1;
-        }
-    } else {		
-        // no vendor specific requests implemented
-    }
-
-    return 0;
-}
-
-
-/**
- * The write function is called when LEDs should be set. Normally, we get only
- * one byte that contains info about the LED states.
- * \param data pointer to received data
- * \param len number ob bytes received
- * \return 0x01
- */
- // function is not working in mac os 
-uint8_t usbFunctionWrite(uchar *data, uchar len) {
-    // DEBUG_PRINT(("data[0] : %d data[1] : %d data[2] : %d len : %d \n", data[0], data[1], data[2], len));
-#ifdef USE_MULTIMEDIA     
-    if (expectReport && (len == 2) && data[0] == REPORT_ID_KEYBOARD) {
-#else
-    if (expectReport && (len == 1)) {
-#endif 
-		// setLEDState(data[0]); // Get the state of all LEDs
-        setLEDState(data[1]); // Get the state of all LEDs
-		setLEDIndicate();	
-    }
-    expectReport = 0;
-    return 0x01;
+void setLedUsb(uint8_t xState){
+    setLEDState(xState); // Get the state of all LEDs
+    setLEDIndicate();  
 }
 
 void initInterfaceUsb(void)
@@ -456,7 +274,26 @@ void prepareKeyMappingUsb(void)
 /* -----------------------------    Function  USB  ----------------------------- */
 /* ------------------------------------------------------------------------- */
 uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
-uint8_t _isMultimediaPressed = 0;
+uint8_t _isMultimediaChanged = 0;
+uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
+    if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
+
+        _isMultimediaChanged = 1;
+        uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
+        reportBufferConsumer[REPORT_ID_INDEX] = REPORT_ID_CONSUMER;
+        if(xIsDown){
+            reportBufferConsumer[REPORT_ID_INDEX + 1] = (uint8_t)(gKeyidxMulti & 0xFF);
+            reportBufferConsumer[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
+        }else{
+            reportBufferConsumer[REPORT_ID_INDEX + 1] = 0;
+            reportBufferConsumer[REPORT_ID_INDEX + 2] = 0;
+            
+        }
+        
+        return 1;
+    }
+    return 0;
+}
 uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     uint8_t retval = 1;
    
@@ -467,19 +304,6 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 
     if(keyidx >= KEY_MAX){
         return 0;       
-    }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
-#ifdef USE_MULTIMEDIA 
-        _isMultimediaPressed = 1;
-
-        uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
-        reportBuffer[REPORT_ID_INDEX] = REPORT_ID_MULTIMEDIA;  // ReportID = 2
-        reportBuffer[REPORT_ID_INDEX + 1] = (uint8_t)(gKeyidxMulti & 0xFF);
-        reportBuffer[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
-
-        return retval;
-#else
-        return 0;        
-#endif
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
@@ -509,10 +333,8 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 }
 
 void clearReportBuffer(void){    
-    memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer
-#ifdef USE_MULTIMEDIA     
-    reportBuffer[REPORT_ID_INDEX] = REPORT_ID_KEYBOARD; // ReportID = 1
-#endif    
+    memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
+    memset(reportBufferConsumer, 0, sizeof(reportBufferConsumer));
 }
 
 uint8_t scanKeyUSB(void) {
@@ -528,6 +350,8 @@ uint8_t scanKeyUSB(void) {
 	reportIndex = 2;
     clearReportBuffer();
     clearDownBuffer();
+
+    _isMultimediaChanged = 0;
 
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
@@ -593,19 +417,18 @@ uint8_t scanKeyUSB(void) {
                retval |= makeReportBuffer(keyidx, 1);
                pushDownBuffer(keyidx);
 			}
+
+            if( prev != cur ) {
+                if(cur){
+                    makeReportBufferExtra(keyidx, 1);
+                }else{
+                    makeReportBufferExtra(keyidx, 0);
+                }
+
+            }
 			
 		}
 	}
-
-#ifdef USE_MULTIMEDIA 
-// 멀티미디어 키 up
-    if(_isMultimediaPressed && reportBuffer[REPORT_ID_INDEX] != REPORT_ID_MULTIMEDIA){
-        reportBuffer[REPORT_ID_INDEX] = REPORT_ID_MULTIMEDIA;  // ReportID = 2 
-        reportBuffer[REPORT_ID_INDEX + 1] = 0;
-        reportBuffer[REPORT_ID_INDEX + 2] = 0; 
-        _isMultimediaPressed = 0;
-    }
-#endif
 
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
@@ -614,8 +437,6 @@ uint8_t scanKeyUSB(void) {
 
 
     if(gKeymapping == 1) return 0;
-
-    // if (!retval & 0x02) memcpy(reportBufferPrev, reportBuffer, REPORT_SIZE_KEYBOARD);
 	
     return retval;
 }
@@ -766,15 +587,14 @@ void usb_main(void) {
                 // DEBUG_PRINT(("hasMacroUsb\n"));
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
             }else if(updateNeeded){
-#ifdef USE_MULTIMEDIA                 
-                if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_MULTIMEDIA){   // report ID : 2
-                    // DEBUG_PRINT((" multi  reportBuffer : [0] = %d [1] = %d [2] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2]));
-                    usbSetInterrupt(reportBuffer, REPORT_SIZE_MULTIMEDIA);    
-                }else 
-                if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_KEYBOARD)
-#endif                    
-                { // report ID : 1
-                    // DEBUG_PRINT((" updateNeeded : [0] = %d [1] = %d [2] = %d [3] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2], reportBuffer[3]));
+               
+                if(_isMultimediaChanged)
+                { 
+                    usbSetInterrupt3(reportBufferConsumer, REPORT_SIZE_CONSUMER);    
+                }
+
+                if(sizeof(reportBuffer)){   // keyboard
+                    
                     usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
                 }
                 updateNeeded = 0;
