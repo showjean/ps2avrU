@@ -2,6 +2,7 @@
 #define KEYDOWNBUFFER_C
 
 #include <stdio.h>
+#include <string.h>
 #include "print.h"
 #include "keymap.h"
 #include "keymatrix.h"

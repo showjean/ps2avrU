@@ -234,13 +234,14 @@
 #include "enterframe.h"
 #include "keydownbuffer.h"
 
-#define REPORT_ID_KEYBOARD      2
-#define REPORT_ID_MULTIMEDIA    3
+#define REPORT_ID_KEYBOARD      1
+#define REPORT_ID_MULTIMEDIA    2
 #define REPORT_SIZE_KEYBOARD    8
 #define REPORT_SIZE_MULTIMEDIA  3
 
 #define REPORT_ID_INDEX 0
-#define KEYBOARD_MODIFIER_INDEX 1
+#define KEYBOARD_MODIFIER_INDEX 0
+// #define USE_MULTIMEDIA
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
@@ -268,8 +269,9 @@ PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] 
     0x05, 0x01,   // USAGE_PAGE (Generic Desktop)
     0x09, 0x06,   // USAGE (Keyboard)
     0xa1, 0x01,   // COLLECTION (Application)
-
+#ifdef USE_MULTIMEDIA
     0x85, REPORT_ID_KEYBOARD,               //Report ID
+#endif
 
     /* modifiers */
     0x05, 0x07,   //   USAGE_PAGE (Keyboard)
@@ -282,9 +284,11 @@ PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] 
     0x81, 0x02,   //   INPUT (Data,Var,Abs)
     /* modifiers end */
 
-    /*0x95, 0x01,   //   REPORT_COUNT (1)
+#ifndef USE_MULTIMEDIA
+    0x95, 0x01,   //   REPORT_COUNT (1)
     0x75, 0x08,   //   REPORT_SIZE (8)
-    0x81, 0x03,   //   INPUT (Cnst,Var,Abs)*/ 
+    0x81, 0x03,   //   INPUT (Cnst,Var,Abs) 
+#endif    
     // endpoint가 1개 일때는 [modi, reserved, keycode, ...] 순이었지만 
     //endpoint가 2개일때는 [Report ID, modi, keycode, ...]순이므로 reserved 는 제거;
 
@@ -311,8 +315,10 @@ PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] 
     0x91, 0x03,   //   OUTPUT (Cnst,Var,Abs)
     /* leds end */
 
-    0xc0,                           // END_COLLECTION
-
+#ifndef USE_MULTIMEDIA
+    0xc0                           // END_COLLECTION
+#else
+    0xc0,                          // END_COLLECTION
     // length : 60
 
     0x05, 0x0c,                    // USAGE_PAGE (Consumer Devices)
@@ -333,6 +339,8 @@ PROGMEM const char usbHidReportDescriptor[USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH] 
 
     // length : 25
     // total length : 85
+#endif
+
 };
 
 
@@ -365,7 +373,12 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
             // MAC OS X is not processing here
 
             // DEBUG_PRINT(("rq->wLength.word : %d rq->wValue : %d  rq->wIndex : %d\n", rq->wLength.word, rq->wValue, rq->wIndex));
-            if (rq->wLength.word == 2) {    // report_id length
+#ifdef USE_MULTIMEDIA            
+            if (rq->wLength.word == 2)     // report_id length
+#else
+            if (rq->wLength.word == 1)     // report_id length
+#endif                
+            {
                 // We expect one byte reports
                 expectReport = 1;
                 return 0xff; // Call usbFunctionWrite with data
@@ -405,8 +418,11 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
  // function is not working in mac os 
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
     // DEBUG_PRINT(("data[0] : %d data[1] : %d data[2] : %d len : %d \n", data[0], data[1], data[2], len));
-    // if (expectReport && (len == 1)) {
+#ifdef USE_MULTIMEDIA     
     if (expectReport && (len == 2) && data[0] == REPORT_ID_KEYBOARD) {
+#else
+    if (expectReport && (len == 1)) {
+#endif 
 		// setLEDState(data[0]); // Get the state of all LEDs
         setLEDState(data[1]); // Get the state of all LEDs
 		setLEDIndicate();	
@@ -450,8 +466,9 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
     if(keyidx >= KEY_MAX){
-        return 0;
+        return 0;       
     }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
+#ifdef USE_MULTIMEDIA 
         _isMultimediaPressed = 1;
 
         uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
@@ -460,6 +477,9 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
         reportBuffer[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
 
         return retval;
+#else
+        return 0;        
+#endif
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
@@ -490,7 +510,9 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer
+#ifdef USE_MULTIMEDIA     
     reportBuffer[REPORT_ID_INDEX] = REPORT_ID_KEYBOARD; // ReportID = 1
+#endif    
 }
 
 uint8_t scanKeyUSB(void) {
@@ -575,6 +597,7 @@ uint8_t scanKeyUSB(void) {
 		}
 	}
 
+#ifdef USE_MULTIMEDIA 
 // 멀티미디어 키 up
     if(_isMultimediaPressed && reportBuffer[REPORT_ID_INDEX] != REPORT_ID_MULTIMEDIA){
         reportBuffer[REPORT_ID_INDEX] = REPORT_ID_MULTIMEDIA;  // ReportID = 2 
@@ -582,6 +605,7 @@ uint8_t scanKeyUSB(void) {
         reportBuffer[REPORT_ID_INDEX + 2] = 0; 
         _isMultimediaPressed = 0;
     }
+#endif
 
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
@@ -742,11 +766,14 @@ void usb_main(void) {
                 // DEBUG_PRINT(("hasMacroUsb\n"));
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
             }else if(updateNeeded){
+#ifdef USE_MULTIMEDIA                 
                 if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_MULTIMEDIA){   // report ID : 2
                     // DEBUG_PRINT((" multi  reportBuffer : [0] = %d [1] = %d [2] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2]));
                     usbSetInterrupt(reportBuffer, REPORT_SIZE_MULTIMEDIA);    
                 }else 
-                if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_KEYBOARD){ // report ID : 1
+                if(reportBuffer[REPORT_ID_INDEX] == REPORT_ID_KEYBOARD)
+#endif                    
+                { // report ID : 1
                     // DEBUG_PRINT((" updateNeeded : [0] = %d [1] = %d [2] = %d [3] = %d \n", reportBuffer[0], reportBuffer[1], reportBuffer[2], reportBuffer[3]));
                     usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
                 }
