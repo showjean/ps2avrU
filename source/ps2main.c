@@ -575,7 +575,7 @@ void ps2_main(void){
 
 			        // ps2avrU loop, must be scan matrix;
 			        enterFrame();
-					renderLED(isBeyondFN);
+					renderLED();
 
 					keyval = pop();
 					if(keyval==SPLIT)
@@ -607,7 +607,7 @@ void ps2_main(void){
 
 			        // ps2avrU loop, must be scan matrix;
 			        enterFrame();
-					renderLED(isBeyondFN);
+					renderLED();
 
 					if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal
 						m_state=STA_NORMAL;

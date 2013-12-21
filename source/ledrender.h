@@ -7,6 +7,9 @@
 #define LED_STATE_CAPS    0x02  ///< caps LED on a boot-protocol keyboard
 #define LED_STATE_SCROLL  0x04  ///< scroll LED on a boot-protocol keyboard
 
+#define turnOnLED(pin)		PORTLEDS |= (pin);
+#define turnOffLED(pin)		PORTLEDS &= ~(pin);
+
 extern void setLEDState(uint8_t xState);
 extern uint8_t getLEDState(void);
 
@@ -28,9 +31,10 @@ extern void sleepLED(void);
 extern void wakeUpLED(void);
 
 extern void doSleep(void);
-extern void renderLED(uint8_t xIsBeyondFN);
+extern void renderLED(void);
 
 extern void stopTimer(void);
 extern void startTimer(void);
+extern void setPWM(int xValue);
 
 #endif

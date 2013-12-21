@@ -605,7 +605,7 @@ void usb_main(void) {
         countSleep();        
            
 		// interrupt 위에서 실행되면 status LED가 제대로 반응하지 않는다.
-		renderLED(isBeyondFN);
+		renderLED();
         
         if(hasMacroUsb())
         {
