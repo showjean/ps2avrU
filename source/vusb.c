@@ -3,20 +3,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <avr/pgmspace.h>
-#include "usbdrv.h"
+#include "usbdrv/usbdrv.h"
 #include "usbconfig.h"
-#include "keymain.h"
-#include "usbmain.h"
 #include "vusb.h"
-
-
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
 uint8_t reportBuffer[REPORT_SIZE_KEYBOARD] = {0}; ///< buffer for HID reports
-uint8_t reportBufferConsumer[REPORT_SIZE_CONSUMER] = {0};
+uint8_t reportBufferExtra[REPORT_SIZE_EXTRA] = {0};
 uint8_t idleRate = 0;        ///< in 4ms units
 static uint8_t protocolVer = 1; ///< 0 = boot protocol, 1 = report protocol
 static uint8_t expectReport = 0;       ///< flag to indicate if we expect an USB-report
@@ -307,7 +303,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
  */
 uint8_t usbFunctionSetup(uint8_t data[8]) {
 
-    interfaceReady = 1;
+    delegateInterfaceReadyUsb(); 
 
     usbRequest_t *rq = (void *)data;
     usbMsgPtr = *reportBuffer;
@@ -333,8 +329,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
             return 1;
         } else if (rq->bRequest == USBRQ_HID_SET_IDLE) {
 
-            // init full led
-            initInterfaceUsb();
+            delegateInitInterfaceUsb();
 
             idleRate = rq->wValue.bytes[1];
         } else if (rq->bRequest == USBRQ_HID_GET_PROTOCOL) {
@@ -363,7 +358,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
  // function is not working in mac os 
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
     if (expectReport && (len == 1)) {
-        setLedUsb(data[0]); 
+        delegateLedUsb(data[0]); 
     }
     expectReport = 0;
     return 0x01;

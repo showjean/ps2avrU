@@ -233,27 +233,36 @@
 #include "sleep.h"
 #include "enterframe.h"
 #include "keydownbuffer.h"
+#include "keymain.h"
 #include "vusb.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
 
-static uint8_t _isInit = 0;     // set 1 when HID init
+#define INIT_INDEX_NOT_INIT     0
+#define INIT_INDEX_SET_IDLE     1
+#define INIT_INDEX_INITED       2
+#define INIT_INDEX_COMPLETE     3
+
+static uint8_t _isInit = INIT_INDEX_NOT_INIT;     // set 1 when HID init
+static int initCount = 0;
 
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 
 void clearReportBuffer(void);
 
-void setLedUsb(uint8_t xState){
+void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();  
 }
 
-void initInterfaceUsb(void)
+void delegateInterfaceReadyUsb(void){
+    interfaceReady = 1;
+}
+
+void delegateInitInterfaceUsb(void)
 {    
-    _isInit = 1;
-    initFullLEDState();
-    wakeUp();            
+    if(_isInit == INIT_INDEX_NOT_INIT) _isInit = INIT_INDEX_SET_IDLE;       
 }
 
 void prepareKeyMappingUsb(void)
@@ -274,19 +283,19 @@ void prepareKeyMappingUsb(void)
 /* -----------------------------    Function  USB  ----------------------------- */
 /* ------------------------------------------------------------------------- */
 uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
-uint8_t _isMultimediaChanged = 0;
+uint8_t _extraHasChanged = 0;
 uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
 
-        _isMultimediaChanged = 1;
+        _extraHasChanged = 1;
         uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
-        reportBufferConsumer[REPORT_ID_INDEX] = REPORT_ID_CONSUMER;
+        reportBufferExtra[REPORT_ID_INDEX] = REPORT_ID_CONSUMER;
         if(xIsDown){
-            reportBufferConsumer[REPORT_ID_INDEX + 1] = (uint8_t)(gKeyidxMulti & 0xFF);
-            reportBufferConsumer[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
+            reportBufferExtra[REPORT_ID_INDEX + 1] = (uint8_t)(gKeyidxMulti & 0xFF);
+            reportBufferExtra[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
         }else{
-            reportBufferConsumer[REPORT_ID_INDEX + 1] = 0;
-            reportBufferConsumer[REPORT_ID_INDEX + 2] = 0;
+            reportBufferExtra[REPORT_ID_INDEX + 1] = 0;
+            reportBufferExtra[REPORT_ID_INDEX + 2] = 0;
             
         }
         
@@ -304,6 +313,8 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 
     if(keyidx >= KEY_MAX){
         return 0;       
+    }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
+        return 0;
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
 
@@ -334,7 +345,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
-    memset(reportBufferConsumer, 0, sizeof(reportBufferConsumer));
+    memset(reportBufferExtra, 0, sizeof(reportBufferExtra));
 }
 
 uint8_t scanKeyUSB(void) {
@@ -351,7 +362,7 @@ uint8_t scanKeyUSB(void) {
     clearReportBuffer();
     clearDownBuffer();
 
-    _isMultimediaChanged = 0;
+    _extraHasChanged = 0;
 
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
@@ -572,11 +583,13 @@ void usb_main(void) {
         enterFrame();
 
         // if an update is needed, send the report
-        if (usbInterruptIsReady()) {   
-            if(_isInit){
-                _isInit = 0;
+        if (usbInterruptIsReady()) {  
+            if(_isInit == INIT_INDEX_SET_IDLE){
+                _isInit = INIT_INDEX_INITED;
                 clearReportBuffer();
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
+
+                wakeUp();     
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
@@ -586,17 +599,27 @@ void usb_main(void) {
                 scanMacroUsb();
                 // DEBUG_PRINT(("hasMacroUsb\n"));
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
-            }else if(updateNeeded){
-               
-                if(_isMultimediaChanged)
-                { 
-                    usbSetInterrupt3(reportBufferConsumer, REPORT_SIZE_CONSUMER);    
-                }
+            }else if(updateNeeded && !_extraHasChanged){
 
-                if(sizeof(reportBuffer)){   // keyboard
-                    
-                    usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
-                }
+                // if(sizeof(reportBuffer)){   // keyboard                    
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
+                
+                updateNeeded = 0;
+            }
+        } 
+
+        if(_isInit == INIT_INDEX_INITED){
+            if(initCount++ == 200){       // delay for OS X USB multi device   
+                // all platform init led
+                initFullLEDState();
+                _isInit = INIT_INDEX_COMPLETE;
+            }
+        }
+
+        if(usbInterruptIsReady3()){
+            if(updateNeeded && _extraHasChanged){ 
+                usbSetInterrupt3(reportBufferExtra, REPORT_SIZE_EXTRA);    
+
                 updateNeeded = 0;
             }
         }
