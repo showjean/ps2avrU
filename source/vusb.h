@@ -18,6 +18,6 @@ extern uint8_t idleRate;        ///< in 4ms units
 
 extern void delegateLedUsb(uint8_t xState);
 extern void delegateInterfaceReadyUsb(void);
-// extern void delegateInitInterfaceUsb(void);
+extern void delegateInitInterfaceUsb(void);
 
 #endif

@@ -579,7 +579,7 @@ void usb_main(void) {
             scanKeyUSB();   // for dummy
         }
 
-        // ps2avrU loop, must be scan matrix;
+        // ps2avrU loop, must be after scan matrix;
         enterFrame();
 
         // if an update is needed, send the report
