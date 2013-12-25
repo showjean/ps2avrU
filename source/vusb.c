@@ -259,18 +259,18 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
     switch (rq->wValue.bytes[1]) {
 #if USB_CFG_DESCR_PROPS_CONFIGURATION
         case USBDESCR_CONFIG:
-            usbMsgPtr = (unsigned char *)usbDescriptorConfiguration;
+            usbMsgPtr = (usbMsgPtr_t)usbDescriptorConfiguration;
             len = sizeof(usbDescriptorConfiguration);
             break;
 #endif
         case USBDESCR_HID:
             switch (rq->wValue.bytes[0]) {
                 case 0:
-                    usbMsgPtr = (unsigned char *)(usbDescriptorConfiguration + 9 + 9);
+                    usbMsgPtr = (usbMsgPtr_t)(usbDescriptorConfiguration + 9 + 9);
                     len = 9;
                     break;
                 case 1:
-                    usbMsgPtr = (unsigned char *)(usbDescriptorConfiguration + 9 + (9 + 9 + 7) + 9);
+                    usbMsgPtr = (usbMsgPtr_t)(usbDescriptorConfiguration + 9 + (9 + 9 + 7) + 9);
                     len = 9;
                     break;
             }
@@ -279,11 +279,11 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
             /* interface index */
             switch (rq->wIndex.word) {
                 case 0:
-                    usbMsgPtr = keyboard_hid_report;
+                    usbMsgPtr = (usbMsgPtr_t)keyboard_hid_report;
                     len = sizeof(keyboard_hid_report);
                     break;
                 case 1:
-                    usbMsgPtr = mouse_hid_report;
+                    usbMsgPtr = (usbMsgPtr_t)mouse_hid_report;
                     len = sizeof(mouse_hid_report);
                     break;
             }

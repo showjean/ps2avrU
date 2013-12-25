@@ -24,7 +24,9 @@ static uint8_t downLevelLife = 0;
 
 static uint8_t ledInited = 0;
 static uint8_t LEDstate = 0;     ///< current state of the LEDs
+#ifndef SCROLL_LOCK_LED_IS_APART 
 static uint8_t scrollLockLED = 0;
+#endif
 
 static uint8_t _fullLEDMode = 0;	// 
 static uint8_t _fullLEDMode_saved = 0;	// 
@@ -171,7 +173,8 @@ void setLEDIndicate(void) {
         turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
     }
 #endif
-    
+
+#ifndef SCROLL_LOCK_LED_IS_APART    
 	static uint8_t prevSCRLED = 0;
     if ((LEDstate & LED_STATE_SCROLL) && prevSCRLED == 0) { // light up scroll lock
     	
@@ -194,6 +197,7 @@ void setLEDIndicate(void) {
 		}
 	
 	}
+#endif
 	
 }
 
