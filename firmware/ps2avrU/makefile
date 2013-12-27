@@ -16,7 +16,8 @@ MCU = atmega32
 F_CPU = 12000000
 
 SRC = ledrender_ps2avrU.c \
-	keymatrix.c
+	keymatrix.c \
+	ps2avrU.c
 
 
 include $(TOP_DIR)/makefile.common

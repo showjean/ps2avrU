@@ -139,7 +139,7 @@ int main(void) {
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
 			if( cur ) {
 #ifdef ENABLE_BOOTMAPPER
-				if(row == 1 && col == 1){	// bootmapper start
+				if(getBootmapperStatus(col, row)){	// bootmapper start
 					setToBootMapper();
 					continue;
 				}
@@ -161,6 +161,10 @@ int main(void) {
 		
 	}
 
+
+#ifdef INTERFACE_ONLY_USB
+	INTERFACE = INTERFACE_USB_USER;
+#else
 	// DEBUG_PRINT(("ckeckNeedInterface %02x \n", ckeckNeedInterface));
 	if(ckeckNeedInterface > 0){
 		INTERFACE = ckeckNeedInterface + 1; 
@@ -225,6 +229,7 @@ int main(void) {
 
 		}
 	}
+#endif
 
 	DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
 
