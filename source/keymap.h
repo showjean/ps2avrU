@@ -262,6 +262,8 @@ extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 
 extern uint8_t getKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 
+extern const unsigned short int modmask[16];
+
 extern uint8_t dualActionKeyIndex;
 extern const uint8_t dualActionMaskDown[];
 extern const uint8_t dualActionMaskUp[];

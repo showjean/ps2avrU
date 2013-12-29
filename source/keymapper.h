@@ -71,6 +71,8 @@
 #define COUNT_TYPE_COUNTING 	1
 #define COUNT_TYPE_KEYMAPPER 	2
 
+#define KEYMAPPER_START_KEYS	0x27	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT + KEY_RSHIFT
+
 extern void initKeymapper(void);
 
 extern uint8_t isKeyMapping(void);

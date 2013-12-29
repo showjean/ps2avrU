@@ -142,7 +142,7 @@ static void applyKeyMapping(uint8_t xModi) {
 	DEBUG_PRINT(("xModi= %d, _isKeyMapping= %d \n", xModi, _isKeyMapping));
 
 	// 약 5초간 입력이 지속되면 키매핑 모드로
-	if(xModi == 0x07 && enabledKeyMappingCount == COUNT_TYPE_NONE){	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT
+	if(xModi == KEYMAPPER_START_KEYS && enabledKeyMappingCount == COUNT_TYPE_NONE){
 		keyMappingCount = 0;
 		enabledKeyMappingCount = COUNT_TYPE_COUNTING;
 	}else{		

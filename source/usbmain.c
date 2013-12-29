@@ -228,6 +228,7 @@
 #include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
+#include "keymap.h"
 #include "keymapper.h"
 #include "macrobuffer.h"
 #include "sleep.h"
