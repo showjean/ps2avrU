@@ -383,7 +383,8 @@ void prepareKeyMappingPs2(void)
 {
  	pushKeyCode(KEY_LSHIFT, 0); 
  	pushKeyCode(KEY_LCTRL, 0); 
- 	pushKeyCode(KEY_LALT, 0); 
+ 	pushKeyCode(KEY_LALT, 0);  
+ 	pushKeyCode(KEY_RSHIFT, 0); 
 }
 
 
