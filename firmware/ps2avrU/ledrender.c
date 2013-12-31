@@ -12,6 +12,7 @@
 
 #include "print.h"
 #include "ledrender.h"
+#include "fncontrol.h"
 #include "sleep.h"
 #include "keymapper.h"
 
@@ -150,9 +151,6 @@ void clearLEDInited(void){
 	ledInited = 0;
 }
 
-void fadePWM(void){
-	fadeLED();
-}
 
 void setLEDIndicate(void) {
 	 if (LEDstate & LED_STATE_NUM) { // light up num lock
@@ -201,7 +199,9 @@ void setLEDIndicate(void) {
 	
 }
 
-void applyKeyDownForFullLED(void){
+void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown){
+	if(!isDown) return;
+	
 	if(_fullLEDMode == 3){
 			// 키를 누르면 값을 증가 시킨다.
 		downLevelStay = 500; //511;
@@ -247,6 +247,10 @@ static int getBrightness(int xValue){
 	int gVal = xValue * _ledBrightnessMax / PWM_MAX;
 	//DEBUG_PRINT(("getBrightness : xValue : %d, val %d \n", xValue, gVal));
 	return gVal;
+}
+
+static void fadePWM(void){
+	fadeLED();
 }
 
 // 
@@ -325,7 +329,7 @@ static void blinkBeyondFNLED(void) {
 	static uint8_t beyondFNLEDState = 1;
 	const int beyondFNCountMAX = 200;
 	uint8_t led = LEDNUM;
-	uint8_t gIsBeyondFN = isBeyondFN;
+	uint8_t gIsBeyondFN = isBeyondFN();
 
 #ifdef ENABLE_BOOTMAPPER
 	if(isBootMapper()){

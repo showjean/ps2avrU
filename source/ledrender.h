@@ -24,7 +24,7 @@ extern void initLED(void);
 
 extern void setLEDIndicate(void);
 
-extern void applyKeyDownForFullLED(void);
+extern void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
 
 extern void sleepLED(void);
 

@@ -250,7 +250,7 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
-	uint8_t gFN = applyFN(keyidx, isDown);
+	uint8_t gFN = applyFN(keyidx, col, row, isDown);
 
 	if(isDown && keyidx != KEY_NONE){
         applyDualActionDown(pushKeyCode, 1);
@@ -424,7 +424,6 @@ void ps2_main(void){
 	kbd_init();
 
 	keymap_init();
-	clearMatrix();
 	clear();
 
 	DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));

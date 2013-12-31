@@ -392,13 +392,13 @@ uint8_t scanKeyUSB(void) {
                 if(keyidx != KEY_NONE){
     				if(cur) {
     					// key down
-    					gFN = applyFN(keyidx, 1);
+    					gFN = applyFN(keyidx, col, row, 1);
                         wakeUp();
                         applyDualActionDown(makeReportBuffer, 1);
 
     				}else{
                         // key up
-    					gFN = applyFN(keyidx, 0);
+    					gFN = applyFN(keyidx, col, row, 0);
     				}
                 }
 			}

@@ -15,7 +15,7 @@
 
 #include "keymap.h"
 #include "keymatrix.h"
-#include "ledrender.h"
+#include "fncontrol.h"
 
 
 /* ----------------------- hardware I/O abstraction ------------------------ */
@@ -34,14 +34,13 @@
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-// for KEY_BEYOND_FN;
-uint8_t isBeyondFN = 0;	 //KEY_BEYOND_FN state
 // 17*8 bit matrix
 uint8_t prevMatrix[ROWS];
 uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 
 #ifdef GHOST_KEY_PREVENTION
-	uint8_t ghostFilterMatrix[ROWS];
+	// uint8_t ghostFilterMatrix[ROWS];
+	uint8_t *ghostFilterMatrixPointer;
 	uint8_t findGhostKey(void);
 #endif
 
@@ -49,7 +48,6 @@ uint8_t _currentLayer = 0;
 
 
 /* ------------------------------------------------------------------------- */
-static uint8_t _isExtraFNDown = 0;
 static uint8_t debounceMAX = 5;
 static uint8_t debounce = 10;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static uint8_t _isAllKeyRelease = 0;
@@ -86,6 +84,8 @@ void initMatrix(void){
   
 	DDRD        &= ~(1<<PIND7); // input row 17
 	PORTD 		|= (1<<PIND7);// pull up row 17
+
+	clearMatrix();
 }
 void clearMatrix(void){
 	uint8_t row;
@@ -95,6 +95,11 @@ void clearMatrix(void){
 	}
 
 	debounceMAX = 10;
+
+#ifdef GHOST_KEY_PREVENTION	
+	ghostFilterMatrixPointer = currentMatrix;
+#endif
+
 }
 
 uint8_t isAllKeyRelease(void)
@@ -110,53 +115,6 @@ uint8_t isAllKeyRelease(void)
 	return _isAllKeyRelease;
 }
 
-// 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
-uint8_t applyFN(uint8_t keyidx, uint8_t isDown) {
-
-	if(keyidx == KEY_FN) return 0;
-    setDualAction(keyidx, isDown);	
-
-	if(isDown) {
-		applyKeyDownForFullLED();
-
-		if((keyidx ==  KEY_BEYOND_FN) || (_isExtraFNDown && keyidx == BEYOND_FN_CANCEL_KEY)){	// beyond_fn을 활성화;
-			 if( keyidx == BEYOND_FN_CANCEL_KEY ) {	// 취소만 가능한 키 
-				isBeyondFN = 0;
-			 }else{
-				isBeyondFN ^= 1;
-			 }
-			 if(isBeyondFN == 0){
-				setLEDIndicate();
-			 }
-			 return 0;
-		}else if(keyidx == EXTRA_FN){
-			_isExtraFNDown = 1;
-		}else if((_isExtraFNDown && keyidx == LED_KEY) || keyidx == KEY_LED){
-			
-			changeFullLedState();
-			return 0;
-		}else if(keyidx == KEY_LED_UP){
-			increaseLedBrightness();
-			return 0;
-		}else if(keyidx == KEY_LED_DOWN){
-			reduceLedBrightness();
-			return 0;
-		}/*else if(keyidx >= KEY_MAX){
-			return 0;
-		}*/
-	}else{	// up 
-
-		if(keyidx ==  KEY_BEYOND_FN){	// beyond_fn 			 
-			 return 0;
-		}else if(keyidx == EXTRA_FN){
-			_isExtraFNDown = 0;
-		}/*else if(keyidx >= KEY_MAX){
-			return 0;
-		}*/
-	}
-
-	return 1;
-}
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
@@ -234,7 +192,7 @@ uint8_t getLayer(void) {
 
 	if(isLazyLayer > 0) return isLazyLayer;
 	
-	if(isBeyondFN == 1) {
+	if(isBeyondFN() == 1) {
 		_currentLayer = 2;
 		return 2;
 	}
@@ -338,16 +296,20 @@ uint8_t getLiveMatrix(void){
 	
 	if(hasGhostKey > 0){
 		// DEBUG_PRINT(("GHOST_KEY_PREVENTION \n"));
-		for(row=0;row<ROWS;row++)
-		{
-			ghostFilterMatrix[row] = prevMatrix[row];
-		}
+		// for(row=0;row<ROWS;row++)
+		// {
+		// 	ghostFilterMatrix[row] = prevMatrix[row];
+		// }
+		ghostFilterMatrixPointer = prevMatrix;
 	}else{
-		for(row=0;row<ROWS;row++)
-		{
-			ghostFilterMatrix[row] = currentMatrix[row];
-		}
+		// for(row=0;row<ROWS;row++)
+		// {
+		// 	ghostFilterMatrix[row] = currentMatrix[row];
+		// }
+		ghostFilterMatrixPointer = currentMatrix;
 	}
+
+	DEBUG_PRINT(("GHOST_KEY_PREVENTION  p : %d, prevMatrix : %d, currentMatrix : %d \n", ghostFilterMatrixPointer, prevMatrix, currentMatrix));
 #endif
 
 	return 1;
@@ -356,7 +318,8 @@ uint8_t getLiveMatrix(void){
 uint8_t *getCurrentMatrix(void){
 
 #ifdef GHOST_KEY_PREVENTION
-	return ghostFilterMatrix;
+	// return ghostFilterMatrix;
+	return ghostFilterMatrixPointer;
 #else
 	return currentMatrix;
 #endif
