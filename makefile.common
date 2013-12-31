@@ -16,6 +16,7 @@
 	AVRLIB = $(TOP_DIR)/avrlib
 	COMMON_DIR = $(TOP_DIR)/source
 
+
 #put the name of the target file here (without extension)
 #  Your "target" file is your C source file that is at the top level of your code.
 #  In other words, this is the file which contains your main() function.
@@ -70,7 +71,7 @@
 #	ASFLAGS += -include $(HARDWARE_INFO_H)
 
 #compiler flags
-	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
+	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
 #	CPFLAGS += -include $(HARDWARE_INFO_H)
 
 #linker flags
