@@ -15,6 +15,7 @@
 
 #include "keymap.h"
 #include "keymatrix.h"
+#include "keymapper.h"
 #include "fncontrol.h"
 
 
@@ -39,7 +40,6 @@ uint8_t prevMatrix[ROWS];
 uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 
 #ifdef GHOST_KEY_PREVENTION
-	// uint8_t ghostFilterMatrix[ROWS];
 	uint8_t *ghostFilterMatrixPointer;
 	uint8_t findGhostKey(void);
 #endif
@@ -126,11 +126,9 @@ uint8_t getLayer(void) {
 
 	for(col=0;col<COLUMNS;col++)
 		for(row=0;row<ROWS;row++){		
-			keyidx = getCurrentKeycode(_currentLayer, row, col);
+			keyidx = getCurrentKeyindex(_currentLayer, row, col);
 
-			if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) { 
-		        keyidx = dualActionMaskDown[keyidx - (KEY_dualAction + 1)];
-		    }
+		    keyidx = getDualActionMaskDown(keyidx); 
 
 			if(keyidx == KEY_LAZY_FN || keyidx == KEY_LAZY_FN2 
 				|| keyidx == KEY_FN || keyidx == KEY_FN2 
@@ -295,17 +293,8 @@ uint8_t getLiveMatrix(void){
 	hasGhostKey = findGhostKey();
 	
 	if(hasGhostKey > 0){
-		// DEBUG_PRINT(("GHOST_KEY_PREVENTION \n"));
-		// for(row=0;row<ROWS;row++)
-		// {
-		// 	ghostFilterMatrix[row] = prevMatrix[row];
-		// }
 		ghostFilterMatrixPointer = prevMatrix;
 	}else{
-		// for(row=0;row<ROWS;row++)
-		// {
-		// 	ghostFilterMatrix[row] = currentMatrix[row];
-		// }
 		ghostFilterMatrixPointer = currentMatrix;
 	}
 
@@ -318,7 +307,6 @@ uint8_t getLiveMatrix(void){
 uint8_t *getCurrentMatrix(void){
 
 #ifdef GHOST_KEY_PREVENTION
-	// return ghostFilterMatrix;
 	return ghostFilterMatrixPointer;
 #else
 	return currentMatrix;

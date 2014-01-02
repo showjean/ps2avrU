@@ -31,6 +31,7 @@
 #include "macrobuffer.h"
 #include "enterframe.h"
 #include "keydownbuffer.h"
+#include "fncontrol.h"
 
 // Output buffer - circular queue
 #define QUEUE_SIZE 200
@@ -160,7 +161,7 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	if(keyidx == KEY_NONE) return 0;
 
      // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-    keyidx = getDualActionDownKeyIdex(keyidx);
+    keyidx = getDualActionDownKeyIndex(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
 
@@ -246,14 +247,20 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	}
 	return 1;
 }
-
+uint8_t pushKeyCodeAdapter(uint8_t keyidx, uint8_t isDown){
+	if(isDown){				
+		// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
+		pushDownBuffer(getDualActionDownKeyIndex(keyidx));
+	}
+	pushKeyCode(keyidx, isDown);
+}
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	uint8_t gFN = applyFN(keyidx, col, row, isDown);
 
 	if(isDown && keyidx != KEY_NONE){
-        applyDualActionDown(pushKeyCode, 1);
+        applyDualActionDownWhenIsCancel(pushKeyCodeAdapter, 1);
 	}
 
 	// 키매핑 진행중;
@@ -272,7 +279,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
 
-	pushKeyCode(keyidx, isDown);
+	pushKeyCodeAdapter(keyidx, isDown);
 
 	return 1;
 }
@@ -306,6 +313,8 @@ int scanKeyPS2(void) {
 	
 	uint8_t row, col, prev, cur, keyidx, prevKeyidx;
 	uint8_t layer = getLayer();
+
+    DEBUG_PRINT(("layer  : %d \n", layer)); 
 	uint8_t gResultPutKey = 1;
 
     uint8_t *gMatrix = getCurrentMatrix();
@@ -320,8 +329,8 @@ int scanKeyPS2(void) {
 				cur  = gMatrix[row] & BV(col);
 				if(!prev) continue;
 				
-				prevKeyidx = getCurrentKeycode(_prevLayer, row, col);
-				keyidx = getCurrentKeycode(layer, row, col);
+				prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
+				keyidx = getCurrentKeyindex(layer, row, col);
 
 	            // 이전 상태에서(press/up) 변화가 있을 경우;
 				if( prevKeyidx != keyidx && keyidx != KEY_NONE ) {
@@ -346,7 +355,7 @@ int scanKeyPS2(void) {
 		{
 			prev = prevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-			keyidx = getCurrentKeycode(layer, row, col);
+			keyidx = getCurrentKeyindex(layer, row, col);
 
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
@@ -365,9 +374,9 @@ int scanKeyPS2(void) {
 					gResultPutKey &= putKey(keyidx, 0, col, row);
 				}
 			}
-			if(cur){				
-				pushDownBuffer(keyidx);
-			}
+			/*if(cur){
+				pushDownBuffer(getDualActionDownKeyIndex(keyidx));
+			}*/
 
 		}
 		

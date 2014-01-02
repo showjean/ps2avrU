@@ -87,7 +87,8 @@ extern void printString(const char *xString);
 // event loop
 extern void enterFrameForMapper(void);
 
-extern uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
+// 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>
+extern uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 // 매크로 등록중인지 확인;
 extern uint8_t isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;

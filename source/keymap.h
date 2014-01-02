@@ -265,11 +265,12 @@ extern uint8_t getKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 extern const unsigned short int modmask[16];
 
 extern uint8_t dualActionKeyIndex;
-extern const uint8_t dualActionMaskDown[];
-extern const uint8_t dualActionMaskUp[];
-extern void applyDualActionDown(uint8_t (*func)(uint8_t, uint8_t), uint8_t isDown);
+// extern const uint8_t PROGMEM dualActionMaskDown[];
+// extern const uint8_t PROGMEM dualActionMaskUp[];
+extern void applyDualActionDownWhenIsCancel(uint8_t (*func)(uint8_t, uint8_t), uint8_t isDown);
 extern void setDualAction(uint8_t keyidx, uint8_t isDown);
 extern uint8_t isCanceledDualAction(void);
-extern uint8_t getDualActionDownKeyIdex(uint8_t xActionIndex);
+extern uint8_t getDualActionDownKeyIndex(uint8_t xActionIndex);
+extern uint8_t getDualActionMaskDown(uint8_t keyidx);
 
 #endif

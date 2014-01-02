@@ -5,7 +5,7 @@
 #include "global.h"
 #include <avr/io.h>
 
-extern uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown);
+extern uint8_t makeReportBufferAdapter(uint8_t keyidx, uint8_t xIsDown);
 extern void prepareKeyMappingUsb(void);
 
 extern void usb_main(void);

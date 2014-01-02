@@ -275,12 +275,12 @@ static uint8_t isMacroKey(uint8_t xKeyidx){
 	}
 }
 // flashrom의 기본 키코드 반환(부트 매퍼);
-static uint8_t getDefaultKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
+static uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	return getKeyCode(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
 }
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
-static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
+static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
 	int gIdx;
@@ -290,14 +290,15 @@ static uint8_t getMappingKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 	return gKeyIndex;
 }
 
-static uint8_t escapeMacroKeycode(uint8_t xKeyidx){
+static uint8_t escapeMacroKeyindex(uint8_t xKeyidx){
 	if(isMacroKey(xKeyidx)){
 		return 0;
 	}
 	return xKeyidx;
 }
 
-uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
+// 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>
+uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
 	if(_isKeyMapping ) {	// 키매핑 중에는 달리 처리;
@@ -305,20 +306,20 @@ uint8_t getCurrentKeycode(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 		if(isMacroInput()){			
 			// 매크로 입력 중에는 매핑된 키코드를 사용;
 			// 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
-			gKeyIndex = getMappingKeyCode(xLayer, xRow, xCol);	
-			gKeyIndex = escapeMacroKeycode(gKeyIndex);
+			gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);	
+			gKeyIndex = escapeMacroKeyindex(gKeyIndex);
 		}else{
 			// 키 매핑 중에는 숫자키만을 이용하므로, 기본 키맵을 이용하도록 한다.
-			gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
+			gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
 
 			return gKeyIndex;
 		}
 	}else{
-		gKeyIndex = getMappingKeyCode(xLayer, xRow, xCol);	
+		gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);	
 	}
 
 	if(gKeyIndex < 1 || gKeyIndex > 254){		
-		gKeyIndex = getDefaultKeyCode(xLayer, xRow, xCol);
+		gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
 	}
 
 	gKeyIndex = getQuickSwapKeyindex(gKeyIndex);
@@ -709,7 +710,7 @@ void resetMacroInput(void){
 }
 void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {	
-    xKeyidx = getDualActionDownKeyIdex(xKeyidx);
+    xKeyidx = getDualActionDownKeyIndex(xKeyidx);
 
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
@@ -951,7 +952,7 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				printString(" (layer=");
 				printString(toString(_currentLayer+1));
 				printString(" default=");
-				gKeyCode = getDefaultKeyCode(_currentLayer, _row, _col);
+				gKeyCode = getDefaultKeyindex(_currentLayer, _row, _col);
 				printString(toString(gKeyCode));
 				printString(" mapping=");
 				gKeyCode = _newKeyMap[_row][_col];

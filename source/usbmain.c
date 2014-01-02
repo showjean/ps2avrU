@@ -235,6 +235,7 @@
 #include "enterframe.h"
 #include "keydownbuffer.h"
 #include "keymain.h"
+#include "fncontrol.h"
 #include "vusb.h"
 
 #define REPORT_ID_INDEX 0
@@ -306,9 +307,9 @@ uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
 }
 uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     uint8_t retval = 1;
-   
+
     // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-    keyidx = getDualActionDownKeyIdex(keyidx);      
+    keyidx = getDualActionDownKeyIndex(keyidx);      
 
     // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
@@ -344,6 +345,16 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     return retval;
 }
 
+uint8_t makeReportBufferAdapter(uint8_t keyidx, uint8_t xIsDown){
+    
+    if(xIsDown){ 
+        // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;       
+        pushDownBuffer(getDualActionDownKeyIndex(keyidx));
+    }
+
+    makeReportBuffer(keyidx, xIsDown);
+}
+
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
     memset(reportBufferExtra, 0, sizeof(reportBufferExtra));
@@ -356,7 +367,9 @@ uint8_t scanKeyUSB(void) {
     if (!setCurrentMatrix()) return retval;    
 
 	uint8_t row, col, prev, cur, keyidx, gKeymapping, gFN;
-	uint8_t keymap = getLayer();
+	uint8_t gLayer = getLayer();
+
+    DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
 	// debounce counter expired, create report
 	reportIndex = 2;
@@ -373,7 +386,7 @@ uint8_t scanKeyUSB(void) {
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = prevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-            keyidx = getCurrentKeycode(keymap, row, col);						
+            keyidx = getCurrentKeyindex(gLayer, row, col);					
 			gFN = 1;
             
             // !(prev&&cur) : 1 && 1 이 아니고, 
@@ -394,7 +407,7 @@ uint8_t scanKeyUSB(void) {
     					// key down
     					gFN = applyFN(keyidx, col, row, 1);
                         wakeUp();
-                        applyDualActionDown(makeReportBuffer, 1);
+                        applyDualActionDownWhenIsCancel(makeReportBufferAdapter, 1);
 
     				}else{
                         // key up
@@ -426,8 +439,8 @@ uint8_t scanKeyUSB(void) {
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBuffer(keyidx, 1);
-               pushDownBuffer(keyidx);
+               retval |= makeReportBufferAdapter(keyidx, 1);
+               // pushDownBuffer(getDualActionDownKeyIndex(keyidx));
 			}
 
             if( prev != cur ) {
@@ -473,7 +486,7 @@ uint8_t scanMacroUsb(void)
                 cur  = gMatrix[row] & BV(col);           
                 // usb는 눌렸을 때만 버퍼에 저장한다.
                 if(cur){
-                    keyidx = getCurrentKeycode(keymap, row, col);
+                    keyidx = getCurrentKeyindex(keymap, row, col);
                     if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) {
                         reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
                     }
