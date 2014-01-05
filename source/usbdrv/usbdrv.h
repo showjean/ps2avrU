@@ -117,6 +117,9 @@ USB messages, even if they address another (low-speed) device on the same bus.
 
 */
 
+// extern void delegateStopTimerWhenUsbInterupt(void);
+// extern void delegateStartTimerWhenUsbInterupt(void);
+
 /* ------------------------------------------------------------------------- */
 /* --------------------------- Module Interface ---------------------------- */
 /* ------------------------------------------------------------------------- */

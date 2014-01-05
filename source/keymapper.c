@@ -621,12 +621,12 @@ void readMacro(uint8_t xMacroIndex){
 
 	uint16_t gAddress;
 	uint8_t gKeyCode;
-	uint8_t buffers[MACRO_SIZE_MAX];
+	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
 		gKeyCode = eeprom_read_byte((uint8_t *)gAddress);
-		buffers[k] = gKeyCode;
+		// buffers[k] = gKeyCode;
 		if(gKeyCode > 0 && gKeyCode < 255){
 			pushM(gKeyCode);
 		}
@@ -640,12 +640,12 @@ void saveMacro(void){
 
 	uint8_t gKeyCode;
 	uint16_t gAddress;
-	uint8_t buffers[MACRO_SIZE_MAX];
+	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gKeyCode = _macroInputBuffer[k];	// value
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		buffers[k] = gKeyCode;
+		// buffers[k] = gKeyCode;
 		eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
 	}
 	// DEBUG_PRINT(("saveMacro  gAddress: %d \n", gAddress));

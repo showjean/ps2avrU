@@ -47,6 +47,7 @@ static const uint8_t ledBrightnessStep = 25;
 static int beyondFNCountDelay = 1800;
 
 static void fadeLED(void);
+static void setFullLEDState(void);
 
 void initLED(void){	
 	// led pin
@@ -57,6 +58,24 @@ void initLED(void){
    	DDRD |= (LEDSCROLL);	// output;
 	PORTD &= ~(LEDSCROLL);	// low
 #endif
+}
+
+void initFullLEDStateAfter(void){
+
+	_ledBrightnessMax = eeprom_read_byte((uint8_t *)EEPROM_LED_BRIGHTNESS);
+	_ledBrightnessMax_saved = _ledBrightnessMax;
+
+	_fullLEDMode = eeprom_read_byte((uint8_t *)EEPROM_LED_MODE);    // 1바이트 11번지 읽기, 기본값 0xFF ( 255)
+	if(_fullLEDMode == 255){
+		_fullLEDMode = 0;
+	}
+	_fullLEDMode_saved = _fullLEDMode;
+
+	setFullLEDState();
+
+	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		beyondFNCountDelay = beyondFNCountDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}
 }
 
 void blinkOnce(void){

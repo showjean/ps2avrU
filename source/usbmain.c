@@ -267,6 +267,13 @@ void delegateInitInterfaceUsb(void)
     if(_isInit == INIT_INDEX_NOT_INIT) _isInit = INIT_INDEX_SET_IDLE;       
 }
 
+/*void delegateStopTimerWhenUsbInterupt(void){
+    stopTimer();
+}
+void delegateStartTimerWhenUsbInterupt(void){
+    startTimer();
+}*/
+
 void prepareKeyMappingUsb(void)
 {
     memset(_prevPressedBuffer, 0, MACRO_SIZE_MAX);

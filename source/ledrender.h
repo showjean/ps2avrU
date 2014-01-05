@@ -20,6 +20,7 @@ extern void clearLEDInited(void);
 
 extern void blinkOnce(void);
 extern void initFullLEDState(void);
+extern void initFullLEDStateAfter(void);
 extern void initLED(void);
 
 extern void setLEDIndicate(void);
