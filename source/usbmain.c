@@ -246,7 +246,8 @@
 #define INIT_INDEX_INITED       2
 #define INIT_INDEX_COMPLETE     3
 
-static uint8_t _isInit = INIT_INDEX_NOT_INIT;     // set 1 when HID init
+static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
+static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
 
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
@@ -256,6 +257,9 @@ void clearReportBuffer(void);
 void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();  
+    if(_ledInitState == INIT_INDEX_NOT_INIT){
+        _ledInitState = INIT_INDEX_INITED;
+    }
 }
 
 void delegateInterfaceReadyUsb(void){
@@ -264,7 +268,11 @@ void delegateInterfaceReadyUsb(void){
 
 void delegateInitInterfaceUsb(void)
 {    
-    if(_isInit == INIT_INDEX_NOT_INIT) _isInit = INIT_INDEX_SET_IDLE;       
+    // 부팅시 cmos와 os에서 각각 불려지므로, os 시작시에 초기화를 해주려면 if문 없이 실행해야한다.
+    // if(_initState == INIT_INDEX_NOT_INIT || _initState == INIT_INDEX_COMPLETE) {
+        _initState = INIT_INDEX_SET_IDLE;
+        _ledInitState = INIT_INDEX_NOT_INIT;       
+    // }
 }
 
 /*void delegateStopTimerWhenUsbInterupt(void){
@@ -605,17 +613,24 @@ void usb_main(void) {
 
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {  
-            if(_isInit == INIT_INDEX_SET_IDLE){
-                _isInit = INIT_INDEX_INITED;
+            if(_initState == INIT_INDEX_SET_IDLE){
+                _initState = INIT_INDEX_INITED;
                 clearReportBuffer();
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
 
                 wakeUp();     
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
                 // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.(MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
-                startKeyMappingOnBoot();
+                // for os x
+                if(idleRate > 0) startKeyMappingOnBoot();
+
+            }else if(_ledInitState == INIT_INDEX_INITED){
+                _ledInitState = INIT_INDEX_COMPLETE;  
+                // for windows
+                if(idleRate == 0) startKeyMappingOnBoot();
+                
             }else if(hasMacroUsb()){
                 scanMacroUsb();
                 // DEBUG_PRINT(("hasMacroUsb\n"));
@@ -627,13 +642,13 @@ void usb_main(void) {
                 
                 updateNeeded = 0;
             }
-        } 
+        }
 
-        if(_isInit == INIT_INDEX_INITED){
+        if(_initState == INIT_INDEX_INITED){
             if(initCount++ == 200){       // delay for OS X USB multi device   
                 // all platform init led
                 initFullLEDState();
-                _isInit = INIT_INDEX_COMPLETE;
+                _initState = INIT_INDEX_COMPLETE;
             }
         }
 
