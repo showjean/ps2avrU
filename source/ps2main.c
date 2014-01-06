@@ -169,7 +169,7 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
 
 	if(isDown) {		// make code
-
+// DEBUG_PRINT(("idx : %d 1 \n", keyidx));
 		lastMAKE_keyidx = keyidx;
 		loopCnt=0;
 		m_state = STA_NORMAL;
@@ -216,7 +216,7 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	}
 	else			// break code - key realeased
 	{
-	
+// DEBUG_PRINT(("idx : %d 0 \n", keyidx));	
 		if(lastMAKE_keyidx == keyidx)		// repeat is resetted only if last make key is released
 			lastMAKE_SIZE=0;
 
@@ -247,20 +247,23 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	}
 	return 1;
 }
-uint8_t pushKeyCodeAdapter(uint8_t keyidx, uint8_t isDown){
+
+uint8_t pushKeyCodeDecorator(uint8_t keyidx, uint8_t isDown){
 	if(isDown){				
 		// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
 		pushDownBuffer(getDualActionDownKeyIndex(keyidx));
 	}
 	pushKeyCode(keyidx, isDown);
+	return 1;
 }
+
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	uint8_t gFN = applyFN(keyidx, col, row, isDown);
 
 	if(isDown && keyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(pushKeyCodeAdapter, 1);
+        applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, 1);
 	}
 
 	// 키매핑 진행중;
@@ -279,14 +282,13 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
 
-	pushKeyCodeAdapter(keyidx, isDown);
+	pushKeyCodeDecorator(keyidx, isDown);
 
 	return 1;
 }
 
-// return : key modified
-int scanKeyPS2(void) {
-    // uint8_t c;
+int scanKeyPs2WithMacro(void){
+
     Key gKey;
     if(isEmptyM()){
     	setMacroProcessEnd(1);
@@ -305,6 +307,12 @@ int scanKeyPS2(void) {
 
 	    return 0;	    
 	}
+
+	return scanKeyPS2();
+}
+
+// return : key modified
+int scanKeyPS2(void) {
 	
 	// debounce cleared and changed
 	if(!setCurrentMatrix()) return 0;
@@ -369,14 +377,13 @@ int scanKeyPS2(void) {
                 }
 #endif	
 				if(cur) {
+					// DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
 					gResultPutKey &= putKey(keyidx, 1, col, row);
 				}else{
+					// DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
 					gResultPutKey &= putKey(keyidx, 0, col, row);
 				}
 			}
-			/*if(cur){
-				pushDownBuffer(getDualActionDownKeyIndex(keyidx));
-			}*/
 
 		}
 		
@@ -579,7 +586,7 @@ void ps2_main(void){
 
 					// if error during send
 					if(isEmpty()){
-						scanKeyPS2();
+						scanKeyPs2WithMacro();
 					}
 
 			        // ps2avrU loop, must be scan matrix;
@@ -611,7 +618,7 @@ void ps2_main(void){
 				case STA_REPEAT:
 					
 					if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
-						scanKeyPS2();
+						scanKeyPs2WithMacro();
 					}
 
 			        // ps2avrU loop, must be scan matrix;

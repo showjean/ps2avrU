@@ -352,7 +352,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     return retval;
 }
 
-uint8_t makeReportBufferAdapter(uint8_t keyidx, uint8_t xIsDown){
+uint8_t makeReportBufferDecorator(uint8_t keyidx, uint8_t xIsDown){
     
     if(xIsDown){ 
         // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;       
@@ -414,7 +414,7 @@ uint8_t scanKeyUSB(void) {
     					// key down
     					gFN = applyFN(keyidx, col, row, 1);
                         wakeUp();
-                        applyDualActionDownWhenIsCancel(makeReportBufferAdapter, 1);
+                        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, 1);
 
     				}else{
                         // key up
@@ -446,7 +446,7 @@ uint8_t scanKeyUSB(void) {
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBufferAdapter(keyidx, 1);
+               retval |= makeReportBufferDecorator(keyidx, 1);
                // pushDownBuffer(getDualActionDownKeyIndex(keyidx));
 			}
 

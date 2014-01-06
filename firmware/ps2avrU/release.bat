@@ -18,4 +18,5 @@ make -f makefile_GKP_SL_apart
 del keymain_GKP_SL_apart.hex
 ren keymain.hex keymain_GKP_SL_apart.hex
 ::pause;
+go.bat
 pause;

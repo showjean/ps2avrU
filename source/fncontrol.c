@@ -33,8 +33,8 @@ uint8_t applyFN(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown) {
     // DEBUG_PRINT(("applyFN  : %d isDown : %d\n", keyidx, isDown)); 
 
 	applyKeyDownForFullLED(keyidx, col, row, isDown);
-	// if(keyidx == KEY_FN) return 0;
     setDualAction(keyidx, isDown);	
+	// if(keyidx == KEY_FN) return 0;
 
 	if(isDown) {
 

@@ -44,8 +44,6 @@ enum {
     KEY_LCTRL_HANJA,
     KEY_dualAction_end  // 230
 };
-#define KEY_MAX         KEY_dualAction     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
-
 
 enum {  // for macro
     KEY_MAC1 = 201,
@@ -61,6 +59,9 @@ enum {  // for macro
     KEY_MAC11,
     KEY_MAC12   // 212
 };
+
+#define KEY_MAX         KEY_MAC1   //KEY_dualAction     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+
 
 enum {
 	KEY_NONE = 0,     // unused
