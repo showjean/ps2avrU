@@ -622,7 +622,8 @@ void usb_main(void) {
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
-                // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.(MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
+                // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.
+                // (MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
                 // for os x
                 if(idleRate > 0) startKeyMappingOnBoot();
 
@@ -633,13 +634,9 @@ void usb_main(void) {
                 
             }else if(hasMacroUsb()){
                 scanMacroUsb();
-                // DEBUG_PRINT(("hasMacroUsb\n"));
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
-            }else if(updateNeeded && !_extraHasChanged){
-
-                // if(sizeof(reportBuffer)){   // keyboard                    
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD); 
-                
+            }else if(updateNeeded && !_extraHasChanged){                 
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);                 
                 updateNeeded = 0;
             }
         }
@@ -655,7 +652,6 @@ void usb_main(void) {
         if(usbInterruptIsReady3()){
             if(updateNeeded && _extraHasChanged){ 
                 usbSetInterrupt3(reportBufferExtra, REPORT_SIZE_EXTRA);    
-
                 updateNeeded = 0;
             }
         }

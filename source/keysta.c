@@ -93,10 +93,16 @@ kbd_init(void)
 	clockHigh();
 	dataHigh();
 
-	timer2Init();
-	timer2SetPrescaler(TIMER_CLK_DIV8);
-	timerAttach(TIMER2OVERFLOW_INT, timerAction);
-	outp(COUNT_UP, TCNT2);	/* value counts up from this to zero */
+	// timer2Init();
+	// timer2SetPrescaler(TIMER_CLK_DIV8);
+	// timerAttach(TIMER2OVERFLOW_INT, timerAction);
+	// outp(COUNT_UP, TCNT2);	/* value counts up from this to zero */
+
+	timer0Init();
+	timer0SetPrescaler(TIMER_CLK_DIV8);
+	timerAttach(TIMER0OVERFLOW_INT, timerAction);
+	outp(COUNT_UP, TCNT0);	/* value counts up from this to zero */
+
 }
 
 	void
@@ -121,7 +127,9 @@ kbd_get_rx_char(void)
 static void timerAction(void)
 {
 	/* restart timer */
-	outp(COUNT_UP, TCNT2);	/* value counts up from this to zero */
+	// outp(COUNT_UP, TCNT2);	/* value counts up from this to zero */
+	outp(COUNT_UP, TCNT0);	/* value counts up from this to zero */
+	
 
 	if (kbd_state < IDLE_END) { // start, wait_rel or ready to tx
 		dataHigh();

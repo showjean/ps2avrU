@@ -33,6 +33,7 @@ void initFullLEDState(void) {
 	// timerInit();	// timerInit() 전체를 실행하면 kbd_init()시 add한 리스너도 지워저 ps2가 동작을 멈춘다.
 	// 때문에 리스너는 지우지 않고 init만 실행;
 	// timer0Init();	// timer0은 usb일때 led와 연관이 있고 이에 따라 부팅시 작동되지 않는 현상이 있다.
+	// ps/2도 timer2에서 timer0으로 변경했으므로, timer1, 2는 자유롭게 사용할 수 있다.
 
 	timer1Init();
 	
