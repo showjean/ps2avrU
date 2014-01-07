@@ -367,7 +367,8 @@ uint8_t makeReportBufferDecorator(uint8_t keyidx, uint8_t xIsDown){
         pushDownBuffer(getDualActionDownKeyIndex(keyidx));
     }
 
-    makeReportBuffer(keyidx, xIsDown);
+    return makeReportBuffer(keyidx, xIsDown);
+
 }
 
 void clearReportBuffer(void){    

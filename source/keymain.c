@@ -25,9 +25,9 @@
 #include <util/delay.h>
 #include <string.h>
 
-#include "keymap.h" 
 #include "hardwareinfo.h"
 #include "hardwareconfig.h"
+#include "keymap.h" 
 #include "keymapper.h"
 #include "quickswap.h"
 #include "ledrender.h"
@@ -160,15 +160,16 @@ int main(void) {
 		}
 		
 	}
-
+  
 
 #ifdef INTERFACE_ONLY_USB
 	INTERFACE = INTERFACE_USB_USER;
 #else
+	
 	// DEBUG_PRINT(("ckeckNeedInterface %02x \n", ckeckNeedInterface));
 	if(ckeckNeedInterface > 0){
 		INTERFACE = ckeckNeedInterface + 1; 
-	}    
+	}  
 
 	DEBUG_PRINT(("user selected INTERFACE %02x \n", INTERFACE));
 
