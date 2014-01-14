@@ -28,7 +28,9 @@ const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_RCTRL,
     KEY_RCTRL,
     KEY_LCTRL,
-    KEY_LCTRL
+    KEY_LCTRL,
+    KEY_FN,
+    KEY_FN2
 };
 const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE, // hangle
@@ -46,7 +48,9 @@ const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE,
     KEY_HANJA,
     KEY_HANGLE,
-    KEY_HANJA
+    KEY_HANJA,
+    KEY_CAPS,
+    KEY_CAPS
 };
 
 static uint8_t _dualActionCount = 0;

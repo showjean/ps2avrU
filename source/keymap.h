@@ -42,7 +42,9 @@ enum {
     KEY_RCTRL_HANJA,
     KEY_LCTRL_HANGLE,
     KEY_LCTRL_HANJA,
-    KEY_dualAction_end  // 230
+    KEY_FN_CAPS,
+    KEY_FN2_CAPS,
+    KEY_dualAction_end  // 232
 };
 
 enum {  // for macro
