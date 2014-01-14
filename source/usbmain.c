@@ -219,6 +219,7 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <util/delay.h>
 
@@ -323,8 +324,8 @@ uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
 uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     uint8_t retval = 1;
 
-    // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-    keyidx = getDualActionDownKeyIndex(keyidx);      
+    // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+    keyidx = getDualActionDownKeyIndexWhenIsCancel(keyidx);      
 
     // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
@@ -363,8 +364,8 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
 uint8_t makeReportBufferDecorator(uint8_t keyidx, uint8_t xIsDown){
     
     if(xIsDown){ 
-        // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;       
-        pushDownBuffer(getDualActionDownKeyIndex(keyidx));
+        // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
+        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
     }
 
     return makeReportBuffer(keyidx, xIsDown);
@@ -456,7 +457,6 @@ uint8_t scanKeyUSB(void) {
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
                retval |= makeReportBufferDecorator(keyidx, 1);
-               // pushDownBuffer(getDualActionDownKeyIndex(keyidx));
 			}
 
             if( prev != cur ) {
@@ -574,6 +574,12 @@ void usb_main(void) {
 	DEBUG_PRINT(("starting USB keyboard!!! \n"));
 
     sei();
+
+//     static int __tempcount = 0;
+// #if USB_COUNT_SOF    
+//     bool _isSuspended = false;
+//     int suspendCount = 0;
+// #endif
     
     while (1) {
 
@@ -586,8 +592,39 @@ void usb_main(void) {
 			break;
 		}
 
+//         if(__tempcount++ > 1000){
+//             __tempcount = 0;
+//             DEBUG_PRINT(("usbSofCount : %d SE0 : %d \n", usbSofCount, USBIN & USBMASK));
+//         }
+
+// #if USB_COUNT_SOF
+//         if (usbSofCount != 0) {
+//             if(_isSuspended == true) DEBUG_PRINT(("_isSuspended == true usbSofCount : %d \n", usbSofCount));
+//             _isSuspended = false;
+//             usbSofCount = 0;
+//             suspendCount = 0;
+
+//             wakeUp();
+
+//         } else {
+//             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
+//             if (_isSuspended == false && suspendCount++ > 20000) {
+//                 DEBUG_PRINT(("_isSuspended == false usbSofCount : %d \n", usbSofCount));
+//                 suspendCount = 0;
+//                 _isSuspended = true;
+
+//                 sleep();
+//             }
+//         }
+// #endif
+
         // main event loop
         usbPoll();
+
+        // if(_isSuspended == true) {
+        //     scanKeyUSB();   // for dummy
+        //     continue;
+        // }
 
         if(updateNeeded == 0){
 		
@@ -665,9 +702,9 @@ void usb_main(void) {
         
         if(hasMacroUsb())
         {
-            setMacroProcessEnd(0);
+            setMacroProcessEnd(false);
         }else{
-            setMacroProcessEnd(1);
+            setMacroProcessEnd(true);
         }
 
     }

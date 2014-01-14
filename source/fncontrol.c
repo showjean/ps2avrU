@@ -36,6 +36,9 @@ uint8_t applyFN(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown) {
     setDualAction(keyidx, isDown);	
 	// if(keyidx == KEY_FN) return 0;
 
+    // 듀얼액션 키의 캔슬 시 사용되는 기본 키를 가져온다.
+	keyidx = getDualActionDefaultKeyIndexWhenIsCancel(keyidx);
+
 	if(isDown) {
 
 		if((keyidx ==  KEY_BEYOND_FN) || (_isExtraFNDown && keyidx == BEYOND_FN_CANCEL_KEY)){	// beyond_fn을 활성화;

@@ -2,6 +2,7 @@
 #define MACROBUFFER_C
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <avr/eeprom.h>
 
@@ -9,7 +10,7 @@
 #include "macrobuffer.h"
 #include "ps2avru_util.h"
 
-static uint8_t _isMacroProcessEnd = 0;
+static bool _isMacroProcessEnd = false;
 static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];
 static int rearm = 0, frontm = 0;
 
@@ -68,11 +69,11 @@ Key popMWithKey(void) {
     return _pressedBuffer;
 }*/
 
-uint8_t isEmptyM(void) {
+bool isEmptyM(void) {
     if(frontm == rearm)
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
 // 프레스 버퍼가 있는 동안 릴리즈 하지 않으면 (usb에서) 리피트가 되버린다.
@@ -91,11 +92,11 @@ void clearMacroPressedBuffer(void){
 
 
 // 현재 매크로가 진행중인지 확인, 각 인터페이스에서 setMacroProcessEnd()로 표시해준다.
-uint8_t isMacroProcessEnd(void)
+bool isMacroProcessEnd(void)
 {
     return _isMacroProcessEnd && isEmptyM();
 }
-void setMacroProcessEnd(uint8_t xIsEnd)
+void setMacroProcessEnd(bool xIsEnd)
 {
     _isMacroProcessEnd = xIsEnd;
 }

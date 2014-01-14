@@ -162,8 +162,8 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 {
 	if(keyidx == KEY_NONE) return 0;
 
-     // 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-    keyidx = getDualActionDownKeyIndex(keyidx);
+     // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+    keyidx = getDualActionDownKeyIndexWhenIsCancel(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
 
@@ -252,8 +252,8 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 
 uint8_t pushKeyCodeDecorator(uint8_t keyidx, uint8_t isDown){
 	if(isDown){				
-		// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-		pushDownBuffer(getDualActionDownKeyIndex(keyidx));
+		// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+		pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
 	}
 	pushKeyCode(keyidx, isDown);
 	return 1;
@@ -293,9 +293,9 @@ int scanKeyPs2WithMacro(void){
 
     Key gKey;
     if(isEmptyM()){
-    	setMacroProcessEnd(1);
+    	setMacroProcessEnd(true);
 	}else{
-    	setMacroProcessEnd(0);
+    	setMacroProcessEnd(false);
 	  
         gKey = popMWithKey();
         if(gKey.mode == 1){	// down

@@ -50,8 +50,9 @@
 // mode select
 #define SEL_MAPPING 1
 #define SEL_MACRO 2
-#define SEL_EXIT 3
-#define SEL_BOOT_MAPPER 4
+#define SEL_TOGGLE_LAZY_FN 3
+#define SEL_EXIT 4
+#define SEL_BOOT_MAPPER 5
 
 // 입력되는 키와 직접 매칭; (숫자 1키를 누르면 CMD_CHOOSE_LAYER...)
 // mapping

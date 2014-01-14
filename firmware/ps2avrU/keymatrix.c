@@ -11,12 +11,12 @@
 
 #include <util/delay.h>
 #include <string.h>
-// #include "udelay.h"
 
 #include "keymap.h"
 #include "keymatrix.h"
 #include "keymapper.h"
 #include "fncontrol.h"
+#include "lazyfn.h"
 
 
 /* ----------------------- hardware I/O abstraction ------------------------ */
@@ -50,7 +50,7 @@ uint8_t _currentLayer = 0;
 /* ------------------------------------------------------------------------- */
 static uint8_t debounceMAX = 5;
 static uint8_t debounce = 10;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
-static uint8_t _isAllKeyRelease = 0;
+static bool _isAllKeyRelease = false;
 
 
 
@@ -102,13 +102,13 @@ void clearMatrix(void){
 
 }
 
-uint8_t isAllKeyRelease(void)
+bool isAllKeyRelease(void)
 {
 	uint8_t row;
-	_isAllKeyRelease = 1;
+	_isAllKeyRelease = true;
 	for(row=0;row<ROWS;row++) {
 		if(currentMatrix[row] > 0){
-			_isAllKeyRelease = 0;
+			_isAllKeyRelease = false;
 			break;
 		}
 	}
@@ -120,7 +120,7 @@ uint8_t isAllKeyRelease(void)
 // 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur;
-	static uint8_t isLazyLayer = 0;
+	static uint8_t _currentLazyLayer = 0;
 
 	// fn이 가장 우선, 다음 fn2
 
@@ -130,8 +130,7 @@ uint8_t getLayer(void) {
 
 		    keyidx = getDualActionMaskDown(keyidx); 
 
-			if(keyidx == KEY_LAZY_FN || keyidx == KEY_LAZY_FN2 
-				|| keyidx == KEY_FN || keyidx == KEY_FN2 
+			if(keyidx == KEY_FN || keyidx == KEY_FN2 
 				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
 				
 				cur = 0;
@@ -165,19 +164,15 @@ uint8_t getLayer(void) {
 					// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
 					if(keyidx == KEY_FN){
 						//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
+						if(_isAllKeyRelease && isLazyFn()){
+							_currentLazyLayer = 1;
+						}
 						return 1;
 					}else if(keyidx == KEY_FN2){
-						return 2;	
-					}else if(keyidx == KEY_LAZY_FN){
-						if(_isAllKeyRelease){
-							isLazyLayer = 1;
-							return 1;	
+						if(_isAllKeyRelease && isLazyFn()){
+							_currentLazyLayer = 2;
 						}
-					}else if(keyidx == KEY_LAZY_FN2){
-						if(_isAllKeyRelease){
-							isLazyLayer = 2;
-							return 2;			
-						}		
+						return 2;					
 					}else if(keyidx == KEY_NOR){
 						// _currentLayer은 2를 유지하면서 스캔할 레이어만 0으로 반환;
 						return 0;
@@ -187,10 +182,10 @@ uint8_t getLayer(void) {
 		}
 
 	if(isAllKeyRelease()){
-		isLazyLayer = 0;
+		_currentLazyLayer = 0;
 	}
 
-	if(isLazyLayer > 0) return isLazyLayer;
+	if(_currentLazyLayer > 0) return _currentLazyLayer;
 	
 	if(isBeyondFN() == 1) {
 		_currentLayer = 2;

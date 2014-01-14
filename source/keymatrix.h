@@ -1,6 +1,7 @@
 #ifndef KEYMATRIX_H
 #define KEYMATRIX_H
 
+#include <stdbool.h>
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
@@ -14,7 +15,7 @@ extern void initMatrix(void);
 
 extern void clearMatrix(void);
 
-extern uint8_t isAllKeyRelease(void);
+extern bool isAllKeyRelease(void);
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn

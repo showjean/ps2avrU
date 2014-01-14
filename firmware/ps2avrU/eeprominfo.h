@@ -2,6 +2,7 @@
 #define EEPROMINFO_H
 
 // eeprom address
+#define EEPROM_LAZY_FN		 	7	// 1byte
 #define EEPROM_QUICK_SWAP	 	8	// 1byte
 #define EEPROM_LED_BRIGHTNESS 	9	// 1byte
 #define EEPROM_LED_MODE			11	// 1byte

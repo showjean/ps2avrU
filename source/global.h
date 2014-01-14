@@ -21,6 +21,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <stdbool.h>
+
 // global AVRLIB defines
 #include "avrlibdefs.h"
 // global AVRLIB types definitions

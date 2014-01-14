@@ -13,7 +13,6 @@
 #include "global.h"
 
 #include "print.h"
-// #include "udelay.h"
 #include "ps2avru_util.h"
 
 #include <avr/io.h>
@@ -30,6 +29,7 @@
 #include "keymap.h" 
 #include "keymapper.h"
 #include "quickswap.h"
+#include "lazyfn.h"
 #include "ledrender.h"
 #include "ps2main.h"
 #include "usbmain.h"
@@ -239,6 +239,7 @@ int main(void) {
 	// init
 	initKeymapper();
 	initQuickSwap();
+	initLazyFn();
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){

@@ -427,7 +427,13 @@ void sleepLED(void){
 #ifdef LEDSCROLL
 	turnOffLED(LEDSCROLL);
 #endif
-	if(_fullLEDMode == 2 || _fullLEDMode == 4){
+	setPWM(0);
+	turnOffLED(LEDFULLLED);
+	_isDidSleep = 1;
+
+	return;
+
+	/*if(_fullLEDMode == 2 || _fullLEDMode == 4){
 		// 켜져 있는 상태일때;
 		pwmCounter = 0;
 		_isDidSleep = 0;
@@ -437,7 +443,7 @@ void sleepLED(void){
 	}else{
 		// pwm이 중간 값일때;
 		_isDidSleep = 0;		
-	}
+	}*/
 }
 
 void wakeUpLED(void){

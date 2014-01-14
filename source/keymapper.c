@@ -24,12 +24,15 @@
 #include "ledrender.h"
 #include "keydownbuffer.h"
 #include "quickswap.h"
+#include "lazyfn.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
 const char str_select_mode2[] PROGMEM =  "2:Macro";
-const char str_select_mode3[] PROGMEM =  "3:Exit";
-const char str_select_mode4[] PROGMEM =  "4:boot mapper";
+const char str_select_mode3[] PROGMEM =  "3:toggle Lazy FN";
+const char str_select_mode4[] PROGMEM =  "4:Exit";
+const char str_select_mode5[] PROGMEM =  "5:boot mapper";
+
 const char str_exit[] PROGMEM =  "good bye~";
 const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
 
@@ -467,6 +470,8 @@ void printSelectMode(void){
 	printEnter();
 	printStringFromFlash(str_select_mode4);
 	printEnter();
+	printStringFromFlash(str_select_mode5);
+	printEnter();
 	
 	_step = STEP_SELECT_MODE;
 	printPrompt();
@@ -710,7 +715,7 @@ void resetMacroInput(void){
 }
 void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {	
-    xKeyidx = getDualActionDownKeyIndex(xKeyidx);
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
 
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
@@ -826,7 +831,16 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				}else if(cmd == SEL_BOOT_MAPPER){
 					_mode = SEL_BOOT_MAPPER;
 					_step = STEP_BOOT_MAPPER;
-					stopKeyMapping();
+					stopKeyMapping();				
+				}else if(cmd == SEL_TOGGLE_LAZY_FN){
+					toggleLazyFn();
+					printString("lazy FN : ");
+					if(isLazyFn()){
+						printString("on");
+					}else{
+						printString("off");
+					}
+					printEnter();
 				}
 			}else{
 				if(cmd == CMD_BACK){

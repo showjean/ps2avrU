@@ -1,6 +1,7 @@
 #ifndef MACROBUFFER_H
 #define MACROBUFFER_H
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <avr/eeprom.h>
@@ -36,14 +37,14 @@ extern Key popMWithKey(void);
     return _pressedBuffer;
 }*/
 
-extern uint8_t isEmptyM(void);
+extern bool isEmptyM(void);
 
 // 새로운 매크로 시작전에 초기화;
 extern void clearMacroPressedBuffer(void);
 
 // 현재 매크로가 진행중인지 확인, 각 인터페이스에서 setMacroProcessEnd()로 표시해준다.
-extern uint8_t isMacroProcessEnd(void);
-extern void setMacroProcessEnd(uint8_t xIsEnd);
+extern bool isMacroProcessEnd(void);
+extern void setMacroProcessEnd(bool xIsEnd);
 
 
 extern const char * toString(uint8_t xInt);
