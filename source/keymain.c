@@ -13,7 +13,7 @@
 #include "global.h"
 
 #include "print.h"
-#include "udelay.h"
+// #include "udelay.h"
 #include "ps2avru_util.h"
 
 #include <avr/io.h>
@@ -93,7 +93,8 @@ static void initHardware(uint8_t xIsUSB) {
 
     if(xIsUSB){
     	// USB Reset by device only required on Watchdog Reset	                        
-	    _delay_us_m(11);      // delay >10ms for USB reset
+	    // _delay_us_m(11);      // delay >10ms for USB reset
+	    _delay_us(11);
 		P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// remove USB reset condition
 
 	    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
@@ -120,7 +121,8 @@ int main(void) {
 
 	initMatrix();
 
-    _delay_us_m(1); 
+    // _delay_us_m(1); 
+    _delay_us(5);
 
 	uint8_t _countDie = 0;
 	while(getLiveMatrix() == 0 && ++_countDie < 30){

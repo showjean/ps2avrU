@@ -38,7 +38,6 @@
 			$(COMMON_DIR)/sleep.c \
 			$(COMMON_DIR)/keymapper.c \
 			$(COMMON_DIR)/ps2avru_util.c \
-			$(COMMON_DIR)/udelay.c \
 			$(COMMON_DIR)/macrobuffer.c \
 			$(COMMON_DIR)/bootMapper.c \
 			$(COMMON_DIR)/enterframe.c \
@@ -47,8 +46,7 @@
 			$(COMMON_DIR)/vusb.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/$(TRG).c \
-
-
+			
 #put additional assembler source file here
 #  The ASRC line allows you to list files which contain assembly code/routines that
 #  you would like to use from within your C programs.  The assembly code must be

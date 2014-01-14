@@ -11,7 +11,7 @@
 
 #include <util/delay.h>
 #include <string.h>
-#include "udelay.h"
+// #include "udelay.h"
 
 #include "keymap.h"
 #include "keymatrix.h"
@@ -147,7 +147,9 @@ uint8_t getLayer(void) {
 				row는 내부 풀업 저항 상태 이기 때문에 1값이 기본값
 				*/
 				
-				_delay_us_m(1);
+				// _delay_us_m(1);
+				_delay_us(5);
+
 
 				if(row<8)	{				// for 0..7, PORTA 0 -> 7
 					cur = (~PINROWS1)&BV(row);
@@ -246,7 +248,8 @@ uint8_t getLiveMatrix(void){
 		DDRCOLUMNS  = BV(col);
 		PORTCOLUMNS = ~BV(col);
 
-		_delay_us_m(1);
+		// _delay_us_m(1);
+		_delay_us(5);
 		
 		// scan each rows
 		for(row=0;row<ROWS;row++)
