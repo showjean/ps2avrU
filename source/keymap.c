@@ -294,7 +294,7 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 
 
 uint8_t* keymapAddress = (uint8_t*)KEYMAP_ADDRESS;
-uint8_t getKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol){
+uint8_t getKeyIndex(uint8_t xLayer, uint8_t xRow, uint8_t xCol){
 	return  pgm_read_byte(keymapAddress+(ROWS * COLUMNS * xLayer)+(xRow * COLUMNS + xCol));
 }
 

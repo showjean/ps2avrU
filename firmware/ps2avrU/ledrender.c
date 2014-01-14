@@ -159,6 +159,10 @@ void reduceLedBrightness(void){
 	ledStateCount = 1;
 }
 void changeFullLedState(void){
+	if(isSleep()){
+		return;
+	}
+	
 	//LED 모드를 변경한다.
 	_fullLEDMode = (_fullLEDMode+1)%5;
 	ledStateCount = 1;

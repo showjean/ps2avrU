@@ -16,4 +16,6 @@
 #define P2U_USB_CFG_DMINUS_BIT      3
 #define P2U_USB_CFG_DPLUS_BIT       2
 
+#define P2U_USB_COUNT_SOF			1
+
 #endif

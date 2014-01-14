@@ -280,7 +280,7 @@ static uint8_t isMacroKey(uint8_t xKeyidx){
 // flashrom의 기본 키코드 반환(부트 매퍼);
 static uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
-	return getKeyCode(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
+	return getKeyIndex(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
 }
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
 static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)

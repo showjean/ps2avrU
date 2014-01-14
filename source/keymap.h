@@ -21,8 +21,6 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
-// #define KEY_LAZY_FN     247
-// #define KEY_LAZY_FN2    246
 
 // dual action 
 enum {
@@ -264,13 +262,10 @@ extern const uint8_t PROGMEM keycode_set2_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 
-extern uint8_t getKeyCode(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
+extern uint8_t getKeyIndex(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 
 extern const unsigned short int modmask[16];
 
-// extern uint8_t dualActionKeyIndex;
-// extern const uint8_t PROGMEM dualActionMaskDown[];
-// extern const uint8_t PROGMEM dualActionMaskUp[];
 extern void applyDualActionDownWhenIsCancel(uint8_t (*func)(uint8_t, uint8_t), uint8_t isDown);
 extern void setDualAction(uint8_t keyidx, uint8_t isDown);
 extern bool isCanceledDualAction(void);

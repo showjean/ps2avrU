@@ -146,7 +146,7 @@ int main(void) {
 					continue;
 				}
 #endif
-				keyidx = getKeyCode(0, row, col); //pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeyindex(0, row, col);
+				keyidx = getKeyIndex(0, row, col); //pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeyindex(0, row, col);
 				if(keyidx == KEY_M) {
 					// DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
 					readyKeyMappingOnBoot();

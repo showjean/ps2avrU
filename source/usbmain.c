@@ -254,6 +254,8 @@ static int initCount = 0;
 static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 
 void clearReportBuffer(void);
+void wakeUpUsb(void);
+void countSleepUsb(void);
 
 void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
@@ -415,7 +417,7 @@ uint8_t scanKeyUSB(void) {
 #ifdef ENABLE_BOOTMAPPER           
                 if(isBootMapper()){
                     if(cur) trace(row, col);
-                    wakeUp();
+                    wakeUpUsb();
                     break;
                 }
 #endif      
@@ -423,7 +425,7 @@ uint8_t scanKeyUSB(void) {
     				if(cur) {
     					// key down
     					gFN = applyFN(keyidx, col, row, 1);
-                        wakeUp();
+                        wakeUpUsb();
                         applyDualActionDownWhenIsCancel(makeReportBufferDecorator, 1);
 
     				}else{
@@ -551,6 +553,16 @@ uint8_t hasMacroUsb(void)
     return (_needRelease || !isEmptyM());
 }
 
+void wakeUpUsb(void){
+    #if !USB_COUNT_SOF  
+        wakeUp();
+    #endif
+}
+void countSleepUsb(void){
+    #if !USB_COUNT_SOF  
+        countSleep();
+    #endif    
+}
 /**
  * Main function, containing the main loop that manages timer- and
  * USB-functionality.
@@ -575,11 +587,10 @@ void usb_main(void) {
 
     sei();
 
-//     static int __tempcount = 0;
-// #if USB_COUNT_SOF    
-//     bool _isSuspended = false;
-//     int suspendCount = 0;
-// #endif
+#if USB_COUNT_SOF    
+    bool _isSuspended = false;
+    int suspendCount = 0;
+#endif
     
     while (1) {
 
@@ -592,39 +603,36 @@ void usb_main(void) {
 			break;
 		}
 
-//         if(__tempcount++ > 1000){
-//             __tempcount = 0;
-//             DEBUG_PRINT(("usbSofCount : %d SE0 : %d \n", usbSofCount, USBIN & USBMASK));
-//         }
+#if USB_COUNT_SOF
+        if (usbSofCount != 0) {
+            // if(_isSuspended == true) DEBUG_PRINT(("_isSuspended == true usbSofCount : %d \n", usbSofCount));
+            _isSuspended = false;
+            usbSofCount = 0;
+            suspendCount = 0;
 
-// #if USB_COUNT_SOF
-//         if (usbSofCount != 0) {
-//             if(_isSuspended == true) DEBUG_PRINT(("_isSuspended == true usbSofCount : %d \n", usbSofCount));
-//             _isSuspended = false;
-//             usbSofCount = 0;
-//             suspendCount = 0;
+            wakeUp();
 
-//             wakeUp();
+        } else {
+            // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
+            if (_isSuspended == false && suspendCount++ > 2000) {
+                // DEBUG_PRINT(("_isSuspended == false usbSofCount : %d \n", usbSofCount));
+                suspendCount = 0;
+                _isSuspended = true;
 
-//         } else {
-//             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
-//             if (_isSuspended == false && suspendCount++ > 20000) {
-//                 DEBUG_PRINT(("_isSuspended == false usbSofCount : %d \n", usbSofCount));
-//                 suspendCount = 0;
-//                 _isSuspended = true;
-
-//                 sleep();
-//             }
-//         }
-// #endif
+                sleep();
+            }
+        }
+#endif
 
         // main event loop
         usbPoll();
 
-        // if(_isSuspended == true) {
-        //     scanKeyUSB();   // for dummy
-        //     continue;
-        // }
+#if USB_COUNT_SOF 
+        if(_isSuspended == true) {
+            scanKeyUSB();   // for dummy
+            continue;
+        }
+#endif
 
         if(updateNeeded == 0){
 		
@@ -656,7 +664,7 @@ void usb_main(void) {
                 clearReportBuffer();
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
 
-                wakeUp();     
+                wakeUpUsb();     
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
@@ -695,7 +703,7 @@ void usb_main(void) {
         }
         
         // 입력이 한동안 없으면 슬립모드로;
-        countSleep();        
+        countSleepUsb();        
            
 		// interrupt 위에서 실행되면 status LED가 제대로 반응하지 않는다.
 		renderLED();
