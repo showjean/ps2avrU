@@ -19,6 +19,7 @@ typedef struct {
 } Key;
 
 
+#define MACRO_NUM 12
 #define MESSAGE_SIZE_MAX 256
 #define MACRO_SIZE_MAX 48
 #define MACRO_SIZE_MAX_HALF 24

@@ -31,15 +31,18 @@ const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
 const char str_select_mode2[] PROGMEM =  "2:Macro";
 const char str_select_mode3[] PROGMEM =  "3:toggle Lazy FN";
 const char str_select_mode4[] PROGMEM =  "4:Exit";
-const char str_select_mode5[] PROGMEM =  "5:boot mapper";
+const char str_select_mode5[] PROGMEM =  "9:boot mapper";
 
 const char str_exit[] PROGMEM =  "good bye~";
 const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
 
 const char str_macro_message[] PROGMEM = "Macro";
 const char str_macro_1[] PROGMEM = "1:Select Macro Index";
-const char str_macro_2[] PROGMEM = "2:Exit";
+const char str_macro_2[] PROGMEM = "2:Clear Macro";
+const char str_macro_3[] PROGMEM = "3:Exit";
 const char str_macro_9[] PROGMEM = "9:Clear All";
+
+const char str_lazyfn_1[] PROGMEM = "1:toggle";
 
 const char str_back_6[] PROGMEM = "6:Back";
 
@@ -65,11 +68,19 @@ const char str_saving[] PROGMEM = "saving...";
 const char str_col_row[] PROGMEM = "col, row : ";
 const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
 
-const char str_select_number[] PROGMEM = "input Macro Index (01~12, must 2 numbers) : ";
+const char str_select_number[] PROGMEM = "input macro index (01~12, cancel: 00, must 2 numbers) : ";
+const char str_select_number_to_clear[] PROGMEM = "select index (01~12, cancel: 00) : ";
 const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
 const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC during 1 sec)";
 const char str_invalid_macro_number[] PROGMEM = "invalid Index, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
+
+const char str_space[] PROGMEM = " ";
+const char str_macro[] PROGMEM = "macro";
+const char str_lazyfn[] PROGMEM = "lazy FN";
+const char str_colon[] PROGMEM = ":";
+const char str_on[] PROGMEM = "on";
+const char str_off[] PROGMEM = "off";
 
 
 static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
@@ -112,6 +123,7 @@ void prepareKeyMapper(void);
 void saveCurrentLayerAfter(void);
 void printMapperMessageAfter(void);
 void clearMacroAfter(void);
+void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
 
@@ -246,7 +258,7 @@ void enterFrameForMapper(void){
 	if(isDeepKeyMapping()) {		
 		if(_isWorkingForEmpty && isMacroProcessEnd())
 		{
-			DEBUG_PRINT(("_wait : %d \n", _wait));
+			// DEBUG_PRINT(("_wait : %d \n", _wait));
 			if(_wait == WAIT_SAVE){
 				saveCurrentLayerAfter();
 				// _isWorkingForEmpty = 0;
@@ -254,6 +266,8 @@ void enterFrameForMapper(void){
 				printMapperMessageAfter();
 				// _isWorkingForEmpty = 0;
 			}else if(_wait == WAIT_CLEAR_MACRO){
+				clearMacroAtIndexAfter();
+			}else if(_wait == WAIT_CLEAR_ALL_MACRO){
 				clearMacroAfter();
 				// _isWorkingForEmpty = 0;
 			}else{
@@ -427,6 +441,9 @@ static void printPrompt(void)
 		case STEP_SELECT_INDEX:
 			printStringFromFlash(str_select_number);
 		break;
+		case STEP_CLEAR_SELECT_INDEX:
+			printStringFromFlash(str_select_number_to_clear);
+		break;
 		case STEP_EXIT_MACRO:
 			printStringFromFlash(str_exit_macro);
 			printEnter();
@@ -515,9 +532,33 @@ void printMacroMessage(void){
 	printEnter();
 	printStringFromFlash(str_macro_2);
 	printEnter();
+	printStringFromFlash(str_macro_3);
+	printEnter();
 	printStringFromFlash(str_back_6);
 	printEnter();
 	printStringFromFlash(str_macro_9);
+	printEnter();
+
+	_step = STEP_INPUT_COMMAND;
+}
+
+void printLazyFnState(void){
+	printStringFromFlash(str_lazyfn);
+	printStringFromFlash(str_space);
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_space);
+	if(isLazyFn()){
+		printStringFromFlash(str_on);
+	}else{
+		printStringFromFlash(str_off);
+	}
+	printEnter();
+}
+void printLazyFnMessage(void){
+	printLazyFnState();
+	printStringFromFlash(str_lazyfn_1);
+	printEnter();
+	printStringFromFlash(str_back_6);
 	printEnter();
 
 	_step = STEP_INPUT_COMMAND;
@@ -621,7 +662,7 @@ uint8_t applyMacro(uint8_t xKeyidx){
 }
 
 void readMacro(uint8_t xMacroIndex){
-	if(xMacroIndex > 11) return;
+	if(xMacroIndex >= MACRO_NUM) return;
 	// DEBUG_PRINT(("readMacro  xMacroIndex: %d \n", xMacroIndex));
 
 	uint16_t gAddress;
@@ -640,7 +681,7 @@ void readMacro(uint8_t xMacroIndex){
 }
 
 void saveMacro(void){
-	if(_macroIndex > 11) return;
+	if(_macroIndex >= MACRO_NUM) return;
 		// DEBUG_PRINT(("saveMacro  _macroIndex: %d \n", _macroIndex));
 
 	uint8_t gKeyCode;
@@ -661,7 +702,7 @@ void saveMacro(void){
 void clearMacroAfter(void){
 	uint16_t gAddress;
 	int k;
-	for(k = 0; k < MACRO_SIZE_MAX * 12; ++k){
+	for(k = 0; k < MACRO_SIZE_MAX * MACRO_NUM; ++k){
 		gAddress = EEPROM_MACRO + (k);	// key
 		eeprom_write_byte((uint8_t *)gAddress, 0);
 	}
@@ -673,6 +714,32 @@ void clearMacroAfter(void){
 
 void clearMacro(void)
 {
+	printStringFromFlash(str_clear_all_macro);
+	printEnter();
+
+	_isWorkingForEmpty = 1;
+
+	_wait = WAIT_CLEAR_ALL_MACRO;
+	_step = STEP_NOTHING;
+}
+
+void clearMacroAtIndexAfter(void){
+	uint16_t gAddress;
+	int k;
+	int gLen = MACRO_SIZE_MAX;
+	for(k = 0; k < gLen; ++k){
+		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
+		eeprom_write_byte((uint8_t *)gAddress, 0);
+	}
+	_step = STEP_INPUT_COMMAND;
+	printPrompt();
+}
+
+void clearMacroAtIndex(void){	
+	printStringFromFlash(str_macro);
+	printStringFromFlash(str_space);
+	printString(toString(_macroIndex+1));
+	printStringFromFlash(str_space);
 	printStringFromFlash(str_clear_all_macro);
 	printEnter();
 
@@ -833,14 +900,8 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					_step = STEP_BOOT_MAPPER;
 					stopKeyMapping();				
 				}else if(cmd == SEL_TOGGLE_LAZY_FN){
-					toggleLazyFn();
-					printString("lazy FN : ");
-					if(isLazyFn()){
-						printString("on");
-					}else{
-						printString("off");
-					}
-					printEnter();
+					_mode = SEL_TOGGLE_LAZY_FN;
+					printLazyFnMessage();
 				}
 			}else{
 				if(cmd == CMD_BACK){
@@ -869,12 +930,20 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				}else if(_mode == SEL_MACRO){
 					if(cmd == CMD_SELECT_INDEX){
 						_step = STEP_SELECT_INDEX;
+					}else if(cmd == CMD_CLEAR_MACRO){
+						_step = STEP_CLEAR_SELECT_INDEX;
 					}else if(cmd == CMD_EXIT_MACRO){
 						_step = STEP_EXIT_MACRO;
 						stopKeyMapping();
 					}else if(cmd == CMD_CLEAR_ALL_MACRO){
 						_step = STEP_CLEAR_ALL_MACRO;
 						clearMacro();
+					}
+				}else if(_mode == SEL_TOGGLE_LAZY_FN){
+					if(cmd == CMD_TOGGLE_LAZY_FN){
+						_step = STEP_INPUT_COMMAND;
+						toggleLazyFn();
+						printLazyFnState();
 					}
 				}
 			}
@@ -912,10 +981,12 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						gKeyCode = gKeyCode + _buffer[1];
 					}
 
-					if(gKeyCode > 0 && gKeyCode <= 12){
+					if(gKeyCode > 0 && gKeyCode <= MACRO_NUM){
 						_macroIndex = gKeyCode - 1;
 						_step = STEP_INPUT_MACRO;
 						resetMacroInput();
+					}else if(gKeyCode == 0){
+						_step = STEP_INPUT_COMMAND;
 					}else{
 						printEnter();
 						printStringFromFlash(str_invalid_macro_number);
@@ -924,6 +995,33 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					memset(_buffer, 0, 3);
 					_bufferIndex = 0;
 					printEnter();
+				}else{
+					_delay_ms(100);
+					return;
+				}
+			break;	
+			case STEP_CLEAR_SELECT_INDEX:
+				if(_bufferIndex == 2)
+				{
+					gKeyCode = (_buffer[0] * 10);
+					if(gKeyCode > -1){
+						gKeyCode = gKeyCode + _buffer[1];
+					}
+
+					if(gKeyCode > 0 && gKeyCode <= MACRO_NUM){
+						_macroIndex = gKeyCode - 1;
+						_step = STEP_INPUT_COMMAND;
+						printEnter();
+						clearMacroAtIndex();
+					}else if(gKeyCode == 0){
+						_step = STEP_INPUT_COMMAND;
+					}else{
+						printEnter();
+						printStringFromFlash(str_invalid_macro_number);
+					}
+
+					memset(_buffer, 0, 3);
+					_bufferIndex = 0;
 				}else{
 					_delay_ms(100);
 					return;

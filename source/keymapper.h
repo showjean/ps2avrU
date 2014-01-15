@@ -36,6 +36,7 @@
 #define STEP_EXIT_MACRO 10
 #define STEP_INPUT_MACRO 11
 #define STEP_CLEAR_ALL_MACRO 12
+#define STEP_CLEAR_SELECT_INDEX 13
 // exit
 #define STEP_EXIT 100
 #define STEP_BACK 110
@@ -45,14 +46,15 @@
 #define WAIT_NOTHING 0
 #define WAIT_WELCOME 10
 #define WAIT_SAVE 11
-#define WAIT_CLEAR_MACRO 12
+#define WAIT_CLEAR_ALL_MACRO 12
+#define WAIT_CLEAR_MACRO 13
 
 // mode select
 #define SEL_MAPPING 1
 #define SEL_MACRO 2
 #define SEL_TOGGLE_LAZY_FN 3
 #define SEL_EXIT 4
-#define SEL_BOOT_MAPPER 5
+#define SEL_BOOT_MAPPER 9
 
 // 입력되는 키와 직접 매칭; (숫자 1키를 누르면 CMD_CHOOSE_LAYER...)
 // mapping
@@ -63,8 +65,11 @@
 #define CMD_RESET_TO_DEFAULT 9
 // macro
 #define CMD_SELECT_INDEX 1
-#define CMD_EXIT_MACRO 2
+#define CMD_CLEAR_MACRO 2
+#define CMD_EXIT_MACRO 3
 #define CMD_CLEAR_ALL_MACRO 9
+// lazy fn
+#define CMD_TOGGLE_LAZY_FN 1
 // back
 #define CMD_BACK 6
 
