@@ -299,12 +299,12 @@ int scanKeyPs2WithMacro(void){
 	  
         gKey = popMWithKey();
         if(gKey.mode == 1){	// down
-        	// DEBUG_PRINT(("macro down : %d \n", gKey.keycode));
-        	pushKeyCode(gKey.keycode, 1);
+        	// DEBUG_PRINT(("macro down : %d \n", gKey.keyindex));
+        	pushKeyCode(gKey.keyindex, 1);
         	push(NO_REPEAT);	// set no repeat
         }else{	// up
-        	pushKeyCode(gKey.keycode, 0);
-        	// DEBUG_PRINT(("macro up : %d \n", gKey.keycode));
+        	pushKeyCode(gKey.keyindex, 0);
+        	// DEBUG_PRINT(("macro up : %d \n", gKey.keyindex));
         }
 
 	    return 0;	    

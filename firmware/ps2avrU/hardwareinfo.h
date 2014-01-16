@@ -27,5 +27,6 @@
 #define ROWS 		17
 
 #define KEYMAP_ADDRESS			0x6500
+#define CUSTOM_MACRO_ADDRESS	0x6800
 
 #endif

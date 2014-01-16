@@ -25,6 +25,7 @@
 #include "keydownbuffer.h"
 #include "quickswap.h"
 #include "lazyfn.h"
+#include "custommacro.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -284,11 +285,11 @@ void enterFrameForMapper(void){
 
 }
 
-static uint8_t isMacroKey(uint8_t xKeyidx){
+static bool isMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
-		return 1;
+		return true;
 	}else{
-		return 0;
+		return false;
 	}
 }
 // flashrom의 기본 키코드 반환(부트 매퍼);
@@ -358,9 +359,9 @@ static void pushCharacter(char *xStr)
     if(key.mode){
     	pushM(KEY_LSHIFT);
     }
-	pushM(key.keycode);	// 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
-	pushM(key.keycode);
-    // DEBUG_PRINT(("pushCharacter char %c : %d \n", xStr[0], key.keycode));
+	pushM(key.keyindex);	// 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
+	pushM(key.keyindex);
+    // DEBUG_PRINT(("pushCharacter char %c : %d \n", xStr[0], key.keyindex));
     if(key.mode){
     	pushM(KEY_LSHIFT);
     }
@@ -597,15 +598,15 @@ void prepareKeyMapper(void)
 
 void saveCurrentLayerAfter(void)
 {
-	uint8_t gKeyCode;
+	uint8_t gKeyindex;
 	uint16_t gAddress;
 	uint8_t k, j;
 	for(k = 0; k < ROWS; ++k){
 		for (j = 0; j < COLUMNS; ++j)
 		{
-			gKeyCode = _newKeyMap[k][j];	// value
+			gKeyindex = _newKeyMap[k][j];	// value
 			gAddress = EEPROM_MAPPING + (k * COLUMNS + j) + (ROWS * COLUMNS * _currentLayer);	// key
-			eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
+			eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
 		}
 	}
 	_editCount = 0;
@@ -651,10 +652,15 @@ uint8_t applyMacro(uint8_t xKeyidx){
 
 	uint8_t gMacroIndex = 255;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
-	if(isMacroKey(xKeyidx) && isEmptyM()){
+	if(isMacroKey(xKeyidx)){		
 		gMacroIndex = xKeyidx - KEY_MAC1;
-		clearMacroPressedBuffer();
-		readMacro(gMacroIndex);
+		if(hasCustomMacroAt(gMacroIndex)){
+			clearMacroPressedBuffer();
+			readCustomMacroAt(gMacroIndex);
+		}else if(isEmptyM()){
+			clearMacroPressedBuffer();
+			readMacro(gMacroIndex);
+		}
 
 		return 1;
 	}
@@ -666,15 +672,15 @@ void readMacro(uint8_t xMacroIndex){
 	// DEBUG_PRINT(("readMacro  xMacroIndex: %d \n", xMacroIndex));
 
 	uint16_t gAddress;
-	uint8_t gKeyCode;
+	uint8_t gKeyindex;
 	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
-		gKeyCode = eeprom_read_byte((uint8_t *)gAddress);
-		// buffers[k] = gKeyCode;
-		if(gKeyCode > 0 && gKeyCode < 255){
-			pushM(gKeyCode);
+		gKeyindex = eeprom_read_byte((uint8_t *)gAddress);
+		// buffers[k] = gKeyindex;
+		if(gKeyindex > 0 && gKeyindex < 255){
+			pushM(gKeyindex);
 		}
 	}
 	// DEBUG_PRINT(("readMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
@@ -684,15 +690,15 @@ void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
 		// DEBUG_PRINT(("saveMacro  _macroIndex: %d \n", _macroIndex));
 
-	uint8_t gKeyCode;
+	uint8_t gKeyindex;
 	uint16_t gAddress;
 	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
-		gKeyCode = _macroInputBuffer[k];	// value
+		gKeyindex = _macroInputBuffer[k];	// value
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		// buffers[k] = gKeyCode;
-		eeprom_write_byte((uint8_t *)gAddress, gKeyCode);
+		// buffers[k] = gKeyindex;
+		eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
 	}
 	// DEBUG_PRINT(("saveMacro  gAddress: %d \n", gAddress));
 	// DEBUG_PRINT(("saveMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
@@ -765,11 +771,11 @@ void resetCurrentLayer(void)
 		
 }
 
-uint8_t isMacroInput(void){
+bool isMacroInput(void){
 	if(_step == STEP_INPUT_MACRO){
-		return 1;
+		return true;
 	}else{
-		return 0;
+		return false;
 	}
 }
 

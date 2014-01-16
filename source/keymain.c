@@ -82,7 +82,7 @@ void clearTimers(void) {
  * Initialize hardware. Configure ports as inputs and outputs, set USB reset
  * condition, start timer and blink LEDs.
  */
-static void initHardware(uint8_t xIsUSB) {
+static void initHardware(bool xIsUSB) {
 
 	initMatrix();
 
@@ -244,7 +244,7 @@ int main(void) {
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
 			clearInterface();
-			initHardware(1);
+			initHardware(true);
 
 			usb_main();			
 		}
@@ -254,7 +254,7 @@ int main(void) {
 			blinkOnce();
 
 			clearInterface();
-			initHardware(0);
+			initHardware(false);
    
 			ps2_main();
 		}

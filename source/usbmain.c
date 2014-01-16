@@ -238,6 +238,7 @@
 #include "keymain.h"
 #include "fncontrol.h"
 #include "vusb.h"
+#include "ps2avru_util.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
@@ -251,7 +252,8 @@ static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
 static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
 
-static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
+// static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
+uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
 
 void clearReportBuffer(void);
 void wakeUpUsb(void);
@@ -287,7 +289,7 @@ void delegateStartTimerWhenUsbInterupt(void){
 
 void prepareKeyMappingUsb(void)
 {
-    memset(_prevPressedBuffer, 0, MACRO_SIZE_MAX);
+    // memset(_prevPressedBuffer, 0, MACRO_SIZE_MAX);
 }
 
 //     /*
@@ -485,6 +487,9 @@ uint8_t scanKeyUSB(void) {
 }
 
 static uint8_t _needRelease = 0;
+void clearMacroBuffer(void){    
+    memset(macroBuffer, 0, sizeof(macroBuffer)); 
+}
 uint8_t scanMacroUsb(void)
 {
     clearReportBuffer(); 
@@ -515,33 +520,35 @@ uint8_t scanMacroUsb(void)
     }
 
     if(!isEmptyM()){
-        int gIdx;        
-      
-        popMWithKey();  // _pressedBuffer에 눌린 키들만 저장된다.        
-        
+        int gIdx;  
+        Key gKey;    
         uint8_t i;
-        uint8_t gLen = strlen((char *)_pressedBuffer);
-        uint8_t gKeyidx;
+        uint8_t gLen = strlen((char *)macroBuffer);
+        uint8_t gKeyidx;  
+      
+        gKey = popMWithKey();  
+        
+        if(gKey.mode == 1){    // down
+            append(macroBuffer, gKey.keyindex);
+        }else{  // up
+            gIdx = findIndex(macroBuffer, gLen, gKey.keyindex);
+            if(gIdx > -1){
+                delete(macroBuffer, gIdx);
+            }
+        }
+
         reportIndex = 2;
+        gLen = strlen((char *)macroBuffer);
         for (i = 0; i < gLen; ++i)
         {
-            gKeyidx = _pressedBuffer[i];
-            // modi 가 아닌 놈들 중에 이미 press 리포트를 한 녀석은 다시 리포트에 포함 시키지 않는다.
-            // 항상 이전 pressedBuffer를 가지고 있으면 된다.
-            if (gKeyidx > KEY_Modifiers && gKeyidx < KEY_Modifiers_end){
-                makeReportBuffer(gKeyidx, 1);                
-            }else{
-                gIdx = findIndex(_prevPressedBuffer, strlen((char *)_prevPressedBuffer), gKeyidx);
-                if(gIdx == -1){
-                   makeReportBuffer(gKeyidx, 1);
-                }
-            }
+            gKeyidx = macroBuffer[i];
+            makeReportBuffer(gKeyidx, 1); 
         }
         _needRelease = 1;
 
-        memcpy (_prevPressedBuffer,_pressedBuffer,gLen+1);
       
     }else if(_needRelease){ 
+        clearMacroBuffer();
         _needRelease = 0;
     }
 
@@ -574,6 +581,7 @@ void usb_main(void) {
 
 	uint8_t updateNeeded = 0;
     uint8_t idleCounter = 0;
+    clearMacroBuffer();
 
     uchar   i = 0;
     usbDeviceDisconnect();  /* do this while interrupts are disabled */
@@ -664,7 +672,7 @@ void usb_main(void) {
                 clearReportBuffer();
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
 
-                wakeUpUsb();     
+                wakeUpUsb(); 
                 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.

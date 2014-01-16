@@ -14,9 +14,10 @@ static bool _isMacroProcessEnd = false;
 static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];
 static int rearm = 0, frontm = 0;
 
-uint8_t _pressedBuffer[MACRO_SIZE_MAX] = {0};
+static uint8_t _pressedBuffer[MACRO_SIZE_MAX] = {0};
 
 // Queue operation -> push, pop
+// keyindex를 저장한다.
 void pushM(uint8_t item) {
     
     rearm = (rearm+1) % MESSAGE_SIZE_MAX;
@@ -43,31 +44,27 @@ Key popMWithKey(void) {
     int gLen;
 
     gKey.mode = 0; // down = 1, up = 0;
-    gKey.keycode = popM();
+    gKey.keyindex = popM();
 
-    if(gKey.keycode == 0) {
+    if(gKey.keyindex == 0) {
         memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
         return gKey;
     }
 
     //
     gLen = strlen((char *)_pressedBuffer);
-    gIdx = findIndex(_pressedBuffer, gLen, gKey.keycode);
+    gIdx = findIndex(_pressedBuffer, gLen, gKey.keyindex);
     // DEBUG_PRINT(("findIndex gIdx :: %d , len : %d \n", gIdx, gLen));
     if(gIdx > -1){
-        // is pressed
+        // already pressed
         delete(_pressedBuffer, gIdx);
     }else{
-        append(_pressedBuffer, gKey.keycode);
+        append(_pressedBuffer, gKey.keyindex);
         gKey.mode = 1;
     }
 
     return gKey;
 }
-
-/*const uint8_t * getPressedBuffer(void){
-    return _pressedBuffer;
-}*/
 
 bool isEmptyM(void) {
     if(frontm == rearm)
@@ -75,15 +72,6 @@ bool isEmptyM(void) {
     else
         return false;
 }
-
-// 프레스 버퍼가 있는 동안 릴리즈 하지 않으면 (usb에서) 리피트가 되버린다.
-/*uint8_t isEmptyMWithPressedBuffer(void){
-    if(isEmptyM() && strlen(_pressedBuffer) == 0){
-        return 1;
-    }else{
-        return 0;
-    }
-}*/
 
 // 새로운 매크로 시작전에 초기화;
 void clearMacroPressedBuffer(void){
@@ -121,122 +109,122 @@ Key charToKey(char character) {
     Key key;
     // initialize with reserved values
     key.mode = KEY_NONE;
-    key.keycode = KEY_NONE;
+    key.keyindex = KEY_NONE;
     if ((character >= 'a') && (character <= 'z')) {
         // a..z
-        key.keycode = (character - 'a') + 0x04;
+        key.keyindex = (character - 'a') + 0x04;
         // DEBUG_PRINT(("a...z"));
     } else if ((character >= 'A') && (character <= 'Z')) {
         // A..Z
         key.mode = MOD_SHIFT_LEFT;
-        key.keycode = (character - 'A') + 0x04;
+        key.keyindex = (character - 'A') + 0x04;
         // DEBUG_PRINT(("A...Z"));
     } else if ((character >= '1') && (character <= '9')) {
         // 1..9
-        key.keycode = (character - '1') + 0x1E;
+        key.keyindex = (character - '1') + 0x1E;
         // DEBUG_PRINT(("1...9"));
     }
     // we can't map the other characters directly, so we switch...
     switch (character) {
         case '0':
-            key.keycode = KEY_0; break;
+            key.keyindex = KEY_0; break;
         case '!':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_1; break;
+            key.keyindex = KEY_1; break;
         case '@':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_2; break;
+            key.keyindex = KEY_2; break;
         case '#':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_3; break;
+            key.keyindex = KEY_3; break;
         case '$':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_4; break;
+            key.keyindex = KEY_4; break;
         case '%':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_5; break;
+            key.keyindex = KEY_5; break;
         case '^':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_6; break;
+            key.keyindex = KEY_6; break;
         case '&':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_7; break;
+            key.keyindex = KEY_7; break;
         case '*':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_8; break;
+            key.keyindex = KEY_8; break;
         case '(':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_9; break;
+            key.keyindex = KEY_9; break;
         case ')':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_0; break;
+            key.keyindex = KEY_0; break;
         case ' ':
-            key.keycode = KEY_SPACE; break;
+            key.keyindex = KEY_SPACE; break;
         case '-':
-            key.keycode = KEY_MINUS; break;
+            key.keyindex = KEY_MINUS; break;
         case '_':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_MINUS; break;
+            key.keyindex = KEY_MINUS; break;
         case '=':
-            key.keycode = KEY_EQUAL; break;
+            key.keyindex = KEY_EQUAL; break;
         case '+':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_EQUAL; break;
+            key.keyindex = KEY_EQUAL; break;
         case '[':
-            key.keycode = KEY_LBR; break;
+            key.keyindex = KEY_LBR; break;
         case '{':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_LBR; break;
+            key.keyindex = KEY_LBR; break;
         case ']':
-            key.keycode = KEY_RBR; break;
+            key.keyindex = KEY_RBR; break;
         case '}':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_RBR; break;
+            key.keyindex = KEY_RBR; break;
         case '\\':
-            key.keycode = KEY_BKSLASH; break;
+            key.keyindex = KEY_BKSLASH; break;
         case '|':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_BKSLASH; break;
+            key.keyindex = KEY_BKSLASH; break;
         /*case '#':
-            key.keycode = KEY_hash; break;
+            key.keyindex = KEY_hash; break;
         case '@':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_hash; break;*/
+            key.keyindex = KEY_hash; break;*/
         case ';':
-            key.keycode = KEY_COLON; break;
+            key.keyindex = KEY_COLON; break;
         case ':':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_COLON; break;
+            key.keyindex = KEY_COLON; break;
         case '\'':
-            key.keycode = KEY_QUOTE; break;
+            key.keyindex = KEY_QUOTE; break;
         case '"':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_QUOTE; break;
+            key.keyindex = KEY_QUOTE; break;
         case '`':
-            key.keycode = KEY_HASH; break;
+            key.keyindex = KEY_HASH; break;
         case '~':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_HASH; break;
+            key.keyindex = KEY_HASH; break;
         case ',':
-            key.keycode = KEY_COMMA; break;
+            key.keyindex = KEY_COMMA; break;
         case '<':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_COMMA; break;
+            key.keyindex = KEY_COMMA; break;
         case '.':
-            key.keycode = KEY_DOT; break;
+            key.keyindex = KEY_DOT; break;
         case '>':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_DOT; break;
+            key.keyindex = KEY_DOT; break;
         case '/':
-            key.keycode = KEY_SLASH; break;
+            key.keyindex = KEY_SLASH; break;
         case '?':
             key.mode = MOD_SHIFT_LEFT;
-            key.keycode = KEY_SLASH; break;
+            key.keyindex = KEY_SLASH; break;
     }
-    if (key.keycode == KEY_NONE) {
+    if (key.keyindex == KEY_NONE) {
         // still reserved? WTF? return question mark...
         key.mode = MOD_SHIFT_LEFT;
-        key.keycode = KEY_SLASH;
+        key.keyindex = KEY_SLASH;
     }
     return key;
 } 

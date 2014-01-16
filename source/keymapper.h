@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <avr/eeprom.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
@@ -96,32 +97,11 @@ extern void enterFrameForMapper(void);
 // 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>
 extern uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 // 매크로 등록중인지 확인;
-extern uint8_t isMacroInput(void);
+extern bool isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 extern uint8_t applyMacro(uint8_t xKeyidx);
 
 extern void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 
-
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-// extern void setWillStartKeyMapping(void);
-// extern uint8_t isDeepKeyMapping(void);
-// extern void applyKeyMapping(uint8_t xModi);
-/**
- 진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
-*/
-// extern void prepareKeyMapping(void);
-/**
-매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
-*/
-// extern void startKeyMapping(void);
-/**
-키매핑을 종료하고 키보드 상태로 돌아간다.
-*/
-// extern void stopKeyMapping(void);
-// extern void countKeyMappingEnabled(void);
-// extern uint8_t isMacroKey(uint8_t xKeyidx);
 
 #endif

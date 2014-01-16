@@ -15,7 +15,7 @@
  */
 typedef struct {
     uint8_t mode;
-    uint8_t keycode;
+    uint8_t keyindex;
 } Key;
 
 
@@ -24,8 +24,6 @@ typedef struct {
 #define MACRO_SIZE_MAX 48
 #define MACRO_SIZE_MAX_HALF 24
 
-extern uint8_t _pressedBuffer[MACRO_SIZE_MAX];
-
 // Queue operation -> push, pop
 extern void pushM(uint8_t item) ;
 
@@ -33,10 +31,6 @@ extern uint8_t popM(void);
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
 extern Key popMWithKey(void);
-
-/*const uint8_t * getPressedBuffer(void){
-    return _pressedBuffer;
-}*/
 
 extern bool isEmptyM(void);
 

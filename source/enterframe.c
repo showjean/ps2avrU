@@ -3,11 +3,14 @@
 
 #include "keymapper.h"
 #include "quickswap.h"
+#include "custommacro.h"
 
 void enterFrame(void){	
 	
 	enterFrameForMapper();	
 	enterFrameForQuickSwap();
+	enterFrameForCustomMacro();
+	
 }
 
 #endif
