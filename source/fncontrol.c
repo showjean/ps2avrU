@@ -14,6 +14,7 @@
 #include "keymap.h"
 #include "keymatrix.h"
 #include "ledrender.h"
+#include "keymapper.h"
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
@@ -70,6 +71,9 @@ uint8_t applyFN(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown) {
 			 return 0;
 		}else if(keyidx == EXTRA_FN){
 			_isExtraFNDown = 0;
+		}else if(keyidx == KEY_P2U){
+			showP2UMenu();
+			return 0;
 		}
 	}
 

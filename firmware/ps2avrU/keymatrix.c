@@ -14,9 +14,10 @@
 
 #include "keymatrix.h"
 #include "keymap.h"
-#include "keymapper.h"
 #include "fncontrol.h"
 #include "lazyfn.h"
+#include "keymapper.h"
+#include "keyindex.h"
 
 // 17*8 bit matrix
 static uint8_t prevMatrix[ROWS];
@@ -74,7 +75,8 @@ bool isAllKeyRelease(void)
 	uint8_t row;
 	_isAllKeyRelease = true;
 	for(row=0;row<ROWS;row++) {
-		if(currentMatrix[row] > 0){
+		// currentMatrix로 비교하면 ps/2연결시 마지막 키의 up 판단 전에 매트릭스상 모든 키가 릴리즈 상태여서 마지막 키가 리포트 되지 않는다.
+		if(prevMatrix[row] > 0){
 			_isAllKeyRelease = false;
 			break;
 		}

@@ -28,6 +28,7 @@
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymapper.h"
+#include "keyindex.h"
 #include "macrobuffer.h"
 #include "enterframe.h"
 #include "keydownbuffer.h"
@@ -165,7 +166,6 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
 
 	if(isDown) {		// make code
-// DEBUG_PRINT(("idx : %d 1 \n", keyidx));
 		lastMAKE_keyidx = keyidx;
 		loopCnt=0;
 		m_state = STA_NORMAL;
@@ -212,7 +212,6 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	}
 	else			// break code - key realeased
 	{
-// DEBUG_PRINT(("idx : %d 0 \n", keyidx));	
 		if(lastMAKE_keyidx == keyidx)		// repeat is resetted only if last make key is released
 			lastMAKE_SIZE=0;
 
@@ -263,9 +262,10 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	}
 
 	// 키매핑 진행중;
-	if(isKeyMapping()){
+	if(isDeepKeyMapping()){
+		DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
 		
-		putKeyCode(keyidx, col, row, isDown);
+		putKeyindex(keyidx, col, row, isDown);
 
 		return 0;
 	}
@@ -278,7 +278,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	// fn키를 키매핑에 적용하려면 위치 주의;
 	if(gFN == 0) return 0;
 
-	pushKeyCodeDecorator(keyidx, isDown);
+	pushKeyCode(keyidx, isDown);
 
 	return 1;
 }
@@ -397,13 +397,10 @@ int scanKeyPS2(void) {
 	return gResultPutKey;
 }
 
-void prepareKeyMappingPs2(void)
+/*void prepareKeyMappingPs2(void)
 {
- 	pushKeyCode(KEY_LSHIFT, 0); 
- 	pushKeyCode(KEY_LCTRL, 0); 
- 	pushKeyCode(KEY_LALT, 0);  
- 	pushKeyCode(KEY_RSHIFT, 0); 
-}
+	
+}*/
 
 
 void initInterfacePs2(void)
@@ -591,10 +588,6 @@ void ps2_main(void){
 						scanKeyPs2WithMacro();
 					}
 
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-					renderLED();
-
 					keyval = pop();
 					if(keyval==SPLIT)
 						continue;
@@ -615,6 +608,10 @@ void ps2_main(void){
 						}
 					}
 
+			        // ps2avrU loop, must be scan matrix;
+			        enterFrame();
+					renderLED();
+
 					break;
 				// typematic : repeat last key
 				case STA_REPEAT:
@@ -622,10 +619,6 @@ void ps2_main(void){
 					if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
 						scanKeyPs2WithMacro();
 					}
-
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-					renderLED();
 
 					if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal
 						m_state=STA_NORMAL;
@@ -641,6 +634,10 @@ void ps2_main(void){
 					
 					loopCnt++;
 					loopCnt %= (3+TYPEMATIC_REPEAT*10);
+
+			        // ps2avrU loop, must be scan matrix;
+			        enterFrame();
+					renderLED();
 					
 					break;
 				case STA_WAIT_SCAN_REPLY:

@@ -17,6 +17,7 @@
 #include "keymapper.h"
 #include "keymap.h"
 #include "keymatrix.h"
+#include "keyindex.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
 #include "ps2main.h"
@@ -61,19 +62,19 @@ const char str_input_keycode[] PROGMEM = "input keycode (must 3 numbers) : ";
 const char str_save_end_mapping[] PROGMEM = "Save & Exit, thank you.";
 const char str_cancel_mapping[] PROGMEM = "Exit without Saving, see you later.";
 const char str_reset_mapping[] PROGMEM = "Reset to default current layer";
-const char str_input_command[] PROGMEM = "Input Command Number: ";
+const char str_input_command[] PROGMEM = ">> ";//"Input Command Number: ";
 const char str_nothing[] PROGMEM = "nothing";
 const char str_save_layer[] PROGMEM = "Save current layer";
 const char str_load_layer[] PROGMEM = "Load current layer";
 const char str_saving[] PROGMEM = "saving...";
 const char str_col_row[] PROGMEM = "col, row : ";
-const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
+// const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
 
 const char str_select_number[] PROGMEM = "input macro index (01~12, cancel: 00, must 2 numbers) : ";
 const char str_select_number_to_clear[] PROGMEM = "select index (01~12, cancel: 00) : ";
 // const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
 const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC during 1 sec)";
-const char str_invalid_macro_number[] PROGMEM = "invalid Index, input again.";
+const char str_invalid_number[] PROGMEM = "invalid number, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
 
 const char str_space[] PROGMEM = " ";
@@ -120,6 +121,7 @@ static uint8_t usingKeys[11] = {
 
 // define functions
 void printPrepareString(void);
+static void prepareKeyMapping(void);
 void prepareKeyMapper(void);
 void saveCurrentLayerAfter(void);
 void printMapperMessageAfter(void);
@@ -144,7 +146,7 @@ static void setWillStartKeyMapping(void){
 uint8_t isKeyMapping(void){
 	return _isKeyMapping & BV(0);	// will start key mapping
 }
-static uint8_t isDeepKeyMapping(void){
+uint8_t isDeepKeyMapping(void){
 	return _isKeyMapping & BV(1);	// did start key mapping
 }
 
@@ -170,6 +172,10 @@ static void applyKeyMapping(uint8_t xModi) {
 
 }
 
+void showP2UMenu(void){
+	prepareKeyMapping();
+}
+
 /**
  진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
 */
@@ -177,20 +183,25 @@ static void prepareKeyMapping(void){
 	setWillStartKeyMapping();	//set will start mapping
 
 	// 각 인터페이스 준비;
-	if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
+	/*if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
 	    prepareKeyMappingUsb();
 	}else{
 		prepareKeyMappingPs2();
-	}
+	}*/
 	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 
-	printPrepareString();
+	blinkOnce();
+	_delay_ms(100);
+	blinkOnce();
+	_delay_ms(100);
+	blinkOnce();
 
 }
 static void startKeyMappingDeep(void)
 {
 	_isKeyMapping |= BV(1);	//set doing mapping
 	// DEBUG_PRINT(("startKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
+	printPrepareString();
 	prepareKeyMapper();
 }
 
@@ -279,76 +290,18 @@ void enterFrameForMapper(void){
 		
 		if(_isPressedEscapeKey && ++_pressedEscapeKeyCount > 1000){
 			_isTiredEscapeKey = 1;
-			putKeyCode(KEY_ESC, 255, 255, 0);	// esc가 up 된것으로 알림;
+			putKeyindex(KEY_ESC, 255, 255, 0);	// esc가 up 된것으로 알림;
 		}
 	}
 
 }
 
-static bool isMacroKey(uint8_t xKeyidx){
+bool isMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
 		return true;
 	}else{
 		return false;
 	}
-}
-// flashrom의 기본 키코드 반환(부트 매퍼);
-static uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
-{
-	return getKeyIndex(xLayer, xRow, xCol);	//pgm_read_byte(&keymap_code[xLayer][xRow][xCol]);
-}
-// eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
-static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
-{
-
-#ifndef	DISABLE_HARDWARE_KEYMAPPING
-	uint8_t gKeyIndex;
-	int gIdx;
-	gIdx = EEPROM_MAPPING + (xRow * COLUMNS + xCol) + (COLUMNS * ROWS * xLayer);
-	gKeyIndex = eeprom_read_byte((uint8_t *)gIdx);
-
-	return gKeyIndex;
-#else
-	return 0;
-#endif
-
-}
-
-static uint8_t escapeMacroKeyindex(uint8_t xKeyidx){
-	if(isMacroKey(xKeyidx)){
-		return 0;
-	}
-	return xKeyidx;
-}
-
-// 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>
-uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
-{
-	uint8_t gKeyIndex;
-	if(_isKeyMapping ) {	// 키매핑 중에는 달리 처리;
-		
-		if(isMacroInput()){			
-			// 매크로 입력 중에는 매핑된 키코드를 사용;
-			// 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
-			gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);	
-			gKeyIndex = escapeMacroKeyindex(gKeyIndex);
-		}else{
-			// 키 매핑 중에는 숫자키만을 이용하므로, 기본 키맵을 이용하도록 한다.
-			gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
-
-			return gKeyIndex;
-		}
-	}else{
-		gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);	
-	}
-
-	if(gKeyIndex < 1 || gKeyIndex > 254){		
-		gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
-	}
-
-	gKeyIndex = getQuickSwapKeyindex(gKeyIndex);
-
-	return gKeyIndex;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -664,15 +617,18 @@ uint8_t applyMacro(uint8_t xKeyidx){
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
 	if(isMacroKey(xKeyidx)){		
 		gMacroIndex = xKeyidx - KEY_MAC1;
-		if(hasCustomMacroAt(gMacroIndex)){
-			clearMacroPressedBuffer();
-			readCustomMacroAt(gMacroIndex);
-		}else if(isEmptyM()){
-			clearMacroPressedBuffer();
-			readMacro(gMacroIndex);
-		}
+		if(isEmptyM()){
+			uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
+			if(gKeyidx > 0 && gKeyidx < 255){
+				clearMacroPressedBuffer();
+				readMacro(gMacroIndex);
+			}else if(hasCustomMacroAt(gMacroIndex)){
+				clearMacroPressedBuffer();
+				readCustomMacroAt(gMacroIndex);
+			}
 
-		return 1;
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -796,13 +752,13 @@ void resetMacroInput(void){
 	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
-void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
+void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {	
-    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
-
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
-	// DEBUG_PRINT(("putKeyCode xKeyidx: %02x, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
+
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
+	// DEBUG_PRINT(("putKeyindex xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
 
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
@@ -1010,7 +966,7 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						_step = STEP_INPUT_COMMAND;
 					}else{
 						printEnter();
-						printStringFromFlash(str_invalid_macro_number);
+						printStringFromFlash(str_invalid_number);
 					}
 
 					memset(_buffer, 0, 3);
@@ -1036,9 +992,11 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						clearMacroAtIndex();
 					}else if(gKeyCode == 0){
 						_step = STEP_INPUT_COMMAND;
+						printEnter();
 					}else{
 						printEnter();
-						printStringFromFlash(str_invalid_macro_number);
+						printStringFromFlash(str_invalid_number);
+						printEnter();
 					}
 
 					memset(_buffer, 0, 3);
@@ -1119,7 +1077,7 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					}else{
 						// 휴효한 키코드가 아닙니다. 다시 입력하세요./////////////////////////////////////////////////
 						printEnter();
-						printStringFromFlash(str_invalid_keycode);
+						printStringFromFlash(str_invalid_number);
 					}
 
 					memset(_buffer, 0, 3);

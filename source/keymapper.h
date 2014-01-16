@@ -19,7 +19,7 @@
 #ifdef DEBUG_KEYMAPPER_H
 	#define KEY_MAPPING_COUNT_MAX 500
 #else
-	#define KEY_MAPPING_COUNT_MAX 5000
+	#define KEY_MAPPING_COUNT_MAX 2500
 #endif
 
 // mapping
@@ -84,9 +84,12 @@
 extern void initKeymapper(void);
 
 extern uint8_t isKeyMapping(void);
+extern uint8_t isDeepKeyMapping(void);
+extern bool isMacroKey(uint8_t xKeyidx);
+
+extern void showP2UMenu(void);
 
 // 부팅시 키 매핑 시작
-// extern uint8_t isReadyKeyMappingOnBoot(void);
 extern void readyKeyMappingOnBoot(void);
 extern void startKeyMappingOnBoot(void);
 
@@ -95,14 +98,12 @@ extern void printString(const char *xString);
 // event loop
 extern void enterFrameForMapper(void);
 
-// 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>
-extern uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 // 매크로 등록중인지 확인;
 extern bool isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 extern uint8_t applyMacro(uint8_t xKeyidx);
 
-extern void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+extern void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 
 
 #endif

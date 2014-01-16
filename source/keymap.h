@@ -21,6 +21,7 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
+#define KEY_P2U         247
 
 // dual action 
 enum {
@@ -261,8 +262,6 @@ extern const uint8_t PROGMEM keycode_set2_make_break[];
 extern const uint8_t PROGMEM keycode_set2_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
-
-extern uint8_t getKeyIndex(uint8_t xLayer, uint8_t xRow, uint8_t xCol);
 
 extern const unsigned short int modmask[16];
 

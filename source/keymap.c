@@ -95,7 +95,7 @@ void applyDualActionDownWhenIsCancel(uint8_t (*func)(uint8_t, uint8_t), uint8_t 
 
         if(isMacroInput()){
         	// DEBUG_PRINT(("applyDualActionDown isMacroInput : %d\n", dualActionKeyIndex)); 
-        	putKeyCode(getDualActionMaskDown(dualActionKeyIndex), 0, 0, 1);
+        	putKeyindex(getDualActionMaskDown(dualActionKeyIndex), 0, 0, 1);
         }
         dualActionKeyIndex = 0;
     }
@@ -115,8 +115,8 @@ static void applyDualActionUp(void){
 
         if(isMacroInput()){
         	// DEBUG_PRINT(("applyDualActionUp isMacroInput : %d\n", gUpIdx)); 
-        	putKeyCode(gUpIdx, 0, 0, 1);
-        	putKeyCode(gUpIdx, 0, 0, 0);
+        	putKeyindex(gUpIdx, 0, 0, 1);
+        	putKeyindex(gUpIdx, 0, 0, 0);
         }
     }
     // 듀얼액션 키가 모두 up 되었을 때만 active 해제;    
@@ -293,10 +293,6 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 	KEY_NONE };
 
 
-uint8_t* keymapAddress = (uint8_t*)KEYMAP_ADDRESS;
-uint8_t getKeyIndex(uint8_t xLayer, uint8_t xRow, uint8_t xCol){
-	return  pgm_read_byte(keymapAddress+(ROWS * COLUMNS * xLayer)+(xRow * COLUMNS + xCol));
-}
 
 
 

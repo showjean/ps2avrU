@@ -28,9 +28,11 @@
 #include "hardwareconfig.h"
 #include "keymap.h" 
 #include "keymapper.h"
+#include "keyindex.h"
 #include "quickswap.h"
 #include "lazyfn.h"
 #include "ledrender.h"
+#include "keyindex.h"
 #include "ps2main.h"
 #include "usbmain.h"
 

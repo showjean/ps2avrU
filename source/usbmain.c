@@ -231,6 +231,7 @@
 #include "ledrender.h"
 #include "keymap.h"
 #include "keymapper.h"
+#include "keyindex.h"
 #include "macrobuffer.h"
 #include "sleep.h"
 #include "enterframe.h"
@@ -287,10 +288,10 @@ void delegateStartTimerWhenUsbInterupt(void){
     startTimer();
 }*/
 
-void prepareKeyMappingUsb(void)
+/*void prepareKeyMappingUsb(void)
 {
-    // memset(_prevPressedBuffer, 0, MACRO_SIZE_MAX);
-}
+    
+}*/
 
 //     /*
 //         "스트링을 입력받아 키코드로 변환"은 외부에서 진행하고 
@@ -441,9 +442,9 @@ uint8_t scanKeyUSB(void) {
             // 키매핑 진행중;
             if(prev != cur && isKeyMapping()){               
                 if(cur){
-                    putKeyCode(keyidx, col, row, 1);
+                    putKeyindex(keyidx, col, row, 1);
                 }else{
-                    putKeyCode(keyidx, col, row, 0);
+                    putKeyindex(keyidx, col, row, 0);
                 }
                 gKeymapping = 1;
                 

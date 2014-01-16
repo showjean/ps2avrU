@@ -33,7 +33,7 @@
 #define SPLIT      0xFC
 
 extern uint8_t pushKeyCodeDecorator(uint8_t keyidx, uint8_t isDown);
-extern void prepareKeyMappingPs2(void);
+// extern void prepareKeyMappingPs2(void);
 extern void ps2_main(void);
 
 #endif
