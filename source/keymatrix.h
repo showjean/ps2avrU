@@ -2,18 +2,15 @@
 #define KEYMATRIX_H
 
 #include <stdbool.h>
-/* ------------------------------------------------------------------------- */
-/* -----------------------------    variable  global ----------------------------- */
-/* ------------------------------------------------------------------------- */
-
-extern uint8_t prevMatrix[ROWS];
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 extern void initMatrix(void);
+extern void initMatrixDevice(void);
 
 extern void clearMatrix(void);
+extern void clearPrevMatrix(void);
 
 extern bool isAllKeyRelease(void);
 
@@ -25,6 +22,11 @@ extern uint8_t getLiveMatrix(void);
 //curmatrix
 extern uint8_t setCurrentMatrix(void);
 extern uint8_t *getCurrentMatrix(void);
+extern void setPrevMatrix(void);
+extern uint8_t *getPrevMatrix(void);
+
+extern void setCellStatus(uint8_t xCol);
+extern uint8_t getCellStatus(uint8_t xRow);
 
 
 #endif

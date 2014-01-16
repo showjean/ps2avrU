@@ -71,7 +71,7 @@ const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
 
 const char str_select_number[] PROGMEM = "input macro index (01~12, cancel: 00, must 2 numbers) : ";
 const char str_select_number_to_clear[] PROGMEM = "select index (01~12, cancel: 00) : ";
-const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
+// const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
 const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC during 1 sec)";
 const char str_invalid_macro_number[] PROGMEM = "invalid Index, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
@@ -300,12 +300,18 @@ static uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
 static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
+
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	uint8_t gKeyIndex;
 	int gIdx;
-	gIdx = EEPROM_MAPPING + (xRow * 8 + xCol) + (136 * xLayer);
+	gIdx = EEPROM_MAPPING + (xRow * COLUMNS + xCol) + (COLUMNS * ROWS * xLayer);
 	gKeyIndex = eeprom_read_byte((uint8_t *)gIdx);
 
 	return gKeyIndex;
+#else
+	return 0;
+#endif
+
 }
 
 static uint8_t escapeMacroKeyindex(uint8_t xKeyidx){
@@ -446,7 +452,7 @@ static void printPrompt(void)
 			printStringFromFlash(str_select_number_to_clear);
 		break;
 		case STEP_EXIT_MACRO:
-			printStringFromFlash(str_exit_macro);
+			printStringFromFlash(str_exit);
 			printEnter();
 			_step = STEP_NOTHING;
 		break;
@@ -480,8 +486,10 @@ void printSelectMode(void){
 	printEnter();
 	printStringFromFlash(str_select_mode);
 	printEnter();
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printStringFromFlash(str_select_mode1);
 	printEnter();
+#endif
 	printStringFromFlash(str_select_mode2);
 	printEnter();
 	printStringFromFlash(str_select_mode3);
@@ -558,6 +566,8 @@ void printLazyFnState(void){
 void printLazyFnMessage(void){
 	printLazyFnState();
 	printStringFromFlash(str_lazyfn_1);
+	printEnter();
+	printStringFromFlash(str_macro_3);	// exit
 	printEnter();
 	printStringFromFlash(str_back_6);
 	printEnter();
@@ -883,21 +893,24 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		if(gKeyIndex > -1 && gKeyIndex < 10){	// 0~9
 			_buffer[_bufferIndex] = gKeyIndex;
 		
-			sprintf(gStr, "%d", gKeyIndex);
-			printString(gStr);
+			printString(toString(gKeyIndex));
 			printEnter();
 
 			// 커맨드에 따라서 스텝 지정;
 			cmd = _buffer[0];
 
 			if(_step == STEP_SELECT_MODE){
-				if(cmd == SEL_MAPPING){
-					_mode = SEL_MAPPING;
-					printMapperMessage();
-				}else if(cmd == SEL_MACRO){
+				if(cmd == SEL_MACRO){
 					_mode = SEL_MACRO;
 					printMacroMessage();
-				}else if(cmd == SEL_EXIT){
+				}
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
+				else if(cmd == SEL_MAPPING){
+					_mode = SEL_MAPPING;
+					printMapperMessage();
+				}
+#endif
+				else if(cmd == SEL_EXIT){
 					_mode = SEL_EXIT;
 					_step = STEP_EXIT;
 					stopKeyMapping();
@@ -922,7 +935,6 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					}else if(cmd == CMD_SAVE_AND_EXIT){
 						_step = STEP_SAVE_END_MAPPING;
 						// 키코드를 저장하고 종료;
-						// 13 + (row * 8 + col) + (136 * layer)
 						saveCurrentLayer();
 					}else if(cmd == CMD_CANCEL_WITHOUT_SAVE){
 						_step = STEP_CANCEL_MAPPING;
@@ -950,6 +962,9 @@ void putKeyCode(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						_step = STEP_INPUT_COMMAND;
 						toggleLazyFn();
 						printLazyFnState();
+					}else if(cmd == CMD_EXIT_LAZY_FN){
+						_step = STEP_EXIT;
+						stopKeyMapping();						
 					}
 				}
 			}

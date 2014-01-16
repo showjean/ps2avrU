@@ -109,14 +109,12 @@ uint8_t isEmpty(void) {
 }
 
 void clear(void) {
-	int i;
 	rear = front = 0;
 	lastMAKE_SIZE=0;
 	lastMAKE_IDX=0;
 	loopCnt=0;
 
-	for(i=0;i<ROWS;i++)
-		prevMatrix[i] = 0x00;
+	clearPrevMatrix();
 }
 
 void tx_state(unsigned char x, unsigned char newstate)
@@ -148,10 +146,6 @@ void keymap_init(void)
 		KFLA[keyidx] |= KFLA_EXTEND;
 	for(i=0;(keyidx=pgm_read_byte(&keycode_set2_proc_shift[i]))!=KEY_NONE;i++)
 		KFLA[keyidx] |= KFLA_PROC_SHIFT;
-
-
-	for(i=0;i<ROWS;i++)
-		prevMatrix[i]=0;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -328,6 +322,7 @@ int scanKeyPS2(void) {
 	uint8_t gResultPutKey = 1;
 
     uint8_t *gMatrix = getCurrentMatrix();
+    uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 	if(_prevLayer != layer){
@@ -335,7 +330,7 @@ int scanKeyPS2(void) {
 		{		
 			for(row=0;row<ROWS;row++)
 			{
-				prev = prevMatrix[row] & BV(col);
+				prev = gPrevMatrix[row] & BV(col);
 				cur  = gMatrix[row] & BV(col);
 				if(!prev) continue;
 				
@@ -363,7 +358,7 @@ int scanKeyPS2(void) {
 	{		
 		for(row=0;row<ROWS;row++)
 		{
-			prev = prevMatrix[row] & BV(col);
+			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
 			keyidx = getCurrentKeyindex(layer, row, col);
 
@@ -387,12 +382,17 @@ int scanKeyPS2(void) {
 				}
 			}
 
+			// 눌려진 키들은 모두 다운 버퍼에 저장;
+			if(cur){
+				// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+				pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
+			}
+
 		}
 		
 	}
 	
-	for(row=0;row<ROWS;row++)
-		prevMatrix[row] = gMatrix[row];
+	setPrevMatrix();
 
 	return gResultPutKey;
 }

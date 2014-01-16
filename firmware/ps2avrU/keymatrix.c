@@ -12,32 +12,15 @@
 #include <util/delay.h>
 #include <string.h>
 
-#include "keymap.h"
 #include "keymatrix.h"
+#include "keymap.h"
 #include "keymapper.h"
 #include "fncontrol.h"
 #include "lazyfn.h"
 
-
-/* ----------------------- hardware I/O abstraction ------------------------ */
-#define PORTCOLUMNS PORTB  ///< port on which we read the state of the columns
-#define PINCOLUMNS  PINB   ///< port on which we read the state of the columns
-#define DDRCOLUMNS  DDRB   ///< port on which we read the state of the columns
-#define PORTROWS1   PORTA  ///< first port connected to the matrix rows
-#define PINROWS1    PINA   ///< first port connected to the matrix rows
-#define DDRROWS1    DDRA   ///< first port connected to the matrix rows
-#define PORTROWS2   PORTC  ///< second port connected to the matrix rows
-#define PINROWS2    PINC   ///< second port connected to the matrix rows
-#define DDRROWS2    DDRC   ///< second port connected to the matrix rows
-
-
-/* ------------------------------------------------------------------------- */
-/* -----------------------------    variable  global ----------------------------- */
-/* ------------------------------------------------------------------------- */
-
 // 17*8 bit matrix
-uint8_t prevMatrix[ROWS];
-uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
+static uint8_t prevMatrix[ROWS];
+static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 
 #ifdef GHOST_KEY_PREVENTION
 	uint8_t *ghostFilterMatrixPointer;
@@ -58,35 +41,12 @@ static bool _isAllKeyRelease = false;
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 void initMatrix(void){
-	// initialize matrix ports - cols, rows
-	// PB0-PB7 : col0 .. col7
-	// PA0-PA7 : row0 .. row7
-	// PC7-PC0 : row8 .. row15
 	
-	// PD0 : NUM
-    // PD1 : CAPS
-    // PD2 : D+ / Clock
-    // PD3 : D- / Data
-    // PD4 : FULL LED
-    // PD5 : 3.6V switch TR
-	// PD6 : SCRL
-    // PD7 : row17
-	
-
-	// signal direction : col -> row
-
-	DDRCOLUMNS 	= 0xFF;	// all outputs for cols
-	PORTCOLUMNS	= 0xFF;	// high
-	DDRROWS1	= 0x00;	// all inputs for rows
-	DDRROWS2	= 0x00;
-	PORTROWS1	= 0xFF;	// all rows pull-up.
-	PORTROWS2	= 0xFF;	
-  
-	DDRD        &= ~(1<<PIND7); // input row 17
-	PORTD 		|= (1<<PIND7);// pull up row 17
+	initMatrixDevice();
 
 	clearMatrix();
 }
+
 void clearMatrix(void){
 	uint8_t row;
 	for(row=0;row<ROWS;++row) {
@@ -100,6 +60,13 @@ void clearMatrix(void){
 	ghostFilterMatrixPointer = currentMatrix;
 #endif
 
+}
+
+void clearPrevMatrix(void){
+	uint8_t row;
+	for(row=0;row<ROWS;++row) {
+		prevMatrix[row] = 0;
+	}
 }
 
 bool isAllKeyRelease(void)
@@ -134,31 +101,10 @@ uint8_t getLayer(void) {
 				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
 				
 				cur = 0;
-				DDRCOLUMNS  = BV(col);		// 해당 col을 출력으로 설정, 나머지 입력
-				PORTCOLUMNS = ~BV(col);	// 해당 col output low, 나머지 컬럼을 풀업 저항
-				/*
-				DDR을 1로 설정하면 출력, 0이면 입력
-				입력중, PORT가 1이면 풀업(풀업 상태는  high 상태);
+				// Col -> set only one port as input and all others as output low
+				setCellStatus(col);
 
-				출력 상태의 PORT가 0이면 output low(0v);
-
-				스위치를 on하면 0, off하면 1이 PIN에 저장;
-				row는 내부 풀업 저항 상태 이기 때문에 1값이 기본값
-				*/
-				
-				// _delay_us_m(1);
-				_delay_us(5);
-
-
-				if(row<8)	{				// for 0..7, PORTA 0 -> 7
-					cur = (~PINROWS1)&BV(row);
-				}
-				else if(row>=8 && row<16) {	// for 8..15, PORTC 7 -> 0
-					cur = (~PINROWS2)&BV(15-row);
-				}
-				else {						// for 16, PORTD 7 
-					cur = (~PIND)&BV(23-row);
-				}
+				cur = getCellStatus(row);
 
 				if(cur){
 					// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
@@ -240,24 +186,12 @@ uint8_t getLiveMatrix(void){
 	for(col=0;col<COLUMNS;col++)
 	{
 		// Col -> set only one port as input and all others as output low
-		DDRCOLUMNS  = BV(col);
-		PORTCOLUMNS = ~BV(col);
-
-		// _delay_us_m(1);
-		_delay_us(5);
+		setCellStatus(col);
 		
 		// scan each rows
 		for(row=0;row<ROWS;row++)
 		{
-			if(row<8)	{				// for 0..7, PORTA 0 -> 7
-				cur = (~PINROWS1) & BV(row);
-			}
-			else if(row>=8 && row<16) {	// for 8..15, PORTC 7 -> 0
-				cur = (~PINROWS2) & BV(15-row);
-			}
-			else {						// for 16, PORTD 7
-				cur = (~PIND) & BV(23-row);
-			}
+			cur = getCellStatus(row);
 
 			prev = currentMatrix[row] & BV(col);
 
@@ -312,13 +246,22 @@ uint8_t *getCurrentMatrix(void){
 
 }
 
+void setPrevMatrix(void){
+	uint8_t row;
+	uint8_t *gMatrix = getCurrentMatrix();
+	for(row=0;row<ROWS;++row)
+		prevMatrix[row] = gMatrix[row];
+}
+
+uint8_t *getPrevMatrix(void){
+	return prevMatrix;
+}
+
 //curmatrix
 uint8_t setCurrentMatrix(void){	
 			
 
 	uint8_t gClearMatrix = getLiveMatrix();
-	
-	// if(isReadyKeyMappingOnBoot()) return 0;
 
 	return gClearMatrix;
 }

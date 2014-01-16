@@ -2,6 +2,7 @@
 #include <avr/pgmspace.h>
 #include "custommacro.h"
 #include "hardwareinfo.h"
+#include "macrobuffer.h"
 #include "print.h"
 
 uint8_t* macroAddress = (uint8_t*)CUSTOM_MACRO_ADDRESS;

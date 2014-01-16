@@ -10,6 +10,7 @@
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
 // #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
 // #define INTERFACE_ONLY_USB	// usb only
+// #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
 
 
 #ifdef DEBUG_KEYMAIN

@@ -17,7 +17,7 @@
 // PD7 : row17
 
 // ----------------------------------------------------------------------------------
-
+// #define DISABLED_TR_SWITCH
 #define DIODE_DDR	DDRD
 #define DIODE_PORT	PORTD
 #define DIODE_PIN	5	 		// 제너 다이오드를 컨트롤할 D 핀 중에 하나;

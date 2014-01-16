@@ -401,11 +401,12 @@ uint8_t scanKeyUSB(void) {
 
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
+    uint8_t *gPrevMatrix = getPrevMatrix();
 	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
 		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
 
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
-			prev = prevMatrix[row] & BV(col);
+			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(gLayer, row, col);					
 			gFN = 1;
@@ -477,9 +478,7 @@ uint8_t scanKeyUSB(void) {
 
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
-	for(row=0;row<ROWS;++row)
-		prevMatrix[row] = gMatrix[row];
-
+    setPrevMatrix();
 
     if(gKeymapping == 1) return 0;
 	

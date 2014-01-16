@@ -71,6 +71,7 @@
 #define CMD_CLEAR_ALL_MACRO 9
 // lazy fn
 #define CMD_TOGGLE_LAZY_FN 1
+#define CMD_EXIT_LAZY_FN 3
 // back
 #define CMD_BACK 6
 
