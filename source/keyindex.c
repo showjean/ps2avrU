@@ -50,7 +50,7 @@ uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex;
-	if(isKeyMapping() ) {	// 키매핑 중에는 달리 처리;
+	if(isDeepKeyMapping() ) {	// 키매핑 중에는 달리 처리;
 		
 		if(isMacroInput()){			
 			// 매크로 입력 중에는 매핑된 키코드를 사용;

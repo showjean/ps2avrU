@@ -15,6 +15,7 @@
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymapper.h"
+#include "dualaction.h"
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */

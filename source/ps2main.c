@@ -33,6 +33,7 @@
 #include "enterframe.h"
 #include "keydownbuffer.h"
 #include "fncontrol.h"
+#include "dualaction.h"
 
 // Output buffer - circular queue
 #define QUEUE_SIZE 200
@@ -263,7 +264,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
 	// 키매핑 진행중;
 	if(isDeepKeyMapping()){
-		DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
+		// DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
 		
 		putKeyindex(keyidx, col, row, isDown);
 

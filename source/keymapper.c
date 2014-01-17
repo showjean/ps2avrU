@@ -27,6 +27,7 @@
 #include "quickswap.h"
 #include "lazyfn.h"
 #include "custommacro.h"
+#include "dualaction.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";

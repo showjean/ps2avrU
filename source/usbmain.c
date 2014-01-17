@@ -240,6 +240,7 @@
 #include "fncontrol.h"
 #include "vusb.h"
 #include "ps2avru_util.h"
+#include "dualaction.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
@@ -292,15 +293,6 @@ void delegateStartTimerWhenUsbInterupt(void){
 {
     
 }*/
-
-//     /*
-//         "스트링을 입력받아 키코드로 변환"은 외부에서 진행하고 
-//         메세지 버퍼에 저장하고, 메세지가 있음을 표시하고, 순서대로 전송한다.
-//         모두 전송하면 더이상 메세지가 없다고 표시; 
-
-//         매크로 구상 : 모든 키는 누르고 떼는 동작만 있다. 때문에 처음 키코드는 누른 것으로 인식 2번째 키코드는 뗀 것으로 인식하면되겠다. 
-//     */
-
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  USB  ----------------------------- */

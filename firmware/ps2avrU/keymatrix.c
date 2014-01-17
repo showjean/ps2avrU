@@ -18,6 +18,7 @@
 #include "lazyfn.h"
 #include "keymapper.h"
 #include "keyindex.h"
+#include "dualaction.h"
 
 // 17*8 bit matrix
 static uint8_t prevMatrix[ROWS];
