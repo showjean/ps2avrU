@@ -244,7 +244,7 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	return 1;
 }
 
-uint8_t pushKeyCodeDecorator(uint8_t keyidx, uint8_t isDown){
+uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown){
 	if(isDown){				
 		// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
 		pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
@@ -256,10 +256,10 @@ uint8_t pushKeyCodeDecorator(uint8_t keyidx, uint8_t isDown){
 // push the keycodes into the queue by its key index, and isDown
 uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 
-	uint8_t gFN = applyFN(keyidx, col, row, isDown);
+	bool gFN = applyFN(keyidx, col, row, isDown);
 
 	if(isDown && keyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, 1);
+        applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, true);
 	}
 
 	// 키매핑 진행중;
@@ -277,7 +277,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	}
 
 	// fn키를 키매핑에 적용하려면 위치 주의;
-	if(gFN == 0) return 0;
+	if(gFN == false) return 0;
 
 	pushKeyCode(keyidx, isDown);
 

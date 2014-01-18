@@ -10,10 +10,10 @@
 /* ------------------------------------------------------------------------- */
 
 // for KEY_BEYOND_FN;
-extern uint8_t isBeyondFN(void);//KEY_BEYOND_FN state
+extern bool isBeyondFN(void);//KEY_BEYOND_FN state
 
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
-extern uint8_t applyFN(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
+extern bool applyFN(uint8_t keyidx, uint8_t col, uint8_t row, bool isDown);
 
 
 #endif

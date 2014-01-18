@@ -82,7 +82,7 @@ static bool isCanceledDualAction(void)
 	return _isCanceledDualAction;
 }
 
-void applyDualActionDownWhenIsCancel(uint8_t (*func)(uint8_t, uint8_t), uint8_t isDown){
+void applyDualActionDownWhenIsCancel(uint8_t (*func)(uint8_t, bool), bool isDown){
 	 if(dualActionKeyIndex > 0 && isCanceledDualAction()){
         // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
         (*func)(getDualActionMaskDown(dualActionKeyIndex), isDown);
@@ -122,7 +122,7 @@ static void applyDualActionUp(void){
     }
 }
 
-void setDualAction(uint8_t keyidx, uint8_t isDown){
+void setDualAction(uint8_t keyidx, bool isDown){
 	if(isDown){
 		if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
 			++_dualActionCount;

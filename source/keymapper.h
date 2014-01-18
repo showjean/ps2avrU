@@ -79,7 +79,7 @@
 #define COUNT_TYPE_COUNTING 	1
 #define COUNT_TYPE_KEYMAPPER 	2
 
-#define KEYMAPPER_START_KEYS	0x27	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT + KEY_RSHIFT	키를 수정하면 ps2의 prepareKeyMappingPs2를 함께 수정해줘야 한다.
+#define KEYMAPPER_START_KEYS	0x27	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT + KEY_RSHIFT
 
 extern void initKeymapper(void);
 

@@ -6,6 +6,7 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <util/delay.h>
 #include <string.h>
@@ -22,15 +23,15 @@
 /* ------------------------------------------------------------------------- */
 
 // for KEY_BEYOND_FN;
-static uint8_t _isBeyondFN = 0;	 //KEY_BEYOND_FN state
-static uint8_t _isExtraFNDown = 0;
+static bool _isBeyondFN = false;	 //KEY_BEYOND_FN state
+static bool _isExtraFNDown = false;
 
-uint8_t isBeyondFN(void){
+bool isBeyondFN(void){
 	return _isBeyondFN;
 }
 
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
-uint8_t applyFN(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown) {
+bool applyFN(uint8_t keyidx, uint8_t col, uint8_t row, bool isDown) {
 
     // DEBUG_PRINT(("applyFN  : %d isDown : %d\n", keyidx, isDown)); 
 

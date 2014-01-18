@@ -299,7 +299,7 @@ void delegateStartTimerWhenUsbInterupt(void){
 /* ------------------------------------------------------------------------- */
 uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
 uint8_t _extraHasChanged = 0;
-uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
+uint8_t makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
 
         _extraHasChanged = 1;
@@ -318,7 +318,7 @@ uint8_t makeReportBufferExtra(uint8_t keyidx, uint8_t xIsDown){
     }
     return 0;
 }
-uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
+uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     uint8_t retval = 1;
 
     // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
@@ -358,7 +358,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, uint8_t xIsDown){
     return retval;
 }
 
-uint8_t makeReportBufferDecorator(uint8_t keyidx, uint8_t xIsDown){
+uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
     
     if(xIsDown){ 
         // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
@@ -380,7 +380,8 @@ uint8_t scanKeyUSB(void) {
 	// debounce cleared
     if (!setCurrentMatrix()) return retval;    
 
-	uint8_t row, col, prev, cur, keyidx, gKeymapping, gFN;
+	uint8_t row, col, prev, cur, keyidx, gKeymapping;
+    bool gFN;
 	uint8_t gLayer = getLayer();
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
@@ -402,7 +403,7 @@ uint8_t scanKeyUSB(void) {
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(gLayer, row, col);					
-			gFN = 1;
+			gFN = false;
             
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
@@ -420,13 +421,13 @@ uint8_t scanKeyUSB(void) {
                 if(keyidx != KEY_NONE){
     				if(cur) {
     					// key down
-    					gFN = applyFN(keyidx, col, row, 1);
+    					gFN = applyFN(keyidx, col, row, true);
                         wakeUpUsb();
-                        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, 1);
+                        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, true);
 
     				}else{
                         // key up
-    					gFN = applyFN(keyidx, col, row, 0);
+    					gFN = applyFN(keyidx, col, row, false);
     				}
                 }
 			}
@@ -449,19 +450,19 @@ uint8_t scanKeyUSB(void) {
             }
             
             // fn키를 키매핑에 적용하려면 위치 주의;
-            if(gFN == 0) continue;
+            if(gFN == false) continue;
 
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBufferDecorator(keyidx, 1);
+               retval |= makeReportBufferDecorator(keyidx, true);
 			}
 
             if( prev != cur ) {
                 if(cur){
-                    makeReportBufferExtra(keyidx, 1);
+                    makeReportBufferExtra(keyidx, true);
                 }else{
-                    makeReportBufferExtra(keyidx, 0);
+                    makeReportBufferExtra(keyidx, false);
                 }
 
             }
@@ -522,10 +523,14 @@ uint8_t scanMacroUsb(void)
         
         if(gKey.mode == 1){    // down
             append(macroBuffer, gKey.keyindex);
+
+            makeReportBufferExtra(gKey.keyindex, true);
         }else{  // up
             gIdx = findIndex(macroBuffer, gLen, gKey.keyindex);
             if(gIdx > -1){
                 delete(macroBuffer, gIdx);
+
+                makeReportBufferExtra(gKey.keyindex, false);
             }
         }
 
