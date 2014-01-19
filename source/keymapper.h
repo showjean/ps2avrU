@@ -54,7 +54,8 @@
 #define SEL_MAPPING 1
 #define SEL_MACRO 2
 #define SEL_TOGGLE_LAZY_FN 3
-#define SEL_EXIT 4
+#define SEL_TOGGLE_SMART_KEY 4
+#define SEL_EXIT 5
 #define SEL_BOOT_MAPPER 9
 
 // 입력되는 키와 직접 매칭; (숫자 1키를 누르면 CMD_CHOOSE_LAYER...)
@@ -72,6 +73,9 @@
 // lazy fn
 #define CMD_TOGGLE_LAZY_FN 1
 #define CMD_EXIT_LAZY_FN 3
+// smart key
+#define CMD_TOGGLE_SMART_KEY 1
+#define CMD_EXIT_SMART_KEY 3
 // back
 #define CMD_BACK 6
 

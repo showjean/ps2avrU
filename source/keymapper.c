@@ -28,13 +28,15 @@
 #include "lazyfn.h"
 #include "custommacro.h"
 #include "dualaction.h"
+#include "smartkey.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
 const char str_select_mode2[] PROGMEM =  "2:Macro";
 const char str_select_mode3[] PROGMEM =  "3:toggle Lazy FN";
-const char str_select_mode4[] PROGMEM =  "4:Exit";
-const char str_select_mode5[] PROGMEM =  "9:boot mapper";
+const char str_select_mode4[] PROGMEM =  "4:toggle Smart Key";
+const char str_select_mode5[] PROGMEM =  "5:Exit";
+const char str_select_mode6[] PROGMEM =  "9:boot mapper";
 
 const char str_exit[] PROGMEM =  "good bye~";
 const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
@@ -45,7 +47,7 @@ const char str_macro_2[] PROGMEM = "2:Clear Macro";
 const char str_macro_3[] PROGMEM = "3:Exit";
 const char str_macro_9[] PROGMEM = "9:Clear All";
 
-const char str_lazyfn_1[] PROGMEM = "1:toggle";
+const char str_toggle_1[] PROGMEM = "1:toggle";
 
 const char str_back_6[] PROGMEM = "6:Back";
 
@@ -81,6 +83,7 @@ const char str_clear_all_macro[] PROGMEM = "clear...";
 const char str_space[] PROGMEM = " ";
 const char str_macro[] PROGMEM = "macro";
 const char str_lazyfn[] PROGMEM = "lazy FN";
+const char str_smartkey[] PROGMEM = "smart key";
 const char str_colon[] PROGMEM = ":";
 const char str_on[] PROGMEM = "on";
 const char str_off[] PROGMEM = "off";
@@ -452,6 +455,8 @@ void printSelectMode(void){
 	printEnter();
 	printStringFromFlash(str_select_mode5);
 	printEnter();
+	printStringFromFlash(str_select_mode6);
+	printEnter();
 	
 	_step = STEP_SELECT_MODE;
 	printPrompt();
@@ -519,7 +524,31 @@ void printLazyFnState(void){
 }
 void printLazyFnMessage(void){
 	printLazyFnState();
-	printStringFromFlash(str_lazyfn_1);
+	printStringFromFlash(str_toggle_1);
+	printEnter();
+	printStringFromFlash(str_macro_3);	// exit
+	printEnter();
+	printStringFromFlash(str_back_6);
+	printEnter();
+
+	_step = STEP_INPUT_COMMAND;
+}
+
+void printSmartKeyState(void){
+	printStringFromFlash(str_smartkey);
+	printStringFromFlash(str_space);
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_space);
+	if(isSmartKeyEnabled()){
+		printStringFromFlash(str_on);
+	}else{
+		printStringFromFlash(str_off);
+	}
+	printEnter();
+}
+void printSmartKeyMessage(void){	
+	printSmartKeyState();
+	printStringFromFlash(str_toggle_1);
 	printEnter();
 	printStringFromFlash(str_macro_3);	// exit
 	printEnter();
@@ -877,7 +906,10 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					stopKeyMapping();				
 				}else if(cmd == SEL_TOGGLE_LAZY_FN){
 					_mode = SEL_TOGGLE_LAZY_FN;
-					printLazyFnMessage();
+					printLazyFnMessage();				
+				}else if(cmd == SEL_TOGGLE_SMART_KEY){
+					_mode = SEL_TOGGLE_SMART_KEY;
+					printSmartKeyMessage();
 				}
 			}else{
 				if(cmd == CMD_BACK){
@@ -919,6 +951,16 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						_step = STEP_INPUT_COMMAND;
 						toggleLazyFn();
 						printLazyFnState();
+					}else if(cmd == CMD_EXIT_LAZY_FN){
+						_step = STEP_EXIT;
+						stopKeyMapping();						
+					}
+
+				}else if(_mode == SEL_TOGGLE_SMART_KEY){
+					if(cmd == CMD_TOGGLE_SMART_KEY){
+						_step = STEP_INPUT_COMMAND;
+						toggleSmartKeyEnabled();
+						printSmartKeyState();
 					}else if(cmd == CMD_EXIT_LAZY_FN){
 						_step = STEP_EXIT;
 						stopKeyMapping();						

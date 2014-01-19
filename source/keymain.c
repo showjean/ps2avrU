@@ -31,6 +31,7 @@
 #include "keyindex.h"
 #include "quickswap.h"
 #include "lazyfn.h"
+#include "smartkey.h"
 #include "ledrender.h"
 #include "keyindex.h"
 #include "ps2main.h"
@@ -246,6 +247,7 @@ int main(void) {
 	initKeymapper();
 	initQuickSwap();
 	initLazyFn();
+	initSmartKey();
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){

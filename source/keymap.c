@@ -100,9 +100,6 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 	KEY_INSERT, KEY_DEL, KEY_HOME, KEY_END, KEY_PGUP, KEY_PGDN, KEY_LGUI, KEY_RGUI, KEY_APPS,
  	KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_KP_SLASH,
 	KEY_NONE };
-
-
-
-
+   
 
 #endif

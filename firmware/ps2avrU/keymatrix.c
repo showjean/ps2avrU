@@ -35,7 +35,7 @@ uint8_t _currentLayer = 0;
 /* ------------------------------------------------------------------------- */
 static uint8_t debounceMAX = 5;
 static uint8_t debounce = 10;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
-static bool _isAllKeyRelease = false;
+static bool _isAllKeyRelease = true;
 
 
 

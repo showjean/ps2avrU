@@ -13,6 +13,7 @@
 // Total 
 #define NUM_KEY 176     // 0~
 
+// fn
 #define KEY_FN          254
 #define KEY_LED         253
 #define KEY_BEYOND_FN   252     // fn2 toggle

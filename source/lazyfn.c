@@ -9,7 +9,8 @@ static bool _isLazyFn;
 
 void initLazyFn(void){
 
-	if(eeprom_read_byte((uint8_t *)EEPROM_LAZY_FN) == 1){
+	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
+	if(gOption&(1<<TOGGLE_LAZY_FN)){
 		_isLazyFn = true;
 	}else{
 		_isLazyFn = false;
@@ -20,12 +21,15 @@ bool isLazyFn(void){
 }
 
 void toggleLazyFn(void){
+	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
 	if(_isLazyFn == false){
 		_isLazyFn = true;
-		eeprom_write_byte((uint8_t *)EEPROM_LAZY_FN, 1);
+		gOption |= (1<<TOGGLE_LAZY_FN);
+		eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
 	}else{
-		_isLazyFn = false;		
-		eeprom_write_byte((uint8_t *)EEPROM_LAZY_FN, 255);
+		_isLazyFn = false;	
+		gOption &= ~(1<<TOGGLE_LAZY_FN);	
+		eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
 	}
 }
 

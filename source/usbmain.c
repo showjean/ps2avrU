@@ -402,8 +402,8 @@ uint8_t scanKeyUSB(void) {
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-            keyidx = getCurrentKeyindex(gLayer, row, col);					
-			gFN = false;
+            keyidx = getCurrentKeyindex(gLayer, row, col);	   		
+			gFN = true;
             
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
@@ -676,7 +676,11 @@ void usb_main(void) {
                 // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.
                 // (MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
                 // for os x
-                if(idleRate > 0) startKeyMappingOnBoot();
+                if(idleRate > 0) {
+                    startKeyMappingOnBoot();
+
+                    setCurrentOS(true);
+                }
 
             }else if(_ledInitState == INIT_INDEX_INITED){
                 _ledInitState = INIT_INDEX_COMPLETE;  
