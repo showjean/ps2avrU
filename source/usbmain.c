@@ -241,6 +241,7 @@
 #include "vusb.h"
 #include "ps2avru_util.h"
 #include "dualaction.h"
+#include "smartkey.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0

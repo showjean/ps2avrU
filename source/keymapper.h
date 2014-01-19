@@ -49,6 +49,7 @@
 #define WAIT_SAVE 11
 #define WAIT_CLEAR_ALL_MACRO 12
 #define WAIT_CLEAR_MACRO 13
+#define WAIT_SELECT_MODE 14
 
 // mode select
 #define SEL_MAPPING 1

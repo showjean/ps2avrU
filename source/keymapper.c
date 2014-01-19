@@ -129,6 +129,7 @@ static void prepareKeyMapping(void);
 void prepareKeyMapper(void);
 void saveCurrentLayerAfter(void);
 void printMapperMessageAfter(void);
+void printSelectModeAfter(void);
 void clearMacroAfter(void);
 void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
@@ -278,6 +279,8 @@ void enterFrameForMapper(void){
 			if(_wait == WAIT_SAVE){
 				saveCurrentLayerAfter();
 				// _isWorkingForEmpty = 0;
+			}else if(_wait == WAIT_SELECT_MODE){
+				printSelectModeAfter();
 			}else if(_wait == WAIT_WELCOME){
 				printMapperMessageAfter();
 				// _isWorkingForEmpty = 0;
@@ -438,6 +441,16 @@ static void printPrompt(void)
 
 	_delay_ms(100);
 }
+void printSelectModeAfter(void){
+
+	printStringFromFlash(str_select_mode5);
+	printEnter();
+	printStringFromFlash(str_select_mode6);
+	printEnter();
+	
+	_step = STEP_SELECT_MODE;
+	printPrompt();
+}
 
 void printSelectMode(void){
 	printEnter();
@@ -450,16 +463,30 @@ void printSelectMode(void){
 	printStringFromFlash(str_select_mode2);
 	printEnter();
 	printStringFromFlash(str_select_mode3);
+	printStringFromFlash(str_space);
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_space);
+	if(isLazyFn()){
+		printStringFromFlash(str_on);
+	}else{
+		printStringFromFlash(str_off);
+	}
 	printEnter();
 	printStringFromFlash(str_select_mode4);
-	printEnter();
-	printStringFromFlash(str_select_mode5);
-	printEnter();
-	printStringFromFlash(str_select_mode6);
+	printStringFromFlash(str_space);
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_space);
+	if(isSmartKeyEnabled()){
+		printStringFromFlash(str_on);
+	}else{
+		printStringFromFlash(str_off);
+	}
 	printEnter();
 	
-	_step = STEP_SELECT_MODE;
-	printPrompt();
+	// 256 바이트를 넘어 모두 출력하지 못하므로 잘라서 실행;
+	_isWorkingForEmpty = 1;
+	_wait = WAIT_SELECT_MODE;
+	_step = STEP_NOTHING;
 }
 
 void printMapperMessageAfter(void)
