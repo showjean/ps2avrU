@@ -18,6 +18,8 @@ static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
+	if(xLayer >= HARDWARE_KEYMAPPING_LAYER_MAX) return 0;	// 하드웨어 키매핑은 레어어 3까지만 지원
+
 	uint8_t gKeyIndex;
 	int gIdx;
 	gIdx = EEPROM_MAPPING + (xRow * COLUMNS + xCol) + (COLUMNS * ROWS * xLayer);

@@ -22,6 +22,7 @@
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
 #define KEY_P2U         247
+#define KEY_FN3         246
 
 // dual action 
 enum {
@@ -44,7 +45,10 @@ enum {
     KEY_LCTRL_HANJA,
     KEY_FN_CAPS,
     KEY_FN2_CAPS,
-    KEY_dualAction_end  // 232
+    KEY_FN3_HANGLE,
+    KEY_FN3_HANJA,
+    KEY_FN3_CAPS,
+    KEY_dualAction_end  // 235
 };
 
 enum {  // for macro

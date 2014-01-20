@@ -22,7 +22,9 @@
 #define DIODE_PORT	PORTD
 #define DIODE_PIN	5	 		// 제너 다이오드를 컨트롤할 D 핀 중에 하나;
 
-#define LAYERS		3
+#define HARDWARE_KEYMAPPING_LAYER_MAX	3
+
+#define LAYERS		4
 #define COLUMNS 	8
 #define ROWS 		17
 

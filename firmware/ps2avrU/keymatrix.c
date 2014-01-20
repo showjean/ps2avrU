@@ -100,7 +100,7 @@ uint8_t getLayer(void) {
 
 		    keyidx = getDualActionMaskDown(keyidx); 
 
-			if(keyidx == KEY_FN || keyidx == KEY_FN2 
+			if(keyidx == KEY_FN || keyidx == KEY_FN2 || keyidx == KEY_FN3 
 				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
 				
 				cur = 0;
@@ -121,7 +121,12 @@ uint8_t getLayer(void) {
 						if(_isAllKeyRelease && isLazyFn()){
 							_currentLazyLayer = 2;
 						}
-						return 2;					
+						return 2;	
+					}else if(keyidx == KEY_FN3){
+						if(_isAllKeyRelease && isLazyFn()){
+							_currentLazyLayer = 3;
+						}
+						return 3;					
 					}else if(keyidx == KEY_NOR){
 						// _currentLayer은 2를 유지하면서 스캔할 레이어만 0으로 반환;
 						return 0;
