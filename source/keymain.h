@@ -29,9 +29,17 @@
 #define INTERFACE_USB_USER	2
 #define INTERFACE_CLEAR		4
 
+typedef struct {
+    int (*syncDelayInterface)(int);
+} interface_config_t;
+
 extern int interfaceCount;
 extern uint8_t interfaceReady;
 extern uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
 extern uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow);
+
+extern void setInterfaceConfig(interface_config_t *c);
+extern int syncDelay(int xDelay);
+
 
 #endif

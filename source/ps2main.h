@@ -35,5 +35,6 @@
 extern uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown);
 // extern void prepareKeyMappingPs2(void);
 extern void ps2_main(void);
+extern void initInterfacePs2(void);
 
 #endif

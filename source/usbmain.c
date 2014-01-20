@@ -262,6 +262,7 @@ void clearReportBuffer(void);
 void wakeUpUsb(void);
 void countSleepUsb(void);
 
+
 void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();  
@@ -295,29 +296,26 @@ void delegateStartTimerWhenUsbInterupt(void){
     
 }*/
 
+
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  USB  ----------------------------- */
 /* ------------------------------------------------------------------------- */
 uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
-uint8_t _extraHasChanged = 0;
-uint8_t makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
+bool _extraHasChanged = false;
+uint16_t extraData = 0;
+void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
 
-        _extraHasChanged = 1;
-        uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
-        reportBufferExtra[REPORT_ID_INDEX] = REPORT_ID_CONSUMER;
+        _extraHasChanged = true;
+
         if(xIsDown){
-            reportBufferExtra[REPORT_ID_INDEX + 1] = (uint8_t)(gKeyidxMulti & 0xFF);
-            reportBufferExtra[REPORT_ID_INDEX + 2] = (uint8_t)((gKeyidxMulti >> 8) & 0xFF);
+            uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
+            extraData = gKeyidxMulti;
         }else{
-            reportBufferExtra[REPORT_ID_INDEX + 1] = 0;
-            reportBufferExtra[REPORT_ID_INDEX + 2] = 0;
-            
+            extraData = 0;
         }
         
-        return 1;
     }
-    return 0;
 }
 uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     uint8_t retval = 1;
@@ -372,7 +370,7 @@ uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
 
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
-    memset(reportBufferExtra, 0, sizeof(reportBufferExtra));
+    extraData = 0;
 }
 
 uint8_t scanKeyUSB(void) {
@@ -391,8 +389,6 @@ uint8_t scanKeyUSB(void) {
 	reportIndex = 2;
     clearReportBuffer();
     clearDownBuffer();
-
-    _extraHasChanged = 0;
 
     gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
@@ -431,24 +427,24 @@ uint8_t scanKeyUSB(void) {
     					gFN = applyFN(keyidx, col, row, false);
     				}
                 }
-			}
 
-            // 키매핑 진행중;
-            if(prev != cur && isKeyMapping()){               
-                if(cur){
-                    putKeyindex(keyidx, col, row, 1);
-                }else{
-                    putKeyindex(keyidx, col, row, 0);
+                // 키매핑 진행중;
+                if(isKeyMapping()){               
+                    if(cur){
+                        putKeyindex(keyidx, col, row, 1);
+                    }else{
+                        putKeyindex(keyidx, col, row, 0);
+                    }
+                    gKeymapping = 1;
+                    
+                    continue;
                 }
-                gKeymapping = 1;
-                
-                continue;
-            }
+			}
             
-            if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
-                // 매크로 실행됨;
-                return 0;
-            }
+            // if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
+            //     // 매크로 실행됨;
+            //     return 0;
+            // }
             
             // fn키를 키매핑에 적용하려면 위치 주의;
             if(gFN == false) continue;
@@ -462,6 +458,10 @@ uint8_t scanKeyUSB(void) {
             if( prev != cur ) {
                 if(cur){
                     makeReportBufferExtra(keyidx, true);
+                    if(applyMacro(keyidx)) {
+                        retval = 0;
+                        goto RETURN_VALUE;    // 매크로 실행됨;
+                    }
                 }else{
                     makeReportBufferExtra(keyidx, false);
                 }
@@ -472,7 +472,8 @@ uint8_t scanKeyUSB(void) {
 	}
 
 	retval |= 0x01; // must have been a change at some point, since debounce is done
-	
+
+RETURN_VALUE:	
     setPrevMatrix();
 
     if(gKeymapping == 1) return 0;
@@ -484,6 +485,7 @@ static uint8_t _needRelease = 0;
 void clearMacroBuffer(void){    
     memset(macroBuffer, 0, sizeof(macroBuffer)); 
 }
+
 uint8_t scanMacroUsb(void)
 {
     clearReportBuffer(); 
@@ -568,11 +570,27 @@ void countSleepUsb(void){
         countSleep();
     #endif    
 }
+
+// usb delay에 맞춰져 있으므로 그대로 반환;
+static int syncDelayUsb(int xDelay){
+    return xDelay;
+}
+
+static interface_config_t configUsb = {
+    syncDelayUsb
+};
+
+
 /**
  * Main function, containing the main loop that manages timer- and
  * USB-functionality.
  * /return the obligatory integer that nobody cares about...
  */
+void initInterfaceUsb(void){
+
+    setInterfaceConfig(&configUsb);
+
+}
 void usb_main(void) {
 
     usbInit();
@@ -635,7 +653,7 @@ void usb_main(void) {
 
 #if USB_COUNT_SOF 
         if(_isSuspended == true) {
-            scanKeyUSB();   // for dummy
+            // scanKeyUSB();   // for dummy
             continue;
         }
 #endif
@@ -664,8 +682,14 @@ void usb_main(void) {
         enterFrame();
 
         // if an update is needed, send the report
-        if (usbInterruptIsReady()) {  
-            if(_initState == INIT_INDEX_SET_IDLE){
+        if (usbInterruptIsReady()) { 
+            if(hasMacroUsb()){
+                scanMacroUsb();
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
+            }else if(updateNeeded){                 
+                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);                 
+                updateNeeded = 0;
+            }else if(_initState == INIT_INDEX_SET_IDLE){
                 _initState = INIT_INDEX_INITED;
                 clearReportBuffer();
                 usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
@@ -688,12 +712,6 @@ void usb_main(void) {
                 // for windows
                 if(idleRate == 0) startKeyMappingOnBoot();
                 
-            }else if(hasMacroUsb()){
-                scanMacroUsb();
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
-            }else if(updateNeeded && !_extraHasChanged){                 
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);                 
-                updateNeeded = 0;
             }
         }
 
@@ -706,9 +724,13 @@ void usb_main(void) {
         }
 
         if(usbInterruptIsReady3()){
-            if(updateNeeded && _extraHasChanged){ 
-                usbSetInterrupt3(reportBufferExtra, REPORT_SIZE_EXTRA);    
-                updateNeeded = 0;
+            if(_extraHasChanged){   
+                report_extra_t gReportExtra = {
+                    .report_id = REPORT_ID_CONSUMER,
+                    .usage = extraData
+                };
+                usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
+                _extraHasChanged = false;
             }
         }
         

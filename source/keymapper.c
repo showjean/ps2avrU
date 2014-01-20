@@ -29,6 +29,7 @@
 #include "custommacro.h"
 #include "dualaction.h"
 #include "smartkey.h"
+#include "keymain.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -137,9 +138,7 @@ void readMacro(uint8_t xMacroIndex);
 
 void initKeymapper(void){
 
-	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
-		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
-	}
+	keyMappingCountMax = syncDelay(keyMappingCountMax);
 }
 
 //------------------------------------------------------///

@@ -116,6 +116,29 @@ static void initHardware(bool xIsUSB) {
  	}
 }
 
+static void initSoftware(void){
+
+	// init
+	initKeymapper();
+	initQuickSwap();
+	initLazyFn();
+	initSmartKey();
+
+}
+
+static interface_config_t *interfaceConfig;
+
+void setInterfaceConfig(interface_config_t *c)
+{
+    interfaceConfig = c;
+    DEBUG_PRINT(("setInterfaceConfig : %d \n", interfaceConfig));
+}
+
+int syncDelay(int xDelay){
+	if (!interfaceConfig) return xDelay;
+	return (*interfaceConfig->syncDelayInterface)(xDelay);	
+}
+
 int main(void) {
 
 	enable_printf();
@@ -131,8 +154,8 @@ int main(void) {
     // _delay_us_m(1); 
     _delay_us(5);
 
-	uint8_t _countDie = 0;
-	while(getLiveMatrix() == 0 && ++_countDie < 30){
+	uint8_t _countLimit = 0;
+	while(getLiveMatrix() == 0 && ++_countLimit < 30){
 		// waiting during clear debounce
 	}
 
@@ -242,18 +265,14 @@ int main(void) {
 #endif
 
 	DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
-
-	// init
-	initKeymapper();
-	initQuickSwap();
-	initLazyFn();
-	initSmartKey();
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
 			clearInterface();
 			initHardware(true);
 
+			initInterfaceUsb();
+			initSoftware();
 			usb_main();			
 		}
 		
@@ -264,6 +283,8 @@ int main(void) {
 			clearInterface();
 			initHardware(false);
    
+			initInterfacePs2();
+			initSoftware();
 			ps2_main();
 		}
 	}

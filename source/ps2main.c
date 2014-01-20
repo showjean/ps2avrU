@@ -404,7 +404,7 @@ int scanKeyPS2(void) {
 }*/
 
 
-void initInterfacePs2(void)
+void initPs2(void)
 {
 	interfaceReady = 1;
 
@@ -418,12 +418,21 @@ uint8_t hasMacroPs2(void)
 {
     return !isEmptyM();
 }
-/*
- putKey()에 키코드만 넣어두면 자동으로 뿌려줄줄 알았더니 그렇지 않다.
- 키코드를 스캔할 때 버퍼에서 하나씩 가져와 처리할 수 있도록 해야겠다.
- 새로운 큐를 위해 매크로버퍼를 이용하자.
-*/
 
+
+// usb delay에 맞춰져 있으므로 절반으로 줄여줌;
+static int syncDelayPs2(int xDelay){
+    return xDelay >> 1;
+}
+static interface_config_t configPs2 = {
+	syncDelayPs2
+};
+
+void initInterfacePs2(void){
+
+    setInterfaceConfig(&configPs2);
+
+}
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  Main  ----------------------------- */
@@ -441,6 +450,8 @@ void ps2_main(void){
 
 	keymap_init();
 	clear();
+
+    setInterfaceConfig(&configPs2);
 
 	DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 
@@ -517,7 +528,7 @@ void ps2_main(void){
 						default:
 							// DEBUG_PRINT((" default \n"));
 							tx_state(0xFA, STA_NORMAL);
-							initInterfacePs2();
+							initPs2();
 							break;
 					}
 					continue;
@@ -556,7 +567,7 @@ void ps2_main(void){
 					continue;
 				case STA_WAIT_LEDS:
 					// Reflect LED states to PD0~2
-					initInterfacePs2();
+					initPs2();
 					
 					uint8_t ledstate = 0;
 

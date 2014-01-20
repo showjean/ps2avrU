@@ -26,10 +26,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define REPORT_ID_CONSUMER  1
 /* report size */
 #define REPORT_SIZE_KEYBOARD    8
-#define REPORT_SIZE_EXTRA  3
+// #define REPORT_SIZE_EXTRA  3
+
+
+typedef struct {
+    uint8_t  report_id;
+    uint16_t usage;
+} __attribute__ ((packed)) report_extra_t;
+
+typedef struct {
+    uint8_t buttons;
+    int8_t x;
+    int8_t y;
+    int8_t v;
+    int8_t h;
+} __attribute__ ((packed)) report_mouse_t;
+
+typedef struct {
+    uint8_t report_id;
+    report_mouse_t report;
+} __attribute__ ((packed)) vusb_mouse_report_t;
+
 
 extern uint8_t reportBuffer[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
-extern uint8_t reportBufferExtra[REPORT_SIZE_EXTRA];
 extern uint8_t idleRate;        ///< in 4ms units
 
 extern void delegateLedUsb(uint8_t xState);
