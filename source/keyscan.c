@@ -24,12 +24,8 @@ static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
         // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
         pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
     }
-
-
-    if (keyscanDriver){
-		return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);
-	}
-	return 0;
+    
+	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
 }
 
 uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
@@ -56,10 +52,9 @@ uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow)
     // fn키를 키매핑에 적용하려면 위치 주의;
     if(gFN == false) return 0;
 
-    if (keyscanDriver){
-		(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
-	}
-
+    
+	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+	
     return 1;
 }
 
@@ -113,9 +108,7 @@ uint8_t scanKey(void) {
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
                 pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
                 
-			    if (keyscanDriver){
-					retval |= (*keyscanDriver->pushKeyCodeWhenDown)(keyidx, true);
-				}
+				retval |= (*keyscanDriver->pushKeyCodeWhenDown)(keyidx, true);
 			}			
 		}
 	}

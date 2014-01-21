@@ -435,7 +435,7 @@ uint8_t hasMacroPs2(void)
 
 
 // usb delay에 맞춰져 있으므로 절반으로 줄여줌;
-static int syncDelayPs2(int xDelay){
+/*static int syncDelayPs2(int xDelay){
     return xDelay >> 1;
 }
 static interface_config_t configPs2 = {
@@ -446,12 +446,12 @@ static keyscan_driver_t driverKeyScanPs2 = {
     pushKeyCode,
     pushKeyCodeDummy,
     pushKeyCode
-};
+};*/
 
 void initInterfacePs2(void){
 
-    setInterfaceConfig(&configPs2);
-    setKeyScanDriver(&driverKeyScanPs2);
+    // setInterfaceConfig(&configPs2);
+    // setKeyScanDriver(&driverKeyScanPs2);
 
 }
 
@@ -471,8 +471,6 @@ void ps2_main(void){
 
 	keymap_init();
 	clear();
-
-    setInterfaceConfig(&configPs2);
 
 	DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 
