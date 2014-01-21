@@ -2,6 +2,7 @@
 #define KEYMAIN_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "global.h"
 
 // #define DEBUG_KEYMAIN	// if you want to debug mode
@@ -34,7 +35,7 @@ typedef struct {
 } interface_config_t;
 
 extern int interfaceCount;
-extern uint8_t interfaceReady;
+extern bool interfaceReady;
 extern uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
 extern uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow);
 

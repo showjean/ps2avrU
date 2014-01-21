@@ -33,7 +33,8 @@ bool isBeyondFN(void){
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t keyidx, uint8_t col, uint8_t row, bool isDown) {
 
-    // DEBUG_PRINT(("applyFN  : %d isDown : %d\n", keyidx, isDown)); 
+    // DEBUG_PRINT(("applyFN  : %d isDown : %d\n", keyidx, isDown));
+    if(keyidx == KEY_NONE) return 0; 
 
 	applyKeyDownForFullLED(keyidx, col, row, isDown);
     setDualAction(keyidx, isDown);	

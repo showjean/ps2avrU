@@ -56,7 +56,8 @@ void clearMatrix(void){
 		currentMatrix[row] = 0;
 	}
 
-	debounceMAX = 10;
+	// debounceMAX = 5;
+	// debounce = 10;
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;

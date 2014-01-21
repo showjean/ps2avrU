@@ -242,6 +242,7 @@
 #include "ps2avru_util.h"
 #include "dualaction.h"
 #include "smartkey.h"
+#include "keyscan.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
@@ -272,7 +273,7 @@ void delegateLedUsb(uint8_t xState){
 }
 
 void delegateInterfaceReadyUsb(void){
-    interfaceReady = 1;
+    interfaceReady = true;
 }
 
 void delegateInitInterfaceUsb(void)
@@ -289,11 +290,6 @@ void delegateInitInterfaceUsb(void)
 }
 void delegateStartTimerWhenUsbInterupt(void){
     startTimer();
-}*/
-
-/*void prepareKeyMappingUsb(void)
-{
-    
 }*/
 
 
@@ -316,6 +312,9 @@ void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
         }
         
     }
+}
+uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
+    return 0;
 }
 uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     uint8_t retval = 1;
@@ -357,7 +356,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     return retval;
 }
 
-uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
+/*uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
     
     if(xIsDown){ 
         // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
@@ -366,117 +365,110 @@ uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
 
     return makeReportBuffer(keyidx, xIsDown);
 
-}
+}*/
 
 void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
     extraData = 0;
 }
+/*
+uint8_t putKeyUsb(uint8_t keyidx, down isDown, uint8_t col, uint8_t row) {
+
+    bool gFN = applyFN(keyidx, col, row, isDown);
+
+    if(isDown && keyidx != KEY_NONE){
+        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, true);
+    }
+
+    // 키매핑 진행중;
+    if(isDeepKeyMapping()){
+        // DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
+        
+        putKeyindex(keyidx, col, row, isDown);
+
+        return 0;
+    }
+            
+    if(isDown && applyMacro(keyidx)) {
+        // 매크로 실행됨;
+        return 0;
+    }
+
+    // fn키를 키매핑에 적용하려면 위치 주의;
+    if(gFN == false) return 0;
+
+    // pushKeyCode(keyidx, isDown);
+
+    return 1;
+}*/
 
 uint8_t scanKeyUSB(void) {
-    uint8_t retval = 0;
 
 	// debounce cleared
-    if (!setCurrentMatrix()) return retval;    
+    if (!setCurrentMatrix()) return 0;  
 
-	uint8_t row, col, prev, cur, keyidx, gKeymapping;
-    bool gFN;
+    // debounce counter expired, create report
+    reportIndex = 2;
+    clearReportBuffer();
+    clearDownBuffer();  
+
+    uint8_t retval = scanKey();
+
+	/*uint8_t row, col, prev, cur, keyidx;
+    uint8_t gFN; 
+    uint8_t gResultPutKey = 1;
 	uint8_t gLayer = getLayer();
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
-	// debounce counter expired, create report
-	reportIndex = 2;
-    clearReportBuffer();
-    clearDownBuffer();
-
-    gKeymapping = 0;
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
 	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
 		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
-
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(gLayer, row, col);	   		
-			gFN = true;
+			gFN = 1;
             
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
             // 이전 상태에서(press/up) 변화가 있을 경우;
-			//if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {                
+			//if( !(prev&&cur) && !(!prev&&!cur)) {                
             if( prev != cur ) {
-
 #ifdef ENABLE_BOOTMAPPER           
                 if(isBootMapper()){
                     if(cur) trace(row, col);
-                    wakeUpUsb();
+                    wakeUpUsb();    /////////////
                     break;
                 }
 #endif      
-                if(keyidx != KEY_NONE){
-    				if(cur) {
-    					// key down
-    					gFN = applyFN(keyidx, col, row, true);
-                        wakeUpUsb();
-                        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, true);
-
-    				}else{
-                        // key up
-    					gFN = applyFN(keyidx, col, row, false);
-    				}
-                }
-
-                // 키매핑 진행중;
-                if(isKeyMapping()){               
-                    if(cur){
-                        putKeyindex(keyidx, col, row, 1);
-                    }else{
-                        putKeyindex(keyidx, col, row, 0);
-                    }
-                    gKeymapping = 1;
-                    
-                    continue;
+                if(cur) {
+                    // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
+                    gFN = putKeyUsb(keyidx, 1, col, row);
+                }else{
+                    // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
+                    gFN = putKeyUsb(keyidx, 0, col, row);
                 }
 			}
             
-            // if(cur && keyidx != KEY_NONE && applyMacro(keyidx)) {
-            //     // 매크로 실행됨;
-            //     return 0;
-            // }
-            
             // fn키를 키매핑에 적용하려면 위치 주의;
-            if(gFN == false) continue;
+            if(gFN == 0) continue;
 
 			// usb는 눌렸을 때만 버퍼에 저장한다.
 			if(cur){
                //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-               retval |= makeReportBufferDecorator(keyidx, true);
-			}
-
-            if( prev != cur ) {
-                if(cur){
-                    makeReportBufferExtra(keyidx, true);
-                    if(applyMacro(keyidx)) {
-                        retval = 0;
-                        goto RETURN_VALUE;    // 매크로 실행됨;
-                    }
-                }else{
-                    makeReportBufferExtra(keyidx, false);
-                }
-
-            }
-			
+                pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
+                retval |= makeReportBuffer(keyidx, true);   /////////////
+			}			
 		}
 	}
 
 	retval |= 0x01; // must have been a change at some point, since debounce is done
-
-RETURN_VALUE:	
+	
     setPrevMatrix();
 
-    if(gKeymapping == 1) return 0;
+    if(gResultPutKey == 0) return 0;*/
 	
     return retval;
 }
@@ -555,20 +547,21 @@ uint8_t scanMacroUsb(void)
     return 1;
 
 }
+
 uint8_t hasMacroUsb(void)
 {
     return (_needRelease || !isEmptyM());
 }
 
 void wakeUpUsb(void){
-    #if !USB_COUNT_SOF  
-        wakeUp();
-    #endif
+#if !USB_COUNT_SOF  
+    wakeUp();
+#endif
 }
 void countSleepUsb(void){
-    #if !USB_COUNT_SOF  
-        countSleep();
-    #endif    
+#if !USB_COUNT_SOF  
+    countSleep();
+#endif    
 }
 
 // usb delay에 맞춰져 있으므로 그대로 반환;
@@ -581,6 +574,13 @@ static interface_config_t configUsb = {
 };
 
 
+static keyscan_driver_t driverKeyScanUsb = {
+    makeReportBuffer,
+    makeReportBuffer,
+    makeReportBufferDummy
+};
+
+
 /**
  * Main function, containing the main loop that manages timer- and
  * USB-functionality.
@@ -589,6 +589,7 @@ static interface_config_t configUsb = {
 void initInterfaceUsb(void){
 
     setInterfaceConfig(&configUsb);
+    setKeyScanDriver(&driverKeyScanUsb);
 
 }
 void usb_main(void) {
@@ -620,7 +621,7 @@ void usb_main(void) {
 
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
 		// 특별한 경우에만 발생하는 현상이다.
-		if(INTERFACE == INTERFACE_USB && interfaceReady == 0 && interfaceCount++ > 2000){
+		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 2000){
 			// move to ps/2
 			INTERFACE = 0;
 			DEBUG_PRINT(("               move to ps/2 \n"));
@@ -735,10 +736,7 @@ void usb_main(void) {
         }
         
         // 입력이 한동안 없으면 슬립모드로;
-        countSleepUsb();        
-           
-		// interrupt 위에서 실행되면 status LED가 제대로 반응하지 않는다.
-		renderLED();
+        countSleepUsb();  
         
         if(hasMacroUsb())
         {

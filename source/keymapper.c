@@ -185,15 +185,7 @@ void showP2UMenu(void){
 */
 static void prepareKeyMapping(void){
 	setWillStartKeyMapping();	//set will start mapping
-
-	// 각 인터페이스 준비;
-	/*if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-	    prepareKeyMappingUsb();
-	}else{
-		prepareKeyMappingPs2();
-	}*/
-	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
-
+	
 	blinkOnce();
 	_delay_ms(100);
 	blinkOnce();
@@ -667,7 +659,7 @@ void saveCurrentLayer(void)
 
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
-	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
+	if(xKeyidx == KEY_NONE || isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
 
 	uint8_t gMacroIndex = 255;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));

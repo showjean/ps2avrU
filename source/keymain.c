@@ -42,7 +42,7 @@
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 int interfaceCount = 0;
-uint8_t interfaceReady = 0;
+bool interfaceReady = false;
 uint8_t INTERFACE = 255;
 /* ------------------------------------------------------------------------- */
 
@@ -67,7 +67,7 @@ void clearInterface(void){
 	cli();
 	clearLEDInited();
 	interfaceCount = 0;
-	interfaceReady = 0;
+	interfaceReady = false;
 }
 
 void clearTimers(void) {
@@ -151,7 +151,6 @@ int main(void) {
 
 	initMatrix();
 
-    // _delay_us_m(1); 
     _delay_us(5);
 
 	uint8_t _countLimit = 0;
@@ -170,13 +169,13 @@ int main(void) {
 			cur  = gMatrix[row] & BV(col);
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
 			if( cur ) {
+				keyidx = getKeyIndex(0, row, col); //getCurrentKeyindex(0, row, col);
 #ifdef ENABLE_BOOTMAPPER
-				if(getBootmapperStatus(col, row)){	// bootmapper start
+				if(getBootmapperStatus(col, row) || keyidx == KEY_TAB){	// bootmapper start
 					setToBootMapper();
 					continue;
 				}
 #endif
-				keyidx = getKeyIndex(0, row, col); //pgm_read_byte(&keymap_code[0][row][col]); //getCurrentKeyindex(0, row, col);
 				if(keyidx == KEY_M) {
 					// DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
 					readyKeyMappingOnBoot();

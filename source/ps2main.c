@@ -34,6 +34,7 @@
 #include "keydownbuffer.h"
 #include "fncontrol.h"
 #include "dualaction.h"
+#include "keyscan.h"
 
 // Output buffer - circular queue
 #define QUEUE_SIZE 200
@@ -153,8 +154,10 @@ void keymap_init(void)
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  PS/2 ----------------------------- */
 /* ------------------------------------------------------------------------- */
-
-uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
+uint8_t pushKeyCodeDummy(uint8_t keyidx, bool isDown){
+	return 0;
+}
+uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
 	if(keyidx == KEY_NONE) return 0;
 
@@ -244,17 +247,17 @@ uint8_t pushKeyCode(uint8_t keyidx, uint8_t isDown)
 	return 1;
 }
 
-uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown){
+/*uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown){
 	if(isDown){				
 		// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
 		pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
 	}
-	pushKeyCode(keyidx, isDown);
-	return 1;
-}
+	
+	return pushKeyCode(keyidx, isDown);
+}*/
 
 // push the keycodes into the queue by its key index, and isDown
-uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
+/*uint8_t putKey(uint8_t keyidx, bool isDown, uint8_t col, uint8_t row) {
 
 	bool gFN = applyFN(keyidx, col, row, isDown);
 
@@ -271,7 +274,7 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 		return 0;
 	}
 			
-	if(isDown && keyidx != KEY_NONE && applyMacro(keyidx)) {
+	if(isDown && applyMacro(keyidx)) {
 		// 매크로 실행됨;
 		return 0;
 	}
@@ -282,6 +285,107 @@ uint8_t putKey(uint8_t keyidx, uint8_t isDown, uint8_t col, uint8_t row) {
 	pushKeyCode(keyidx, isDown);
 
 	return 1;
+}*/
+
+// return : key modified
+int scanKeyPS2(void) {
+	
+	// debounce cleared and changed
+	if(!setCurrentMatrix()) return 0;
+
+    clearDownBuffer();
+	
+    uint8_t prevKeyidx;
+
+	uint8_t row, col, prev, cur, keyidx;
+	// uint8_t gFN; 
+	// uint8_t gResultPutKey = 1;
+	uint8_t gLayer = getLayer();
+
+    // DEBUG_PRINT(("gLayer  : %d \n", gLayer));
+
+    uint8_t *gMatrix = getCurrentMatrix();
+    uint8_t *gPrevMatrix = getPrevMatrix();
+    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
+	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
+	if(_prevLayer != gLayer){
+		for(col=0;col<COLUMNS;col++)
+		{		
+			for(row=0;row<ROWS;row++)
+			{
+				prev = gPrevMatrix[row] & BV(col);
+				cur  = gMatrix[row] & BV(col);
+
+				if(!prev) continue;
+				
+				prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
+				keyidx = getCurrentKeyindex(gLayer, row, col);
+
+	            // 이전 상태에서(press/up) 변화가 있을 경우;
+				if( prevKeyidx != keyidx && keyidx != KEY_NONE ) {
+					// if(prev){
+					putChangedKey(prevKeyidx, false, col, row);
+					if(cur){
+						putChangedKey(keyidx, true, col, row);
+					}
+					// }
+				}
+
+			}
+			
+		}
+	}
+	_prevLayer = gLayer;
+
+	uint8_t retval = scanKey();
+/*
+	// debounce cleared => compare last matrix and current matrix
+	for(col=0;col<COLUMNS;++col) {		
+		for(row=0;row<ROWS;++row) {
+
+			prev = gPrevMatrix[row] & BV(col);
+			cur  = gMatrix[row] & BV(col);
+			keyidx = getCurrentKeyindex(gLayer, row, col);	   		
+			gFN = 1;
+
+            // !(prev&&cur) : 1 && 1 이 아니고, 
+            // !(!prev&&!cur) : 0 && 0 이 아니고, 
+            // 이전 상태에서(press/up) 변화가 있을 경우;
+			// if( !(prev&&cur) && !(!prev&&!cur)) {
+			if( prev != cur ) {
+#ifdef ENABLE_BOOTMAPPER                
+                if(isBootMapper()){
+                    if(cur) trace(row, col);
+                    /////////////////////////
+                    break;
+                }
+#endif	
+				if(cur) {
+					// DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
+					gFN = putKey(keyidx, 1, col, row);
+				}else{
+					// DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
+					gFN = putKey(keyidx, 0, col, row);
+				}
+			}
+
+            // fn키를 키매핑에 적용하려면 위치 주의;
+            if(gFN == 0) continue;
+
+			// 눌려진 키들은 모두 다운 버퍼에 저장;
+			if(cur){
+				// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+				pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
+				/////////////////////////////////
+			}
+		}		
+	}
+	
+	setPrevMatrix();
+
+	return gResultPutKey;*/
+
+    return retval;
 }
 
 int scanKeyPs2WithMacro(void){
@@ -295,10 +399,16 @@ int scanKeyPs2WithMacro(void){
         gKey = popMWithKey();
         if(gKey.mode == 1){	// down
         	// DEBUG_PRINT(("macro down : %d \n", gKey.keyindex));
-        	pushKeyCode(gKey.keyindex, 1);
+        	pushKeyCode(gKey.keyindex, true);
         	push(NO_REPEAT);	// set no repeat
         }else{	// up
-        	pushKeyCode(gKey.keyindex, 0);
+        	// 모디키가 눌려져 있다면 그 상태를 유지;
+        	if (gKey.keyindex > KEY_Modifiers && gKey.keyindex < KEY_Modifiers_end) {
+                if(getModifierDownBuffer() & modmask[gKey.keyindex - (KEY_Modifiers + 1)]){
+                	return 0;
+                }
+            }
+        	pushKeyCode(gKey.keyindex, false);
         	// DEBUG_PRINT(("macro up : %d \n", gKey.keyindex));
         }
 
@@ -308,105 +418,9 @@ int scanKeyPs2WithMacro(void){
 	return scanKeyPS2();
 }
 
-// return : key modified
-int scanKeyPS2(void) {
-	
-	// debounce cleared and changed
-	if(!setCurrentMatrix()) return 0;
-
-    clearDownBuffer();
-	
-	uint8_t row, col, prev, cur, keyidx, prevKeyidx;
-	uint8_t layer = getLayer();
-
-    DEBUG_PRINT(("layer  : %d \n", layer)); 
-	uint8_t gResultPutKey = 1;
-
-    uint8_t *gMatrix = getCurrentMatrix();
-    uint8_t *gPrevMatrix = getPrevMatrix();
-    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
-	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-	if(_prevLayer != layer){
-		for(col=0;col<COLUMNS;col++)
-		{		
-			for(row=0;row<ROWS;row++)
-			{
-				prev = gPrevMatrix[row] & BV(col);
-				cur  = gMatrix[row] & BV(col);
-				if(!prev) continue;
-				
-				prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
-				keyidx = getCurrentKeyindex(layer, row, col);
-
-	            // 이전 상태에서(press/up) 변화가 있을 경우;
-				if( prevKeyidx != keyidx && keyidx != KEY_NONE ) {
-					if(prev){
-						putKey(prevKeyidx, 0, col, row);
-						if(cur){
-							putKey(keyidx, 1, col, row);
-						}
-					}
-				}
-
-			}
-			
-		}
-	}
-	_prevLayer = layer;
-
-	// debounce cleared => compare last matrix and current matrix
-	for(col=0;col<COLUMNS;col++)
-	{		
-		for(row=0;row<ROWS;row++)
-		{
-			prev = gPrevMatrix[row] & BV(col);
-			cur  = gMatrix[row] & BV(col);
-			keyidx = getCurrentKeyindex(layer, row, col);
-
-            // !(prev&&cur) : 1 && 1 이 아니고, 
-            // !(!prev&&!cur) : 0 && 0 이 아니고, 
-            // 이전 상태에서(press/up) 변화가 있을 경우;
-			// if( !(prev&&cur) && !(!prev&&!cur) && keyidx != KEY_NONE ) {
-			if( prev != cur ) {
-#ifdef ENABLE_BOOTMAPPER                
-                if(isBootMapper()){
-                    if(cur) trace(row, col);
-                    break;
-                }
-#endif	
-				if(cur) {
-					// DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
-					gResultPutKey &= putKey(keyidx, 1, col, row);
-				}else{
-					// DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
-					gResultPutKey &= putKey(keyidx, 0, col, row);
-				}
-			}
-
-			// 눌려진 키들은 모두 다운 버퍼에 저장;
-			if(cur){
-				// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-				pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-			}
-
-		}
-		
-	}
-	
-	setPrevMatrix();
-
-	return gResultPutKey;
-}
-
-/*void prepareKeyMappingPs2(void)
-{
-	
-}*/
-
-
 void initPs2(void)
 {
-	interfaceReady = 1;
+	interfaceReady = true;
 
     initFullLEDState();
 
@@ -428,9 +442,16 @@ static interface_config_t configPs2 = {
 	syncDelayPs2
 };
 
+static keyscan_driver_t driverKeyScanPs2 = {
+    pushKeyCode,
+    pushKeyCodeDummy,
+    pushKeyCode
+};
+
 void initInterfacePs2(void){
 
     setInterfaceConfig(&configPs2);
+    setKeyScanDriver(&driverKeyScanPs2);
 
 }
 
@@ -461,7 +482,7 @@ void ps2_main(void){
 
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
 		// 특별한 경우에만 발생하는 현상이다.
-		if(INTERFACE == INTERFACE_PS2 && interfaceReady == 0 && interfaceCount++ > 2000){			
+		if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 2000){			
 			// move to usb
 			INTERFACE = 1;
 			DEBUG_PRINT((" move to usb \n"));
@@ -600,6 +621,9 @@ void ps2_main(void){
 						scanKeyPs2WithMacro();
 					}
 
+			        // ps2avrU loop, must be scan matrix;
+			        enterFrame();
+
 					keyval = pop();
 					if(keyval==SPLIT)
 						continue;
@@ -620,10 +644,6 @@ void ps2_main(void){
 						}
 					}
 
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-					renderLED();
-
 					break;
 				// typematic : repeat last key
 				case STA_REPEAT:
@@ -631,6 +651,8 @@ void ps2_main(void){
 					if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
 						scanKeyPs2WithMacro();
 					}
+			        // ps2avrU loop, must be scan matrix;
+			        enterFrame();
 
 					if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal
 						m_state=STA_NORMAL;
@@ -647,9 +669,6 @@ void ps2_main(void){
 					loopCnt++;
 					loopCnt %= (3+TYPEMATIC_REPEAT*10);
 
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-					renderLED();
 					
 					break;
 				case STA_WAIT_SCAN_REPLY:
