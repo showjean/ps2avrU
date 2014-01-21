@@ -116,6 +116,18 @@ static void initHardware(bool xIsUSB) {
  	}
 }
 
+static interface_config_t *interfaceConfig;
+
+void setInterfaceConfig(interface_config_t *c)
+{
+    interfaceConfig = c;
+}
+
+int syncDelay(int xDelay){
+	if (!interfaceConfig) return xDelay;
+	return (*interfaceConfig->syncDelayInterface)(xDelay);	
+}
+
 static void initSoftware(void){
 
 	// init
@@ -124,19 +136,6 @@ static void initSoftware(void){
 	initLazyFn();
 	initSmartKey();
 
-}
-
-static interface_config_t *interfaceConfig;
-
-void setInterfaceConfig(interface_config_t *c)
-{
-    interfaceConfig = c;
-    DEBUG_PRINT(("setInterfaceConfig : %d \n", interfaceConfig));
-}
-
-int syncDelay(int xDelay){
-	if (!interfaceConfig) return xDelay;
-	return (*interfaceConfig->syncDelayInterface)(xDelay);	
 }
 
 int main(void) {

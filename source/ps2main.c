@@ -60,13 +60,13 @@ unsigned char lastState;
 // key information for each keys
 uint8_t KFLA[NUM_KEY];
 
-int scanKeyPS2(void);
+static int scanKeyPS2(void);
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- PS/2 interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
 // Queue operation -> push, pop
-void push(uint8_t item) {
+static void push(uint8_t item) {
 	static uint8_t record=0;
 
 	if(item==START_MAKE) {
@@ -95,7 +95,7 @@ void push(uint8_t item) {
     QUEUE[rear] = item;
 }
 
-uint8_t pop(void) {
+static uint8_t pop(void) {
     if(front==rear) {
         return 0;
     }
@@ -104,14 +104,14 @@ uint8_t pop(void) {
     return QUEUE[front];
 }
 
-uint8_t isEmpty(void) {
+static uint8_t isEmpty(void) {
 	if(front==rear)
         return 1;
 	else
 		return 0;
 }
 
-void clear(void) {
+static void clear(void) {
 	rear = front = 0;
 	lastMAKE_SIZE=0;
 	lastMAKE_IDX=0;
@@ -120,7 +120,7 @@ void clear(void) {
 	clearPrevMatrix();
 }
 
-void tx_state(unsigned char x, unsigned char newstate)
+static void tx_state(unsigned char x, unsigned char newstate)
 {
 	//DEBUG_PRINT(("[%02x] [%d] tx_state\n", x, newstate));
 	if(x != 0xFE)
@@ -130,7 +130,7 @@ void tx_state(unsigned char x, unsigned char newstate)
 
 }
 
-void keymap_init(void) 
+static void keymap_init(void) 
 {
 	int i, keyidx;
 
@@ -154,10 +154,10 @@ void keymap_init(void)
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  PS/2 ----------------------------- */
 /* ------------------------------------------------------------------------- */
-uint8_t pushKeyCodeDummy(uint8_t keyidx, bool isDown){
+static uint8_t pushKeyCodeDummy(uint8_t keyidx, bool isDown){
 	return 0;
 }
-uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
+static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
 	if(keyidx == KEY_NONE) return 0;
 
@@ -288,7 +288,7 @@ uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 }*/
 
 // return : key modified
-int scanKeyPS2(void) {
+static int scanKeyPS2(void) {
 	
 	// debounce cleared and changed
 	if(!setCurrentMatrix()) return 0;
@@ -388,7 +388,7 @@ int scanKeyPS2(void) {
     return retval;
 }
 
-int scanKeyPs2WithMacro(void){
+static int scanKeyPs2WithMacro(void){
 
     Key gKey;
     if(isEmptyM()){
@@ -418,7 +418,7 @@ int scanKeyPs2WithMacro(void){
 	return scanKeyPS2();
 }
 
-void initPs2(void)
+static void initPs2(void)
 {
 	interfaceReady = true;
 
@@ -428,14 +428,14 @@ void initPs2(void)
 }
  
 
-uint8_t hasMacroPs2(void)
+static uint8_t hasMacroPs2(void)
 {
     return !isEmptyM();
 }
 
 
 // usb delay에 맞춰져 있으므로 절반으로 줄여줌;
-/*static int syncDelayPs2(int xDelay){
+static int syncDelayPs2(int xDelay){
     return xDelay >> 1;
 }
 static interface_config_t configPs2 = {
@@ -446,12 +446,12 @@ static keyscan_driver_t driverKeyScanPs2 = {
     pushKeyCode,
     pushKeyCodeDummy,
     pushKeyCode
-};*/
+};
 
 void initInterfacePs2(void){
 
-    // setInterfaceConfig(&configPs2);
-    // setKeyScanDriver(&driverKeyScanPs2);
+    setInterfaceConfig(&configPs2);
+    setKeyScanDriver(&driverKeyScanPs2);
 
 }
 
@@ -482,7 +482,7 @@ void ps2_main(void){
 		// 특별한 경우에만 발생하는 현상이다.
 		if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 2000){			
 			// move to usb
-			INTERFACE = 1;
+			INTERFACE = INTERFACE_USB;
 			DEBUG_PRINT((" move to usb \n"));
 			break;
 		}		
@@ -504,55 +504,55 @@ void ps2_main(void){
 				default:
 					switch(rxed) {
 						case 0xEE: /* echo */
-							// DEBUG_PRINT((" echo \n"));
+							DEBUG_PRINT((" echo \n"));
 							tx_state(0xEE, m_state);
 							continue;
 						case 0xF2: /* read id */
-							// DEBUG_PRINT((" read id \n"));
+							DEBUG_PRINT((" read id \n"));
 							tx_state(0xFA, STA_WAIT_ID);
 							continue;
 						case 0xFF: /* reset */
-							// DEBUG_PRINT((" reset \n"));
+							DEBUG_PRINT((" reset \n"));
 							tx_state(0xFA, STA_WAIT_RESET);
 							continue;
 						case 0xFE: /* resend */
-							// DEBUG_PRINT((" resend \n"));
+							DEBUG_PRINT((" resend \n"));
 							tx_state(lastSent, m_state);
 							continue;
 						case 0xF0: /* scan code set */
-							// DEBUG_PRINT((" scan code set \n"));
+							DEBUG_PRINT((" scan code set \n"));
 							tx_state(0xFA, STA_WAIT_SCAN_SET);
 							continue;
 						case 0xED: /* led indicators */	
-							// DEBUG_PRINT((" led indicators \n"));	
+							DEBUG_PRINT((" led indicators \n"));	
 							tx_state(0xFA, STA_WAIT_LEDS);
 							continue;
 						case 0xF3:
-							// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+							DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
 							tx_state(0xFA, STA_WAIT_AUTOREP);
 							continue;
 						case 0xF4:		// enable
-							// DEBUG_PRINT((" enable \n"));
+							DEBUG_PRINT((" enable \n"));
 							tx_state(0xFA, STA_NORMAL);
+							initPs2();
 							continue;
 						case 0xF5:		// disable
-							// DEBUG_PRINT((" disable \n"));
+							DEBUG_PRINT((" disable \n"));
 							tx_state(0xFA, STA_NORMAL);
 							continue;
 						case 0xF6:		// Set Default
-							// DEBUG_PRINT((" Set Default \n"));
+							DEBUG_PRINT((" Set Default \n"));
 							TYPEMATIC_DELAY=1;
 							TYPEMATIC_REPEAT=5;
 							clear();
 						default:
-							// DEBUG_PRINT((" default \n"));
+							DEBUG_PRINT((" default \n"));
 							tx_state(0xFA, STA_NORMAL);
-							initPs2();
 							break;
 					}
 					continue;
 				case STA_RXCHAR:
-					// DEBUG_PRINT((" STA_RXCHAR \n"));
+					DEBUG_PRINT((" STA_RXCHAR \n"));
 					if (rxed == 0xF5)
 						tx_state(0xFA, STA_NORMAL);
 					else {
@@ -561,14 +561,14 @@ void ps2_main(void){
 					continue;
 
 				case STA_WAIT_SCAN_SET:
-					// DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
+					DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
 					// start point... ps2로 인식 후 처음 이곳을 한 번은 거쳐간다?
 
 					clear();
 					tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
 					continue;
 				case STA_WAIT_AUTOREP:
-					// DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+					DEBUG_PRINT((" STA_WAIT_AUTOREP STA_WAIT_AUTOREP \n"));
 					TYPEMATIC_DELAY = (rxed&0b01100000)/0b00100000;
 
 					temp_a = (rxed&0b00000111);

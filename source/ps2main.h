@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include <avr/io.h>
+#include <stdbool.h>
 
 /* This controls what to do when a character has been recieved from the
    host, and when we want to send a character to the host. Note that
@@ -32,7 +33,7 @@
 #define NO_REPEAT  0xFD
 #define SPLIT      0xFC
 
-extern uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown);
+// extern uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown);
 // extern void prepareKeyMappingPs2(void);
 extern void ps2_main(void);
 extern void initInterfacePs2(void);

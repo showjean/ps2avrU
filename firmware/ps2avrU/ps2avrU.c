@@ -82,7 +82,7 @@ uint8_t getCellStatus(uint8_t xRow){
 	if(xRow<8)	{				// for 0..7, PORTA 0 -> 7
 		return (~PINROWS1) & BV(xRow);
 	}
-	else if(xRow<16) {	// for 8..15, PORTC 7 -> 0
+	else if(xRow>=8 && xRow<16) {	// for 8..15, PORTC 7 -> 0
 		return (~PINROWS2) & BV(15-xRow);
 	}
 	else {						// for 16, PORTD 7

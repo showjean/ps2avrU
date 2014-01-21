@@ -259,9 +259,9 @@ static int initCount = 0;
 // static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
 uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
 
-void clearReportBuffer(void);
-void wakeUpUsb(void);
-void countSleepUsb(void);
+static void clearReportBuffer(void);
+static void wakeUpUsb(void);
+static void countSleepUsb(void);
 
 
 void delegateLedUsb(uint8_t xState){
@@ -296,10 +296,10 @@ void delegateStartTimerWhenUsbInterupt(void){
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  USB  ----------------------------- */
 /* ------------------------------------------------------------------------- */
-uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
-bool _extraHasChanged = false;
-uint16_t extraData = 0;
-void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
+static uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
+static bool _extraHasChanged = false;
+static uint16_t extraData = 0;
+static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
 
         _extraHasChanged = true;
@@ -313,10 +313,10 @@ void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
         
     }
 }
-uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
+static uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
     return 0;
 }
-uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
+static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     uint8_t retval = 1;
 
     // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
@@ -367,7 +367,7 @@ uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
 
 }*/
 
-void clearReportBuffer(void){    
+static void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
     extraData = 0;
 }
@@ -402,7 +402,7 @@ uint8_t putKeyUsb(uint8_t keyidx, down isDown, uint8_t col, uint8_t row) {
     return 1;
 }*/
 
-uint8_t scanKeyUSB(void) {
+static uint8_t scanKeyUSB(void) {
 
 	// debounce cleared
     if (!setCurrentMatrix()) return 0;  
@@ -474,11 +474,11 @@ uint8_t scanKeyUSB(void) {
 }
 
 static uint8_t _needRelease = 0;
-void clearMacroBuffer(void){    
+static void clearMacroBuffer(void){    
     memset(macroBuffer, 0, sizeof(macroBuffer)); 
 }
 
-uint8_t scanMacroUsb(void)
+static uint8_t scanMacroUsb(void)
 {
     clearReportBuffer(); 
 
@@ -548,17 +548,17 @@ uint8_t scanMacroUsb(void)
 
 }
 
-uint8_t hasMacroUsb(void)
+static uint8_t hasMacroUsb(void)
 {
     return (_needRelease || !isEmptyM());
 }
 
-void wakeUpUsb(void){
+static void wakeUpUsb(void){
 #if !USB_COUNT_SOF  
     wakeUp();
 #endif
 }
-void countSleepUsb(void){
+static void countSleepUsb(void){
 #if !USB_COUNT_SOF  
     countSleep();
 #endif    
@@ -623,7 +623,7 @@ void usb_main(void) {
 		// 특별한 경우에만 발생하는 현상이다.
 		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 2000){
 			// move to ps/2
-			INTERFACE = 0;
+			INTERFACE = INTERFACE_PS2;
 			DEBUG_PRINT(("               move to ps/2 \n"));
 			break;
 		}
