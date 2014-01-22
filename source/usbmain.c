@@ -418,14 +418,14 @@ static uint8_t scanMacroUsb(void)
 
     if(!isEmptyM()){
         int gIdx;  
-        Key gKey;    
+        macro_key_t gKey;    
         uint8_t i;
         uint8_t gLen = strlen((char *)macroBuffer);
         uint8_t gKeyidx;  
       
         gKey = popMWithKey();  
         
-        if(gKey.mode == 1){    // down
+        if(gKey.mode == MACRO_KEY_DOWN){    // down
             append(macroBuffer, gKey.keyindex);
 
             makeReportBufferExtra(gKey.keyindex, true);

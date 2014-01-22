@@ -323,7 +323,7 @@ bool isMacroKey(uint8_t xKeyidx){
 static void pushCharacter(char *xStr)
 {	   
  	// 버퍼에 쌓아두고 모두 출력되기를 기다린다.
-	Key key;
+	macro_key_t key;
 
     key = charToKey(xStr[0]); 
     if(key.mode){

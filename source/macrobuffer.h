@@ -9,6 +9,8 @@
 
 
 #define MOD_SHIFT_LEFT  (1 << 1)
+#define MACRO_KEY_DOWN  	1
+#define MACRO_KEY_UP	  	0
 /**
  * This structure can be used as a container for a single 'key'. It consists of
  * the key-code and the modifier-code.
@@ -16,7 +18,7 @@
 typedef struct {
     uint8_t mode;
     uint8_t keyindex;
-} Key;
+} macro_key_t;
 
 
 #define MACRO_NUM 12
@@ -30,7 +32,7 @@ extern void pushM(uint8_t item) ;
 extern uint8_t popM(void);
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
-extern Key popMWithKey(void);
+extern macro_key_t popMWithKey(void);
 
 extern bool isEmptyM(void);
 
@@ -52,6 +54,6 @@ extern const char * toString(uint8_t xInt);
  * \return structure containing the combination
  */
 
-extern Key charToKey(char character);
+extern macro_key_t charToKey(char character);
 
 #endif

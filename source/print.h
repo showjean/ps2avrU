@@ -34,10 +34,10 @@ static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 #define DEBUG_PRINT(arg)
 #endif
 
+#ifdef DEBUG
 static void 
 enable_printf(void)
 {
-#ifdef DEBUG
 	stdout = &mystdout;
 	//DDRD |= 0x01;
 
@@ -46,7 +46,10 @@ enable_printf(void)
 	UCSRA = 0x00;									   // asynchronous normal mode
 	UCSRB = 0x08;									   // Tx enable, 8 data
 	UCSRC = 0x86;									   // no parity, 1 stop, 8 data
-#endif
+
 }
+#else
+#define enable_printf(void)
+#endif
 
 #endif

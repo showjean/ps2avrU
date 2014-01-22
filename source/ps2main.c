@@ -301,16 +301,19 @@ static int scanKeyPS2(void) {
     return retval;
 }
 
+static uint8_t hasMacroPs2(void)
+{
+    return !isEmptyM();
+}
+
 static int scanKeyPs2WithMacro(void){
 
-    Key gKey;
-    if(isEmptyM()){
-    	setMacroProcessEnd(true);
-	}else{
+    macro_key_t gKey;
+    if(hasMacroPs2()){
     	setMacroProcessEnd(false);
 	  
         gKey = popMWithKey();
-        if(gKey.mode == 1){	// down
+        if(gKey.mode == MACRO_KEY_DOWN){	// down
         	// DEBUG_PRINT(("macro down : %d \n", gKey.keyindex));
         	pushKeyCode(gKey.keyindex, true);
         	push(NO_REPEAT);	// set no repeat
@@ -325,7 +328,9 @@ static int scanKeyPs2WithMacro(void){
         	// DEBUG_PRINT(("macro up : %d \n", gKey.keyindex));
         }
 
-	    return 0;	    
+	    return 0;	 
+	}else{   
+    	setMacroProcessEnd(true);
 	}
 
 	return scanKeyPS2();
@@ -338,13 +343,7 @@ static void initPs2(void)
     initFullLEDState();
 
     startKeyMappingOnBoot();
-}
- 
-
-static uint8_t hasMacroPs2(void)
-{
-    return !isEmptyM();
-}
+} 
 
 static keyscan_driver_t driverKeyScanPs2 = {
     pushKeyCode,
@@ -362,12 +361,216 @@ void initInterfacePs2(void){
 /* -----------------------------    Function  Main  ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-void ps2_main(void){
-	// initialize speed port
-	unsigned char rxed;
+// initialize speed port
+static unsigned char rxed;
 
-	int temp_a, temp_b;
-	int i, j;
+static int temp_a, temp_b;
+static int i, j;
+static int keyval=0;
+void processRXPs2(void){
+	// check that every key code for single keys are transmitted		
+	/*if (kbd_flags & FLA_RX_BAD) {		// pokud je nastaveny flag spatneho prijmu, zrus ho 
+		// pokud flag is set back income withdrawn
+		cli();
+		kbd_flags &= ~FLA_RX_BAD;
+		sei();
+	}*/
+	if ((kbd_flags & FLA_RX_BYTE) && (keyval==SPLIT || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
+		// pokud law, the flag setting apart, take it and zanalyzuj
+		rxed = kbd_get_rx_char();		
+
+		switch(m_state) {
+			default:
+				switch(rxed) {
+					case 0xEE: /* echo */
+						DEBUG_PRINT((" echo \n"));
+						tx_state(0xEE, m_state);
+						return;
+					case 0xF2: /* read id */
+						DEBUG_PRINT((" read id \n"));
+						tx_state(0xFA, STA_WAIT_ID);
+						return;
+					case 0xFF: /* reset */
+						DEBUG_PRINT((" reset \n"));
+						tx_state(0xFA, STA_WAIT_RESET);
+						return;
+					case 0xFE: /* resend */
+						DEBUG_PRINT((" resend \n"));
+						tx_state(lastSent, m_state);
+						return;
+					case 0xF0: /* scan code set */
+						DEBUG_PRINT((" scan code set \n"));
+						tx_state(0xFA, STA_WAIT_SCAN_SET);
+						return;
+					case 0xED: /* led indicators */	
+						DEBUG_PRINT((" led indicators \n"));	
+						tx_state(0xFA, STA_WAIT_LEDS);
+						return;
+					case 0xF3:
+						DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
+						tx_state(0xFA, STA_WAIT_AUTOREP);
+						return;
+					case 0xF4:		// enable
+						DEBUG_PRINT((" enable \n"));
+						tx_state(0xFA, STA_NORMAL);
+						initPs2();
+						return;
+					case 0xF5:		// disable
+						DEBUG_PRINT((" disable \n"));
+						tx_state(0xFA, STA_NORMAL);
+						return;
+					case 0xF6:		// Set Default
+						DEBUG_PRINT((" Set Default \n"));
+						TYPEMATIC_DELAY=1;
+						TYPEMATIC_REPEAT=5;
+						clear();
+					default:
+						DEBUG_PRINT((" default \n"));
+						tx_state(0xFA, STA_NORMAL);
+						break;
+				}
+				return;
+			case STA_RXCHAR:
+				DEBUG_PRINT((" STA_RXCHAR \n"));
+				if (rxed == 0xF5)
+					tx_state(0xFA, STA_NORMAL);
+				else {
+					tx_state(0xFA, STA_RXCHAR);
+				}
+				return;
+
+			case STA_WAIT_SCAN_SET:
+				DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
+				// start point... ps2로 인식 후 처음 이곳을 한 번은 거쳐간다?
+
+				clear();
+				tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
+				return;
+			case STA_WAIT_AUTOREP:
+				DEBUG_PRINT((" STA_WAIT_AUTOREP STA_WAIT_AUTOREP \n"));
+				TYPEMATIC_DELAY = (rxed&0b01100000)/0b00100000;
+
+				temp_a = (rxed&0b00000111);
+				temp_b = (rxed&0b00011000)/(0b000001000);
+
+				j=1;
+				for(i=0;i<temp_b;i++) {
+					j = j*2;
+				}
+
+				TYPEMATIC_REPEAT = temp_a*j;
+
+				tx_state(0xFA, STA_NORMAL);
+				
+				return;
+			case STA_WAIT_LEDS:
+				// Reflect LED states to PD0~2
+				initPs2();
+				
+				uint8_t ledstate = 0;
+
+				// scroll lock
+				if(rxed&0x01)
+					ledstate |= LED_STATE_SCROLL;					
+
+				// num lock
+				if(rxed&0x02)
+					ledstate |= LED_STATE_NUM;
+									
+				// capslock
+				if(rxed&0x04)
+					ledstate |= LED_STATE_CAPS;
+				
+				setLEDState(ledstate);
+				setLEDIndicate();
+
+				tx_state(0xFA, STA_NORMAL);
+				return;
+		}
+	}
+}
+
+void processTXPs2(void){
+	if (kbd_flags & FLA_TX_OK) {   // pokud flag odesilani ok -> if the flag sent ok
+		switch(m_state) {
+			case STA_NORMAL:
+
+				// if error during send
+				if(isEmpty()){
+					scanKeyPs2WithMacro();
+				}
+
+		        // ps2avrU loop, must be scan matrix;
+		        enterFrame();
+
+				keyval = pop();
+				if(keyval==SPLIT)
+					return;
+
+				if(keyval) {
+					tx_state(keyval, STA_NORMAL);
+
+					loopCnt=0;
+
+				}else if(lastMAKE_SIZE>0) {		// means key is still pressed
+					loopCnt++;
+
+					// if key is pressed until typmatic_delay, goes to repeat the last key
+					if(loopCnt >= TYPEMATIC_DELAY*150+230) {
+						loopCnt=0;
+						lastMAKE_IDX=0;
+						m_state = STA_REPEAT;							
+					}
+				}
+
+				break;
+			// typematic : repeat last key
+			case STA_REPEAT:
+				
+				if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
+					scanKeyPs2WithMacro();
+				}
+		        // ps2avrU loop, must be scan matrix;
+		        enterFrame();
+
+				if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal
+					m_state=STA_NORMAL;
+					loopCnt=0;
+					break;
+				}
+
+				// if release key is pushed, send them.
+				if(loopCnt==1 || lastMAKE_IDX!=0) {
+					tx_state(lastMAKE[lastMAKE_IDX++], STA_REPEAT);
+					lastMAKE_IDX %= lastMAKE_SIZE;
+				}
+				
+				loopCnt++;
+				loopCnt %= (3+TYPEMATIC_REPEAT*10);
+
+				
+				break;
+			case STA_WAIT_SCAN_REPLY:
+				tx_state(0x02, STA_NORMAL);
+				break;
+			case STA_WAIT_ID:
+				tx_state(0xAB, STA_WAIT_ID1);
+				break;
+			case STA_WAIT_ID1:
+				tx_state(0x83, STA_NORMAL);
+				break;
+
+				_delay_ms(300);
+			case STA_WAIT_RESET:
+				clear();
+
+				tx_state(0xAA, STA_NORMAL);
+				break;
+		}
+	}
+}
+
+void ps2_main(void){
 
 	m_state = STA_WAIT_RESET;
 	kbd_init();
@@ -392,206 +595,9 @@ void ps2_main(void){
 			break;
 		}		
 
-		static int keyval=0;
+		processRXPs2();
+		processTXPs2();
 
-		// check that every key code for single keys are transmitted		
-		/*if (kbd_flags & FLA_RX_BAD) {		// pokud je nastaveny flag spatneho prijmu, zrus ho 
-			// pokud flag is set back income withdrawn
-			cli();
-			kbd_flags &= ~FLA_RX_BAD;
-			sei();
-		}*/
-		if ((kbd_flags & FLA_RX_BYTE) && (keyval==SPLIT || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
-			// pokud law, the flag setting apart, take it and zanalyzuj
-			rxed = kbd_get_rx_char();		
-
-			switch(m_state) {
-				default:
-					switch(rxed) {
-						case 0xEE: /* echo */
-							DEBUG_PRINT((" echo \n"));
-							tx_state(0xEE, m_state);
-							continue;
-						case 0xF2: /* read id */
-							DEBUG_PRINT((" read id \n"));
-							tx_state(0xFA, STA_WAIT_ID);
-							continue;
-						case 0xFF: /* reset */
-							DEBUG_PRINT((" reset \n"));
-							tx_state(0xFA, STA_WAIT_RESET);
-							continue;
-						case 0xFE: /* resend */
-							DEBUG_PRINT((" resend \n"));
-							tx_state(lastSent, m_state);
-							continue;
-						case 0xF0: /* scan code set */
-							DEBUG_PRINT((" scan code set \n"));
-							tx_state(0xFA, STA_WAIT_SCAN_SET);
-							continue;
-						case 0xED: /* led indicators */	
-							DEBUG_PRINT((" led indicators \n"));	
-							tx_state(0xFA, STA_WAIT_LEDS);
-							continue;
-						case 0xF3:
-							DEBUG_PRINT((" STA_WAIT_AUTOREP \n"));
-							tx_state(0xFA, STA_WAIT_AUTOREP);
-							continue;
-						case 0xF4:		// enable
-							DEBUG_PRINT((" enable \n"));
-							tx_state(0xFA, STA_NORMAL);
-							initPs2();
-							continue;
-						case 0xF5:		// disable
-							DEBUG_PRINT((" disable \n"));
-							tx_state(0xFA, STA_NORMAL);
-							continue;
-						case 0xF6:		// Set Default
-							DEBUG_PRINT((" Set Default \n"));
-							TYPEMATIC_DELAY=1;
-							TYPEMATIC_REPEAT=5;
-							clear();
-						default:
-							DEBUG_PRINT((" default \n"));
-							tx_state(0xFA, STA_NORMAL);
-							break;
-					}
-					continue;
-				case STA_RXCHAR:
-					DEBUG_PRINT((" STA_RXCHAR \n"));
-					if (rxed == 0xF5)
-						tx_state(0xFA, STA_NORMAL);
-					else {
-						tx_state(0xFA, STA_RXCHAR);
-					}
-					continue;
-
-				case STA_WAIT_SCAN_SET:
-					DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
-					// start point... ps2로 인식 후 처음 이곳을 한 번은 거쳐간다?
-
-					clear();
-					tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
-					continue;
-				case STA_WAIT_AUTOREP:
-					DEBUG_PRINT((" STA_WAIT_AUTOREP STA_WAIT_AUTOREP \n"));
-					TYPEMATIC_DELAY = (rxed&0b01100000)/0b00100000;
-
-					temp_a = (rxed&0b00000111);
-					temp_b = (rxed&0b00011000)/(0b000001000);
-
-					j=1;
-					for(i=0;i<temp_b;i++) {
-						j = j*2;
-					}
-
-					TYPEMATIC_REPEAT = temp_a*j;
-
-					tx_state(0xFA, STA_NORMAL);
-					
-					continue;
-				case STA_WAIT_LEDS:
-					// Reflect LED states to PD0~2
-					initPs2();
-					
-					uint8_t ledstate = 0;
-
-					// scroll lock
-					if(rxed&0x01)
-						ledstate |= LED_STATE_SCROLL;					
-
-					// num lock
-					if(rxed&0x02)
-						ledstate |= LED_STATE_NUM;
-										
-					// capslock
-					if(rxed&0x04)
-						ledstate |= LED_STATE_CAPS;
-					
-					setLEDState(ledstate);
-					setLEDIndicate();
-
-					tx_state(0xFA, STA_NORMAL);
-					continue;
-			}
-		}
-
-		if (kbd_flags & FLA_TX_OK) {   // pokud flag odesilani ok -> if the flag sent ok
-			switch(m_state) {
-				case STA_NORMAL:
-
-					// if error during send
-					if(isEmpty()){
-						scanKeyPs2WithMacro();
-					}
-
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-
-					keyval = pop();
-					if(keyval==SPLIT)
-						continue;
-
-					if(keyval) {
-						tx_state(keyval, STA_NORMAL);
-	
-						loopCnt=0;
-
-					}else if(lastMAKE_SIZE>0) {		// means key is still pressed
-						loopCnt++;
-
-						// if key is pressed until typmatic_delay, goes to repeat the last key
-						if(loopCnt >= TYPEMATIC_DELAY*150+230) {
-							loopCnt=0;
-							lastMAKE_IDX=0;
-							m_state = STA_REPEAT;							
-						}
-					}
-
-					break;
-				// typematic : repeat last key
-				case STA_REPEAT:
-					
-					if(lastMAKE_IDX==0)	{	// key state can be escaped only if whole key scancode is transmitted
-						scanKeyPs2WithMacro();
-					}
-			        // ps2avrU loop, must be scan matrix;
-			        enterFrame();
-
-					if(lastMAKE_SIZE==0 || !isEmpty()) {	// key is released. go to normal
-						m_state=STA_NORMAL;
-						loopCnt=0;
-						break;
-					}
-
-					// if release key is pushed, send them.
-					if(loopCnt==1 || lastMAKE_IDX!=0) {
-						tx_state(lastMAKE[lastMAKE_IDX++], STA_REPEAT);
-						lastMAKE_IDX %= lastMAKE_SIZE;
-					}
-					
-					loopCnt++;
-					loopCnt %= (3+TYPEMATIC_REPEAT*10);
-
-					
-					break;
-				case STA_WAIT_SCAN_REPLY:
-					tx_state(0x02, STA_NORMAL);
-					break;
-				case STA_WAIT_ID:
-					tx_state(0xAB, STA_WAIT_ID1);
-					break;
-				case STA_WAIT_ID1:
-					tx_state(0x83, STA_NORMAL);
-					break;
-
-					_delay_ms(300);
-				case STA_WAIT_RESET:
-					clear();
-
-					tx_state(0xAA, STA_NORMAL);
-					break;
-			}
-		}
 	}
 
 

@@ -38,12 +38,12 @@ uint8_t popM(void) {
 }
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
-Key popMWithKey(void) {
-    Key gKey;
+macro_key_t popMWithKey(void) {
+    macro_key_t gKey;
     int gIdx;
     int gLen;
 
-    gKey.mode = 0; // down = 1, up = 0;
+    gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
     gKey.keyindex = popM();
 
     if(gKey.keyindex == 0) {
@@ -60,7 +60,7 @@ Key popMWithKey(void) {
         delete(_pressedBuffer, gIdx);
     }else{
         append(_pressedBuffer, gKey.keyindex);
-        gKey.mode = 1;
+        gKey.mode = MACRO_KEY_DOWN;
     }
 
     return gKey;
@@ -105,8 +105,8 @@ const char * toString(uint8_t xInt)
  * \return structure containing the combination
  */
 
-Key charToKey(char character) {
-    Key key;
+macro_key_t charToKey(char character) {
+    macro_key_t key;
     // initialize with reserved values
     key.mode = KEY_NONE;
     key.keyindex = KEY_NONE;
