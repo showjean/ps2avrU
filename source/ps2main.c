@@ -34,6 +34,7 @@
 #include "keydownbuffer.h"
 #include "fncontrol.h"
 #include "dualaction.h"
+#include "lazyfn.h"
 #include "keyscan.h"
 
 // Output buffer - circular queue
@@ -262,27 +263,31 @@ static int scanKeyPS2(void) {
     uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-	if(_prevLayer != gLayer){
+	if(!isLazyFn() && _prevLayer != gLayer){
 		for(col=0;col<COLUMNS;col++)
 		{		
 			for(row=0;row<ROWS;row++)
-			{
-				prev = gPrevMatrix[row] & BV(col);
-				cur  = gMatrix[row] & BV(col);
-
-				if(!prev) continue;
-				
+			{				
 				prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
 				keyidx = getCurrentKeyindex(gLayer, row, col);
 
 	            // 이전 상태에서(press/up) 변화가 있을 경우;
-				if( prevKeyidx != keyidx && keyidx != KEY_NONE ) {
-					// if(prev){
-					putChangedKey(prevKeyidx, false, col, row);
+	            /*
+	            prev : 1, cur : 1 = prev up, cur down
+	            prev : 1, cur : 0 = prev up
+	            prev : 0, cur : 1 = cur down
+	            prev : 0, cur : 0 = -
+	            */	            
+				if( prevKeyidx != keyidx ) {
+					prev = gPrevMatrix[row] & BV(col);
+					cur  = gMatrix[row] & BV(col);
+
+					if(prev){
+						putChangedKey(prevKeyidx, false, col, row);
+					}
 					if(cur){
 						putChangedKey(keyidx, true, col, row);
 					}
-					// }
 				}
 
 			}
@@ -291,7 +296,7 @@ static int scanKeyPS2(void) {
 	}
 	_prevLayer = gLayer;
 
-	uint8_t retval = scanKey();
+	uint8_t retval = scanKey(gLayer);
 
     return retval;
 }

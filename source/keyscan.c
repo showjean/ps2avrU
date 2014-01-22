@@ -58,14 +58,15 @@ uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow)
     return 1;
 }
 
-uint8_t scanKey(void) {
+uint8_t scanKey(uint8_t xLayer) {
 
     uint8_t retval = 0;
 
 	uint8_t row, col, prev, cur, keyidx;
     uint8_t gFN; 
     uint8_t gResultPutKey = 1;
-	uint8_t gLayer = getLayer();
+	uint8_t gLayer = xLayer; //getLayer();    
+    // static uint8_t pressedKeyidx[ROWS][COLUMNS];
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
@@ -94,8 +95,10 @@ uint8_t scanKey(void) {
                 if(cur) {
                     // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
                     gFN = putChangedKey(keyidx, true, col, row);
+                    // pressedKeyidx[col][row] = keyidx;
                 }else{
                     // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
+                    // gFN = putChangedKey(pressedKeyidx[col][row], false, col, row);
                     gFN = putChangedKey(keyidx, false, col, row);
                 }
 			}
@@ -116,6 +119,8 @@ uint8_t scanKey(void) {
 	retval |= 0x01; // must have been a change at some point, since debounce is done
 	
     setPrevMatrix();
+
+    setCurrentMatrixAfter();
 
     if(gResultPutKey == 0) return 0;
 	

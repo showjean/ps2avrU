@@ -376,7 +376,8 @@ static uint8_t scanKeyUSB(void) {
     clearReportBuffer();
     clearDownBuffer();  
 
-    uint8_t retval = scanKey();
+    uint8_t gLayer = getLayer();
+    uint8_t retval = scanKey(gLayer);
 
     return retval;
 }

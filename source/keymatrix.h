@@ -12,6 +12,7 @@ extern void initMatrixDevice(void);
 extern void clearMatrix(void);
 extern void clearPrevMatrix(void);
 
+// extern void setReleaseAll(void);
 extern bool isReleaseAll(void);
 extern bool isReleaseAllPrev(void);
 
@@ -21,6 +22,7 @@ extern uint8_t getLayer(void);
 
 extern uint8_t getLiveMatrix(void);
 //curmatrix
+extern void setCurrentMatrixAfter(void);
 extern uint8_t setCurrentMatrix(void);
 extern uint8_t *getCurrentMatrix(void);
 extern void setPrevMatrix(void);

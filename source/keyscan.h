@@ -12,6 +12,6 @@ typedef struct {
 
 extern void setKeyScanDriver(keyscan_driver_t *driver);
 extern uint8_t putChangedKey(uint8_t keyidx, bool isDown, uint8_t col, uint8_t row);
-extern uint8_t scanKey(void);
+extern uint8_t scanKey(uint8_t xLayer);
 
 #endif

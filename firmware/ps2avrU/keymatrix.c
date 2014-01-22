@@ -37,6 +37,7 @@ static uint8_t debounceMAX;
 static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 static bool _isReleaseAllPrev = true;
+static uint8_t _currentLazyLayer = 0;
 
 
 
@@ -73,7 +74,7 @@ void clearPrevMatrix(void){
 	}
 }
 
-bool isReleaseAll(void){
+void setReleaseAll(void){
 	uint8_t row;
 	_isReleaseAll = true;
 	for(row=0;row<ROWS;row++) {
@@ -82,10 +83,6 @@ bool isReleaseAll(void){
 			break;
 		}
 	}
-	return _isReleaseAll;
-}
-bool isReleaseAllPrev(void){
-	uint8_t row;
 	_isReleaseAllPrev = true;
 	for(row=0;row<ROWS;row++) {
 		if(prevMatrix[row] > 0){
@@ -93,8 +90,13 @@ bool isReleaseAllPrev(void){
 			break;
 		}
 	}
-	return _isReleaseAllPrev;
+}
 
+bool isReleaseAll(void){	
+	return _isReleaseAll;
+}
+bool isReleaseAllPrev(void){
+	return _isReleaseAllPrev;
 }
 
 
@@ -102,12 +104,23 @@ bool isReleaseAllPrev(void){
 // 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur;
-	static uint8_t _currentLazyLayer = 0;
+
+	/*
+
+	게으른 FN이 작동되는 상황 정리;
+	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함;
+	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
+	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
+	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
+	*/
+
+	if(_currentLazyLayer > 0) return _currentLazyLayer;
 
 	// fn이 가장 우선, 다음 fn2
     uint8_t *gMatrix = getCurrentMatrix();
-	for(col=0;col<COLUMNS;col++){
-		for(row=0;row<ROWS;row++){		
+	for(row=0;row<ROWS;row++){	
+		if(gMatrix[row] == 0) continue;
+		for(col=0;col<COLUMNS;col++){	
 
 			cur  = gMatrix[row] & BV(col);
 
@@ -119,17 +132,29 @@ uint8_t getLayer(void) {
 				if(keyidx == KEY_FN){
 					//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
 					if(isLazyFn()){
-						_currentLazyLayer = 1;
+						if(isReleaseAllPrev()){
+							_currentLazyLayer = 1;
+						}else{
+							return _currentLayer;
+						}
 					}
 					return 1;
 				}else if(keyidx == KEY_FN2){
 					if(isLazyFn()){
-						_currentLazyLayer = 2;
+						if(isReleaseAllPrev()){
+							_currentLazyLayer = 2;
+						}else{
+							return _currentLayer;
+						}
 					}
 					return 2;	
 				}else if(keyidx == KEY_FN3){
 					if(isLazyFn()){
-						_currentLazyLayer = 3;
+						if(isReleaseAllPrev()){
+							_currentLazyLayer = 3;
+						}else{
+							return _currentLayer;
+						}
 					}
 					return 3;					
 				}else if(keyidx == KEY_NOR){
@@ -141,12 +166,6 @@ uint8_t getLayer(void) {
 			}
 		}
 	}
-
-	if(isReleaseAll()){
-		_currentLazyLayer = 0;
-	}
-
-	if(_currentLazyLayer > 0) return _currentLazyLayer;
 	
 	if(isBeyondFN() == 1) {
 		_currentLayer = 2;
@@ -264,8 +283,9 @@ uint8_t *getCurrentMatrix(void){
 void setPrevMatrix(void){
 	uint8_t row;
 	uint8_t *gMatrix = getCurrentMatrix();
-	for(row=0;row<ROWS;++row)
+	for(row=0;row<ROWS;++row){
 		prevMatrix[row] = gMatrix[row];
+	}
 }
 
 uint8_t *getPrevMatrix(void){
@@ -281,6 +301,14 @@ uint8_t setCurrentMatrix(void){
 	return gClearMatrix;
 }
 
+// 매트릭스에 관련된 모든 처리가 끝난 후 실행 된다.
+void setCurrentMatrixAfter(void){
+	setReleaseAll();
+
+	if(isReleaseAll()){
+		_currentLazyLayer = 0;
+	}
+}
 
 
 #endif
