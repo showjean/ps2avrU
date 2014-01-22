@@ -247,47 +247,6 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 	return 1;
 }
 
-/*uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown){
-	if(isDown){				
-		// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-		pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-	}
-	
-	return pushKeyCode(keyidx, isDown);
-}*/
-
-// push the keycodes into the queue by its key index, and isDown
-/*uint8_t putKey(uint8_t keyidx, bool isDown, uint8_t col, uint8_t row) {
-
-	bool gFN = applyFN(keyidx, col, row, isDown);
-
-	if(isDown && keyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, true);
-	}
-
-	// 키매핑 진행중;
-	if(isDeepKeyMapping()){
-		// DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
-		
-		putKeyindex(keyidx, col, row, isDown);
-
-		return 0;
-	}
-			
-	if(isDown && applyMacro(keyidx)) {
-		// 매크로 실행됨;
-		return 0;
-	}
-
-	// fn키를 키매핑에 적용하려면 위치 주의;
-	if(gFN == false) return 0;
-
-	pushKeyCode(keyidx, isDown);
-
-	return 1;
-}*/
-
-// return : key modified
 static int scanKeyPS2(void) {
 	
 	// debounce cleared and changed
@@ -296,13 +255,8 @@ static int scanKeyPS2(void) {
     clearDownBuffer();
 	
     uint8_t prevKeyidx;
-
 	uint8_t row, col, prev, cur, keyidx;
-	// uint8_t gFN; 
-	// uint8_t gResultPutKey = 1;
 	uint8_t gLayer = getLayer();
-
-    // DEBUG_PRINT(("gLayer  : %d \n", gLayer));
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
@@ -338,52 +292,6 @@ static int scanKeyPS2(void) {
 	_prevLayer = gLayer;
 
 	uint8_t retval = scanKey();
-/*
-	// debounce cleared => compare last matrix and current matrix
-	for(col=0;col<COLUMNS;++col) {		
-		for(row=0;row<ROWS;++row) {
-
-			prev = gPrevMatrix[row] & BV(col);
-			cur  = gMatrix[row] & BV(col);
-			keyidx = getCurrentKeyindex(gLayer, row, col);	   		
-			gFN = 1;
-
-            // !(prev&&cur) : 1 && 1 이 아니고, 
-            // !(!prev&&!cur) : 0 && 0 이 아니고, 
-            // 이전 상태에서(press/up) 변화가 있을 경우;
-			// if( !(prev&&cur) && !(!prev&&!cur)) {
-			if( prev != cur ) {
-#ifdef ENABLE_BOOTMAPPER                
-                if(isBootMapper()){
-                    if(cur) trace(row, col);
-                    /////////////////////////
-                    break;
-                }
-#endif	
-				if(cur) {
-					// DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
-					gFN = putKey(keyidx, 1, col, row);
-				}else{
-					// DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
-					gFN = putKey(keyidx, 0, col, row);
-				}
-			}
-
-            // fn키를 키매핑에 적용하려면 위치 주의;
-            if(gFN == 0) continue;
-
-			// 눌려진 키들은 모두 다운 버퍼에 저장;
-			if(cur){
-				// 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-				pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-				/////////////////////////////////
-			}
-		}		
-	}
-	
-	setPrevMatrix();
-
-	return gResultPutKey;*/
 
     return retval;
 }
@@ -433,15 +341,6 @@ static uint8_t hasMacroPs2(void)
     return !isEmptyM();
 }
 
-
-// usb delay에 맞춰져 있으므로 절반으로 줄여줌;
-static int syncDelayPs2(int xDelay){
-    return xDelay >> 1;
-}
-static interface_config_t configPs2 = {
-	syncDelayPs2
-};
-
 static keyscan_driver_t driverKeyScanPs2 = {
     pushKeyCode,
     pushKeyCodeDummy,
@@ -450,7 +349,6 @@ static keyscan_driver_t driverKeyScanPs2 = {
 
 void initInterfacePs2(void){
 
-    setInterfaceConfig(&configPs2);
     setKeyScanDriver(&driverKeyScanPs2);
 
 }
@@ -471,6 +369,8 @@ void ps2_main(void){
 
 	keymap_init();
 	clear();
+
+	initInterfacePs2();
 
 	DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 

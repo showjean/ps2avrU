@@ -33,8 +33,6 @@
 #define NO_REPEAT  0xFD
 #define SPLIT      0xFC
 
-// extern uint8_t pushKeyCodeDecorator(uint8_t keyidx, bool isDown);
-// extern void prepareKeyMappingPs2(void);
 extern void ps2_main(void);
 extern void initInterfacePs2(void);
 

@@ -74,7 +74,11 @@ void initFullLEDStateAfter(void){
 
 	setFullLEDState();
 
-	beyondFNCountDelay = syncDelay(beyondFNCountDelay);
+	/*if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		beyondFNCountDelay = beyondFNCountDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}*/
+
+	beyondFNCountDelay = setDelay(beyondFNCountDelay);
 }
 
 void blinkOnce(void){

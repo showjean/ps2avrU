@@ -33,9 +33,10 @@ uint8_t _currentLayer = 0;
 
 
 /* ------------------------------------------------------------------------- */
-static uint8_t debounceMAX = 7;
-static uint8_t debounce = 0;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
-static bool _isAllKeyRelease = true;
+static uint8_t debounceMAX;
+static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+static bool _isReleaseAll = true;
+static bool _isReleaseAllPrev = true;
 
 
 
@@ -47,8 +48,6 @@ void initMatrix(void){
 	initMatrixDevice();
 
 	clearMatrix();
-	
-	debounce = 0;
 }
 
 void clearMatrix(void){
@@ -57,6 +56,9 @@ void clearMatrix(void){
 		prevMatrix[row] = 0;
 		currentMatrix[row] = 0;
 	}
+
+	debounceMAX = 7;
+	debounce = 10;
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
@@ -71,18 +73,28 @@ void clearPrevMatrix(void){
 	}
 }
 
-bool isAllKeyRelease(void)
-{
+bool isReleaseAll(void){
 	uint8_t row;
-	_isAllKeyRelease = true;
+	_isReleaseAll = true;
 	for(row=0;row<ROWS;row++) {
-		// currentMatrix로 비교하면 ps/2연결시 마지막 키의 up 판단 전에 매트릭스상 모든 키가 릴리즈 상태여서 마지막 키가 리포트 되지 않는다.
-		if(prevMatrix[row] > 0){
-			_isAllKeyRelease = false;
+		if(currentMatrix[row] > 0){
+			_isReleaseAll = false;
 			break;
 		}
 	}
-	return _isAllKeyRelease;
+	return _isReleaseAll;
+}
+bool isReleaseAllPrev(void){
+	uint8_t row;
+	_isReleaseAllPrev = true;
+	for(row=0;row<ROWS;row++) {
+		if(prevMatrix[row] > 0){
+			_isReleaseAllPrev = false;
+			break;
+		}
+	}
+	return _isReleaseAllPrev;
+
 }
 
 
@@ -93,49 +105,44 @@ uint8_t getLayer(void) {
 	static uint8_t _currentLazyLayer = 0;
 
 	// fn이 가장 우선, 다음 fn2
-
-	for(col=0;col<COLUMNS;col++)
+    uint8_t *gMatrix = getCurrentMatrix();
+	for(col=0;col<COLUMNS;col++){
 		for(row=0;row<ROWS;row++){		
-			keyidx = getCurrentKeyindex(_currentLayer, row, col);
 
-		    keyidx = getDualActionMaskDown(keyidx); 
+			cur  = gMatrix[row] & BV(col);
 
-			if(keyidx == KEY_FN || keyidx == KEY_FN2 || keyidx == KEY_FN3 
-				|| (keyidx == KEY_NOR && _currentLayer == 2)) {
+			if(cur){
+				keyidx = getCurrentKeyindex(_currentLayer, row, col);
+			    keyidx = getDualActionMaskDown(keyidx); 
 				
-				cur = 0;
-				// Col -> set only one port as input and all others as output low
-				setCellStatus(col);
-
-				cur = getCellStatus(row);
-
-				if(cur){
-					// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
-					if(keyidx == KEY_FN){
-						//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
-						if(_isAllKeyRelease && isLazyFn()){
-							_currentLazyLayer = 1;
-						}
-						return 1;
-					}else if(keyidx == KEY_FN2){
-						if(_isAllKeyRelease && isLazyFn()){
-							_currentLazyLayer = 2;
-						}
-						return 2;	
-					}else if(keyidx == KEY_FN3){
-						if(_isAllKeyRelease && isLazyFn()){
-							_currentLazyLayer = 3;
-						}
-						return 3;					
-					}else if(keyidx == KEY_NOR){
+				// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
+				if(keyidx == KEY_FN){
+					//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
+					if(isLazyFn()){
+						_currentLazyLayer = 1;
+					}
+					return 1;
+				}else if(keyidx == KEY_FN2){
+					if(isLazyFn()){
+						_currentLazyLayer = 2;
+					}
+					return 2;	
+				}else if(keyidx == KEY_FN3){
+					if(isLazyFn()){
+						_currentLazyLayer = 3;
+					}
+					return 3;					
+				}else if(keyidx == KEY_NOR){
+					if(_currentLayer == 2){
 						// _currentLayer은 2를 유지하면서 스캔할 레이어만 0으로 반환;
 						return 0;
 					}
 				}
 			}
 		}
+	}
 
-	if(isAllKeyRelease()){
+	if(isReleaseAll()){
 		_currentLazyLayer = 0;
 	}
 

@@ -314,6 +314,11 @@ static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     }
 }
 static uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
+    if(xIsDown){
+        makeReportBufferExtra(keyidx, true);
+    }else{
+        makeReportBufferExtra(keyidx, false);
+    }
     return 0;
 }
 static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
@@ -356,51 +361,10 @@ static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     return retval;
 }
 
-/*uint8_t makeReportBufferDecorator(uint8_t keyidx, bool xIsDown){
-    
-    if(xIsDown){ 
-        // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-    }
-
-    return makeReportBuffer(keyidx, xIsDown);
-
-}*/
-
 static void clearReportBuffer(void){    
     memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
     extraData = 0;
 }
-/*
-uint8_t putKeyUsb(uint8_t keyidx, down isDown, uint8_t col, uint8_t row) {
-
-    bool gFN = applyFN(keyidx, col, row, isDown);
-
-    if(isDown && keyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(makeReportBufferDecorator, true);
-    }
-
-    // 키매핑 진행중;
-    if(isDeepKeyMapping()){
-        // DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", keyidx, isDown, col, row));
-        
-        putKeyindex(keyidx, col, row, isDown);
-
-        return 0;
-    }
-            
-    if(isDown && applyMacro(keyidx)) {
-        // 매크로 실행됨;
-        return 0;
-    }
-
-    // fn키를 키매핑에 적용하려면 위치 주의;
-    if(gFN == false) return 0;
-
-    // pushKeyCode(keyidx, isDown);
-
-    return 1;
-}*/
 
 static uint8_t scanKeyUSB(void) {
 
@@ -414,62 +378,6 @@ static uint8_t scanKeyUSB(void) {
 
     uint8_t retval = scanKey();
 
-	/*uint8_t row, col, prev, cur, keyidx;
-    uint8_t gFN; 
-    uint8_t gResultPutKey = 1;
-	uint8_t gLayer = getLayer();
-
-    DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
-
-    uint8_t *gMatrix = getCurrentMatrix();
-    uint8_t *gPrevMatrix = getPrevMatrix();
-	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
-		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
-			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
-			prev = gPrevMatrix[row] & BV(col);
-			cur  = gMatrix[row] & BV(col);
-            keyidx = getCurrentKeyindex(gLayer, row, col);	   		
-			gFN = 1;
-            
-            // !(prev&&cur) : 1 && 1 이 아니고, 
-            // !(!prev&&!cur) : 0 && 0 이 아니고, 
-            // 이전 상태에서(press/up) 변화가 있을 경우;
-			//if( !(prev&&cur) && !(!prev&&!cur)) {                
-            if( prev != cur ) {
-#ifdef ENABLE_BOOTMAPPER           
-                if(isBootMapper()){
-                    if(cur) trace(row, col);
-                    wakeUpUsb();    /////////////
-                    break;
-                }
-#endif      
-                if(cur) {
-                    // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
-                    gFN = putKeyUsb(keyidx, 1, col, row);
-                }else{
-                    // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
-                    gFN = putKeyUsb(keyidx, 0, col, row);
-                }
-			}
-            
-            // fn키를 키매핑에 적용하려면 위치 주의;
-            if(gFN == 0) continue;
-
-			// usb는 눌렸을 때만 버퍼에 저장한다.
-			if(cur){
-               //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-                pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-                retval |= makeReportBuffer(keyidx, true);   /////////////
-			}			
-		}
-	}
-
-	retval |= 0x01; // must have been a change at some point, since debounce is done
-	
-    setPrevMatrix();
-
-    if(gResultPutKey == 0) return 0;*/
-	
     return retval;
 }
 
@@ -564,16 +472,6 @@ static void countSleepUsb(void){
 #endif    
 }
 
-// usb delay에 맞춰져 있으므로 그대로 반환;
-static int syncDelayUsb(int xDelay){
-    return xDelay;
-}
-
-static interface_config_t configUsb = {
-    syncDelayUsb
-};
-
-
 static keyscan_driver_t driverKeyScanUsb = {
     makeReportBuffer,
     makeReportBuffer,
@@ -588,7 +486,6 @@ static keyscan_driver_t driverKeyScanUsb = {
  */
 void initInterfaceUsb(void){
 
-    setInterfaceConfig(&configUsb);
     setKeyScanDriver(&driverKeyScanUsb);
 
 }
@@ -607,6 +504,8 @@ void usb_main(void) {
         _delay_ms(1);
     }while(--i);
     usbDeviceConnect();
+
+    initInterfaceUsb();
     
 	DEBUG_PRINT(("starting USB keyboard!!! \n"));
 

@@ -34,7 +34,7 @@ bool isBeyondFN(void){
 bool applyFN(uint8_t keyidx, uint8_t col, uint8_t row, bool isDown) {
 
     // DEBUG_PRINT(("applyFN  : %d isDown : %d\n", keyidx, isDown));
-    if(keyidx == KEY_NONE) return 0; 
+    if(keyidx == KEY_FN) return 0; 
 
 	applyKeyDownForFullLED(keyidx, col, row, isDown);
     setDualAction(keyidx, isDown);	

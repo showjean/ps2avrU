@@ -20,6 +20,7 @@
 #include "keyindex.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
+#include "keymain.h"
 #include "ps2main.h"
 #include "usbmain.h"
 #include "ledrender.h"
@@ -29,7 +30,6 @@
 #include "custommacro.h"
 #include "dualaction.h"
 #include "smartkey.h"
-#include "keymain.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -138,7 +138,11 @@ void readMacro(uint8_t xMacroIndex);
 
 void initKeymapper(void){
 
-	keyMappingCountMax = syncDelay(keyMappingCountMax);
+	/*if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}*/
+	keyMappingCountMax = setDelay(KEY_MAPPING_COUNT_MAX);
+
 }
 
 //------------------------------------------------------///
@@ -185,7 +189,15 @@ void showP2UMenu(void){
 */
 static void prepareKeyMapping(void){
 	setWillStartKeyMapping();	//set will start mapping
-	
+
+	// 각 인터페이스 준비;
+	/*if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
+	    prepareKeyMappingUsb();
+	}else{
+		prepareKeyMappingPs2();
+	}*/
+	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
+
 	blinkOnce();
 	_delay_ms(100);
 	blinkOnce();
@@ -232,7 +244,8 @@ void startKeyMappingOnBoot(void)
 매핑 준비가 되었을 때 모든키의 입력이 해제 되면 본격적으로 매핑을 시작한다.
 */
 static void startKeyMapping(void){
-	if(isKeyMapping() && !isDeepKeyMapping() && isAllKeyRelease()){
+		// isReleaseAll()로 비교하면 ps/2연결시 마지막 키의 up 판단 전에 매트릭스상 모든 키가 릴리즈 상태여서 마지막 키가 리포트 되지 않는다.
+	if(isKeyMapping() && !isDeepKeyMapping() && isReleaseAllPrev()){
 		startKeyMappingDeep();
 	}
 }
@@ -659,7 +672,7 @@ void saveCurrentLayer(void)
 
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
-	if(xKeyidx == KEY_NONE || isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
+	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
 
 	uint8_t gMacroIndex = 255;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));

@@ -42,7 +42,7 @@
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 int interfaceCount = 0;
-bool interfaceReady = false;
+bool interfaceReady = 0;
 uint8_t INTERFACE = 255;
 /* ------------------------------------------------------------------------- */
 
@@ -67,7 +67,7 @@ void clearInterface(void){
 	cli();
 	clearLEDInited();
 	interfaceCount = 0;
-	interfaceReady = false;
+	interfaceReady = 0;
 }
 
 void clearTimers(void) {
@@ -116,26 +116,19 @@ static void initHardware(bool xIsUSB) {
  	}
 }
 
-static interface_config_t *interfaceConfig;
-
-void setInterfaceConfig(interface_config_t *c)
-{
-    interfaceConfig = c;
-}
-
-int syncDelay(int xDelay){
-	if (!interfaceConfig) return xDelay;
-	return (*interfaceConfig->syncDelayInterface)(xDelay);	
+int setDelay(int xDelay){
+	if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		return xDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}
+	return xDelay;
 }
 
 static void initSoftware(void){
-
 	// init
 	initKeymapper();
 	initQuickSwap();
 	initLazyFn();
 	initSmartKey();
-
 }
 
 int main(void) {
@@ -150,10 +143,11 @@ int main(void) {
 
 	initMatrix();
 
+    // _delay_us_m(1); 
     _delay_us(5);
 
-	uint8_t _countLimit = 0;
-	while(getLiveMatrix() == 0 && ++_countLimit < 30){
+	uint8_t _countDie = 0;
+	while(getLiveMatrix() == 0 && ++_countDie < 20){
 		// waiting during clear debounce
 	}
 
@@ -266,23 +260,21 @@ int main(void) {
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
+			initSoftware();
 			clearInterface();
 			initHardware(true);
 
-			initInterfaceUsb();
-			initSoftware();
 			usb_main();			
 		}
 		
 		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
+			initSoftware();
 			initLED();
 			blinkOnce();
 
 			clearInterface();
 			initHardware(false);
    
-			initInterfacePs2();
-			initSoftware();
 			ps2_main();
 		}
 	}

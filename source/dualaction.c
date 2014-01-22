@@ -153,7 +153,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
             if(_normalKeyCount > 0) --_normalKeyCount;
         }
 
-        if(isAllKeyRelease()){
+        if(isReleaseAll()){
             _dualActionCount = 0;
             dualActionKeyIndex = 0;
             _normalKeyCount = 0;

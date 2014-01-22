@@ -24,7 +24,13 @@ void initQuickSwap(void){
 	quickSwapMode = eeprom_read_byte((uint8_t *)EEPROM_QUICK_SWAP); 
 	if(quickSwapMode == 0xFF) quickSwapMode = 0;
 
-	quickSwapCountMax = syncDelay(QUICKSWAP_COUNT_MAX);
+	/*if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
+		quickSwapCountMax = QUICKSWAP_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
+	}else{
+		quickSwapCountMax = QUICKSWAP_COUNT_MAX;
+	}*/
+		
+	quickSwapCountMax = setDelay(QUICKSWAP_COUNT_MAX);
 }
 /**
 	전달되는 키인덱스를 현재 퀵스왑 형식에 맞게 변환;

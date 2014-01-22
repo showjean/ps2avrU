@@ -12,7 +12,8 @@ extern void initMatrixDevice(void);
 extern void clearMatrix(void);
 extern void clearPrevMatrix(void);
 
-extern bool isAllKeyRelease(void);
+extern bool isReleaseAll(void);
+extern bool isReleaseAllPrev(void);
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
