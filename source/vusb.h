@@ -25,9 +25,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define REPORT_ID_SYSTEM    2
 #define REPORT_ID_CONSUMER  1
 /* report size */
-#define REPORT_SIZE_KEYBOARD    8
-// #define REPORT_SIZE_EXTRA  3
+#define REPORT_KEYS    6
+#define REPORT_SIZE_KEYBOARD  8
 
+typedef struct {
+    // uint8_t report_id;
+    uint8_t mods;
+    uint8_t reserved;
+    uint8_t keys[REPORT_KEYS];
+    // uint8_t ext;
+} __attribute__ ((packed)) report_keyboard_t;
 
 typedef struct {
     uint8_t  report_id;
@@ -48,7 +55,7 @@ typedef struct {
 } __attribute__ ((packed)) vusb_mouse_report_t;
 
 
-extern uint8_t reportBuffer[REPORT_SIZE_KEYBOARD]; ///< buffer for HID reports
+extern report_keyboard_t reportKeyboard; ///< buffer for HID reports
 extern uint8_t idleRate;        ///< in 4ms units
 
 extern void delegateLedUsb(uint8_t xState);

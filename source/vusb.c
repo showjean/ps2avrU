@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* ----------------------------- USB interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-uint8_t reportBuffer[REPORT_SIZE_KEYBOARD] = {0}; ///< buffer for HID reports
+report_keyboard_t reportKeyboard;
 uint8_t idleRate = 0;        ///< in 4ms units
 static uint8_t protocolVer = 1; ///< 0 = boot protocol, 1 = report protocol
 static uint8_t expectReport = 0;       ///< flag to indicate if we expect an USB-report
@@ -46,6 +46,8 @@ PROGMEM const uchar keyboard_hid_report[] = {
     0x09, 0x06,   // USAGE (Keyboard)
     0xa1, 0x01,   // COLLECTION (Application)
 
+    // 0x85, 0x07,         //   REPORT_ID (7)
+
     /* modifiers */
     0x05, 0x07,   //   USAGE_PAGE (Keyboard)
     0x19, 0xe0,   //   USAGE_MINIMUM (Keyboard LeftControl)
@@ -60,18 +62,7 @@ PROGMEM const uchar keyboard_hid_report[] = {
     0x95, 0x01,   //   REPORT_COUNT (1)
     0x75, 0x08,   //   REPORT_SIZE (8)
     0x81, 0x03,   //   INPUT (Cnst,Var,Abs) 
-
-    /* keyboard body */
-    0x05, 0x07,   //   USAGE_PAGE (Keyboard)
-    0x19, 0x00,   //   USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0xA4,   //   USAGE_MAXIMUM (Keyboard ExSel)
-    0x95, 0x06,   //   REPORT_COUNT (6)
-    0x75, 0x08,   //   REPORT_SIZE (8)
-    0x15, 0x00,   //   LOGICAL_MINIMUM (0)
-    0x26, 0xA4, 0x00,  //   LOGICAL_MAXIMUM (165)
-    0x81, 0x00,   //   INPUT (Data,Ary,Abs)
-    /* keyboard body end */
-
+    
     /* leds */
     0x95, 0x05,   //   REPORT_COUNT (5)
     0x75, 0x01,   //   REPORT_SIZE (1)
@@ -84,7 +75,33 @@ PROGMEM const uchar keyboard_hid_report[] = {
     0x91, 0x03,   //   OUTPUT (Cnst,Var,Abs)
     /* leds end */
 
-    0xc0                           // END_COLLECTION
+    /* keyboard body */
+    0x05, 0x07,   //   USAGE_PAGE (Keyboard)
+    0x19, 0x00,   //   USAGE_MINIMUM (Reserved (no event indicated))
+    0x29, 0xFF,   //   USAGE_MAXIMUM
+    0x95, 0x06,   //   REPORT_COUNT (6)
+    0x75, 0x08,   //   REPORT_SIZE (8)
+    0x15, 0x00,   //   LOGICAL_MINIMUM (0)
+    0x26, 0xFF, 0x00,  //   LOGICAL_MAXIMUM (255)
+    0x81, 0x00,   //   INPUT (Data,Ary,Abs)
+    /* keyboard body end */
+
+    /* consumer device */
+    // 0x05, 0x0C,   // USAGE_PAGE (Consumer Devices)
+    // 0x75, 0x01,   //   REPORT_SIZE (1)
+    // 0x95, 0x01,   //   REPORT_COUNT (1)
+    // 0x09, 0xB8,   //   USAGE (Eject)
+    // 0x15, 0x00,   //   LOGICAL_MINIMUM (0)
+    // 0x25, 0x01,   //   LOGICAL_MAXIMUM (1)
+    // 0x81, 0x02,   //   INPUT (Data,Var,Abs)
+    // 0x05, 0xFF,   // USAGE_PAGE
+    // 0x09, 0x03,   //   USAGE 
+    // 0x75, 0x07,   //   REPORT_SIZE (7)
+    // 0x95, 0x01,   //   REPORT_COUNT (1)
+    // 0x81, 0x02,   //   INPUT (Data,Var,Abs) 
+    /* consumer device end */
+
+    0xC0                           // END_COLLECTION
 };
 
 /*
@@ -320,14 +337,14 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
     delegateInterfaceReadyUsb(); 
 
     usbRequest_t *rq = (void *)data;
-    usbMsgPtr = *reportBuffer;
 
     if ((rq->bmRequestType & USBRQ_TYPE_MASK) == USBRQ_TYPE_CLASS) {
         // class request type
         if (rq->bRequest == USBRQ_HID_GET_REPORT) {
             // wValue: ReportType (highbyte), ReportID (lowbyte)
             // we only have one report type, so don't look at wValue
-            return sizeof(reportBuffer);
+            usbMsgPtr = (usbMsgPtr_t)&reportKeyboard;
+            return sizeof(reportKeyboard);
         } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
             // MAC OS X is not processing here
               

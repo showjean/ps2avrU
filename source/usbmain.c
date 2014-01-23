@@ -257,7 +257,9 @@ static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
 
 // static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
-uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
+static uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
+// static uint8_t reportBufferPrev[REPORT_SIZE_KEYBOARD];
+static report_keyboard_t reportKeyboardPrev;
 
 static void clearReportBuffer(void);
 static void wakeUpUsb(void);
@@ -305,8 +307,7 @@ static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
         _extraHasChanged = true;
 
         if(xIsDown){
-            uint16_t gKeyidxMulti = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
-            extraData = gKeyidxMulti;
+            extraData = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
         }else{
             extraData = 0;
         }
@@ -321,6 +322,9 @@ static uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
     }
     return 0;
 }
+static void addModifiers(uint8_t xKeyidx){
+    reportKeyboard.mods |= modmask[xKeyidx - (KEY_Modifiers + 1)];
+}
 static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     uint8_t retval = 1;
 
@@ -334,13 +338,13 @@ static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
         return 0;
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-        reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
+        addModifiers(keyidx);
 
         return retval;
     }
 
     if (keyidx != KEY_NONE) { // keycode should be added to report
-        if (reportIndex >= REPORT_SIZE_KEYBOARD) { // too many keycodes
+        if (reportIndex >= REPORT_KEYS) { // too many keycodes
             // DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
             // if (!retval & 0x02) { // Only fill buffer once
                 // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
@@ -353,7 +357,7 @@ static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
             if(keyidx > KEY_extend && keyidx < KEY_extend_end){
                 keyidx = pgm_read_byte(&keycode_USB_extend[keyidx - (KEY_extend + 1)]); 
             }
-            reportBuffer[reportIndex] = keyidx; // set next available entry
+            reportKeyboard.keys[reportIndex] = keyidx;
             reportIndex++;
         }
     }
@@ -361,8 +365,12 @@ static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
     return retval;
 }
 
-static void clearReportBuffer(void){    
-    memset(reportBuffer, 0, sizeof(reportBuffer)); // clear report buffer 
+static void clearReportBuffer(void){  
+    reportIndex = 0;  
+    // reportKeyboard.report_id = 7;
+    // reportKeyboard.ext = 0;
+    reportKeyboard.mods = 0;
+    memset(reportKeyboard.keys, 0, REPORT_KEYS);    
     extraData = 0;
 }
 
@@ -372,7 +380,6 @@ static uint8_t scanKeyUSB(void) {
     if (!setCurrentMatrix()) return 0;  
 
     // debounce counter expired, create report
-    reportIndex = 2;
     clearReportBuffer();
     clearDownBuffer();  
 
@@ -408,7 +415,7 @@ static uint8_t scanMacroUsb(void)
                 if(cur){
                     keyidx = getCurrentKeyindex(keymap, row, col);
                     if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) {
-                        reportBuffer[KEYBOARD_MODIFIER_INDEX] |= modmask[keyidx - (KEY_Modifiers + 1)];
+                        addModifiers(keyidx);
                     }
                 }
                 
@@ -438,7 +445,6 @@ static uint8_t scanMacroUsb(void)
             }
         }
 
-        reportIndex = 2;
         gLen = strlen((char *)macroBuffer);
         for (i = 0; i < gLen; ++i)
         {
@@ -562,21 +568,36 @@ void usb_main(void) {
         if(updateNeeded == 0){
 		
             updateNeeded = scanKeyUSB(); // changes?
-    		
-            // check timer if we need periodic reports
-            if (TIFR & (1 << TOV0)) {
-                TIFR = (1 << TOV0); // reset flag
-                if (idleRate != 0) { // do we need periodic reports?
-                    if(idleCounter > 4){ // yes, but not yet
-                        idleCounter -= 5; // 22ms in units of 4ms
-                    } else { // yes, it is time now
-                        updateNeeded = 1;
-                        idleCounter = idleRate;
-                    }
+            if(updateNeeded){
+                // 이전과 같은 리포트는 할 필요 없음;
+                // if(memcmp(reportBuffer, reportBufferPrev, REPORT_SIZE_KEYBOARD) == 0){
+                //     updateNeeded = 0;
+                // }else{
+                //     memcpy(reportBufferPrev, reportBuffer, REPORT_SIZE_KEYBOARD);
+                // }
+                if(reportKeyboard.mods == reportKeyboardPrev.mods && 
+                    memcmp(reportKeyboard.keys, reportKeyboardPrev.keys, REPORT_KEYS) == 0){
+                    updateNeeded = 0;
+                }else{
+                    reportKeyboardPrev.mods = reportKeyboard.mods;
+                    memcpy(reportKeyboardPrev.keys, reportKeyboard.keys, REPORT_SIZE_KEYBOARD);
                 }
             }
     	}else{
             scanKeyUSB();   // for dummy
+        }
+            
+        // check timer if we need periodic reports
+        if (TIFR & (1 << TOV0)) {
+            TIFR = (1 << TOV0); // reset flag
+            if (idleRate != 0) { // do we need periodic reports?
+                if(idleCounter > 4){ // yes, but not yet
+                    idleCounter -= 5; // 22ms in units of 4ms
+                } else { // yes, it is time now
+                    updateNeeded = 1;
+                    idleCounter = idleRate;
+                }
+            }
         }
 
         // ps2avrU loop, must be after scan matrix;
@@ -586,14 +607,17 @@ void usb_main(void) {
         if (usbInterruptIsReady()) { 
             if(hasMacroUsb()){
                 scanMacroUsb();
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);
+                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
+                wakeUpUsb();
             }else if(updateNeeded){                 
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);                 
+                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));                
                 updateNeeded = 0;
+                wakeUpUsb();
             }else if(_initState == INIT_INDEX_SET_IDLE){
                 _initState = INIT_INDEX_INITED;
                 clearReportBuffer();
-                usbSetInterrupt(reportBuffer, REPORT_SIZE_KEYBOARD);   // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
+                // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
+                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
 
                 wakeUpUsb(); 
                 
@@ -616,14 +640,6 @@ void usb_main(void) {
             }
         }
 
-        if(_initState == INIT_INDEX_INITED){
-            if(initCount++ == 200){       // delay for OS X USB multi device   
-                // all platform init led
-                initFullLEDState();
-                _initState = INIT_INDEX_COMPLETE;
-            }
-        }
-
         if(usbInterruptIsReady3()){
             if(_extraHasChanged){   
                 report_extra_t gReportExtra = {
@@ -632,6 +648,15 @@ void usb_main(void) {
                 };
                 usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
                 _extraHasChanged = false;
+                wakeUpUsb();
+            }
+        }
+
+        if(_initState == INIT_INDEX_INITED){
+            if(initCount++ == 200){       // delay for OS X USB multi device   
+                // all platform init led
+                initFullLEDState();
+                _initState = INIT_INDEX_COMPLETE;
             }
         }
         

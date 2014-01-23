@@ -294,7 +294,6 @@ uint8_t *getPrevMatrix(void){
 
 //curmatrix
 uint8_t setCurrentMatrix(void){	
-			
 
 	uint8_t gClearMatrix = getLiveMatrix();
 

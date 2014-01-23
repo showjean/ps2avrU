@@ -23,6 +23,7 @@
 #define KEY_FN2         248
 #define KEY_P2U         247
 #define KEY_FN3         246
+// #define KEY_P2U_RESET   245
 
 // dual action 
 enum {
