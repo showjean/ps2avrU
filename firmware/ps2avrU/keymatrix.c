@@ -40,14 +40,13 @@ static bool _isReleaseAllPrev = true;
 static uint8_t _currentLazyLayer = 0;
 
 
+
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 void initMatrix(void){
 	
 	initMatrixDevice();
-
-	clearMatrix();
 
 	debounceMAX = 7;
 	debounce = 10;
@@ -56,6 +55,7 @@ void initMatrix(void){
 	ghostFilterMatrixPointer = currentMatrix;
 #endif
 
+	clearMatrix();
 }
 
 void clearMatrix(void){
@@ -64,17 +64,16 @@ void clearMatrix(void){
 		prevMatrix[row] = 0;
 		currentMatrix[row] = 0;
 	}
-
 }
 
-/*static void clearPrevMatrix(void){
-	uint8_t row;
-	for(row=0;row<ROWS;++row) {
-		prevMatrix[row] = 0;
-	}
-}*/
+// void clearPrevMatrix(void){
+// 	uint8_t row;
+// 	for(row=0;row<ROWS;++row) {
+// 		prevMatrix[row] = 0;
+// 	}
+// }
 
-static void setReleaseAll(void){
+void setReleaseAll(void){
 	uint8_t row;
 	_isReleaseAll = true;
 	for(row=0;row<ROWS;row++) {

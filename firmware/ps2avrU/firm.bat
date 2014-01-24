@@ -1,2 +1,2 @@
-bootloadHID.exe -r keymain.hex
+bootloadHID.exe keymain.hex
 pause;

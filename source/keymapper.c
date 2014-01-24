@@ -53,7 +53,6 @@ const char str_toggle_1[] PROGMEM = "1:toggle";
 
 const char str_back_6[] PROGMEM = "6:Back";
 
-
 #ifndef	DISABLE_HARDWARE_KEYMAPPING	
 const char str_mapper_message[] PROGMEM = "Key Mapper";
 const char str_mapper_1[] PROGMEM = "1:Change Layer";
@@ -133,7 +132,10 @@ void printPrepareString(void);
 static void prepareKeyMapping(void);
 void prepareKeyMapper(void);
 void saveCurrentLayerAfter(void);
+
+#ifndef	DISABLE_HARDWARE_KEYMAPPING				
 void printMapperMessageAfter(void);
+#endif
 void printSelectModeAfter(void);
 void clearMacroAfter(void);
 void clearMacroAtIndexAfter(void);
@@ -153,9 +155,6 @@ void initKeymapper(void){
 
 static void setWillStartKeyMapping(void){
 	_isKeyMapping |= BV(0);	//set will start mapping
-}
-static void setDeepStartKeyMapping(void){
-	_isKeyMapping |= BV(1);	
 }
 
 uint8_t isKeyMapping(void){
@@ -214,7 +213,7 @@ static void prepareKeyMapping(void){
 }
 static void startKeyMappingDeep(void)
 {
-	setDeepStartKeyMapping();	//set doing mapping
+	_isKeyMapping |= BV(1);	//set doing mapping
 	// DEBUG_PRINT(("startKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 	printPrepareString();
 	prepareKeyMapper();
@@ -292,14 +291,13 @@ void enterFrameForMapper(void){
 				// _isWorkingForEmpty = 0;
 			}else if(_wait == WAIT_SELECT_MODE){
 				printSelectModeAfter();
-
 			}
 #ifndef	DISABLE_HARDWARE_KEYMAPPING				
 			else if(_wait == WAIT_WELCOME){
 				printMapperMessageAfter();
 				// _isWorkingForEmpty = 0;
 			}
-#endif				
+#endif			
 			else if(_wait == WAIT_CLEAR_MACRO){
 				clearMacroAtIndexAfter();
 			}else if(_wait == WAIT_CLEAR_ALL_MACRO){
@@ -505,9 +503,9 @@ void printSelectMode(void){
 	_step = STEP_NOTHING;
 }
 
+#ifndef	DISABLE_HARDWARE_KEYMAPPING				
 void printMapperMessageAfter(void)
 {
-#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printEnter();
 	printStringFromFlash(str_mapper_3);
 	printEnter();
@@ -520,13 +518,12 @@ void printMapperMessageAfter(void)
 	
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
+}
 #endif
 
-}
+#ifndef	DISABLE_HARDWARE_KEYMAPPING				
 static void printMapperMessage(void)
 {
-
-#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printEnter();
 	printStringFromFlash(str_mapper_message);
 	printEnter();
@@ -538,8 +535,9 @@ static void printMapperMessage(void)
 	_isWorkingForEmpty = 1;
 	_wait = WAIT_WELCOME;
 	_step = STEP_NOTHING;
-#endif
 }
+#endif
+
 void printMacroMessage(void){
 	printEnter();
 	printStringFromFlash(str_macro_message);

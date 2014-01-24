@@ -69,7 +69,7 @@ enum {  // for macro
     KEY_MAC12   // 212
 };
 
-#define KEY_MAX         KEY_MAC1     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_MAX         KEY_MAC1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {

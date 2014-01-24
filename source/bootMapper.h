@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #ifdef ENABLE_BOOTMAPPER
 // bootmapper

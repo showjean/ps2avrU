@@ -1,0 +1,85 @@
+diff a/source/keyscan.c b/source/keyscan.c	(rejected hunks)
+@@ -9,6 +9,7 @@
+ #include "keymapper.h"
+ #include "keymatrix.h"
+ #include "fncontrol.h"
++#include "bootmapper.h"
+ 
+ 
+ static keyscan_driver_t *keyscanDriver;
+@@ -29,6 +30,9 @@
+ }
+ 
+ uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
++    
++    if(isBootMapper()) return 0;
++
+ 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
+ 
+     if(xIsDown && xKeyidx != KEY_NONE){
+@@ -36,6 +40,7 @@
+     }
+ 
+     // 키매핑 진행중;
++    // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
+     if(isDeepKeyMapping()){
+         // DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, xCol: %d, xRow: %d \n", xKeyidx, xIsDown, xCol, xRow));
+         
+@@ -65,43 +70,44 @@
+ 	uint8_t row, col, prev, cur, keyidx;
+     uint8_t gFN; 
+     uint8_t gResultPutKey = 1;
+-	uint8_t gLayer = xLayer; //getLayer();    
+-    // static uint8_t pressedKeyidx[ROWS][COLUMNS];
++	uint8_t gLayer = xLayer;
+ 
+     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
+ 
+     uint8_t *gMatrix = getCurrentMatrix();
+     uint8_t *gPrevMatrix = getPrevMatrix();
+-	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+-		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
++	for (row = 0; row < ROWS; ++row) { // check every bit on this row 
++        // if(gPrevMatrix[row] == gMatrix[row] && gMatrix[row] == 0) continue;  
++        for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+ 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
+ 			prev = gPrevMatrix[row] & BV(col);
+ 			cur  = gMatrix[row] & BV(col);
+             keyidx = getCurrentKeyindex(gLayer, row, col);	   		
+ 			gFN = 1;
++
++            // if(isKeyEnabled(keyidx, cur) == false) continue;
++
++#ifdef ENABLE_BOOTMAPPER           
++            if(isBootMapper()){
++                if(!prev && cur) trace(row, col);
++                continue;
++            }
++#endif      
+             
+             // !(prev&&cur) : 1 && 1 이 아니고, 
+             // !(!prev&&!cur) : 0 && 0 이 아니고, 
+             // 이전 상태에서(press/up) 변화가 있을 경우;
+ 			//if( !(prev&&cur) && !(!prev&&!cur)) {                
+             if( prev != cur ) {
+-#ifdef ENABLE_BOOTMAPPER           
+-                if(isBootMapper()){
+-                    if(cur) trace(row, col);
+-                    // wakeUpUsb();    /////////////
+-                    break;
+-                }
+-#endif      
+                 if(cur) {
+                     // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
+                     gFN = putChangedKey(keyidx, true, col, row);
+                     // pressedKeyidx[col][row] = keyidx;
+                 }else{
+                     // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
+-                    // gFN = putChangedKey(pressedKeyidx[col][row], false, col, row);
+                     gFN = putChangedKey(keyidx, false, col, row);
+                 }
+-			}
++			}            
+             
+             // fn키를 키매핑에 적용하려면 위치 주의;
+             if(gFN == 0) continue;

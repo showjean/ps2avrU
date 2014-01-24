@@ -30,8 +30,7 @@ static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
 }
 
 uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
-    
-    if(isBootMapper()) return 0;
+    if(isBootMapper()) return;
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
@@ -70,35 +69,36 @@ uint8_t scanKey(uint8_t xLayer) {
 	uint8_t row, col, prev, cur, keyidx;
     uint8_t gFN; 
     uint8_t gResultPutKey = 1;
-	uint8_t gLayer = xLayer;
+	uint8_t gLayer = xLayer; 
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
-	for (row = 0; row < ROWS; ++row) { // check every bit on this row 
-        // if(gPrevMatrix[row] == gMatrix[row] && gMatrix[row] == 0) continue;  
-        for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(gLayer, row, col);	   		
 			gFN = 1;
 
-            // if(isKeyEnabled(keyidx, cur) == false) continue;
+            if(isKeyEnabled(keyidx, cur) == false) continue;
 
 #ifdef ENABLE_BOOTMAPPER           
             if(isBootMapper()){
-                if(!prev && cur) trace(row, col);
-                continue;
+                if( prev != cur){
+                    if(cur) trace(row, col);
+                    break;
+                }  
+                continue;              
             }
-#endif      
-            
+#endif               
             // !(prev&&cur) : 1 && 1 이 아니고, 
             // !(!prev&&!cur) : 0 && 0 이 아니고, 
             // 이전 상태에서(press/up) 변화가 있을 경우;
 			//if( !(prev&&cur) && !(!prev&&!cur)) {                
-            if( prev != cur ) {
+            if( prev != cur ) {   
                 if(cur) {
                     // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
                     gFN = putChangedKey(keyidx, true, col, row);
@@ -107,7 +107,7 @@ uint8_t scanKey(uint8_t xLayer) {
                     // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
                     gFN = putChangedKey(keyidx, false, col, row);
                 }
-			}            
+			}
             
             // fn키를 키매핑에 적용하려면 위치 주의;
             if(gFN == 0) continue;

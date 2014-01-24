@@ -33,7 +33,6 @@
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
 			$(COMMON_DIR)/usbdrv/oddebug.c \
 			$(COMMON_DIR)/custommacro.c \
-			$(COMMON_DIR)/bootmapper.c \
 			$(COMMON_DIR)/keyscan.c \
 			$(COMMON_DIR)/smartkey.c \
 			$(COMMON_DIR)/quickswap.c \
@@ -45,6 +44,7 @@
 			$(COMMON_DIR)/keymapper.c \
 			$(COMMON_DIR)/ps2avru_util.c \
 			$(COMMON_DIR)/macrobuffer.c \
+			$(COMMON_DIR)/bootmapper.c \
 			$(COMMON_DIR)/enterframe.c \
 			$(COMMON_DIR)/fncontrol.c \
 			$(COMMON_DIR)/lazyfn.c \

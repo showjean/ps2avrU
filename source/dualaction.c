@@ -24,11 +24,12 @@ const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_RCTRL,
     KEY_LCTRL,
     KEY_LCTRL,
-    KEY_FN,
+    KEY_FN,    
     KEY_FN2,
     KEY_FN3,
     KEY_FN3,
     KEY_FN3
+
 };
 const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE, // hangle

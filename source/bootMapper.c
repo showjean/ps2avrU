@@ -1,3 +1,5 @@
+#ifndef BOOTMAPPER_C
+#define BOOTMAPPER_C
 
 #include <stdio.h>
 #include <string.h>
@@ -5,10 +7,9 @@
 #include <avr/pgmspace.h>
 #include <util/delay.h>
 
-#include "print.h"
-#include "bootmapper.h"
 #include "keymapper.h"
 #include "macrobuffer.h"
+#include "bootmapper.h"
 
 #ifdef ENABLE_BOOTMAPPER
 // bootmapper
@@ -20,11 +21,13 @@ bool isBootMapper(void){
 	return _isBootMapper;
 }
 void trace(uint8_t xRow, uint8_t xCol){
-	DEBUG_PRINT(("trace : row= %d, col= %d \n", xRow, xCol));
+	// DEBUG_PRINT(("trace : row= %d, col= %d \n", xRow, xCol));
 	printString("-");
 	printString(toString(xCol));
 	printString(",");
 	printString(toString(xRow));	
 	printString("=");
 }
+#endif
+
 #endif
