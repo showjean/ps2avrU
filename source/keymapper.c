@@ -30,6 +30,7 @@
 #include "custommacro.h"
 #include "dualaction.h"
 #include "smartkey.h"
+#include "bootmapper.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -52,12 +53,15 @@ const char str_toggle_1[] PROGMEM = "1:toggle";
 
 const char str_back_6[] PROGMEM = "6:Back";
 
+
+#ifndef	DISABLE_HARDWARE_KEYMAPPING	
 const char str_mapper_message[] PROGMEM = "Key Mapper";
 const char str_mapper_1[] PROGMEM = "1:Change Layer";
 const char str_mapper_2[] PROGMEM = "2:Select Key - input keycode";
 const char str_mapper_3[] PROGMEM = "3:Save and Exit";
 const char str_mapper_4[] PROGMEM = "4:Exit without Saving";
 const char str_mapper_9[] PROGMEM = "9:Reset to Default (Current Layer)";
+#endif
 
 const char str_prepare_message[] PROGMEM =  "ps2avrU";
 const char str_choose_layer[] PROGMEM =  "choose layer (1: normal, 2: FN, 3: FN2) current= ";
@@ -150,6 +154,9 @@ void initKeymapper(void){
 static void setWillStartKeyMapping(void){
 	_isKeyMapping |= BV(0);	//set will start mapping
 }
+static void setDeepStartKeyMapping(void){
+	_isKeyMapping |= BV(1);	
+}
 
 uint8_t isKeyMapping(void){
 	return _isKeyMapping & BV(0);	// will start key mapping
@@ -207,7 +214,7 @@ static void prepareKeyMapping(void){
 }
 static void startKeyMappingDeep(void)
 {
-	_isKeyMapping |= BV(1);	//set doing mapping
+	setDeepStartKeyMapping();	//set doing mapping
 	// DEBUG_PRINT(("startKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 	printPrepareString();
 	prepareKeyMapper();
@@ -285,10 +292,15 @@ void enterFrameForMapper(void){
 				// _isWorkingForEmpty = 0;
 			}else if(_wait == WAIT_SELECT_MODE){
 				printSelectModeAfter();
-			}else if(_wait == WAIT_WELCOME){
+
+			}
+#ifndef	DISABLE_HARDWARE_KEYMAPPING				
+			else if(_wait == WAIT_WELCOME){
 				printMapperMessageAfter();
 				// _isWorkingForEmpty = 0;
-			}else if(_wait == WAIT_CLEAR_MACRO){
+			}
+#endif				
+			else if(_wait == WAIT_CLEAR_MACRO){
 				clearMacroAtIndexAfter();
 			}else if(_wait == WAIT_CLEAR_ALL_MACRO){
 				clearMacroAfter();
@@ -495,6 +507,7 @@ void printSelectMode(void){
 
 void printMapperMessageAfter(void)
 {
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printEnter();
 	printStringFromFlash(str_mapper_3);
 	printEnter();
@@ -507,10 +520,13 @@ void printMapperMessageAfter(void)
 	
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
+#endif
 
 }
 static void printMapperMessage(void)
 {
+
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printEnter();
 	printStringFromFlash(str_mapper_message);
 	printEnter();
@@ -522,6 +538,7 @@ static void printMapperMessage(void)
 	_isWorkingForEmpty = 1;
 	_wait = WAIT_WELCOME;
 	_step = STEP_NOTHING;
+#endif
 }
 void printMacroMessage(void){
 	printEnter();

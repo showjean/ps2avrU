@@ -25,7 +25,10 @@ const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_LCTRL,
     KEY_LCTRL,
     KEY_FN,
-    KEY_FN2
+    KEY_FN2,
+    KEY_FN3,
+    KEY_FN3,
+    KEY_FN3
 };
 const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE, // hangle
@@ -45,6 +48,9 @@ const uint8_t PROGMEM dualActionMaskUp[] = {
     KEY_HANGLE,
     KEY_HANJA,
     KEY_CAPS,
+    KEY_CAPS,
+    KEY_HANGLE,
+    KEY_HANJA,
     KEY_CAPS
 };
 // 듀얼액션 취소시 출력할 코드값이 "다운"쪽 설정 값인지 결정;
@@ -66,6 +72,9 @@ const bool PROGMEM dualActionCancelDefaultDown[] = {
     true,
     true,
     false,
+    false,
+    true,
+    true,
     false
 };
 

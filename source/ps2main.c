@@ -118,7 +118,7 @@ static void clear(void) {
 	lastMAKE_IDX=0;
 	loopCnt=0;
 
-	clearPrevMatrix();
+	// clearPrevMatrix();
 }
 
 static void tx_state(unsigned char x, unsigned char newstate)
@@ -343,6 +343,11 @@ static void initPs2(void)
     initFullLEDState();
 
     startKeyMappingOnBoot();
+
+    /*
+    인터페이스가 확실히 선택되기 전까지는 prevMatrix를 clear해서는 안된다.
+    만약 M키를 눌러 부트 매핑으로 접근할 때 ps2의 경우 prevMatrix가 clear되어 M키가 눌려지는 현상이 나타난다.
+    */
 } 
 
 static keyscan_driver_t driverKeyScanPs2 = {

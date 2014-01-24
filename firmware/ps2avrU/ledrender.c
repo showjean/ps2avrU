@@ -15,6 +15,7 @@
 #include "fncontrol.h"
 #include "sleep.h"
 #include "keymapper.h"
+#include "bootmapper.h"
 #include "keymain.h"
 
 #define PWM_MAX 0xFF

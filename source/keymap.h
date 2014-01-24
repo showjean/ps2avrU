@@ -24,6 +24,8 @@
 #define KEY_P2U         247
 #define KEY_FN3         246
 // #define KEY_P2U_RESET   245
+#define KEY_LOCK_KEY    244
+#define KEY_LOCK_WIN    243
 
 // dual action 
 enum {
@@ -67,7 +69,7 @@ enum {  // for macro
     KEY_MAC12   // 212
 };
 
-#define KEY_MAX         KEY_MAC1   //KEY_dualAction     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_MAX         KEY_MAC1     // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {

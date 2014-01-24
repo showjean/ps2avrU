@@ -34,6 +34,7 @@
 #include "smartkey.h"
 #include "ledrender.h"
 #include "keyindex.h"
+#include "bootmapper.h"
 #include "ps2main.h"
 #include "usbmain.h"
 
@@ -184,6 +185,8 @@ int main(void) {
 		}
 		
 	}
+    setPrevMatrix();
+    setCurrentMatrixAfter();
   
 
 #ifdef INTERFACE_ONLY_USB
@@ -226,8 +229,8 @@ int main(void) {
 			ps/2  0xdc = 0b11011100 => 0xcc = 0b11001100
 			*/
 			
-			if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 0){
-				if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 0){
+			if((P2U_PS2_PINS & BV(P2U_PS2_CLOCK_PIN)) == 0){
+				if((prevPIN & BV(P2U_PS2_CLOCK_PIN)) == 0){
 					debounce++;
 					if(debounce > 5){
 						// usb
@@ -237,8 +240,8 @@ int main(void) {
 					debounce = 0;
 				}
 				prevPIN = P2U_PS2_PINS;
-			}else if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 4){
-				if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 4){
+			}else if(P2U_PS2_PINS & BV(P2U_PS2_CLOCK_PIN)){
+				if(prevPIN & BV(P2U_PS2_CLOCK_PIN)){
 					debounce++;
 					if(debounce > 5){
 						// ps2
@@ -264,9 +267,10 @@ int main(void) {
 			clearInterface();
 			initHardware(true);
 
-			usb_main();			
+			usb_main();	
+
+			cli();		
 		}
-		
 		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
 			initSoftware();
 			initLED();
@@ -276,6 +280,8 @@ int main(void) {
 			initHardware(false);
    
 			ps2_main();
+
+			cli();
 		}
 	}
 

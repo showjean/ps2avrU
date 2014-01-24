@@ -243,6 +243,7 @@
 #include "dualaction.h"
 #include "smartkey.h"
 #include "keyscan.h"
+#include "bootmapper.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0

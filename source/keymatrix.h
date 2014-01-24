@@ -10,7 +10,7 @@ extern void initMatrix(void);
 extern void initMatrixDevice(void);
 
 extern void clearMatrix(void);
-extern void clearPrevMatrix(void);
+// extern void clearPrevMatrix(void);
 
 // extern void setReleaseAll(void);
 extern bool isReleaseAll(void);
