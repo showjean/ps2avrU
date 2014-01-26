@@ -137,18 +137,13 @@ void saveCurrentLayerAfter(void);
 void printMapperMessageAfter(void);
 #endif
 void printSelectModeAfter(void);
-void clearMacroAfter(void);
+void clearMacroAllAfter(void);
 void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
 
 void initKeymapper(void){
-
-	/*if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
-		keyMappingCountMax = KEY_MAPPING_COUNT_MAX >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
-	}*/
 	keyMappingCountMax = setDelay(KEY_MAPPING_COUNT_MAX);
-
 }
 
 //------------------------------------------------------///
@@ -191,30 +186,21 @@ void showP2UMenu(void){
 }
 
 /**
- 진입키(Left - ctrl+alt+shift)가 입력되면 매핑 시작을 준비한다.
+ 진입키가 입력되면 매핑 시작을 준비한다.
 */
 static void prepareKeyMapping(void){
 	setWillStartKeyMapping();	//set will start mapping
 
-	// 각 인터페이스 준비;
-	/*if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-	    prepareKeyMappingUsb();
-	}else{
-		prepareKeyMappingPs2();
-	}*/
-	// DEBUG_PRINT(("prepareKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
-
-	blinkOnce();
-	_delay_ms(100);
-	blinkOnce();
-	_delay_ms(100);
-	blinkOnce();
+	blinkOnce(50);
+	_delay_ms(50);
+	blinkOnce(50);
+	_delay_ms(50);
+	blinkOnce(100);
 
 }
 static void startKeyMappingDeep(void)
 {
 	_isKeyMapping |= BV(1);	//set doing mapping
-	// DEBUG_PRINT(("startKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
 	printPrepareString();
 	prepareKeyMapper();
 }
@@ -301,7 +287,7 @@ void enterFrameForMapper(void){
 			else if(_wait == WAIT_CLEAR_MACRO){
 				clearMacroAtIndexAfter();
 			}else if(_wait == WAIT_CLEAR_ALL_MACRO){
-				clearMacroAfter();
+				clearMacroAllAfter();
 				// _isWorkingForEmpty = 0;
 			}else{
 				_isWorkingForEmpty = 0;
@@ -391,7 +377,6 @@ static void printPrompt(void)
 		case STEP_CHOOSE_LAYER:		
 		// DEBUG_PRINT(("_currentLayer : %d \n", _currentLayer));	
 			printStringFromFlash(str_choose_layer);
-			// sprintf(gStr, "%d", _currentLayer+1);
 			printString(toString(_currentLayer+1));
 			printEnter();
 		break;
@@ -715,17 +700,14 @@ void readMacro(uint8_t xMacroIndex){
 
 	uint16_t gAddress;
 	uint8_t gKeyindex;
-	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
 		gKeyindex = eeprom_read_byte((uint8_t *)gAddress);
-		// buffers[k] = gKeyindex;
 		if(gKeyindex > 0 && gKeyindex < 255){
 			pushM(gKeyindex);
 		}
 	}
-	// DEBUG_PRINT(("readMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
 }
 
 void saveMacro(void){
@@ -734,33 +716,30 @@ void saveMacro(void){
 
 	uint8_t gKeyindex;
 	uint16_t gAddress;
-	// uint8_t buffers[MACRO_SIZE_MAX];
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gKeyindex = _macroInputBuffer[k];	// value
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		// buffers[k] = gKeyindex;
 		eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
 	}
 	// DEBUG_PRINT(("saveMacro  gAddress: %d \n", gAddress));
-	// DEBUG_PRINT(("saveMacro  buffers[0]: %d, buffers[1]: %d, buffers[30]: %d, buffers[31]: %d \n", buffers[0], buffers[1], buffers[30], buffers[31]));
 	_macroIndex = 255;
 }
 
-void clearMacroAfter(void){
+void clearMacroAllAfter(void){
 	uint16_t gAddress;
 	int k;
 	for(k = 0; k < MACRO_SIZE_MAX * MACRO_NUM; ++k){
 		gAddress = EEPROM_MACRO + (k);	// key
 		eeprom_write_byte((uint8_t *)gAddress, 0);
 	}
-	// DEBUG_PRINT(("clearMacro  gAddress: %d \n", gAddress));
+	// DEBUG_PRINT(("clearMacroAll  gAddress: %d \n", gAddress));
 
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
 }
 
-void clearMacro(void)
+void clearMacroAll(void)
 {
 	printStringFromFlash(str_clear_all_macro);
 	printEnter();
@@ -990,7 +969,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						stopKeyMapping();
 					}else if(cmd == CMD_CLEAR_ALL_MACRO){
 						_step = STEP_CLEAR_ALL_MACRO;
-						clearMacro();
+						clearMacroAll();
 					}
 				}else if(_mode == SEL_TOGGLE_LAZY_FN){
 					if(cmd == CMD_TOGGLE_LAZY_FN){

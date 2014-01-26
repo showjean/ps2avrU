@@ -18,7 +18,7 @@ extern void reduceLedBrightness(void);
 extern void changeFullLedState(void);
 extern void clearLEDInited(void);
 
-extern void blinkOnce(void);
+extern void blinkOnce(int xStayMs);
 extern void initFullLEDState(void);
 extern void initFullLEDStateAfter(void);
 extern void initLED(void);
@@ -31,7 +31,6 @@ extern void sleepLED(void);
 
 extern void wakeUpLED(void);
 
-extern void doSleep(void);
 extern void renderLED(void);
 
 extern void stopTimer(void);

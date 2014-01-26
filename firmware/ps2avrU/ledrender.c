@@ -46,7 +46,7 @@ static uint8_t _ledBrightnessMax_saved = 0;	//
 static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
 
-static int beyondFNCountDelay = 1800;
+static int blinkLedCountDelay = 1800;
 
 static void fadeLED(void);
 static void setFullLEDState(void);
@@ -75,14 +75,10 @@ void initFullLEDStateAfter(void){
 
 	setFullLEDState();
 
-	/*if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){		
-		beyondFNCountDelay = beyondFNCountDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
-	}*/
-
-	beyondFNCountDelay = setDelay(beyondFNCountDelay);
+	blinkLedCountDelay = setDelay(blinkLedCountDelay);
 }
 
-void blinkOnce(void){
+void blinkOnce(int xStayMs){
 	if (LEDstate & LED_STATE_NUM) { // light up num lock
         turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
     }else{
@@ -93,7 +89,7 @@ void blinkOnce(void){
     } else {
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
     }
-	_delay_ms(100);
+	_delay_ms(xStayMs);
 	if (LEDstate & LED_STATE_NUM) { // light up num lock
         turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//   
     }else{
@@ -349,59 +345,56 @@ static void fadeLED(void) {
 }
 
 //
-static void blinkBeyondFNLED(void) {
-	// for beyond fn
-	static int beyondFNCounter = 0;
-	static int beyondFNDelayCounter = 0;
-	static uint8_t beyondFNLEDState = 1;
-	const int beyondFNCountMAX = 200;
+static void blinkLED(void) {
+	static int gCounter = 0;
+	static int gDelayCounter = 0;
+	static uint8_t gLEDState = 1;
+	const int gCountMAX = 200;
 	uint8_t led = LEDNUM;
-	uint8_t gIsBeyondFN = isBeyondFN();
+	uint8_t gIsOn = 0;
 
 #ifdef ENABLE_BOOTMAPPER
 	if(isBootMapper()){
 		led = LEDCAPS;
-		// DEBUG_PRINT(("isBootMapper(): %d \n", isBootMapper()));
 
-		gIsBeyondFN = 1;
+		gIsOn = 1;
 	}
 #endif
 
-	if(gIsBeyondFN == 1){
+	if(gIsOn == 1){
 		
 
-		beyondFNDelayCounter++;
-		if(beyondFNDelayCounter > beyondFNCountDelay){
-			beyondFNCounter++;
-			if(beyondFNCounter > beyondFNCountMAX){
+		gDelayCounter++;
+		if(gDelayCounter > blinkLedCountDelay){
+			gCounter++;
+			if(gCounter > gCountMAX){
 				if(getLEDState() & LED_STATE_NUM){	// Num Lock이 켜져 있을때는 커졌다 켜지고;
-					if(beyondFNLEDState == 1){
+					if(gLEDState == 1){
 						turnOffLED(led);
 					}else{
 						turnOnLED(led);
-						beyondFNDelayCounter = 0;
+						gDelayCounter = 0;
 					}
 				}else{	// Num Lock이 꺼져 있을 때는 켜졌다 꺼진다.
-					if(beyondFNLEDState == 1){
+					if(gLEDState == 1){
 						turnOnLED(led);
 					}else{
 						turnOffLED(led);
-						beyondFNDelayCounter = 0;
+						gDelayCounter = 0;
 					}
 				}
-				beyondFNLEDState ^= 1;
-				beyondFNCounter = 0;
+				gLEDState ^= 1;
+				gCounter = 0;
 			}
 		}
 	}else{
-		beyondFNCounter = 0;
-		beyondFNLEDState = 1;
+		gCounter = 0;
+		gLEDState = 1;
 	}
 }
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 static void blinkScrollLockLED(void) {
-	// for beyond fn
 	static int counter = 0;
 	const int countMAX = 100;
 	//on off on off
@@ -439,19 +432,6 @@ void sleepLED(void){
 	turnOffLED(LEDFULLLED);
 	_isDidSleep = 1;
 
-	return;
-
-	/*if(_fullLEDMode == 2 || _fullLEDMode == 4){
-		// 켜져 있는 상태일때;
-		pwmCounter = 0;
-		_isDidSleep = 0;
-	}else if(_fullLEDMode == 0 || _fullLEDMode == 3){
-		// 꺼져 있는 상태 일때;
-		_isDidSleep = 1;
-	}else{
-		// pwm이 중간 값일때;
-		_isDidSleep = 0;		
-	}*/
 }
 
 void wakeUpLED(void){
@@ -460,27 +440,14 @@ void wakeUpLED(void){
 	setFullLEDState();
 }
 
-void doSleep(void){
-	if(_isDidSleep == 1) return;
-	//DEBUG_PRINT(("pwmCounter %d \n", (uint16_t)(PWM_MAX-pwmCounter/speed)));
-	setPWM((uint8_t)(getBrightness(PWM_MAX-pwmCounter/speed)));
-	if(pwmCounter >= PWM_MAX*speed) {		
-		setPWM(0);
-		turnOffLED(LEDFULLLED);
-		_isDidSleep = 1;
-	}
-	pwmCounter++;
-}
-
 void renderLED(void) {
 	if(!ledInited) return;
-	if(isSleep()){		
-		doSleep();
+	if(isSleep()){	
 		return;
 	}
 	
 	// for beyond fn
-	blinkBeyondFNLED();
+	blinkLED();
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led

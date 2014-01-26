@@ -73,13 +73,13 @@ static void applyQuickSwap(uint8_t xModi) {
 static void countQuickSwapEnabled(void){	
 	if(enabledQuickSwapCount && ++_quickSwapCount > quickSwapCountMax){
 		if(enabledQuickSwapCount == COUNT_TYPE_QUICKSWAP_ALT_GUI){
-			blinkOnce();
+			blinkOnce(50);
 			if((quickSwapMode & QUICKSWAP_ALT_GUI) == QUICKSWAP_ALT_GUI){			
 				quickSwapMode &= ~QUICKSWAP_ALT_GUI;
 			}else{
 				quickSwapMode |= QUICKSWAP_ALT_GUI;		
-				_delay_ms(100);
-				blinkOnce();
+				_delay_ms(50);
+				blinkOnce(100);
 			}
 		}		
 		eeprom_write_byte((uint8_t *)EEPROM_QUICK_SWAP, quickSwapMode);

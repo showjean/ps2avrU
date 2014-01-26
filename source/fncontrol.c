@@ -36,21 +36,21 @@ void enterFrameForFnControl(void){
 	if(isReleaseAll()){
 		if(_isLockKey == LOCK_WILL_SET){
 			_isLockKey = LOCK_IS_SET;
-			blinkOnce();
-			_delay_ms(100);
-			blinkOnce();
+			blinkOnce(50);
+			_delay_ms(50);
+			blinkOnce(100);
 		}else if(_isLockKey == LOCK_WILL_NOT_SET){
 			_isLockKey = LOCK_NOT_SET;
-			blinkOnce();
+			blinkOnce(100);
 		}
 		if(_isLockWin == LOCK_WILL_SET){
 			_isLockWin = LOCK_IS_SET;
-			blinkOnce();
-			_delay_ms(100);
-			blinkOnce();
+			blinkOnce(50);
+			_delay_ms(50);
+			blinkOnce(100);
 		}else if(_isLockWin == LOCK_WILL_NOT_SET){
 			_isLockWin = LOCK_NOT_SET;
-			blinkOnce();
+			blinkOnce(100);
 		}
 	}
 }
@@ -107,7 +107,12 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 				_isBeyondFN ^= true;
 			 }
 			 if(_isBeyondFN == false){
-				setLEDIndicate();
+				blinkOnce(100);
+				//setLEDIndicate();
+			 }else{
+				blinkOnce(100);
+				_delay_ms(50);
+				blinkOnce(50);
 			 }
 			 return 0;
 		}else if(xKeyidx == EXTRA_FN){
