@@ -54,8 +54,6 @@ void initMatrix(void){
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
 #endif
-
-	clearMatrix();
 }
 
 void clearMatrix(void){
@@ -294,9 +292,9 @@ uint8_t *getPrevMatrix(void){
 //curmatrix
 uint8_t setCurrentMatrix(void){	
 
-	uint8_t gClearMatrix = getLiveMatrix();
+	uint8_t gClear = getLiveMatrix();
 
-	return gClearMatrix;
+	return gClear;
 }
 
 // 매트릭스에 관련된 모든 처리가 끝난 후 실행 된다.

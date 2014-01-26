@@ -24,7 +24,7 @@
 #define KEY_P2U         247
 #define KEY_FN3         246
 // #define KEY_P2U_RESET   245
-#define KEY_LOCK_KEY    244
+#define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 
 // dual action 

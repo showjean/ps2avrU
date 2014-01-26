@@ -281,10 +281,10 @@ static int scanKeyPS2(void) {
 					cur  = gMatrix[row] & BV(col);
 
 					if(prev){
-						putChangedKey(prevKeyidx, false, col, row);
+						processKeyIndex(prevKeyidx, true, false, col, row);
 					}
 					if(cur){
-						putChangedKey(keyidx, true, col, row);
+						processKeyIndex(keyidx, false, true, col, row);
 					}
 				}
 
@@ -439,7 +439,6 @@ void processRXPs2(void){
 
 			case STA_WAIT_SCAN_SET:
 				DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
-				// start point... ps2로 인식 후 처음 이곳을 한 번은 거쳐간다?
 
 				clear();
 				tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
@@ -598,7 +597,6 @@ void ps2_main(void){
 
 	}
 
-
-	return;	// 0;
+	return;
 }
 #endif

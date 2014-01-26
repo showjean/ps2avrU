@@ -676,6 +676,6 @@ void usb_main(void) {
 	// data line reset;
 	USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
 
-	return; // 0;
+	return;
 }
 #endif

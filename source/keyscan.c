@@ -29,8 +29,7 @@ static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
 	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
 }
 
-uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
-    if(isBootMapper()) return;
+static uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
@@ -62,13 +61,48 @@ uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow)
     return 1;
 }
 
+uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
+
+    uint8_t gRetval = 1; 
+
+    // !(prev&&cur) : 1 && 1 이 아니고, 
+    // !(!prev&&!cur) : 0 && 0 이 아니고, 
+    // 이전 상태에서(press/up) 변화가 있을 경우;
+    //if( !(prev&&cur) && !(!prev&&!cur)) {                
+    if( xPrev != xCur ) { 
+        setKeyEnabled(xKeyidx, xCur);
+
+        if(isKeyEnabled(xKeyidx) == false) return 0;   
+
+        if(xCur) {
+            // DEBUG_PRINT(("key xKeyidx : %d 1\n", xKeyidx));
+            gRetval = putChangedKey(xKeyidx, true, xCol, xRow);
+        }else{
+            // DEBUG_PRINT(("key xKeyidx : %d 0\n", xKeyidx));
+            gRetval = putChangedKey(xKeyidx, false, xCol, xRow);
+        }
+    }
+
+    if(gRetval == 0) return 0;
+
+    // usb는 눌렸을 때만 버퍼에 저장한다.
+    if(xCur){
+        if(isKeyEnabled(xKeyidx) == false) return 0;  
+        //DEBUG_PRINT(("key down!!! xKeyidx : %d , reportIndex : %d \n", xKeyidx, reportIndex));
+        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
+        
+        gRetval |= (*keyscanDriver->pushKeyCodeWhenDown)(xKeyidx, true);
+    }  
+    return gRetval;     
+}
+
 uint8_t scanKey(uint8_t xLayer) {
 
     uint8_t retval = 0;
 
 	uint8_t row, col, prev, cur, keyidx;
     uint8_t gFN; 
-    uint8_t gResultPutKey = 1;
+    // uint8_t gResultPutKey = 1;
 	uint8_t gLayer = xLayer; 
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
@@ -83,8 +117,6 @@ uint8_t scanKey(uint8_t xLayer) {
             keyidx = getCurrentKeyindex(gLayer, row, col);	   		
 			gFN = 1;
 
-            if(isKeyEnabled(keyidx, cur) == false) continue;
-
 #ifdef ENABLE_BOOTMAPPER           
             if(isBootMapper()){
                 if( prev != cur){
@@ -93,32 +125,9 @@ uint8_t scanKey(uint8_t xLayer) {
                 }  
                 continue;              
             }
-#endif               
-            // !(prev&&cur) : 1 && 1 이 아니고, 
-            // !(!prev&&!cur) : 0 && 0 이 아니고, 
-            // 이전 상태에서(press/up) 변화가 있을 경우;
-			//if( !(prev&&cur) && !(!prev&&!cur)) {                
-            if( prev != cur ) {   
-                if(cur) {
-                    // DEBUG_PRINT(("key keyidx : %d 1\n", keyidx));
-                    gFN = putChangedKey(keyidx, true, col, row);
-                    // pressedKeyidx[col][row] = keyidx;
-                }else{
-                    // DEBUG_PRINT(("key keyidx : %d 0\n", keyidx));
-                    gFN = putChangedKey(keyidx, false, col, row);
-                }
-			}
-            
-            // fn키를 키매핑에 적용하려면 위치 주의;
-            if(gFN == 0) continue;
-
-			// usb는 눌렸을 때만 버퍼에 저장한다.
-			if(cur){
-               //DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-                pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(keyidx));
-                
-				retval |= (*keyscanDriver->pushKeyCodeWhenDown)(keyidx, true);
-			}			
+#endif              
+            gFN = processKeyIndex(keyidx, prev, cur, col, row);	
+            if(gFN == 0)continue;
 		}
 	}
 
@@ -128,7 +137,7 @@ uint8_t scanKey(uint8_t xLayer) {
 
     setCurrentMatrixAfter();
 
-    if(gResultPutKey == 0) return 0;
+    // if(gResultPutKey == 0) return 0;
 	
     return retval;
 }

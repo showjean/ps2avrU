@@ -143,6 +143,7 @@ int main(void) {
     // initHardware(0);	//여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
 
 	initMatrix();
+	clearMatrix();	// 전체를 통틀어 여기에서 1번만 실행시킨다.
 
     // _delay_us_m(1); 
     _delay_us(5);
