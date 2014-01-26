@@ -17,6 +17,7 @@
 #include "keymapper.h"
 #include "keymain.h"
 #include "bootmapper.h"
+#include "ps2avru_util.h"
 
 #define PWM_MAX 0xFF
 
@@ -78,7 +79,7 @@ void initFullLEDStateAfter(void){
 	blinkLedCountDelay = setDelay(blinkLedCountDelay);
 }
 
-void blinkOnce(int xStayMs){
+void blinkOnce(const uint8_t xStayMs){
 	if (LEDstate & LED_STATE_NUM) { // light up num lock
         turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
     }else{
@@ -89,7 +90,12 @@ void blinkOnce(int xStayMs){
     } else {
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
     }
-	_delay_ms(xStayMs);
+	/*
+		_delay_ms()에 xStayMs를 인자로 넣으면 hex 파일의 용량이 0x1000가량 증가한다. 
+		매뉴얼 펑션으로 _delay_ms(1)을 ms 만큼 루프시키도록 만들어서 사용;
+	*/
+	__delay_ms(xStayMs);	
+
 	if (LEDstate & LED_STATE_NUM) { // light up num lock
         turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//   
     }else{

@@ -1,6 +1,7 @@
 #ifndef LEDRENDER_H
 #define LEDRENDER_H
 
+#include <stdio.h>
 #include "hardwareinfo.h"
 
 #define LED_STATE_NUM     0x01  ///< num LED on a boot-protocol keyboard
@@ -18,7 +19,7 @@ extern void reduceLedBrightness(void);
 extern void changeFullLedState(void);
 extern void clearLEDInited(void);
 
-extern void blinkOnce(int xStayMs);
+extern void blinkOnce(uint8_t xStayMs);
 extern void initFullLEDState(void);
 extern void initFullLEDStateAfter(void);
 extern void initLED(void);

@@ -10,6 +10,6 @@ extern void append(uint8_t ary[], char ch);
  
 extern int findIndex(uint8_t xArr[], uint8_t xlen, uint8_t xValue);
 
-// extern int equalAll(uint8_t xArr[], uint8_t xlen);
+extern void __delay_ms(int n);
 
 #endif

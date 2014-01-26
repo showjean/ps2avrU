@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <util/delay.h>
 
 #include "ps2avru_util.h"
 
@@ -43,22 +44,10 @@ int findIndex(uint8_t xArr[], uint8_t xlen, uint8_t xValue)
         return -1;
 }
 
-// int equalAll(uint8_t xArr[], uint8_t xlen)
-// {
-// 	uint8_t i;
-// 	uint8_t prev;
-// 	int cur = -1;
-// 	prev = xArr[0];
-// 	for (i = 0; i < xlen; ++i)
-// 	{
-// 		cur = xArr[i];
-// 		if (cur != prev)
-// 		{
-// 			return -1;  /* it is not equal */
-// 		}
-// 		prev = cur;
-// 	}
-// 	return cur;  /* all equal */
-// }
+void __delay_ms(int n) { 
+  while (--n) { 
+   _delay_ms(1); 
+ } 
+}
 
 #endif
