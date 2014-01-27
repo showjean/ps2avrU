@@ -55,6 +55,19 @@ enum {
 };
 
 enum {  // for macro
+
+    KEY_CST_MAC1 = 189,
+    KEY_CST_MAC2,
+    KEY_CST_MAC3,
+    KEY_CST_MAC4,
+    KEY_CST_MAC5,
+    KEY_CST_MAC6,
+    KEY_CST_MAC7,
+    KEY_CST_MAC8,
+    KEY_CST_MAC9,
+    KEY_CST_MAC10,
+    KEY_CST_MAC11,
+    KEY_CST_MAC12,   
     KEY_MAC1 = 201,
     KEY_MAC2,
     KEY_MAC3,

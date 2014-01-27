@@ -25,11 +25,14 @@ void readCustomMacroAt(uint8_t xMacroIndex){
 	uint8_t gKeyindex;
 	uint8_t k;
 	for(k = 0; k < CUSTOM_MACRO_SIZE_MAX; ++k){
+		// key index
 		gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * xMacroIndex) + k);
 		
 		if(gKeyindex > 0 && gKeyindex < 255){
 			pushM(gKeyindex);
 		}
+		// isDown/delay
+		++k;
 	}
 }
 

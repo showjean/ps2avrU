@@ -303,14 +303,6 @@ void enterFrameForMapper(void){
 
 }
 
-bool isMacroKey(uint8_t xKeyidx){
-	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -670,6 +662,14 @@ void saveCurrentLayer(void)
 	_step = STEP_NOTHING;
 }
 
+bool isMacroKey(uint8_t xKeyidx){
+	if(xKeyidx >= KEY_CST_MAC1 && xKeyidx <= KEY_MAC12){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
 	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
@@ -677,15 +677,20 @@ uint8_t applyMacro(uint8_t xKeyidx){
 	uint8_t gMacroIndex = 255;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
 	if(isMacroKey(xKeyidx)){		
-		gMacroIndex = xKeyidx - KEY_MAC1;
 		if(isEmptyM()){
-			uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
-			if(gKeyidx > 0 && gKeyidx < 255){
-				clearMacroPressedBuffer();
-				readMacro(gMacroIndex);
-			}else if(hasCustomMacroAt(gMacroIndex)){
-				clearMacroPressedBuffer();
-				readCustomMacroAt(gMacroIndex);
+			if(xKeyidx >= KEY_MAC1){	// eeprom macro
+				gMacroIndex = xKeyidx - KEY_MAC1;			
+				uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
+				if(gKeyidx > 0 && gKeyidx < 255){
+					clearMacroPressedBuffer();
+					readMacro(gMacroIndex);
+				}
+			}else{	// custom macro
+				gMacroIndex = xKeyidx - KEY_CST_MAC1;		
+				if(hasCustomMacroAt(gMacroIndex)){
+					clearMacroPressedBuffer();
+					readCustomMacroAt(gMacroIndex);
+				}
 			}
 
 			return 1;
