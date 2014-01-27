@@ -823,9 +823,9 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	int gKeyIndex; 
 	char gStr[3];
     int gIdx;
-    int gLen;
+    // int gLen;
 
-	gKeyIndex = findIndex(usingKeys, 11, xKeyidx);
+	gKeyIndex = findIndex(usingKeys, xKeyidx);
 
 	if(isMacroInput()){
 
@@ -856,8 +856,8 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		    append(_macroPressedBuffer, xKeyidx);
 		    
 		}else{
-			gLen = strlen((char *)_macroPressedBuffer);
-		    gIdx = findIndex(_macroPressedBuffer, gLen, xKeyidx);
+			// gLen = strlen((char *)_macroPressedBuffer);
+		    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
 		    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
 		    if(gIdx == -1){
 		    	return;

@@ -3,6 +3,11 @@
 
 #include <stdbool.h>
 
+#define LAYER_NORMAL		0
+#define LAYER_FN			1
+#define LAYER_FN2			2
+#define LAYER_FN3			3
+
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
@@ -10,9 +15,7 @@ extern void initMatrix(void);
 extern void initMatrixDevice(void);
 
 extern void clearMatrix(void);
-// extern void clearPrevMatrix(void);
 
-// extern void setReleaseAll(void);
 extern bool isReleaseAll(void);
 extern bool isReleaseAllPrev(void);
 

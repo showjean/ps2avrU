@@ -351,37 +351,33 @@ static void fadeLED(void) {
 }
 
 //
-static void blinkLED(void) {
+static void blinkCapsLockLED(void) {
 	static int gCounter = 0;
 	static int gDelayCounter = 0;
 	static uint8_t gLEDState = 1;
 	const int gCountMAX = 200;
-	uint8_t led = LEDNUM;
+	uint8_t led = LEDCAPS;
 	uint8_t gIsOn = 0;
 
 #ifdef ENABLE_BOOTMAPPER
 	if(isBootMapper()){
-		led = LEDCAPS;
-
 		gIsOn = 1;
 	}
-#endif
+#endif	
 
 	if(gIsOn == 1){
-		
-
-		gDelayCounter++;
+		++gDelayCounter;
 		if(gDelayCounter > blinkLedCountDelay){
 			gCounter++;
 			if(gCounter > gCountMAX){
-				if(getLEDState() & LED_STATE_NUM){	// Num Lock이 켜져 있을때는 커졌다 켜지고;
+				if(getLEDState() & LED_STATE_CAPS){	// Caps Lock이 켜져 있을때는 커졌다 켜지고;
 					if(gLEDState == 1){
 						turnOffLED(led);
 					}else{
 						turnOnLED(led);
 						gDelayCounter = 0;
 					}
-				}else{	// Num Lock이 꺼져 있을 때는 켜졌다 꺼진다.
+				}else{	// Caps Lock이 꺼져 있을 때는 켜졌다 꺼진다.
 					if(gLEDState == 1){
 						turnOnLED(led);
 					}else{
@@ -451,9 +447,8 @@ void renderLED(void) {
 	if(isSleep()){	
 		return;
 	}
-	
-	// for beyond fn
-	blinkLED();
+
+	blinkCapsLockLED();
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led

@@ -334,9 +334,7 @@ static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
 
     // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
 
-    if(keyidx >= KEY_MAX){
-        return 0;       
-    }else if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
+    if(keyidx >= KEY_MAX || (keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end)){
         return 0;
     }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
         addModifiers(keyidx);
@@ -408,9 +406,9 @@ static uint8_t scanMacroUsb(void)
         uint8_t row, col, cur, keyidx;
         uint8_t *gMatrix = getCurrentMatrix();
         uint8_t keymap = getLayer();
-        for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
-            for (row = 0; row < ROWS; ++row) { // check every bit on this row   
-               
+        for (row = 0; row < ROWS; ++row) { // check every bit on this row       
+            if(gMatrix[row] == 0) continue;
+            for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
                 cur  = gMatrix[row] & BV(col);           
                 // usb는 눌렸을 때만 버퍼에 저장한다.
                 if(cur){
@@ -438,7 +436,7 @@ static uint8_t scanMacroUsb(void)
 
             makeReportBufferExtra(gKey.keyindex, true);
         }else{  // up
-            gIdx = findIndex(macroBuffer, gLen, gKey.keyindex);
+            gIdx = findIndex(macroBuffer, gKey.keyindex);
             if(gIdx > -1){
                 delete(macroBuffer, gIdx);
 
@@ -499,6 +497,8 @@ void initInterfaceUsb(void){
 }
 void usb_main(void) {
 
+    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
+    TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
     usbInit();
 
 	uint8_t updateNeeded = 0;
@@ -513,8 +513,7 @@ void usb_main(void) {
     }while(--i);
     usbDeviceConnect();
 
-    initInterfaceUsb();
-    
+    initInterfaceUsb();    
 	DEBUG_PRINT(("starting USB keyboard!!! \n"));
 
     sei();
@@ -571,11 +570,6 @@ void usb_main(void) {
             updateNeeded = scanKeyUSB(); // changes?
             if(updateNeeded){
                 // 이전과 같은 리포트는 할 필요 없음;
-                // if(memcmp(reportBuffer, reportBufferPrev, REPORT_SIZE_KEYBOARD) == 0){
-                //     updateNeeded = 0;
-                // }else{
-                //     memcpy(reportBufferPrev, reportBuffer, REPORT_SIZE_KEYBOARD);
-                // }
                 if(reportKeyboard.mods == reportKeyboardPrev.mods && 
                     memcmp(reportKeyboard.keys, reportKeyboardPrev.keys, REPORT_KEYS) == 0){
                     updateNeeded = 0;

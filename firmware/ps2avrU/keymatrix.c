@@ -8,9 +8,8 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
-
-#include <util/delay.h>
 #include <string.h>
+#include <util/delay.h>
 
 #include "keymatrix.h"
 #include "keymap.h"
@@ -57,21 +56,11 @@ void initMatrix(void){
 }
 
 void clearMatrix(void){
-	uint8_t row;
-	for(row=0;row<ROWS;++row) {
-		prevMatrix[row] = 0;
-		currentMatrix[row] = 0;
-	}
+	memset(prevMatrix, 0, ROWS);
+	memset(currentMatrix, 0, ROWS);
 }
 
-// void clearPrevMatrix(void){
-// 	uint8_t row;
-// 	for(row=0;row<ROWS;++row) {
-// 		prevMatrix[row] = 0;
-// 	}
-// }
-
-void setReleaseAll(void){
+static void setReleaseAll(void){
 	uint8_t row;
 	_isReleaseAll = true;
 	for(row=0;row<ROWS;row++) {
@@ -100,7 +89,7 @@ bool isReleaseAllPrev(void){
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void) {
-	uint8_t col, row, keyidx, cur;
+	uint8_t col, row, keyidx, cur, gLayer;
 
 	/*
 
@@ -113,6 +102,7 @@ uint8_t getLayer(void) {
 
 	if(_currentLazyLayer > 0) return _currentLazyLayer;
 
+	gLayer= 0;
 	// fn이 가장 우선, 다음 fn2
     uint8_t *gMatrix = getCurrentMatrix();
 	for(row=0;row<ROWS;row++){	
@@ -123,54 +113,43 @@ uint8_t getLayer(void) {
 
 			if(cur){
 				keyidx = getCurrentKeyindex(_currentLayer, row, col);
-			    keyidx = getDualActionMaskDown(keyidx); 
+			    keyidx = getDualActionMaskDown(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
 				
 				// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
 				if(keyidx == KEY_FN){
-					//_currentLayer = 1;	// fn 레이어에는 FN키를 검색하지 않는다. 
-					if(isLazyFn()){
-						if(isReleaseAllPrev()){
-							_currentLazyLayer = 1;
-						}else{
-							return _currentLayer;
-						}
-					}
-					return 1;
+					gLayer = LAYER_FN;
 				}else if(keyidx == KEY_FN2){
-					if(isLazyFn()){
-						if(isReleaseAllPrev()){
-							_currentLazyLayer = 2;
-						}else{
-							return _currentLayer;
-						}
-					}
-					return 2;	
+					gLayer = LAYER_FN2;
 				}else if(keyidx == KEY_FN3){
+					gLayer = LAYER_FN3;		
+				}else if(keyidx == KEY_NOR){
+					if(_currentLayer == LAYER_FN2){
+						// _currentLayer은 2를 유지하면서 스캔할 레이어는 0으로 반환;
+						return LAYER_NORMAL;
+					}
+				}
+				if(gLayer > 0){					
+					// _currentLayer은 0을 유지하면서 스캔할 레이어는 1로 반환;
 					if(isLazyFn()){
-						if(isReleaseAllPrev()){
-							_currentLazyLayer = 3;
+						if(isReleaseAllPrev()){		// 모든 키가 눌려져 있지 않은 상태에서만 작동;
+							_currentLazyLayer = gLayer;
 						}else{
 							return _currentLayer;
 						}
 					}
-					return 3;					
-				}else if(keyidx == KEY_NOR){
-					if(_currentLayer == 2){
-						// _currentLayer은 2를 유지하면서 스캔할 레이어만 0으로 반환;
-						return 0;
-					}
+					return gLayer;
 				}
 			}
 		}
 	}
 	
-	if(isBeyondFN() == 1) {
-		_currentLayer = 2;
-		return 2;
+	if(isBeyondFN()) {
+		_currentLayer = LAYER_FN2;
+		return _currentLayer;
 	}
 		
-	_currentLayer = 0;
-	return 0;
+	_currentLayer = LAYER_NORMAL;
+	return _currentLayer;
 }
 
 #ifdef GHOST_KEY_PREVENTION
@@ -252,16 +231,14 @@ uint8_t getLiveMatrix(void){
 #ifdef GHOST_KEY_PREVENTION
 	// ghost-key prevention
 	// col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.	
-	uint8_t hasGhostKey = 0;
-	hasGhostKey = findGhostKey();
 	
-	if(hasGhostKey > 0){
+	if(findGhostKey() > 0){
 		ghostFilterMatrixPointer = prevMatrix;
 	}else{
 		ghostFilterMatrixPointer = currentMatrix;
 	}
 
-	DEBUG_PRINT(("GHOST_KEY_PREVENTION  p : %d, prevMatrix : %d, currentMatrix : %d \n", ghostFilterMatrixPointer, prevMatrix, currentMatrix));
+	// DEBUG_PRINT(("GHOST_KEY_PREVENTION  p : %d, prevMatrix : %d, currentMatrix : %d \n", ghostFilterMatrixPointer, prevMatrix, currentMatrix));
 #endif
 
 	return 1;
@@ -278,23 +255,16 @@ uint8_t *getCurrentMatrix(void){
 }
 
 void setPrevMatrix(void){
-	uint8_t row;
-	uint8_t *gMatrix = getCurrentMatrix();
-	for(row=0;row<ROWS;++row){
-		prevMatrix[row] = gMatrix[row];
-	}
+	memcpy(prevMatrix, getCurrentMatrix(), ROWS);
 }
 
 uint8_t *getPrevMatrix(void){
 	return prevMatrix;
 }
 
-//curmatrix
+// return debounce clear
 uint8_t setCurrentMatrix(void){	
-
-	uint8_t gClear = getLiveMatrix();
-
-	return gClear;
+	return getLiveMatrix();
 }
 
 // 매트릭스에 관련된 모든 처리가 끝난 후 실행 된다.

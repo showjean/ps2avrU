@@ -64,14 +64,14 @@ void setUsbOff(void) {
 #endif
 }
 
-void clearInterface(void){
+static void clearInterface(void){
 	cli();
 	clearLEDInited();
 	interfaceCount = 0;
 	interfaceReady = 0;
 }
 
-void clearTimers(void) {
+static void clearTimers(void) {
 	// timer들을 리셋하지않으면 USB 인식이 불안정하다.
 
 	u08 intNum;
@@ -93,26 +93,19 @@ void clearTimers(void) {
 static void initHardware(bool xIsUSB) {
 
 	initMatrix();
-
-	initLED();
-
-	P2U_USB_CFG_DDR |= ((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));	// input
-	P2U_PS2_PORT &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT)); // 
+	P2U_PS2_PORT &= ~((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN)); // input:tri-state		output:low
 
     if(xIsUSB){
     	// USB Reset by device only required on Watchdog Reset	                        
-	    // _delay_us_m(11);      // delay >10ms for USB reset
-	    _delay_us(11);
-		P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// remove USB reset condition
-
-	    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
-	    TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
+	    // _delay_us(11);	// delay >10ms for USB reset
+		P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// output, remove USB reset condition
 
 		clearTimers();
 
-		// initHardware() 보다 나중에 사용되야 한다.	
 		setUsbOn();
  	}else{
+		P2U_PS2_DDR |= ((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN));	// input
+
  		setUsbOff();
  	}
 }
@@ -124,12 +117,16 @@ int setDelay(int xDelay){
 	return xDelay;
 }
 
-static void initSoftware(void){
-	// init
+static void initPreparing(void){
+	// init sw
 	initKeymapper();
 	initQuickSwap();
 	initLazyFn();
 	initSmartKey();
+
+	// init
+	initLED();
+	clearInterface();
 }
 
 int main(void) {
@@ -145,11 +142,10 @@ int main(void) {
 	initMatrix();
 	clearMatrix();	// 전체를 통틀어 여기에서 1번만 실행시킨다.
 
-    // _delay_us_m(1); 
     _delay_us(5);
 
-	uint8_t _countDie = 0;
-	while(getLiveMatrix() == 0 && ++_countDie < 20){
+	uint8_t escapeCounter = 0;
+	while(getLiveMatrix() == 0 && ++escapeCounter < 20){
 		// waiting during clear debounce
 	}
 
@@ -157,14 +153,15 @@ int main(void) {
 	uint8_t *gMatrix = getCurrentMatrix();
 
 	// debounce cleared => compare last matrix and current matrix
-	for(col=0;col<COLUMNS;col++)
-	{		
-		for(row=0;row<ROWS;row++)
+	for(row=0;row<ROWS;row++)
+	{	
+		if(gMatrix[row] == 0) continue;
+		for(col=0;col<COLUMNS;col++)
 		{
 			cur  = gMatrix[row] & BV(col);
 			// DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));	
 			if( cur ) {
-				keyidx = getKeyIndex(0, row, col); //getCurrentKeyindex(0, row, col);
+				keyidx = getKeyIndex(0, row, col);
 #ifdef ENABLE_BOOTMAPPER
 				if(getBootmapperStatus(col, row) || keyidx == KEY_TAB){	// bootmapper start
 					setToBootMapper();
@@ -172,13 +169,10 @@ int main(void) {
 				}
 #endif
 				if(keyidx == KEY_M) {
-					// DEBUG_PRINT(("...........readyKeyMappingOnBoot \n"));
 					readyKeyMappingOnBoot();
 				}else if(keyidx == KEY_U) {
-					DEBUG_PRINT(("KEY_U \n"));
 					ckeckNeedInterface |= (1 << 0);
 				}else if(keyidx == KEY_P) {
-					DEBUG_PRINT(("KEY_P \n"));
 					ckeckNeedInterface |= (1 << 1);
 				}
 			}
@@ -241,8 +235,8 @@ int main(void) {
 					debounce = 0;
 				}
 				prevPIN = P2U_PS2_PINS;
-			}else if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN)))){
-				if((prevPIN&(BV(P2U_PS2_CLOCK_PIN)))){
+			}else if(P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))){
+				if(prevPIN&(BV(P2U_PS2_CLOCK_PIN))){
 					debounce++;
 					if(debounce > 5){
 						// ps2
@@ -264,26 +258,20 @@ int main(void) {
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-			initSoftware();
-			clearInterface();
+			initPreparing();
+
 			initHardware(true);
 
-			usb_main();			
-
-			cli();
+			usb_main();	
 		}
 		
 		if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
-			initSoftware();
-			initLED();
-			blinkOnce(50);
+			initPreparing();
 
-			clearInterface();
+			blinkOnce(50);
 			initHardware(false);
    
 			ps2_main();
-
-			cli();
 		}
 	}
 

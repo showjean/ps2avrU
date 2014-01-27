@@ -23,18 +23,8 @@ void append(uint8_t ary[], char ch)
      insert(ary, strlen((char *)ary), ch);
 }
  
-int findIndex(uint8_t xArr[], uint8_t xlen, uint8_t xValue)
+int findIndex(uint8_t xArr[], uint8_t xValue)
 {
-	// uint8_t i;
-	// for (i = 0; i < xlen; ++i)
-	// {
-	// 	if (xArr[i] == xValue)
-	// 	{
-	// 		return i;  /* it was found */
-	// 	}
-	// }
-	// return -1;  /* if it was not found */
-
 	char * pch;
     pch = (char*) memchr((char *)xArr, xValue, strlen((char *)xArr));
 
@@ -43,7 +33,10 @@ int findIndex(uint8_t xArr[], uint8_t xlen, uint8_t xValue)
     else
         return -1;
 }
-
+/*
+    _delay_ms()에 xStayMs를 인자로 넣으면 hex 파일의 용량이 0x1000가량 증가한다. 
+    매뉴얼 펑션으로 _delay_ms(1)을 ms 만큼 루프시키도록 만들어서 사용;
+*/
 void __delay_ms(int n) { 
   while (--n) { 
    _delay_ms(1); 

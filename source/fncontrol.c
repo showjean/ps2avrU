@@ -31,27 +31,29 @@ static uint8_t _isLockWin = LOCK_NOT_SET;
 bool isBeyondFN(void){
 	return _isBeyondFN;
 }
+static void applyLock(uint8_t *lock){
+	if(*lock == LOCK_WILL_SET){
+		*lock = LOCK_IS_SET;
+		blinkOnce(50);
+		_delay_ms(50);
+		blinkOnce(100);
+	}else if(*lock == LOCK_WILL_NOT_SET){
+		*lock = LOCK_NOT_SET;
+		blinkOnce(100);
+	}
+}
 // 
 void enterFrameForFnControl(void){
 	if(isReleaseAll()){
-		if(_isLockKey == LOCK_WILL_SET){
-			_isLockKey = LOCK_IS_SET;
-			blinkOnce(50);
-			_delay_ms(50);
-			blinkOnce(100);
-		}else if(_isLockKey == LOCK_WILL_NOT_SET){
-			_isLockKey = LOCK_NOT_SET;
-			blinkOnce(100);
-		}
-		if(_isLockWin == LOCK_WILL_SET){
-			_isLockWin = LOCK_IS_SET;
-			blinkOnce(50);
-			_delay_ms(50);
-			blinkOnce(100);
-		}else if(_isLockWin == LOCK_WILL_NOT_SET){
-			_isLockWin = LOCK_NOT_SET;
-			blinkOnce(100);
-		}
+		applyLock(&_isLockKey);
+		applyLock(&_isLockWin);
+	}
+}
+static void __setKeyEnabled(uint8_t *lock){
+	if(*lock == LOCK_IS_SET){
+		*lock = LOCK_WILL_NOT_SET;
+	}else{
+		*lock = LOCK_WILL_SET;				
 	}
 }
 void setKeyEnabled(uint8_t xKeyidx, bool xIsDown){
@@ -60,17 +62,9 @@ void setKeyEnabled(uint8_t xKeyidx, bool xIsDown){
 	*/
 	if(xIsDown) {	// !xIsDown은 오작동한다.
 		if(xKeyidx == KEY_LOCK_ALL){
-			if(_isLockKey == LOCK_IS_SET){
-				_isLockKey = LOCK_WILL_NOT_SET;
-			}else{
-				_isLockKey = LOCK_WILL_SET;				
-			}
+			__setKeyEnabled(&_isLockKey);
 		}else if(xKeyidx == KEY_LOCK_WIN){
-			if(_isLockWin == LOCK_IS_SET){
-				_isLockWin = LOCK_WILL_NOT_SET;
-			}else{
-				_isLockWin = LOCK_WILL_SET;				
-			}
+			__setKeyEnabled(&_isLockWin);
 		}
 	}
 }
@@ -108,11 +102,10 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 			 }
 			 if(_isBeyondFN == false){
 				blinkOnce(100);
-				//setLEDIndicate();
 			 }else{
 				blinkOnce(100);
-				_delay_ms(50);
-				blinkOnce(50);
+				_delay_ms(80);
+				blinkOnce(70);
 			 }
 			 return 0;
 		}else if(xKeyidx == EXTRA_FN){

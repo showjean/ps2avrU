@@ -109,8 +109,9 @@ uint8_t scanKey(uint8_t xLayer) {
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
-	for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
-		for (row = 0; row < ROWS; ++row) { // check every bit on this row   
+	for (row = 0; row < ROWS; ++row) { // check every bit on this row   
+        if(gPrevMatrix[row] == 0 && gMatrix[row] == 0) continue;
+        for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);

@@ -41,7 +41,7 @@ uint8_t popM(void) {
 macro_key_t popMWithKey(void) {
     macro_key_t gKey;
     int gIdx;
-    int gLen;
+    // int gLen;
 
     gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
     gKey.keyindex = popM();
@@ -52,8 +52,8 @@ macro_key_t popMWithKey(void) {
     }
 
     //
-    gLen = strlen((char *)_pressedBuffer);
-    gIdx = findIndex(_pressedBuffer, gLen, gKey.keyindex);
+    // gLen = strlen((char *)_pressedBuffer);
+    gIdx = findIndex(_pressedBuffer, gKey.keyindex);
     // DEBUG_PRINT(("findIndex gIdx :: %d , len : %d \n", gIdx, gLen));
     if(gIdx > -1){
         // already pressed
