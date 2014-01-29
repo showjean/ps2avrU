@@ -255,13 +255,14 @@ static int scanKeyPS2(void) {
 	
     uint8_t prevKeyidx;
 	uint8_t row, col, prev, cur, keyidx;
+	static bool _isFnPressedPrev = false;
 	uint8_t gLayer = getLayer();
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
 	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-	if(!isLazyFn() && _prevLayer != gLayer){
+	if( (!isLazyFn() || !_isFnPressedPrev) && _prevLayer != gLayer){	// !isLazyFn() || !_isFnPressedPrev 순서 주의
 		for(col=0;col<COLUMNS;col++)
 		{		
 			for(row=0;row<ROWS;row++)
@@ -293,6 +294,7 @@ static int scanKeyPS2(void) {
 		}
 	}
 	_prevLayer = gLayer;
+	_isFnPressedPrev = isFnPressed();
 
 	uint8_t retval = scanKey(gLayer);
 

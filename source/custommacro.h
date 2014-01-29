@@ -14,8 +14,6 @@
 	2byte : 1byte = keyindex, 1byte = 8bit(1bit = up/down flag, 7bit = delay * 100ms);
 */
 
-#define CUSTOM_MACRO_SIZE_MAX 			168 // = 42 * 4
-
 extern bool hasCustomMacroAt(uint8_t xMacroIndex);
 
 extern void readCustomMacroAt(uint8_t xMacroIndex);

@@ -31,4 +31,6 @@
 #define KEYMAP_ADDRESS			0x6500
 #define CUSTOM_MACRO_ADDRESS	0x6800
 
+#define CUSTOM_MACRO_SIZE_MAX 			168 // = 42 * 4
+
 #endif

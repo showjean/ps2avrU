@@ -28,7 +28,7 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 	uint8_t findGhostKey(void);
 #endif
 
-uint8_t _currentLayer = 0;
+uint8_t _fnScanLayer = 0;
 
 
 /* ------------------------------------------------------------------------- */
@@ -36,6 +36,7 @@ static uint8_t debounceMAX;
 static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 static bool _isReleaseAllPrev = true;
+static bool _isFnPressed = false;
 static uint8_t _currentLazyLayer = 0;
 
 
@@ -84,7 +85,9 @@ bool isReleaseAll(void){
 bool isReleaseAllPrev(void){
 	return _isReleaseAllPrev;
 }
-
+bool isFnPressed(void){
+	return _isFnPressed;
+}
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
@@ -94,7 +97,9 @@ uint8_t getLayer(void) {
 	/*
 
 	게으른 FN이 작동되는 상황 정리;
-	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함;
+	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함; <- 불편할 수 있으므로
+		기본 레이어일 경우에는 다른 키들이 눌려져 있어도 FN이 작동하도록 한다.
+		: 
 	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
 	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
 	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
@@ -112,7 +117,7 @@ uint8_t getLayer(void) {
 			cur  = gMatrix[row] & BV(col);
 
 			if(cur){
-				keyidx = getCurrentKeyindex(_currentLayer, row, col);
+				keyidx = getCurrentKeyindex(_fnScanLayer, row, col);
 			    keyidx = getDualActionMaskDown(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
 				
 				// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
@@ -123,20 +128,22 @@ uint8_t getLayer(void) {
 				}else if(keyidx == KEY_FN3){
 					gLayer = LAYER_FN3;		
 				}else if(keyidx == KEY_NOR){
-					if(_currentLayer == LAYER_FN2){
-						// _currentLayer은 2를 유지하면서 스캔할 레이어는 0으로 반환;
+					if(_fnScanLayer == LAYER_FN2){
+						// _fnScanLayer은 2를 유지하면서 스캔할 레이어는 0으로 반환;
+						_isFnPressed = true;
 						return LAYER_NORMAL;
 					}
 				}
 				if(gLayer > 0){					
-					// _currentLayer은 0을 유지하면서 스캔할 레이어는 1로 반환;
+					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 1로 반환;
 					if(isLazyFn()){
-						if(isReleaseAllPrev()){		// 모든 키가 눌려져 있지 않은 상태에서만 작동;
+						if(isReleaseAllPrev() || _isFnPressed == false){
 							_currentLazyLayer = gLayer;
 						}else{
-							return _currentLayer;
+							return _fnScanLayer;
 						}
 					}
+					_isFnPressed = true;
 					return gLayer;
 				}
 			}
@@ -144,12 +151,12 @@ uint8_t getLayer(void) {
 	}
 	
 	if(isBeyondFN()) {
-		_currentLayer = LAYER_FN2;
-		return _currentLayer;
+		_fnScanLayer = LAYER_FN2;
+	}else{		
+		_fnScanLayer = LAYER_NORMAL;
 	}
-		
-	_currentLayer = LAYER_NORMAL;
-	return _currentLayer;
+	_isFnPressed = false;
+	return _fnScanLayer;
 }
 
 #ifdef GHOST_KEY_PREVENTION
