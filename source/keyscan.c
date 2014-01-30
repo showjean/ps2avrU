@@ -65,6 +65,9 @@ uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, ui
 
     uint8_t gRetval = 1; 
 
+    if(xCur){
+        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
+    }  
     // !(prev&&cur) : 1 && 1 이 아니고, 
     // !(!prev&&!cur) : 0 && 0 이 아니고, 
     // 이전 상태에서(press/up) 변화가 있을 경우;
@@ -87,9 +90,7 @@ uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, ui
 
     // usb는 눌렸을 때만 버퍼에 저장한다.
     if(xCur){
-        if(isKeyEnabled(xKeyidx) == false) return 0;  
-        //DEBUG_PRINT(("key down!!! xKeyidx : %d , reportIndex : %d \n", xKeyidx, reportIndex));
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
+        if(isKeyEnabled(xKeyidx) == false || isDeepKeyMapping()) return 0;  
         
         gRetval |= (*keyscanDriver->pushKeyCodeWhenDown)(xKeyidx, true);
     }  

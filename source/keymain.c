@@ -254,7 +254,7 @@ int main(void) {
 	}
 #endif
 
-	DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
+	// DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
 	
 	for(;;){
 		if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){

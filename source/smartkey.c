@@ -3,13 +3,15 @@
 #include "keymap.h"
 #include <avr/eeprom.h>
 #include "eeprominfo.h"
+#include "print.h"
 
 static bool _isOsx = false;
 static bool _enabled = false;
 void initSmartKey(void){
 
 	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
-	if((gOption&(1<<TOGGLE_SMART_KEY)) == OPTION_OFF){
+	DEBUG_PRINT(("initSmartKey : %d %d \n", gOption, gOption&(1<<TOGGLE_SMART_KEY)));	
+	if(((gOption >> TOGGLE_SMART_KEY) & 0x01) == OPTION_OFF){
 		_enabled = false;
 	}else{
 		_enabled = true;

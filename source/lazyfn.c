@@ -4,13 +4,15 @@
 #include "lazyfn.h"
 #include <avr/eeprom.h>
 #include "eeprominfo.h"
+#include "print.h"
 
 static bool _isLazyFn;
 
 void initLazyFn(void){
 
 	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
-	if((gOption&(1<<TOGGLE_LAZY_FN)) == OPTION_OFF){
+	DEBUG_PRINT(("initLazyFn : %d %d \n", gOption, gOption&(1<<TOGGLE_SMART_KEY)));	
+	if(((gOption >> TOGGLE_LAZY_FN) & 0x01) == OPTION_OFF){
 		_isLazyFn = false;
 	}else{
 		_isLazyFn = true;
