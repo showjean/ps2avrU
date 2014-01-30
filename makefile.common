@@ -30,8 +30,6 @@
 
 	SRC += $(AVRLIB)/timer.c\
 			$(COMMON_DIR)/keysta.c \
-			$(COMMON_DIR)/usbdrv/usbdrv.c \
-			$(COMMON_DIR)/usbdrv/oddebug.c \
 			$(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \
 			$(COMMON_DIR)/smartkey.c \
@@ -51,6 +49,8 @@
 			$(COMMON_DIR)/ps2main.c \
 			$(COMMON_DIR)/vusb.c \
 			$(COMMON_DIR)/usbmain.c \
+			$(COMMON_DIR)/usbdrv/usbdrv.c \
+			$(COMMON_DIR)/usbdrv/oddebug.c \
 			$(COMMON_DIR)/$(TRG).c \
 			
 #put additional assembler source file here

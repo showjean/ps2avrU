@@ -13,7 +13,7 @@
 #include <string.h>
 #include <avr/interrupt.h>
 
-#define BAUD 57600
+#define BAUD 19200	//57600
 #define UBRR (((F_CPU / (BAUD * 16UL))) - 1) 
 
 #define DEBUG_PRINT(arg) printf arg
@@ -38,6 +38,10 @@ static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 static void 
 enable_printf(void)
 {
+
+	// ODDBG_UCR |= (1<<ODDBG_TXEN);
+ //    ODDBG_UBRR = F_CPU / (19200 * 16L) - 1;
+    
 	stdout = &mystdout;
 	//DDRD |= 0x01;
 

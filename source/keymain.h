@@ -5,6 +5,9 @@
 #include <stdbool.h>
 #include "global.h"
 
+// for oddebug
+#define  DEBUG_LEVEL 		1
+
 // #define DEBUG_KEYMAIN	// if you want to debug mode
 
 // only for test, use makefile -D option on release.bat

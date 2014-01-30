@@ -41,6 +41,7 @@ void    odDebug(uchar prefix, uchar *data, uchar len)
     while(len--){
         uartPutc(' ');
         printHex(*data++);
+        // uartPutc(*data++);
     }
     uartPutc('\r');
     uartPutc('\n');

@@ -38,6 +38,8 @@
 #include "usbmain.h"
 #include "bootmapper.h"
 
+#include "oddebug.h"
+
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
@@ -132,6 +134,9 @@ static void initPreparing(void){
 int main(void) {
 
 	enable_printf();
+	odDebugInit();
+
+	DBG1(0x00, 0, 0);
 
     INTERFACE = 255;
 	uint8_t ckeckNeedInterface = 0;
