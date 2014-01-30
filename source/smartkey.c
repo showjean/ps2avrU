@@ -9,10 +9,10 @@ static bool _enabled = false;
 void initSmartKey(void){
 
 	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
-	if(gOption&(1<<TOGGLE_SMART_KEY)){
-		_enabled = true;
-	}else{
+	if((gOption&(1<<TOGGLE_SMART_KEY)) == OPTION_OFF){
 		_enabled = false;
+	}else{
+		_enabled = true;
 	}
 }
 bool isSmartKeyEnabled(void){
@@ -47,11 +47,10 @@ void toggleSmartKeyEnabled(void){
 	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
 	if(_enabled == false){
 		_enabled = true;
-		gOption |= (1<<TOGGLE_SMART_KEY);
-		eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
+		gOption &= ~(1<<TOGGLE_SMART_KEY);	
 	}else{
 		_enabled = false;	
-		gOption &= ~(1<<TOGGLE_SMART_KEY);	
-		eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
+		gOption |= (1<<TOGGLE_SMART_KEY);
 	}
+	eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
 }
