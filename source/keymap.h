@@ -51,7 +51,10 @@ enum {
     KEY_FN3_HANGLE,
     KEY_FN3_HANJA,
     KEY_FN3_CAPS,
-    KEY_dualAction_end  // 235
+    KEY_FN_APPS,
+    KEY_FN2_APPS,
+    KEY_FN3_APPS,
+    KEY_dualAction_end  // 238
 };
 
 enum {  // for macro
