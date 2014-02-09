@@ -9,6 +9,7 @@
 #include "keymap.h" 
 #include "macrobuffer.h"
 #include "ps2avru_util.h"
+#include "hardwareinfo.h"
 
 static bool _isMacroProcessEnd = false;
 static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];

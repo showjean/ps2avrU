@@ -10,4 +10,7 @@
 #define LEDSCROLL   (1 << 6)	//PIND6  ///< address of the scroll-lock LED  
 #define LEDFULLLED  (1 << 4)	//PIND4  ///< address of the full led controll pin
 
+#define turnOnLED(pin)		PORTLEDS |= (pin);
+#define turnOffLED(pin)		PORTLEDS &= ~(pin);
+
 #endif

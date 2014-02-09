@@ -28,9 +28,16 @@
 #define COLUMNS 	8
 #define ROWS 		17
 
+// flash address
 #define KEYMAP_ADDRESS			0x6500
 #define CUSTOM_MACRO_ADDRESS	0x6800
 
+// eeprom macro
+#define MACRO_SIZE_MAX 48
+#define MACRO_SIZE_MAX_HALF 24
+#define MACRO_NUM 12
+
+// flash macro
 #define CUSTOM_MACRO_SIZE_MAX 			168 // = 42 * 4
 
 #endif

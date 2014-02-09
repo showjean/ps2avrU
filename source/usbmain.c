@@ -227,6 +227,7 @@
 #include "usbdrv/usbdrv.h"
 
 #include "hardwareinfo.h"
+#include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymap.h"
@@ -497,6 +498,10 @@ void initInterfaceUsb(void){
 }
 void usb_main(void) {
 
+    // USB Reset by device only required on Watchdog Reset         
+    P2U_PS2_PORT &= ~((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN)); // input:tri-state     output:low                 
+    P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// input, remove USB reset condition
+    
     // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
     TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
     usbInit();

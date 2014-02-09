@@ -95,19 +95,11 @@ static void clearTimers(void) {
 static void initHardware(bool xIsUSB) {
 
 	initMatrix();
-	P2U_PS2_PORT &= ~((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN)); // input:tri-state		output:low
 
     if(xIsUSB){
-    	// USB Reset by device only required on Watchdog Reset	                        
-	    // _delay_us(11);	// delay >10ms for USB reset
-		P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// output, remove USB reset condition
-
 		clearTimers();
-
 		setUsbOn();
  	}else{
-		P2U_PS2_DDR |= ((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN));	// input
-
  		setUsbOff();
  	}
 }
@@ -212,8 +204,8 @@ int main(void) {
 	}
 
 	// preparing auto detacting
-	P2U_PS2_DDR    	&= ~BV(P2U_PS2_CLOCK_PIN);	//0b00010011;	
-	P2U_PS2_PORT	|= BV(P2U_PS2_CLOCK_PIN);	//0b11101100;
+	P2U_PS2_DDR    	&= ~BV(P2U_PS2_CLOCK_PIN);
+	P2U_PS2_PORT	|= BV(P2U_PS2_CLOCK_PIN);
 	uint8_t debounce = 0;
 	uint8_t prevPIN = 0;
 
