@@ -11,7 +11,9 @@
 
 #if DEBUG_LEVEL > 0
 
+#warning "======================================================="
 #warning "Never compile production devices with debugging enabled"
+#warning "======================================================="
 
 static void uartPutc(char c)
 {

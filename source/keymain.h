@@ -16,6 +16,7 @@
 // #define INTERFACE_ONLY_USB	// usb only
 // #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
 
+// #define DEBUG_QUICK_BOOTLOADER
 
 #ifdef DEBUG_KEYMAIN
 	#define DEBUG_KEYMAPPER_H
@@ -39,5 +40,6 @@ extern uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, cl
 extern uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow);
 
 extern int setDelay(int xDelay);
+extern void initAfterInterfaceMount(void);
 
 #endif

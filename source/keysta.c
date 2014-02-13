@@ -6,7 +6,7 @@
 #include <avr/interrupt.h>
 
 #include "global.h"
-#include "timer.h"
+#include "timerinclude.h"
 #include "common_inc.h"
 #include "keysta.h"
 

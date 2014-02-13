@@ -10,7 +10,10 @@
 #include "keymatrix.h"
 #include "fncontrol.h"
 #include "bootmapper.h"
+#include "lazyfn.h"
+#include "oddebug.h"
 
+static void scanKey(uint8_t xLayer);
 
 static keyscan_driver_t *keyscanDriver;
 
@@ -29,7 +32,7 @@ static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
 	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
 }
 
-static uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
+static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
@@ -42,28 +45,26 @@ static uint8_t putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_
     if(isDeepKeyMapping()){
         // DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, xCol: %d, xRow: %d \n", xKeyidx, xIsDown, xCol, xRow));
         
+        // DBG1(0x0A, (uchar *)&xKeyidx, 1);  
         putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 
-        return 0;
+        return;
     }
             
     if(xIsDown && applyMacro(xKeyidx)) {
         // 매크로 실행됨;
-        return 0;
+        return;
     }
 
     // fn키를 키매핑에 적용하려면 위치 주의;
-    if(gFN == false) return 0;
+    if(gFN == false) return;
 
     
 	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
 	
-    return 1;
 }
 
-uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
-
-    uint8_t gRetval = 1; 
+static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
     if(xCur){
         pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
@@ -75,36 +76,113 @@ uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, ui
     if( xPrev != xCur ) { 
         setKeyEnabled(xKeyidx, xCur);
 
-        if(isKeyEnabled(xKeyidx) == false) return 0;   
+        if(isKeyEnabled(xKeyidx) == false) return;   
 
         if(xCur) {
             // DEBUG_PRINT(("key xKeyidx : %d 1\n", xKeyidx));
-            gRetval = putChangedKey(xKeyidx, true, xCol, xRow);
+            putChangedKey(xKeyidx, true, xCol, xRow);
         }else{
             // DEBUG_PRINT(("key xKeyidx : %d 0\n", xKeyidx));
-            gRetval = putChangedKey(xKeyidx, false, xCol, xRow);
+            putChangedKey(xKeyidx, false, xCol, xRow);
         }
     }
 
-    if(gRetval == 0) return 0;
-
-    // usb는 눌렸을 때만 버퍼에 저장한다.
-    if(xCur){
-        if(isKeyEnabled(xKeyidx) == false || isDeepKeyMapping()) return 0;  
-        
-        gRetval |= (*keyscanDriver->pushKeyCodeWhenDown)(xKeyidx, true);
-    }  
-    return gRetval;     
 }
 
-uint8_t scanKey(uint8_t xLayer) {
+void scanKeyWithMacro(void){
 
-    uint8_t retval = 0;
+    macro_key_t gKey;
+    if(isActiveMacro()){
+        if(!isEmptyM()){
+            // setActiveMacro(true);
+          
+            gKey = popMWithKey();
+            if(gKey.mode == MACRO_KEY_DOWN){    // down
+                (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, true);
+                
+                // push(NO_REPEAT);    // set no repeat
+
+            }else{  // up
+                // 모디키가 눌려져 있다면 그 상태를 유지;
+                if (gKey.keyindex > KEY_Modifiers && gKey.keyindex < KEY_Modifiers_end) {
+                    if(getModifierDownBuffer() & getModifierBit(gKey.keyindex)){                     
+                        goto PASS_MODI;
+                    }
+                }
+                (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, false);                
+             
+            }
+        }
+
+    }
+
+PASS_MODI:
+
+    scanKeyWithDebounce();
+}
+
+void scanKeyWithDebounce(void) {
+    
+    // debounce cleared and changed
+    if(!setCurrentMatrix()) return;
+    
+    uint8_t prevKeyidx;
+    uint8_t row, col, prev, cur, keyidx;
+    static bool _isFnPressedPrev = false;   
+    static uint8_t _prevLayer = 0;
+    uint8_t gLayer = getLayer();
+
+    uint8_t *gMatrix = getCurrentMatrix();
+    uint8_t *gPrevMatrix = getPrevMatrix();
+    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
+    // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
+    if( (!isLazyFn() || !_isFnPressedPrev) && _prevLayer != gLayer){    // !isLazyFn() || !_isFnPressedPrev 순서 주의
+        for(col=0;col<COLUMNS;col++)
+        {       
+            for(row=0;row<ROWS;row++)
+            {               
+                prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
+                keyidx = getCurrentKeyindex(gLayer, row, col);
+
+                // 이전 상태에서(press/up) 변화가 있을 경우;
+                /*
+                prev : 1, cur : 1 = prev up, cur down
+                prev : 1, cur : 0 = prev up
+                prev : 0, cur : 1 = cur down
+                prev : 0, cur : 0 = -
+                */              
+                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx)) {
+                    prev = gPrevMatrix[row] & BV(col);
+                    cur  = gMatrix[row] & BV(col);
+
+                    if(prev){
+                        DBG1(0x0B, (uchar *)&prevKeyidx, 1);  
+                        processKeyIndex(prevKeyidx, true, false, col, row);
+                    }
+                    if(cur){
+                        DBG1(0x0C, (uchar *)&keyidx, 1);  
+                        processKeyIndex(keyidx, false, true, col, row);
+                    }
+                }
+
+            }
+            
+        }
+    }
+    _prevLayer = gLayer;
+    _isFnPressedPrev = isFnPressed();
+
+    scanKey(gLayer);
+}
+
+static void scanKey(uint8_t xLayer) {
 
 	uint8_t row, col, prev, cur, keyidx;
     uint8_t gFN; 
     // uint8_t gResultPutKey = 1;
 	uint8_t gLayer = xLayer; 
+
+    clearDownBuffer();
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
@@ -128,18 +206,14 @@ uint8_t scanKey(uint8_t xLayer) {
                 continue;              
             }
 #endif              
-            gFN = processKeyIndex(keyidx, prev, cur, col, row);	
-            if(gFN == 0)continue;
+            processKeyIndex(keyidx, prev, cur, col, row);	
 		}
 	}
 
-	retval |= 0x01; // must have been a change at some point, since debounce is done
+	// retval |= 0x01; // must have been a change at some point, since debounce is done
 	
     setPrevMatrix();
 
     setCurrentMatrixAfter();
 
-    // if(gResultPutKey == 0) return 0;
-	
-    return retval;
 }

@@ -10,8 +10,9 @@
 #include "macrobuffer.h"
 #include "ps2avru_util.h"
 #include "hardwareinfo.h"
+#include "custommacro.h"
 
-static bool _isMacroProcessEnd = false;
+// static bool _isActiveMacro = false;
 static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];
 static int rearm = 0, frontm = 0;
 
@@ -79,16 +80,16 @@ void clearMacroPressedBuffer(void){
     if(isEmptyM()) memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
 }
 
-
-// 현재 매크로가 진행중인지 확인, 각 인터페이스에서 setMacroProcessEnd()로 표시해준다.
-bool isMacroProcessEnd(void)
+// 현재 매크로가 진행중인지 확인, 
+// 매크로 시작시 true, 각 인터페이스에서 종료시 false로 표시해준다.
+bool isActiveMacro(void)
 {
-    return _isMacroProcessEnd && isEmptyM();
+    return !isEmptyM()|| isActiveCustomMacro(); // || _isActiveMacro 
 }
-void setMacroProcessEnd(bool xIsEnd)
+/*void setActiveMacro(bool xIsAct)
 {
-    _isMacroProcessEnd = xIsEnd;
-}
+    _isActiveMacro = xIsAct;
+}*/
 
 
 const char * toString(uint8_t xInt)

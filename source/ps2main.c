@@ -11,7 +11,7 @@
 #include "ps2main.h"
 
 #include "global.h"
-#include "timer.h"
+#include "timerinclude.h"
 #include "print.h"
 #include "keymap.h"
 
@@ -51,8 +51,6 @@ static long loopCnt;
 static uint8_t TYPEMATIC_DELAY=2;
 static long TYPEMATIC_REPEAT=5;
 
-static uint8_t _prevLayer = 0;
-
 unsigned char txScanCode = 0; // scancode being urrently transmitted
 unsigned char m_state;
 unsigned char lastSent;
@@ -61,7 +59,7 @@ unsigned char lastState;
 // key information for each keys
 uint8_t KFLA[NUM_KEY];
 
-static int scanKeyPS2(void);
+// static int scanKeyPS2(void);
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- PS/2 interface ----------------------------- */
@@ -153,9 +151,9 @@ static void keymap_init(void)
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  PS/2 ----------------------------- */
 /* ------------------------------------------------------------------------- */
-static uint8_t pushKeyCodeDummy(uint8_t keyidx, bool isDown){
+/*static uint8_t pushKeyCodeDummy(uint8_t keyidx, bool isDown){
 	return 0;
-}
+}*/
 static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
 	if(keyidx == KEY_NONE) return 0;
@@ -246,109 +244,34 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 	return 1;
 }
 
-static int scanKeyPS2(void) {
-	
-	// debounce cleared and changed
-	if(!setCurrentMatrix()) return 0;
+// static int scanKeyPS2(void) {	
 
-    clearDownBuffer();
-	
-    uint8_t prevKeyidx;
-	uint8_t row, col, prev, cur, keyidx;
-	static bool _isFnPressedPrev = false;
-	uint8_t gLayer = getLayer();
+//     return scanKeyWithDebounce();
+// }
 
-    uint8_t *gMatrix = getCurrentMatrix();
-    uint8_t *gPrevMatrix = getPrevMatrix();
-    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
-	// 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-	if( (!isLazyFn() || !_isFnPressedPrev) && _prevLayer != gLayer){	// !isLazyFn() || !_isFnPressedPrev 순서 주의
-		for(col=0;col<COLUMNS;col++)
-		{		
-			for(row=0;row<ROWS;row++)
-			{				
-				prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
-				keyidx = getCurrentKeyindex(gLayer, row, col);
+// static uint8_t hasMacroPs2(void)
+// {
+//     return !isEmptyM();
+// }
 
-	            // 이전 상태에서(press/up) 변화가 있을 경우;
-	            /*
-	            prev : 1, cur : 1 = prev up, cur down
-	            prev : 1, cur : 0 = prev up
-	            prev : 0, cur : 1 = cur down
-	            prev : 0, cur : 0 = -
-	            */	            
-				if( prevKeyidx != keyidx ) {
-					prev = gPrevMatrix[row] & BV(col);
-					cur  = gMatrix[row] & BV(col);
+static void scanKeyPs2WithMacro(void){
 
-					if(prev){
-						processKeyIndex(prevKeyidx, true, false, col, row);
-					}
-					if(cur){
-						processKeyIndex(keyidx, false, true, col, row);
-					}
-				}
-
-			}
-			
-		}
-	}
-	_prevLayer = gLayer;
-	_isFnPressedPrev = isFnPressed();
-
-	uint8_t retval = scanKey(gLayer);
-
-    return retval;
-}
-
-static uint8_t hasMacroPs2(void)
-{
-    return !isEmptyM();
-}
-
-static int scanKeyPs2WithMacro(void){
-
-    macro_key_t gKey;
-    if(hasMacroPs2()){
-    	setMacroProcessEnd(false);
-	  
-        gKey = popMWithKey();
-        if(gKey.mode == MACRO_KEY_DOWN){	// down
-        	// DEBUG_PRINT(("macro down : %d \n", gKey.keyindex));
-        	pushKeyCode(gKey.keyindex, true);
-        	push(NO_REPEAT);	// set no repeat
-        }else{	// up
-        	// 모디키가 눌려져 있다면 그 상태를 유지;
-        	if (gKey.keyindex > KEY_Modifiers && gKey.keyindex < KEY_Modifiers_end) {
-                if(getModifierDownBuffer() & modmask[gKey.keyindex - (KEY_Modifiers + 1)]){
-                	return 0;
-                }
-            }
-        	pushKeyCode(gKey.keyindex, false);
-        	// DEBUG_PRINT(("macro up : %d \n", gKey.keyindex));
-        }
-
-	    return 0;	 
-	}else{   
-    	setMacroProcessEnd(true);
-	}
-
-	return scanKeyPS2();
+	scanKeyWithMacro();
 }
 
 static void initPs2(void)
 {
 	interfaceReady = true;
 
-    initFullLEDState();
+    initAfterInterfaceMount();
 
     startKeyMappingOnBoot();
 } 
 
 static keyscan_driver_t driverKeyScanPs2 = {
-    pushKeyCode,
-    pushKeyCodeDummy,
-    pushKeyCode
+    pushKeyCode,		// pushKeyCode
+    // pushKeyCodeDummy,	// pushKeyCodeWhenDown
+    pushKeyCode 		// pushKeyCodeWhenChange
 };
 
 void initInterfacePs2(void){

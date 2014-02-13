@@ -26,7 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* ----------------------------- USB interface ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-report_keyboard_t reportKeyboard;
+// report_keyboard_t reportKeyboard;
+uint8_t reportKeyboard[REPORT_SIZE_KEYBOARD];
 uint8_t idleRate = 0;        ///< in 4ms units
 static uint8_t protocolVer = 1; ///< 0 = boot protocol, 1 = report protocol
 static uint8_t expectReport = 0;       ///< flag to indicate if we expect an USB-report

@@ -38,6 +38,11 @@
 #define MACRO_NUM 12
 
 // flash macro
+/*
+	2048 flash space
+	12 macros
+	42 keycodes per macro
+*/
 #define CUSTOM_MACRO_SIZE_MAX 			168 // = 42 * 4
 
 #endif

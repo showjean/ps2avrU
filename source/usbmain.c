@@ -211,7 +211,7 @@
 #include "usbmain.h"
 
 #include "global.h"
-#include "timer.h"
+#include "timerinclude.h"
 #include "print.h"
 #include "keymap.h"
 
@@ -245,6 +245,8 @@
 #include "smartkey.h"
 #include "keyscan.h"
 #include "bootmapper.h"
+#include "custommacro.h"
+#include "oddebug.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
@@ -254,14 +256,17 @@
 #define INIT_INDEX_INITED       2
 #define INIT_INDEX_COMPLETE     3
 
+#define BUFFER_SIZE 200
+
 static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
 static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
+static bool _usbReset = false;
 
 // static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
-static uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
+// static uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
 // static uint8_t reportBufferPrev[REPORT_SIZE_KEYBOARD];
-static report_keyboard_t reportKeyboardPrev;
+// static report_keyboard_t reportKeyboardPrev;
 
 static void clearReportBuffer(void);
 static void wakeUpUsb(void);
@@ -285,24 +290,19 @@ void delegateInitInterfaceUsb(void)
     // 부팅시 cmos와 os에서 각각 불려지므로, os 시작시에 초기화를 해주려면 if문 없이 실행해야한다.
     // if(_initState == INIT_INDEX_NOT_INIT || _initState == INIT_INDEX_COMPLETE) {
         _initState = INIT_INDEX_SET_IDLE;
-        _ledInitState = INIT_INDEX_NOT_INIT;       
+        _ledInitState = INIT_INDEX_NOT_INIT;    
+        _usbReset = true;   
     // }
 }
-
-/*void delegateStopTimerWhenUsbInterupt(void){
-    stopTimer();
-}
-void delegateStartTimerWhenUsbInterupt(void){
-    startTimer();
-}*/
 
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  USB  ----------------------------- */
 /* ------------------------------------------------------------------------- */
-static uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
+// static uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
 static bool _extraHasChanged = false;
 static uint16_t extraData = 0;
+
 static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
 
@@ -313,159 +313,117 @@ static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
         }else{
             extraData = 0;
         }
+
+        DBG1(0xAA, (uchar *)&extraData, 1);
         
     }
 }
-static uint8_t makeReportBufferDummy(uint8_t keyidx, bool xIsDown){
-    if(xIsDown){
-        makeReportBufferExtra(keyidx, true);
-    }else{
-        makeReportBufferExtra(keyidx, false);
-    }
-    return 0;
-}
+static uint8_t _modifiers = 0;
+static uint8_t updateNeeded = 0;
+static uint8_t reportBuffer[REPORT_KEYS];
+
+// static uint8_t keyindexBuffer[BUFFER_SIZE];
 static void addModifiers(uint8_t xKeyidx){
-    reportKeyboard.mods |= modmask[xKeyidx - (KEY_Modifiers + 1)];
+    _modifiers |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
 }
-static uint8_t makeReportBuffer(uint8_t keyidx, bool xIsDown){
+static void removeModifiers(uint8_t xKeyidx){
+    _modifiers &= ~(getModifierBit(xKeyidx)); // ~(modmask[xKeyidx - (KEY_Modifiers + 1)]);
+}
+
+static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     uint8_t retval = 1;
 
     // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-    keyidx = getDualActionDownKeyIndexWhenIsCancel(keyidx);      
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);      
 
-    // DEBUG_PRINT(("key down!!! keyidx : %d , reportIndex : %d \n", keyidx, reportIndex));
-
-    if(keyidx >= KEY_MAX || (keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end)){
+    if(xKeyidx == KEY_NONE || xKeyidx >= KEY_MAX || (xKeyidx > KEY_Multimedia && xKeyidx < KEY_Multimedia_end)){
         return 0;
-    }else if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-        addModifiers(keyidx);
-
-        return retval;
     }
 
-    if (keyidx != KEY_NONE) { // keycode should be added to report
-        if (reportIndex >= REPORT_KEYS) { // too many keycodes
-            // DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
-            // if (!retval & 0x02) { // Only fill buffer once
-                // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
-                /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후 
-                6번째 이전의 키 하나를 떼도 7키가 눌린것으로 판단 이전 6개의 키가 유지되는 버그가 있어서 매트릭스 순으로 6개를 처리하도록 방치;*/
-                // retval |= 0x02; // continue decoding to get modifiers
-            // }
-        } else {
-            // DEBUG_PRINT(("reportBuffer[reportIndex] : reportIndex = %d keyidx = %d \n", reportIndex, keyidx));
-            if(keyidx > KEY_extend && keyidx < KEY_extend_end){
-                keyidx = pgm_read_byte(&keycode_USB_extend[keyidx - (KEY_extend + 1)]); 
+// DBG1(0x03, (uchar *)&xKeyidx, 3);
+
+    updateNeeded = 1;
+
+    uint8_t gLen;
+    if(xIsDown){ 
+        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
+            addModifiers(xKeyidx);
+
+        }else{ // keycode should be added to report
+            gLen = strlen((char *)reportBuffer);
+            if (gLen >= REPORT_KEYS) { // too many keycodes
+                // DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
+                // if (!retval & 0x02) { // Only fill buffer once
+                    // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
+                    /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후 
+                    6번째 이전의 키 하나를 떼도 7키가 눌린것으로 판단 이전 6개의 키가 유지되는 버그가 있어서 매트릭스 순으로 6개를 처리하도록 방치;*/
+                    // retval |= 0x02; // continue decoding to get modifiers
+                // }
+            } else {
+                if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
+                    xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
+                }
+                append(reportBuffer, xKeyidx);
             }
-            reportKeyboard.keys[reportIndex] = keyidx;
-            reportIndex++;
+            // DBG1(0x04, (uchar *)&reportBuffer, strlen((char *)reportBuffer));
+        }
+    }else{
+
+        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
+            removeModifiers(xKeyidx);
+
+        }else{ // keycode should be added to report
+            int gIdx;     
+            if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
+                xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
+            }
+            gLen = strlen((char *)reportBuffer);
+            gIdx = findIndex(reportBuffer, xKeyidx);
+            if(gIdx > -1){
+                delete(reportBuffer, gIdx);                
+            }
+            // DBG1(0x05, (uchar *)&reportBuffer, strlen((char *)reportBuffer));            
+            
+            
         }
     }
 
     return retval;
 }
 
-static void clearReportBuffer(void){  
-    reportIndex = 0;  
-    // reportKeyboard.report_id = 7;
-    // reportKeyboard.ext = 0;
-    reportKeyboard.mods = 0;
-    memset(reportKeyboard.keys, 0, REPORT_KEYS);    
+static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
+   
+   // DBG1(0x02, (uchar *)&xKeyidx, 3);
+ 
+    uint8_t gKeyidx; 
+  
+    gKeyidx = xKeyidx;  
+    
+    if(xIsDown){    // down
+
+        makeReportBuffer(gKeyidx, true);
+        makeReportBufferExtra(gKeyidx, true);
+
+    }else{  // up
+
+        makeReportBuffer(gKeyidx, false);
+        makeReportBufferExtra(gKeyidx, false);
+    }
+
+    return 1;    
+}
+
+static void clearReportBuffer(void){
+    memset(reportBuffer, 0, REPORT_KEYS); 
+    _modifiers = 0;
     extraData = 0;
 }
 
-static uint8_t scanKeyUSB(void) {
+static void scanKeyUsbWithMacro(void){
+    // 멀티미디어 키를 처리하기 전까지 대기;
+    if(_extraHasChanged) return;
 
-	// debounce cleared
-    if (!setCurrentMatrix()) return 0;  
-
-    // debounce counter expired, create report
-    clearReportBuffer();
-    clearDownBuffer();  
-
-    uint8_t gLayer = getLayer();
-    uint8_t retval = scanKey(gLayer);
-
-    return retval;
-}
-
-static uint8_t _needRelease = 0;
-static void clearMacroBuffer(void){    
-    memset(macroBuffer, 0, sizeof(macroBuffer)); 
-}
-
-static uint8_t scanMacroUsb(void)
-{
-    clearReportBuffer(); 
-
-    // 매크로 실행시 modifier 키를 함께 사용할 수 있도록 스캔;
-    if(!isKeyMapping()
-#ifdef ENABLE_BOOTMAPPER           
-        && !isBootMapper()
-#endif    
-        ){
-        uint8_t row, col, cur, keyidx;
-        uint8_t *gMatrix = getCurrentMatrix();
-        uint8_t keymap = getLayer();
-        for (row = 0; row < ROWS; ++row) { // check every bit on this row       
-            if(gMatrix[row] == 0) continue;
-            for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
-                cur  = gMatrix[row] & BV(col);           
-                // usb는 눌렸을 때만 버퍼에 저장한다.
-                if(cur){
-                    keyidx = getCurrentKeyindex(keymap, row, col);
-                    if (keyidx > KEY_Modifiers && keyidx < KEY_Modifiers_end) {
-                        addModifiers(keyidx);
-                    }
-                }
-                
-            }
-        }
-    }
-
-    if(!isEmptyM()){
-        int gIdx;  
-        macro_key_t gKey;    
-        uint8_t i;
-        uint8_t gLen = strlen((char *)macroBuffer);
-        uint8_t gKeyidx;  
-      
-        gKey = popMWithKey();  
-        
-        if(gKey.mode == MACRO_KEY_DOWN){    // down
-            append(macroBuffer, gKey.keyindex);
-
-            makeReportBufferExtra(gKey.keyindex, true);
-        }else{  // up
-            gIdx = findIndex(macroBuffer, gKey.keyindex);
-            if(gIdx > -1){
-                delete(macroBuffer, gIdx);
-
-                makeReportBufferExtra(gKey.keyindex, false);
-            }
-        }
-
-        gLen = strlen((char *)macroBuffer);
-        for (i = 0; i < gLen; ++i)
-        {
-            gKeyidx = macroBuffer[i];
-            makeReportBuffer(gKeyidx, 1); 
-        }
-        _needRelease = 1;
-
-      
-    }else if(_needRelease){ 
-        clearMacroBuffer();
-        _needRelease = 0;
-    }
-
-    return 1;
-
-}
-
-static uint8_t hasMacroUsb(void)
-{
-    return (_needRelease || !isEmptyM());
+    scanKeyWithMacro();
 }
 
 static void wakeUpUsb(void){
@@ -480,9 +438,9 @@ static void countSleepUsb(void){
 }
 
 static keyscan_driver_t driverKeyScanUsb = {
-    makeReportBuffer,
-    makeReportBuffer,
-    makeReportBufferDummy
+    pushKeyindexBuffer,       // pushKeyCode
+    // makeReportBuffer,       // pushKeyCodeWhenDown
+    pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
 
@@ -494,6 +452,7 @@ static keyscan_driver_t driverKeyScanUsb = {
 void initInterfaceUsb(void){
 
     setKeyScanDriver(&driverKeyScanUsb);
+    clearReportBuffer();
 
 }
 void usb_main(void) {
@@ -506,9 +465,7 @@ void usb_main(void) {
     TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
     usbInit();
 
-	uint8_t updateNeeded = 0;
     uint8_t idleCounter = 0;
-    clearMacroBuffer();
 
     uchar   i = 0;
     usbDeviceDisconnect();  /* do this while interrupts are disabled */
@@ -541,17 +498,20 @@ void usb_main(void) {
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
-            // if(_isSuspended == true) DEBUG_PRINT(("_isSuspended == true usbSofCount : %d \n", usbSofCount));
             _isSuspended = false;
             usbSofCount = 0;
             suspendCount = 0;
+            _usbReset = false;
 
             wakeUp();
 
-        } else {
+        } else if(_usbReset == true){
+            _isSuspended = false;
+            wakeUp();
+
+        }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
             if (_isSuspended == false && suspendCount++ > 2000) {
-                // DEBUG_PRINT(("_isSuspended == false usbSofCount : %d \n", usbSofCount));
                 suspendCount = 0;
                 _isSuspended = true;
 
@@ -565,28 +525,10 @@ void usb_main(void) {
 
 #if USB_COUNT_SOF 
         if(_isSuspended == true) {
-            // scanKeyUSB();   // for dummy
             continue;
         }
 #endif
 
-        if(updateNeeded == 0){
-		
-            updateNeeded = scanKeyUSB(); // changes?
-            if(updateNeeded){
-                // 이전과 같은 리포트는 할 필요 없음;
-                if(reportKeyboard.mods == reportKeyboardPrev.mods && 
-                    memcmp(reportKeyboard.keys, reportKeyboardPrev.keys, REPORT_KEYS) == 0){
-                    updateNeeded = 0;
-                }else{
-                    reportKeyboardPrev.mods = reportKeyboard.mods;
-                    memcpy(reportKeyboardPrev.keys, reportKeyboard.keys, REPORT_SIZE_KEYBOARD);
-                }
-            }
-    	}else{
-            scanKeyUSB();   // for dummy
-        }
-            
         // check timer if we need periodic reports
         if (TIFR & (1 << TOV0)) {
             TIFR = (1 << TOV0); // reset flag
@@ -600,22 +542,28 @@ void usb_main(void) {
             }
         }
 
-        // ps2avrU loop, must be after scan matrix;
-        enterFrame();
-
         // if an update is needed, send the report
-        if (usbInterruptIsReady()) { 
-            if(hasMacroUsb()){
-                scanMacroUsb();
-                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
-                wakeUpUsb();
-            }else if(updateNeeded){                 
+        if (usbInterruptIsReady()) {           
+            
+            scanKeyUsbWithMacro(); //scanKeyUSB(); // changes?             
+
+            // ps2avrU loop, must be after scan matrix;
+            enterFrame();
+
+            if(updateNeeded){  
+              
+                memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
+                reportKeyboard[0] = _modifiers;
+                reportKeyboard[1] = 0;
+                memcpy ( reportKeyboard+2, reportBuffer, strlen((char *)reportBuffer) );
+                // DBG1(0x06, (uchar *)&reportKeyboard[0], 1);    
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));                
                 updateNeeded = 0;
                 wakeUpUsb();
+
             }else if(_initState == INIT_INDEX_SET_IDLE){
                 _initState = INIT_INDEX_INITED;
-                clearReportBuffer();
+                memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
                 // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
 
@@ -655,7 +603,7 @@ void usb_main(void) {
         if(_initState == INIT_INDEX_INITED){
             if(initCount++ == 200){       // delay for OS X USB multi device   
                 // all platform init led
-                initFullLEDState();
+                initAfterInterfaceMount();
                 _initState = INIT_INDEX_COMPLETE;
             }
         }
@@ -663,13 +611,6 @@ void usb_main(void) {
         // 입력이 한동안 없으면 슬립모드로;
         countSleepUsb();  
         
-        if(hasMacroUsb())
-        {
-            setMacroProcessEnd(false);
-        }else{
-            setMacroProcessEnd(true);
-        }
-
     }
 
 	// data line reset;

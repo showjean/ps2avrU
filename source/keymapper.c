@@ -1,7 +1,7 @@
 #ifndef KEYMAPPER_C
 #define KEYMAPPER_C
 
-#include "timer.h"
+#include "timerinclude.h"
 #include "global.h"
 
 #include <avr/io.h>
@@ -31,6 +31,7 @@
 #include "dualaction.h"
 #include "smartkey.h"
 #include "bootmapper.h"
+#include "oddebug.h"
 
 const char str_select_mode[] PROGMEM =  "select mode";
 const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
@@ -65,7 +66,7 @@ const char str_mapper_9[] PROGMEM = "9:Reset to Default (Current Layer)";
 const char str_prepare_message[] PROGMEM =  "ps2avrU";
 const char str_choose_layer[] PROGMEM =  "choose layer (1: normal, 2: FN, 3: FN2) current= ";
 const char str_choose_key[] PROGMEM = "select key (any key you want) ";
-const char str_input_keycode[] PROGMEM = "input keycode (must 3 numbers) : ";
+const char str_input_keycode[] PROGMEM = "input keycode (must 3 numbers, clear:000) : ";
 const char str_save_end_mapping[] PROGMEM = "Save & Exit, thank you.";
 const char str_cancel_mapping[] PROGMEM = "Exit without Saving, see you later.";
 const char str_reset_mapping[] PROGMEM = "Reset to default current layer";
@@ -269,7 +270,7 @@ void enterFrameForMapper(void){
 	countKeyMappingEnabled();
 
 	if(isDeepKeyMapping()) {		
-		if(_isWorkingForEmpty && isMacroProcessEnd())
+		if(_isWorkingForEmpty && !isActiveMacro())
 		{
 			// DEBUG_PRINT(("_wait : %d \n", _wait));
 			if(_wait == WAIT_SAVE){
@@ -607,8 +608,6 @@ void prepareKeyMapper(void)
 	_currentLayer = 0;
 	_mode = 0;
 
-	loadCurrentLayer();
-
 	printSelectMode();
 }
 
@@ -677,17 +676,19 @@ uint8_t applyMacro(uint8_t xKeyidx){
 	uint8_t gMacroIndex = 255;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
 	if(isMacroKey(xKeyidx)){		
-		if(isEmptyM()){
+		if(!isActiveMacro()){
 			if(xKeyidx >= KEY_MAC1){	// eeprom macro
 				gMacroIndex = xKeyidx - KEY_MAC1;			
 				uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
 				if(gKeyidx > 0 && gKeyidx < 255){
+					// setActiveMacro(true);
 					clearMacroPressedBuffer();
 					readMacro(gMacroIndex);
 				}
 			}else{	// custom macro
 				gMacroIndex = xKeyidx - KEY_CST_MAC1;		
 				if(hasCustomMacroAt(gMacroIndex)){
+					// setActiveMacro(true);
 					clearMacroPressedBuffer();
 					readCustomMacroAt(gMacroIndex);
 				}
@@ -856,7 +857,8 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				return;
 			}
 			++_macroDownCount;
-		    DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
+		    // DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
+		    DBG1(0x07, (uchar *)&xKeyidx, 1);  
 		   
 		    append(_macroPressedBuffer, xKeyidx);
 		    
@@ -868,11 +870,14 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		    	return;
 		    }
 		    delete(_macroPressedBuffer, gIdx);
-		    DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
+		    // DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
+		    DBG1(0x08, (uchar *)&xKeyidx, 1);  
 		}
 
 		_macroInputBuffer[_macroBufferIndex] = xKeyidx;
 		++_macroBufferIndex;
+
+		DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
 
 		pushM(xKeyidx);
 
@@ -923,6 +928,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
 				else if(cmd == SEL_MAPPING){
 					_mode = SEL_MAPPING;
+					loadCurrentLayer();
 					printMapperMessage();
 				}
 #endif

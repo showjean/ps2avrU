@@ -1,7 +1,7 @@
 #ifndef KEYMATRIX_C
 #define KEYMATRIX_C
 
-#include "timer.h"
+#include "timerinclude.h"
 #include "print.h"
 
 #include <avr/io.h>
@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <util/delay.h>
-
+#ifdef DEBUG_QUICK_BOOTLOADER
+	#include <avr/wdt.h>
+#endif
 #include "keymatrix.h"
 #include "keymap.h"
 #include "fncontrol.h"
@@ -119,7 +121,13 @@ uint8_t getLayer(void) {
 			if(cur){
 				keyidx = getCurrentKeyindex(_fnScanLayer, row, col);
 			    keyidx = getDualActionMaskDown(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
-				
+#ifdef DEBUG_QUICK_BOOTLOADER
+    // for test
+    if(col == 0 && row == 0){
+    	wdt_enable(WDTO_15MS);
+    	while(1);
+    }
+#endif				
 				// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
 				if(keyidx == KEY_FN){
 					gLayer = LAYER_FN;

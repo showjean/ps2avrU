@@ -28,7 +28,7 @@
 #  They will be compiled in the order you list them, so it's probably best
 #  to list $(TRG).c, your top-level target file, last.
 
-	SRC += $(AVRLIB)/timer.c\
+	SRC +=  $(AVRLIB)/$(TIMER).c\
 			$(COMMON_DIR)/keysta.c \
 			$(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \

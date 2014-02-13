@@ -20,7 +20,7 @@ static uint8_t _downBufferIndex;
 */
 void pushDownBuffer(uint8_t xKeyidx){
 	if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { 
-        _downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= modmask[xKeyidx - (KEY_Modifiers + 1)];
+        _downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
         return;
     }
 

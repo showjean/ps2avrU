@@ -2,6 +2,7 @@
 
 # Directory common source filess exist
 TOP_DIR = ../..
+TIMER = timer
 
 
 

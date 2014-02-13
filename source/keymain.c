@@ -9,7 +9,7 @@
 
 #include "keymain.h"
 
-#include "timer.h"
+#include "timerinclude.h"
 #include "global.h"
 
 #include "print.h"
@@ -37,6 +37,7 @@
 #include "ps2main.h"
 #include "usbmain.h"
 #include "bootmapper.h"
+#include "custommacro.h"
 
 #include "oddebug.h"
 
@@ -109,6 +110,10 @@ int setDelay(int xDelay){
 		return xDelay >> 1;	// ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
 	}
 	return xDelay;
+}
+void initAfterInterfaceMount(void){
+	initFullLEDState();
+	initCustomMacro();
 }
 
 static void initPreparing(void){

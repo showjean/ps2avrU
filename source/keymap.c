@@ -12,11 +12,30 @@
 	#define KEYMAP_A87
 #endif
 
+const uint8_t PROGMEM fnList[4] = {
+    KEY_FN, KEY_FN2, KEY_FN3, KEY_NOR
+};  
+
+bool isFnKey(uint8_t xKeyidx){
+	uint8_t gLen = 4;
+	uint8_t i;
+	for( i = 0; i < gLen; ++i){
+		if(xKeyidx == pgm_read_byte(fnList+i)){
+			return true;
+		}
+	}
+	return false;
+}
+
 /* Originally used as a mask for the modifier bits, but now also
    used for other x -> 2^x conversions (lookup table). */
-const unsigned short int modmask[8] = {
-    0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080
+const uint8_t PROGMEM modmask[8] = {
+    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 };
+
+uint8_t getModifierBit(uint8_t xKeyidx){
+	return pgm_read_byte(modmask + xKeyidx - (KEY_Modifiers + 1));
+}
 
 // for ps/2 interface
 const uint8_t PROGMEM keycode_set2[NUM_KEY] =	{ 
@@ -100,6 +119,6 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
 	KEY_INSERT, KEY_DEL, KEY_HOME, KEY_END, KEY_PGUP, KEY_PGDN, KEY_LGUI, KEY_RGUI, KEY_APPS,
  	KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_KP_SLASH,
 	KEY_NONE };
-   
+ 
 
 #endif

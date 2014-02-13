@@ -85,7 +85,7 @@ enum {  // for macro
     KEY_MAC12   // 212
 };
 
-#define KEY_MAX         KEY_MAC1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_MAX         KEY_CST_MAC1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {
@@ -286,6 +286,10 @@ extern const uint8_t PROGMEM keycode_set2_extend[];
 
 extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
 
-extern const unsigned short int modmask[8];
+extern const uint8_t PROGMEM modmask[8];
+
+extern bool isFnKey(uint8_t xKeyidx);
+
+extern uint8_t getModifierBit(uint8_t xKeyidx);
 
 #endif
