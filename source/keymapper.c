@@ -818,7 +818,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
 
-    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
+    xKeyidx = getDualActionMaskDown(xKeyidx);
 	// DEBUG_PRINT(("putKeyindex xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
 
 	// 매핑 중에는 키 업만 실행 시킨다.

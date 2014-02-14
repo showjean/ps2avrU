@@ -84,13 +84,14 @@ bool isKeyEnabled(uint8_t xKeyidx){
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     // DEBUG_PRINT(("applyFN  : %d xIsDown : %d\n", xKeyidx, xIsDown));
-    if(xKeyidx == KEY_FN || xKeyidx == KEY_FN2 || xKeyidx == KEY_FN3) return false; 
+    if(isFnKey(xKeyidx)) return false; 
 
 	applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
     setDualAction(xKeyidx, xIsDown);	
 
-    // 듀얼액션 키의 캔슬 시 사용되는 기본 키를 가져온다.
-	xKeyidx = getDualActionDefaultKeyIndexWhenIsCancel(xKeyidx);
+    // 듀얼액션 키의 기본 키를 가져온다.
+	xKeyidx = getDualActionDefaultKey(xKeyidx);
+	if(isFnKey(xKeyidx)) return false; 
 
 	if(xIsDown) {
 

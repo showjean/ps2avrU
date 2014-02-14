@@ -63,8 +63,6 @@ uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 		}else{
 			// 키 매핑 중에는 숫자키만을 이용하므로, 기본 키맵을 이용하도록 한다.
 			gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
-			// gKeyIndex = getQuickSwapKeyindex(gKeyIndex);
-			// gKeyIndex = getSmartKeyIndex(gKeyIndex);
 
 			// return gKeyIndex;
 			goto RETURN_INDEX;

@@ -22,28 +22,27 @@ void setKeyScanDriver(keyscan_driver_t *driver)
     keyscanDriver = driver;
 }
 
-static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
+/*static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
     
     if(xIsDown){ 
         // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
+        pushDownBuffer(getDualActionMaskDown(xKeyidx));
     }
     
 	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
-}
+}*/
 
 static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
-    if(xIsDown && xKeyidx != KEY_NONE){
+    /*if(xIsDown && xKeyidx != KEY_NONE){
         applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, true);
-    }
+    }*/
 
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
-        // DEBUG_PRINT(("putKey xKeyidx: %d, xIsDown: %d, xCol: %d, xRow: %d \n", xKeyidx, xIsDown, xCol, xRow));
         
         // DBG1(0x0A, (uchar *)&xKeyidx, 1);  
         putKeyindex(xKeyidx, xCol, xRow, xIsDown);
@@ -67,7 +66,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
     if(xCur){
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx));
+        pushDownBuffer(getDualActionMaskDown(xKeyidx));
     }  
     // !(prev&&cur) : 1 && 1 이 아니고, 
     // !(!prev&&!cur) : 0 && 0 이 아니고, 
