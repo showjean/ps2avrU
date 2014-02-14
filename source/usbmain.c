@@ -256,17 +256,12 @@
 #define INIT_INDEX_INITED       2
 #define INIT_INDEX_COMPLETE     3
 
-#define BUFFER_SIZE 200
+// #define BUFFER_SIZE 200
 
 static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
 static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
 static bool _usbReset = false;
-
-// static uint8_t _prevPressedBuffer[MACRO_SIZE_MAX];
-// static uint8_t macroBuffer[REPORT_SIZE_KEYBOARD];
-// static uint8_t reportBufferPrev[REPORT_SIZE_KEYBOARD];
-// static report_keyboard_t reportKeyboardPrev;
 
 static void clearReportBuffer(void);
 static void wakeUpUsb(void);
@@ -439,7 +434,6 @@ static void countSleepUsb(void){
 
 static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer,       // pushKeyCode
-    // makeReportBuffer,       // pushKeyCodeWhenDown
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 

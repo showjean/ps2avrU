@@ -6,6 +6,7 @@
 #include "keymapper.h"
 #include "keymatrix.h"
 #include "quickswap.h"
+#include "oddebug.h"
 
 const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_FN, // FN
@@ -127,16 +128,19 @@ void setDualAction(uint8_t keyidx, bool isDown){
         ++_keyCount;
         if(_isActiveDualAction){
             _isCanceledDualAction = true; 
-        }else if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
+            dualActionKeyIndex = 0;
+        }else if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end && _keyCount == 1){
+            // 듀얼 액션은 첫키로 눌렸을 때만 적용됨;
             dualActionKeyIndex = keyidx;
 			_isActiveDualAction = true;
             _isCanceledDualAction = false;
 	    }
 	}else{
         if(_keyCount > 0) --_keyCount;
-		if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){				
-			applyDualActionUp();
-		}
+
+        if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){             
+            applyDualActionUp();
+        }
 
 // isReleaseAll()은 이 후에 세팅된다.
         
@@ -145,6 +149,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
             _isActiveDualAction = false;
         }
 	}
+        DBG1(0xC2, (uchar *)&_keyCount, 1);
     // DEBUG_PRINT(("_keyCount :::: %d\n", _keyCount)); 
 }
 

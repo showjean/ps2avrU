@@ -78,10 +78,10 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
         if(isKeyEnabled(xKeyidx) == false) return;   
 
         if(xCur) {
-            // DEBUG_PRINT(("key xKeyidx : %d 1\n", xKeyidx));
+            DBG1(0xB1, (uchar *)&xKeyidx, 1);  
             putChangedKey(xKeyidx, true, xCol, xRow);
         }else{
-            // DEBUG_PRINT(("key xKeyidx : %d 0\n", xKeyidx));
+            DBG1(0xC1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, false, xCol, xRow);
         }
     }
@@ -155,11 +155,11 @@ void scanKeyWithDebounce(void) {
                     cur  = gMatrix[row] & BV(col);
 
                     if(prev){
-                        DBG1(0x0B, (uchar *)&prevKeyidx, 1);  
+                        // DBG1(0x0B, (uchar *)&prevKeyidx, 1);  
                         processKeyIndex(prevKeyidx, true, false, col, row);
                     }
                     if(cur){
-                        DBG1(0x0C, (uchar *)&keyidx, 1);  
+                        // DBG1(0x0C, (uchar *)&keyidx, 1);  
                         processKeyIndex(keyidx, false, true, col, row);
                     }
                 }

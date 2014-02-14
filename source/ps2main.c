@@ -244,16 +244,6 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 	return 1;
 }
 
-// static int scanKeyPS2(void) {	
-
-//     return scanKeyWithDebounce();
-// }
-
-// static uint8_t hasMacroPs2(void)
-// {
-//     return !isEmptyM();
-// }
-
 static void scanKeyPs2WithMacro(void){
 
 	scanKeyWithMacro();
@@ -270,7 +260,6 @@ static void initPs2(void)
 
 static keyscan_driver_t driverKeyScanPs2 = {
     pushKeyCode,		// pushKeyCode
-    // pushKeyCodeDummy,	// pushKeyCodeWhenDown
     pushKeyCode 		// pushKeyCodeWhenChange
 };
 
