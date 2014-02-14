@@ -158,8 +158,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
 	if(keyidx == KEY_NONE) return 0;
 
-     // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-    keyidx = getDualActionMaskDown(keyidx);
+    keyidx = getDualActionKeyWhenCompound(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
 

@@ -123,7 +123,8 @@ uint8_t getLayer(void) {
 
 			if(cur){
 				keyidx = getCurrentKeyindex(_fnScanLayer, row, col);
-			    keyidx = getDualActionMaskDown(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
+			    keyidx = getDualActionKeyWhenCompound(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
+			    
 #ifdef DEBUG_QUICK_BOOTLOADER
     // for test
     if(col == 0 && row == 0){

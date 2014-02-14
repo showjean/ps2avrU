@@ -25,8 +25,7 @@ void setKeyScanDriver(keyscan_driver_t *driver)
 /*static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
     
     if(xIsDown){ 
-        // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;       
-        pushDownBuffer(getDualActionMaskDown(xKeyidx));
+        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx));
     }
     
 	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
@@ -66,7 +65,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
     if(xCur){
-        pushDownBuffer(getDualActionMaskDown(xKeyidx));
+        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx));
     }  
     // !(prev&&cur) : 1 && 1 이 아니고, 
     // !(!prev&&!cur) : 0 && 0 이 아니고, 

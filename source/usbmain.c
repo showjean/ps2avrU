@@ -328,8 +328,7 @@ static void removeModifiers(uint8_t xKeyidx){
 static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     uint8_t retval = 1;
 
-    // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
-    xKeyidx = getDualActionMaskDown(xKeyidx);      
+    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);      
 
     if(xKeyidx == KEY_NONE || xKeyidx >= KEY_MAX || (xKeyidx > KEY_Multimedia && xKeyidx < KEY_Multimedia_end)){
         return 0;

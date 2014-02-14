@@ -8,7 +8,7 @@
 #include "quickswap.h"
 #include "oddebug.h"
 
-const uint8_t PROGMEM dualActionMaskDown[] = {
+const uint8_t PROGMEM dualActionCompoundMask[] = {
     KEY_FN, // FN
     KEY_FN, // FN
     KEY_FN2, // FN2
@@ -35,7 +35,7 @@ const uint8_t PROGMEM dualActionMaskDown[] = {
     KEY_FN3
 
 };
-const uint8_t PROGMEM dualActionMaskUp[] = {
+const uint8_t PROGMEM dualActionAloneMask[] = {
     KEY_HANGLE, // hangle
     KEY_HANJA,  // hanja
     KEY_HANGLE, // hangle
@@ -95,7 +95,7 @@ static uint8_t _keyCount = 0;
 static bool _isCanceledDualAction = false;
 static bool _isActiveDualAction = false;
 
-static uint8_t getDualActionMaskUp(uint8_t keyidx);
+static uint8_t getDualActionKeyWhenAlone(uint8_t keyidx);
 
 static bool isCanceledDualAction(void)
 {
@@ -108,7 +108,7 @@ static void applyDualActionUp(void){
 
     if(dualActionKeyIndex > 0 && !isCanceledDualAction()){
         // 듀얼액션이 저장되어 있을 때 아무키도 눌리지 않은 리포트가 간다면 액션!
-       	uint8_t gUpIdx = pgm_read_byte(&dualActionMaskUp[dualActionKeyIndex - (KEY_dualAction + 1)]);
+       	uint8_t gUpIdx = getDualActionKeyWhenAlone(dualActionKeyIndex);
         pushM(gUpIdx);
         pushM(gUpIdx);
         dualActionKeyIndex = 0;
@@ -142,7 +142,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
             applyDualActionUp();
         }
 
-// isReleaseAll()은 이 후에 세팅된다.
+// isReleaseAll()은 이 후에 세팅되므로 여기서 확인할 수 없다.
         
         if(_keyCount == 0){
             _isCanceledDualAction = false;
@@ -157,37 +157,24 @@ uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
     if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end){
         bool gIsDefaultDown = pgm_read_byte(&dualActionCancelDefaultDown[xActionIndex - (KEY_dualAction + 1)]);
         if(gIsDefaultDown){
-            return getDualActionMaskDown(xActionIndex); 
+            return getDualActionKeyWhenCompound(xActionIndex); 
         }else{
-            return getDualActionMaskUp(xActionIndex); 
+            return getDualActionKeyWhenAlone(xActionIndex); 
         }
     }
     return xActionIndex;
 }
-/*uint8_t getDualActionDefaultKeyIndexWhenIsCancel(uint8_t xActionIndex){
-    if(isCanceledDualAction()){
-        return getDualActionDefaultKey(xActionIndex);
-    }
-    return xActionIndex;
-}*/
-
-// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
-/*uint8_t getDualActionDownKeyIndexWhenIsCancel(uint8_t xActionIndex){
-	if(isCanceledDualAction()){
-        return getDualActionMaskDown(xActionIndex);         
-    }
-    return xActionIndex;
-}*/
 // 듀얼액션 키인덱스라면 다운 키코드를 반환한다.
-uint8_t getDualActionMaskDown(uint8_t keyidx){
+uint8_t getDualActionKeyWhenCompound(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionMaskDown[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionCompoundMask[keyidx - (KEY_dualAction + 1)])); 
     }
     return keyidx;
 }
-static uint8_t getDualActionMaskUp(uint8_t keyidx){
+
+static uint8_t getDualActionKeyWhenAlone(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionMaskUp[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionAloneMask[keyidx - (KEY_dualAction + 1)])); 
     }
     return keyidx;
 }
