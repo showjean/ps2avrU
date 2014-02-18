@@ -5,7 +5,7 @@
 #include "macrobuffer.h"
 #include "keymapper.h"
 #include "keymatrix.h"
-#include "quickswap.h"
+#include "keyindex.h"
 #include "oddebug.h"
 
 const uint8_t PROGMEM dualActionCompoundMask[] = {
@@ -167,14 +167,14 @@ uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
 // 듀얼액션 키인덱스라면 다운 키코드를 반환한다.
 uint8_t getDualActionKeyWhenCompound(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionCompoundMask[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getExchangedKeyindex(pgm_read_byte(&dualActionCompoundMask[keyidx - (KEY_dualAction + 1)])); 
     }
     return keyidx;
 }
 
 static uint8_t getDualActionKeyWhenAlone(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getQuickSwapKeyindex(pgm_read_byte(&dualActionAloneMask[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getExchangedKeyindex(pgm_read_byte(&dualActionAloneMask[keyidx - (KEY_dualAction + 1)])); 
     }
     return keyidx;
 }

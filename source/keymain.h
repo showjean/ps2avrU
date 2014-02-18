@@ -16,7 +16,7 @@
 // #define INTERFACE_ONLY_USB	// usb only
 // #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
 
-#define DEBUG_QUICK_BOOTLOADER
+// #define DEBUG_QUICK_BOOTLOADER
 
 #ifdef DEBUG_KEYMAIN
 	#define DEBUG_KEYMAPPER_H
