@@ -9,4 +9,6 @@ extern void setDualAction(uint8_t keyidx, bool isDown);
 extern uint8_t getDualActionDefaultKey(uint8_t xActionIndex);
 extern uint8_t getDualActionKeyWhenCompound(uint8_t keyidx);
 
+// extern void enterFrameForDualAction(void);
+
 #endif

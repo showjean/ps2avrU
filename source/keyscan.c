@@ -22,22 +22,9 @@ void setKeyScanDriver(keyscan_driver_t *driver)
     keyscanDriver = driver;
 }
 
-/*static uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
-    
-    if(xIsDown){ 
-        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx));
-    }
-    
-	return (*keyscanDriver->pushKeyCode)(xKeyidx, xIsDown);	
-}*/
-
 static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
-
-    /*if(xIsDown && xKeyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(pushKeyCodeDecorator, true);
-    }*/
 
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
@@ -77,10 +64,10 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
         if(isKeyEnabled(xKeyidx) == false) return;   
 
         if(xCur) {
-            DBG1(0xB1, (uchar *)&xKeyidx, 1);  
+            // DBG1(0xB1, (uchar *)&xKeyidx, 1);  
             putChangedKey(xKeyidx, true, xCol, xRow);
         }else{
-            DBG1(0xC1, (uchar *)&xKeyidx, 1);
+            // DBG1(0xC1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, false, xCol, xRow);
         }
     }
@@ -95,6 +82,9 @@ void scanKeyWithMacro(void){
             // setActiveMacro(true);
           
             gKey = popMWithKey();
+
+            DBG1(0x1F, (uchar *)&gKey.keyindex, 1); 
+            DBG1(0x1F, (uchar *)&gKey.mode, 1); 
             if(gKey.mode == MACRO_KEY_DOWN){    // down
                 (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, true);
                 

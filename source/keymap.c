@@ -120,5 +120,9 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
  	KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_KP_SLASH,
 	KEY_NONE };
  
+ const uint8_t PROGMEM keycode_set2_wait_until_rx[] =
+ {
+    KEY_CAPS, KEY_NUMLOCK, KEY_SCRLCK,
+    KEY_NONE };
 
 #endif

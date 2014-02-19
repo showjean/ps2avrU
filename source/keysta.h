@@ -4,6 +4,7 @@
 #define KEYSTA_H
 #include "common_inc.h"
 #include "hardwareconfig.h"
+#include <stdbool.h>
 
 /* Copyright Jamie Honan, 2001.  Distributed under the GPL.
    This program comes with ABSOLUTELY NO WARRANTY.
@@ -72,12 +73,14 @@ kbd_set_tx(unsigned char txchar);
 
 unsigned char kbd_get_rx_char(void);
 
+bool isReadyForTx(void);
+bool isReadyForRx(void);
 
-#define FLA_CLOCK_HIGH	1
-#define FLA_RX_BAD	2
-#define FLA_RX_BYTE	4
-#define FLA_TX_BYTE	8
-#define FLA_TX_OK	0x10
+#define FLA_CLOCK_HIGH  1
+#define FLA_RX_BAD      2
+#define FLA_RX_BYTE     4
+#define FLA_TX_BYTE     8
+#define FLA_TX_OK       0x10
 
 #define FLA_TX_ERR	0x20
 

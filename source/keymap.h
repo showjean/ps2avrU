@@ -9,6 +9,7 @@
 #define KFLA_MAKEONLY       0x04
 #define KFLA_MAKE_BREAK     0x08
 #define KFLA_PROC_SHIFT     0x10
+#define KFLA_WAIT_UNTIL_RX  0x20
 
 // Total 
 #define NUM_KEY 176     // 0~
@@ -284,7 +285,9 @@ extern const uint8_t PROGMEM keycode_set2_make_break[];
 
 extern const uint8_t PROGMEM keycode_set2_extend[];
 
-extern const uint8_t PROGMEM keycode_set2_proc_shift[] ;
+extern const uint8_t PROGMEM keycode_set2_proc_shift[];
+
+extern const uint8_t PROGMEM keycode_set2_wait_until_rx[];
 
 extern const uint8_t PROGMEM modmask[8];
 

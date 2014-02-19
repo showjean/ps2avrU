@@ -94,6 +94,7 @@ static uint8_t _keyCount = 0;
 // static uint8_t _normalKeyCount = 0;
 static bool _isCanceledDualAction = false;
 static bool _isActiveDualAction = false;
+// static uint8_t _upKeyindex = 0;
 
 static uint8_t getDualActionKeyWhenAlone(uint8_t keyidx);
 
@@ -101,6 +102,19 @@ static bool isCanceledDualAction(void)
 {
 	return _isCanceledDualAction;
 }
+
+/*void enterFrameForDualAction(void){
+    static uint8_t upKeyCount = 0;
+    if(_upKeyindex > 0 && ++upKeyCount > 100){
+        pushM(_upKeyindex);
+
+        if(isMacroInput()){
+            putKeyindex(_upKeyindex, 0, 0, 0);
+        }
+        _upKeyindex = 0;
+        upKeyCount = 0;
+    }
+}*/
 
 static void applyDualActionUp(void){
 
@@ -117,6 +131,7 @@ static void applyDualActionUp(void){
         	putKeyindex(gUpIdx, 0, 0, 1);
         	putKeyindex(gUpIdx, 0, 0, 0);
         }
+        // _upKeyindex = gUpIdx;
     }    
 }
 

@@ -15,23 +15,24 @@
    replies are driven by a state machine.
    */
 
-#define STA_NORMAL		0
-#define STA_RXCHAR		1
-#define STA_WAIT_SCAN_SET	2
-#define STA_WAIT_SCAN_REPLY	3
-#define STA_WAIT_ID		4
-#define STA_WAIT_ID1		5
-#define STA_WAIT_LEDS		6
-#define STA_WAIT_AUTOREP	7
-#define STA_WAIT_RESET		8
-#define STA_DISABLED		9
+#define STA_NORMAL          0
+#define STA_RXCHAR          1
+#define STA_WAIT_SCAN_SET   2
+#define STA_WAIT_SCAN_REPLY 3
+#define STA_WAIT_ID         4
+#define STA_WAIT_ID1        5
+#define STA_WAIT_LEDS       6
+#define STA_WAIT_AUTOREP    7
+#define STA_WAIT_RESET      8
+#define STA_DISABLED        9
 #define STA_DELAY           11
-#define STA_REPEAT        12
+#define STA_REPEAT          12
 
-#define START_MAKE 0xFF
-#define END_MAKE   0xFE
-#define NO_REPEAT  0xFD
-#define SPLIT      0xFC
+#define START_MAKE  0xFF
+#define END_MAKE    0xFE
+#define NO_REPEAT   0xFD
+#define SPLIT       0xFC
+#define WAIT_RX     0xFB
 
 extern void ps2_main(void);
 extern void initInterfacePs2(void);
