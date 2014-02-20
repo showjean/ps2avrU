@@ -8,11 +8,12 @@
 
 static bool _isOsx = false;
 static bool _enabled = false;
+static bool _fixed = false;
 void initSmartKey(void){
 
 	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
 	// DEBUG_PRINT(("initSmartKey : %d %d \n", gOption, gOption&(1<<TOGGLE_SMART_KEY)));	
-	DBG1(0x01, &gOption, 1);
+	// DBG1(0x01, &gOption, 1);
 	if(((gOption >> TOGGLE_SMART_KEY) & 0x01) == OPTION_OFF){
 		_enabled = false;
 	}else{
@@ -44,7 +45,10 @@ uint8_t getSmartKeyIndex(uint8_t xKeyidx){
 }
 
 void setCurrentOS(bool xIsOsx){
-	_isOsx = xIsOsx;
+	if(!_fixed) {
+		_isOsx = xIsOsx;
+		_fixed = true;
+	}
 }
 
 void toggleSmartKeyEnabled(void){	
