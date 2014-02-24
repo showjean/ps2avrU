@@ -41,6 +41,11 @@
 
 #include "oddebug.h"
 
+#ifdef DEBUG_QUICK_BOOTLOADER
+#warning "======================================================="
+#warning "Never compile production devices with QUICK_BOOTLOADER enabled"
+#warning "======================================================="
+#endif
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */

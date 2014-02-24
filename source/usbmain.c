@@ -297,6 +297,8 @@ void delegateInitInterfaceUsb(void)
 // static uint8_t reportIndex; // reportBuffer[KEYBOARD_MODIFIER_INDEX] contains modifiers
 static bool _extraHasChanged = false;
 static uint16_t extraData = 0;
+static bool _systemHasChanged = false;
+static uint16_t systemData = 0;
 
 static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
     if(keyidx > KEY_Multimedia && keyidx < KEY_Multimedia_end){
@@ -309,7 +311,22 @@ static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
             extraData = 0;
         }
 
-        DBG1(0xAA, (uchar *)&extraData, 1);
+        // DBG1(0xAA, (uchar *)&extraData, 1);
+        
+    }
+}
+static void makeReportBufferSystem(uint8_t keyidx, bool xIsDown){
+    if(keyidx >= KEY_POWER && keyidx <= KEY_WAKE){
+
+        _systemHasChanged = true;
+
+        if(xIsDown){
+            systemData = pgm_read_word(&keycode_USB_multimedia[keyidx - (KEY_Multimedia + 1)]);
+        }else{
+            systemData = 0;
+        }
+
+        // DBG1(0xAA, (uchar *)&extraData, 1);
         
     }
 }
@@ -396,12 +413,14 @@ static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
     if(xIsDown){    // down
 
         makeReportBuffer(gKeyidx, true);
-        makeReportBufferExtra(gKeyidx, true);
+        makeReportBufferExtra(gKeyidx, true);        
+        makeReportBufferSystem(gKeyidx, true);        
 
     }else{  // up
 
         makeReportBuffer(gKeyidx, false);
         makeReportBufferExtra(gKeyidx, false);
+        makeReportBufferSystem(gKeyidx, false);
     }
 
     return 1;    
@@ -415,7 +434,7 @@ static void clearReportBuffer(void){
 
 static void scanKeyUsbWithMacro(void){
     // 멀티미디어 키를 처리하기 전까지 대기;
-    if(_extraHasChanged) return;
+    if(_extraHasChanged || _systemHasChanged) return;
 
     scanKeyWithMacro();
 }
@@ -572,6 +591,8 @@ void usb_main(void) {
 
                     setCurrentOS(true);
                 }
+                
+                DBG1(0xAA, (uchar *)&idleRate, 1);
 
             }else if(_ledInitState == INIT_INDEX_INITED){
                 _ledInitState = INIT_INDEX_COMPLETE;  
@@ -589,6 +610,15 @@ void usb_main(void) {
                 };
                 usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
                 _extraHasChanged = false;
+                wakeUpUsb();
+            }
+            if(_systemHasChanged){   
+                report_extra_t gReportExtra = {
+                    .report_id = REPORT_ID_SYSTEM,
+                    .usage = systemData
+                };
+                usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
+                _systemHasChanged = false;
                 wakeUpUsb();
             }
         }

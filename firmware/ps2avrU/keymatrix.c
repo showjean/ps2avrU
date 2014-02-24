@@ -12,9 +12,6 @@
 #include <util/delay.h>
 #ifdef DEBUG_QUICK_BOOTLOADER
     #include <avr/wdt.h>
-#warning "======================================================="
-#warning "Never compile production devices with QUICK_BOOTLOADER enabled"
-#warning "======================================================="
 #endif
 #include "keymatrix.h"
 #include "keymap.h"
