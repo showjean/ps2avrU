@@ -346,9 +346,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
             // we only have one report type, so don't look at wValue
             usbMsgPtr = (usbMsgPtr_t)&reportKeyboard;
             return sizeof(reportKeyboard);
-        } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
-            // MAC OS X is not processing here
-              
+        } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {              
             // Report Type: 0x02(Out)/ReportID: 0x00(none) && Interface: 0(keyboard)
             if (rq->wValue.word == 0x0200 && rq->wIndex.word == 0) 
             {

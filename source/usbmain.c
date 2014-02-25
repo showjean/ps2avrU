@@ -288,6 +288,7 @@ void delegateInitInterfaceUsb(void)
         _ledInitState = INIT_INDEX_NOT_INIT;    
         _usbReset = true;   
     // }
+         DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -588,8 +589,9 @@ void usb_main(void) {
                 // for os x
                 if(idleRate > 0) {
                     startKeyMappingOnBoot();
-
                     setCurrentOS(true);
+                }else{                    
+                    setCurrentOS(false);
                 }
                 
                 DBG1(0xAA, (uchar *)&idleRate, 1);
@@ -597,7 +599,9 @@ void usb_main(void) {
             }else if(_ledInitState == INIT_INDEX_INITED){
                 _ledInitState = INIT_INDEX_COMPLETE;  
                 // for windows
-                if(idleRate == 0) startKeyMappingOnBoot();
+                if(idleRate == 0) {
+                    startKeyMappingOnBoot();
+                }
                 
             }
         }
@@ -627,6 +631,8 @@ void usb_main(void) {
             if(initCount++ == 200){       // delay for OS X USB multi device   
                 // all platform init led
                 initAfterInterfaceMount();
+            }else if(initCount > 200){    
+                initCount = 201;            
                 _initState = INIT_INDEX_COMPLETE;
             }
         }
