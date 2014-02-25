@@ -48,6 +48,11 @@ uint8_t getQuickSwapKeyindex(uint8_t xKeyidx){
 static void applyQuickSwap(uint8_t xModi) {
 	static uint8_t prevModifier = 0;
 
+	if(getDownBufferAt(DOWN_BUFFER_START_INDEX) > 0){
+		enabledQuickSwapCount = 0;
+		return;
+	}
+	
 	if(xModi == prevModifier) return;
 
 	// DEBUG_PRINT(("xModi= %d, quickSwapMode= %d \n", xModi, quickSwapMode));

@@ -6,9 +6,7 @@
 #include "print.h"
 #include "keymap.h"
 #include "keymatrix.h"
-
-#define DOWN_BUFFER_SIZE 			7
-#define DOWN_BUFFER_MODIFIER_INDEX 	0
+#include "keydownbuffer.h"
 
 static uint8_t _downBuffer[DOWN_BUFFER_SIZE];
 static uint8_t _downBufferIndex;
