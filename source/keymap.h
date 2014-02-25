@@ -12,7 +12,7 @@
 #define KFLA_WAIT_UNTIL_RX  0x20
 
 // Total 
-#define NUM_KEY 176     // 0~
+#define NUM_KEY 160     // 0~
 
 // fn
 #define KEY_FN          254
@@ -28,34 +28,19 @@
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 
-// dual action 
-enum {
-    KEY_dualAction = 213,
-    KEY_FN_HANGLE,      // 누른 상태에서 다른 키를 조합하면 Fn키로 작동하고 아니면 한/영키로 작동;
-    KEY_FN_HANJA,
-    KEY_FN2_HANGLE,
-    KEY_FN2_HANJA,
-    KEY_RSHIFT_HANGLE,
-    KEY_RSHIFT_HANJA,
-    KEY_LSHIFT_HANGLE,
-    KEY_LSHIFT_HANJA,
-    KEY_RALT_HANGLE,
-    KEY_RALT_HANJA,
-    KEY_LALT_HANGLE,
-    KEY_LALT_HANJA,
-    KEY_RCTRL_HANGLE,
-    KEY_RCTRL_HANJA,
-    KEY_LCTRL_HANGLE,
-    KEY_LCTRL_HANJA,
-    KEY_FN_CAPS,
-    KEY_FN2_CAPS,
-    KEY_FN3_HANGLE,
-    KEY_FN3_HANJA,
-    KEY_FN3_CAPS,
-    KEY_FN_APPS,
-    KEY_FN2_APPS,
-    KEY_FN3_APPS,
-    KEY_dualAction_end  // 238
+enum {  // group key
+    KEY_GROUP1 = 177,
+    KEY_GROUP2,
+    KEY_GROUP3,
+    KEY_GROUP4,
+    KEY_GROUP5,
+    KEY_GROUP6,
+    KEY_GROUP7,
+    KEY_GROUP8,
+    KEY_GROUP9,
+    KEY_GROUP10,
+    KEY_GROUP11,
+    KEY_GROUP12     // = 188
 };
 
 enum {  // for macro
@@ -86,7 +71,37 @@ enum {  // for macro
     KEY_MAC12   // 212
 };
 
-#define KEY_MAX         KEY_CST_MAC1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+enum {  // dual action 
+
+    KEY_dualAction = 213,
+    KEY_FN_HANGLE,      // 누른 상태에서 다른 키를 조합하면 Fn키로 작동하고 아니면 한/영키로 작동;
+    KEY_FN_HANJA,
+    KEY_FN2_HANGLE,
+    KEY_FN2_HANJA,
+    KEY_RSHIFT_HANGLE,
+    KEY_RSHIFT_HANJA,
+    KEY_LSHIFT_HANGLE,
+    KEY_LSHIFT_HANJA,
+    KEY_RALT_HANGLE,
+    KEY_RALT_HANJA,
+    KEY_LALT_HANGLE,
+    KEY_LALT_HANJA,
+    KEY_RCTRL_HANGLE,
+    KEY_RCTRL_HANJA,
+    KEY_LCTRL_HANGLE,
+    KEY_LCTRL_HANJA,
+    KEY_FN_CAPS,
+    KEY_FN2_CAPS,
+    KEY_FN3_HANGLE,
+    KEY_FN3_HANJA,
+    KEY_FN3_CAPS,
+    KEY_FN_APPS,
+    KEY_FN2_APPS,
+    KEY_FN3_APPS,
+    KEY_dualAction_end  // 238
+};
+
+#define KEY_MAX         KEY_GROUP1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {
@@ -240,8 +255,8 @@ enum {
     KEY_F23,
     KEY_F24,     
     KEY_KP_COMMA,
-    KEY_EQUAL_SIGN, 
-    KEY_INT1,
+    KEY_EQUAL_SIGN,     // 158
+   /* KEY_INT1,
     KEY_INT2,           // 160
     KEY_INT3,
     KEY_INT4,
@@ -250,16 +265,16 @@ enum {
     KEY_INT7,
     KEY_INT8,
     KEY_INT9,
-    // KEY_LANG1,   /* = KEY_HANGLE       */
-    // KEY_LANG2,   /* = KEY_HANJA      */
+    // KEY_LANG1,   // = KEY_HANGLE      
+    // KEY_LANG2,   // = KEY_HANJA      
     KEY_LANG3,          
     KEY_LANG4,
     KEY_LANG5,          // 170
     KEY_LANG6,          
     KEY_LANG7,
     KEY_LANG8,
-    KEY_LANG9,                
-    KEY_extend_end    // 175
+    KEY_LANG9,      */          
+    KEY_extend_end  //159   // 175
 };
 
 // for ps/2 interface
