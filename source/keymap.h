@@ -11,9 +11,6 @@
 #define KFLA_PROC_SHIFT     0x10
 #define KFLA_WAIT_UNTIL_RX  0x20
 
-// Total 
-#define NUM_KEY 160     // 0~
-
 // fn
 #define KEY_FN          254
 #define KEY_LED         253
@@ -28,7 +25,7 @@
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 
-enum {  // group key
+/*enum {  // group key
     KEY_GROUP1 = 177,
     KEY_GROUP2,
     KEY_GROUP3,
@@ -41,7 +38,7 @@ enum {  // group key
     KEY_GROUP10,
     KEY_GROUP11,
     KEY_GROUP12     // = 188
-};
+};*/
 
 enum {  // for macro
 
@@ -101,7 +98,7 @@ enum {  // dual action
     KEY_dualAction_end  // 238
 };
 
-#define KEY_MAX         KEY_GROUP1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_MAX         KEY_CST_MAC1    //KEY_GROUP1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {
@@ -276,6 +273,11 @@ enum {
     KEY_LANG9,      */          
     KEY_extend_end  //159   // 175
 };
+
+
+// Total 
+#define NUM_KEY KEY_extend_end + 1     // 0~
+
 
 // for ps/2 interface
 extern const uint8_t PROGMEM keycode_set2[NUM_KEY];
