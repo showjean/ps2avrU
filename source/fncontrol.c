@@ -101,13 +101,18 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }else{
                 _isBeyondFN ^= true;
              }
-             if(_isBeyondFN == false){
+
+#ifndef DISABLE_FN2_TOGGLE_LED_BLINK 
+             if(_isBeyondFN == false){                
                 blinkOnce(100);
              }else{
                 blinkOnce(100);
                 _delay_ms(80);
                 blinkOnce(70);
              }
+#endif
+             delegateSetBeyondFnLed(_isBeyondFN);
+
              return 0;
         }else if(xKeyidx == EXTRA_FN){
             _isExtraFNDown = 1;

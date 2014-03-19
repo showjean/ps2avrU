@@ -10,8 +10,6 @@
 #ifndef __oddebug_h_included__
 #define __oddebug_h_included__
 
-#include "keymain.h"
-
 /*
 General Description:
 This module implements a function for debug logs on the serial line of the
