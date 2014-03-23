@@ -1,6 +1,7 @@
 #ifndef LEDRENDER_H
 #define LEDRENDER_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include "hardwareinfo.h"
 
@@ -8,31 +9,32 @@
 #define LED_STATE_CAPS    0x02  ///< caps LED on a boot-protocol keyboard
 #define LED_STATE_SCROLL  0x04  ///< scroll LED on a boot-protocol keyboard
 
-extern void setLEDState(uint8_t xState);
-extern uint8_t getLEDState(void);
+void setLEDState(uint8_t xState);
+uint8_t getLEDState(void);
 
-extern void increaseLedBrightness(void);
-extern void reduceLedBrightness(void);
-extern void changeFullLedState(void);
-extern void clearLEDInited(void);
+void increaseLedBrightness(void);
+void reduceLedBrightness(void);
+void changeFullLedState(void);
+void clearLEDInited(void);
 
-extern void blinkOnce(uint8_t xStayMs);
-extern void initFullLEDState(void);
-extern void initFullLEDStateAfter(void);
-extern void initLED(void);
+void blinkOnce(uint8_t xStayMs);
+void initFullLEDState(void);
+void initFullLEDStateAfter(void);
+void initLED(void);
 
-extern void setLEDIndicate(void);
+void setLEDIndicate(void);
+void setLed(uint8_t xLed, bool xBool);
 
-extern void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
+void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
 
-extern void sleepLED(void);
+void sleepLED(void);
 
-extern void wakeUpLED(void);
+void wakeUpLED(void);
 
-extern void renderLED(void);
+void renderLED(void);
 
-extern void stopTimer(void);
-extern void startTimer(void);
-extern void setPWM(int xValue);
+void stopTimer(void);
+void startTimer(void);
+void setPWM(int xValue);
 
 #endif

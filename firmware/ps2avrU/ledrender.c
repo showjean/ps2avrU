@@ -29,8 +29,9 @@ static uint8_t downLevelLife = 0;
 static uint8_t ledInited = 0;
 static uint8_t LEDstate = 0;     ///< current state of the LEDs
 #ifndef SCROLL_LOCK_LED_IS_APART 
-static uint8_t scrollLockLED = 0;
+static uint8_t ledBlinkScrollLockCount = 0;
 #endif
+static uint8_t ledBlinkNumLockCount = 0;
 
 static uint8_t _fullLEDMode = 0;	// 
 static uint8_t _fullLEDMode_saved = 0;	// 
@@ -196,14 +197,64 @@ void clearLEDInited(void){
 	ledInited = 0;
 }
 
+void setLed(uint8_t xLed, bool xBool){
+	if(xBool){
+		if(xLed == LED_STATE_NUM){
+			turnOnLED(LEDNUM);
+		}else if(xLed == LED_STATE_CAPS){
+			turnOnLED(LEDCAPS);
+		}
+#ifdef LEDSCROLL
+		else if(xLed == LED_STATE_SCROLL){
+			turnOnLED(LEDSCROLL);
+		}
+#endif
+	}else{
+		if(xLed == LED_STATE_NUM){
+			turnOffLED(LEDNUM);
+		}else if(xLed == LED_STATE_CAPS){
+			turnOffLED(LEDCAPS);
+		}
+#ifdef LEDSCROLL
+		else if(xLed == LED_STATE_SCROLL){
+			turnOffLED(LEDSCROLL);
+		}
+#endif
+	}
+}
+
+static uint8_t getLedBlnik(uint8_t xLed, bool xStatus, bool *xPrev){
+	// static uint8_t prevSCRLED = 0;
+	uint8_t gVal;
+    if ((LEDstate & xLed) && *xPrev == false) { // light up
+    	
+		*xPrev = true;
+		// delay 함수를 이용하면 ps2연결시 노이즈가 발생하는지 "방향키 상"이 
+		// 연속으로 눌리는 현상이있어, 실시간으로 작동되도록 수정;
+    	if(!xStatus){
+			gVal =  5;	//on off on off 1
+		}else{
+			gVal =  4;	// off on off 1
+		}
+		
+	} else if(!(LEDstate & xLed) &&  *xPrev == true){
+		
+		*xPrev = false;	
+		if(!xStatus){
+			gVal =  3;	// on off 1
+		}else{
+			gVal =  2;	// off 1
+		}
+	
+	}
+	return gVal;
+}
 
 void setLEDIndicate(void) {
+	static bool prevNum = false;
+
 	if(isBeyondFnLedEnabled()){
-		if (isBeyondFN()) { // light up num lock on FN2 toggle
-	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
-	    } else {
-	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
-	    }
+		ledBlinkNumLockCount = getLedBlnik(LED_STATE_NUM, isBeyondFN(), &prevNum);
 	}else{
 		if (LEDstate & LED_STATE_NUM) { // light up num lock
 	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
@@ -226,29 +277,9 @@ void setLEDIndicate(void) {
     }
 #endif
 
-#ifndef SCROLL_LOCK_LED_IS_APART    
-	static uint8_t prevSCRLED = 0;
-    if ((LEDstate & LED_STATE_SCROLL) && prevSCRLED == 0) { // light up scroll lock
-    	
-		prevSCRLED = 1;
-		// delay 함수를 이용하면 ps2연결시 노이즈가 발생하는지 "방향키 상"이 
-		// 연속으로 눌리는 현상이있어, 실시간으로 작동되도록 수정;
-    	if(!(LEDstate & LED_STATE_CAPS)){
-			scrollLockLED = 5;	//on off on off 1
-		}else{
-			scrollLockLED = 4;	// off on off 1
-		}
-		
-	} else if(!(LEDstate & LED_STATE_SCROLL) && prevSCRLED == 1){
-		
-		prevSCRLED = 0;		
-		if(!(LEDstate & LED_STATE_CAPS)){
-			scrollLockLED = 3;	// on off 1
-		}else{
-			scrollLockLED = 2;	// off 1
-		}
-	
-	}
+#ifndef SCROLL_LOCK_LED_IS_APART   
+	static bool prevScroll = false; 
+	ledBlinkScrollLockCount = getLedBlnik(LED_STATE_SCROLL, (LEDstate & LED_STATE_CAPS), &prevScroll);
 #endif
 	
 }
@@ -419,28 +450,57 @@ static void blinkCapsLockLED(void) {
 		gLEDState = 1;
 	}
 }
+static void blinkNumLockLED(void) {
+	static int counter = 0;
+	const int countMAX = 100;
+	//on off on off
+	if(ledBlinkNumLockCount > 0){
+		counter++;
+		if(counter > countMAX){
+			if(ledBlinkNumLockCount == 5 || ledBlinkNumLockCount == 3){ 
+				turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDCAPS);
+			}else if(ledBlinkNumLockCount == 4 || ledBlinkNumLockCount == 2){ 
+				turnOffLED(LEDNUM); //PORTLEDS &= ~(1 << LEDCAPS);
+			}else{
+				if(isBeyondFnLedEnabled()){
+					if(isBeyondFN()){
+						turnOnLED(LEDNUM);
+					}
+				}else{
+					if((getLEDState() & LED_STATE_NUM)){
+						turnOnLED(LEDNUM);
+					}
+				}
+			}
+			counter = 0;
+
+			ledBlinkNumLockCount--;
+		}
+	}else{
+		counter = 0;
+	}
+}
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 static void blinkScrollLockLED(void) {
 	static int counter = 0;
 	const int countMAX = 100;
 	//on off on off
-	if(scrollLockLED > 0){
+	if(ledBlinkScrollLockCount > 0){
 		counter++;
 		if(counter > countMAX){
-			if(scrollLockLED == 5 || scrollLockLED == 3){ 
+			if(ledBlinkScrollLockCount == 5 || ledBlinkScrollLockCount == 3){ 
 				turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);
-			}else if(scrollLockLED == 4 || scrollLockLED == 2){ 
+			}else if(ledBlinkScrollLockCount == 4 || ledBlinkScrollLockCount == 2){ 
 				turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);
 			}else{
-				//PORTD = backupPORTD;
 				if((getLEDState() & LED_STATE_CAPS)){
 					turnOnLED(LEDCAPS);
 				}
 			}
 			counter = 0;
 
-			scrollLockLED--;
+			ledBlinkScrollLockCount--;
 		}
 	}else{
 		counter = 0;
@@ -474,6 +534,7 @@ void renderLED(void) {
 	}
 
 	blinkCapsLockLED();
+	blinkNumLockLED();
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led
