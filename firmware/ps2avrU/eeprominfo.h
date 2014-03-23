@@ -6,8 +6,9 @@
 #define OPTION_OFF			1
 
 // EEPROM_ENABLED_OPTION bit
-#define TOGGLE_LAZY_FN		0
-#define TOGGLE_SMART_KEY	1
+#define TOGGLE_LAZY_FN		    0
+#define TOGGLE_SMART_KEY        1
+#define TOGGLE_BEYOND_FN_LED    2
 
 // eeprom address
 #define EEPROM_ENABLED_OPTION 	7	// 1byte

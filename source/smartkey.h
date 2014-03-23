@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "keymapper.h"
+
+keymapper_driver_t driverKeymapperSmartKey;
 
 extern void initSmartKey(void);
 

@@ -38,6 +38,7 @@
 #include "usbmain.h"
 #include "bootmapper.h"
 #include "custommacro.h"
+#include "fncontrol.h"
 
 #include "oddebug.h"
 
@@ -127,6 +128,7 @@ static void initPreparing(void){
     initQuickSwap();
     initLazyFn();
     initSmartKey();
+    initBeyondFn();
 
     // init
     initLED();

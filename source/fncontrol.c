@@ -17,20 +17,97 @@
 #include "keymapper.h"
 #include "dualaction.h"
 #include "keymatrix.h"
+#include "ps2avru_util.h"
 
-/* ------------------------------------------------------------------------- */
-/* -----------------------------    variable  global ----------------------------- */
-/* ------------------------------------------------------------------------- */
+#define CMD_TOGGLE_BEYOND_FN_LED 1
+#define CMD_EXIT_BEYOND_FN_LED 3
+#define CMD_BACK_BEYOND_FN_LED 6
 
+const char str_select_beyond_fn[] PROGMEM = "enable fn2 led";
+
+static bool _isBeyondFnLedEnabled;
 // for KEY_BEYOND_FN;
 static bool _isBeyondFN = false;     //KEY_BEYOND_FN state
 static bool _isExtraFNDown = false;
 static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
+void initBeyondFn(void){
+    _isBeyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED);
+}
+
 bool isBeyondFN(void){
     return _isBeyondFN;
 }
+
+bool isBeyondFnLedEnabled(void){
+    return _isBeyondFnLedEnabled;
+}
+static void toggleBeyondFnLedEnabled(void){    
+    _isBeyondFnLedEnabled ^= true;
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED, _isBeyondFnLedEnabled);
+    
+    setLEDIndicate();
+}
+
+
+void printMenuBeyondFn(void);
+void printContentsBeyondFn(void);
+void putKeyindexBeyondFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+
+keymapper_driver_t driverKeymapperBeyondFn = {
+    printMenuBeyondFn,
+    printContentsBeyondFn,
+    putKeyindexBeyondFn
+};
+
+static void printBeyondFnLedState(void){
+    printStringFromFlash(str_select_beyond_fn);
+    printStringFromFlash(str_space);
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_space);
+    if(isBeyondFnLedEnabled()){
+        printStringFromFlash(str_on);
+    }else{
+        printStringFromFlash(str_off);
+    }
+}
+
+void printMenuBeyondFn(void){
+    printBeyondFnLedState();
+}
+
+void printContentsBeyondFn(void){
+    printBeyondFnLedState();
+    printEnter();
+    printString(toString(CMD_TOGGLE_BEYOND_FN_LED));
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_toggle);
+    printEnter();
+    printString(toString(CMD_EXIT_BEYOND_FN_LED));
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_exit); // exit
+    printEnter();
+    printString(toString(CMD_BACK_BEYOND_FN_LED));
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_back);
+    printEnter();
+}
+
+void putKeyindexBeyondFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){
+    if(xCmd == CMD_TOGGLE_BEYOND_FN_LED){
+        setStep(STEP_INPUT_COMMAND);
+        toggleBeyondFnLedEnabled();
+        printBeyondFnLedState();
+        printEnter();
+    }else if(xCmd == CMD_EXIT_BEYOND_FN_LED){
+        setStep(STEP_EXIT);
+        stopKeyMapping();
+    }else if(xCmd == CMD_BACK_BEYOND_FN_LED){     
+        setStep(STEP_BACK);
+    }
+}
+
 static void applyLock(uint8_t *lock){
     if(*lock == LOCK_WILL_SET){
         *lock = LOCK_IS_SET;
@@ -103,15 +180,21 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 
 #ifndef DISABLE_FN2_TOGGLE_LED_BLINK 
-             if(_isBeyondFN == false){                
-                blinkOnce(100);
-             }else{
-                blinkOnce(100);
-                _delay_ms(80);
-                blinkOnce(70);
+             if(isBeyondFnLedEnabled() == false){
+                 if(_isBeyondFN == false){                
+                    blinkOnce(100);
+                 }else{
+                    blinkOnce(100);
+                    _delay_ms(80);
+                    blinkOnce(70);
+                 }
              }
 #endif
              delegateSetBeyondFnLed(_isBeyondFN);
+
+             if(isBeyondFnLedEnabled()){
+                setLEDIndicate();
+             }
 
              return 0;
         }else if(xKeyidx == EXTRA_FN){

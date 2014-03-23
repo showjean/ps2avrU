@@ -31,30 +31,29 @@
 #include "dualaction.h"
 #include "smartkey.h"
 #include "bootmapper.h"
+#include "fncontrol.h"
 #include "oddebug.h"
 
-const char str_select_mode[] PROGMEM =  "select mode";
-const char str_select_mode1[] PROGMEM =  "1:Key Mapping";
-const char str_select_mode2[] PROGMEM =  "2:Macro";
-const char str_select_mode3[] PROGMEM =  "3:toggle Lazy FN";
-const char str_select_mode4[] PROGMEM =  "4:toggle Smart Key";
-const char str_select_mode5[] PROGMEM =  "5:Exit";
-const char str_select_mode6[] PROGMEM =  "9:boot mapper";
 
-const char str_exit[] PROGMEM =  "good bye~";
+const char str_select_mode[] PROGMEM =  "select mode";
+const char str_select_mode1[] PROGMEM =  "key mapping";
+const char str_select_mode2[] PROGMEM =  "macro";
+const char str_select_mode_exit[] PROGMEM =  "exit";
+const char str_select_mode_bootmapper[] PROGMEM =  "boot mapper";
+
+const char str_exit_msg[] PROGMEM =  "good bye~";
 const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
 
 const char str_macro_message[] PROGMEM = "Macro";
 const char str_macro_1[] PROGMEM = "1:Select Macro Index";
 const char str_macro_2[] PROGMEM = "2:Clear Macro";
-const char str_macro_3[] PROGMEM = "3:Exit";
 const char str_macro_9[] PROGMEM = "9:Clear All";
 
-const char str_toggle_1[] PROGMEM = "1:toggle";
+const char str_toggle[] PROGMEM = "toggle";
+const char str_exit[] PROGMEM = "Exit";
+const char str_back[] PROGMEM = "Back";
 
-const char str_back_6[] PROGMEM = "6:Back";
-
-#ifndef	DISABLE_HARDWARE_KEYMAPPING	
+#ifndef DISABLE_HARDWARE_KEYMAPPING 
 const char str_mapper_message[] PROGMEM = "Key Mapper";
 const char str_mapper_1[] PROGMEM = "1:Change Layer";
 const char str_mapper_2[] PROGMEM = "2:Select Key - input keycode";
@@ -76,19 +75,15 @@ const char str_save_layer[] PROGMEM = "Save current layer";
 const char str_load_layer[] PROGMEM = "Load current layer";
 const char str_saving[] PROGMEM = "saving...";
 const char str_col_row[] PROGMEM = "col, row : ";
-// const char str_invalid_keycode[] PROGMEM = "invalid keycode, input again.";
 
 const char str_select_number[] PROGMEM = "input macro index (01~12, cancel: 00, must 2 numbers) : ";
 const char str_select_number_to_clear[] PROGMEM = "select index (01~12, cancel: 00) : ";
-// const char str_exit_macro[] PROGMEM = "Exit macro, see you later.";
 const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC during 1 sec)";
 const char str_invalid_number[] PROGMEM = "invalid number, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
 
 const char str_space[] PROGMEM = " ";
 const char str_macro[] PROGMEM = "macro";
-const char str_lazyfn[] PROGMEM = "lazy FN";
-const char str_smartkey[] PROGMEM = "smart key";
 const char str_colon[] PROGMEM = ":";
 const char str_on[] PROGMEM = "on";
 const char str_off[] PROGMEM = "off";
@@ -142,11 +137,34 @@ void clearMacroAllAfter(void);
 void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
+static void addKeymapperDriver(keymapper_driver_t *xDriver);
+
+static keymapper_driver_t *_drivers[4];
+static uint8_t _driverCount = 0;
+static uint8_t _driverIndex;
+static uint8_t _driverIndexOffset;
 
 void initKeymapper(void){
 	keyMappingCountMax = setDelay(KEY_MAPPING_COUNT_MAX);
+
+#ifdef DISABLE_HARDWARE_KEYMAPPING
+	_driverIndexOffset = 1;
+#else
+	_driverIndexOffset = 2;
+#endif
+
+	addKeymapperDriver(&driverKeymapperLazyFn);
+	addKeymapperDriver(&driverKeymapperSmartKey);
+	addKeymapperDriver(&driverKeymapperBeyondFn);
 }
 
+static void addKeymapperDriver(keymapper_driver_t *xDriver){
+	_drivers[_driverCount] = xDriver;
+	++_driverCount;
+}
+void setStep(uint8_t xStep){
+	_step = xStep;
+}
 //------------------------------------------------------///
 
 static void setWillStartKeyMapping(void){
@@ -246,7 +264,7 @@ static void startKeyMapping(void){
 /**
 키매핑을 종료하고 키보드 상태로 돌아간다.
 */
-static void stopKeyMapping(void){
+void stopKeyMapping(void){
 	_isKeyMapping = 0;
 	_wait = WAIT_NOTHING;
 	// DEBUG_PRINT(("stopKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
@@ -328,7 +346,7 @@ static void pushCharacter(char *xStr)
 }
 
 
-static void printEnter(void)
+void printEnter(void)
 {	
     pushM(KEY_ENTER);
     pushM(KEY_ENTER);
@@ -348,7 +366,7 @@ void printString(const char *xString)
     	
     }
 }
-static void printStringFromFlash(const char *str) 
+void printStringFromFlash(const char *str) 
 { 	
 	char c;
 	char gChar[1];
@@ -404,7 +422,7 @@ static void printPrompt(void)
 			printStringFromFlash(str_select_number_to_clear);
 		break;
 		case STEP_EXIT_MACRO:
-			printStringFromFlash(str_exit);
+			printStringFromFlash(str_exit_msg);
 			printEnter();
 			_step = STEP_NOTHING;
 		break;
@@ -419,7 +437,7 @@ static void printPrompt(void)
 			setToBootMapper();
 		break;
 		case STEP_EXIT:
-			printStringFromFlash(str_exit);
+			printStringFromFlash(str_exit_msg);
 			printEnter();
 			_step = STEP_NOTHING;
 		break;
@@ -435,45 +453,44 @@ static void printPrompt(void)
 }
 void printSelectModeAfter(void){
 
-	printStringFromFlash(str_select_mode5);
+	printString(toString(SEL_EXIT));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_select_mode_exit);
 	printEnter();
-	printStringFromFlash(str_select_mode6);
+	printString(toString(SEL_BOOT_MAPPER));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_select_mode_bootmapper);
 	printEnter();
 	
 	_step = STEP_SELECT_MODE;
 	printPrompt();
 }
 
-void printSelectMode(void){
+void printSelectMode(void){	
 	printEnter();
+
 	printStringFromFlash(str_select_mode);
 	printEnter();
+
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
+	printString(toString(SEL_MAPPING));
+	printStringFromFlash(str_colon);
 	printStringFromFlash(str_select_mode1);
 	printEnter();
 #endif
+	printString(toString(SEL_MACRO));
+	printStringFromFlash(str_colon);
 	printStringFromFlash(str_select_mode2);
 	printEnter();
-	printStringFromFlash(str_select_mode3);
-	printStringFromFlash(str_space);
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_space);
-	if(isLazyFn()){
-		printStringFromFlash(str_on);
-	}else{
-		printStringFromFlash(str_off);
+
+	uint8_t i;
+	for (i = 0; i < _driverCount; ++i)
+	{
+		printString(toString(i+1+_driverIndexOffset));
+		printStringFromFlash(str_colon);
+		(*_drivers[i]->printMenu)();
+		printEnter(); 
 	}
-	printEnter();
-	printStringFromFlash(str_select_mode4);
-	printStringFromFlash(str_space);
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_space);
-	if(isSmartKeyEnabled()){
-		printStringFromFlash(str_on);
-	}else{
-		printStringFromFlash(str_off);
-	}
-	printEnter();
 	
 	// 256 바이트를 넘어 모두 출력하지 못하므로 잘라서 실행;
 	_isWorkingForEmpty = 1;
@@ -489,7 +506,9 @@ void printMapperMessageAfter(void)
 	printEnter();
 	printStringFromFlash(str_mapper_4);
 	printEnter();
-	printStringFromFlash(str_back_6);
+	printString(toString(CMD_BACK));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_back);
 	printEnter();
 	printStringFromFlash(str_mapper_9);
 	printEnter();
@@ -524,9 +543,13 @@ void printMacroMessage(void){
 	printEnter();
 	printStringFromFlash(str_macro_2);
 	printEnter();
-	printStringFromFlash(str_macro_3);
+	printString(toString(CMD_EXIT_MACRO));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_exit);
 	printEnter();
-	printStringFromFlash(str_back_6);
+	printString(toString(CMD_BACK));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_back);
 	printEnter();
 	printStringFromFlash(str_macro_9);
 	printEnter();
@@ -534,53 +557,6 @@ void printMacroMessage(void){
 	_step = STEP_INPUT_COMMAND;
 }
 
-void printLazyFnState(void){
-	printStringFromFlash(str_lazyfn);
-	printStringFromFlash(str_space);
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_space);
-	if(isLazyFn()){
-		printStringFromFlash(str_on);
-	}else{
-		printStringFromFlash(str_off);
-	}
-	printEnter();
-}
-void printLazyFnMessage(void){
-	printLazyFnState();
-	printStringFromFlash(str_toggle_1);
-	printEnter();
-	printStringFromFlash(str_macro_3);	// exit
-	printEnter();
-	printStringFromFlash(str_back_6);
-	printEnter();
-
-	_step = STEP_INPUT_COMMAND;
-}
-
-void printSmartKeyState(void){
-	printStringFromFlash(str_smartkey);
-	printStringFromFlash(str_space);
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_space);
-	if(isSmartKeyEnabled()){
-		printStringFromFlash(str_on);
-	}else{
-		printStringFromFlash(str_off);
-	}
-	printEnter();
-}
-void printSmartKeyMessage(void){	
-	printSmartKeyState();
-	printStringFromFlash(str_toggle_1);
-	printEnter();
-	printStringFromFlash(str_macro_3);	// exit
-	printEnter();
-	printStringFromFlash(str_back_6);
-	printEnter();
-
-	_step = STEP_INPUT_COMMAND;
-}
 
 void printPrepareString(void){
 	printStringFromFlash(str_prepare_message);
@@ -827,7 +803,6 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	uint8_t cmd,gLayer;
 	int gKeyCode;
 	int gKeyIndex; 
-	char gStr[3];
     int gIdx;
     // int gLen;
 
@@ -940,14 +915,15 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					_mode = SEL_BOOT_MAPPER;
 					_step = STEP_BOOT_MAPPER;
 					stopKeyMapping();				
-				}else if(cmd == SEL_TOGGLE_LAZY_FN){
-					_mode = SEL_TOGGLE_LAZY_FN;
-					printLazyFnMessage();				
-				}else if(cmd == SEL_TOGGLE_SMART_KEY){
-					_mode = SEL_TOGGLE_SMART_KEY;
-					printSmartKeyMessage();
+				}else{
+					_mode = SEL_OPTIONS;
+					_driverIndex = cmd-1-_driverIndexOffset;
+					(*_drivers[_driverIndex]->printContents)();
+
+					_step = STEP_INPUT_COMMAND;
 				}
-			}else{
+				
+			}else if(_step == STEP_INPUT_COMMAND){
 				if(cmd == CMD_BACK){
 					_step = STEP_BACK;
 				}
@@ -982,25 +958,8 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						_step = STEP_CLEAR_ALL_MACRO;
 						clearMacroAll();
 					}
-				}else if(_mode == SEL_TOGGLE_LAZY_FN){
-					if(cmd == CMD_TOGGLE_LAZY_FN){
-						_step = STEP_INPUT_COMMAND;
-						toggleLazyFn();
-						printLazyFnState();
-					}else if(cmd == CMD_EXIT_LAZY_FN){
-						_step = STEP_EXIT;
-						stopKeyMapping();						
-					}
-
-				}else if(_mode == SEL_TOGGLE_SMART_KEY){
-					if(cmd == CMD_TOGGLE_SMART_KEY){
-						_step = STEP_INPUT_COMMAND;
-						toggleSmartKeyEnabled();
-						printSmartKeyState();
-					}else if(cmd == CMD_EXIT_LAZY_FN){
-						_step = STEP_EXIT;
-						stopKeyMapping();						
-					}
+				}else if(_mode == SEL_OPTIONS){
+					(*_drivers[_driverIndex]->putKeyindex)(cmd, xKeyidx, xCol, xRow, xIsDown);
 				}
 			}
 			_bufferIndex = 0;
@@ -1016,8 +975,8 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		_buffer[_bufferIndex] = gKeyIndex;
 		++_bufferIndex;
 
-		sprintf(gStr, "%d", gKeyIndex);
-		printString(gStr);		
+		// sprintf(gStr, "%d", gKeyIndex);
+		printString(toString(gKeyIndex));		
 
 	}else{
 		// DEBUG_PRINT(("bad command \n"));
@@ -1026,6 +985,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	
 	// DEBUG_PRINT(("step: %d, buffer [0]: %d, [1]: %d, [2]: %d, index:%d \n", _step, _buffer[0], _buffer[1], _buffer[2], _bufferIndex));
 	
+	// key mapper
 	if((gKeyIndex > -1  && gKeyIndex < 10) || _step == STEP_CHOOSE_KEY)
 	{		
 		switch(_step){

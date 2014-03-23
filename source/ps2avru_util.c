@@ -4,8 +4,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <util/delay.h>
+#include <avr/eeprom.h>
 
 #include "ps2avru_util.h"
+#include "eeprominfo.h"
 
 void insert(uint8_t ary[], int idx, char ch)
 {
@@ -41,6 +43,28 @@ void __delay_ms(int n) {
   while (--n) { 
    _delay_ms(1); 
  } 
+}
+
+void setToggleOption(int xAddress, uint8_t xBit, bool xBool){
+    uint8_t gOption = eeprom_read_byte((uint8_t *)xAddress);
+    if(xBool == false){
+        gOption = (gOption & ~(1<<xBit)) | (OPTION_OFF<<xBit);
+        // gOption &= ~(1<<xBit);
+    }else{
+        gOption = (gOption & ~(1<<xBit)) | (OPTION_ON<<xBit);
+        // gOption |= (1<<xBit);
+    }
+    eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
+}
+
+bool getToggleOption(int xAddress, uint8_t xBit){
+
+    uint8_t gOption = eeprom_read_byte((uint8_t *)xAddress);
+    if(((gOption >> xBit) & 0x01) == OPTION_OFF){
+        return false;
+    }else{
+        return true;
+    }
 }
 
 #endif

@@ -54,10 +54,9 @@
 // mode select
 #define SEL_MAPPING 1
 #define SEL_MACRO 2
-#define SEL_TOGGLE_LAZY_FN 3
-#define SEL_TOGGLE_SMART_KEY 4
-#define SEL_EXIT 5
+#define SEL_EXIT 6
 #define SEL_BOOT_MAPPER 9
+#define SEL_OPTIONS 99
 
 // 입력되는 키와 직접 매칭; (숫자 1키를 누르면 CMD_CHOOSE_LAYER...)
 // mapping
@@ -66,17 +65,13 @@
 #define CMD_SAVE_AND_EXIT 3
 #define CMD_CANCEL_WITHOUT_SAVE 4
 #define CMD_RESET_TO_DEFAULT 9
+
 // macro
 #define CMD_SELECT_INDEX 1
 #define CMD_CLEAR_MACRO 2
 #define CMD_EXIT_MACRO 3
 #define CMD_CLEAR_ALL_MACRO 9
-// lazy fn
-#define CMD_TOGGLE_LAZY_FN 1
-#define CMD_EXIT_LAZY_FN 3
-// smart key
-#define CMD_TOGGLE_SMART_KEY 1
-#define CMD_EXIT_SMART_KEY 3
+
 // back
 #define CMD_BACK 6
 
@@ -85,6 +80,74 @@
 #define COUNT_TYPE_KEYMAPPER 	2
 
 #define KEYMAPPER_START_KEYS	0x27	// KEY_LCTRL + KEY_LSHIFT + KEY_LALT + KEY_RSHIFT
+
+
+extern const char PROGMEM str_select_mode[];
+extern const char PROGMEM str_select_mode1[];
+extern const char PROGMEM str_select_mode2[];
+extern const char PROGMEM str_select_mode_exit[];
+extern const char PROGMEM str_select_mode_bootmapper[];
+
+extern const char PROGMEM str_exit_msg[];
+extern const char PROGMEM str_boot_mapper[];
+
+extern const char PROGMEM str_macro_message[];
+extern const char PROGMEM str_macro_1[];
+extern const char PROGMEM str_macro_2[];
+extern const char PROGMEM str_exit[];
+extern const char PROGMEM str_macro_9[];
+
+extern const char PROGMEM str_toggle[];
+
+extern const char PROGMEM str_back[];
+
+#ifndef DISABLE_HARDWARE_KEYMAPPING 
+extern const char PROGMEM str_mapper_message[];
+extern const char PROGMEM str_mapper_1[];
+extern const char PROGMEM str_mapper_2[];
+extern const char PROGMEM str_mapper_3[];
+extern const char PROGMEM str_mapper_4[];
+extern const char PROGMEM str_mapper_9[];
+#endif
+
+extern const char PROGMEM str_prepare_message[];
+extern const char PROGMEM str_choose_layer[];
+extern const char PROGMEM str_choose_key[];
+extern const char PROGMEM str_input_keycode[];
+extern const char PROGMEM str_save_end_mapping[];
+extern const char PROGMEM str_cancel_mapping[];
+extern const char PROGMEM str_reset_mapping[];
+extern const char PROGMEM str_input_command[];
+extern const char PROGMEM str_nothing[];
+extern const char PROGMEM str_save_layer[];
+extern const char PROGMEM str_load_layer[];
+extern const char PROGMEM str_saving[];
+extern const char PROGMEM str_col_row[];
+
+extern const char PROGMEM str_select_number[];
+extern const char PROGMEM str_select_number_to_clear[];
+extern const char PROGMEM str_input_macro[];
+extern const char PROGMEM str_invalid_number[];
+extern const char PROGMEM str_clear_all_macro[];
+
+extern const char PROGMEM str_space[];
+extern const char PROGMEM str_macro[];
+extern const char PROGMEM str_colon[];
+extern const char PROGMEM str_on[];
+extern const char PROGMEM str_off[];
+
+typedef struct {
+    void (*printMenu)(void);
+    void (*printContents)(void);
+    void (*putKeyindex)(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+} keymapper_driver_t;
+
+// void addKeymapperDriver(keymapper_driver_t *xDriver);
+void printStringFromFlash(const char *str);
+void printString(const char *xString);
+void stopKeyMapping(void);
+void printEnter(void);
+void setStep(uint8_t xStep);
 
 extern void initKeymapper(void);
 
@@ -98,7 +161,6 @@ extern void showP2UMenu(void);
 extern void readyKeyMappingOnBoot(void);
 extern void startKeyMappingOnBoot(void);
 
-extern void printString(const char *xString);
 
 // event loop
 extern void enterFrameForMapper(void);

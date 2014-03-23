@@ -5,20 +5,82 @@
 #include "eeprominfo.h"
 // #include "print.h"
 #include "oddebug.h"
+#include "ps2avru_util.h"
+
+// smart key
+#define CMD_TOGGLE_SMART_KEY 1
+#define CMD_EXIT_SMART_KEY 3
+#define CMD_BACK_SMART_KEY 6
+
+const char str_select_smart_key[] PROGMEM =  "smart key";
+// const char str_smartkey[] PROGMEM = "smart key";
 
 static bool _isOsx = false;
 static bool _enabled = false;
 static bool _fixed = false;
-void initSmartKey(void){
 
-	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
-	// DEBUG_PRINT(("initSmartKey : %d %d \n", gOption, gOption&(1<<TOGGLE_SMART_KEY)));	
-	// DBG1(0x01, &gOption, 1);
-	if(((gOption >> TOGGLE_SMART_KEY) & 0x01) == OPTION_OFF){
-		_enabled = false;
+
+void printMenuSmartKey(void);
+void printContentsSmartKey(void);
+void putKeyindexSmartKey(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+
+keymapper_driver_t driverKeymapperSmartKey = {
+   	printMenuSmartKey,
+    printContentsSmartKey,
+    putKeyindexSmartKey
+};
+
+
+static void printSmartKeyState(void){	
+	printStringFromFlash(str_select_smart_key);
+	printStringFromFlash(str_space);
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_space);
+	if(isSmartKeyEnabled()){
+		printStringFromFlash(str_on);
 	}else{
-		_enabled = true;
+		printStringFromFlash(str_off);
 	}
+}
+
+void printMenuSmartKey(void){
+	printSmartKeyState();
+}
+
+void printContentsSmartKey(void){
+	printSmartKeyState();
+	printEnter();
+	printString(toString(CMD_TOGGLE_SMART_KEY));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_toggle);
+	printEnter();
+	printString(toString(CMD_EXIT_SMART_KEY));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_exit);	// exit
+	printEnter();
+	printString(toString(CMD_BACK_SMART_KEY));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_back);
+	printEnter();
+
+}
+
+void putKeyindexSmartKey(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){
+	if(xCmd == CMD_TOGGLE_SMART_KEY){
+		setStep(STEP_INPUT_COMMAND);
+		toggleSmartKeyEnabled();
+		printSmartKeyState();
+		printEnter();
+	}else if(xCmd == CMD_EXIT_SMART_KEY){
+		setStep(STEP_EXIT);
+		stopKeyMapping();						
+	}else if(xCmd == CMD_BACK_SMART_KEY){		
+		setStep(STEP_BACK);
+	}
+}
+
+void initSmartKey(void){
+	_enabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_SMART_KEY);
 }
 bool isSmartKeyEnabled(void){
 	return _enabled;
@@ -52,13 +114,6 @@ void setCurrentOS(bool xIsOsx){
 }
 
 void toggleSmartKeyEnabled(void){	
-	uint8_t gOption = eeprom_read_byte((uint8_t *)EEPROM_ENABLED_OPTION);
-	if(_enabled == false){
-		_enabled = true;
-		gOption &= ~(1<<TOGGLE_SMART_KEY);	
-	}else{
-		_enabled = false;	
-		gOption |= (1<<TOGGLE_SMART_KEY);
-	}
-	eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
+	_enabled ^= true;	
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_SMART_KEY, _enabled);
 }

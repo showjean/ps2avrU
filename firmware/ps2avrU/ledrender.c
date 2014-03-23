@@ -80,11 +80,19 @@ void initFullLEDStateAfter(void){
 }
 
 void blinkOnce(const uint8_t xStayMs){
-	if (LEDstate & LED_STATE_NUM) { // light up num lock
-        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
-    }else{
-        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//    	
-    }
+	if(isBeyondFnLedEnabled()){
+		if (isBeyondFN()) { // light up num lock on FN2 toggle
+	        turnOffLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
+	    } else {
+	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+	    }
+	}else{
+		if (LEDstate & LED_STATE_NUM) { // light up num lock
+	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+	    }else{
+	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//    	
+	    }
+	}
     if (LEDstate & LED_STATE_CAPS) { // light up caps lock
         turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
     } else {
@@ -95,12 +103,20 @@ void blinkOnce(const uint8_t xStayMs){
 		매뉴얼 펑션으로 _delay_ms(1)을 ms 만큼 루프시키도록 만들어서 사용;
 	*/
 	__delay_ms(xStayMs);	
-
-	if (LEDstate & LED_STATE_NUM) { // light up num lock
-        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//   
-    }else{
-        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	// 	
-    }
+	
+	if(isBeyondFnLedEnabled()){
+		if (isBeyondFN()) { // light up num lock on FN2 toggle
+	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
+	    } else {
+	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+	    }
+	}else{
+		if (LEDstate & LED_STATE_NUM) { // light up num lock
+	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//   
+	    }else{
+	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	// 	
+	    }
+	}
     if (LEDstate & LED_STATE_CAPS) { // light up caps lock
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
     } else {
@@ -182,11 +198,20 @@ void clearLEDInited(void){
 
 
 void setLEDIndicate(void) {
-	 if (LEDstate & LED_STATE_NUM) { // light up num lock
-        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
-    } else {
-        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
-    }
+	if(isBeyondFnLedEnabled()){
+		if (isBeyondFN()) { // light up num lock on FN2 toggle
+	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
+	    } else {
+	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+	    }
+	}else{
+		if (LEDstate & LED_STATE_NUM) { // light up num lock
+	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
+	    } else {
+	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
+	    }
+	}
+
     if (LEDstate & LED_STATE_CAPS) { // light up caps lock
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	// 
     } else {

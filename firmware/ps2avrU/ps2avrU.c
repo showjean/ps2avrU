@@ -89,3 +89,6 @@ uint8_t getCellStatus(uint8_t xRow){
 	}
 
 }
+void delegateSetBeyondFnLed(bool xIsBeyondFn){
+	
+}
