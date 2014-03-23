@@ -34,12 +34,12 @@
 #define INTERFACE_USB_USER	2
 #define INTERFACE_CLEAR		4
 
-extern int interfaceCount;
-extern bool interfaceReady;
-extern uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
-extern uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow);
+int interfaceCount;
+bool interfaceReady;
+uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
+extern uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow);
 
-extern int setDelay(int xDelay);
-extern void initAfterInterfaceMount(void);
+int setDelay(int xDelay);
+void initAfterInterfaceMount(void);
 
 #endif

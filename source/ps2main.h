@@ -34,7 +34,7 @@
 #define SPLIT       0xFC
 #define WAIT_RX     0xFB
 
-extern void ps2_main(void);
-extern void initInterfacePs2(void);
+void ps2_main(void);
+void initInterfacePs2(void);
 
 #endif

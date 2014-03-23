@@ -172,7 +172,7 @@ int main(void) {
             if( cur ) {
                 keyidx = getKeyIndex(0, row, col);
 #ifdef ENABLE_BOOTMAPPER
-                if(getBootmapperStatus(col, row) || keyidx == KEY_TAB){ // bootmapper start
+                if(delegateGetBootmapperStatus(col, row) || keyidx == KEY_TAB){ // bootmapper start
                     setToBootMapper();
                     continue;
                 }

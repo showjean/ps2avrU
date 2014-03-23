@@ -20,7 +20,7 @@
 #define DDRROWS2    DDRC   ///< second port connected to the matrix rows
 
 // _______________________________________________________________ keymain
-uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow){
+uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow){
 	if(xCol == 1 && xRow == 1){
 		return 1;
 	}else{
@@ -29,7 +29,7 @@ uint8_t getBootmapperStatus(uint8_t xCol, uint8_t xRow){
 }
 
 // _______________________________________________________________ keymatrix
-void initMatrixDevice(void){
+void delegateInitMatrixDevice(void){
 	// initialize matrix ports - cols, rows
 	// PB0-PB7 : col0 .. col7
 	// PA0-PA7 : row0 .. row7
@@ -58,7 +58,7 @@ void initMatrixDevice(void){
 	PORTD 		|= (1<<PIND7);// pull up row 17
 }
 
-void setCellStatus(uint8_t xCol){
+void delegateSetCellStatus(uint8_t xCol){
 	// Col -> set only one port as input and all others as output low
 	DDRCOLUMNS  = BV(xCol);	// 해당 col을 출력으로 설정, 나머지 입력
 	PORTCOLUMNS = ~BV(xCol);	// 해당 col output low, 나머지 컬럼을 풀업 저항
@@ -76,7 +76,7 @@ void setCellStatus(uint8_t xCol){
 	_delay_us(5);
 }
 
-uint8_t getCellStatus(uint8_t xRow){
+uint8_t delegateGetCellStatus(uint8_t xRow){
 
 	if(xRow<8)	{				// for 0..7, PORTA 0 -> 7
 		return (~PINROWS1) & BV(xRow);

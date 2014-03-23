@@ -7,8 +7,8 @@
 
 keymapper_driver_t driverKeymapperLazyFn;
 
-extern void initLazyFn(void);
-extern bool isLazyFn(void);
-extern void toggleLazyFn(void);
+void initLazyFn(void);
+bool isLazyFn(void);
+void toggleLazyFn(void);
 
 #endif

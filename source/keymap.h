@@ -280,7 +280,7 @@ enum {
 
 
 // for ps/2 interface
-extern const uint8_t PROGMEM keycode_set2[NUM_KEY];
+extern const uint8_t keycode_set2[NUM_KEY];
 
 // usage page 01(Generic Desktop) : KEY_POWER,  KEY_SLEEP,  KEY_WAKE
 // usage page 07(keyboard) : KEY_HANJA,   KEY_HANGLE, KEY_KBD_POWER
@@ -289,27 +289,27 @@ extern const uint8_t PROGMEM keycode_set2[NUM_KEY];
 //
 // windows OS 에서 미지원 키 : KEY_SCREENSAVE,    KEY_REC,    KEY_REWIND,     KEY_MINIMIZE,   KEY_EJECT
 
-extern const uint16_t PROGMEM keycode_USB_multimedia[];
+extern const uint16_t keycode_USB_multimedia[];
 // KEY_APPS까지는 keycode 순서에 맞게 나열되어 있지만, 
 // KEY_extend는 배열 순서와는 다른 키코드를 갖는 usage page 07(keyboard)의 키코드를 정의.
-extern const uint8_t PROGMEM keycode_USB_extend[];
+extern const uint8_t keycode_USB_extend[];
 
-extern const uint8_t PROGMEM keycode_set2_special[];
+extern const uint8_t keycode_set2_special[];
 
-extern const uint8_t PROGMEM keycode_set2_makeonly[];
+extern const uint8_t keycode_set2_makeonly[];
 
-extern const uint8_t PROGMEM keycode_set2_make_break[];
+extern const uint8_t keycode_set2_make_break[];
 
-extern const uint8_t PROGMEM keycode_set2_extend[];
+extern const uint8_t keycode_set2_extend[];
 
-extern const uint8_t PROGMEM keycode_set2_proc_shift[];
+extern const uint8_t keycode_set2_proc_shift[];
 
-extern const uint8_t PROGMEM keycode_set2_wait_until_rx[];
+extern const uint8_t keycode_set2_wait_until_rx[];
 
-extern const uint8_t PROGMEM modmask[8];
+extern const uint8_t modmask[8];
 
-extern bool isFnKey(uint8_t xKeyidx);
+bool isFnKey(uint8_t xKeyidx);
 
-extern uint8_t getModifierBit(uint8_t xKeyidx);
+uint8_t getModifierBit(uint8_t xKeyidx);
 
 #endif

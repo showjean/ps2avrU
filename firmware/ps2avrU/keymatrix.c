@@ -48,7 +48,7 @@ static uint8_t _currentLazyLayer = 0;
 /* ------------------------------------------------------------------------- */
 void initMatrix(void){
     
-    initMatrixDevice();
+    delegateInitMatrixDevice();
 
     debounceMAX = 7;
     debounce = 10;
@@ -212,12 +212,12 @@ uint8_t getLiveMatrix(void){
     for(col=0;col<COLUMNS;col++)
     {
         // Col -> set only one port as input and all others as output low
-        setCellStatus(col);
+        delegateSetCellStatus(col);
         
         // scan each rows
         for(row=0;row<ROWS;row++)
         {
-            cur = getCellStatus(row);
+            cur = delegateGetCellStatus(row);
 
             prev = currentMatrix[row] & BV(col);
 

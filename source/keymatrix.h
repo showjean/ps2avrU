@@ -11,29 +11,29 @@
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
-extern void initMatrix(void);
-extern void initMatrixDevice(void);
+void initMatrix(void);
+extern void delegateInitMatrixDevice(void);
 
-extern void clearMatrix(void);
+void clearMatrix(void);
 
-extern bool isReleaseAll(void);
-extern bool isReleaseAllPrev(void);
-extern bool isFnPressed(void);
+bool isReleaseAll(void);
+bool isReleaseAllPrev(void);
+bool isFnPressed(void);
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
-extern uint8_t getLayer(void);
+uint8_t getLayer(void);
 
-extern uint8_t getLiveMatrix(void);
+uint8_t getLiveMatrix(void);
 //curmatrix
-extern void setCurrentMatrixAfter(void);
-extern uint8_t setCurrentMatrix(void);
-extern uint8_t *getCurrentMatrix(void);
-extern void setPrevMatrix(void);
-extern uint8_t *getPrevMatrix(void);
+void setCurrentMatrixAfter(void);
+uint8_t setCurrentMatrix(void);
+uint8_t *getCurrentMatrix(void);
+void setPrevMatrix(void);
+uint8_t *getPrevMatrix(void);
 
-extern void setCellStatus(uint8_t xCol);
-extern uint8_t getCellStatus(uint8_t xRow);
+extern void delegateSetCellStatus(uint8_t xCol);
+extern uint8_t delegateGetCellStatus(uint8_t xRow);
 
 
 #endif

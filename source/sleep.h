@@ -9,12 +9,12 @@
 	#define SLEEP_COUNT_MAX 300000
 #endif
 
-extern void countSleep(void);
+void countSleep(void);
 
-extern void wakeUp(void);
+void wakeUp(void);
 
-extern void sleep(void);
+void sleep(void);
 
-extern uint8_t isSleep(void);
+uint8_t isSleep(void);
 
 #endif

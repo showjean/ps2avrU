@@ -17,9 +17,9 @@
 /**
 	전달되는 키인덱스를 현재 퀵스왑 형식에 맞게 변환;
 */
-extern uint8_t getQuickSwapKeyindex(uint8_t xKeyidx);
-extern void initQuickSwap(void);
+uint8_t getQuickSwapKeyindex(uint8_t xKeyidx);
+void initQuickSwap(void);
 
-extern void enterFrameForQuickSwap(void);
+void enterFrameForQuickSwap(void);
 
 #endif

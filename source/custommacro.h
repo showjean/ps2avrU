@@ -12,14 +12,14 @@
 	down 2byte up 2byte
 	2byte : 1byte = keyindex, 1byte = 8bit(1bit = up/down flag, 7bit = delay * 100ms);
 */
-extern void initCustomMacro(void);
+void initCustomMacro(void);
 
-extern bool hasCustomMacroAt(uint8_t xMacroIndex);
+bool hasCustomMacroAt(uint8_t xMacroIndex);
 
-extern void readCustomMacroAt(uint8_t xMacroIndex);
+void readCustomMacroAt(uint8_t xMacroIndex);
 
-extern bool isActiveCustomMacro(void);
+bool isActiveCustomMacro(void);
 
-extern void enterFrameForCustomMacro(void);
+void enterFrameForCustomMacro(void);
 
 #endif

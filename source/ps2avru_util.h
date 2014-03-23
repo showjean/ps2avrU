@@ -5,13 +5,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-extern void insert(uint8_t ary[], int idx, char ch);
-extern void delete(uint8_t ary[], int idx);
-extern void append(uint8_t ary[], char ch);
+void insert(uint8_t ary[], int idx, char ch);
+void delete(uint8_t ary[], int idx);
+void append(uint8_t ary[], char ch);
  
-extern int findIndex(uint8_t xArr[], uint8_t xValue);
+int findIndex(uint8_t xArr[], uint8_t xValue);
 
-extern void __delay_ms(int n);
+void __delay_ms(int n);
 
 void setToggleOption(int xAddress, uint8_t xBit, bool xBool);
 

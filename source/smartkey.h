@@ -7,14 +7,14 @@
 
 keymapper_driver_t driverKeymapperSmartKey;
 
-extern void initSmartKey(void);
+void initSmartKey(void);
 
-extern uint8_t getSmartKeyIndex(uint8_t xKeyidx);
+uint8_t getSmartKeyIndex(uint8_t xKeyidx);
 
-extern void setCurrentOS(bool xIsOsx);
+void setCurrentOS(bool xIsOsx);
 
-extern bool isSmartKeyEnabled(void);
-extern void toggleSmartKeyEnabled(void);
+bool isSmartKeyEnabled(void);
+void toggleSmartKeyEnabled(void);
 
 
 #endif
