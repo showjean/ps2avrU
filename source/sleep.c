@@ -1,12 +1,6 @@
 #ifndef SLEEP_C
 #define SLEEP_C
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <avr/pgmspace.h>
-#include <stdio.h>
-#include <avr/eeprom.h>
-
 #include <util/delay.h>
 #include <string.h>
 

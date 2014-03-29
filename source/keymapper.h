@@ -8,7 +8,7 @@
 #include <avr/pgmspace.h>
 #include <util/delay.h>
 
-#include "keymain.h"
+#include "main.h"
 #include "hardwareinfo.h"
 #include "keymap.h"
 #include "keymatrix.h"

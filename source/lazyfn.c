@@ -1,5 +1,3 @@
-#ifndef LAZYFN_C
-#define LAZYFN_C
 
 #include "lazyfn.h"
 #include <avr/eeprom.h>
@@ -88,5 +86,3 @@ void toggleLazyFn(void){
 	_isLazyFn ^= true;	
     setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LAZY_FN, _isLazyFn);
 }
-
-#endif

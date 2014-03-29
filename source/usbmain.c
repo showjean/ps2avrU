@@ -237,7 +237,7 @@
 #include "sleep.h"
 #include "enterframe.h"
 #include "keydownbuffer.h"
-#include "keymain.h"
+#include "main.h"
 #include "fncontrol.h"
 #include "vusb.h"
 #include "ps2avru_util.h"
@@ -498,7 +498,7 @@ void usb_main(void) {
     int suspendCount = 0;
 #endif
     
-    while (1) {
+    while (1) {        
 
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
 		// 특별한 경우에만 발생하는 현상이다.
@@ -508,6 +508,12 @@ void usb_main(void) {
 			DEBUG_PRINT(("               move to ps/2 \n"));
 			break;
 		}
+
+        // for test
+        // initFullLEDState();
+        // scanKeyUsbWithMacro();
+        // enterFrame();
+        // continue;
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {

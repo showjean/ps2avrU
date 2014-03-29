@@ -1,6 +1,3 @@
-#ifndef QUICKSWAP_C
-#define QUICKSWAP_C
-
 #include <stdio.h>
 #include <string.h>
 #include <avr/eeprom.h>
@@ -12,7 +9,7 @@
 #include "hardwareinfo.h"
 #include "keydownbuffer.h"
 #include "ledrender.h"
-#include "keymain.h"
+#include "main.h"
 
 static uint8_t quickSwapMode;
 static uint8_t enabledQuickSwapCount;
@@ -92,5 +89,3 @@ void enterFrameForQuickSwap(void){
 
 	countQuickSwapEnabled();
 }
-
-#endif

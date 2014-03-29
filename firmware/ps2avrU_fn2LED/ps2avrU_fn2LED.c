@@ -3,7 +3,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 
-#include "keymain.h"
+#include "main.h"
 #include "keymatrix.h"
 #include "hardwareinfo.h"
 #include "fncontrol.h"

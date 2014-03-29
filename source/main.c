@@ -1,5 +1,5 @@
 /**
- * \file source/keymain.c
+ * \file source/main.c
  * \brief Main functions for ps2avrU
  * \author showjean <showjean@hanmail.net>
  * \version v 1.0 2013-10-21 11:51
@@ -7,7 +7,7 @@
  * License: GNU GPL v2
  */
 
-#include "keymain.h"
+#include "main.h"
 
 #include "timerinclude.h"
 #include "global.h"

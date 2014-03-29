@@ -20,7 +20,7 @@
 #include "keyindex.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
-#include "keymain.h"
+#include "main.h"
 #include "ps2main.h"
 #include "usbmain.h"
 #include "ledrender.h"

@@ -15,7 +15,7 @@
 #include "fncontrol.h"
 #include "sleep.h"
 #include "keymapper.h"
-#include "keymain.h"
+#include "main.h"
 #include "bootmapper.h"
 #include "ps2avru_util.h"
 

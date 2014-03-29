@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#include "keymain.h"
+#include "main.h"
 
 #ifdef DEBUG_QUICKSWAP_H
 	#define QUICKSWAP_COUNT_MAX 500

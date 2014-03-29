@@ -2,10 +2,6 @@
 #define BOOTMAPPER_C
 
 #include <stdio.h>
-#include <string.h>
-#include <avr/eeprom.h>
-#include <avr/pgmspace.h>
-#include <util/delay.h>
 
 #include "keymapper.h"
 #include "macrobuffer.h"

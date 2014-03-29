@@ -1,7 +1,7 @@
 #ifndef PRINT
 #define PRINT
 
-#include "keymain.h"
+#include "main.h"
 
 #ifdef DEBUG_PRINT_H
 	#define DEBUG
