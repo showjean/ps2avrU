@@ -17,7 +17,7 @@ void reduceLedBrightness(void);
 void changeFullLedState(void);
 void clearLEDInited(void);
 
-void blinkOnce(uint8_t xStayMs);
+void blinkOnce(const int xStayMs);
 void initFullLEDState(void);
 void initFullLEDStateAfter(void);
 void initLED(void);

@@ -24,21 +24,8 @@
 // #define KEY_P2U_RESET   245
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
+#define KEY_QUICK_MACRO 242
 
-/*enum {  // group key
-    KEY_GROUP1 = 177,
-    KEY_GROUP2,
-    KEY_GROUP3,
-    KEY_GROUP4,
-    KEY_GROUP5,
-    KEY_GROUP6,
-    KEY_GROUP7,
-    KEY_GROUP8,
-    KEY_GROUP9,
-    KEY_GROUP10,
-    KEY_GROUP11,
-    KEY_GROUP12     // = 188
-};*/
 
 enum {  // for macro
 
@@ -98,7 +85,7 @@ enum {  // dual action
     KEY_dualAction_end  // 238
 };
 
-#define KEY_MAX         KEY_CST_MAC1    //KEY_GROUP1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
+#define KEY_MAX         KEY_CST_MAC1   // 이 값보다 크거나 같으면 키인덱스를 처리 하지 않는다.
 
 
 enum {

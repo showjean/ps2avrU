@@ -29,6 +29,9 @@ static bool _isBeyondFnLedEnabled;
 // for KEY_BEYOND_FN;
 static bool _isBeyondFN = false;     //KEY_BEYOND_FN state
 static bool _isExtraFNDown = false;
+static bool _isQuickMacroDown = false;
+static bool _isReadyQuickMacro = false;
+static uint8_t _quickMacroIndex = 255;
 static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
@@ -125,6 +128,13 @@ void enterFrameForFnControl(void){
         applyLock(&_isLockKey);
         applyLock(&_isLockWin);
     }
+    if(isReleaseAllPrev() && _isReadyQuickMacro){
+        _isReadyQuickMacro = false;
+        if(_quickMacroIndex < 255) {
+            startQuickMacro(_quickMacroIndex);
+            _quickMacroIndex = 255;
+        }
+    }
 }
 static void __setKeyEnabled(uint8_t *lock){
     if(*lock == LOCK_IS_SET){
@@ -197,8 +207,12 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 
              return 0;
+        }else if(_isQuickMacroDown && isEepromMacroKey(xKeyidx)){
+            _quickMacroIndex = xKeyidx - KEY_MAC1; 
+            _isReadyQuickMacro = true;
+            return 0;
         }else if(xKeyidx == EXTRA_FN){
-            _isExtraFNDown = 1;
+            _isExtraFNDown = true;
         }else if((_isExtraFNDown && xKeyidx == LED_KEY) || xKeyidx == KEY_LED){
             
             changeFullLedState();
@@ -209,13 +223,24 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
         }else if(xKeyidx == KEY_LED_DOWN){
             reduceLedBrightness();
             return 0;
+        }else if(xKeyidx == KEY_QUICK_MACRO){
+            if(isQuickMacro()){
+                stopQuickMacro();
+            }else{
+                _isQuickMacroDown = true;                
+            }
+            return 0;
         }
+
     }else{  // up 
 
         if(xKeyidx ==  KEY_BEYOND_FN){  // beyond_fn             
              return 0;
         }else if(xKeyidx == EXTRA_FN){
-            _isExtraFNDown = 0;
+            _isExtraFNDown = false;
+        }else if(xKeyidx == KEY_QUICK_MACRO){
+            _isQuickMacroDown = false;
+            return 0;
         }else if(xKeyidx == KEY_P2U){
             showP2UMenu();
             return 0;

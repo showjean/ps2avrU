@@ -154,13 +154,13 @@ void initKeymapper(void);
 uint8_t isKeyMapping(void);
 uint8_t isDeepKeyMapping(void);
 bool isMacroKey(uint8_t xKeyidx);
+bool isEepromMacroKey(uint8_t xKeyidx);
 
 void showP2UMenu(void);
 
 // 부팅시 키 매핑 시작
 void readyKeyMappingOnBoot(void);
 void startKeyMappingOnBoot(void);
-
 
 // event loop
 void enterFrameForMapper(void);
@@ -172,6 +172,9 @@ uint8_t applyMacro(uint8_t xKeyidx);
 
 void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 
+bool isQuickMacro(void);
+void startQuickMacro(uint8_t xMacroIndex);
+void stopQuickMacro(void);
 void putMacro(uint8_t xKeyidx, uint8_t xIsDown);
 
 

@@ -80,7 +80,7 @@ void initFullLEDStateAfter(void){
 	blinkLedCountDelay = setDelay(blinkLedCountDelay);
 }
 
-void blinkOnce(const uint8_t xStayMs){
+void blinkOnce(const int xStayMs){
 	if(isBeyondFnLedEnabled()){
 		if (isBeyondFN()) { // light up num lock on FN2 toggle
 	        turnOffLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//

@@ -35,15 +35,14 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
         return;
     }
+
+    // fn키를 키매핑에 적용하려면 위치 주의;
+    if(gFN == false) return;
             
     if(xIsDown && applyMacro(xKeyidx)) {
         // 매크로 실행됨;
         return;
     }
-
-    // fn키를 키매핑에 적용하려면 위치 주의;
-    if(gFN == false) return;
-
     
 	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
 	

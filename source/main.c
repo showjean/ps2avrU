@@ -137,7 +137,7 @@ static void initPreparing(void){
 
 int main(void) {
 
-    enable_printf();
+    // enable_printf();
     odDebugInit();
 
     DBG1(0x00, 0, 0);

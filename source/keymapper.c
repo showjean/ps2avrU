@@ -174,6 +174,9 @@ static void setWillStartKeyMapping(void){
 uint8_t isKeyMapping(void){
 	return _isKeyMapping & BV(0);	// will start key mapping
 }
+void setDeepKeyMapping(void){
+	_isKeyMapping |= BV(1);	//set doing mapping
+}
 uint8_t isDeepKeyMapping(void){
 	return _isKeyMapping & BV(1);	// did start key mapping
 }
@@ -219,7 +222,7 @@ static void prepareKeyMapping(void){
 }
 static void startKeyMappingDeep(void)
 {
-	_isKeyMapping |= BV(1);	//set doing mapping
+	setDeepKeyMapping();
 	printPrepareString();
 	prepareKeyMapper();
 }
@@ -646,6 +649,14 @@ bool isMacroKey(uint8_t xKeyidx){
 	}
 }
 
+bool isEepromMacroKey(uint8_t xKeyidx){
+	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
 	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
@@ -784,12 +795,46 @@ bool isMacroInput(void){
 }
 
 static uint8_t _macroDownCount = 0;
-void resetMacroInput(void){	
+static bool _isQuickMacro = false;
+static void resetMacroInput(void){	
 	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);
 	_macroBufferIndex = 0;
 	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
+bool isQuickMacro(void){
+	return _isQuickMacro;
+}
+void startQuickMacro(uint8_t xMacroIndex){
+	resetMacroInput();
+	_macroIndex = xMacroIndex;
+	_step = STEP_INPUT_MACRO;
+	setDeepKeyMapping();
+	_isQuickMacro = true;
+	blinkOnce(500);
+	_delay_ms(100);
+	blinkOnce(500);
+}
+void stopQuickMacro(void){
+	saveMacro();
+	_macroIndex = 255;
+	_step = STEP_NOTHING;
+	_isQuickMacro = false;
+	stopKeyMapping();
+	blinkOnce(1000);
+}
+
+static void stopMacroInput(void){
+	if(_isQuickMacro){
+		stopQuickMacro();
+	}else{
+		saveMacro();
+		_step = STEP_INPUT_COMMAND;
+		printEnter();
+		printPrompt();
+	}
+}
+
 void putMacro(uint8_t xKeyidx, uint8_t xIsDown){ 
     int gIdx;
 
@@ -802,10 +847,8 @@ void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		pushM(xKeyidx);
 		// 또는 ESC를 1초이상 누르면 종료;
 		_macroInputBuffer[_macroBufferIndex-1] = 0;	// 마지막 esc 눌림 제거;
-		saveMacro();
-		_step = STEP_INPUT_COMMAND;
-		printEnter();
-		printPrompt();
+
+		stopMacroInput();
 
 		return;
 	}
@@ -843,12 +886,10 @@ void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	// MACRO_SIZE_MAX개를 채웠다면 종료;
 	if(_macroBufferIndex >= MACRO_SIZE_MAX){
-		_step = STEP_INPUT_COMMAND;
 		// _macroIndex 위치에 저장;
 		// DEBUG_PRINT((".......................... macro input end \n"));
-		saveMacro();
-		printEnter();
-		printPrompt();
+	
+		stopMacroInput();
 
 		return;
 	}
@@ -878,14 +919,13 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
 
-	gKeyIndex = findIndex(usingKeys, xKeyidx);
-
 	if(isMacroInput()){
 		putMacro(xKeyidx, xIsDown);	
 
 		return;	
 	}
 
+	gKeyIndex = findIndex(usingKeys, xKeyidx);
 
 	// 입력되는 키코드 값은 usb/ps2 모두 동일하다.
 	// DEBUG_PRINT(("keymapping xKeyidx: %02x, gKeyIndex: %d, col: %d, row: %d \n", xKeyidx, gKeyIndex, xCol, xRow));
