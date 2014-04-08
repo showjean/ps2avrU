@@ -472,16 +472,17 @@ void printSelectMode(void){
 	printStringFromFlash(str_select_mode);
 	printEnter();
 
+	printString(toString(SEL_MACRO));
+	printStringFromFlash(str_colon);
+	printStringFromFlash(str_select_mode2);
+	printEnter();
+
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printString(toString(SEL_MAPPING));
 	printStringFromFlash(str_colon);
 	printStringFromFlash(str_select_mode1);
 	printEnter();
 #endif
-	printString(toString(SEL_MACRO));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_select_mode2);
-	printEnter();
 
 	uint8_t i;
 	for (i = 0; i < _driverCount; ++i)
@@ -789,97 +790,100 @@ void resetMacroInput(void){
 	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
+void putMacro(uint8_t xKeyidx, uint8_t xIsDown){ 
+    int gIdx;
+
+	if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
+
+	if(_isTiredEscapeKey){
+		_isPressedEscapeKey = 0;
+		_isTiredEscapeKey = 0;
+
+		pushM(xKeyidx);
+		// 또는 ESC를 1초이상 누르면 종료;
+		_macroInputBuffer[_macroBufferIndex-1] = 0;	// 마지막 esc 눌림 제거;
+		saveMacro();
+		_step = STEP_INPUT_COMMAND;
+		printEnter();
+		printPrompt();
+
+		return;
+	}
+
+	if(xIsDown){
+		if(_macroDownCount >= MACRO_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
+			return;
+		}
+		++_macroDownCount;
+	    // DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
+	    DBG1(0x07, (uchar *)&xKeyidx, 1);  
+	   
+	    append(_macroPressedBuffer, xKeyidx);
+	    
+	}else{
+		// gLen = strlen((char *)_macroPressedBuffer);
+	    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
+	    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
+	    if(gIdx == -1){
+	    	return;
+	    }
+	    delete(_macroPressedBuffer, gIdx);
+	    // DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
+	    DBG1(0x08, (uchar *)&xKeyidx, 1);  
+	}
+
+	_macroInputBuffer[_macroBufferIndex] = xKeyidx;
+	++_macroBufferIndex;
+
+	DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
+
+	pushM(xKeyidx);
+
+	// DEBUG_PRINT(("                                              _macroBufferIndex : %d \n", _macroBufferIndex));
+
+	// MACRO_SIZE_MAX개를 채웠다면 종료;
+	if(_macroBufferIndex >= MACRO_SIZE_MAX){
+		_step = STEP_INPUT_COMMAND;
+		// _macroIndex 위치에 저장;
+		// DEBUG_PRINT((".......................... macro input end \n"));
+		saveMacro();
+		printEnter();
+		printPrompt();
+
+		return;
+	}
+
+	if(xIsDown && xKeyidx == KEY_ESC){
+		//esc 눌렸음;
+		_isPressedEscapeKey = 1;
+		_pressedEscapeKeyCount = 0;
+	}else{
+		_isPressedEscapeKey = 0;
+		_isTiredEscapeKey = 0;
+	}
+}
+
 void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {	
-	// 매크로 실행중에는 입력을 받지 않는다.
-	if(_isWorkingForEmpty) return;
-
-    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
-	// DEBUG_PRINT(("putKeyindex xKeyidx: %d, xIsDown: %d, col: %d, row: %d \n", xKeyidx, xIsDown, xCol, xRow));
-
-	// 매핑 중에는 키 업만 실행 시킨다.
-	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
-
 	uint8_t cmd,gLayer;
 	int gKeyCode;
 	int gKeyIndex; 
     int gIdx;
-    // int gLen;
+
+	// 매크로 실행중에는 입력을 받지 않는다.
+	if(_isWorkingForEmpty) return;
+
+    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
+
+	// 매핑 중에는 키 업만 실행 시킨다.
+	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
 
 	gKeyIndex = findIndex(usingKeys, xKeyidx);
 
 	if(isMacroInput()){
+		putMacro(xKeyidx, xIsDown);	
 
-		if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
-
-		if(_isTiredEscapeKey){
-			_isPressedEscapeKey = 0;
-			_isTiredEscapeKey = 0;
-
-			pushM(xKeyidx);
-			// 또는 ESC를 1초이상 누르면 종료;
-			_macroInputBuffer[_macroBufferIndex-1] = 0;	// 마지막 esc 눌림 제거;
-			saveMacro();
-			_step = STEP_INPUT_COMMAND;
-			printEnter();
-			printPrompt();
-
-			return;
-		}
-
-		if(xIsDown){
-			if(_macroDownCount >= MACRO_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
-				return;
-			}
-			++_macroDownCount;
-		    // DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
-		    DBG1(0x07, (uchar *)&xKeyidx, 1);  
-		   
-		    append(_macroPressedBuffer, xKeyidx);
-		    
-		}else{
-			// gLen = strlen((char *)_macroPressedBuffer);
-		    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
-		    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
-		    if(gIdx == -1){
-		    	return;
-		    }
-		    delete(_macroPressedBuffer, gIdx);
-		    // DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
-		    DBG1(0x08, (uchar *)&xKeyidx, 1);  
-		}
-
-		_macroInputBuffer[_macroBufferIndex] = xKeyidx;
-		++_macroBufferIndex;
-
-		DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
-
-		pushM(xKeyidx);
-
-		DEBUG_PRINT(("                                              _macroBufferIndex : %d \n", _macroBufferIndex));
-
-		// MACRO_SIZE_MAX개를 채웠다면 종료;
-		if(_macroBufferIndex >= MACRO_SIZE_MAX){
-			_step = STEP_INPUT_COMMAND;
-			// _macroIndex 위치에 저장;
-			DEBUG_PRINT((".......................... macro input end \n"));
-			saveMacro();
-			printEnter();
-			printPrompt();
-
-			return;
-		}
-
-		if(xIsDown && usingKeys[gKeyIndex] == KEY_ESC){
-			//esc 눌렸음;
-			_isPressedEscapeKey = 1;
-			_pressedEscapeKeyCount = 0;
-		}else{
-			_isPressedEscapeKey = 0;
-			_isTiredEscapeKey = 0;
-		}
-
-		return;
+		return;	
 	}
 
 
@@ -916,11 +920,14 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					_step = STEP_BOOT_MAPPER;
 					stopKeyMapping();				
 				}else{
-					_mode = SEL_OPTIONS;
-					_driverIndex = cmd-1-_driverIndexOffset;
-					(*_drivers[_driverIndex]->printContents)();
+					gIdx = cmd-1-_driverIndexOffset;
+					if(gIdx < _driverCount){
+						_mode = SEL_OPTIONS;
+						_driverIndex = gIdx;
+						(*_drivers[_driverIndex]->printContents)();
+						_step = STEP_INPUT_COMMAND;
+					}
 
-					_step = STEP_INPUT_COMMAND;
 				}
 				
 			}else if(_step == STEP_INPUT_COMMAND){

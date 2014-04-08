@@ -52,8 +52,8 @@
 #define WAIT_SELECT_MODE 14
 
 // mode select
-#define SEL_MAPPING 1
-#define SEL_MACRO 2
+#define SEL_MACRO 1
+#define SEL_MAPPING 2
 #define SEL_EXIT 6
 #define SEL_BOOT_MAPPER 9
 #define SEL_OPTIONS 99
@@ -149,28 +149,30 @@ void stopKeyMapping(void);
 void printEnter(void);
 void setStep(uint8_t xStep);
 
-extern void initKeymapper(void);
+void initKeymapper(void);
 
-extern uint8_t isKeyMapping(void);
-extern uint8_t isDeepKeyMapping(void);
-extern bool isMacroKey(uint8_t xKeyidx);
+uint8_t isKeyMapping(void);
+uint8_t isDeepKeyMapping(void);
+bool isMacroKey(uint8_t xKeyidx);
 
-extern void showP2UMenu(void);
+void showP2UMenu(void);
 
 // 부팅시 키 매핑 시작
-extern void readyKeyMappingOnBoot(void);
-extern void startKeyMappingOnBoot(void);
+void readyKeyMappingOnBoot(void);
+void startKeyMappingOnBoot(void);
 
 
 // event loop
-extern void enterFrameForMapper(void);
+void enterFrameForMapper(void);
 
 // 매크로 등록중인지 확인;
-extern bool isMacroInput(void);
+bool isMacroInput(void);
 // 매크로 적용됐으면 1, 아니면 0 반환;
-extern uint8_t applyMacro(uint8_t xKeyidx);
+uint8_t applyMacro(uint8_t xKeyidx);
 
-extern void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
+
+void putMacro(uint8_t xKeyidx, uint8_t xIsDown);
 
 
 #endif
