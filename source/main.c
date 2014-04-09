@@ -104,6 +104,7 @@ static void clearTimers(void) {
 static void initHardware(bool xIsUSB) {
 
     initMatrix();
+    interfaceCount = 0;
 
     if(xIsUSB){
         clearTimers();
@@ -136,7 +137,6 @@ static void initPreparing(void){
 
     // init
     initLED();
-    clearInterface();
 }
 
 int main(void) {
@@ -269,9 +269,12 @@ int main(void) {
 
     // DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
     
+    initPreparing();
+
     for(;;){
         if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-            initPreparing();
+
+            clearInterface();
 
             initHardware(true);
 
@@ -279,7 +282,8 @@ int main(void) {
         }
         
         if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
-            initPreparing();
+
+            clearInterface();
 
             blinkOnce(50);
             initHardware(false);

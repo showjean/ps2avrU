@@ -2,9 +2,6 @@
    This program comes with ABSOLUTELY NO WARRANTY.
    See the file COPYING for license details.
    */
-   
-#ifndef PS2MAIN_C
-#define PS2MAIN_C
 
 #define KEYBD_EXTERN
 
@@ -519,7 +516,6 @@ static void processTxPs2(void){
                 tx_state(0x83, STA_NORMAL);
                 break;
 
-                _delay_ms(300);
             case STA_WAIT_RESET:
                 clear();
 
@@ -561,4 +557,3 @@ void ps2_main(void){
 
     return;
 }
-#endif
