@@ -1,6 +1,3 @@
-#ifndef PS2AVRU_UTIL_C
-#define PS2AVRU_UTIL_C
-
 #include <string.h>
 #include <stdio.h>
 #include <util/delay.h>
@@ -66,5 +63,3 @@ bool getToggleOption(int xAddress, uint8_t xBit){
         return true;
     }
 }
-
-#endif

@@ -32,6 +32,7 @@
 #include "smartkey.h"
 #include "bootmapper.h"
 #include "fncontrol.h"
+#include "esctilde.h"
 #include "oddebug.h"
 
 
@@ -156,6 +157,7 @@ void initKeymapper(void){
 	addKeymapperDriver(&driverKeymapperLazyFn);
 	addKeymapperDriver(&driverKeymapperSmartKey);
 	addKeymapperDriver(&driverKeymapperBeyondFn);
+	addKeymapperDriver(&driverKeymapperEscTilde);
 }
 
 static void addKeymapperDriver(keymapper_driver_t *xDriver){

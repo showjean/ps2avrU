@@ -54,7 +54,6 @@ static void applyQuickSwap(uint8_t xModi) {
 
 	// DEBUG_PRINT(("xModi= %d, quickSwapMode= %d \n", xModi, quickSwapMode));
 
-	// 약 5초간 입력이 지속되면 키매핑 모드로
 	if(xModi == 0x0C || xModi == 0xC0 || xModi == 0x48 || xModi == 0x84){	// ALT + GUI
 		_quickSwapCount = 0;
 		enabledQuickSwapCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;

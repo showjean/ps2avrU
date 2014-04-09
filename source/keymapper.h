@@ -54,7 +54,7 @@
 // mode select
 #define SEL_MACRO 1
 #define SEL_MAPPING 2
-#define SEL_EXIT 6
+#define SEL_EXIT 7
 #define SEL_BOOT_MAPPER 9
 #define SEL_OPTIONS 99
 

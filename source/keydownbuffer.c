@@ -7,6 +7,8 @@
 #include "keymap.h"
 #include "keymatrix.h"
 #include "keydownbuffer.h"
+#include "ps2avru_util.h"
+//#include "oddebug.h"
 
 static uint8_t _downBuffer[DOWN_BUFFER_SIZE];
 static uint8_t _downBufferIndex;
@@ -16,8 +18,45 @@ static uint8_t _downBufferIndex;
 
 	각 기능들은 이 버퍼를 이용해서 키의 상태를 파악한다.
 */
-void pushDownBuffer(uint8_t xKeyidx){
-	if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { 
+void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
+
+//    uint8_t gLen;
+	if(xIsDown){
+		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
+			_downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
+//			DBG1(0x34, (uchar *)&_downBuffer[DOWN_BUFFER_MODIFIER_INDEX], 1);
+		}else{ // keycode should be added to report
+//	            gLen = strlen((char *)_downBuffer);
+			if (_downBufferIndex >= DOWN_BUFFER_SIZE) { // too many keycodes
+
+			} else {
+
+//	                append(reportBuffer, xKeyidx);
+				_downBuffer[_downBufferIndex] = xKeyidx;
+				++_downBufferIndex;
+			}
+
+		}
+	}else{
+
+		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
+			_downBuffer[DOWN_BUFFER_MODIFIER_INDEX] &= ~(getModifierBit(xKeyidx));
+//			DBG1(0x35, (uchar *)&_downBuffer[DOWN_BUFFER_MODIFIER_INDEX], 1);
+		}else{ // keycode should be added to report
+			int gIdx;
+
+			gIdx = findIndex(_downBuffer, xKeyidx);
+			if(gIdx > 0){
+				delete(_downBuffer, gIdx);
+				--_downBufferIndex;
+			}
+			// DBG1(0x05, (uchar *)&reportBuffer, strlen((char *)reportBuffer));
+
+
+		}
+	}
+
+	/*if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) {
         _downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
         return;
     }
@@ -26,7 +65,7 @@ void pushDownBuffer(uint8_t xKeyidx){
 
 	_downBuffer[_downBufferIndex] = xKeyidx;
 	// DEBUG_PRINT(("_downBufferIndex= %d, _downBuffer[_downBufferIndex]= %d \n", _downBufferIndex, _downBuffer[_downBufferIndex]));
-	++_downBufferIndex;
+	++_downBufferIndex;*/
 }
 
 void clearDownBuffer(void){

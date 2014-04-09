@@ -11,6 +11,7 @@
 #include "fncontrol.h"
 #include "bootmapper.h"
 #include "lazyfn.h"
+#include "esctilde.h"
 #include "oddebug.h"
 
 static void scanKey(uint8_t xLayer);
@@ -43,6 +44,15 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
         // 매크로 실행됨;
         return;
     }
+
+    // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
+    if(xKeyidx == KEY_ESC && isEscTilde()){
+    	uint8_t gModi = getModifierDownBuffer();
+    	DBG1(0x33, (uchar *)&gModi, 1);
+    	if(((gModi >> 1) & 0x01) || ((gModi >> 5) & 0x01)){
+    		xKeyidx = KEY_HASH;
+    	}
+    }
     
 	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
 	
@@ -50,9 +60,9 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
 static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
-    if(xCur){
-        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx));
-    }  
+//    if(xCur){
+        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
+//    }
     // !(prev&&cur) : 1 && 1 이 아니고, 
     // !(!prev&&!cur) : 0 && 0 이 아니고, 
     // 이전 상태에서(press/up) 변화가 있을 경우;
@@ -169,7 +179,7 @@ static void scanKey(uint8_t xLayer) {
     // uint8_t gResultPutKey = 1;
 	uint8_t gLayer = xLayer; 
 
-    clearDownBuffer();
+//    clearDownBuffer();
 
     DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 

@@ -39,6 +39,8 @@
 #include "bootmapper.h"
 #include "custommacro.h"
 #include "fncontrol.h"
+#include "esctilde.h"
+#include "keydownbuffer.h"
 
 #include "oddebug.h"
 
@@ -129,6 +131,8 @@ static void initPreparing(void){
     initLazyFn();
     initSmartKey();
     initBeyondFn();
+    initEscTilde();
+    clearDownBuffer();
 
     // init
     initLED();
