@@ -141,7 +141,7 @@ void readMacro(uint8_t xMacroIndex);
 static void addKeymapperDriver(keymapper_driver_t *xDriver);
 
 static keymapper_driver_t *_drivers[4];
-static uint8_t _driverCount = 0;
+static uint8_t _driverCount;
 static uint8_t _driverIndex;
 static uint8_t _driverIndexOffset;
 
@@ -154,6 +154,7 @@ void initKeymapper(void){
 	_driverIndexOffset = 2;
 #endif
 
+	_driverCount = 0;
 	addKeymapperDriver(&driverKeymapperLazyFn);
 	addKeymapperDriver(&driverKeymapperSmartKey);
 	addKeymapperDriver(&driverKeymapperBeyondFn);
