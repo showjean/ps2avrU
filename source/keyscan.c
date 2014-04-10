@@ -46,14 +46,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     }
 
     // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
-    if(xKeyidx == KEY_ESC && isEscTilde()){
-    	uint8_t gModi = getModifierDownBuffer();
-    	DBG1(0x33, (uchar *)&gModi, 1);
-    	//if(((gModi >> 1) & 0x01) || ((gModi >> 5) & 0x01)){
-    	if(gModi == 0x02 || gModi == 0x20){
-    		xKeyidx = KEY_HASH;
-    	}
-    }
+    xKeyidx = getEscToTilde(xKeyidx, xIsDown);
     
 	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
 	

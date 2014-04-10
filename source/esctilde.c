@@ -1,5 +1,6 @@
 
 #include "esctilde.h"
+#include "oddebug.h"
 
 //
 #define CMD_TOGGLE_ESC_TILDE 1
@@ -66,6 +67,26 @@ void putKeyindexEscTilde(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xR
 	}else if(xCmd == CMD_BACK_ESC_TILDE){
 		setStep(STEP_BACK);
 	}
+}
+
+static bool _isEscTildeDown = false;
+uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
+    if(xKeyidx == KEY_ESC && isEscTilde()){
+    	if(xIsDown){
+			uint8_t gModi = getModifierDownBuffer();
+//			DBG1(0x33, (uchar *)&gModi, 1);
+			if(gModi == 0x02 || gModi == 0x20){
+				xKeyidx = KEY_HASH;
+				_isEscTildeDown = true;
+			}
+    	}else{
+    		if(_isEscTildeDown){
+    			_isEscTildeDown = false;
+    			xKeyidx = KEY_HASH;
+    		}
+    	}
+    }
+    return xKeyidx;
 }
 
 void initEscTilde(void){
