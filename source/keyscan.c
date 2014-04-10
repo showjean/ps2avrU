@@ -49,7 +49,8 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     if(xKeyidx == KEY_ESC && isEscTilde()){
     	uint8_t gModi = getModifierDownBuffer();
     	DBG1(0x33, (uchar *)&gModi, 1);
-    	if(((gModi >> 1) & 0x01) || ((gModi >> 5) & 0x01)){
+    	//if(((gModi >> 1) & 0x01) || ((gModi >> 5) & 0x01)){
+    	if(gModi == 0x02 || gModi == 0x20){
     		xKeyidx = KEY_HASH;
     	}
     }
