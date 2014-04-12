@@ -164,7 +164,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
             _isActiveDualAction = false;
         }
 	}
-        DBG1(0xC2, (uchar *)&_keyCount, 1);
+//        DBG1(0xC2, (uchar *)&_keyCount, 1);
     // DEBUG_PRINT(("_keyCount :::: %d\n", _keyCount)); 
 }
 

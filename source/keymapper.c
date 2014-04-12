@@ -178,6 +178,7 @@ uint8_t isKeyMapping(void){
 	return _isKeyMapping & BV(0);	// will start key mapping
 }
 void setDeepKeyMapping(void){
+	setWillStartKeyMapping();
 	_isKeyMapping |= BV(1);	//set doing mapping
 }
 uint8_t isDeepKeyMapping(void){
@@ -274,6 +275,7 @@ void stopKeyMapping(void){
 	_isKeyMapping = 0;
 	_wait = WAIT_NOTHING;
 	// DEBUG_PRINT(("stopKeyMapping : _isKeyMapping= %d \n", _isKeyMapping));
+	DBG1(0xff, (uchar *)&_isKeyMapping, 1);
 }
 
 
@@ -819,6 +821,7 @@ void startQuickMacro(uint8_t xMacroIndex){
 	blinkOnce(500);
 }
 void stopQuickMacro(void){
+	DBG1(0xef, (uchar *)&_macroBufferIndex, 1);
 	saveMacro();
 	_macroIndex = 255;
 	_step = STEP_NOTHING;
@@ -828,6 +831,7 @@ void stopQuickMacro(void){
 }
 
 static void stopMacroInput(void){
+	DBG1(0xee, (uchar *)&_macroBufferIndex, 1);
 	if(_isQuickMacro){
 		stopQuickMacro();
 	}else{
@@ -838,7 +842,7 @@ static void stopMacroInput(void){
 	}
 }
 
-void putMacro(uint8_t xKeyidx, uint8_t xIsDown){ 
+static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
     int gIdx;
 
 	if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
@@ -914,10 +918,13 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	int gKeyIndex; 
     int gIdx;
 
+    DBG1(0x01, (uchar *)&_isWorkingForEmpty, 1);
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
 
     xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
+
+    DBG1(0x11, (uchar *)&xKeyidx, 1);
 
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;

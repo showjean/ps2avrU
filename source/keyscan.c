@@ -31,7 +31,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
         
-        // DBG1(0x0A, (uchar *)&xKeyidx, 1);  
+         DBG1(0x0A, (uchar *)&xKeyidx, 1);
         putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 
         return;
@@ -86,13 +86,10 @@ void scanKeyWithMacro(void){
           
             gKey = popMWithKey();
 
-            DBG1(0x1F, (uchar *)&gKey.keyindex, 1); 
-            DBG1(0x1F, (uchar *)&gKey.mode, 1); 
+            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down
                 (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, true);
                 
-                // push(NO_REPEAT);    // set no repeat
-
             }else{  // up
                 // 모디키가 눌려져 있다면 그 상태를 유지;
                 if (gKey.keyindex > KEY_Modifiers && gKey.keyindex < KEY_Modifiers_end) {

@@ -175,7 +175,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 bool isQuickMacro(void);
 void startQuickMacro(uint8_t xMacroIndex);
 void stopQuickMacro(void);
-void putMacro(uint8_t xKeyidx, uint8_t xIsDown);
+//void putMacro(uint8_t xKeyidx, uint8_t xIsDown);
 
 
 #endif

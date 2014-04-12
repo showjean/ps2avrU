@@ -1,5 +1,6 @@
 
 #include "esctilde.h"
+#include "keydownbuffer.h"
 #include "oddebug.h"
 
 //
