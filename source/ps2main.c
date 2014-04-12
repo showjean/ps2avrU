@@ -57,6 +57,13 @@ unsigned char lastState;
 // key information for each keys
 uint8_t KFLA[NUM_KEY];
 
+// initialize speed port
+static unsigned char rxed;
+
+static int temp_a, temp_b;
+static int i, j;
+static int keyval=0;
+
 // waiting RX, for led indicate key like capslock, because, fix bug of fast down/up like macro/dualaction.
 static bool _isWaitingRx = false;
 static void setWaitingRx(bool xIsWait);
@@ -152,6 +159,7 @@ static void keymap_init(void)
 }
 
 void setWaitingRx(bool xIsWait){
+	if(xIsWait) keyval = SPLIT;
     _isWaitingRx = xIsWait;
 }
 bool isWaitingRx(void){
@@ -171,6 +179,8 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
     keyidx = getDualActionKeyWhenCompound(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
+
+     DBG1(0x20, (uchar *)&keyidx, 2);
 
     // if prev and current state are different,
     uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
@@ -219,11 +229,18 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
             push(END_MAKE);
             push(SPLIT);
 
-            // DBG1(0x20, (uchar *)&keyidx, 1); 
         }
 
         if(KFLA[keyidx] & KFLA_WAIT_UNTIL_RX){
-            push(WAIT_RX);
+            if(keyidx == KEY_SCRLCK){
+            	// ctrl + scroll lock 키는 LED 반응을 하지 않으니 설정안함
+            	uint8_t gModi = getModifierDownBuffer();
+				if(!(((gModi >> 0) & 0x01) || ((gModi >> 4) & 0x01))){
+	            	push(WAIT_RX);
+				}
+            }else{
+            	push(WAIT_RX);
+            }
         }
     }
     else            // break code - key realeased
@@ -292,13 +309,8 @@ void initInterfacePs2(void){
 /* -----------------------------    Function  Main  ----------------------------- */
 /* ------------------------------------------------------------------------- */
 
-// initialize speed port
-static unsigned char rxed;
-
-static int temp_a, temp_b;
-static int i, j;
-static int keyval=0;
 static void processRxPs2(void){
+
     // check that every key code for single keys are transmitted        
     if (kbd_flags & FLA_RX_BAD) {     // pokud je nastaveny flag spatneho prijmu, zrus ho 
         // pokud flag is set back income withdrawn
@@ -412,9 +424,8 @@ static void processRxPs2(void){
                 
                 return;
             case STA_WAIT_LEDS:
-                DBG1(0xdb, (uchar *)&rxed, 1); 
+                DBG1(0xdb, (uchar *)&rxed, 1);
 
-                // Reflect LED states to PD0~2
                 initPs2();
                 
                 uint8_t ledstate = 0;
@@ -442,6 +453,7 @@ static void processRxPs2(void){
 
 static void processTxPs2(void){
     if (isReadyForTx() && !isWaitingRx()) {   // pokud flag odesilani ok -> if the flag sent ok
+
         switch(m_state) {
             case STA_NORMAL:
 

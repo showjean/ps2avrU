@@ -6,7 +6,7 @@
 #include "global.h"
 
 // for oddebug
-// #define  DEBUG_LEVEL 		1
+//#define  DEBUG_LEVEL 		1
 
 // #define DEBUG_KEYMAIN	// if you want to debug mode
 
