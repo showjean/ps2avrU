@@ -451,8 +451,15 @@ static void countSleepUsb(void){
 #endif    
 }
 
+bool hasUpdateUsb(void){
+	return updateNeeded;
+}
+
+static interface_update_t updateUsb = {
+		hasUpdateUsb         // hasUpdate
+};
 static keyscan_driver_t driverKeyScanUsb = {
-    pushKeyindexBuffer,       // pushKeyCode
+//    pushKeyindexBuffer,       // pushKeyCode
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
@@ -465,6 +472,7 @@ static keyscan_driver_t driverKeyScanUsb = {
 void initInterfaceUsb(void){
 
     setKeyScanDriver(&driverKeyScanUsb);
+    setUpdateDriver(&updateUsb);
     clearReportBuffer();
 
 }
@@ -564,7 +572,7 @@ void usb_main(void) {
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {           
             
-            scanKeyUsbWithMacro(); //scanKeyUSB(); // changes?             
+            scanKeyUsbWithMacro(); //scanKeyUSB(); // changes?
 
             // ps2avrU loop, must be after scan matrix;
             enterFrame();

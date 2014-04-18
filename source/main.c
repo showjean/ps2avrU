@@ -50,6 +50,12 @@
 #warning "======================================================="
 #endif
 
+#if defined(DEBUG_KEYMAPPER_H) || defined(DEBUG_SLEEP_H) || defined(DEBUG_PRINT_H) || defined(DEBUG_QUICKSWAP_H)
+#warning "======================================================="
+#warning "Never compile production devices with DEBUG OPTIONS enabled"
+#warning "======================================================="
+#endif
+
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
@@ -120,6 +126,18 @@ int setDelay(int xDelay){
     }
     return xDelay;
 }
+
+static interface_update_t *updateDriver;
+/**
+ * 업데이트(키코드 전송)을 해야 하는지 확인하는 드라이버 세팅
+ */
+void setUpdateDriver(interface_update_t *driver){
+	updateDriver = driver;
+}
+bool hasUpdate(void){
+	return updateDriver->hasUpdate();
+}
+
 void initAfterInterfaceMount(void){
     initFullLEDState();
     initCustomMacro();

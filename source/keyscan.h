@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 typedef struct {
-    uint8_t (*pushKeyCode)(uint8_t, bool);
+//    uint8_t (*pushKeyCode)(uint8_t, bool);
     uint8_t (*pushKeyCodeWhenChange)(uint8_t, bool);
 } keyscan_driver_t;
 

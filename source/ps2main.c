@@ -295,15 +295,24 @@ static void initPs2(void)
     }
 } 
 
+bool hasUpdatePs2(void){
+	return !isEmpty();
+}
+
+static interface_update_t updatePs2 = {
+		hasUpdatePs2         // hasUpdate
+};
+
 static keyscan_driver_t driverKeyScanPs2 = {
-    pushKeyCode,        // pushKeyCode
+//    pushKeyCode,        // pushKeyCode
     pushKeyCode         // pushKeyCodeWhenChange
 };
+
 
 void initInterfacePs2(void){
 
     setKeyScanDriver(&driverKeyScanPs2);
-
+    setUpdateDriver(&updatePs2);
 }
 
 /* ------------------------------------------------------------------------- */

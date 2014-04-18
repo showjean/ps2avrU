@@ -23,7 +23,7 @@
 #define CMD_EXIT_BEYOND_FN_LED 3
 #define CMD_BACK_BEYOND_FN_LED 6
 
-const char str_select_beyond_fn[] PROGMEM = "enable fn2 led";
+const char str_select_beyond_fn[] PROGMEM = "fn2 led";
 
 static bool _isBeyondFnLedEnabled;
 // for KEY_BEYOND_FN;

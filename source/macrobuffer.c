@@ -12,7 +12,6 @@
 #include "hardwareinfo.h"
 #include "custommacro.h"
 
-// static bool _isActiveMacro = false;
 static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];
 static int rearm = 0, frontm = 0;
 
@@ -84,13 +83,8 @@ void clearMacroPressedBuffer(void){
 // 매크로 시작시 true, 각 인터페이스에서 종료시 false로 표시해준다.
 bool isActiveMacro(void)
 {
-    return !isEmptyM()|| isActiveCustomMacro(); // || _isActiveMacro 
+    return !isEmptyM()|| isActiveCustomMacro();
 }
-/*void setActiveMacro(bool xIsAct)
-{
-    _isActiveMacro = xIsAct;
-}*/
-
 
 const char * toString(uint8_t xInt)
 {        

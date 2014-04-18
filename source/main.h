@@ -5,8 +5,7 @@
 #include <stdbool.h>
 #include "global.h"
 
-// for oddebug
-//#define  DEBUG_LEVEL 		1
+//#define  DEBUG_LEVEL 		1	// for oddebug
 
 // #define DEBUG_KEYMAIN	// if you want to debug mode
 
@@ -34,6 +33,10 @@
 #define INTERFACE_USB_USER	2
 #define INTERFACE_CLEAR		4
 
+typedef struct {
+	bool (*hasUpdate)(void);
+} interface_update_t;
+
 int interfaceCount;
 bool interfaceReady;
 uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
@@ -41,5 +44,7 @@ extern uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow);
 
 int setDelay(int xDelay);
 void initAfterInterfaceMount(void);
+void setUpdateDriver(interface_update_t *driver);
+bool hasUpdate(void);
 
 #endif

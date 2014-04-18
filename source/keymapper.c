@@ -296,7 +296,7 @@ void enterFrameForMapper(void){
 	countKeyMappingEnabled();
 
 	if(isDeepKeyMapping()) {		
-		if(_isWorkingForEmpty && !isActiveMacro())
+		if(_isWorkingForEmpty && !isActiveMacro() && !hasUpdate())
 		{
 			// DEBUG_PRINT(("_wait : %d \n", _wait));
 			if(_wait == WAIT_SAVE){
@@ -429,10 +429,6 @@ static void printPrompt(void)
 		case STEP_CLEAR_SELECT_INDEX:
 			printStringFromFlash(str_select_number_to_clear);
 		break;
-		case STEP_EXIT_MACRO:
-			printStringFromFlash(str_exit_msg);
-			printEnter();
-			_step = STEP_NOTHING;
 		break;
 		case STEP_INPUT_MACRO:
 			printStringFromFlash(str_input_macro);
@@ -445,6 +441,7 @@ static void printPrompt(void)
 			setToBootMapper();
 		break;
 		case STEP_EXIT:
+			stopKeyMapping();
 			printStringFromFlash(str_exit_msg);
 			printEnter();
 			_step = STEP_NOTHING;
@@ -457,7 +454,7 @@ static void printPrompt(void)
 		break;
 	}
 
-	_delay_ms(100);
+	if(_step != STEP_NOTHING) _delay_ms(100);
 }
 void printSelectModeAfter(void){
 
@@ -674,14 +671,12 @@ uint8_t applyMacro(uint8_t xKeyidx){
 				gMacroIndex = xKeyidx - KEY_MAC1;			
 				uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
 				if(gKeyidx > 0 && gKeyidx < 255){
-					// setActiveMacro(true);
 					clearMacroPressedBuffer();
 					readMacro(gMacroIndex);
 				}
 			}else{	// custom macro
 				gMacroIndex = xKeyidx - KEY_CST_MAC1;		
 				if(hasCustomMacroAt(gMacroIndex)){
-					// setActiveMacro(true);
 					clearMacroPressedBuffer();
 					readCustomMacroAt(gMacroIndex);
 				}
@@ -962,9 +957,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				}
 #endif
 				else if(cmd == SEL_EXIT){
-					_mode = SEL_EXIT;
 					_step = STEP_EXIT;
-					stopKeyMapping();
 				}else if(cmd == SEL_BOOT_MAPPER){
 					_mode = SEL_BOOT_MAPPER;
 					_step = STEP_BOOT_MAPPER;
@@ -1009,8 +1002,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					}else if(cmd == CMD_CLEAR_MACRO){
 						_step = STEP_CLEAR_SELECT_INDEX;
 					}else if(cmd == CMD_EXIT_MACRO){
-						_step = STEP_EXIT_MACRO;
-						stopKeyMapping();
+						_step = STEP_EXIT;
 					}else if(cmd == CMD_CLEAR_ALL_MACRO){
 						_step = STEP_CLEAR_ALL_MACRO;
 						clearMacroAll();

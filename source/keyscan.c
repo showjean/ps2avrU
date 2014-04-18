@@ -82,7 +82,6 @@ void scanKeyWithMacro(void){
     macro_key_t gKey;
     if(isActiveMacro()){
         if(!isEmptyM()){
-            // setActiveMacro(true);
           
             gKey = popMWithKey();
 

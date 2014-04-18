@@ -21,7 +21,7 @@ typedef struct {
 } macro_key_t;
 
 
-#define MESSAGE_SIZE_MAX 256
+#define MESSAGE_SIZE_MAX 300
 
 // Queue operation -> push, pop
 void pushM(uint8_t item);
@@ -37,7 +37,6 @@ void clearMacroPressedBuffer(void);
 // 현재 매크로가 진행중인지 확인, 
 // 매크로 시작시 true, 각 인터페이스에서 종료시 false로 표시해준다.
 bool isActiveMacro(void);
-// void setActiveMacro(bool xIsEnd);
 
 const char * toString(uint8_t xInt);
 

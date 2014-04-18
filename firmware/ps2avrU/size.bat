@@ -1,2 +1,2 @@
-avr-size -C --mcu=atmega32 keymain.elf
+avr-size -C --mcu=atmega32 main.elf
 pause;
