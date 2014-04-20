@@ -24,13 +24,14 @@ void append(uint8_t ary[], char ch)
  
 int findIndex(uint8_t xArr[], uint8_t xValue)
 {
-	char * pch;
-    pch = (char*) memchr((char *)xArr, xValue, strlen((char *)xArr));
+	char * gAddress;
+    gAddress = (char*) memchr((char *)xArr, xValue, strlen((char *)xArr));
 
-    if (pch!=NULL)
-        return (pch-(char *)xArr);
-    else
+    if (gAddress!=NULL){
+        return (gAddress-(char *)xArr);
+    }else{
         return -1;
+    }
 }
 /*
     _delay_ms()에 xStayMs를 인자로 넣으면 hex 파일의 용량이 0x1000가량 증가한다. 

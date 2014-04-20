@@ -869,6 +869,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		// gLen = strlen((char *)_macroPressedBuffer);
 	    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
 	    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
+//	    DBG1(0x08, (uchar *)&gIdx, 2);
 	    if(gIdx == -1){
 	    	return;
 	    }
@@ -935,7 +936,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// 입력되는 키코드 값은 usb/ps2 모두 동일하다.
 	// DEBUG_PRINT(("keymapping xKeyidx: %02x, gKeyIndex: %d, col: %d, row: %d \n", xKeyidx, gKeyIndex, xCol, xRow));
 	if(_step == STEP_INPUT_COMMAND || _step == STEP_SELECT_MODE){
-		if(gKeyIndex > -1 && gKeyIndex < 10){	// 0~9
+		if(gKeyIndex >= 0 && gKeyIndex < 10){	// 0~9
 			_buffer[_bufferIndex] = gKeyIndex;
 		
 			printString(toString(gKeyIndex));
@@ -1019,7 +1020,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 	}else if(_step == STEP_CHOOSE_KEY){
 		// do not anything;
-	}else if(gKeyIndex > -1 && gKeyIndex < 10){	// 0~9
+	}else if(gKeyIndex >= 0 && gKeyIndex < 10){	// 0~9
 
 		_buffer[_bufferIndex] = gKeyIndex;
 		++_bufferIndex;
@@ -1035,7 +1036,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// DEBUG_PRINT(("step: %d, buffer [0]: %d, [1]: %d, [2]: %d, index:%d \n", _step, _buffer[0], _buffer[1], _buffer[2], _bufferIndex));
 	
 	// key mapper
-	if((gKeyIndex > -1  && gKeyIndex < 10) || _step == STEP_CHOOSE_KEY)
+	if((gKeyIndex >= 0 && gKeyIndex < 10) || _step == STEP_CHOOSE_KEY)
 	{		
 		switch(_step){
 			case STEP_SELECT_INDEX:

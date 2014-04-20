@@ -151,7 +151,7 @@ static void initPreparing(void){
     initSmartKey();
     initBeyondFn();
     initEscTilde();
-    clearDownBuffer();
+    initKeyDownBuffer();
 
     // init
     initLED();

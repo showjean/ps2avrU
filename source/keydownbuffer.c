@@ -8,9 +8,10 @@
 #include "keymatrix.h"
 #include "keydownbuffer.h"
 #include "ps2avru_util.h"
-//#include "oddebug.h"
+#include "oddebug.h"
 
 static uint8_t _downBuffer[DOWN_BUFFER_SIZE];
+static uint8_t _downModifyBuffer;
 static uint8_t _downBufferIndex;
 
 /**
@@ -21,36 +22,41 @@ static uint8_t _downBufferIndex;
 void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 
 //    uint8_t gLen;
+	int gIdx;
 	if(xIsDown){
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
-			_downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-//			DBG1(0x34, (uchar *)&_downBuffer[DOWN_BUFFER_MODIFIER_INDEX], 1);
+			_downModifyBuffer |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
+			DBG1(0x34, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 		}else{ // keycode should be added to report
 //	            gLen = strlen((char *)_downBuffer);
 			if (_downBufferIndex >= DOWN_BUFFER_SIZE) { // too many keycodes
-
+//				DBG1(0x39, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 			} else {
-
 //	                append(reportBuffer, xKeyidx);
-				_downBuffer[_downBufferIndex] = xKeyidx;
-				++_downBufferIndex;
+				gIdx = findIndex(_downBuffer, xKeyidx);
+//				DBG1(0x34, (uchar *)&gIdx, 2);
+				if(gIdx == -1){
+					_downBuffer[_downBufferIndex] = xKeyidx;
+					++_downBufferIndex;
+				}
+
+//				DBG1(0x24, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 			}
 
 		}
 	}else{
 
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
-			_downBuffer[DOWN_BUFFER_MODIFIER_INDEX] &= ~(getModifierBit(xKeyidx));
-//			DBG1(0x35, (uchar *)&_downBuffer[DOWN_BUFFER_MODIFIER_INDEX], 1);
+			_downModifyBuffer &= ~(getModifierBit(xKeyidx));
+//			DBG1(0x35, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 		}else{ // keycode should be added to report
-			int gIdx;
-
 			gIdx = findIndex(_downBuffer, xKeyidx);
-			if(gIdx > 0){
+//			DBG1(0x35, (uchar *)&gIdx, 1);
+			if(gIdx >= 0){
 				delete(_downBuffer, gIdx);
 				--_downBufferIndex;
 			}
-			// DBG1(0x05, (uchar *)&reportBuffer, strlen((char *)reportBuffer));
+//			DBG1(0x25, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 
 
 		}
@@ -68,22 +74,23 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 	++_downBufferIndex;*/
 }
 
-void clearDownBuffer(void){
-	_downBufferIndex = 1;
+void initKeyDownBuffer(void){
+	_downBufferIndex = 0;
+	_downModifyBuffer = 0;
 	memset(_downBuffer, 0, DOWN_BUFFER_SIZE);
 }
 
-uint8_t * getDownBuffer(void){
+/*uint8_t * getDownBuffer(void){
 	return _downBuffer;
 }
-
+*/
 uint8_t getDownBufferAt(uint8_t xIdx){
 	if(xIdx >= DOWN_BUFFER_SIZE) return 0;
 	return _downBuffer[xIdx];
 }
 
 uint8_t getModifierDownBuffer(void){
-	return _downBuffer[DOWN_BUFFER_MODIFIER_INDEX];
+	return _downModifyBuffer;
 }
 
 #endif

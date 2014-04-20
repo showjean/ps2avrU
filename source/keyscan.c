@@ -54,14 +54,13 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
 static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
-//    if(xCur){
-        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
-//    }
-    // !(prev&&cur) : 1 && 1 이 아니고, 
+	// !(prev&&cur) : 1 && 1 이 아니고,
     // !(!prev&&!cur) : 0 && 0 이 아니고, 
     // 이전 상태에서(press/up) 변화가 있을 경우;
     //if( !(prev&&cur) && !(!prev&&!cur)) {                
-    if( xPrev != xCur ) { 
+    if( xPrev != xCur ) {
+        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
+
         setKeyEnabled(xKeyidx, xCur);
 
         if(isKeyEnabled(xKeyidx) == false) return;   
@@ -137,7 +136,7 @@ void scanKeyWithDebounce(void) {
                 prev : 1, cur : 0 = prev up
                 prev : 0, cur : 1 = cur down
                 prev : 0, cur : 0 = -
-                */              
+                */
                 if( prevKeyidx != keyidx && !isFnKey(prevKeyidx)) {
                     prev = gPrevMatrix[row] & BV(col);
                     cur  = gMatrix[row] & BV(col);

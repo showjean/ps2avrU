@@ -56,7 +56,7 @@ macro_key_t popMWithKey(void) {
     // gLen = strlen((char *)_pressedBuffer);
     gIdx = findIndex(_pressedBuffer, gKey.keyindex);
     // DEBUG_PRINT(("findIndex gIdx :: %d , len : %d \n", gIdx, gLen));
-    if(gIdx > -1){
+    if(gIdx >= 0){
         // already pressed
         delete(_pressedBuffer, gIdx);
     }else{

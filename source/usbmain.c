@@ -357,6 +357,7 @@ static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     updateNeeded = 1;
 
     uint8_t gLen;
+    int gIdx;
     if(xIsDown){ 
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
             addModifiers(xKeyidx);
@@ -375,6 +376,8 @@ static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
                 if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
                     xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
                 }
+                gIdx = findIndex(reportBuffer, xKeyidx);
+//                DBG1(0x03, (uchar *)&gIdx, 2);
                 append(reportBuffer, xKeyidx);
             }
             // DBG1(0x04, (uchar *)&reportBuffer, strlen((char *)reportBuffer));
@@ -385,13 +388,13 @@ static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
             removeModifiers(xKeyidx);
 
         }else{ // keycode should be added to report
-            int gIdx;     
             if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
                 xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
             }
-            gLen = strlen((char *)reportBuffer);
+//            gLen = strlen((char *)reportBuffer);
             gIdx = findIndex(reportBuffer, xKeyidx);
-            if(gIdx > -1){
+//            DBG1(0x04, (uchar *)&gIdx, 2);
+            if(gIdx >= 0){
                 delete(reportBuffer, gIdx);                
             }
             // DBG1(0x05, (uchar *)&reportBuffer, strlen((char *)reportBuffer));            
