@@ -8,12 +8,18 @@
 
 #include "global.h"
 #include <avr/io.h>
-#include <stdbool.h>
 
 /* This controls what to do when a character has been recieved from the
    host, and when we want to send a character to the host. Note that
    replies are driven by a state machine.
    */
+
+#define KFLA_EXTEND         0x01
+#define KFLA_SPECIAL        0x02
+#define KFLA_MAKEONLY       0x04
+#define KFLA_MAKE_BREAK     0x08
+#define KFLA_PROC_SHIFT     0x10
+#define KFLA_WAIT_UNTIL_RX  0x20
 
 #define STA_NORMAL          0
 #define STA_RXCHAR          1

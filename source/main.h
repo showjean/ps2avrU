@@ -14,6 +14,7 @@
 // #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
 // #define INTERFACE_ONLY_USB	// usb only
 // #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
+//#define ENDABLE_LED2	// second LED
 
 //#define DEBUG_QUICK_BOOTLOADER  // for debug
 

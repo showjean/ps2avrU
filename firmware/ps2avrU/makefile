@@ -4,8 +4,6 @@
 TOP_DIR = ../..
 TIMER = timer
 
-
-
 ifndef RESULT
 	RESULT = ps2avrU
 endif

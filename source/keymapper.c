@@ -1043,7 +1043,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				if(_bufferIndex == 2)
 				{
 					gKeyCode = (_buffer[0] * 10);
-					if(gKeyCode > -1){
+					if(gKeyCode >= 0){
 						gKeyCode = gKeyCode + _buffer[1];
 					}
 
@@ -1070,7 +1070,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				if(_bufferIndex == 2)
 				{
 					gKeyCode = (_buffer[0] * 10);
-					if(gKeyCode > -1){
+					if(gKeyCode >= 0){
 						gKeyCode = gKeyCode + _buffer[1];
 					}
 
@@ -1150,10 +1150,10 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 				if(_bufferIndex == 3)
 				{
 					gKeyCode = (_buffer[0] * 100);
-					if(gKeyCode > -1){
+					if(gKeyCode >= 0){
 						gKeyCode = gKeyCode + (_buffer[1] * 10);
 					}
-					if(gKeyCode > -1){
+					if(gKeyCode >= 0){
 						gKeyCode = gKeyCode + _buffer[2];
 					}
 

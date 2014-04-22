@@ -17,6 +17,7 @@
 #include "keymapper.h"
 #include "dualaction.h"
 #include "keymatrix.h"
+#include "keydownbuffer.h"
 #include "ps2avru_util.h"
 
 #define CMD_TOGGLE_BEYOND_FN_LED 1
@@ -213,10 +214,20 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             return 0;
         }else if(xKeyidx == EXTRA_FN){
             _isExtraFNDown = true;
-        }else if((_isExtraFNDown && xKeyidx == LED_KEY) || xKeyidx == KEY_LED){
-            
-            changeFullLedState();
+        }else if((_isExtraFNDown && xKeyidx == LED_KEY)){
+        	uint8_t gModi = getModifierDownBuffer();
+			if(gModi == 0x02 || gModi == 0x20){
+				changeFullLedState(FULL_LED_MODE2);
+			}else{
+				changeFullLedState(FULL_LED_MODE1);
+			}
             return 0;
+        }else if(xKeyidx == KEY_LED){
+			changeFullLedState(FULL_LED_MODE1);
+			return 0;
+        }else if(xKeyidx == KEY_LED2){
+			changeFullLedState(FULL_LED_MODE2);
+			return 0;
         }else if(xKeyidx == KEY_LED_UP){
             increaseLedBrightness();
             return 0;

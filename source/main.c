@@ -139,6 +139,9 @@ bool hasUpdate(void){
 }
 
 void initAfterInterfaceMount(void){
+
+    initLED();
+
     initFullLEDState();
     initCustomMacro();
 }
@@ -152,9 +155,6 @@ static void initPreparing(void){
     initBeyondFn();
     initEscTilde();
     initKeyDownBuffer();
-
-    // init
-    initLED();
 }
 
 int main(void) {

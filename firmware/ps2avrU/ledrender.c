@@ -181,7 +181,7 @@ void reduceLedBrightness(void){
 	}
 	ledStateCount = 1;
 }
-void changeFullLedState(void){
+void changeFullLedState(uint8_t xFullLedMode){
 	if(isSleep()){
 		return;
 	}

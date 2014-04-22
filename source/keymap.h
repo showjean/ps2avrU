@@ -4,13 +4,6 @@
 #include <stdbool.h>
 #include <avr/pgmspace.h>
 
-#define KFLA_EXTEND         0x01
-#define KFLA_SPECIAL        0x02
-#define KFLA_MAKEONLY       0x04
-#define KFLA_MAKE_BREAK     0x08
-#define KFLA_PROC_SHIFT     0x10
-#define KFLA_WAIT_UNTIL_RX  0x20
-
 // fn
 #define KEY_FN          254
 #define KEY_LED         253
@@ -25,6 +18,8 @@
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
+#define KEY_LED2        241		// bottom led
+// undefined 160~188, 239~240
 
 
 enum {  // for macro
@@ -258,7 +253,7 @@ enum {
     KEY_LANG7,
     KEY_LANG8,
     KEY_LANG9,      */          
-    KEY_extend_end  //159   // 175
+    KEY_extend_end  //159
 };
 
 
