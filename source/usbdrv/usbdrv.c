@@ -572,7 +572,7 @@ uchar           isReset = !notResetState;
         wasReset = isReset;
     }
 #else
-    notResetState = notResetState;  // avoid compiler warning
+//    notResetState = notResetState;  // avoid compiler warning
 #endif
 }
 

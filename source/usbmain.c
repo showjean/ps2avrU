@@ -256,8 +256,6 @@
 #define INIT_INDEX_INITED       2
 #define INIT_INDEX_COMPLETE     3
 
-// #define BUFFER_SIZE 200
-
 static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
 static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
 static int initCount = 0;
@@ -270,10 +268,11 @@ static void countSleepUsb(void);
 
 void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
-    setLEDIndicate();  
+    setLEDIndicate();
     if(_ledInitState == INIT_INDEX_NOT_INIT){
         _ledInitState = INIT_INDEX_INITED;
     }
+
 }
 
 void delegateInterfaceReadyUsb(void){
@@ -288,7 +287,7 @@ void delegateInitInterfaceUsb(void)
         _ledInitState = INIT_INDEX_NOT_INIT;    
         _usbReset = true;   
     // }
-         DBG1(0xA0, (uchar *)&idleRate, 1);
+	 DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -312,8 +311,6 @@ static void makeReportBufferExtra(uint8_t keyidx, bool xIsDown){
             extraData = 0;
         }
 
-        // DBG1(0xAA, (uchar *)&extraData, 1);
-        
     }
 }
 static void makeReportBufferSystem(uint8_t keyidx, bool xIsDown){
@@ -327,32 +324,19 @@ static void makeReportBufferSystem(uint8_t keyidx, bool xIsDown){
             systemData = 0;
         }
 
-        // DBG1(0xAA, (uchar *)&extraData, 1);
-        
     }
 }
 static uint8_t _modifiers = 0;
 static uint8_t updateNeeded = 0;
 static uint8_t reportBuffer[REPORT_KEYS];
 
-// static uint8_t keyindexBuffer[BUFFER_SIZE];
-static void addModifiers(uint8_t xKeyidx){
-    _modifiers |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-}
-static void removeModifiers(uint8_t xKeyidx){
-    _modifiers &= ~(getModifierBit(xKeyidx)); // ~(modmask[xKeyidx - (KEY_Modifiers + 1)]);
-}
 
-static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
-    uint8_t retval = 1;
-
+static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     xKeyidx = getDualActionKeyWhenCompound(xKeyidx);      
 
     if(xKeyidx == KEY_NONE || xKeyidx >= KEY_MAX || (xKeyidx > KEY_Multimedia && xKeyidx < KEY_Multimedia_end)){
-        return 0;
+        return;
     }
-
-// DBG1(0x03, (uchar *)&xKeyidx, 3);
 
     updateNeeded = 1;
 
@@ -360,8 +344,7 @@ static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     int gIdx;
     if(xIsDown){ 
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-            addModifiers(xKeyidx);
-
+        	_modifiers |= getModifierBit(xKeyidx);
         }else{ // keycode should be added to report
             gLen = strlen((char *)reportBuffer);
             if (gLen >= REPORT_KEYS) { // too many keycodes
@@ -377,33 +360,29 @@ static uint8_t makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
                     xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
                 }
                 gIdx = findIndex(reportBuffer, xKeyidx);
-//                DBG1(0x03, (uchar *)&gIdx, 2);
-                append(reportBuffer, xKeyidx);
+                if(gIdx == -1){
+                	append(reportBuffer, xKeyidx);
+                }
             }
-            // DBG1(0x04, (uchar *)&reportBuffer, strlen((char *)reportBuffer));
         }
     }else{
 
-        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-            removeModifiers(xKeyidx);
+        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */        	_modifiers &= ~(getModifierBit(xKeyidx));;
 
         }else{ // keycode should be added to report
             if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
                 xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
             }
-//            gLen = strlen((char *)reportBuffer);
             gIdx = findIndex(reportBuffer, xKeyidx);
-//            DBG1(0x04, (uchar *)&gIdx, 2);
             if(gIdx >= 0){
                 delete(reportBuffer, gIdx);                
             }
-            // DBG1(0x05, (uchar *)&reportBuffer, strlen((char *)reportBuffer));            
             
             
         }
     }
 
-    return retval;
+    return;
 }
 
 static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
@@ -418,7 +397,7 @@ static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
 
         makeReportBuffer(gKeyidx, true);
         makeReportBufferExtra(gKeyidx, true);        
-        makeReportBufferSystem(gKeyidx, true);        
+        makeReportBufferSystem(gKeyidx, true);
 
     }else{  // up
 
@@ -462,7 +441,6 @@ static interface_update_t updateUsb = {
 		hasUpdateUsb         // hasUpdate
 };
 static keyscan_driver_t driverKeyScanUsb = {
-//    pushKeyindexBuffer,       // pushKeyCode
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
@@ -513,18 +491,12 @@ void usb_main(void) {
 
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
 		// 특별한 경우에만 발생하는 현상이다.
-		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 2000){
+		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 1000){
 			// move to ps/2
 			INTERFACE = INTERFACE_PS2;
 			DEBUG_PRINT(("               move to ps/2 \n"));
 			break;
 		}
-
-        // for test
-        // initFullLEDState();
-        // scanKeyUsbWithMacro();
-        // enterFrame();
-        // continue;
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
@@ -611,7 +583,7 @@ void usb_main(void) {
                     setCurrentOS(false);
                 }
                 
-                DBG1(0xAA, (uchar *)&idleRate, 1);
+//                DBG1(0xAA, (uchar *)&idleRate, 1);
 
             }else if(_ledInitState == INIT_INDEX_INITED){
                 _ledInitState = INIT_INDEX_COMPLETE;  

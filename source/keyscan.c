@@ -31,7 +31,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
         
-         DBG1(0x0A, (uchar *)&xKeyidx, 1);
+//    	DBG1(0x0A, (uchar *)&xKeyidx, 1);
         putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 
         return;
@@ -84,7 +84,7 @@ void scanKeyWithMacro(void){
           
             gKey = popMWithKey();
 
-            DBG1(0x1F, (uchar *)&gKey, 2);
+//            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down
                 (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, true);
                 
@@ -165,12 +165,7 @@ static void scanKey(uint8_t xLayer) {
 
 	uint8_t row, col, prev, cur, keyidx;
     uint8_t gFN; 
-    // uint8_t gResultPutKey = 1;
 	uint8_t gLayer = xLayer; 
-
-//    clearDownBuffer();
-
-    DEBUG_PRINT(("gLayer  : %d \n", gLayer)); 
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
@@ -196,8 +191,6 @@ static void scanKey(uint8_t xLayer) {
 		}
 	}
 
-	// retval |= 0x01; // must have been a change at some point, since debounce is done
-	
     setPrevMatrix();
 
     setCurrentMatrixAfter();

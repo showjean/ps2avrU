@@ -37,43 +37,47 @@
 
 
 const char str_select_mode[] PROGMEM =  "select mode";
-const char str_select_mode1[] PROGMEM =  "key mapping";
-const char str_select_mode2[] PROGMEM =  "macro";
-const char str_select_mode_exit[] PROGMEM =  "exit";
-const char str_select_mode_bootmapper[] PROGMEM =  "boot mapper";
 
-const char str_exit_msg[] PROGMEM =  "good bye~";
-const char str_boot_mapper[] PROGMEM =  "boot mapper start!";
+const char str_exit_msg[] PROGMEM =  "good bye";
+const char str_space[] PROGMEM = " ";
+const char str_colon[] PROGMEM = ":";
+const char str_on[] PROGMEM = "on";
+const char str_off[] PROGMEM = "off";
+const char str_toggle[] PROGMEM = "toggle";
+const char str_exit[] PROGMEM = "exit";
+const char str_back[] PROGMEM = "back";
+const char str_macro[] PROGMEM = "macro";
 
-const char str_macro_message[] PROGMEM = "Macro";
-const char str_macro_1[] PROGMEM = "1:Select Macro Index";
-const char str_macro_2[] PROGMEM = "2:Clear Macro";
+#ifdef ENABLE_BOOTMAPPER
+const char str_bootmapper[] PROGMEM =  "boot mapper";
+const char str_start[] PROGMEM =  "start";
+#endif
+
+const char str_macro_1[] PROGMEM = "1:select macro index";
+const char str_macro_2[] PROGMEM = "2:clear macro";
 const char str_macro_9[] PROGMEM = "9:Clear All";
 
-const char str_toggle[] PROGMEM = "toggle";
-const char str_exit[] PROGMEM = "Exit";
-const char str_back[] PROGMEM = "Back";
 
 #ifndef DISABLE_HARDWARE_KEYMAPPING 
-const char str_mapper_message[] PROGMEM = "Key Mapper";
-const char str_mapper_1[] PROGMEM = "1:Change Layer";
-const char str_mapper_2[] PROGMEM = "2:Select Key - input keycode";
-const char str_mapper_3[] PROGMEM = "3:Save and Exit";
-const char str_mapper_4[] PROGMEM = "4:Exit without Saving";
-const char str_mapper_9[] PROGMEM = "9:Reset to Default (Current Layer)";
+const char str_mapper[] PROGMEM = "key mapper";
+const char str_mapper_1[] PROGMEM = "1:change layer";
+const char str_mapper_2[] PROGMEM = "2:select key - input keycode";
+const char str_mapper_3[] PROGMEM = "3:save and exit";
+const char str_mapper_4[] PROGMEM = "4:exit without saving";
+const char str_mapper_9[] PROGMEM = "9:reset to default (current layer)";
 #endif
 
 const char str_prepare_message[] PROGMEM =  "ps2avrU";
 const char str_choose_layer[] PROGMEM =  "choose layer (1: normal, 2: FN, 3: FN2) current= ";
 const char str_choose_key[] PROGMEM = "select key (any key you want) ";
 const char str_input_keycode[] PROGMEM = "input keycode (must 3 numbers, clear:000) : ";
-const char str_save_end_mapping[] PROGMEM = "Save & Exit, thank you.";
-const char str_cancel_mapping[] PROGMEM = "Exit without Saving, see you later.";
-const char str_reset_mapping[] PROGMEM = "Reset to default current layer";
+const char str_save_end_mapping[] PROGMEM = "save & exit, thank you.";
+const char str_cancel_mapping[] PROGMEM = "exit without saving, see you later.";
+const char str_reset_mapping[] PROGMEM = "reset to default current layer";
 const char str_input_command[] PROGMEM = ">> ";//"Input Command Number: ";
 const char str_nothing[] PROGMEM = "nothing";
-const char str_save_layer[] PROGMEM = "Save current layer";
-const char str_load_layer[] PROGMEM = "Load current layer";
+const char str_save_layer[] PROGMEM = "save current layer";
+const char str_load_layer[] PROGMEM = "load current layer";
 const char str_saving[] PROGMEM = "saving...";
 const char str_col_row[] PROGMEM = "col, row : ";
 
@@ -83,11 +87,6 @@ const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC
 const char str_invalid_number[] PROGMEM = "invalid number, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
 
-const char str_space[] PROGMEM = " ";
-const char str_macro[] PROGMEM = "macro";
-const char str_colon[] PROGMEM = ":";
-const char str_on[] PROGMEM = "on";
-const char str_off[] PROGMEM = "off";
 
 
 static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
@@ -114,7 +113,7 @@ static uint8_t _bufferIndex;
 static int _editCount;	// 카운트가 1이상이어야만 eeprom에 write 한다.
 static uint8_t _isWorkingForEmpty = 0;	// 매크로 버퍼가 모두 소진된 후 진행할 내용이 있는지 확인;
 
-uint8_t _newKeyMap[ROWS][COLUMNS]; // = {0};
+uint8_t _newKeyMap[ROWS][COLUMNS];
 
 static uint8_t _currentLayer;
 static uint8_t _currentLayerAfter;
@@ -207,9 +206,9 @@ static void applyKeyMapping(uint8_t xModi) {
 
 }
 
-void showP2UMenu(void){
+/*void showP2UMenu(void){
 	prepareKeyMapping();
-}
+}*/
 
 /**
  진입키가 입력되면 매핑 시작을 준비한다.
@@ -301,21 +300,18 @@ void enterFrameForMapper(void){
 			// DEBUG_PRINT(("_wait : %d \n", _wait));
 			if(_wait == WAIT_SAVE){
 				saveCurrentLayerAfter();
-				// _isWorkingForEmpty = 0;
 			}else if(_wait == WAIT_SELECT_MODE){
 				printSelectModeAfter();
 			}
-#ifndef	DISABLE_HARDWARE_KEYMAPPING				
-			else if(_wait == WAIT_WELCOME){
+#ifndef	DISABLE_HARDWARE_KEYMAPPING
+			else if(_wait == WAIT_KEYMAPPER){
 				printMapperMessageAfter();
-				// _isWorkingForEmpty = 0;
 			}
-#endif			
+#endif
 			else if(_wait == WAIT_CLEAR_MACRO){
 				clearMacroAtIndexAfter();
 			}else if(_wait == WAIT_CLEAR_ALL_MACRO){
 				clearMacroAllAfter();
-				// _isWorkingForEmpty = 0;
 			}else{
 				_isWorkingForEmpty = 0;
 			}
@@ -338,9 +334,7 @@ void enterFrameForMapper(void){
 static void pushCharacter(char *xStr)
 {	   
  	// 버퍼에 쌓아두고 모두 출력되기를 기다린다.
-	macro_key_t key;
-
-    key = charToKey(xStr[0]); 
+	macro_key_t key = charToKey(xStr[0]);
     if(key.mode){
     	pushM(KEY_LSHIFT);
     }
@@ -360,6 +354,10 @@ void printEnter(void)
     pushM(KEY_ENTER);
 }
 
+void printStringAndFlash(const char *xStr, const char *xfStr){
+	printString(xStr);
+	printStringFromFlash(xfStr);
+}
 void printString(const char *xString)
 {
 	char c;
@@ -374,6 +372,10 @@ void printString(const char *xString)
     	
     }
 }
+void printStringFromFlashWithEnter(const char *str){
+	printStringFromFlash(str);
+	printEnter();
+}
 void printStringFromFlash(const char *str) 
 { 	
 	char c;
@@ -382,7 +384,7 @@ void printStringFromFlash(const char *str)
   	if(!str) return;
   	while((c = pgm_read_byte(str++))){ 
     	sprintf(gChar, "%c", c);
-    	pushCharacter(gChar);    	
+    	pushCharacter(gChar);
     } 
 }
 
@@ -394,26 +396,22 @@ static void printPrompt(void)
 	_isWorkingForEmpty = 1;
 	switch(_step){
 		case STEP_CHOOSE_LAYER:		
-		// DEBUG_PRINT(("_currentLayer : %d \n", _currentLayer));	
 			printStringFromFlash(str_choose_layer);
 			printString(toString(_currentLayer+1));
 			printEnter();
 		break;
 		case STEP_CHOOSE_KEY:
-			printStringFromFlash(str_choose_key);
-			printEnter();
+			printStringFromFlashWithEnter(str_choose_key);
 		break;
 		case STEP_INPUT_KEYCODE:
 			printStringFromFlash(str_input_keycode);
 		break;
 		case STEP_SAVE_END_MAPPING:
-			printStringFromFlash(str_save_end_mapping);
-			printEnter();
+			printStringFromFlashWithEnter(str_save_end_mapping);
 			_step = STEP_NOTHING;
 		break;
 		case STEP_CANCEL_MAPPING:
-			printStringFromFlash(str_cancel_mapping);
-			printEnter();
+			printStringFromFlashWithEnter(str_cancel_mapping);
 			_step = STEP_NOTHING;
 		break;
 		case STEP_RESET_MAPPING:
@@ -431,41 +429,38 @@ static void printPrompt(void)
 		break;
 		break;
 		case STEP_INPUT_MACRO:
-			printStringFromFlash(str_input_macro);
-			printEnter();
+			printStringFromFlashWithEnter(str_input_macro);
 		break;
+#ifdef ENABLE_BOOTMAPPER
 		case STEP_BOOT_MAPPER:
-			printStringFromFlash(str_boot_mapper);
-			printEnter();
+			printStringFromFlashWithEnter(str_bootmapper);
 			_step = STEP_NOTHING;
 			setToBootMapper();
 		break;
+#endif
 		case STEP_EXIT:
 			stopKeyMapping();
-			printStringFromFlash(str_exit_msg);
-			printEnter();
+			printStringFromFlashWithEnter(str_exit_msg);
 			_step = STEP_NOTHING;
 		break;
 		case STEP_BACK:
 			printSelectMode();
 		break;
 		case STEP_NOTHING:
-			// _isWorkingForEmpty = 0;
 		break;
 	}
 
 	if(_step != STEP_NOTHING) _delay_ms(100);
 }
+
 void printSelectModeAfter(void){
 
-	printString(toString(SEL_EXIT));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_select_mode_exit);
-	printEnter();
-	printString(toString(SEL_BOOT_MAPPER));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_select_mode_bootmapper);
-	printEnter();
+	printStringAndFlash(toString(SEL_EXIT), str_colon);
+	printStringFromFlashWithEnter(str_exit);
+#ifdef ENABLE_BOOTMAPPER
+	printStringAndFlash(toString(SEL_BOOT_MAPPER), str_colon);
+	printStringFromFlashWithEnter(str_start);
+#endif
 	
 	_step = STEP_SELECT_MODE;
 	printPrompt();
@@ -474,26 +469,19 @@ void printSelectModeAfter(void){
 void printSelectMode(void){	
 	printEnter();
 
-	printStringFromFlash(str_select_mode);
-	printEnter();
-
-	printString(toString(SEL_MACRO));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_select_mode2);
-	printEnter();
+	printStringFromFlashWithEnter(str_select_mode);
+	printStringAndFlash(toString(SEL_MACRO), str_colon);
+	printStringFromFlashWithEnter(str_mapper);
 
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
-	printString(toString(SEL_MAPPING));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_select_mode1);
-	printEnter();
+	printStringAndFlash(toString(SEL_MAPPING), str_colon);
+	printStringFromFlashWithEnter(str_mapper);
 #endif
 
 	uint8_t i;
 	for (i = 0; i < _driverCount; ++i)
 	{
-		printString(toString(i+1+_driverIndexOffset));
-		printStringFromFlash(str_colon);
+		printStringAndFlash(toString(i+1+_driverIndexOffset), str_colon);
 		(*_drivers[i]->printMenu)();
 		printEnter(); 
 	}
@@ -508,65 +496,47 @@ void printSelectMode(void){
 void printMapperMessageAfter(void)
 {
 	printEnter();
-	printStringFromFlash(str_mapper_3);
-	printEnter();
-	printStringFromFlash(str_mapper_4);
-	printEnter();
-	printString(toString(CMD_BACK));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_back);
-	printEnter();
-	printStringFromFlash(str_mapper_9);
-	printEnter();
+	printStringFromFlashWithEnter(str_mapper_3);
+	printStringFromFlashWithEnter(str_mapper_4);
+	printStringAndFlash(toString(CMD_BACK), str_colon);
+	printStringFromFlashWithEnter(str_back);
+	printStringFromFlashWithEnter(str_mapper_9);
 	
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
 }
-#endif
-
-#ifndef	DISABLE_HARDWARE_KEYMAPPING				
 static void printMapperMessage(void)
 {
 	printEnter();
-	printStringFromFlash(str_mapper_message);
-	printEnter();
-	printStringFromFlash(str_mapper_1);
-	printEnter();
+	printStringFromFlashWithEnter(str_mapper);
+	printStringFromFlashWithEnter(str_mapper_1);
 	printStringFromFlash(str_mapper_2);
 
 	// 256 바이트를 넘어 모두 출력하지 못하므로 잘라서 실행;
 	_isWorkingForEmpty = 1;
-	_wait = WAIT_WELCOME;
+	_wait = WAIT_KEYMAPPER;
 	_step = STEP_NOTHING;
 }
 #endif
 
 void printMacroMessage(void){
 	printEnter();
-	printStringFromFlash(str_macro_message);
-	printEnter();
-	printStringFromFlash(str_macro_1);
-	printEnter();
+	printStringFromFlashWithEnter(str_macro);
+	printStringFromFlashWithEnter(str_macro_1);
 	printStringFromFlash(str_macro_2);
 	printEnter();
-	printString(toString(CMD_EXIT_MACRO));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_exit);
-	printEnter();
-	printString(toString(CMD_BACK));
-	printStringFromFlash(str_colon);
-	printStringFromFlash(str_back);
-	printEnter();
-	printStringFromFlash(str_macro_9);
-	printEnter();
+	printStringAndFlash(toString(CMD_EXIT_MACRO), str_colon);
+	printStringFromFlashWithEnter(str_exit);
+	printStringAndFlash(toString(CMD_BACK), str_colon);
+	printStringFromFlashWithEnter(str_back);
+	printStringFromFlashWithEnter(str_macro_9);
 
 	_step = STEP_INPUT_COMMAND;
 }
 
 
 void printPrepareString(void){
-	printStringFromFlash(str_prepare_message);
-	printEnter();
+	printStringFromFlashWithEnter(str_prepare_message);
 }
 
 void loadCurrentLayer(void)
@@ -615,8 +585,7 @@ void saveCurrentLayerAfter(void)
 	}else if(_stepAfterLayerSave == STEP_CHOOSE_LAYER)
 	{	
 		printEnter();
-		printStringFromFlash(str_load_layer);
-		printEnter();
+		printStringFromFlashWithEnter(str_load_layer);
 		_step = STEP_INPUT_COMMAND;
 		_currentLayer = _currentLayerAfter;			
 		loadCurrentLayer();
@@ -633,8 +602,7 @@ void saveCurrentLayer(void)
 		return;
 	}
 
-	printStringFromFlash(str_saving);
-	printEnter();
+	printStringFromFlashWithEnter(str_saving);
 
 	_isWorkingForEmpty = 1;
 
@@ -646,24 +614,24 @@ void saveCurrentLayer(void)
 bool isMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_CST_MAC1 && xKeyidx <= KEY_MAC12){
 		return true;
-	}else{
-		return false;
 	}
+	return false;
+
 }
 
 bool isEepromMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_MAC1 && xKeyidx <= KEY_MAC12){
 		return true;
-	}else{
-		return false;
 	}
+	return false;
+
 }
 
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
 	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
 
-	uint8_t gMacroIndex = 255;
+	uint8_t gMacroIndex;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
 	if(isMacroKey(xKeyidx)){		
 		if(!isActiveMacro()){
@@ -690,7 +658,6 @@ uint8_t applyMacro(uint8_t xKeyidx){
 
 void readMacro(uint8_t xMacroIndex){
 	if(xMacroIndex >= MACRO_NUM) return;
-	// DEBUG_PRINT(("readMacro  xMacroIndex: %d \n", xMacroIndex));
 
 	uint16_t gAddress;
 	uint8_t gKeyindex;
@@ -706,7 +673,6 @@ void readMacro(uint8_t xMacroIndex){
 
 void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
-		// DEBUG_PRINT(("saveMacro  _macroIndex: %d \n", _macroIndex));
 
 	uint8_t gKeyindex;
 	uint16_t gAddress;
@@ -716,7 +682,6 @@ void saveMacro(void){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
 		eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
 	}
-	// DEBUG_PRINT(("saveMacro  gAddress: %d \n", gAddress));
 	_macroIndex = 255;
 }
 
@@ -727,7 +692,6 @@ void clearMacroAllAfter(void){
 		gAddress = EEPROM_MACRO + (k);	// key
 		eeprom_write_byte((uint8_t *)gAddress, 0);
 	}
-	// DEBUG_PRINT(("clearMacroAll  gAddress: %d \n", gAddress));
 
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
@@ -735,8 +699,7 @@ void clearMacroAllAfter(void){
 
 void clearMacroAll(void)
 {
-	printStringFromFlash(str_clear_all_macro);
-	printEnter();
+	printStringFromFlashWithEnter(str_clear_all_macro);
 
 	_isWorkingForEmpty = 1;
 
@@ -759,10 +722,8 @@ void clearMacroAtIndexAfter(void){
 void clearMacroAtIndex(void){	
 	printStringFromFlash(str_macro);
 	printStringFromFlash(str_space);
-	printString(toString(_macroIndex+1));
-	printStringFromFlash(str_space);
-	printStringFromFlash(str_clear_all_macro);
-	printEnter();
+	printStringAndFlash(toString(_macroIndex+1), str_space);
+	printStringFromFlashWithEnter(str_clear_all_macro);
 
 	_isWorkingForEmpty = 1;
 
@@ -772,8 +733,7 @@ void clearMacroAtIndex(void){
 
 void resetCurrentLayer(void)
 {
-	printStringFromFlash(str_reset_mapping);
-	printEnter();
+	printStringFromFlashWithEnter(str_reset_mapping);
 	// 현재 레이어 기본값으로 복구;
 	uint8_t k, j; 
 	for(k = 0; k < ROWS; ++k){
@@ -802,15 +762,18 @@ static void resetMacroInput(void){
 	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
 	_macroDownCount = 0;
 }
+
 bool isQuickMacro(void){
 	return _isQuickMacro;
 }
+
 void startQuickMacro(uint8_t xMacroIndex){
 	resetMacroInput();
 	_macroIndex = xMacroIndex;
 	_step = STEP_INPUT_MACRO;
 	setDeepKeyMapping();
 	_isQuickMacro = true;
+
 	blinkOnce(500);
 	_delay_ms(100);
 	blinkOnce(500);
@@ -822,6 +785,7 @@ void stopQuickMacro(void){
 	_step = STEP_NOTHING;
 	_isQuickMacro = false;
 	stopKeyMapping();
+
 	blinkOnce(1000);
 }
 
@@ -860,13 +824,11 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 			return;
 		}
 		++_macroDownCount;
-	    // DEBUG_PRINT(("down _macroDownCount : %d xKeyidx : %d \n", _macroDownCount, xKeyidx));
 	    DBG1(0x07, (uchar *)&xKeyidx, 1);  
 	   
 	    append(_macroPressedBuffer, xKeyidx);
 	    
 	}else{
-		// gLen = strlen((char *)_macroPressedBuffer);
 	    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
 	    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
 //	    DBG1(0x08, (uchar *)&gIdx, 2);
@@ -874,7 +836,6 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 	    	return;
 	    }
 	    delete(_macroPressedBuffer, gIdx);
-	    // DEBUG_PRINT(("up idx : %d, buffer len : %d xKeyidx : %d \n", gIdx, strlen((char *)_macroPressedBuffer), xKeyidx));
 	    DBG1(0x08, (uchar *)&xKeyidx, 1);  
 	}
 
@@ -885,12 +846,9 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	pushM(xKeyidx);
 
-	// DEBUG_PRINT(("                                              _macroBufferIndex : %d \n", _macroBufferIndex));
-
 	// MACRO_SIZE_MAX개를 채웠다면 종료;
 	if(_macroBufferIndex >= MACRO_SIZE_MAX){
 		// _macroIndex 위치에 저장;
-		// DEBUG_PRINT((".......................... macro input end \n"));
 	
 		stopMacroInput();
 
@@ -920,7 +878,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
     xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
 
-    DBG1(0x11, (uchar *)&xKeyidx, 1);
+//    DBG1(0x11, (uchar *)&xKeyidx, 1);
 
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
@@ -934,7 +892,6 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	gKeyIndex = findIndex(usingKeys, xKeyidx);
 
 	// 입력되는 키코드 값은 usb/ps2 모두 동일하다.
-	// DEBUG_PRINT(("keymapping xKeyidx: %02x, gKeyIndex: %d, col: %d, row: %d \n", xKeyidx, gKeyIndex, xCol, xRow));
 	if(_step == STEP_INPUT_COMMAND || _step == STEP_SELECT_MODE){
 		if(gKeyIndex >= 0 && gKeyIndex < 10){	// 0~9
 			_buffer[_bufferIndex] = gKeyIndex;
@@ -959,10 +916,12 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 #endif
 				else if(cmd == SEL_EXIT){
 					_step = STEP_EXIT;
+#ifdef ENABLE_BOOTMAPPER
 				}else if(cmd == SEL_BOOT_MAPPER){
 					_mode = SEL_BOOT_MAPPER;
 					_step = STEP_BOOT_MAPPER;
-					stopKeyMapping();				
+					stopKeyMapping();
+#endif
 				}else{
 					gIdx = cmd-1-_driverIndexOffset;
 					if(gIdx < _driverCount){
@@ -1025,15 +984,12 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		_buffer[_bufferIndex] = gKeyIndex;
 		++_bufferIndex;
 
-		// sprintf(gStr, "%d", gKeyIndex);
 		printString(toString(gKeyIndex));		
 
 	}else{
 		// DEBUG_PRINT(("bad command \n"));
 		return;
 	}
-	
-	// DEBUG_PRINT(("step: %d, buffer [0]: %d, [1]: %d, [2]: %d, index:%d \n", _step, _buffer[0], _buffer[1], _buffer[2], _bufferIndex));
 	
 	// key mapper
 	if((gKeyIndex >= 0 && gKeyIndex < 10) || _step == STEP_CHOOSE_KEY)
@@ -1084,8 +1040,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 						printEnter();
 					}else{
 						printEnter();
-						printStringFromFlash(str_invalid_number);
-						printEnter();
+						printStringFromFlashWithEnter(str_invalid_number);
 					}
 
 					memset(_buffer, 0, 3);
@@ -1098,18 +1053,15 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 			case STEP_CHOOSE_LAYER:
 			
 				gLayer = _buffer[0] - 1;
-				// DEBUG_PRINT(("________________________________________ gLayer : %d \n", gLayer));
 				if(_currentLayer < 3 && _currentLayer != gLayer && (gLayer >= 0 && gLayer < 3)){
 					if(_editCount > 0){
 						printEnter();
-						printStringFromFlash(str_save_layer);
-						printEnter();
+						printStringFromFlashWithEnter(str_save_layer);
 						saveCurrentLayer();
 						_currentLayerAfter = gLayer;
 					}else{
 						printEnter();
-						printStringFromFlash(str_load_layer);
-						printEnter();
+						printStringFromFlashWithEnter(str_load_layer);
 						_step = STEP_INPUT_COMMAND;
 						_currentLayer = gLayer;						
 						loadCurrentLayer();
@@ -1156,8 +1108,6 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					if(gKeyCode >= 0){
 						gKeyCode = gKeyCode + _buffer[2];
 					}
-
-					// DEBUG_PRINT(("_currentLayer: %d, gKeyCode : %d, _bufferIndex: %d \n", _currentLayer, gKeyCode, _bufferIndex));
 
 					if(gKeyCode < 0xFF){
 						_newKeyMap[_row][_col] = (uint8_t)gKeyCode;

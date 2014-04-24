@@ -12,14 +12,13 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
-#define KEY_P2U         247
+//#define KEY_P2U         247
 #define KEY_FN3         246
-// #define KEY_P2U_RESET   245
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
 #define KEY_LED2        241		// bottom led
-// undefined 160~188, 239~240
+// undefined : 160~188, 239~240, 247, 245
 
 
 enum {  // for macro
@@ -263,13 +262,6 @@ enum {
 
 // for ps/2 interface
 extern const uint8_t keycode_set2[NUM_KEY];
-
-// usage page 01(Generic Desktop) : KEY_POWER,  KEY_SLEEP,  KEY_WAKE
-// usage page 07(keyboard) : KEY_HANJA,   KEY_HANGLE, KEY_KBD_POWER
-/* usage page 0C(Consumer Devices) : KEY_WWW_SEARCH, KEY_WWW_HOME, KEY_WWW_BACK, KEY_WWW_FORWARD, KEY_WWW_STOP, KEY_WWW_REFRESH, KEY_WWW_FAVORITE,KEY_EMAIL,  
-                                    KEY_NEXT_TRK, KEY_PREV_TRK, KEY_STOP, KEY_PLAY, KEY_MUTE, KEY_VOL_UP, KEY_VOL_DOWN, KEY_MEDIA,  KEY_CALC,   KEY_MYCOM */
-//
-// windows OS 에서 미지원 키 : KEY_SCREENSAVE,    KEY_REC,    KEY_REWIND,     KEY_MINIMIZE,   KEY_EJECT
 
 extern const uint16_t keycode_USB_multimedia[];
 // KEY_APPS까지는 keycode 순서에 맞게 나열되어 있지만, 

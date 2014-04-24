@@ -190,9 +190,9 @@ int main(void) {
         for(col=0;col<COLUMNS;col++)
         {
             cur  = gMatrix[row] & BV(col);
-            // DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));  
+            // DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));
             if( cur ) {
-                keyidx = getKeyIndex(0, row, col);
+                keyidx = getDefaultKeyindex(0, row, col);
 #ifdef ENABLE_BOOTMAPPER
                 if(delegateGetBootmapperStatus(col, row) || keyidx == KEY_TAB){ // bootmapper start
                     setToBootMapper();

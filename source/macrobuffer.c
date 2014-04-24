@@ -42,7 +42,6 @@ uint8_t popM(void) {
 macro_key_t popMWithKey(void) {
     macro_key_t gKey;
     int gIdx;
-    // int gLen;
 
     gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
     gKey.keyindex = popM();
@@ -53,9 +52,7 @@ macro_key_t popMWithKey(void) {
     }
 
     //
-    // gLen = strlen((char *)_pressedBuffer);
     gIdx = findIndex(_pressedBuffer, gKey.keyindex);
-    // DEBUG_PRINT(("findIndex gIdx :: %d , len : %d \n", gIdx, gLen));
     if(gIdx >= 0){
         // already pressed
         delete(_pressedBuffer, gIdx);
@@ -83,7 +80,7 @@ void clearMacroPressedBuffer(void){
 // 매크로 시작시 true, 각 인터페이스에서 종료시 false로 표시해준다.
 bool isActiveMacro(void)
 {
-    return !isEmptyM()|| isActiveCustomMacro();
+    return !isEmptyM() || isActiveCustomMacro();
 }
 
 const char * toString(uint8_t xInt)
@@ -181,11 +178,6 @@ macro_key_t charToKey(char character) {
         case '|':
             key.mode = MOD_SHIFT_LEFT;
             key.keyindex = KEY_BKSLASH; break;
-        /*case '#':
-            key.keyindex = KEY_hash; break;
-        case '@':
-            key.mode = MOD_SHIFT_LEFT;
-            key.keyindex = KEY_hash; break;*/
         case ';':
             key.keyindex = KEY_COLON; break;
         case ':':

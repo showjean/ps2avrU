@@ -67,6 +67,7 @@ static void stopTimerCustomMacro(void){
 
 bool hasCustomMacroAt(uint8_t xMacroIndex){
     uint8_t gKeyidx = pgm_read_byte(macroAddress+(CUSTOM_MACRO_SIZE_MAX * xMacroIndex));
+    // 매크로의 첫번째 byte의 값이 있는지 확인;
     if(gKeyidx > 0 && gKeyidx < 255){
         return true;
     }
@@ -104,7 +105,7 @@ static void pushNextKeyIndex(void){
     // 0b10000000 : isDown
     // 0b01111111 : delay * 100 ms
     uint8_t gDownDelay;
-    uint8_t gIsDown;
+//    uint8_t gIsDown;
     uint8_t gDelay;
     while(1){
         if(CUSTOM_MACRO_SIZE_MAX <= macroCounter){
@@ -112,7 +113,7 @@ static void pushNextKeyIndex(void){
             break;
         }
         // key index
-        gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
+        gKeyindex = pgm_read_word(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
         ++macroCounter;
 
         gDownDelay = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
@@ -121,7 +122,7 @@ static void pushNextKeyIndex(void){
         if(gKeyindex > 0 && gKeyindex < 255){
             pushM(gKeyindex);
             // 현재 사용되지 않음;
-            gIsDown = (gDownDelay>>7)&0x01;
+//            gIsDown = (gDownDelay>>7)&0x01;
             // delay : 100ms
             gDelay = gDownDelay & 0x7F; // 10 == 1 secound
             if(gDelay > 0){
@@ -148,7 +149,6 @@ void enterFrameForCustomMacro(void){
 }
 
 // 매크로 실행 중에는 다른 리포트를 하지 않도록 막는다.
-// 단, 현재는 매크로에 딜레이를 적용하지 않았으므로 막을 필요는 없다.
 bool isActiveCustomMacro(void){
     return _isActiveCustomMacro;
 }

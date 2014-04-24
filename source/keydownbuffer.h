@@ -10,7 +10,6 @@
 */
 void pushDownBuffer(uint8_t xKeyidx, bool xIsDown);
 void initKeyDownBuffer(void);
-//uint8_t * getDownBuffer(void);
 uint8_t getDownBufferAt(uint8_t xIdx);
 uint8_t getModifierDownBuffer(void);
 

@@ -44,16 +44,13 @@ void printContentsEscTilde(void){
 	printEnter();
 	printString(toString(CMD_TOGGLE_ESC_TILDE));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_toggle);
-	printEnter();
+	printStringFromFlashWithEnter(str_toggle);
 	printString(toString(CMD_EXIT_ESC_TILDE));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_exit);	// exit
-	printEnter();
+	printStringFromFlashWithEnter(str_exit);	// exit
 	printString(toString(CMD_BACK_ESC_TILDE));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_back);
-	printEnter();
+	printStringFromFlashWithEnter(str_back);
 }
 
 void putKeyindexEscTilde(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){

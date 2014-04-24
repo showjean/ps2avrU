@@ -52,8 +52,6 @@ static void applyQuickSwap(uint8_t xModi) {
 	
 	if(xModi == prevModifier) return;
 
-	// DEBUG_PRINT(("xModi= %d, quickSwapMode= %d \n", xModi, quickSwapMode));
-
 	if(xModi == 0x0C || xModi == 0xC0 || xModi == 0x48 || xModi == 0x84){	// ALT + GUI
 		_quickSwapCount = 0;
 		enabledQuickSwapCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;

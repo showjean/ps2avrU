@@ -180,7 +180,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 
     if(keyidx >= KEY_MAX) return 0;
 
-     DBG1(0x20, (uchar *)&keyidx, 2);
+//    DBG1(0x20, (uchar *)&keyidx, 2);
 
     // if prev and current state are different,
     uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
@@ -214,13 +214,10 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
                     push(SPLIT);
                     break;
             }
-        }
-        else if(KFLA[keyidx]&KFLA_MAKEONLY) {
+        }else if(KFLA[keyidx]&KFLA_MAKEONLY) {
             push(keyVal);
             push(SPLIT);
-        }
-        else 
-        {
+        }else{
             push(START_MAKE);
             if(KFLA[keyidx]&KFLA_EXTEND) 
                 push(0xE0);
@@ -261,11 +258,8 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
                     push(SPLIT);
                     break;
             }
-        }
-        else if(KFLA[keyidx]&KFLA_MAKEONLY) {
-        }
-        else 
-        {
+        }else if(KFLA[keyidx]&KFLA_MAKEONLY) {
+        }else{
             if(KFLA[keyidx]&KFLA_EXTEND)
                 push(0xE0);
 
@@ -310,7 +304,6 @@ static keyscan_driver_t driverKeyScanPs2 = {
 
 
 void initInterfacePs2(void){
-
     setKeyScanDriver(&driverKeyScanPs2);
     setUpdateDriver(&updatePs2);
 }
@@ -560,12 +553,12 @@ void ps2_main(void){
     DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 
     sei();
-    
+
     while(1) {
 
         // 카운트 이내에 신호가 잡히지 않으면 이동;
         // 특별한 경우에만 발생하는 현상이다.
-        if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 2000){           
+        if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 1000){
             // move to usb
             INTERFACE = INTERFACE_USB;
             DEBUG_PRINT((" move to usb \n"));

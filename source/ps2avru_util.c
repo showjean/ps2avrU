@@ -24,8 +24,7 @@ void append(uint8_t ary[], char ch)
  
 int findIndex(uint8_t xArr[], uint8_t xValue)
 {
-	char * gAddress;
-    gAddress = (char*) memchr((char *)xArr, xValue, strlen((char *)xArr));
+	char * gAddress = (char*) memchr((char *)xArr, xValue, strlen((char *)xArr));
 
     if (gAddress!=NULL){
         return (gAddress-(char *)xArr);
@@ -45,12 +44,11 @@ void __delay_ms(int n) {
 
 void setToggleOption(int xAddress, uint8_t xBit, bool xBool){
     uint8_t gOption = eeprom_read_byte((uint8_t *)xAddress);
+    gOption = (gOption & ~(1<<xBit));
     if(xBool == false){
-        gOption = (gOption & ~(1<<xBit)) | (OPTION_OFF<<xBit);
-        // gOption &= ~(1<<xBit);
+        gOption |= (OPTION_OFF<<xBit);
     }else{
-        gOption = (gOption & ~(1<<xBit)) | (OPTION_ON<<xBit);
-        // gOption |= (1<<xBit);
+        gOption |= (OPTION_ON<<xBit);
     }
     eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
 }

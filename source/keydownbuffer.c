@@ -26,7 +26,7 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 	if(xIsDown){
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
 			_downModifyBuffer |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-			DBG1(0x34, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
+//			DBG1(0x34, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 		}else{ // keycode should be added to report
 //	            gLen = strlen((char *)_downBuffer);
 			if (_downBufferIndex >= DOWN_BUFFER_SIZE) { // too many keycodes
@@ -62,16 +62,6 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 		}
 	}
 
-	/*if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) {
-        _downBuffer[DOWN_BUFFER_MODIFIER_INDEX] |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-        return;
-    }
-
-	if(_downBufferIndex >= DOWN_BUFFER_SIZE) return;
-
-	_downBuffer[_downBufferIndex] = xKeyidx;
-	// DEBUG_PRINT(("_downBufferIndex= %d, _downBuffer[_downBufferIndex]= %d \n", _downBufferIndex, _downBuffer[_downBufferIndex]));
-	++_downBufferIndex;*/
 }
 
 void initKeyDownBuffer(void){
@@ -80,10 +70,6 @@ void initKeyDownBuffer(void){
 	memset(_downBuffer, 0, DOWN_BUFFER_SIZE);
 }
 
-/*uint8_t * getDownBuffer(void){
-	return _downBuffer;
-}
-*/
 uint8_t getDownBufferAt(uint8_t xIdx){
 	if(xIdx >= DOWN_BUFFER_SIZE) return 0;
 	return _downBuffer[xIdx];

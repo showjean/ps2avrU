@@ -12,7 +12,6 @@
 #define CMD_BACK_LAZY_FN 6
 
 const char str_select_lazy_fn[] PROGMEM =  "lazy fn";
-// const char str_lazyfn[] PROGMEM = "lazy FN";
 
 static bool _isLazyFn;
 
@@ -47,16 +46,13 @@ void printContentsLazyFn(void){
 	printEnter();
 	printString(toString(CMD_TOGGLE_LAZY_FN));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_toggle);
-	printEnter();
+	printStringFromFlashWithEnter(str_toggle);
 	printString(toString(CMD_EXIT_LAZY_FN));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_exit);	// exit
-	printEnter();
+	printStringFromFlashWithEnter(str_exit);	// exit
 	printString(toString(CMD_BACK_LAZY_FN));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_back);
-	printEnter();
+	printStringFromFlashWithEnter(str_back);
 }
 
 void putKeyindexLazyFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){

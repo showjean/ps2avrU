@@ -91,10 +91,8 @@ const bool PROGMEM dualActionCancelDefaultDown[] = {
 
 static uint8_t dualActionKeyIndex = 0;
 static uint8_t _keyCount = 0;
-// static uint8_t _normalKeyCount = 0;
 static bool _isCanceledDualAction = false;
 static bool _isActiveDualAction = false;
-// static uint8_t _upKeyindex = 0;
 
 static uint8_t getDualActionKeyWhenAlone(uint8_t keyidx);
 
@@ -165,7 +163,6 @@ void setDualAction(uint8_t keyidx, bool isDown){
         }
 	}
 //        DBG1(0xC2, (uchar *)&_keyCount, 1);
-    // DEBUG_PRINT(("_keyCount :::: %d\n", _keyCount)); 
 }
 
 uint8_t getDualActionDefaultKey(uint8_t xActionIndex){

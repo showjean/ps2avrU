@@ -17,9 +17,8 @@ const uint8_t PROGMEM fnList[4] = {
 };  
 
 bool isFnKey(uint8_t xKeyidx){
-	uint8_t gLen = 4;
 	uint8_t i;
-	for( i = 0; i < gLen; ++i){
+	for( i = 0; i < 4; ++i){
 		if(xKeyidx == pgm_read_byte(fnList+i)){
 			return true;
 		}

@@ -145,9 +145,6 @@ static void __setKeyEnabled(uint8_t *lock){
     }
 }
 void setKeyEnabled(uint8_t xKeyidx, bool xIsDown){
-    /*
-        현재 ps2에서 눌려진 키가 복귀 되지 않는 상태로 lock이 걸린다.
-    */
     if(xIsDown) {   // !xIsDown은 오작동한다.
         if(xKeyidx == KEY_LOCK_ALL){
             __setKeyEnabled(&_isLockKey);
@@ -252,10 +249,11 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
         }else if(xKeyidx == KEY_QUICK_MACRO){
             _isQuickMacroDown = false;
             return 0;
-        }else if(xKeyidx == KEY_P2U){
+        }
+        /*else if(xKeyidx == KEY_P2U){
             showP2UMenu();
             return 0;
-        }
+        }*/
     }
 
     return 1;

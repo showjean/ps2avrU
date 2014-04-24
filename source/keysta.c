@@ -95,6 +95,7 @@ kbd_init(void)
 
     timer0Init();
     timer0SetPrescaler(TIMER_CLK_DIV8);
+//    timer0SetPrescaler(TIMER_CLK_DIV64);
     timerAttach(TIMER0OVERFLOW_INT, timerAction);
     outp(COUNT_UP, TCNT0);  /* value counts up from this to zero */
 
@@ -265,6 +266,7 @@ static void timerAction(void)
                     case TX_START:
                         tx_shift = tx_byte;
                         parity = 0;
+                        /* no break */
                     case TX_DATA1: 
                     case TX_DATA2: 
                     case TX_DATA3: 

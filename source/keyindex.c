@@ -11,7 +11,7 @@
 #include "smartkey.h"
 
 
-uint8_t* keymapAddress = (uint8_t*)KEYMAP_ADDRESS;
+//uint8_t* keymapAddress = (uint8_t*)KEYMAP_ADDRESS;
 
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
 static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
@@ -19,13 +19,7 @@ static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
 	if(xLayer >= HARDWARE_KEYMAPPING_LAYER_MAX) return 0;	// 하드웨어 키매핑은 레어어 3까지만 지원
-
-	uint8_t gKeyIndex;
-	int gIdx;
-	gIdx = EEPROM_MAPPING + (xRow * COLUMNS + xCol) + (COLUMNS * ROWS * xLayer);
-	gKeyIndex = eeprom_read_byte((uint8_t *)gIdx);
-
-	return gKeyIndex;
+	return eeprom_read_byte((uint8_t *)EEPROM_MAPPING + (xRow * COLUMNS + xCol) + (COLUMNS * ROWS * xLayer));
 #else
 	return 0;
 #endif
@@ -39,14 +33,10 @@ static uint8_t escapeMacroKeyindex(uint8_t xKeyidx){
 	return xKeyidx;
 }
 
-uint8_t getKeyIndex(uint8_t xLayer, uint8_t xRow, uint8_t xCol){
-	return  pgm_read_byte(keymapAddress+(ROWS * COLUMNS * xLayer)+(xRow * COLUMNS + xCol));
-}
-
 // flashrom의 기본 키코드 반환(부트 매퍼);
 uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
-	return getKeyIndex(xLayer, xRow, xCol);
+	return pgm_read_byte(KEYMAP_ADDRESS+(ROWS * COLUMNS * xLayer)+(xRow * COLUMNS + xCol));
 }
 
 uint8_t getExchangedKeyindex(uint8_t xKeyindex){

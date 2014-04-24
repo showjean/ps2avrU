@@ -226,7 +226,7 @@ void timerPause(unsigned short pause_ms)
 	// loop until time expires
 	while( ((TimerPauseReg<<8) | inb(TCNT0)) < (pause+timerThres) )
 	{
-		if( TimerPauseReg < (pause>>8));
+		if( TimerPauseReg < (pause>>8))
 		{
 			// save power by idling the processor
 			set_sleep_mode(SLEEP_MODE_IDLE);

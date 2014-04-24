@@ -13,7 +13,6 @@
 #define CMD_BACK_SMART_KEY 6
 
 const char str_select_smart_key[] PROGMEM =  "smart key";
-// const char str_smartkey[] PROGMEM = "smart key";
 
 static bool _isOsx = false;
 static bool _enabled = false;
@@ -52,16 +51,13 @@ void printContentsSmartKey(void){
 	printEnter();
 	printString(toString(CMD_TOGGLE_SMART_KEY));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_toggle);
-	printEnter();
+	printStringFromFlashWithEnter(str_toggle);
 	printString(toString(CMD_EXIT_SMART_KEY));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_exit);	// exit
-	printEnter();
+	printStringFromFlashWithEnter(str_exit);	// exit
 	printString(toString(CMD_BACK_SMART_KEY));
 	printStringFromFlash(str_colon);
-	printStringFromFlash(str_back);
-	printEnter();
+	printStringFromFlashWithEnter(str_back);
 
 }
 

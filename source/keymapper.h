@@ -40,11 +40,13 @@
 // exit
 #define STEP_EXIT 100
 #define STEP_BACK 110
+#ifdef ENABLE_BOOTMAPPER
 #define STEP_BOOT_MAPPER 120
+#endif
 
 // wait
 #define WAIT_NOTHING 0
-#define WAIT_WELCOME 10
+#define WAIT_KEYMAPPER 10
 #define WAIT_SAVE 11
 #define WAIT_CLEAR_ALL_MACRO 12
 #define WAIT_CLEAR_MACRO 13
@@ -141,7 +143,7 @@ typedef struct {
     void (*putKeyindex)(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
 } keymapper_driver_t;
 
-// void addKeymapperDriver(keymapper_driver_t *xDriver);
+void printStringFromFlashWithEnter(const char *str);
 void printStringFromFlash(const char *str);
 void printString(const char *xString);
 void stopKeyMapping(void);
@@ -155,7 +157,7 @@ uint8_t isDeepKeyMapping(void);
 bool isMacroKey(uint8_t xKeyidx);
 bool isEepromMacroKey(uint8_t xKeyidx);
 
-void showP2UMenu(void);
+//void showP2UMenu(void);
 
 // 부팅시 키 매핑 시작
 void readyKeyMappingOnBoot(void);
@@ -174,7 +176,6 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 bool isQuickMacro(void);
 void startQuickMacro(uint8_t xMacroIndex);
 void stopQuickMacro(void);
-//void putMacro(uint8_t xKeyidx, uint8_t xIsDown);
 
 
 #endif

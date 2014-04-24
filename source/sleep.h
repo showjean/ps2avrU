@@ -4,7 +4,7 @@
 #include "main.h"
 
 #ifdef DEBUG_SLEEP_H
-	#define SLEEP_COUNT_MAX 30000
+	#define SLEEP_COUNT_MAX 6000
 #else
 	#define SLEEP_COUNT_MAX 300000
 #endif

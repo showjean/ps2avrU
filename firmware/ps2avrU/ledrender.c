@@ -21,7 +21,7 @@
 
 #define PWM_MAX 0xFF
 
-static uint16_t downLevelStay = 0;
+static int downLevelStay = 0;
 static uint8_t downLevel = 0;
 static const uint8_t downLevelMax = 12;
 static uint8_t downLevelLife = 0;

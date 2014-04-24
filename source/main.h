@@ -14,18 +14,17 @@
 // #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
 // #define INTERFACE_ONLY_USB	// usb only
 // #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
-//#define ENDABLE_LED2	// second LED
 
 //#define DEBUG_QUICK_BOOTLOADER  // for debug
 
 #ifdef DEBUG_KEYMAIN
-    #define DEBUG_KEYMAPPER_H
 	#define DEBUG_SLEEP_H
+    #define DEBUG_KEYMAPPER_H
 	#define DEBUG_PRINT_H
 	#define DEBUG_QUICKSWAP_H
 #endif
 
-#define ENABLE_BOOTMAPPER	// use bootmapper	
+#define ENABLE_BOOTMAPPER	// use bootmapper
 
 /* --------------------------- interface --------------------------------*/
 #define INTERFACE_PS2		0
