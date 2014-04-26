@@ -27,4 +27,4 @@ SRC = $(P2USRC)/ledrender_ps2avrU.c \
 	$(P2USRC)/keymatrix.c \
 	ps2avrU_fn2LED.c
 
-include $(TOP_DIR)/makefile.common
+include $(TOP_DIR)/common.mk

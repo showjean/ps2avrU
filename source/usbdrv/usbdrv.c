@@ -9,7 +9,6 @@
 
 #include "usbdrv.h"
 #include "oddebug.h"
-#include "../ledrender.h"
 
 /*
 General Description:
@@ -227,7 +226,6 @@ char    i;
     if(usbTxLen1 == USBPID_STALL)
         return;
 #endif
-stopTimer();
     if(txStatus->len & 0x10){   /* packet buffer was empty */
         txStatus->buffer[0] ^= USBPID_DATA0 ^ USBPID_DATA1; /* toggle token */
     }else{
@@ -242,7 +240,6 @@ stopTimer();
     txStatus->len = len + 4;    /* len must be given including sync byte */
     DBG2(0x21 + (((int)txStatus >> 3) & 3), txStatus->buffer, len + 3);
 
-startTimer();
 }
 
 USB_PUBLIC void usbSetInterrupt(uchar *data, uchar len)
@@ -320,7 +317,6 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
     SWITCH_CASE(USBDESCR_DEVICE)    /* 1 */
         // disable TCNT1 overflow
         TIMSK &= ~(1 << TOIE1); //cbi(TIMSK, TOIE1);
-        stopTimer();
 
         GET_DESCRIPTOR(USB_CFG_DESCR_PROPS_DEVICE, usbDescriptorDevice)
     SWITCH_CASE(USBDESCR_CONFIG)    /* 2 */
@@ -354,7 +350,6 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
 
         // enable TCNT1 overflow
         TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
-        startTimer(); 
 #endif
     SWITCH_DEFAULT
         if(USB_CFG_DESCR_PROPS_UNKNOWN & USB_PROP_IS_DYNAMIC){
@@ -440,7 +435,7 @@ usbRequest_t    *rq = (void *)data;
  * 0xe1 11100001 (USBPID_OUT: data phase of setup transfer)
  * 0...0x0f for OUT on endpoint X
  */
-    DBG2(0x10 + (usbRxToken & 0xf), data, len + 2); /* SETUP=1d, SETUP-DATA=11, OUTx=1x */
+    DBG1(0x10 + (usbRxToken & 0xf), data, len + 2); /* SETUP=1d, SETUP-DATA=11, OUTx=1x */
     USB_RX_USER_HOOK(data, len)
 #if USB_CFG_IMPLEMENT_FN_WRITEOUT
     if(usbRxToken < 0x10){  /* OUT to endpoint != 0: endpoint number in usbRxToken */
@@ -472,6 +467,7 @@ usbRequest_t    *rq = (void *)data;
                 }
             }
             usbMsgFlags = USB_FLG_USE_USER_RW;
+            DBG1(0x77, (uchar *)usbMsgFlags, 1);
         }else   /* The 'else' prevents that we limit a replyLen of USB_NO_MSG to the maximum transfer len. */
 #endif
         if(sizeof(replyLen) < sizeof(rq->wLength.word)){ /* help compiler with optimizing */
@@ -485,6 +481,7 @@ usbRequest_t    *rq = (void *)data;
     }else{  /* usbRxToken must be USBPID_OUT, which means data phase of setup (control-out) */
 #if USB_CFG_IMPLEMENT_FN_WRITE
         if(usbMsgFlags & USB_FLG_USE_USER_RW){
+        	DBG1(0xBB, data, len);
             uchar rval = usbFunctionWrite(data, len);
             if(rval == 0xff){   /* an error occurred */
                 usbTxLen = USBPID_STALL;
@@ -580,7 +577,6 @@ uchar           isReset = !notResetState;
 
 USB_PUBLIC void usbPoll(void)
 {
-    stopTimer();
 
 schar   len;
 uchar   i;
@@ -619,7 +615,6 @@ uchar   i;
 isNotReset:
     usbHandleResetHook(i);
 
-    startTimer(); 
 }
 
 /* ------------------------------------------------------------------------- */

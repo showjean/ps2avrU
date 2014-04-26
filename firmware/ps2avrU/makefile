@@ -22,4 +22,4 @@ SRC = ledrender_ps2avrU.c \
 	keymatrix.c \
 	ps2avrU.c
 
-include $(TOP_DIR)/makefile.common
+include $(TOP_DIR)/common.mk

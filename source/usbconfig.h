@@ -387,12 +387,12 @@ section at the end of this file).
 
 #if USB_COUNT_SOF
 /* Set INT1 for D- falling edge to count SOF */
-/* #define USB_INTR_CFG            EICRA */
+/* #define USB_INTR_CFG            MCUCR */
 #define USB_INTR_CFG_SET        ((1 << ISC11) | (0 << ISC10))
 /* #define USB_INTR_CFG_CLR        0 */
-/* #define USB_INTR_ENABLE         EIMSK */
+/* #define USB_INTR_ENABLE         GICR */
 #define USB_INTR_ENABLE_BIT     INT1
-/* #define USB_INTR_PENDING        EIFR */
+/* #define USB_INTR_PENDING        GIFR */
 #define USB_INTR_PENDING_BIT    INTF1
 #define USB_INTR_VECTOR         INT1_vect
 #endif

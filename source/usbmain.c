@@ -267,12 +267,12 @@ static void countSleepUsb(void);
 
 
 void delegateLedUsb(uint8_t xState){
+    DBG1(0x30, (uchar *)&xState, 1);
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();
     if(_ledInitState == INIT_INDEX_NOT_INIT){
         _ledInitState = INIT_INDEX_INITED;
     }
-
 }
 
 void delegateInterfaceReadyUsb(void){
@@ -287,7 +287,7 @@ void delegateInitInterfaceUsb(void)
         _ledInitState = INIT_INDEX_NOT_INIT;    
         _usbReset = true;   
     // }
-	 DBG1(0xA0, (uchar *)&idleRate, 1);
+//	 DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -478,7 +478,6 @@ void usb_main(void) {
     usbDeviceConnect();
 
     initInterfaceUsb();    
-	DEBUG_PRINT(("starting USB keyboard!!! \n"));
 
     sei();
 
@@ -487,8 +486,9 @@ void usb_main(void) {
     int suspendCount = 0;
 #endif
     
-    while (1) {        
+    for(;;){
 
+#ifndef INTERFACE_ONLY_USB
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
 		// 특별한 경우에만 발생하는 현상이다.
 		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 1000){
@@ -497,6 +497,7 @@ void usb_main(void) {
 			DEBUG_PRINT(("               move to ps/2 \n"));
 			break;
 		}
+#endif
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
@@ -631,8 +632,10 @@ void usb_main(void) {
         
     }
 
+#ifndef INTERFACE_ONLY_USB
 	// data line reset;
 	USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
+#endif
 
 	return;
 }

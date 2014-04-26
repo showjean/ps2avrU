@@ -34,7 +34,9 @@
 #include "smartkey.h"
 #include "ledrender.h"
 #include "keyindex.h"
+#ifndef INTERFACE_ONLY_USB
 #include "ps2main.h"
+#endif
 #include "usbmain.h"
 #include "bootmapper.h"
 #include "custommacro.h"
@@ -44,7 +46,7 @@
 
 #include "oddebug.h"
 
-#ifdef DEBUG_QUICK_BOOTLOADER
+#if defined(DEBUG_QUICK_BOOTLOADER)
 #warning "======================================================="
 #warning "Never compile production devices with QUICK_BOOTLOADER enabled"
 #warning "======================================================="
@@ -134,6 +136,7 @@ static interface_update_t *updateDriver;
 void setUpdateDriver(interface_update_t *driver){
 	updateDriver = driver;
 }
+
 bool hasUpdate(void){
 	return updateDriver->hasUpdate();
 }
@@ -218,7 +221,6 @@ int main(void) {
 #ifdef INTERFACE_ONLY_USB
     INTERFACE = INTERFACE_USB_USER;
 #else
-    
     // DEBUG_PRINT(("ckeckNeedInterface %02x \n", ckeckNeedInterface));
     if(ckeckNeedInterface > 0){
         INTERFACE = ckeckNeedInterface + 1; 
@@ -289,16 +291,17 @@ int main(void) {
     
     initPreparing();
 
+#ifndef INTERFACE_ONLY_USB
     for(;;){
         if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-
+#endif
             clearInterface();
 
             initHardware(true);
 
             usb_main(); 
+#ifndef INTERFACE_ONLY_USB
         }
-        
         if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
 
             clearInterface();
@@ -309,6 +312,7 @@ int main(void) {
             ps2_main();
         }
     }
+#endif
 
     return 1;
 }

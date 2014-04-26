@@ -16,13 +16,6 @@ void setPWM(int xValue){
 	timer1PWMBSet(xValue);
 }
 
-void stopTimer(void){
-
-}
-void startTimer(void){
-
-}
-
 
 void initFullLEDState(void) {
 

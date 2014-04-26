@@ -21,7 +21,7 @@
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
 #include "main.h"
-#include "ps2main.h"
+//#include "ps2main.h"
 #include "usbmain.h"
 #include "ledrender.h"
 #include "keydownbuffer.h"
@@ -471,7 +471,7 @@ void printSelectMode(void){
 
 	printStringFromFlashWithEnter(str_select_mode);
 	printStringAndFlash(toString(SEL_MACRO), str_colon);
-	printStringFromFlashWithEnter(str_mapper);
+	printStringFromFlashWithEnter(str_macro);
 
 #ifndef	DISABLE_HARDWARE_KEYMAPPING
 	printStringAndFlash(toString(SEL_MAPPING), str_colon);

@@ -41,6 +41,5 @@
 #define WAIT_RX     0xFB
 
 void ps2_main(void);
-void initInterfacePs2(void);
 
 #endif

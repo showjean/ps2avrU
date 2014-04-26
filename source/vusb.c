@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "usbdrv/usbdrv.h"
 #include "usbconfig.h"
 #include "vusb.h"
+#include "oddebug.h"
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
@@ -338,6 +339,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
     delegateInterfaceReadyUsb(); 
 
     usbRequest_t *rq = (void *)data;
+    DBG1(0xCC, data, 8);
 
     if ((rq->bmRequestType & USBRQ_TYPE_MASK) == USBRQ_TYPE_CLASS) {
         // class request type
@@ -346,7 +348,8 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
             // we only have one report type, so don't look at wValue
             usbMsgPtr = (usbMsgPtr_t)&reportKeyboard;
             return sizeof(reportKeyboard);
-        } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {              
+        } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
+        	DBG1(0xAA, data, 8);
             // Report Type: 0x02(Out)/ReportID: 0x00(none) && Interface: 0(keyboard)
             if (rq->wValue.word == 0x0200 && rq->wIndex.word == 0) 
             {
@@ -385,7 +388,6 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
  * \param len number ob bytes received
  * \return 0x01
  */
- // function is not working in mac os 
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
     if (expectReport && (len == 1)) {
         delegateLedUsb(data[0]); 

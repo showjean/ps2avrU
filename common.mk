@@ -23,13 +23,20 @@
 
 	TRG = main
 
+# Option
+ifdef INTERFACE_ONLY_USB
+    OPT_DEFS += -DINTERFACE_ONLY_USB
+else
+    SRC +=  $(COMMON_DIR)/keysta.c \
+            $(COMMON_DIR)/ps2main.c
+endif
+
 #put your C sourcefiles here 
 #  Here you must list any C source files which are used by your target file.
 #  They will be compiled in the order you list them, so it's probably best
 #  to list $(TRG).c, your top-level target file, last.
 
 	SRC +=  $(AVRLIB)/$(TIMER).c\
-			$(COMMON_DIR)/keysta.c \
 			$(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \
 			$(COMMON_DIR)/smartkey.c \
@@ -47,7 +54,6 @@
 			$(COMMON_DIR)/fncontrol.c \
 			$(COMMON_DIR)/esctilde.c \
 			$(COMMON_DIR)/lazyfn.c \
-			$(COMMON_DIR)/ps2main.c \
 			$(COMMON_DIR)/vusb.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
@@ -125,5 +131,5 @@ prog: all
 	avrdude -c stk500v2 -P com3 -p atmega32 -U flash:w:main.hex:i
 	pause;
 
-rename: $(TRG).hex
-	cp $(TRG).hex $(RESULT).hex
+#rename: $(TRG).hex
+#	cp $(TRG).hex $(RESULT).hex

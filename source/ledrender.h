@@ -36,8 +36,8 @@ void wakeUpLED(void);
 
 void renderLED(void);
 
-void stopTimer(void);
-void startTimer(void);
+//void stopTimer(void);
+//void startTimer(void);
 void setPWM(int xValue);
 
 #endif
