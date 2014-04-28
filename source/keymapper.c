@@ -55,7 +55,7 @@ const char str_start[] PROGMEM =  "start";
 
 const char str_macro_1[] PROGMEM = "1:select macro index";
 const char str_macro_2[] PROGMEM = "2:clear macro";
-const char str_macro_9[] PROGMEM = "9:Clear All";
+const char str_macro_9[] PROGMEM = "9:clear all";
 
 
 #ifndef DISABLE_HARDWARE_KEYMAPPING 
@@ -137,7 +137,6 @@ void clearMacroAllAfter(void);
 void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
 void readMacro(uint8_t xMacroIndex);
-static void addKeymapperDriver(keymapper_driver_t *xDriver);
 
 static keymapper_driver_t *_drivers[4];
 static uint8_t _driverCount;
@@ -154,13 +153,9 @@ void initKeymapper(void){
 #endif
 
 	_driverCount = 0;
-	addKeymapperDriver(&driverKeymapperLazyFn);
-	addKeymapperDriver(&driverKeymapperSmartKey);
-	addKeymapperDriver(&driverKeymapperBeyondFn);
-	addKeymapperDriver(&driverKeymapperEscTilde);
 }
 
-static void addKeymapperDriver(keymapper_driver_t *xDriver){
+void addKeymapperDriver(keymapper_driver_t *xDriver){
 	_drivers[_driverCount] = xDriver;
 	++_driverCount;
 }

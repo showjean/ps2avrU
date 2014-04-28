@@ -303,11 +303,6 @@ static keyscan_driver_t driverKeyScanPs2 = {
 };
 
 
-void initInterfacePs2(void){
-    setKeyScanDriver(&driverKeyScanPs2);
-    setUpdateDriver(&updatePs2);
-}
-
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  Main  ----------------------------- */
 /* ------------------------------------------------------------------------- */
@@ -548,7 +543,9 @@ void ps2_main(void){
     keymap_init();
     clear();
 
-    initInterfacePs2();
+    // init
+    setKeyScanDriver(&driverKeyScanPs2);
+    setUpdateDriver(&updatePs2);
 
     DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 

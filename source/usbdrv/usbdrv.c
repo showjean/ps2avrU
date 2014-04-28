@@ -467,7 +467,7 @@ usbRequest_t    *rq = (void *)data;
                 }
             }
             usbMsgFlags = USB_FLG_USE_USER_RW;
-            DBG1(0x77, (uchar *)usbMsgFlags, 1);
+            DBG1(0x77, (uchar *)&usbMsgFlags, 1);
         }else   /* The 'else' prevents that we limit a replyLen of USB_NO_MSG to the maximum transfer len. */
 #endif
         if(sizeof(replyLen) < sizeof(rq->wLength.word)){ /* help compiler with optimizing */

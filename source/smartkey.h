@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "keymapper.h"
 
-keymapper_driver_t driverKeymapperSmartKey;
+//keymapper_driver_t driverKeymapperSmartKey;
 
 void initSmartKey(void);
 

@@ -2,22 +2,25 @@
 #define SLEEP_C
 
 #include <util/delay.h>
-#include <string.h>
 
 #include "sleep.h"
 #include "ledrender.h"
 
-static long int _sleepCount = 0;
+static uint16_t _sleepCount = 0;
+static uint8_t _sleepCount2 = 0;
 static uint8_t _isSleep = 0;
 
 void countSleep(void){
 	if(_isSleep) return; 
 	
-	++_sleepCount;
+	_sleepCount = _sleepCount + 1;
 
 	if(_sleepCount >= SLEEP_COUNT_MAX){
 		_sleepCount = 0;
-		sleep();
+		_sleepCount2 = _sleepCount2 + 1;
+		if(_sleepCount2 == 10){
+		    sleep();
+		}
 	}
 }
 
@@ -28,6 +31,7 @@ void wakeUp(void){
 		wakeUpLED();
 	}
 	_sleepCount = 0;
+	_sleepCount2 = 0;
 }
 
 void sleep(void){

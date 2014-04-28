@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "keymapper.h"
 
-keymapper_driver_t driverKeymapperLazyFn;
+//keymapper_driver_t driverKeymapperLazyFn;
 
 void initLazyFn(void);
 bool isLazyFn(void);

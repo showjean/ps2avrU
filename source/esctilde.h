@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "keymapper.h"
 
-keymapper_driver_t driverKeymapperEscTilde;
+//keymapper_driver_t driverKeymapperEscTilde;
 void initEscTilde(void);
 bool isEscTilde(void);
 void toggleEscTilde(void);

@@ -20,6 +20,7 @@
 #include "ps2avru_util.h"
 
 #define PWM_MAX 0xFF
+#define LED_MODE_NUM 5
 
 static int downLevelStay = 0;
 static uint8_t downLevel = 0;
@@ -70,7 +71,7 @@ void initFullLEDStateAfter(void){
 	_ledBrightnessMax_saved = _ledBrightnessMax;
 
 	_fullLEDMode = eeprom_read_byte((uint8_t *)EEPROM_LED_MODE);    // 1바이트 11번지 읽기, 기본값 0xFF ( 255)
-	if(_fullLEDMode == 255){
+	if(_fullLEDMode >= LED_MODE_NUM || _fullLEDMode < 0){
 		_fullLEDMode = 0;
 	}
 	_fullLEDMode_saved = _fullLEDMode;
@@ -187,7 +188,7 @@ void changeFullLedState(uint8_t xFullLedMode){
 	}
 	
 	//LED 모드를 변경한다.
-	_fullLEDMode = (_fullLEDMode+1)%5;
+	_fullLEDMode = (_fullLEDMode+1)%LED_MODE_NUM;
 	ledStateCount = 1;
 	//DEBUG_PRINT(("_fullLEDMode %02x\n ", _fullLEDMode));
 	setFullLEDState();

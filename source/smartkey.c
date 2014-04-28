@@ -77,6 +77,7 @@ void putKeyindexSmartKey(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xR
 
 void initSmartKey(void){
 	_enabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_SMART_KEY);
+	addKeymapperDriver(&driverKeymapperSmartKey);
 }
 bool isSmartKeyEnabled(void){
 	return _enabled;

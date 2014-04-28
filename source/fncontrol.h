@@ -15,7 +15,7 @@
 #define LOCK_WILL_NOT_SET	3
 
 
-keymapper_driver_t driverKeymapperBeyondFn;
+//keymapper_driver_t driverKeymapperBeyondFn;
 void initBeyondFn(void);
 bool isBeyondFnLedEnabled(void);
 

@@ -142,7 +142,7 @@ typedef struct {
     void (*printContents)(void);
     void (*putKeyindex)(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
 } keymapper_driver_t;
-
+void addKeymapperDriver(keymapper_driver_t *xDriver);
 void printStringFromFlashWithEnter(const char *str);
 void printStringFromFlash(const char *str);
 void printString(const char *xString);

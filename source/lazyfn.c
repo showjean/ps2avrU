@@ -71,6 +71,7 @@ void putKeyindexLazyFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow
 
 void initLazyFn(void){
 	_isLazyFn = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LAZY_FN);
+	addKeymapperDriver(&driverKeymapperLazyFn);
 }
 
 bool isLazyFn(void){

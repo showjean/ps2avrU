@@ -89,6 +89,7 @@ uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
 
 void initEscTilde(void){
 	_isEscTilde = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_ESC_TO_TILDE);
+	addKeymapperDriver(&driverKeymapperEscTilde);
 }
 bool isEscTilde(void){
 	return _isEscTilde;

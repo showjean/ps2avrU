@@ -6,25 +6,26 @@
 #include "global.h"
 
 //#define  DEBUG_LEVEL 		1	// for oddebug
-
-// #define DEBUG_KEYMAIN	// if you want to debug mode
+// DBG1(0x00, (uchar *)&xRgb, 3);
 
 // only for test, use makefile -D option on release.bat
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
-// #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
-// #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
-//#define INTERFACE_ONLY_USB	// usb only
 
-//#define DEBUG_QUICK_BOOTLOADER  // for debug
-
-#ifdef DEBUG_KEYMAIN
-	#define DEBUG_SLEEP_H
-    #define DEBUG_KEYMAPPER_H
-	#define DEBUG_PRINT_H
-	#define DEBUG_QUICKSWAP_H
+#if defined( DEBUG_LEVEL )
+    #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
+    #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
+    #define INTERFACE_ONLY_USB	// usb only
 #endif
+    #define DEBUG_QUICK_BOOTLOADER  // for debug
 
-#define ENABLE_BOOTMAPPER	// use bootmapper
+//#define DEBUG_SLEEP_H
+//#define DEBUG_KEYMAPPER_H
+//#define DEBUG_PRINT_H
+//#define DEBUG_QUICKSWAP_H
+
+#if !defined( DEBUG_LEVEL )
+    #define ENABLE_BOOTMAPPER	// use bootmapper
+#endif
 
 /* --------------------------- interface --------------------------------*/
 #define INTERFACE_PS2		0

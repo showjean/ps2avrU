@@ -348,7 +348,6 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
         }else{ // keycode should be added to report
             gLen = strlen((char *)reportBuffer);
             if (gLen >= REPORT_KEYS) { // too many keycodes
-                // DEBUG_PRINT(("too many keycodes : reportIndex = %d \n", reportIndex));
                 // if (!retval & 0x02) { // Only fill buffer once
                     // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
                     /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후 
@@ -450,13 +449,6 @@ static keyscan_driver_t driverKeyScanUsb = {
  * USB-functionality.
  * /return the obligatory integer that nobody cares about...
  */
-void initInterfaceUsb(void){
-
-    setKeyScanDriver(&driverKeyScanUsb);
-    setUpdateDriver(&updateUsb);
-    clearReportBuffer();
-
-}
 void usb_main(void) {
 
     // USB Reset by device only required on Watchdog Reset         
@@ -464,7 +456,9 @@ void usb_main(void) {
     P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// input, remove USB reset condition
     
     // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
-    TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
+    //TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
+//    TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));    // timer stop
+
     usbInit();
 
     uint8_t idleCounter = 0;
@@ -477,7 +471,10 @@ void usb_main(void) {
     }while(--i);
     usbDeviceConnect();
 
-    initInterfaceUsb();    
+    // init
+    setKeyScanDriver(&driverKeyScanUsb);
+    setUpdateDriver(&updateUsb);
+    clearReportBuffer();
 
     sei();
 
@@ -485,8 +482,9 @@ void usb_main(void) {
     bool _isSuspended = false;
     int suspendCount = 0;
 #endif
-    
+
     for(;;){
+
 
 #ifndef INTERFACE_ONLY_USB
 		// 카운트 이내에 신호가 잡히지 않으면 이동;
@@ -501,6 +499,7 @@ void usb_main(void) {
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
+//		DBG1(0x55, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
             usbSofCount = 0;
             suspendCount = 0;
@@ -509,13 +508,15 @@ void usb_main(void) {
             wakeUp();
 
         } else if(_usbReset == true){
+//            DBG1(0x56, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
+            usbSofCount = 1;
             wakeUp();
 
         }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
-            if (_isSuspended == false && suspendCount++ > 2000) {
-                suspendCount = 0;
+            if (_isSuspended == false && suspendCount++ > 20000) {
+//                DBG1(0x5a, (uchar *)&usbSofCount, 2);
                 _isSuspended = true;
 
                 sleep();
@@ -546,7 +547,7 @@ void usb_main(void) {
         }
 
         // if an update is needed, send the report
-        if (usbInterruptIsReady()) {           
+        if (usbInterruptIsReady()) {
             
             scanKeyUsbWithMacro(); //scanKeyUSB(); // changes?
 
@@ -628,7 +629,7 @@ void usb_main(void) {
         }
         
         // 입력이 한동안 없으면 슬립모드로;
-        countSleepUsb();  
+        countSleepUsb();
         
     }
 

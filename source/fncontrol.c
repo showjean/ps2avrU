@@ -36,10 +36,6 @@ static uint8_t _quickMacroIndex = 255;
 static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
-void initBeyondFn(void){
-    _isBeyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED);
-}
-
 bool isBeyondFN(void){
     return _isBeyondFN;
 }
@@ -64,6 +60,11 @@ keymapper_driver_t driverKeymapperBeyondFn = {
     printContentsBeyondFn,
     putKeyindexBeyondFn
 };
+
+void initBeyondFn(void){
+    _isBeyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED);
+    addKeymapperDriver(&driverKeymapperBeyondFn);
+}
 
 static void printBeyondFnLedState(void){
     printStringFromFlash(str_select_beyond_fn);

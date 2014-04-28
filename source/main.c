@@ -134,11 +134,11 @@ static interface_update_t *updateDriver;
  * 업데이트(키코드 전송)을 해야 하는지 확인하는 드라이버 세팅
  */
 void setUpdateDriver(interface_update_t *driver){
-	updateDriver = driver;
+    updateDriver = driver;
 }
 
 bool hasUpdate(void){
-	return updateDriver->hasUpdate();
+    return updateDriver->hasUpdate();
 }
 
 void initAfterInterfaceMount(void){
@@ -151,12 +151,13 @@ void initAfterInterfaceMount(void){
 
 static void initPreparing(void){
     // init sw
-    initKeymapper();
     initQuickSwap();
-    initLazyFn();
+    initKeymapper();    // first
+    initLazyFn();       // 1...
     initSmartKey();
     initBeyondFn();
-    initEscTilde();
+    initEscTilde();     // last
+
     initKeyDownBuffer();
 }
 
@@ -212,7 +213,7 @@ int main(void) {
             }
 
         }
-        
+
     }
     setPrevMatrix();
     setCurrentMatrixAfter();
@@ -255,8 +256,8 @@ int main(void) {
 
             usb  0xd8 = 0b11011000 => 0xc8 = 0b11001000
             ps/2  0xdc = 0b11011100 => 0xcc = 0b11001100
-            */
-            
+             */
+
             if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 0){
                 if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 0){
                     debounce++;
@@ -288,7 +289,7 @@ int main(void) {
 #endif
 
     // DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
-    
+
     initPreparing();
 
 #ifndef INTERFACE_ONLY_USB
@@ -308,7 +309,7 @@ int main(void) {
 
             blinkOnce(50);
             initHardware(false);
-   
+
             ps2_main();
         }
     }
