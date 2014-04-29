@@ -546,6 +546,7 @@ void ps2_main(void){
     // init
     setKeyScanDriver(&driverKeyScanPs2);
     setUpdateDriver(&updatePs2);
+    clearMatrix();
 
     DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 

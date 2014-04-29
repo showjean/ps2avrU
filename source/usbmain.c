@@ -487,14 +487,14 @@ void usb_main(void) {
 
 
 #ifndef INTERFACE_ONLY_USB
-		// 카운트 이내에 신호가 잡히지 않으면 이동;
-		// 특별한 경우에만 발생하는 현상이다.
-		if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 1000){
-			// move to ps/2
-			INTERFACE = INTERFACE_PS2;
-			DEBUG_PRINT(("               move to ps/2 \n"));
-			break;
-		}
+        // 카운트 이내에 신호가 잡히지 않으면 이동;
+        // 특별한 경우에만 발생하는 현상이다.
+        if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 3000){
+            // move to ps/2
+            INTERFACE = INTERFACE_PS2;
+            DBG1(0x88, 0, 0);
+            break;
+        }
 #endif
 
 #if USB_COUNT_SOF
@@ -515,7 +515,7 @@ void usb_main(void) {
 
         }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
-            if (_isSuspended == false && suspendCount++ > 20000) {
+            if (_isSuspended == false && suspendCount++ > 10000 && getModifierDownBuffer() == 0 && getDownBufferAt(0) == 0) {
 //                DBG1(0x5a, (uchar *)&usbSofCount, 2);
                 _isSuspended = true;
 
@@ -549,13 +549,14 @@ void usb_main(void) {
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
             
-            scanKeyUsbWithMacro(); //scanKeyUSB(); // changes?
+            scanKeyUsbWithMacro(); // changes?
 
             // ps2avrU loop, must be after scan matrix;
             enterFrame();
 
-            if(updateNeeded){  
-              
+            if(updateNeeded){
+                if(interfaceReady==false) continue;
+
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
                 reportKeyboard[0] = _modifiers;
                 reportKeyboard[1] = 0;
@@ -570,6 +571,7 @@ void usb_main(void) {
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
                 // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
+                clearMatrix();
 
                 wakeUpUsb(); 
                 
