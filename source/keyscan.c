@@ -1,5 +1,5 @@
 
-#include "print.h"
+// #include "print.h"
 
 #include "keyscan.h"
 #include "dualaction.h"
@@ -66,10 +66,10 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
         if(isKeyEnabled(xKeyidx) == false) return;   
 
         if(xCur) {
-            // DBG1(0xB1, (uchar *)&xKeyidx, 1);  
+            DBG1(0xB1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, true, xCol, xRow);
         }else{
-            // DBG1(0xC1, (uchar *)&xKeyidx, 1);
+            DBG1(0xC1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, false, xCol, xRow);
         }
     }

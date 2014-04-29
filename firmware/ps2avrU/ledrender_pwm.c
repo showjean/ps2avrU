@@ -9,7 +9,7 @@
 #include <util/delay.h>
 #include <string.h>
 
-#include "print.h"
+// #include "print.h"
 #include "ledrender.h"
 
 void setPWM(int xValue){
@@ -33,7 +33,7 @@ void initFullLEDState(void) {
 	timer1PWMInit(8);
 	timer1PWMBOn();
 
-	DEBUG_PRINT(("______________________ init LED State_____________\n"));
+//	DEBUG_PRINT(("______________________ init LED State_____________\n"));
 
 	initFullLEDStateAfter();
 

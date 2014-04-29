@@ -12,20 +12,26 @@
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
 
 #if defined( DEBUG_LEVEL )
-    #define SCROLL_LOCK_LED_IS_APART	// SCROLL_LOCK pin was connect
-    #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
-    #define INTERFACE_ONLY_USB	// usb only
-#endif
+    #if !defined(DISABLE_HARDWARE_KEYMAPPING)
+//        #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
+    #endif
+     #if !defined(SCROLL_LOCK_LED_IS_APART)
+//        #define SCROLL_LOCK_LED_IS_APART // SCROLL_LOCK pin was connected
+    #endif
+     #if !defined(INTERFACE_ONLY_USB)
+//        #define INTERFACE_ONLY_USB // usb only
+    #endif
     #define DEBUG_QUICK_BOOTLOADER  // for debug
+#endif
+
+#if !defined( DEBUG_LEVEL )
+    #define ENABLE_BOOTMAPPER	// use bootmapper
+#endif
 
 //#define DEBUG_SLEEP_H
 //#define DEBUG_KEYMAPPER_H
 //#define DEBUG_PRINT_H
 //#define DEBUG_QUICKSWAP_H
-
-#if !defined( DEBUG_LEVEL )
-    #define ENABLE_BOOTMAPPER	// use bootmapper
-#endif
 
 /* --------------------------- interface --------------------------------*/
 #define INTERFACE_PS2		0

@@ -339,7 +339,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
     delegateInterfaceReadyUsb(); 
 
     usbRequest_t *rq = (void *)data;
-    DBG1(0xCC, data, 8);
+//    DBG1(0xCC, data, 8);
 
     if ((rq->bmRequestType & USBRQ_TYPE_MASK) == USBRQ_TYPE_CLASS) {
         // class request type
@@ -349,7 +349,7 @@ uint8_t usbFunctionSetup(uint8_t data[8]) {
             usbMsgPtr = (usbMsgPtr_t)&reportKeyboard;
             return sizeof(reportKeyboard);
         } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
-        	DBG1(0xAA, data, 8);
+//        	DBG1(0xAA, data, 8);
             // Report Type: 0x02(Out)/ReportID: 0x00(none) && Interface: 0(keyboard)
             if (rq->wValue.word == 0x0200 && rq->wIndex.word == 0) 
             {

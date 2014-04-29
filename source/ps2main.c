@@ -9,7 +9,7 @@
 
 #include "global.h"
 #include "timerinclude.h"
-#include "print.h"
+// #include "print.h"
 #include "keymap.h"
 
 #include <avr/io.h>
@@ -390,7 +390,7 @@ static void processRxPs2(void){
                 }
                 return;
             case STA_RXCHAR:
-                DEBUG_PRINT((" STA_RXCHAR \n"));
+//                DEBUG_PRINT((" STA_RXCHAR \n"));
                 if (rxed == 0xF5)
                     tx_state(0xFA, STA_NORMAL);
                 else {
@@ -399,13 +399,13 @@ static void processRxPs2(void){
                 return;
 
             case STA_WAIT_SCAN_SET:
-                DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
+//                DEBUG_PRINT((" STA_WAIT_SCAN_SET \n"));
 
                 clear();
                 tx_state(0xFA, rxed == 0 ? STA_WAIT_SCAN_REPLY : STA_NORMAL);
                 return;
             case STA_WAIT_AUTOREP:
-                DEBUG_PRINT((" STA_WAIT_AUTOREP STA_WAIT_AUTOREP \n"));
+//                DEBUG_PRINT((" STA_WAIT_AUTOREP STA_WAIT_AUTOREP \n"));
                 TYPEMATIC_DELAY = (rxed&0b01100000)/0b00100000;
 
                 temp_a = (rxed&0b00000111);
@@ -548,7 +548,7 @@ void ps2_main(void){
     setUpdateDriver(&updatePs2);
     clearMatrix();
 
-    DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
+//    DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 
     sei();
 
@@ -559,7 +559,7 @@ void ps2_main(void){
         if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 1000){
             // move to usb
             INTERFACE = INTERFACE_USB;
-            DEBUG_PRINT((" move to usb \n"));
+            DBG1(0x99, 0, 0);
             break;
         }       
 

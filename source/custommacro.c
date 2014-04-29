@@ -10,13 +10,12 @@
 #include "hardwareinfo.h"
 #include "macrobuffer.h"
 #include "timerinclude.h"
-#include "print.h"
+// #include "print.h"
 #include "ledrender.h"
 #include "oddebug.h"
 
 // #define TICKS_PER_SEC                    1000             // (1/1000)초
 #define CUSTOMMACRO_TIMER_COUNT_START   6   //256 - (F_CPU / TICKS_PER_SEC / 64)
-
 
 #define COUNT_FOR_100_MS                75  //F_CPU / 10 / (256-CUSTOMMACRO_TIMER_COUNT_START) / 64
 // 12000000 / 10 / 250 / 64
@@ -113,7 +112,7 @@ static void pushNextKeyIndex(void){
             break;
         }
         // key index
-        gKeyindex = pgm_read_word(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
+        gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
         ++macroCounter;
 
         gDownDelay = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);

@@ -24,6 +24,14 @@
 	TRG = main
 
 # Option
+ifdef SCROLL_LOCK_LED_IS_APART
+    OPT_DEFS += -DSCROLL_LOCK_LED_IS_APART
+endif
+
+ifdef DISABLE_HARDWARE_KEYMAPPING
+    OPT_DEFS += -DDISABLE_HARDWARE_KEYMAPPING
+endif
+
 ifdef INTERFACE_ONLY_USB
     OPT_DEFS += -DINTERFACE_ONLY_USB
 else
@@ -31,13 +39,16 @@ else
             $(COMMON_DIR)/ps2main.c
 endif
 
+ifndef USING_CUSTOM_TIMER
+	SRC +=  $(AVRLIB)/$(TIMER).c
+endif
+
 #put your C sourcefiles here 
 #  Here you must list any C source files which are used by your target file.
 #  They will be compiled in the order you list them, so it's probably best
 #  to list $(TRG).c, your top-level target file, last.
 
-	SRC +=  $(AVRLIB)/$(TIMER).c\
-			$(COMMON_DIR)/custommacro.c \
+	SRC +=  $(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \
 			$(COMMON_DIR)/smartkey.c \
 			$(COMMON_DIR)/quickswap.c \

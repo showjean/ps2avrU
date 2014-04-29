@@ -12,12 +12,12 @@
 #include "timerinclude.h"
 #include "global.h"
 
-#include "print.h"
+//#include "print.h"
 #include "ps2avru_util.h"
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
-#include <avr/pgmspace.h>
+//#include <avr/interrupt.h>
+//#include <avr/pgmspace.h>
 #include <stdio.h>
 #include <avr/eeprom.h>
 
@@ -168,7 +168,7 @@ int main(void) {
 
     DBG1(0x00, 0, 0);
 
-    INTERFACE = 255;
+//    INTERFACE = 255;
     uint8_t ckeckNeedInterface = 0;
 
     // for interface select
@@ -226,8 +226,6 @@ int main(void) {
     if(ckeckNeedInterface > 0){
         INTERFACE = ckeckNeedInterface + 1; 
     }  
-
-    DEBUG_PRINT(("user selected INTERFACE %02x \n", INTERFACE));
 
     if(INTERFACE == INTERFACE_CLEAR){
         eeprom_write_byte((uint8_t *)EEPROM_INTERFACE, 255);  // eeprom clear; // 1바이트 12번지 쓰기

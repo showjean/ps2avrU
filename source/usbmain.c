@@ -212,7 +212,7 @@
 
 #include "global.h"
 #include "timerinclude.h"
-#include "print.h"
+// #include "print.h"
 #include "keymap.h"
 
 #include <avr/io.h>
@@ -287,7 +287,7 @@ void delegateInitInterfaceUsb(void)
         _ledInitState = INIT_INDEX_NOT_INIT;    
         _usbReset = true;   
     // }
-//	 DBG1(0xA0, (uchar *)&idleRate, 1);
+//   DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -344,7 +344,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     int gIdx;
     if(xIsDown){ 
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-        	_modifiers |= getModifierBit(xKeyidx);
+            _modifiers |= getModifierBit(xKeyidx);
         }else{ // keycode should be added to report
             gLen = strlen((char *)reportBuffer);
             if (gLen >= REPORT_KEYS) { // too many keycodes
@@ -360,13 +360,14 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
                 }
                 gIdx = findIndex(reportBuffer, xKeyidx);
                 if(gIdx == -1){
-                	append(reportBuffer, xKeyidx);
+                    append(reportBuffer, xKeyidx);
                 }
             }
         }
     }else{
 
-        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */        	_modifiers &= ~(getModifierBit(xKeyidx));;
+        if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
+            _modifiers &= ~(getModifierBit(xKeyidx));;
 
         }else{ // keycode should be added to report
             if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
@@ -433,11 +434,11 @@ static void countSleepUsb(void){
 }
 
 bool hasUpdateUsb(void){
-	return updateNeeded;
+    return updateNeeded;
 }
 
 static interface_update_t updateUsb = {
-		hasUpdateUsb         // hasUpdate
+        hasUpdateUsb         // hasUpdate
 };
 static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
@@ -499,7 +500,7 @@ void usb_main(void) {
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
-//		DBG1(0x55, (uchar *)&usbSofCount, 1);
+//      DBG1(0x55, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
             usbSofCount = 0;
             suspendCount = 0;
@@ -561,8 +562,8 @@ void usb_main(void) {
                 reportKeyboard[0] = _modifiers;
                 reportKeyboard[1] = 0;
                 memcpy ( reportKeyboard+2, reportBuffer, strlen((char *)reportBuffer) );
-                // DBG1(0x06, (uchar *)&reportKeyboard[0], 1);    
-                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));                
+                // DBG1(0x06, (uchar *)&reportKeyboard[0], 1);
+                usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 updateNeeded = 0;
                 wakeUpUsb();
 
@@ -636,10 +637,10 @@ void usb_main(void) {
     }
 
 #ifndef INTERFACE_ONLY_USB
-	// data line reset;
-	USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
+    // data line reset;
+    USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
 #endif
 
-	return;
+    return;
 }
 #endif
