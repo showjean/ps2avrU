@@ -11,6 +11,12 @@
 #define __usbconfig_h_included__
 
 #include "hardwareconfig.h"
+
+/* report id */
+#define REPORT_ID_MOUSE     3
+#define REPORT_ID_SYSTEM    2
+#define REPORT_ID_CONSUMER  1
+
 /*
 General Description:
 This file is an example configuration (with inline documentation) for the USB

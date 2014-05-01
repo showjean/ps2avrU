@@ -10,7 +10,7 @@
 #include "quickswap.h"
 #include "smartkey.h"
 
-#ifdef DISABLE_HARDWARE_KEYMAPPING
+#ifndef DISABLE_HARDWARE_KEYMAPPING
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
 static uint8_t getMappingKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
@@ -47,7 +47,7 @@ uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 		
 		if(isMacroInput()){			
 			// 매크로 입력 중에는 매핑된 키코드를 사용;
-#ifdef DISABLE_HARDWARE_KEYMAPPING
+#ifndef DISABLE_HARDWARE_KEYMAPPING
 			gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);
 		    if(gKeyIndex < 1 || gKeyIndex > 254)
 #endif
@@ -64,7 +64,7 @@ uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
         // return gKeyIndex;
         goto RETURN_INDEX;
 	}
-#ifdef DISABLE_HARDWARE_KEYMAPPING
+#ifndef DISABLE_HARDWARE_KEYMAPPING
 	else{
 		gKeyIndex = getMappingKeyindex(xLayer, xRow, xCol);	
 	}

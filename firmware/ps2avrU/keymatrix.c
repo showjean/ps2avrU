@@ -124,7 +124,7 @@ uint8_t getLayer(void) {
                 
 #ifdef DEBUG_QUICK_BOOTLOADER
     // for test
-    if(col == 0 && row <= 1){
+    if(col == 0 && row == 0){
         wdt_enable(WDTO_15MS);
         while(1);
     }

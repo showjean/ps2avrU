@@ -20,10 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "global.h"
 
-/* report id */
-#define REPORT_ID_MOUSE     3
-#define REPORT_ID_SYSTEM    2
-#define REPORT_ID_CONSUMER  1
 /* report size */
 #define REPORT_KEYS    6
 #define REPORT_SIZE_KEYBOARD  8

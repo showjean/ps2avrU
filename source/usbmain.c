@@ -227,7 +227,6 @@
 #include "usbdrv/usbdrv.h"
 
 #include "hardwareinfo.h"
-#include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
 #include "keymap.h"

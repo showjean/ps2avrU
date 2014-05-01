@@ -13,13 +13,13 @@
 
 #if defined( DEBUG_LEVEL )
     #if !defined(DISABLE_HARDWARE_KEYMAPPING)
-//        #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
+        #define DISABLE_HARDWARE_KEYMAPPING	// disable_hardware_keymapping
     #endif
-     #if !defined(SCROLL_LOCK_LED_IS_APART)
-//        #define SCROLL_LOCK_LED_IS_APART // SCROLL_LOCK pin was connected
+    #if !defined(SCROLL_LOCK_LED_IS_APART)
+        #define SCROLL_LOCK_LED_IS_APART // SCROLL_LOCK pin was connected
     #endif
-     #if !defined(INTERFACE_ONLY_USB)
-//        #define INTERFACE_ONLY_USB // usb only
+    #if !defined(INTERFACE_ONLY_USB)
+        #define INTERFACE_ONLY_USB // usb only
     #endif
     #define DEBUG_QUICK_BOOTLOADER  // for debug
 #endif

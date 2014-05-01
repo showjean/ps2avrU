@@ -19,6 +19,7 @@ F_CPU = 12000000
 
 SRC = ledrender_ps2avrU.c \
 	keymatrix.c \
+	vusb.c \
 	ps2avrU.c
 
 include $(TOP_DIR)/common.mk

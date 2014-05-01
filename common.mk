@@ -22,10 +22,22 @@
 #  In other words, this is the file which contains your main() function.
 
 	TRG = main
+	
+
+# debug
+
+ifdef DEBUG_LEVEL
+    OPT_DEFS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)
+	SRC +=  $(COMMON_DIR)/usbdrv/oddebug.c
+endif
 
 # Option
 ifdef SCROLL_LOCK_LED_IS_APART
     OPT_DEFS += -DSCROLL_LOCK_LED_IS_APART
+endif
+
+ifdef GHOST_KEY_PREVENTION
+    OPT_DEFS += -DGHOST_KEY_PREVENTION
 endif
 
 ifdef DISABLE_HARDWARE_KEYMAPPING
@@ -65,10 +77,8 @@ endif
 			$(COMMON_DIR)/fncontrol.c \
 			$(COMMON_DIR)/esctilde.c \
 			$(COMMON_DIR)/lazyfn.c \
-			$(COMMON_DIR)/vusb.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
-			$(COMMON_DIR)/usbdrv/oddebug.c \
 			$(COMMON_DIR)/$(TRG).c \
 			
 #put additional assembler source file here

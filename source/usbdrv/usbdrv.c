@@ -467,7 +467,7 @@ usbRequest_t    *rq = (void *)data;
                 }
             }
             usbMsgFlags = USB_FLG_USE_USER_RW;
-            DBG1(0x77, (uchar *)&usbMsgFlags, 1);
+//            DBG1(0x77, (uchar *)&usbMsgFlags, 1);
         }else   /* The 'else' prevents that we limit a replyLen of USB_NO_MSG to the maximum transfer len. */
 #endif
         if(sizeof(replyLen) < sizeof(rq->wLength.word)){ /* help compiler with optimizing */
@@ -481,7 +481,7 @@ usbRequest_t    *rq = (void *)data;
     }else{  /* usbRxToken must be USBPID_OUT, which means data phase of setup (control-out) */
 #if USB_CFG_IMPLEMENT_FN_WRITE
         if(usbMsgFlags & USB_FLG_USE_USER_RW){
-        	DBG1(0xBB, data, len);
+//        	DBG1(0xBB, data, len);
             uchar rval = usbFunctionWrite(data, len);
             if(rval == 0xff){   /* an error occurred */
                 usbTxLen = USBPID_STALL;
