@@ -55,7 +55,7 @@ unsigned char lastSent;
 unsigned char lastState;
 
 // key information for each keys
-uint8_t KFLA[NUM_KEY];
+static uint8_t KFLA[NUM_KEY];
 
 // initialize speed port
 static unsigned char rxed;

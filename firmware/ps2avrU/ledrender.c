@@ -49,7 +49,7 @@ static uint8_t _ledBrightnessMax_saved = 0;	//
 static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
 
-static int blinkLedCountDelay = 1800;
+static int blinkLedCountDelay = 900;
 
 static void fadeLED(void);
 static void setFullLEDState(void);
@@ -412,7 +412,7 @@ static void blinkCapsLockLED(void) {
 	static int gCounter = 0;
 	static int gDelayCounter = 0;
 	static uint8_t gLEDState = 1;
-	const int gCountMAX = 200;
+	const uint8_t gCountMAX = 200;
 	uint8_t led = LEDCAPS;
 	uint8_t gIsOn = 0;
 

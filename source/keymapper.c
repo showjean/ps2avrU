@@ -459,7 +459,7 @@ void printSelectModeAfter(void){
 	printStringFromFlashWithEnter(str_exit);
 #ifdef ENABLE_BOOTMAPPER
 	printStringAndFlash(toString(SEL_BOOT_MAPPER), str_colon);
-	printStringFromFlashWithEnter(str_start);
+	printStringFromFlashWithEnter(str_bootmapper);
 #endif
 	
 	_step = STEP_SELECT_MODE;

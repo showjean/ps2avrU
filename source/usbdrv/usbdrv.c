@@ -481,8 +481,8 @@ usbRequest_t    *rq = (void *)data;
     }else{  /* usbRxToken must be USBPID_OUT, which means data phase of setup (control-out) */
 #if USB_CFG_IMPLEMENT_FN_WRITE
         if(usbMsgFlags & USB_FLG_USE_USER_RW){
-//        	DBG1(0xBB, data, len);
             uchar rval = usbFunctionWrite(data, len);
+//        	DBG1(0xBB, (void *)&rval, 1);
             if(rval == 0xff){   /* an error occurred */
                 usbTxLen = USBPID_STALL;
             }else if(rval != 0){    /* This was the final package */

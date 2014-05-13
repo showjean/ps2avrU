@@ -100,21 +100,19 @@ endif
 
 #assembler flags
 	ASFLAGS = -Wa, -gstabs -DF_CPU=$(F_CPU) -I$(COMMON_DIR)
-#	ASFLAGS += -include $(HARDWARE_INFO_H)
 
 #compiler flags
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
-#	CPFLAGS += -include $(HARDWARE_INFO_H)
 
 #linker flags
-	LDFLAGS = -Wl,-Map=$(TRG).map,--cref 
+	LDFLAGS += -Wl,-Map=$(TRG).map,--cref 
 #	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
 # 	KEYMAP_ADDRESS = 0x6500
 # 	LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)
 
 	
 ########### you should not need to change the following line #############
-include $(AVRLIB)/make/avrproj_make
+include $(COMMON_DIR)/avrproj.mk
 	  
 ###### dependecies, add any dependencies you need here ###################
 #  Dependencies tell the compiler which files in your code depend on which

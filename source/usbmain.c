@@ -246,6 +246,7 @@
 #include "bootmapper.h"
 #include "custommacro.h"
 #include "oddebug.h"
+//#include "boot.h"
 
 #define REPORT_ID_INDEX 0
 #define KEYBOARD_MODIFIER_INDEX 0
@@ -349,7 +350,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
             if (gLen >= REPORT_KEYS) { // too many keycodes
                 // if (!retval & 0x02) { // Only fill buffer once
                     // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
-                    /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후 
+                    /*6키 이상 입력시 새로운 키는 무시되지만 8키를 누른 후
                     6번째 이전의 키 하나를 떼도 7키가 눌린것으로 판단 이전 6개의 키가 유지되는 버그가 있어서 매트릭스 순으로 6개를 처리하도록 방치;*/
                     // retval |= 0x02; // continue decoding to get modifiers
                 // }
@@ -443,6 +444,24 @@ static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
+//static uint16_t _bootUpdatedelayCount = 0;
+//static void updateBoot(void){
+//	if(_hasBootUpdate){
+//		_hasBootUpdate = 0;
+//		_bootUpdatedelayCount = 1;
+//	}
+//	if(_bootUpdatedelayCount > 0 && ++_bootUpdatedelayCount > 1000){
+//		cli();
+//		uint8_t i;
+//		for(i = 0; i < BOOT_PAGE_COUNT; ++i){
+//			callProgramPage(address[i], (uint8_t *)buffer[i]);
+//			DBG1(0x3F, (void *)&address[i], 2);
+//			DBG1(0x3F, buffer[i], SPM_PAGESIZE);
+//		}
+//		sei();
+//		_bootUpdatedelayCount = 0;
+//	}
+//}
 
 /**
  * Main function, containing the main loop that manages timer- and
@@ -524,6 +543,9 @@ void usb_main(void) {
         }
 #endif
 
+        // boot
+//        updateBoot();
+
         // main event loop
         usbPoll();
 
@@ -548,7 +570,7 @@ void usb_main(void) {
 
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
-            
+
             scanKeyUsbWithMacro(); // changes?
 
             // ps2avrU loop, must be after scan matrix;
@@ -569,13 +591,13 @@ void usb_main(void) {
             }else if(_initState == INIT_INDEX_SET_IDLE){
                 _initState = INIT_INDEX_INITED;
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
-                // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송; 
+                // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 clearMatrix();
 
-                wakeUpUsb(); 
-                
-                // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다. 
+                wakeUpUsb();
+
+                // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다.
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
                 // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.
                 // (MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
@@ -583,24 +605,24 @@ void usb_main(void) {
                 if(idleRate > 0) {
                     startKeyMappingOnBoot();
                     setCurrentOS(true);
-                }else{                    
+                }else{
                     setCurrentOS(false);
                 }
-                
+
 //                DBG1(0xAA, (uchar *)&idleRate, 1);
 
             }else if(_ledInitState == INIT_INDEX_INITED){
-                _ledInitState = INIT_INDEX_COMPLETE;  
+                _ledInitState = INIT_INDEX_COMPLETE;
                 // for windows
                 if(idleRate == 0) {
                     startKeyMappingOnBoot();
                 }
-                
+
             }
         }
 
         if(usbInterruptIsReady3()){
-            if(_extraHasChanged){   
+            if(_extraHasChanged){
                 report_extra_t gReportExtra = {
                     .report_id = REPORT_ID_CONSUMER,
                     .usage = extraData
@@ -609,7 +631,7 @@ void usb_main(void) {
                 _extraHasChanged = false;
                 wakeUpUsb();
             }
-            if(_systemHasChanged){   
+            if(_systemHasChanged){
                 report_extra_t gReportExtra = {
                     .report_id = REPORT_ID_SYSTEM,
                     .usage = systemData
@@ -621,18 +643,18 @@ void usb_main(void) {
         }
 
         if(_initState == INIT_INDEX_INITED){
-            if(initCount++ == 200){       // delay for OS X USB multi device   
+            if(initCount++ == 200){       // delay for OS X USB multi device
                 // all platform init led
                 initAfterInterfaceMount();
-            }else if(initCount > 200){    
-                initCount = 201;            
+            }else if(initCount > 200){
+                initCount = 201;
                 _initState = INIT_INDEX_COMPLETE;
             }
         }
-        
+
         // 입력이 한동안 없으면 슬립모드로;
         countSleepUsb();
-        
+
     }
 
 #ifndef INTERFACE_ONLY_USB
