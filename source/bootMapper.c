@@ -10,8 +10,8 @@
 #ifdef ENABLE_BOOTMAPPER
 // bootmapper
 static bool _isBootMapper = false;
-void setToBootMapper(void){
-	_isBootMapper = true;
+void setToBootMapper(bool xBool){
+	_isBootMapper = xBool;
 }
 bool isBootMapper(void){
 	return _isBootMapper;

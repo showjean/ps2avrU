@@ -15,8 +15,8 @@
 void setLEDState(uint8_t xState);
 uint8_t getLEDState(void);
 
-void increaseLedBrightness(void);
-void reduceLedBrightness(void);
+void increaseLedBrightness(uint8_t xFullLedMode);
+void reduceLedBrightness(uint8_t xFullLedMode);
 void changeFullLedState(uint8_t xFullLedMode);
 void clearLEDInited(void);
 
@@ -36,8 +36,6 @@ void wakeUpLED(void);
 
 void renderLED(void);
 
-//void stopTimer(void);
-//void startTimer(void);
 void setPWM(int xValue);
 
 #endif

@@ -435,7 +435,7 @@ static void printPrompt(void)
 		case STEP_BOOT_MAPPER:
 			printStringFromFlashWithEnter(str_bootmapper);
 			_step = STEP_NOTHING;
-			setToBootMapper();
+			setToBootMapper(true);
 		break;
 #endif
 		case STEP_EXIT:

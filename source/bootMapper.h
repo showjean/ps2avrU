@@ -9,7 +9,7 @@
 #ifdef ENABLE_BOOTMAPPER
 // bootmapper
 void trace(uint8_t xRow, uint8_t xCol);
-void setToBootMapper(void);
+void setToBootMapper(bool xBool);
 bool isBootMapper(void);
 #endif
 

@@ -25,8 +25,8 @@
 #endif
 
 #if !defined( DEBUG_LEVEL )
-    #define ENABLE_BOOTMAPPER	// use bootmapper
 #endif
+#define ENABLE_BOOTMAPPER	// use bootmapper
 
 //#define DEBUG_SLEEP_H
 //#define DEBUG_KEYMAPPER_H

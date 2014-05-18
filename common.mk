@@ -105,7 +105,7 @@ endif
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
 
 #linker flags
-	LDFLAGS += -Wl,-Map=$(TRG).map,--cref 
+	LDFLAGS += -Wl,-Map=$(TRG).map,--cref -Wl,-u,vfprintf -lprintf_min
 #	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
 # 	KEYMAP_ADDRESS = 0x6500
 # 	LDFLAGS += -Wl,--section-start=.key_matrix_basic=$(KEYMAP_ADDRESS)

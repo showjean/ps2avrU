@@ -156,7 +156,7 @@ static void setFullLEDState(void) {
 	}
 }
 
-void increaseLedBrightness(void){
+void increaseLedBrightness(uint8_t xFullLedMode){
 	if(_ledBrightnessMax == PWM_MAX) return;
 
 	int gLedBrightness = _ledBrightnessMax + ledBrightnessStep;
@@ -170,7 +170,7 @@ void increaseLedBrightness(void){
 	}
 	ledStateCount = 1;
 }
-void reduceLedBrightness(void){
+void reduceLedBrightness(uint8_t xFullLedMode){
 	if(_ledBrightnessMax == ledBrightnessMin) return;
 
 	_ledBrightnessMax = _ledBrightnessMax - ledBrightnessStep;

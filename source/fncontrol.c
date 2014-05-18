@@ -227,10 +227,20 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 			changeFullLedState(FULL_LED_MODE2);
 			return 0;
         }else if(xKeyidx == KEY_LED_UP){
-            increaseLedBrightness();
-            return 0;
+        	uint8_t gModi = getModifierDownBuffer();
+        	if(gModi == 0x02 || gModi == 0x20){
+        		increaseLedBrightness(FULL_LED_MODE2);
+        	}else{
+        		increaseLedBrightness(FULL_LED_MODE1);
+        	}
+        	return 0;
         }else if(xKeyidx == KEY_LED_DOWN){
-            reduceLedBrightness();
+        	uint8_t gModi = getModifierDownBuffer();
+        	if(gModi == 0x02 || gModi == 0x20){
+        		reduceLedBrightness(FULL_LED_MODE2);
+        	}else{
+        		reduceLedBrightness(FULL_LED_MODE1);
+        	}
             return 0;
         }else if(xKeyidx == KEY_QUICK_MACRO){
             if(isQuickMacro()){
@@ -251,10 +261,6 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             _isQuickMacroDown = false;
             return 0;
         }
-        /*else if(xKeyidx == KEY_P2U){
-            showP2UMenu();
-            return 0;
-        }*/
     }
 
     return 1;
