@@ -51,9 +51,11 @@ typedef struct {
     report_mouse_t report;
 } __attribute__ ((packed)) vusb_mouse_report_t;
 
-extern uint8_t reportKeyboard[REPORT_SIZE_KEYBOARD];
+uint8_t reportKeyboard[REPORT_SIZE_KEYBOARD];
 // extern report_keyboard_t reportKeyboard; ///< buffer for HID reports
-extern uint8_t idleRate;        ///< in 4ms units
+uint8_t idleRate;        ///< in 4ms units
+
+uint8_t expectReport;
 
 extern void delegateLedUsb(uint8_t xState);
 extern void delegateInterfaceReadyUsb(void);

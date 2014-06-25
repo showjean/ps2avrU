@@ -29,7 +29,7 @@
 #include "lazyfn.h"
 #include "custommacro.h"
 #include "dualaction.h"
-#include "smartkey.h"
+//#include "smartkey.h"
 #include "bootmapper.h"
 #include "fncontrol.h"
 #include "esctilde.h"

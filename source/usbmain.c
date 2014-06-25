@@ -204,10 +204,6 @@
  * <b>(c) 2008 by Ronald Schaten - http://www.schatenseite.de</b>
  */
 
-
-#ifndef KEYBD_EXTERN_USB
-#define KEYBD_EXTERN_USB
-
 #include "usbmain.h"
 
 #include "global.h"
@@ -241,7 +237,7 @@
 #include "vusb.h"
 #include "ps2avru_util.h"
 #include "dualaction.h"
-#include "smartkey.h"
+//#include "smartkey.h"
 #include "keyscan.h"
 #include "bootmapper.h"
 #include "custommacro.h"
@@ -267,7 +263,7 @@ static void countSleepUsb(void);
 
 
 void delegateLedUsb(uint8_t xState){
-    DBG1(0x30, (uchar *)&xState, 1);
+    DBG1(0x3A, (uchar *)&xState, 1);
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();
     if(_ledInitState == INIT_INDEX_NOT_INIT){
@@ -549,6 +545,12 @@ void usb_main(void) {
         // main event loop
         usbPoll();
 
+        // stop timer for usb report
+//        if(expectReport){
+//        	expectReport = 0;
+//        	sbi(TIMSK, TOIE1);
+//        }
+
 #if USB_COUNT_SOF 
         if(_isSuspended == true) {
             continue;
@@ -568,6 +570,7 @@ void usb_main(void) {
             }
         }
 
+#if !USB_CFG_SUPPRESS_INTR_CODE
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
 
@@ -604,9 +607,9 @@ void usb_main(void) {
                 // for os x
                 if(idleRate > 0) {
                     startKeyMappingOnBoot();
-                    setCurrentOS(true);
-                }else{
-                    setCurrentOS(false);
+//                    setCurrentOS(true);
+//                }else{
+//                    setCurrentOS(false);
                 }
 
 //                DBG1(0xAA, (uchar *)&idleRate, 1);
@@ -654,7 +657,15 @@ void usb_main(void) {
 
         // 입력이 한동안 없으면 슬립모드로;
         countSleepUsb();
-
+#else
+        if(initCount == 0){
+        	initAfterInterfaceMount();
+        }
+        if(initCount++ > 300){
+        	initCount = 1;
+        	enterFrame();
+        }
+#endif
     }
 
 #ifndef INTERFACE_ONLY_USB
@@ -662,6 +673,4 @@ void usb_main(void) {
     USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
 #endif
 
-    return;
 }
-#endif

@@ -95,7 +95,6 @@ kbd_init(void)
 
     timer0Init();
     timer0SetPrescaler(TIMER_CLK_DIV8);
-//    timer0SetPrescaler(TIMER_CLK_DIV64);
     timerAttach(TIMER0OVERFLOW_INT, timerAction);
     outp(COUNT_UP, TCNT0);  /* value counts up from this to zero */
 

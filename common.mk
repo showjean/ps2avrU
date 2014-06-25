@@ -62,7 +62,6 @@ endif
 
 	SRC +=  $(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \
-			$(COMMON_DIR)/smartkey.c \
 			$(COMMON_DIR)/quickswap.c \
 			$(COMMON_DIR)/dualaction.c \
 			$(COMMON_DIR)/keydownbuffer.c \
@@ -103,6 +102,7 @@ endif
 
 #compiler flags
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
+#	CPGLAGS += -fno-inline-small-functions
 
 #linker flags
 	LDFLAGS += -Wl,-Map=$(TRG).map,--cref -Wl,-u,vfprintf -lprintf_min

@@ -8,7 +8,7 @@
 #include "keymap.h"
 #include "keymapper.h"
 #include "quickswap.h"
-#include "smartkey.h"
+//#include "smartkey.h"
 
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)
@@ -36,7 +36,8 @@ uint8_t getDefaultKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 
 uint8_t getExchangedKeyindex(uint8_t xKeyindex){
 
-	return getQuickSwapKeyindex(getSmartKeyIndex(xKeyindex));
+//	return getQuickSwapKeyindex(getSmartKeyIndex(xKeyindex));
+	return getQuickSwapKeyindex(xKeyindex);
 }
 
 // 키들을 순서대로 나열한 인덱스를 반환. <키코드가 아님!>

@@ -112,11 +112,9 @@ static void pushNextKeyIndex(void){
             break;
         }
         // key index
-        gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
-        ++macroCounter;
+        gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
 
-        gDownDelay = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter);
-        ++macroCounter;
+        gDownDelay = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
         
         if(gKeyindex > 0 && gKeyindex < 255){
             pushM(gKeyindex);

@@ -199,7 +199,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
                  }
              }
 #endif
-             delegateSetBeyondFnLed(_isBeyondFN);
+//             delegateSetBeyondFnLed(_isBeyondFN);
 
              if(isBeyondFnLedEnabled()){    
                 setLed(LED_STATE_NUM, isBeyondFN());

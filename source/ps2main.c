@@ -551,7 +551,7 @@ void ps2_main(void){
 //    DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
 
     sei();
-
+//    DBG1(0x90, 0, 0);
     for(;;){
 
         // 카운트 이내에 신호가 잡히지 않으면 이동;
@@ -561,12 +561,11 @@ void ps2_main(void){
             INTERFACE = INTERFACE_USB;
             DBG1(0x99, 0, 0);
             break;
-        }       
+        }
 
         processRxPs2();
         processTxPs2();
 
     }
-
-    return;
+//    DBG1(0x9F, 0, 0);
 }

@@ -31,7 +31,7 @@
 #include "keyindex.h"
 #include "quickswap.h"
 #include "lazyfn.h"
-#include "smartkey.h"
+//#include "smartkey.h"
 #include "ledrender.h"
 #include "keyindex.h"
 #ifndef INTERFACE_ONLY_USB
@@ -112,7 +112,6 @@ static void clearTimers(void) {
 static void initHardware(bool xIsUSB) {
 
     initMatrix();
-    interfaceCount = 0;
 
     if(xIsUSB){
         clearTimers();
@@ -154,7 +153,7 @@ static void initPreparing(void){
     initQuickSwap();
     initKeymapper();    // first
     initLazyFn();       // 1...
-    initSmartKey();
+//    initSmartKey();
     initBeyondFn();
     initEscTilde();     // last
 
@@ -287,6 +286,7 @@ int main(void) {
 #endif
 
     // DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
+    DBG1(0x01, (void *)&INTERFACE, 1);
 
     initPreparing();
 
@@ -301,6 +301,7 @@ int main(void) {
             usb_main(); 
 #ifndef INTERFACE_ONLY_USB
         }
+
         if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
 
             clearInterface();
