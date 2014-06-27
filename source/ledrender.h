@@ -31,11 +31,11 @@ void setLed(uint8_t xLed, bool xBool);
 void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
 
 void sleepLED(void);
-
 void wakeUpLED(void);
-
 void renderLED(void);
-
 void setPWM(int xValue);
+
+void turnOnLedAll(void);
+void turnOffLedAll(void);
 
 #endif

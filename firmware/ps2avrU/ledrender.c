@@ -509,6 +509,17 @@ static void blinkScrollLockLED(void) {
 }
 #endif
 
+static bool _ledOff = false;
+void turnOnLedAll(void){
+	wakeUpLED();
+	_ledOff = false;
+
+}
+void turnOffLedAll(void){
+	sleepLED();
+	_ledOff = true;
+}
+
 void sleepLED(void){
 	// DEBUG_PRINT(("sleepLED \n"));
 	turnOffLED(LEDNUM);

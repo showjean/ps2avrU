@@ -36,6 +36,8 @@ static uint8_t _quickMacroIndex = 255;
 static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
+static bool _ledOff = false;
+
 bool isBeyondFN(void){
     return _isBeyondFN;
 }
@@ -242,6 +244,13 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
         		reduceLedBrightness(FULL_LED_MODE1);
         	}
             return 0;
+        }else if(xKeyidx == KEY_LED_ON_OFF){
+        	_ledOff ^= true;
+        	if(_ledOff == false){
+        		turnOnLedAll();
+        	}else{
+        		turnOffLedAll();
+        	}
         }else if(xKeyidx == KEY_QUICK_MACRO){
             if(isQuickMacro()){
                 stopQuickMacro();
