@@ -669,6 +669,11 @@ uint8_t applyMacro(uint8_t xKeyidx){
 			}
 
 			return 1;
+		}else if(isRepeat()){
+			clearRepeat();
+			stopRepeat();
+
+			return 1;
 		}
 	}
 	return 0;

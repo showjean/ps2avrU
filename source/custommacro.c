@@ -10,7 +10,6 @@
 #include "hardwareinfo.h"
 #include "macrobuffer.h"
 #include "timerinclude.h"
-// #include "print.h"
 #include "ledrender.h"
 #include "oddebug.h"
 
@@ -21,7 +20,6 @@
 // 12000000 / 10 / 250 / 64
 // 16000000 / 10 / 250 / 64
 
-static uint8_t* macroAddress = (uint8_t*)CUSTOM_MACRO_ADDRESS;
 static uint8_t _currentMacroIndex = 255;
 static bool _isActiveCustomMacro = false;
 static int _customMacroDelay;
@@ -65,7 +63,7 @@ static void stopTimerCustomMacro(void){
 }
 
 bool hasCustomMacroAt(uint8_t xMacroIndex){
-    uint8_t gKeyidx = pgm_read_byte(macroAddress+(CUSTOM_MACRO_SIZE_MAX * xMacroIndex));
+    uint8_t gKeyidx = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * xMacroIndex));
     // 매크로의 첫번째 byte의 값이 있는지 확인;
     if(gKeyidx > 0 && gKeyidx < 255){
         return true;
@@ -90,7 +88,7 @@ void readCustomMacroAt(uint8_t xMacroIndex){
     startTimerCustomMacro();
 }
 
-static void closeCustomMacro(void){
+void closeCustomMacro(void){
     _isActiveCustomMacro = false;
     stopTimerCustomMacro();
 }
@@ -111,12 +109,19 @@ static void pushNextKeyIndex(void){
             closeCustomMacro();
             break;
         }
-        // key index
-        gKeyindex = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
 
-        gDownDelay = pgm_read_byte(macroAddress + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
+//        DBG1(0x73, (void *)&macroCounter, 1);
+
+        // key index
+        gKeyindex = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
+
+        gDownDelay = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
         
+//        DBG1(0x74, (void *)&_currentMacroIndex, 1);
+//        DBG1(0x75, (void *)&gKeyindex, 1);
+
         if(gKeyindex > 0 && gKeyindex < 255){
+
             pushM(gKeyindex);
             // 현재 사용되지 않음;
 //            gIsDown = (gDownDelay>>7)&0x01;
@@ -128,6 +133,7 @@ static void pushNextKeyIndex(void){
             }
         }else{
             closeCustomMacro();
+            stopRepeat();
 
             break;
         }

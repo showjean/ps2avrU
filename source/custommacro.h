@@ -22,4 +22,6 @@ bool isActiveCustomMacro(void);
 
 void enterFrameForCustomMacro(void);
 
+void closeCustomMacro(void);
+
 #endif

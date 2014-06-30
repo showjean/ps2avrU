@@ -27,6 +27,10 @@ typedef struct {
 void pushM(uint8_t item);
 uint8_t popM(void);
 bool isEmptyM(void);
+void clearM(void);
+bool isRepeat(void);
+void stopRepeat(void);
+void clearRepeat(void);
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
 macro_key_t popMWithKey(void);

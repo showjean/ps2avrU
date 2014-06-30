@@ -14,11 +14,11 @@
 #define KEY_FN2         248
 //#define KEY_P2U         247
 #define KEY_FN3         246
+#define KEY_LED_ON_OFF  245
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
 #define KEY_LED2        241		// bottom led
-#define KEY_LED_ON_OFF  245
 // undefined : 160~188, 239~240, 247
 
 

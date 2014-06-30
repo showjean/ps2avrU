@@ -11,31 +11,49 @@
 #include "ps2avru_util.h"
 #include "hardwareinfo.h"
 #include "custommacro.h"
+#include "oddebug.h"
 
-static uint8_t QUEUE_M[MESSAGE_SIZE_MAX];
-static int rearm = 0, frontm = 0;
+static uint8_t QUEUE[MESSAGE_SIZE_MAX];
+static int rear = 0, front = 0;
 
 static uint8_t _pressedBuffer[MACRO_SIZE_MAX] = {0};
 
+void clearM(void){
+	rear = 0;
+	front = 0;
+	memset(QUEUE, 0, MESSAGE_SIZE_MAX);
+	memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
+}
 // Queue operation -> push, pop
 // keyindex를 저장한다.
 void pushM(uint8_t item) {
     
-    rearm = (rearm+1) % MESSAGE_SIZE_MAX;
-    if(frontm == rearm) {
-        rearm = (rearm!=0) ? (rearm-1):(MESSAGE_SIZE_MAX-1);
+    rear = (rear+1) % MESSAGE_SIZE_MAX;
+    if(front == rear) {
+        rear = (rear!=0) ? (rear-1):(MESSAGE_SIZE_MAX-1);
         return;
     }
-    QUEUE_M[rearm] = item;
+    QUEUE[rear] = item;
 }
 
 uint8_t popM(void) {
-    if(frontm == rearm) {
+    if(front == rear) {
         return 0;
     }
-    frontm = (frontm+1) % MESSAGE_SIZE_MAX;
+    front = (front+1) % MESSAGE_SIZE_MAX;
 
-    return QUEUE_M[frontm];
+    return QUEUE[front];
+}
+static bool _isRepeat = false;
+bool isRepeat(void){
+	return _isRepeat;
+}
+void stopRepeat(void){
+	_isRepeat = false;
+}
+void clearRepeat(void){
+	clearM();
+	closeCustomMacro();
 }
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
@@ -45,6 +63,25 @@ macro_key_t popMWithKey(void) {
 
     gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
     gKey.keyindex = popM();
+
+    DBG1(0x76, (void *)&gKey.keyindex, 1);
+
+	/*
+	 * 매크로키가 발견되면 현재 매크로 중단,
+	 * 새 매크로 시작;
+	 */
+	if(gKey.keyindex >= KEY_CST_MAC1 && gKey.keyindex <= KEY_CST_MAC12){
+		DBG1(0x77, (void *)&gKey.keyindex, 1);
+
+		clearRepeat();
+
+		readCustomMacroAt(gKey.keyindex - KEY_CST_MAC1);
+
+		_isRepeat = true;
+
+		gKey.keyindex = 0;
+		return gKey;
+	}
 
     if(gKey.keyindex == 0) {
         memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
@@ -61,11 +98,12 @@ macro_key_t popMWithKey(void) {
         gKey.mode = MACRO_KEY_DOWN;
     }
 
+
     return gKey;
 }
 
 bool isEmptyM(void) {
-    if(frontm == rearm)
+    if(front == rear)
         return true;
     else
         return false;
