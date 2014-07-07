@@ -28,7 +28,7 @@ const char str_select_beyond_fn[] PROGMEM = "fn2 led";
 
 static bool _isBeyondFnLedEnabled;
 // for KEY_BEYOND_FN;
-static bool _isBeyondFN = false;     //KEY_BEYOND_FN state
+static uint8_t _beyondFnIndex = 0;     //KEY_BEYOND_FN state
 static bool _isExtraFNDown = false;
 static bool _isQuickMacroDown = false;
 static bool _isReadyQuickMacro = false;
@@ -38,8 +38,8 @@ static uint8_t _isLockWin = LOCK_NOT_SET;
 
 static bool _ledOff = false;
 
-bool isBeyondFN(void){
-    return _isBeyondFN;
+uint8_t isBeyondFN(void){
+    return _beyondFnIndex;
 }
 
 bool isBeyondFnLedEnabled(void){
@@ -183,16 +183,37 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     if(xIsDown) {
 
-        if((xKeyidx ==  KEY_BEYOND_FN) || (_isExtraFNDown && xKeyidx == BEYOND_FN_CANCEL_KEY)){ // beyond_fn을 활성화;
+        if((xKeyidx ==  KEY_BEYOND_FN || xKeyidx == KEY_BEYOND_FN3)
+        		|| (_isExtraFNDown && xKeyidx == BEYOND_FN_CANCEL_KEY)){ // beyond_fn을 활성화;
              if( xKeyidx == BEYOND_FN_CANCEL_KEY ) {    // 취소만 가능한 키 
-                _isBeyondFN = false;
+                _beyondFnIndex = false;
              }else{
-                _isBeyondFN ^= true;
+            	if(_beyondFnIndex == 0){
+            		if(xKeyidx ==  KEY_BEYOND_FN){
+            			_beyondFnIndex = LAYER_FN2;
+            		}else{
+            			_beyondFnIndex = LAYER_FN3;
+            		}
+            	}else{
+            		if(xKeyidx ==  KEY_BEYOND_FN){
+            			if(_beyondFnIndex ==  LAYER_FN2){
+            				_beyondFnIndex = LAYER_NORMAL;
+            			}else{
+            				_beyondFnIndex = LAYER_FN2;
+            			}
+					}else if(xKeyidx ==  KEY_BEYOND_FN3){
+            			if(_beyondFnIndex ==  LAYER_FN3){
+            				_beyondFnIndex = LAYER_NORMAL;
+            			}else{
+            				_beyondFnIndex = LAYER_FN3;
+            			}
+					}
+            	}
              }
 
 #ifndef DISABLE_FN2_TOGGLE_LED_BLINK 
              if(isBeyondFnLedEnabled() == false){
-                 if(_isBeyondFN == false){                
+                 if(_beyondFnIndex == 0){
                     blinkOnce(100);
                  }else{
                     blinkOnce(100);

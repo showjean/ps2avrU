@@ -12,14 +12,14 @@
 #define KEY_LED_UP      250     // increase led brightness 
 #define KEY_LED_DOWN    249     // reduce led brightness
 #define KEY_FN2         248
-//#define KEY_P2U         247
+#define KEY_BEYOND_FN3  247
 #define KEY_FN3         246
 #define KEY_LED_ON_OFF  245
 #define KEY_LOCK_ALL    244
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
 #define KEY_LED2        241		// bottom led
-// undefined : 160~188, 239~240, 247
+// undefined : 160~188, 239~240
 
 
 enum {  // for macro
