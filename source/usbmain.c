@@ -258,8 +258,10 @@ static int initCount = 0;
 static bool _usbReset = false;
 
 static void clearReportBuffer(void);
+#if !USB_COUNT_SOF
 static void wakeUpUsb(void);
 static void countSleepUsb(void);
+#endif
 
 
 void delegateLedUsb(uint8_t xState){
@@ -283,7 +285,7 @@ void delegateInitInterfaceUsb(void)
         _ledInitState = INIT_INDEX_NOT_INIT;    
         _usbReset = true;   
     // }
-//   DBG1(0xA0, (uchar *)&idleRate, 1);
+   DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -363,7 +365,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
     }else{
 
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
-            _modifiers &= ~(getModifierBit(xKeyidx));;
+            _modifiers &= ~(getModifierBit(xKeyidx));
 
         }else{ // keycode should be added to report
             if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
@@ -418,16 +420,15 @@ static void scanKeyUsbWithMacro(void){
     scanKeyWithMacro();
 }
 
+#if !USB_COUNT_SOF
 static void wakeUpUsb(void){
-#if !USB_COUNT_SOF  
     wakeUp();
-#endif
 }
+
 static void countSleepUsb(void){
-#if !USB_COUNT_SOF  
     countSleep();
-#endif    
 }
+#endif    
 
 bool hasUpdateUsb(void){
     return updateNeeded;
@@ -439,25 +440,6 @@ static interface_update_t updateUsb = {
 static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
-
-//static uint16_t _bootUpdatedelayCount = 0;
-//static void updateBoot(void){
-//	if(_hasBootUpdate){
-//		_hasBootUpdate = 0;
-//		_bootUpdatedelayCount = 1;
-//	}
-//	if(_bootUpdatedelayCount > 0 && ++_bootUpdatedelayCount > 1000){
-//		cli();
-//		uint8_t i;
-//		for(i = 0; i < BOOT_PAGE_COUNT; ++i){
-//			callProgramPage(address[i], (uint8_t *)buffer[i]);
-//			DBG1(0x3F, (void *)&address[i], 2);
-//			DBG1(0x3F, buffer[i], SPM_PAGESIZE);
-//		}
-//		sei();
-//		_bootUpdatedelayCount = 0;
-//	}
-//}
 
 /**
  * Main function, containing the main loop that manages timer- and
@@ -539,22 +521,13 @@ void usb_main(void) {
         }
 #endif
 
-        // boot
-//        updateBoot();
-
         // main event loop
         usbPoll();
 
-        // stop timer for usb report
-//        if(expectReport){
-//        	expectReport = 0;
-//        	sbi(TIMSK, TOIE1);
-//        }
-
 #if USB_COUNT_SOF 
-        if(_isSuspended == true) {
+        /*if(_isSuspended == true) {
             continue;
-        }
+        }*/
 #endif
 
         // check timer if we need periodic reports
@@ -570,7 +543,6 @@ void usb_main(void) {
             }
         }
 
-#if !USB_CFG_SUPPRESS_INTR_CODE
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
 
@@ -589,16 +561,22 @@ void usb_main(void) {
                 // DBG1(0x06, (uchar *)&reportKeyboard[0], 1);
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 updateNeeded = 0;
+#if !USB_COUNT_SOF
                 wakeUpUsb();
+#endif
 
             }else if(_initState == INIT_INDEX_SET_IDLE){
+            	DBG1(0x99, (uchar *)&_initState, 1);
+
                 _initState = INIT_INDEX_INITED;
-                memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
+
                 // 재부팅시 첫키 입력 오류를 방지하기 위해서 HID init 후 all release 전송;
+                memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 clearMatrix();
-
+#if !USB_COUNT_SOF
                 wakeUpUsb();
+#endif
 
                 // 플러깅 후 출력되는 메세지는 넘락등 LED가 반응한 후에 보여진다.
                 // usbInterruptIsReady() 일지라도 LED 반응 전에는 출력이 되지 않는다.
@@ -607,9 +585,6 @@ void usb_main(void) {
                 // for os x
                 if(idleRate > 0) {
                     startKeyMappingOnBoot();
-//                    setCurrentOS(true);
-//                }else{
-//                    setCurrentOS(false);
                 }
 
 //                DBG1(0xAA, (uchar *)&idleRate, 1);
@@ -632,7 +607,9 @@ void usb_main(void) {
                 };
                 usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
                 _extraHasChanged = false;
+#if !USB_COUNT_SOF
                 wakeUpUsb();
+#endif
             }
             if(_systemHasChanged){
                 report_extra_t gReportExtra = {
@@ -641,7 +618,9 @@ void usb_main(void) {
                 };
                 usbSetInterrupt3((void *)&gReportExtra, sizeof(gReportExtra));
                 _systemHasChanged = false;
+#if !USB_COUNT_SOF
                 wakeUpUsb();
+#endif
             }
         }
 
@@ -655,17 +634,11 @@ void usb_main(void) {
             }
         }
 
+#if !USB_COUNT_SOF
         // 입력이 한동안 없으면 슬립모드로;
         countSleepUsb();
-#else
-        if(initCount == 0){
-        	initAfterInterfaceMount();
-        }
-        if(initCount++ > 300){
-        	initCount = 1;
-        	enterFrame();
-        }
 #endif
+
     }
 
 #ifndef INTERFACE_ONLY_USB
