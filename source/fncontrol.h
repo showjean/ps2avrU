@@ -21,7 +21,6 @@ bool isBeyondFnLedEnabled(void);
 
 // for KEY_BEYOND_FN;
 uint8_t isBeyondFN(void);//KEY_BEYOND_FN state
-//extern void delegateSetBeyondFnLed(bool xIsBeyondFn);
 
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown);
