@@ -323,7 +323,6 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
             break;
     }
     //debug("desc len: "); debug_hex(len); debug("\n");
-    delegateInterfaceReadyUsb();
 
     return len;
 }
@@ -337,6 +336,8 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
  * called
  */
 uint8_t usbFunctionSetup(uint8_t data[8]) {
+
+    delegateInterfaceReadyUsb();
 
     usbRequest_t *rq = (void *)data;
 //    DBG1(0xCC, data, 8);
