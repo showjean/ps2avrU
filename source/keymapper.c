@@ -77,7 +77,7 @@ const char str_col_row[] PROGMEM = "col, row : ";
 const char str_saving[] PROGMEM = "saving...";
 #endif
 
-const char str_prepare_message[] PROGMEM =  "ps2avrU";
+const char str_prepare_message[] PROGMEM =  "hello";
 const char str_input_command[] PROGMEM = ">> ";
 const char str_nothing[] PROGMEM = "nothing";
 

@@ -52,6 +52,10 @@ else
 endif
 
 ifndef USING_CUSTOM_TIMER
+	ifndef TIMER	
+		TIMER = timer
+	endif
+
 	SRC +=  $(AVRLIB)/$(TIMER).c
 endif
 

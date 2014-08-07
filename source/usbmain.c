@@ -508,6 +508,7 @@ void usb_main(void) {
 //            DBG1(0x56, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
             usbSofCount = 1;
+
             wakeUp();
 
         }else{
