@@ -172,9 +172,10 @@ bool isKeyEnabled(uint8_t xKeyidx){
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     // DEBUG_PRINT(("applyFN  : %d xIsDown : %d\n", xKeyidx, xIsDown));
+    applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
+
     if(isFnKey(xKeyidx)) return false; 
 
-    applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
     setDualAction(xKeyidx, xIsDown);    
 
     // 듀얼액션 키의 기본 키를 가져온다.
