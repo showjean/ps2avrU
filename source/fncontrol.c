@@ -19,14 +19,19 @@
 #include "keymatrix.h"
 #include "keydownbuffer.h"
 #include "ps2avru_util.h"
+#include "oddebug.h"
 
-#define CMD_TOGGLE_BEYOND_FN_LED 1
-#define CMD_EXIT_BEYOND_FN_LED 3
+#define CMD_OFF_BEYOND_FN_LED 1
+#define CMD_NL_BEYOND_FN_LED 2
+#define CMD_SL_BEYOND_FN_LED 3
+#define CMD_EXIT_BEYOND_FN_LED 4
 #define CMD_BACK_BEYOND_FN_LED 6
 
-const char str_select_beyond_fn[] PROGMEM = "fn2 led";
+const char str_select_beyond_fn[] PROGMEM = "fn2/3 led";
+const char str_beyond_fn_led_nl[] PROGMEM = "nl";
+const char str_beyond_fn_led_sl[] PROGMEM = "sl";
 
-static bool _isBeyondFnLedEnabled;
+static uint8_t _beyondFnLedEnabled;	// 0: off, 1:NL, 2:SL
 // for KEY_BEYOND_FN;
 static uint8_t _beyondFnIndex = 0;     //KEY_BEYOND_FN state
 static bool _isExtraFNDown = false;
@@ -42,13 +47,29 @@ uint8_t isBeyondFN(void){
     return _beyondFnIndex;
 }
 
-bool isBeyondFnLedEnabled(void){
-    return _isBeyondFnLedEnabled;
+uint8_t isBeyondFnLedEnabled(void){
+    return _beyondFnLedEnabled;
 }
-static void toggleBeyondFnLedEnabled(void){    
-    _isBeyondFnLedEnabled ^= true;
-    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED, _isBeyondFnLedEnabled);
-    
+static void setBeyondFnLedEnabled(uint8_t xLed){
+    _beyondFnLedEnabled = xLed;
+    /*
+    	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 1 : off
+    	 TOGGLE_BEYOND_FN_LED_NL == 0, TOGGLE_BEYOND_FN_LED_SL == 1 : NL
+    	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
+    	 */
+
+    if(_beyondFnLedEnabled == BEYOND_FN_LED_NL){
+    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) & ~(_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
+    }else if(_beyondFnLedEnabled == BEYOND_FN_LED_SL){
+    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) & ~(_BV(TOGGLE_BEYOND_FN_LED_SL))));
+    }else{
+    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
+    }
+
+//    uint8_t len = eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION);
+//    DBG1(0xFC, (uchar *)&len, 1);
+//    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL, _beyondFnLedEnabled);
+
     setLEDIndicate();
 }
 
@@ -64,7 +85,26 @@ keymapper_driver_t driverKeymapperBeyondFn = {
 };
 
 void initBeyondFn(void){
-    _isBeyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED);
+	/*
+	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 1 : off
+	 TOGGLE_BEYOND_FN_LED_NL == 0, TOGGLE_BEYOND_FN_LED_SL == 1 : NL
+	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
+	 */
+//    _beyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL);
+	if(
+		((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_ON
+		&& ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_OFF
+	){
+		_beyondFnLedEnabled = 1;
+	}else if(
+		((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_OFF
+		&& ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_ON
+	){
+		_beyondFnLedEnabled = 2;
+	}else{
+		_beyondFnLedEnabled = 0;
+	}
+
     addKeymapperDriver(&driverKeymapperBeyondFn);
 }
 
@@ -73,8 +113,10 @@ static void printBeyondFnLedState(void){
     printStringFromFlash(str_space);
     printStringFromFlash(str_colon);
     printStringFromFlash(str_space);
-    if(isBeyondFnLedEnabled()){
-        printStringFromFlash(str_on);
+    if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+        printStringFromFlash(str_beyond_fn_led_nl);
+    }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+        printStringFromFlash(str_beyond_fn_led_sl);
     }else{
         printStringFromFlash(str_off);
     }
@@ -87,9 +129,17 @@ void printMenuBeyondFn(void){
 void printContentsBeyondFn(void){
     printBeyondFnLedState();
     printEnter();
-    printString(toString(CMD_TOGGLE_BEYOND_FN_LED));
+    printString(toString(CMD_OFF_BEYOND_FN_LED));
     printStringFromFlash(str_colon);
-    printStringFromFlash(str_toggle);
+    printStringFromFlash(str_off);
+    printEnter();
+    printString(toString(CMD_NL_BEYOND_FN_LED));
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_beyond_fn_led_nl);
+    printEnter();
+    printString(toString(CMD_SL_BEYOND_FN_LED));
+    printStringFromFlash(str_colon);
+    printStringFromFlash(str_beyond_fn_led_sl);
     printEnter();
     printString(toString(CMD_EXIT_BEYOND_FN_LED));
     printStringFromFlash(str_colon);
@@ -102,9 +152,9 @@ void printContentsBeyondFn(void){
 }
 
 void putKeyindexBeyondFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){
-    if(xCmd == CMD_TOGGLE_BEYOND_FN_LED){
+    if(xCmd == CMD_OFF_BEYOND_FN_LED || xCmd == CMD_NL_BEYOND_FN_LED || xCmd == CMD_SL_BEYOND_FN_LED){
         setStep(STEP_INPUT_COMMAND);
-        toggleBeyondFnLedEnabled();
+        setBeyondFnLedEnabled(xCmd-1);
         printBeyondFnLedState();
         printEnter();
     }else if(xCmd == CMD_EXIT_BEYOND_FN_LED){
@@ -213,7 +263,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 
 #ifndef DISABLE_FN2_TOGGLE_LED_BLINK 
-             if(isBeyondFnLedEnabled() == false){
+             if(isBeyondFnLedEnabled() == BEYOND_FN_LED_OFF){
                  if(_beyondFnIndex == 0){
                     blinkOnce(100);
                  }else{
@@ -224,9 +274,12 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 #endif
 
-             if(isBeyondFnLedEnabled()){    
+             if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
                 setLed(LED_STATE_NUM, isBeyondFN());
-             }
+             }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+            	setLed(LED_STATE_SCROLL, isBeyondFN());
+			 }
+
 
              return 0;
         }else if(_isQuickMacroDown && isEepromMacroKey(xKeyidx)){

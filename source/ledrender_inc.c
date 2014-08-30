@@ -3,30 +3,69 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include "fncontrol.h"
 #include "ledrender.h"
 #include "hardwareinfo.h"
 #include "ledconfig.h"
 #include "bootmapper.h"
 
+static uint8_t LEDstate = 0;     ///< current state of the LEDs
 #define blinkLedCountDelay 900
 
-static uint8_t ledBlinkNumLockCount = 0;
+static uint8_t ledBlinkCount = 0;
 
-void blinkNumLockLED(void) {
+/*
+ * xPrev : LED의 이전 상태를 저장하고 있다. 이정 상태와 다를 경우에만 깜박이도록.
+ */
+void getLedBlink(uint8_t xLed, bool xStatus, uint8_t *xPrevState, uint8_t *xCount){
+    if ((LEDstate & xLed) && !(*xPrevState & xLed)) { // light up
+
+		*xPrevState = LEDstate;
+    	if(!xStatus){
+    	    *xCount =  5;	//on off on off 1
+		}else{
+		    *xCount =  4;	// off on off 1
+		}
+
+	} else if(!(LEDstate & xLed) && (*xPrevState & xLed)){
+
+		*xPrevState = LEDstate;
+		if(!xStatus){
+		    *xCount =  3;	// on off 1
+		}else{
+		    *xCount =  2;	// off 1
+		}
+
+	}
+}
+
+void blinkIndicateLED(void) {
 	static int counter = 0;
 	const int countMAX = 100;
 	//on off on off
-	if(ledBlinkNumLockCount > 0){
+	if(ledBlinkCount > 0){
 		counter++;
 		if(counter > countMAX){
-			if(ledBlinkNumLockCount == 5 || ledBlinkNumLockCount == 3){
-				turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDCAPS);
-			}else if(ledBlinkNumLockCount == 4 || ledBlinkNumLockCount == 2){
-				turnOffLED(LEDNUM); //PORTLEDS &= ~(1 << LEDCAPS);
+			if(ledBlinkCount == 5 || ledBlinkCount == 3){
+				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+					turnOnLED(LEDNUM);
+				}else{
+					turnOnLED(LEDSCROLL);
+				}
+			}else if(ledBlinkCount == 4 || ledBlinkCount == 2){
+				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+					turnOffLED(LEDNUM);
+				}else{
+					turnOffLED(LEDSCROLL);
+				}
 			}else{
-				if(isBeyondFnLedEnabled()){
+				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
 					if(isBeyondFN()){
 						turnOnLED(LEDNUM);
+					}
+				}else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+					if(isBeyondFN()){
+						turnOnLED(LEDSCROLL);
 					}
 				}else{
 					if((getLEDState() & LED_STATE_NUM)){
@@ -36,7 +75,7 @@ void blinkNumLockLED(void) {
 			}
 			counter = 0;
 
-			ledBlinkNumLockCount--;
+			ledBlinkCount--;
 		}
 	}else{
 		counter = 0;
@@ -44,7 +83,7 @@ void blinkNumLockLED(void) {
 }
 
 
-void blinkCapsLockLED(void) {
+void blinkBootMapperLED(void) {
 //	static int gCounter = 0;
 	static int gDelayCounter = 0;
 	static uint8_t gLEDState = 1;
@@ -88,4 +127,29 @@ void blinkCapsLockLED(void) {
 	}
 }
 
+void setLed(uint8_t xLed, bool xBool) {
+	if (xBool) {
+		if (xLed == LED_STATE_NUM) {
+			turnOnLED(LEDNUM);
+		} else if (xLed == LED_STATE_CAPS) {
+			turnOnLED(LEDCAPS);
+		}
+#ifdef LEDSCROLL
+		else if(xLed == LED_STATE_SCROLL) {
+			turnOnLED(LEDSCROLL);
+		}
+#endif
+	} else {
+		if (xLed == LED_STATE_NUM) {
+			turnOffLED(LEDNUM);
+		} else if (xLed == LED_STATE_CAPS) {
+			turnOffLED(LEDCAPS);
+		}
+#ifdef LEDSCROLL
+		else if(xLed == LED_STATE_SCROLL) {
+			turnOffLED(LEDSCROLL);
+		}
+#endif
+	}
+}
 #endif

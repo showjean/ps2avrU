@@ -29,7 +29,6 @@ static const uint8_t downLevelMax = 12;
 static uint8_t downLevelLife = 0;
 
 static uint8_t ledInited = 0;
-static uint8_t LEDstate = 0;     ///< current state of the LEDs
 #ifndef SCROLL_LOCK_LED_IS_APART 
 static uint8_t ledBlinkScrollLockCount = 0;
 #endif
@@ -200,65 +199,12 @@ void clearLEDInited(void) {
 	ledInited = 0;
 }
 
-void setLed(uint8_t xLed, bool xBool) {
-	if (xBool) {
-		if (xLed == LED_STATE_NUM) {
-			turnOnLED(LEDNUM);
-		} else if (xLed == LED_STATE_CAPS) {
-			turnOnLED(LEDCAPS);
-		}
-#ifdef LEDSCROLL
-		else if(xLed == LED_STATE_SCROLL) {
-			turnOnLED(LEDSCROLL);
-		}
-#endif
-	} else {
-		if (xLed == LED_STATE_NUM) {
-			turnOffLED(LEDNUM);
-		} else if (xLed == LED_STATE_CAPS) {
-			turnOffLED(LEDCAPS);
-		}
-#ifdef LEDSCROLL
-		else if(xLed == LED_STATE_SCROLL) {
-			turnOffLED(LEDSCROLL);
-		}
-#endif
-	}
-}
-
-static uint8_t getLedBlnik(uint8_t xLed, bool xStatus, bool *xPrev) {
-	// static uint8_t prevSCRLED = 0;
-	uint8_t gVal;
-	if ((LEDstate & xLed) && *xPrev == false) { // light up
-
-		*xPrev = true;
-		// delay 함수를 이용하면 ps2연결시 노이즈가 발생하는지 "방향키 상"이 
-		// 연속으로 눌리는 현상이있어, 실시간으로 작동되도록 수정;
-		if (!xStatus) {
-			gVal = 5;	//on off on off 1
-		} else {
-			gVal = 4;	// off on off 1
-		}
-
-	} else if (!(LEDstate & xLed) && *xPrev == true) {
-
-		*xPrev = false;
-		if (!xStatus) {
-			gVal = 3;	// on off 1
-		} else {
-			gVal = 2;	// off 1
-		}
-
-	}
-	return gVal;
-}
 
 void setLEDIndicate(void) {
-	static bool prevNum = false;
+	static uint8_t prevLEDstate;
 
-	if (isBeyondFnLedEnabled()) {
-		ledBlinkNumLockCount = getLedBlnik(LED_STATE_NUM, isBeyondFN(),
-				&prevNum);
+	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_NL) {
+		getLedBlink(LED_STATE_NUM, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	} else {
 		if (LEDstate & LED_STATE_NUM) { // light up num lock
 			turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDNUM);	//
@@ -274,17 +220,19 @@ void setLEDIndicate(void) {
 	}
 
 #ifdef LEDSCROLL
-	if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
-		turnOnLED(LEDSCROLL);//PORTLEDS |= (1 << LEDCAPS);	//
+	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_SL) {
+		getLedBlink(LED_STATE_SCROLL, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	} else {
-		turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
+		if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
+			turnOnLED(LEDSCROLL);//PORTLEDS |= (1 << LEDCAPS);	//
+		} else {
+			turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
+		}
 	}
 #endif
 
 #ifndef SCROLL_LOCK_LED_IS_APART   
-	static bool prevScroll = false;
-	ledBlinkScrollLockCount = getLedBlnik(LED_STATE_SCROLL,
-			(LEDstate & LED_STATE_CAPS), &prevScroll);
+	getLedBlink(LED_STATE_SCROLL, (LEDstate & LED_STATE_CAPS), &prevLEDstate, &ledBlinkScrollLockCount);
 #endif
 
 }
@@ -484,8 +432,8 @@ void renderLED(void) {
 		return;
 	}
 
-	blinkCapsLockLED();
-	blinkNumLockLED();
+	blinkBootMapperLED();
+	blinkIndicateLED();
 
 #ifndef SCROLL_LOCK_LED_IS_APART
 	// s/l led

@@ -14,10 +14,13 @@
 #define LOCK_IS_SET			2
 #define LOCK_WILL_NOT_SET	3
 
+#define BEYOND_FN_LED_OFF 	0
+#define BEYOND_FN_LED_NL  	1
+#define BEYOND_FN_LED_SL	2
 
 //keymapper_driver_t driverKeymapperBeyondFn;
 void initBeyondFn(void);
-bool isBeyondFnLedEnabled(void);
+uint8_t isBeyondFnLedEnabled(void);
 
 // for KEY_BEYOND_FN;
 uint8_t isBeyondFN(void);//KEY_BEYOND_FN state

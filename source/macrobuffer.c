@@ -64,7 +64,7 @@ macro_key_t popMWithKey(void) {
     gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
     gKey.keyindex = popM();
 
-    DBG1(0x76, (void *)&gKey.keyindex, 1);
+//    DBG1(0x76, (void *)&gKey.keyindex, 1);
 
 	/*
 	 * 매크로키가 발견되면 현재 매크로 중단,
