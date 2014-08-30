@@ -18,6 +18,8 @@
 #include "bootmapper.h"
 #include "ps2avru_util.h"
 
+#include "ledrender_inc.c"
+
 #define PWM_MAX 0xFF
 #define LED_MODE_NUM 5
 
@@ -31,7 +33,7 @@ static uint8_t LEDstate = 0;     ///< current state of the LEDs
 #ifndef SCROLL_LOCK_LED_IS_APART 
 static uint8_t ledBlinkScrollLockCount = 0;
 #endif
-static uint8_t ledBlinkNumLockCount = 0;
+
 
 static uint8_t _fullLEDMode = 0;	// 
 static uint8_t _fullLEDMode_saved = 0;	// 
@@ -48,8 +50,6 @@ static uint8_t _ledBrightnessMax = PWM_MAX;
 static uint8_t _ledBrightnessMax_saved = 0;	// 
 static const uint8_t ledBrightnessMin = 30;
 static const uint8_t ledBrightnessStep = 25;
-
-static int blinkLedCountDelay = 900;
 
 static void fadeLED(void);
 static void setFullLEDState(void);
@@ -78,7 +78,6 @@ void initFullLEDStateAfter(void) {
 
 	setFullLEDState();
 
-	blinkLedCountDelay = setDelay(blinkLedCountDelay);
 }
 
 void blinkOnce(const int xStayMs) {
@@ -417,81 +416,6 @@ static void fadeLED(void) {
 	} else {
 		pwmCounter = 0;
 		pwmDir = 3;
-	}
-}
-
-//
-static void blinkCapsLockLED(void) {
-	static int gCounter = 0;
-	static int gDelayCounter = 0;
-	static uint8_t gLEDState = 1;
-	const uint8_t gCountMAX = 200;
-	uint8_t led = LEDCAPS;
-	uint8_t gIsOn = 0;
-
-#ifdef ENABLE_BOOTMAPPER
-	if (isBootMapper()) {
-		gIsOn = 1;
-	}
-#endif	
-
-	if (gIsOn == 1) {
-		++gDelayCounter;
-		if (gDelayCounter > blinkLedCountDelay) {
-			gCounter++;
-			if (gCounter > gCountMAX) {
-				if (getLEDState() & LED_STATE_CAPS) {// Caps Lock이 켜져 있을때는 커졌다 켜지고;
-					if (gLEDState == 1) {
-						turnOffLED(led);
-					} else {
-						turnOnLED(led);
-						gDelayCounter = 0;
-					}
-				} else {	// Caps Lock이 꺼져 있을 때는 켜졌다 꺼진다.
-					if (gLEDState == 1) {
-						turnOnLED(led);
-					} else {
-						turnOffLED(led);
-						gDelayCounter = 0;
-					}
-				}
-				gLEDState ^= 1;
-				gCounter = 0;
-			}
-		}
-	} else {
-		gCounter = 0;
-		gLEDState = 1;
-	}
-}
-static void blinkNumLockLED(void) {
-	static int counter = 0;
-	const int countMAX = 100;
-	//on off on off
-	if (ledBlinkNumLockCount > 0) {
-		counter++;
-		if (counter > countMAX) {
-			if (ledBlinkNumLockCount == 5 || ledBlinkNumLockCount == 3) {
-				turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDCAPS);
-			} else if (ledBlinkNumLockCount == 4 || ledBlinkNumLockCount == 2) {
-				turnOffLED(LEDNUM); //PORTLEDS &= ~(1 << LEDCAPS);
-			} else {
-				if (isBeyondFnLedEnabled()) {
-					if (isBeyondFN()) {
-						turnOnLED(LEDNUM);
-					}
-				} else {
-					if ((getLEDState() & LED_STATE_NUM)) {
-						turnOnLED(LEDNUM);
-					}
-				}
-			}
-			counter = 0;
-
-			ledBlinkNumLockCount--;
-		}
-	} else {
-		counter = 0;
 	}
 }
 

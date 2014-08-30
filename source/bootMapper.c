@@ -1,17 +1,16 @@
-#ifndef BOOTMAPPER_C
-#define BOOTMAPPER_C
-
 #include <stdio.h>
 
 #include "keymapper.h"
 #include "macrobuffer.h"
 #include "bootmapper.h"
+#include "ledrender.h"
 
 #ifdef ENABLE_BOOTMAPPER
 // bootmapper
 static bool _isBootMapper = false;
 void setToBootMapper(bool xBool){
 	_isBootMapper = xBool;
+	setLEDIndicate();
 }
 bool isBootMapper(void){
 	return _isBootMapper;
@@ -26,4 +25,3 @@ void trace(uint8_t xRow, uint8_t xCol){
 }
 #endif
 
-#endif
