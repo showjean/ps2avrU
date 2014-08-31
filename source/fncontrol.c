@@ -246,18 +246,12 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             			_beyondFnIndex = LAYER_FN3;
             		}
             	}else{
-            		if(xKeyidx ==  KEY_BEYOND_FN){
-            			if(_beyondFnIndex ==  LAYER_FN2){
-            				_beyondFnIndex = LAYER_NORMAL;
-            			}else{
-            				_beyondFnIndex = LAYER_FN2;
-            			}
-					}else if(xKeyidx ==  KEY_BEYOND_FN3){
-            			if(_beyondFnIndex ==  LAYER_FN3){
-            				_beyondFnIndex = LAYER_NORMAL;
-            			}else{
-            				_beyondFnIndex = LAYER_FN3;
-            			}
+            		if(xKeyidx ==  KEY_BEYOND_FN && !(_beyondFnIndex ==  LAYER_FN2)){
+            			_beyondFnIndex = LAYER_FN2;
+					}else if(xKeyidx ==  KEY_BEYOND_FN3 && !(_beyondFnIndex ==  LAYER_FN3)){
+            			_beyondFnIndex = LAYER_FN3;
+					}else{
+        				_beyondFnIndex = LAYER_NORMAL;
 					}
             	}
              }

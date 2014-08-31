@@ -2,10 +2,12 @@
 #include <util/delay.h>
 #include <avr/io.h>
 #include <stdio.h>
+#include <avr/wdt.h>
 
 #include "main.h"
 #include "keymatrix.h"
 #include "hardwareinfo.h"
+#include "boot.h"
 
 
 /* ----------------------- hardware I/O abstraction ------------------------ */
@@ -18,6 +20,18 @@
 #define PORTROWS2   PORTC  ///< second port connected to the matrix rows
 #define PINROWS2    PINC   ///< second port connected to the matrix rows
 #define DDRROWS2    DDRC   ///< second port connected to the matrix rows
+
+// _______________________________________________________________ boot
+void delegateGotoBootloader(void){
+	wdt_enable(WDTO_15MS);
+	for(;;);
+
+	//        	typedef void (*AppPtr_t)(void) __attribute__ ((noreturn));
+	//
+	//        	AppPtr_t AppStartPtr = (AppPtr_t)(BOOTLOADER_START);
+	//        	AppStartPtr();
+	//        	((void (*)(void))(BOOTLOADER_START))();
+}
 
 // _______________________________________________________________ keymain
 uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow){

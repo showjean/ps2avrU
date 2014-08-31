@@ -235,6 +235,8 @@ void setLEDIndicate(void) {
 	getLedBlink(LED_STATE_SCROLL, (LEDstate & LED_STATE_CAPS), &prevLEDstate, &ledBlinkScrollLockCount);
 #endif
 
+	prevLEDstate = LEDstate;
+
 }
 
 void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row,

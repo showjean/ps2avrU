@@ -20,7 +20,7 @@ static uint8_t ledBlinkCount = 0;
 void getLedBlink(uint8_t xLed, bool xStatus, uint8_t *xPrevState, uint8_t *xCount){
     if ((LEDstate & xLed) && !(*xPrevState & xLed)) { // light up
 
-		*xPrevState = LEDstate;
+//		*xPrevState = LEDstate;
     	if(!xStatus){
     	    *xCount =  5;	//on off on off 1
 		}else{
@@ -29,7 +29,7 @@ void getLedBlink(uint8_t xLed, bool xStatus, uint8_t *xPrevState, uint8_t *xCoun
 
 	} else if(!(LEDstate & xLed) && (*xPrevState & xLed)){
 
-		*xPrevState = LEDstate;
+//		*xPrevState = LEDstate;
 		if(!xStatus){
 		    *xCount =  3;	// on off 1
 		}else{
