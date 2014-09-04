@@ -32,8 +32,9 @@ uint8_t *getCurrentMatrix(void);
 void setPrevMatrix(void);
 uint8_t *getPrevMatrix(void);
 
-extern void delegateSetCellStatus(uint8_t xCol);
-extern uint8_t delegateGetCellStatus(uint8_t xRow);
+extern void delegateGetLiveMatrix(uint8_t *xCurrentMatrix, uint8_t *isModified);
+//extern void delegateSetCellStatus(uint8_t xCol);
+//extern uint8_t delegateGetCellStatus(uint8_t xRow);
 
 
 #endif

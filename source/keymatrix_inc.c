@@ -220,34 +220,10 @@ uint8_t findGhostKey(void){
 #endif
 
 uint8_t getLiveMatrix(void){
-	uint8_t col, row;
-	uint8_t prev, cur;
 	
 	uint8_t isModified = 0;
 
-	for(col=0;col<COLUMNS;col++)
-	{
-		// Col -> set only one port as input and all others as output low
-		delegateSetCellStatus(col);
-		
-		// scan each rows
-		for(row=0;row<ROWS;row++)
-		{
-			cur = delegateGetCellStatus(row);
-
-			prev = currentMatrix[row] & BV(col);
-
-			if(!(prev && cur) && !(!prev && !cur)) {
-				if(cur)
-					currentMatrix[row] |= BV(col);
-				else
-					currentMatrix[row] &=~ BV(col);
-
-				isModified = 1;
-			}
-		}
-
-	}
+	delegateGetLiveMatrix(currentMatrix, &isModified);
 
 	if(isModified){
 		debounce=0;

@@ -103,3 +103,33 @@ uint8_t delegateGetCellStatus(uint8_t xRow){
 	}
 
 }
+
+
+void delegateGetLiveMatrix(uint8_t *xCurrentMatrix, uint8_t *xIsModified){
+	uint8_t col, row;
+	uint8_t prev, cur;
+
+	for(col=0;col<COLUMNS;col++)
+	{
+		delegateSetCellStatus(col);
+
+		// scan each rows
+		for(row=0;row<ROWS;row++)
+		{
+			cur = delegateGetCellStatus(row);
+
+			prev = xCurrentMatrix[row] & BV(col);
+
+			if(!(prev && cur) && !(!prev && !cur)) {
+				if(cur)
+					xCurrentMatrix[row] |= BV(col);
+				else
+					xCurrentMatrix[row] &=~ BV(col);
+
+				*xIsModified = 1;
+			}
+		}
+
+	}
+
+}
