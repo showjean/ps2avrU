@@ -164,7 +164,6 @@ void scanKeyWithDebounce(void) {
 static void scanKey(uint8_t xLayer) {
 
 	uint8_t row, col, prev, cur, keyidx;
-//    uint8_t gFN;
 	uint8_t gLayer = xLayer; 
 
     uint8_t *gMatrix = getCurrentMatrix();
@@ -176,7 +175,6 @@ static void scanKey(uint8_t xLayer) {
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(gLayer, row, col);	   		
-//			gFN = 1;
 
 #ifdef ENABLE_BOOTMAPPER           
             if(isBootMapper()){

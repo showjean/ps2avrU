@@ -448,3 +448,21 @@ void renderLED(void) {
 	/* LED Fader */
 	fadePWM();
 }
+
+bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
+	if((xIsExtraFnDown && xKeyidx == LED_KEY)){
+		changeFullLedState(FULL_LED_MODE1);
+		return 0;
+	}else if(xKeyidx == KEY_LED){
+		changeFullLedState(FULL_LED_MODE1);
+		return 0;
+	}else if(xKeyidx == KEY_LED_UP){
+		increaseLedBrightness(FULL_LED_MODE1);
+		return 0;
+	}else if(xKeyidx == KEY_LED_DOWN){
+		reduceLedBrightness(FULL_LED_MODE1);
+		return 0;
+	}
+
+	return 1;
+}

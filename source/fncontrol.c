@@ -282,36 +282,6 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             return 0;
         }else if(xKeyidx == EXTRA_FN){
             _isExtraFNDown = true;
-        }else if((_isExtraFNDown && xKeyidx == LED_KEY)){
-        	uint8_t gModi = getModifierDownBuffer();
-			if(gModi == 0x02 || gModi == 0x20){
-				changeFullLedState(FULL_LED_MODE2);
-			}else{
-				changeFullLedState(FULL_LED_MODE1);
-			}
-            return 0;
-        }else if(xKeyidx == KEY_LED){
-			changeFullLedState(FULL_LED_MODE1);
-			return 0;
-        }else if(xKeyidx == KEY_LED2){
-			changeFullLedState(FULL_LED_MODE2);
-			return 0;
-        }else if(xKeyidx == KEY_LED_UP){
-        	uint8_t gModi = getModifierDownBuffer();
-        	if(gModi == 0x02 || gModi == 0x20){
-        		increaseLedBrightness(FULL_LED_MODE2);
-        	}else{
-        		increaseLedBrightness(FULL_LED_MODE1);
-        	}
-        	return 0;
-        }else if(xKeyidx == KEY_LED_DOWN){
-        	uint8_t gModi = getModifierDownBuffer();
-        	if(gModi == 0x02 || gModi == 0x20){
-        		reduceLedBrightness(FULL_LED_MODE2);
-        	}else{
-        		reduceLedBrightness(FULL_LED_MODE1);
-        	}
-            return 0;
         }else if(xKeyidx == KEY_LED_ON_OFF){
         	_ledOff ^= true;
         	if(_ledOff == false){
@@ -326,6 +296,8 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
                 _isQuickMacroDown = true;                
             }
             return 0;
+        }else{
+        	return delegateFnControl(xKeyidx, _isExtraFNDown);
         }
 
     }else{  // up 
