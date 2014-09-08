@@ -9,7 +9,6 @@
 #include <util/delay.h>
 #include <string.h>
 
-// #include "print.h"
 #include "ledrender.h"
 #include "fncontrol.h"
 #include "sleep.h"
@@ -22,6 +21,9 @@
 
 #define PWM_MAX 0xFF
 #define LED_MODE_NUM 5
+#ifndef PWM_SPEED
+	#define PWM_SPEED 8
+#endif
 
 static int downLevelStay = 0;
 static uint8_t downLevel = 0;
@@ -39,7 +41,6 @@ static uint8_t _fullLEDMode_saved = 0;	//
 
 static int pwmCounter = 0;
 static int pwmDir = 0;
-static const uint8_t speed = 8;
 //static uint8_t _isDidSleep = 0;
 
 static int ledStateCount = 0;
@@ -286,6 +287,7 @@ static void writeLEDMode(void) {
 					_ledBrightnessMax);  // 1바이트 9번지 쓰기
 			// DEBUG_PRINT(("eeprom_write_byte : _ledBrightnessMax %d \n", _ledBrightnessMax));
 		}
+		blinkOnce(50);
 	}
 }
 
@@ -305,14 +307,14 @@ static void fadeLED(void) {
 	if (_fullLEDMode == 1) {
 
 		if (pwmDir == 0)
-			setPWM((uint8_t) (getBrightness(pwmCounter / speed)));
+			setPWM((uint8_t) (getBrightness(pwmCounter / PWM_SPEED)));
 		else if (pwmDir == 2)
-			setPWM((uint8_t) (getBrightness(PWM_MAX - pwmCounter / speed)));
+			setPWM((uint8_t) (getBrightness(PWM_MAX - pwmCounter / PWM_SPEED)));
 		else if (pwmDir == 1 || pwmDir == 3)
 			pwmCounter++;
 
 		// pwmDir 0~3 : idle
-		if (pwmCounter >= PWM_MAX * speed) {
+		if (pwmCounter >= PWM_MAX * PWM_SPEED) {
 			pwmCounter = 0;
 			pwmDir = (pwmDir + 1) % 4;
 		}
@@ -327,7 +329,7 @@ static void fadeLED(void) {
 			// 시간이 흐르면 레벨을 감소 시킨다.
 			if (downLevelLife > 0) {
 				pwmCounter++;
-				if (pwmCounter >= speed) {
+				if (pwmCounter >= PWM_SPEED) {
 					pwmCounter = 0;
 					downLevelLife--;
 					downLevel = downLevelMax
@@ -349,7 +351,7 @@ static void fadeLED(void) {
 			// 시간이 흐르면 레벨을 증가 시킨다.
 			if (downLevelLife < PWM_MAX) {
 				pwmCounter++;
-				if (pwmCounter >= speed) {
+				if (pwmCounter >= PWM_SPEED) {
 					pwmCounter = 0;
 					downLevelLife++;
 					downLevel = downLevelMax

@@ -27,7 +27,7 @@ MCU = atmega32
 F_CPU = 12000000
 
 
-SRC = $(P2USRC)/ledrender_ps2avrU.c \
+SRC = ledrender_split.c \
 	i2c/i2c.c \
 	keymatrix_split.c \
 	$(P2USRC)/vusb.c \
