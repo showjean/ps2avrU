@@ -79,9 +79,9 @@ void initFullLEDStateAfter(void) {
 	setFullLEDState();
 
 }
-
+/*
 void blinkOnce(const int xStayMs) {
-	if (isBeyondFnLedEnabled()) {
+	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_NL) {
 		if (isBeyondFN()) { // light up num lock on FN2 toggle
 			turnOffLED(LEDNUM); //PORTLEDS |= (1 << LEDNUM);	//
 		} else {
@@ -99,13 +99,13 @@ void blinkOnce(const int xStayMs) {
 	} else {
 		turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	//
 	}
-	/*
+
 	 _delay_ms()에 xStayMs를 인자로 넣으면 hex 파일의 용량이 0x1000가량 증가한다.
 	 매뉴얼 펑션으로 _delay_ms(1)을 ms 만큼 루프시키도록 만들어서 사용;
-	 */
+
 	__delay_ms(xStayMs);
 
-	if (isBeyondFnLedEnabled()) {
+	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_NL) {
 		if (isBeyondFN()) { // light up num lock on FN2 toggle
 			turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDNUM);	//
 		} else {
@@ -123,7 +123,7 @@ void blinkOnce(const int xStayMs) {
 	} else {
 		turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
 	}
-}
+}*/
 
 void setLEDState(uint8_t xState) {
 	LEDstate = xState;
