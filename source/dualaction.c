@@ -124,7 +124,6 @@ void enterFrameForDualAction(void){
 	if(dualActionKeyIndex > 0 && ++_autoDownCount > 500){
 		_isCanceledDualAction = true;
 		applyDualActionDownWhenIsCancel(true);
-		_autoDownCount = 0;
 	}
 
 }
@@ -139,6 +138,7 @@ void applyDualActionDownWhenIsCancel(bool isDown){
         	putKeyindex(getDualActionKeyWhenCompound(dualActionKeyIndex), 0, 0, 1);
         }
         dualActionKeyIndex = 0;
+		_autoDownCount = 0;
     }
 }
 
@@ -152,6 +152,7 @@ static void applyDualActionUp(void){
         pushM(gUpIdx);
         pushM(gUpIdx);
         dualActionKeyIndex = 0;
+		_autoDownCount = 0;
 
         if(isMacroInput()){
         	putKeyindex(gUpIdx, 0, 0, 1);
