@@ -26,10 +26,10 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 	if(xIsDown){
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
 			_downModifyBuffer |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-//			DBG1(0x34, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
+//			DBG1(0x34, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
 //	            gLen = strlen((char *)_downBuffer);
-			if (_downBufferIndex >= DOWN_BUFFER_SIZE) { // too many keycodes
+			if (_downBufferIndex >= DOWN_BUFFER_SIZE || xKeyidx >= KEY_MAX) { // too many keycodes
 //				DBG1(0x39, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
 			} else {
 //	                append(reportBuffer, xKeyidx);
@@ -48,7 +48,7 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
 			_downModifyBuffer &= ~(getModifierBit(xKeyidx));
-//			DBG1(0x35, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
+//			DBG1(0x35, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
 			gIdx = findIndex(_downBuffer, xKeyidx);
 //			DBG1(0x35, (uchar *)&gIdx, 1);
