@@ -176,7 +176,8 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
     if(keyidx == KEY_NONE) return 0;
 
-    keyidx = getDualActionKeyWhenCompound(keyidx);
+//    keyidx = getDualActionKeyWhenCompound(keyidx);
+    keyidx = getDualActionDownKeyIndexWhenIsCancel(keyidx);
 
     if(keyidx >= KEY_MAX) return 0;
 

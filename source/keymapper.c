@@ -887,7 +887,8 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
 
-    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
+//    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
 
 //    DBG1(0x11, (uchar *)&xKeyidx, 1);
 

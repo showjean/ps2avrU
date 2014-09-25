@@ -12,6 +12,7 @@ void enterFrame(void){
 	enterFrameForQuickSwap();
 	enterFrameForCustomMacro();
 	enterFrameForFnControl();
+	enterFrameForDualAction();
 
 	renderLED();
 	

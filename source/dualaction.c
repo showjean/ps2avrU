@@ -6,6 +6,7 @@
 #include "keymapper.h"
 #include "keymatrix.h"
 #include "keyindex.h"
+#include "keyscan.h"
 #include "oddebug.h"
 
 const uint8_t PROGMEM dualActionCompoundMask[] = {
@@ -90,7 +91,9 @@ const bool PROGMEM dualActionCancelDefaultDown[] = {
 };
 
 static uint8_t dualActionKeyIndex = 0;
-static uint8_t _keyCount = 0;
+static uint8_t _dualActionCount = 0;
+static uint8_t _normalKeyCount = 0;
+//static uint8_t _keyCount = 0;
 static bool _isCanceledDualAction = false;
 static bool _isActiveDualAction = false;
 
@@ -113,6 +116,31 @@ static bool isCanceledDualAction(void)
         upKeyCount = 0;
     }
 }*/
+static uint16_t _autoDownCount = 0;
+void enterFrameForDualAction(void){
+	/*
+	 * 듀얼액션 키가 눌려진 상태로 일정 시간 (약 0.5초?)이 유지되면 일반키가 조합되지 않아도 다운 키 적용
+	 */
+	if(dualActionKeyIndex > 0 && ++_autoDownCount > 500){
+		_isCanceledDualAction = true;
+		applyDualActionDownWhenIsCancel(true);
+		_autoDownCount = 0;
+	}
+
+}
+
+void applyDualActionDownWhenIsCancel(bool isDown){
+	 if(dualActionKeyIndex > 0 && isCanceledDualAction()){
+        // 듀얼액션 활성화 후 다른 키가 눌려 취소되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
+//        (*func)(getDualActionKeyWhenCompound(dualActionKeyIndex), isDown);
+		pushKeyCodeDecorator(getDualActionKeyWhenCompound(dualActionKeyIndex), isDown);
+
+        if(isMacroInput()){
+        	putKeyindex(getDualActionKeyWhenCompound(dualActionKeyIndex), 0, 0, 1);
+        }
+        dualActionKeyIndex = 0;
+    }
+}
 
 static void applyDualActionUp(void){
 
@@ -130,40 +158,62 @@ static void applyDualActionUp(void){
         	putKeyindex(gUpIdx, 0, 0, 0);
         }
         // _upKeyindex = gUpIdx;
-    }    
+    }
+    // 듀얼액션 키가 모두 up 되었을 때만 active 해제;
+	if(_dualActionCount == 0) {
+        _isActiveDualAction = false;
+
+        // 모든 듀얼액션 키가 업 되었더라도 일반키는 눌려져 있을 수 있으므로 코멘트 처리;
+        // _normalKeyCount = 0;
+    }
 }
 
 void setDualAction(uint8_t keyidx, bool isDown){
 
-// applyDualActionUp이 한번 뿐이 실행되지 않는다.
-
 	if(isDown){
-        ++_keyCount;
-        if(_isActiveDualAction){
-            _isCanceledDualAction = true; 
-            dualActionKeyIndex = 0;
-        }else if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end && _keyCount == 1){
-            // 듀얼 액션은 첫키로 눌렸을 때만 적용됨;
-            dualActionKeyIndex = keyidx;
-			_isActiveDualAction = true;
-            _isCanceledDualAction = false;
-	    }
-	}else{
-        if(_keyCount > 0) --_keyCount;
+		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
+			++_dualActionCount;
+			if (_isActiveDualAction == false && _normalKeyCount == 0) {
+				dualActionKeyIndex = keyidx;
+				_isActiveDualAction = true;
+				_isCanceledDualAction = false;
+			} else {
+				// 듀얼액션이 저장되어 있을 때 아무 키나 눌리면 액션 중지;
+				_isCanceledDualAction = true;
+			}
+		} else if (dualActionKeyIndex > 0) {
+			// 듀얼액션이 저장되어 있을 때 아무 키나 눌리면 액션 중지;
+			_isCanceledDualAction = true; // 듀얼액션을 취소 시키면 다음 듀얼액션 키 down일 때까지 계속 취소상태로 유지됨;
+			++_normalKeyCount;
+		} else if (_isActiveDualAction == false) {
+			// 듀얼액션 키보다 다른 키들이 먼저 눌려진 경우 듀얼액션은 작동하지 않고 down 키값을 사용한다.
+			++_normalKeyCount;  // 보통 키가 눌려진 수만큼 증가;
+			_isCanceledDualAction = true;
+		}
+	} else {
+		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
+			if (_dualActionCount > 0)
+				--_dualActionCount;
+			applyDualActionUp();
+		} else {
+			if (_normalKeyCount > 0)
+				--_normalKeyCount;
+		}
 
-        if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){             
-            applyDualActionUp();
-        }
-
-// isReleaseAll()은 이 후에 세팅되므로 여기서 확인할 수 없다.
-        
-        if(_keyCount == 0){
-            _isCanceledDualAction = false;
-            _isActiveDualAction = false;
-        }
+/* 작동하지 않는 부분;
+  		if (isReleaseAll()) {
+			DBG1(0xC2, (uchar *)&_dualActionCount, 1);
+			DBG1(0xC2, (uchar *)&_normalKeyCount, 1);
+			_dualActionCount = 0;
+			_normalKeyCount = 0;
+			dualActionKeyIndex = 0;
+			_isCanceledDualAction = false;
+			_isActiveDualAction = false;
+		}*/
 	}
-//        DBG1(0xC2, (uchar *)&_keyCount, 1);
 }
+
+//-------------------------------------------------------------------------------
 
 uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
     if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end){
@@ -173,6 +223,14 @@ uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
         }else{
             return getDualActionKeyWhenAlone(xActionIndex); 
         }
+    }
+    return xActionIndex;
+}
+
+// 듀얼액션 취소되었을 때는 다운 키코드를 적용한다.;
+uint8_t getDualActionDownKeyIndexWhenIsCancel(uint8_t xActionIndex){
+	if(isCanceledDualAction()){
+        return getDualActionKeyWhenCompound(xActionIndex);
     }
     return xActionIndex;
 }

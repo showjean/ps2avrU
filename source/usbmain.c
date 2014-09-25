@@ -330,7 +330,8 @@ static uint8_t reportBuffer[REPORT_KEYS];
 
 
 static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
-    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);      
+//    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
 
     if(xKeyidx == KEY_NONE || xKeyidx >= KEY_MAX || (xKeyidx > KEY_Multimedia && xKeyidx < KEY_Multimedia_end)){
         return;

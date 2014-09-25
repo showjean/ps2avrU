@@ -23,9 +23,25 @@ void setKeyScanDriver(keyscan_driver_t *driver)
     keyscanDriver = driver;
 }
 
+uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
+
+    if(xIsDown){
+        // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
+        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx), xIsDown);
+    }
+
+    return (*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+}
+
+
 static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
+
+    if(xIsDown && xKeyidx != KEY_NONE){
+        applyDualActionDownWhenIsCancel(true);
+    }
+
 
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
@@ -59,7 +75,8 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
     // 이전 상태에서(press/up) 변화가 있을 경우;
     //if( !(prev&&cur) && !(!prev&&!cur)) {                
     if( xPrev != xCur ) {
-        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
+//        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
+        pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx), xCur);
 
         setKeyEnabled(xKeyidx, xCur);
 
