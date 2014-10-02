@@ -388,7 +388,7 @@ void wakeUpLED(void) {
 }
 
 void renderLED(void) {
-	if (!ledInited || isSleep() || _ledOff) {
+	if (!ledInited || isSleep()) {
 		return;
 	}
 
@@ -402,6 +402,8 @@ void renderLED(void) {
 
 	// LED 모드 저장.
 	writeLEDMode();
+
+	if(_ledOff) return;
 
 	/* LED Fader */
 	fadePWM();
