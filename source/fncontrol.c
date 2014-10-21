@@ -95,14 +95,14 @@ void initBeyondFn(void){
 		((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_ON
 		&& ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_OFF
 	){
-		_beyondFnLedEnabled = 1;
+		_beyondFnLedEnabled = BEYOND_FN_LED_NL;
 	}else if(
 		((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_OFF
 		&& ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_ON
 	){
-		_beyondFnLedEnabled = 2;
+		_beyondFnLedEnabled = BEYOND_FN_LED_SL;
 	}else{
-		_beyondFnLedEnabled = 0;
+		_beyondFnLedEnabled = BEYOND_FN_LED_OFF;
 	}
 
     addKeymapperDriver(&driverKeymapperBeyondFn);

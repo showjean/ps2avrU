@@ -21,6 +21,7 @@
 #include "keymapper.h"
 #include "keyindex.h"
 #include "dualaction.h"
+#include "keydownbuffer.h"
 #include "oddebug.h"
 
 // 17*8 bit matrix
@@ -113,6 +114,7 @@ uint8_t getLayer(void) {
 	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함; <- 불편할 수 있으므로
 		기본 레이어일 경우에는 다른 키들이 눌려져 있어도 FN이 작동하도록 한다.
 		: 
+	- modi key만 눌려진(FN 키와 문자 키들은 눌리지 않은) 상태는 해제.
 	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
 	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
 	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
@@ -121,6 +123,7 @@ uint8_t getLayer(void) {
 	if(_currentLazyLayer > 0) {
 
 		setFnScanLayer();
+		_isFnPressed = false;
 
 		return _currentLazyLayer;
 	}
@@ -160,8 +163,9 @@ uint8_t getLayer(void) {
 					}
 				}
 				if(gLayer > 0){
-					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 1로 반환;
+					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 gLayer로 반환;
 					if(isLazyFn()){
+						// FN키를 처음 누른 경우
 						if(isReleaseAllPrev() || _isFnPressed == false){
 							_currentLazyLayer = gLayer;
 						}else{
@@ -278,7 +282,8 @@ uint8_t setCurrentMatrix(void){
 void setCurrentMatrixAfter(void){
 	setReleaseAll();
 
-	if(isReleaseAll()){
+	// 모든 키가 release이거나 modi key만 눌려진 상태에서 lazy FN 해제;
+	if(isReleaseAll() || (getDownBufferAt(0) == 0 && isFnPressed() == false)){
 		_currentLazyLayer = 0;
 	}
 }
