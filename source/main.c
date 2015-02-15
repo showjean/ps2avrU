@@ -208,6 +208,12 @@ int main(void) {
                     ckeckNeedInterface |= (1 << 0);
                 }else if(keyidx == KEY_P) {
                     ckeckNeedInterface |= (1 << 1);
+                }else if(keyidx == KEY_1) {
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_HIGH;
+                }else if(keyidx == KEY_2) {
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_MIDD;
+                }else if(keyidx == KEY_3) {
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_LOW;
                 }
             }
 

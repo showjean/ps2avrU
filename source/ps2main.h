@@ -40,6 +40,13 @@
 #define SPLIT       0xFC
 #define WAIT_RX     0xFB
 
+#define PS2_REPEAT_SPEED_NONE	0
+#define PS2_REPEAT_SPEED_HIGH	1
+#define PS2_REPEAT_SPEED_MIDD	5
+#define PS2_REPEAT_SPEED_LOW	10
+
+
+uint8_t ps2_repeat_speed;
 void ps2_main(void);
 
 #endif

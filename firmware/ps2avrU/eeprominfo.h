@@ -12,6 +12,7 @@
 #define TOGGLE_ESC_TO_TILDE	    3
 #define TOGGLE_BEYOND_FN_LED_SL 4
 
+#define EEPROM_PS2_REPEAT_SPEED	6	// 1byte
 // eeprom address
 #define EEPROM_ENABLED_OPTION 	7	// 1byte
 #define EEPROM_QUICK_SWAP	 	8	// 1byte

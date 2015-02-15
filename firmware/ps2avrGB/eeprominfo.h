@@ -18,7 +18,7 @@
 #define EEPROM_LED2_KEY_EVENT	3	// 1byte	0xF0 : type, 0x0F : mode
 #define EEPROM_LED2_NUM			4	// 1byte
 #define EEPROM_LED2_FADE_TYPE	5	// 1byte
-// 6 : 1bytes
+#define EEPROM_PS2_REPEAT_SPEED	6	// 1byte
 #define EEPROM_ENABLED_OPTION 	7	// 1byte
 #define EEPROM_QUICK_SWAP	 	8	// 1byte
 #define EEPROM_LED_BRIGHTNESS 	9	// 1byte

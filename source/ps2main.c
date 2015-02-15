@@ -21,6 +21,7 @@
 
 #include "keysta.h"
 
+#include "eeprominfo.h"
 #include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
@@ -68,6 +69,8 @@ static int keyval=0;
 static bool _isWaitingRx = false;
 static void setWaitingRx(bool xIsWait);
 static bool isWaitingRx(void);
+
+uint8_t ps2_repeat_speed = PS2_REPEAT_SPEED_NONE;
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- PS/2 interface ----------------------------- */
@@ -513,7 +516,7 @@ static void processTxPs2(void){
                 }
                 
                 loopCnt++;
-                loopCnt %= (3+TYPEMATIC_REPEAT*10);
+                loopCnt %= (3+TYPEMATIC_REPEAT*10) * ps2_repeat_speed;
 
                 
                 break;
@@ -543,6 +546,16 @@ void ps2_main(void){
 
     keymap_init();
     clear();
+
+    //set key repeat speed;
+    uint8_t gSpeed = eeprom_read_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED);
+    if(gSpeed == 0xFF) gSpeed = 1;
+    if(ps2_repeat_speed == PS2_REPEAT_SPEED_NONE){
+    	ps2_repeat_speed = gSpeed;
+    }else if(ps2_repeat_speed != gSpeed){
+    	eeprom_write_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED, ps2_repeat_speed);
+    }
+
 
     // init
     setKeyScanDriver(&driverKeyScanPs2);
