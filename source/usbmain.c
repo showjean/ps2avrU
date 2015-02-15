@@ -533,7 +533,7 @@ void usb_main(void) {
 #endif
 
         // check timer if we need periodic reports
-        if (TIFR & (1 << TOV0)) {
+        /*if (TIFR & (1 << TOV0)) {
             TIFR = (1 << TOV0); // reset flag
             if (idleRate != 0) { // do we need periodic reports?
                 if(idleCounter > 4){ // yes, but not yet
@@ -543,7 +543,7 @@ void usb_main(void) {
                     idleCounter = idleRate;
                 }
             }
-        }
+        }*/
 
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
