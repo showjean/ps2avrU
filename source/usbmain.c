@@ -459,7 +459,7 @@ void usb_main(void) {
 
     usbInit();
 
-    uint8_t idleCounter = 0;
+//    uint8_t idleCounter = 0;
 
     uchar   i = 0;
     usbDeviceDisconnect();  /* do this while interrupts are disabled */

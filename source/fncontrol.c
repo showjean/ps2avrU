@@ -274,7 +274,9 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             	setLed(LED_STATE_SCROLL, isBeyondFN());
 			 }
 
-
+             if( xKeyidx == BEYOND_FN_CANCEL_KEY ) {    // 키가 작동하도록 1 리턴;
+            	 return 1;
+			  }
              return 0;
         }else if(_isQuickMacroDown && isEepromMacroKey(xKeyidx)){
             _quickMacroIndex = xKeyidx - KEY_MAC1; 

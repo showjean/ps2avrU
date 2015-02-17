@@ -204,6 +204,7 @@ int main(void) {
 #endif
                 if(keyidx == KEY_M) {
                     readyKeyMappingOnBoot();
+#ifndef INTERFACE_ONLY_USB
                 }else if(keyidx == KEY_U) {
                     ckeckNeedInterface |= (1 << 0);
                 }else if(keyidx == KEY_P) {
@@ -214,6 +215,7 @@ int main(void) {
                 	ps2_repeat_speed = PS2_REPEAT_SPEED_MIDD;
                 }else if(keyidx == KEY_3) {
                 	ps2_repeat_speed = PS2_REPEAT_SPEED_LOW;
+#endif
                 }
             }
 
