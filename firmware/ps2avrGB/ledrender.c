@@ -69,7 +69,9 @@ static uint8_t _Led2KeyEventType = 0;	//
 
 static uint8_t pwmCounter = 0;
 static uint8_t pwmDir = 0;
-#define PWM_SPEED 8
+#ifndef PWM_SPEED
+	#define PWM_SPEED 8
+#endif
 
 static int ledStateCount = 0;
 static cRGB_t _currentLedAllColor;
@@ -988,7 +990,7 @@ void turnOnLedAll(void){
 }
 void turnOffLedAll(void){
 	_ledOff = true;
-//	sleepLED();
+
 	setPWM(0);
 	turnOffLED(LEDFULLLED);
 

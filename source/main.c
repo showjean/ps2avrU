@@ -167,9 +167,10 @@ int main(void) {
 
     DBG1(0x00, 0, 0);
 
+#ifndef INTERFACE_ONLY_USB
 //    INTERFACE = 255;
     uint8_t ckeckNeedInterface = 0;
-
+#endif
     // for interface select
     // initHardware(0); //여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
 

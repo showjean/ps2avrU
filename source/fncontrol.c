@@ -291,6 +291,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
         	}else{
         		turnOffLedAll();
         	}
+        	return 0;
         }else if(xKeyidx == KEY_QUICK_MACRO){
             if(isQuickMacro()){
                 stopQuickMacro();
