@@ -19,9 +19,9 @@
         #define SCROLL_LOCK_LED_IS_APART // SCROLL_LOCK pin was connected
     #endif
     #if !defined(INTERFACE_ONLY_USB)
-        #define INTERFACE_ONLY_USB // usb only
+//        #define INTERFACE_ONLY_USB // usb only
     #endif
-    #define DEBUG_QUICK_BOOTLOADER  // for debug
+//    #define DEBUG_QUICK_BOOTLOADER  // for debug
 #endif
 
 #if !defined( DEBUG_LEVEL )

@@ -69,6 +69,7 @@ static int keyval=0;
 static bool _isWaitingRx = false;
 static void setWaitingRx(bool xIsWait);
 static bool isWaitingRx(void);
+static bool isAlreadyPushedWaitingRx = false;
 
 uint8_t ps2_repeat_speed = PS2_REPEAT_SPEED_NONE;
 
@@ -162,7 +163,12 @@ static void keymap_init(void)
 }
 
 void setWaitingRx(bool xIsWait){
-	if(xIsWait) keyval = SPLIT;
+	if(xIsWait) {
+		keyval = SPLIT;
+	}else{
+		isAlreadyPushedWaitingRx = false;
+	}
+
     _isWaitingRx = xIsWait;
 }
 bool isWaitingRx(void){
@@ -184,7 +190,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 
     if(keyidx >= KEY_MAX) return 0;
 
-//    DBG1(0x20, (uchar *)&keyidx, 2);
+    DBG1(0x20, (uchar *)&keyidx, 2);
 
     // if prev and current state are different,
     uint8_t keyVal = pgm_read_byte(&keycode_set2[keyidx]);
@@ -232,7 +238,10 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 
         }
 
-        if(KFLA[keyidx] & KFLA_WAIT_UNTIL_RX){
+
+        // 2 연속으로 waiting rx 키가 입력 되면 오류로 키보드가 멈춘다. 이를 방지 하기 위해서 isAlreadyPushedWaitingRx를 설정;
+        if((KFLA[keyidx] & KFLA_WAIT_UNTIL_RX) && isAlreadyPushedWaitingRx == false){
+        	isAlreadyPushedWaitingRx = true;
             if(keyidx == KEY_SCRLCK){
             	// ctrl + scroll lock 키는 LED 반응을 하지 않으니 설정안함
             	// ctrl + alt + s/l 등 다른 조합키와 섞이면 반응함
@@ -426,7 +435,7 @@ static void processRxPs2(void){
                 
                 return;
             case STA_WAIT_LEDS:
-                DBG1(0xdb, (uchar *)&rxed, 1);
+            	DBG1(0xdb, (uchar *)&rxed, 1);
 
                 initPs2();
                 

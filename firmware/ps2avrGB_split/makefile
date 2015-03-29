@@ -30,7 +30,7 @@ MCU = atmega32
 F_CPU = 12000000
 # Light_WS2812/light_ws2812.c \
 
-SRC =i2c/i2c.c \
+SRC = i2c/i2c.c \
 	$(P2USRC)timer/timer.c \
 
 SRC +=ledrender_split.c \
