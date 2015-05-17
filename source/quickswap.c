@@ -52,16 +52,18 @@ static void applyQuickSwap() {
 	
 	uint8_t gModi = getModifierDownBuffer();
 
-	if(gModi == prevModifier) return;
+	if(gModi != prevModifier) {
 
-	if(gModi == 0x2C || gModi == 0xE0 || gModi == 0x68 || gModi == 0xA4){	// ALT + GUI + R SHIFT
-		_quickSwapCount = 0;
-		enabledQuickSwapCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;
-	}else{		
-		enabledQuickSwapCount = 0;
-	}
+        if(gModi == 0x2C || gModi == 0xE0 || gModi == 0x68 || gModi == 0xA4){	// ALT + GUI + R SHIFT
+            _quickSwapCount = 0;
+            enabledQuickSwapCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;
+        }else{
+            enabledQuickSwapCount = 0;
+        }
 
-	prevModifier = gModi;
+        prevModifier = gModi;
+
+    }
 
 //}
 
