@@ -38,6 +38,7 @@ typedef struct {
     uint16_t usage;
 } __attribute__ ((packed)) report_extra_t;
 
+/*
 typedef struct {
     uint8_t buttons;
     int8_t x;
@@ -50,6 +51,7 @@ typedef struct {
     uint8_t report_id;
     report_mouse_t report;
 } __attribute__ ((packed)) vusb_mouse_report_t;
+*/
 
 uint8_t reportKeyboard[REPORT_SIZE_KEYBOARD];
 // extern report_keyboard_t reportKeyboard; ///< buffer for HID reports

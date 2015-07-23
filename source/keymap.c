@@ -124,4 +124,48 @@ const uint8_t PROGMEM keycode_set2_proc_shift[] =
     KEY_CAPS, KEY_NUMLOCK, KEY_SCRLCK,
     KEY_NONE };
 
+#ifdef DEBUG_JTAG
+ __attribute__((section (".keymapCodeJtag"))) const uint8_t keymap_code_jtag[2][15][8] =  {
+     {
+         // set 1 : normal
+         // COL0     COL1        COL2        COL3        COL4        COL5        COL6        COL7
+         { KEY_PAUSE,    KEY_NONE,   KEY_NONE,   KEY_NONE,   KEY_RCTRL,  KEY_NONE,   KEY_LCTRL,  KEY_F5 },   // ROW0
+         { KEY_Q,        KEY_TAB,    KEY_A,      KEY_ESC,    KEY_Z,      KEY_NONE,   KEY_HASH,   KEY_1 },    // ROW1
+         { KEY_W,        KEY_CAPS,   KEY_S,      KEY_NONE,   KEY_X,      KEY_NONE,   KEY_F1,     KEY_2 },    // ROW2
+         { KEY_E,        KEY_F3,     KEY_D,      KEY_F4,     KEY_C,      KEY_NONE,   KEY_F2,     KEY_3 },    // ROW3
+         { KEY_R,        KEY_T,      KEY_F,      KEY_G,      KEY_V,      KEY_B,      KEY_5,      KEY_4 },    // ROW4
+         { KEY_U,        KEY_Y,      KEY_J,      KEY_H,      KEY_M,      KEY_N,      KEY_6,      KEY_7 },    // ROW5
+         { KEY_I,        KEY_RBR,    KEY_K,      KEY_F6,     KEY_COMMA,  KEY_NONE,   KEY_EQUAL,  KEY_8 },    // ROW6
+         { KEY_O,        KEY_F7,     KEY_L,      KEY_NONE,       KEY_DOT,    KEY_FN,     KEY_F8,     KEY_9 },    // ROW7
+         { KEY_P,        KEY_LBR,    KEY_COLON,  KEY_QUOTE,  KEY_NONE,   KEY_SLASH,  KEY_MINUS,  KEY_0},     // ROW8
+         { KEY_SCRLCK,   KEY_NONE,   KEY_NONE,   KEY_LALT,   KEY_NONE,   KEY_RALT,   KEY_NONE,   KEY_PRNSCR},// ROW9
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE},   // ROW10
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW11
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW12
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW13
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,   KEY_UP,     KEY_NONE,   KEY_LEFT,   KEY_HOME,   KEY_END }  // ROW14
+     },
+
+     {
+         // set 2 : FN
+         // COL0     COL1        COL2        COL3        COL4        COL5        COL6        COL7
+         { KEY_NUMLOCK,  KEY_NONE,   KEY_NONE,   KEY_NONE,   KEY_RCTRL,  KEY_NONE,   KEY_LCTRL,  KEY_F5 },   // ROW0
+         { KEY_Q,        KEY_TAB,    KEY_A,      KEY_ESC,    KEY_Z,      KEY_NONE,   KEY_HASH,   KEY_1 },    // ROW1
+         { KEY_W,        KEY_CAPS,   KEY_S,      KEY_NONE,   KEY_X,      KEY_NONE,   KEY_F1,     KEY_2 },    // ROW2
+         { KEY_E,        KEY_F3,     KEY_D,      KEY_F4,     KEY_C,      KEY_NONE,   KEY_F2,     KEY_3 },    // ROW3
+         { KEY_R,        KEY_T,      KEY_F,      KEY_G,      KEY_V,      KEY_B,      KEY_5,      KEY_4 },    // ROW4
+         { KEY_KP_4,     KEY_Y,      KEY_KP_1,   KEY_H,      KEY_KP_0,   KEY_N,      KEY_6,      KEY_KP_7 }, // ROW5
+         { KEY_KP_5,     KEY_RBR,    KEY_KP_2,   KEY_F6,     KEY_KP_0,   KEY_NONE,   KEY_EQUAL,  KEY_KP_8 }, // ROW6
+         { KEY_KP_6,     KEY_F7,     KEY_KP_3,   KEY_NONE,       KEY_KP_DOT, KEY_FN,     KEY_F8,     KEY_KP_9 }, // ROW7
+         { KEY_KP_AST,   KEY_LBR,    KEY_KP_MINUS,KEY_QUOTE, KEY_NONE,   KEY_KP_PLUS,KEY_MINUS,  KEY_KP_SLASH},  // ROW8
+         { KEY_LED,  KEY_NONE,   KEY_NONE,   KEY_LALT,   KEY_NONE,   KEY_RALT,   KEY_NONE,   KEY_PRNSCR},// ROW9
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE},   // ROW10
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW11
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW12
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,KEY_NONE,    KEY_NONE,  KEY_NONE,    KEY_NONE,     KEY_NONE}, // ROW13
+         { KEY_NONE,     KEY_NONE,   KEY_NONE,   KEY_UP,     KEY_NONE,   KEY_LEFT,   KEY_HOME,   KEY_END }  // ROW14
+     }
+  };
+#endif
+
 #endif

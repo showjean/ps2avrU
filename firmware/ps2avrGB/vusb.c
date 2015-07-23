@@ -222,13 +222,17 @@ PROGMEM const char usbDescriptorConfiguration[] = {    /* USB configuration desc
     9 + (9 + 9 + 7) + (9 + 9 + 7), 0,
     //18 + 7 * USB_CFG_HAVE_INTRIN_ENDPOINT + 7 * USB_CFG_HAVE_INTRIN_ENDPOINT3 + 9, 0,
                 /* total length of data returned (including inlined descriptors) */
+#if defined( USING_SIMPLE_MODE )
+    1,          /* number of interfaces in this configuration */
+#else
     2,          /* number of interfaces in this configuration */
+#endif
     1,          /* index of this configuration */
     0,          /* configuration name string index */
 #if USB_CFG_IS_SELF_POWERED
     (1 << 7) | USBATTR_SELFPOWER,       /* attributes */
 #else
-    (1 << 7),                           /* attributes */
+    (1 << 7) | USBATTR_REMOTEWAKE,      /* attributes */
 #endif
     USB_CFG_MAX_BUS_POWER/2,            /* max USB current in 2mA units */
 
@@ -263,6 +267,7 @@ PROGMEM const char usbDescriptorConfiguration[] = {    /* USB configuration desc
     USB_CFG_INTR_POLL_INTERVAL, /* in ms */
 #endif
 
+#if !defined( USING_SIMPLE_MODE )
     /*
      * Mouse interface
      */
@@ -292,6 +297,7 @@ PROGMEM const char usbDescriptorConfiguration[] = {    /* USB configuration desc
     0x03,       /* attrib: Interrupt endpoint */
     8, 0,       /* maximum packet size */
     USB_CFG_INTR_POLL_INTERVAL, /* in ms */
+#endif
 #endif
 };
 #endif
@@ -424,7 +430,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             	}
             }
         } else if (rq->bRequest == USBRQ_HID_SET_REPORT) {
-        	DBG1(0xAA, (uchar *)&rq->wValue.word, 2);
+//        	DBG1(0xAA, (uchar *)&rq->wValue.word, 2);
         	// 02 03 : Report Type: 0x03,  ReportID: 0x02
         	// 01 03 : Report Type: 0x03,  ReportID: 0x01
             // Report Type: 0x02(Out)/ReportID: 0x00(none) && Interface: 0(keyboard)
@@ -539,7 +545,8 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
     DBG1(0xBB, (uchar *)&len, 1);
     if (expectReport == 1 && (len == 1)) {
-        delegateLedUsb(data[0]); 
+        // change LEDs of indicator
+        delegateLedUsb(data[0]);
         expectReport = 0;
     }else if (expectReport == 2){   // options
         DBG1(0xEE, data, len);

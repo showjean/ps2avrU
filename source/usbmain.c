@@ -265,7 +265,7 @@ static void countSleepUsb(void);
 
 
 void delegateLedUsb(uint8_t xState){
-    DBG1(0x3A, (uchar *)&xState, 1);
+//    DBG1(0x3A, (uchar *)&xState, 1);
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();
     if(_ledInitState == INIT_INDEX_NOT_INIT){
@@ -327,6 +327,7 @@ static void makeReportBufferSystem(uint8_t keyidx, bool xIsDown){
 static uint8_t _modifiers = 0;
 static uint8_t updateNeeded = 0;
 static uint8_t reportBuffer[REPORT_KEYS];
+static uint8_t _countOfBuffer = 0;
 
 
 static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
@@ -345,7 +346,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
             _modifiers |= getModifierBit(xKeyidx);
         }else{ // keycode should be added to report
-            gLen = strlen((char *)reportBuffer);
+            gLen = _countOfBuffer; //strlen((char *)reportBuffer);
             if (gLen >= REPORT_KEYS) { // too many keycodes
                 // if (!retval & 0x02) { // Only fill buffer once
                     // memset(reportBuffer+2, KEY_ErrorRollOver, sizeof(reportBuffer)-2);
@@ -360,10 +361,13 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
                 gIdx = findIndex(reportBuffer, xKeyidx);
                 if(gIdx == -1){
                     append(reportBuffer, xKeyidx);
+                    _countOfBuffer++;
                 }
             }
         }
     }else{
+
+//        DBG1(0xC6, (uchar *)&xKeyidx, 3);
 
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
             _modifiers &= ~(getModifierBit(xKeyidx));
@@ -372,9 +376,15 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
             if(xKeyidx > KEY_extend && xKeyidx < KEY_extend_end){
                 xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
             }
+
+//            DBG1(0xC7, (uchar *)&xKeyidx, 3);
+
             gIdx = findIndex(reportBuffer, xKeyidx);
-            if(gIdx >= 0){
-                delete(reportBuffer, gIdx);                
+            DBG1(0xC7, (uchar *)&gIdx, 3);
+
+            if(gIdx >= 0 ){
+                delete(reportBuffer, gIdx);
+                _countOfBuffer--;
             }
             
             
@@ -386,23 +396,22 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
 
 static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
    
-   // DBG1(0x02, (uchar *)&xKeyidx, 3);
- 
-    uint8_t gKeyidx; 
-  
-    gKeyidx = xKeyidx;  
-    
+
     if(xIsDown){    // down
 
-        makeReportBuffer(gKeyidx, true);
-        makeReportBufferExtra(gKeyidx, true);        
-        makeReportBufferSystem(gKeyidx, true);
+//        DBG1(0xB5, (uchar *)&xKeyidx, 3);
+
+        makeReportBuffer(xKeyidx, true);
+        makeReportBufferExtra(xKeyidx, true);
+        makeReportBufferSystem(xKeyidx, true);
 
     }else{  // up
 
-        makeReportBuffer(gKeyidx, false);
-        makeReportBufferExtra(gKeyidx, false);
-        makeReportBufferSystem(gKeyidx, false);
+//        DBG1(0xC5, (uchar *)&xKeyidx, 3);
+
+        makeReportBuffer(xKeyidx, false);
+        makeReportBufferExtra(xKeyidx, false);
+        makeReportBufferSystem(xKeyidx, false);
     }
 
     return 1;    
@@ -410,6 +419,7 @@ static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
 
 static void clearReportBuffer(void){
     memset(reportBuffer, 0, REPORT_KEYS); 
+    _countOfBuffer = 0;
     _modifiers = 0;
     extraData = 0;
 }
@@ -441,6 +451,23 @@ static interface_update_t updateUsb = {
 static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
+
+static void wake_up_signal()
+{
+    cli();
+    char ps_p = P2U_PS2_PORT;
+    char ps_ddr = P2U_PS2_DDR;
+    PORTD |=P2U_PS2_CLOCK_BIT;
+    PORTD &= ~(P2U_PS2_DATA_BIT);
+    DDRD |= (P2U_PS2_CLOCK_BIT)|(P2U_PS2_DATA_BIT);
+    _delay_ms(100);
+    PORTD ^=(P2U_PS2_CLOCK_BIT);
+    PORTD ^=(P2U_PS2_DATA_BIT);
+    _delay_ms(3);
+    P2U_PS2_PORT = ps_p;
+    P2U_PS2_DDR = ps_ddr;
+    sei();
+}
 
 /**
  * Main function, containing the main loop that manages timer- and
@@ -556,13 +583,23 @@ void usb_main(void) {
             if(updateNeeded){
                 if(interfaceReady==false) continue;
 
+                if(_isSuspended == true) {
+                    wake_up_signal();
+                    updateNeeded = 0;
+                    continue;
+                }
+
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
+
                 reportKeyboard[0] = _modifiers;
                 reportKeyboard[1] = 0;
-                memcpy ( reportKeyboard+2, reportBuffer, strlen((char *)reportBuffer) );
-                // DBG1(0x06, (uchar *)&reportKeyboard[0], 1);
+//                DBG1(0x05, (uchar *)&reportBuffer, _countOfBuffer);
+                memcpy ( reportKeyboard+2, reportBuffer, _countOfBuffer ); //strlen((char *)reportBuffer) );
+//                DBG1(0x06, (uchar *)&reportKeyboard, 8);
+
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 updateNeeded = 0;
+
 #if !USB_COUNT_SOF
                 wakeUpUsb();
 #endif
@@ -601,6 +638,7 @@ void usb_main(void) {
             }
         }
 
+#if !defined( USING_SIMPLE_MODE )
         if(usbInterruptIsReady3()){
             if(_extraHasChanged){
                 report_extra_t gReportExtra = {
@@ -625,6 +663,7 @@ void usb_main(void) {
 #endif
             }
         }
+#endif
 
         if(_initState == INIT_INDEX_INITED){
             if(initCount++ == 200){       // delay for OS X USB multi device

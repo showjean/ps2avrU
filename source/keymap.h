@@ -287,4 +287,8 @@ bool isFnKey(uint8_t xKeyidx);
 
 uint8_t getModifierBit(uint8_t xKeyidx);
 
+#ifdef DEBUG_JTAG
+const uint8_t keymap_code_jtag[2][15][8];
+#endif
+
 #endif

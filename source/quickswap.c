@@ -15,6 +15,7 @@ static uint8_t quickSwapMode;
 static uint8_t enabledQuickSwapCount;
 static int quickSwapCountMax;
 static int _quickSwapCount;
+static void applyQuickSwap(void);
 
 void initQuickSwap(void){
 		
@@ -42,7 +43,7 @@ uint8_t getQuickSwapKeyindex(uint8_t xKeyidx){
 	}
 	return xKeyidx;
 }
-static void applyQuickSwap() {
+static void applyQuickSwap(void) {
 	static uint8_t prevModifier = 0;
 
 	if(getDownBufferAt(0) > 0){
