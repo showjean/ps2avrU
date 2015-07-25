@@ -135,7 +135,9 @@ inline void i2cSendByte(u08 data)
 	outb(TWCR, (inb(TWCR)&TWCR_CMD_MASK)|BV(TWINT));
 }
 
-/*inline void i2cReceiveByte(u08 ackFlag)
+
+#ifdef I2C_FULLDUPLEX
+inline void i2cReceiveByte(u08 ackFlag)
 {
 	// begin receive over i2c
 	if( ackFlag )
@@ -148,12 +150,13 @@ inline void i2cSendByte(u08 data)
 		// ackFlag = FALSE: NACK the recevied data
 		outb(TWCR, (inb(TWCR)&TWCR_CMD_MASK)|BV(TWINT));
 	}
-}*/
-/*inline u08 i2cGetReceivedByte(void)
+}
+inline u08 i2cGetReceivedByte(void)
 {
     // retieve received data byte from i2c TWDR
     return( inb(TWDR) );
-}*/
+}
+#endif
 
 u08 i2cMasterSendNI(u08 deviceAddr, u08 length, u08* data)
 {
@@ -206,20 +209,24 @@ u08 i2cMasterSendNI(u08 deviceAddr, u08 length, u08* data)
 	return retval;
 }
 
-/*u08 i2cMasterReceiveNI(u08 deviceAddr, u08 length, u08 *data)
+#ifdef I2C_FULLDUPLEX
+u08 i2cMasterReceiveNI(u08 deviceAddr, u08 length, u08 *data)
 {
     u08 retval = I2C_OK;
 
+    u08 status;
     // disable TWI interrupt
     cbi(TWCR, TWIE);
 
     // send start condition
     i2cSendStart();
-    i2cWaitForComplete();
+    i2cWaitForComplete(&status);
+	if(status > I2C_DELAY_MAX) return I2C_ERROR_NODEV;
 
     // send device address with read
     i2cSendByte( deviceAddr | 0x01 );
-    i2cWaitForComplete();
+    i2cWaitForComplete(&status);
+	if(status > I2C_DELAY_MAX) return I2C_ERROR_NODEV;
 
     // check if device is present and live
     if( inb(TWSR) == TW_MR_SLA_ACK)
@@ -228,7 +235,8 @@ u08 i2cMasterSendNI(u08 deviceAddr, u08 length, u08* data)
         while(length > 1)
         {
             i2cReceiveByte(true);
-            i2cWaitForComplete();
+            i2cWaitForComplete(&status);
+			if(status > I2C_DELAY_MAX) return I2C_ERROR_NODEV;
             *data++ = i2cGetReceivedByte();
             // decrement length
             length--;
@@ -236,7 +244,8 @@ u08 i2cMasterSendNI(u08 deviceAddr, u08 length, u08* data)
 
         // accept receive data and nack it (last-byte signal)
         i2cReceiveByte(false);
-        i2cWaitForComplete();
+        i2cWaitForComplete(&status);
+		if(status > I2C_DELAY_MAX) return I2C_ERROR_NODEV;
         *data++ = i2cGetReceivedByte();
     }
     else
@@ -255,7 +264,8 @@ u08 i2cMasterSendNI(u08 deviceAddr, u08 length, u08* data)
     sbi(TWCR, TWIE);
 
     return retval;
-}*/
+}
+#endif
 /*
 
 //! I2C (TWI) interrupt service routine

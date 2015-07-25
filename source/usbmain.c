@@ -583,11 +583,13 @@ void usb_main(void) {
             if(updateNeeded){
                 if(interfaceReady==false) continue;
 
+#if USB_COUNT_SOF
                 if(_isSuspended == true) {
                     wake_up_signal();
                     updateNeeded = 0;
                     continue;
                 }
+#endif
 
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
 

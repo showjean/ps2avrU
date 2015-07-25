@@ -21,7 +21,9 @@
 #  Your "target" file is your C source file that is at the top level of your code.
 #  In other words, this is the file which contains your main() function.
 
+ifndef TRG
 	TRG = main
+endif
 	
 
 # debug
@@ -29,6 +31,10 @@
 ifdef DEBUG_LEVEL
     OPT_DEFS += -DDEBUG_LEVEL=$(DEBUG_LEVEL)
 	SRC +=  $(COMMON_DIR)/usbdrv/oddebug.c
+endif
+
+ifdef DEBUG_JTAG
+	OPT_DEFS += -DDEBUG_JTAG=$(DEBUG_JTAG)
 endif
 
 # Option
@@ -59,12 +65,25 @@ ifndef USING_CUSTOM_TIMER
 	SRC +=  $(AVRLIB)/$(TIMER).c
 endif
 
+ifdef USING_SIMPLE_MODE
+	OPT_DEFS += -DUSING_SIMPLE_MODE
+endif
+
+ifdef PWM_SPEED_3
+	OPT_DEFS += -DPWM_SPEED_3
+endif
+
+ifdef I2C_FULLDUPLEX
+	OPT_DEFS += -DI2C_FULLDUPLEX
+endif
+
 #put your C sourcefiles here 
 #  Here you must list any C source files which are used by your target file.
 #  They will be compiled in the order you list them, so it's probably best
 #  to list $(TRG).c, your top-level target file, last.
 
-	SRC +=  $(COMMON_DIR)/custommacro.c \
+	SRC +=  $(COMMON_DIR)/keymatrix.c \
+			$(COMMON_DIR)/custommacro.c \
 			$(COMMON_DIR)/keyscan.c \
 			$(COMMON_DIR)/quickswap.c \
 			$(COMMON_DIR)/dualaction.c \
@@ -82,7 +101,7 @@ endif
 			$(COMMON_DIR)/lazyfn.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
-			$(COMMON_DIR)/$(TRG).c \
+			$(COMMON_DIR)/main.c \
 			
 #put additional assembler source file here
 #  The ASRC line allows you to list files which contain assembly code/routines that

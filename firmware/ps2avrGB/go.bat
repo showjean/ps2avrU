@@ -1,5 +1,5 @@
 make clean
 ::pause;
 make
-make rename
+::make rename
 pause;

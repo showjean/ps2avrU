@@ -6,10 +6,6 @@ TOP_DIR = ../..
 
 #FLASH_WRITE_ADDRESS = 0x7E00
 
-ifndef RESULT
-	RESULT = ps2avrGB
-endif
-
 TRG = ps2avrGB
 
 #DEBUG_LEVEL = 1
@@ -23,7 +19,7 @@ endif
 SCROLL_LOCK_LED_IS_APART = 1
 DISABLE_HARDWARE_KEYMAPPING = 1
 USING_CUSTOM_TIMER = 1
-USING_SIMPLE_MODE = 1
+#USING_SIMPLE_MODE = 1
 
 
 ########### change this lines according to your project ##################
@@ -37,11 +33,36 @@ F_CPU = 12000000
 
 SRC =i2c/i2c.c \
 	timer/timer.c \
+	ledrender.c \
+	vusb.c
 
-SRC +=ledrender.c \
-	keymatrix.c \
-	vusb.c \
-	ps2avrGB_main.c
+
+ifdef SPLIT
+	PWM_SPEED_3 = 1
+	I2C_FULLDUPLEX = 1
+	INTERFACE_ONLY_USB = 1
+	
+	SRC +=  ps2avrGB_split_main.c
+
+	ifdef GKP
+		GHOST_KEY_PREVENTION = 1
+		RESULT = ps2avrGB_split_GKP
+	else
+		RESULT = ps2avrGB_split_NKRO
+	endif
+
+else
+	SRC +=  ps2avrGB_main.c
+	
+	ifdef GKP
+		GHOST_KEY_PREVENTION = 1
+		RESULT = ps2avrGB_GKP
+	else
+		RESULT = ps2avrGB_NKRO
+	endif
+endif
+
+
 
 # boot
 ifdef FLASH_WRITE_ADDRESS

@@ -1,22 +1,26 @@
+del bin\*.hex
+
 make clean
-make -f makefile_NKRO
-del keymain_NKRO.hex
-ren main.hex keymain_NKRO.hex
+make GKP=1
+copy /Y ps2avrU.hex bin\keymain_GKP.hex
 ::pause;
 make clean
-make -f makefile_GKP
-del keymain_GKP.hex
-ren main.hex keymain_GKP.hex
+make SLA=1
+copy /Y ps2avrU.hex bin\keymain_NKRO_SL_apart.hex
 ::pause;
 make clean
-make -f makefile_NKRO_SL_apart
-del keymain_NKRO_SL_apart.hex
-ren main.hex keymain_NKRO_SL_apart.hex
+make GKP=1 SLA=1
+copy /Y ps2avrU.hex bin\keymain_GKP_SL_apart.hex
 ::pause;
 make clean
-make -f makefile_GKP_SL_apart
-del keymain_GKP_SL_apart.hex
-ren main.hex keymain_GKP_SL_apart.hex
+make SPLIT=1
+copy /Y ps2avrU.hex bin\keymain_split_NKRO.hex
 ::pause;
-go.bat
+make clean
+make SPLIT=1 GKP=1
+copy /Y ps2avrU.hex bin\keymain_split_GKP.hex
+::pause;
+make clean
+make
+copy /Y ps2avrU.hex bin\keymain_NKRO.hex
 pause;

@@ -22,7 +22,11 @@
 #define PWM_MAX 0xFF
 #define LED_MODE_NUM 5
 #ifndef PWM_SPEED
-	#define PWM_SPEED 8
+	#ifdef PWM_SPEED_3
+		#define PWM_SPEED 3
+	#else
+		#define PWM_SPEED 8
+	#endif
 #endif
 
 static int downLevelStay = 0;

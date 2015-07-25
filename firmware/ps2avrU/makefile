@@ -4,9 +4,7 @@
 TOP_DIR = ../..
 TIMER = timer
 
-ifndef RESULT
-	RESULT = ps2avrU
-endif
+TRG = ps2avrU
 
 #DEBUG_LEVEL = 1
 
@@ -19,8 +17,45 @@ MCU = atmega32
 F_CPU = 12000000
 
 SRC = ledrender_ps2avrU.c \
-	keymatrix.c \
-	vusb.c \
-	ps2avrU.c
+	vusb.c
+
+ifdef SPLIT
+	INTERFACE_ONLY_USB = 1
+	SCROLL_LOCK_LED_IS_APART = 1
+	DISABLE_HARDWARE_KEYMAPPING = 1
+	PWM_SPEED_3 = 1
+	I2C_FULLDUPLEX = 1
+	
+	SRC +=  i2c/i2c.c \
+		ps2avrU_split_main.c
+	
+	ifdef GKP
+		GHOST_KEY_PREVENTION = 1
+		RESULT = ps2avrU_split_GKP
+	else
+		RESULT = ps2avrU_split_NKRO
+	endif
+
+else
+	SRC +=  ps2avrU_main.c
+			
+	ifdef GKP
+		GHOST_KEY_PREVENTION = 1
+		ifdef SLA
+			SCROLL_LOCK_LED_IS_APART = 1
+			RESULT = ps2avrU_GKP_SLA
+		else
+			RESULT = ps2avrU_GKP
+		endif
+	else
+		ifdef SLA
+			SCROLL_LOCK_LED_IS_APART = 1
+			RESULT = ps2avrU_NKRO_SLA
+		else
+			RESULT = ps2avrU_NKRO
+		endif
+	endif
+
+endif
 
 include $(TOP_DIR)/common.mk

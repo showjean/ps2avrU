@@ -1,12 +1,24 @@
+::make clean
+::make -f makefile_NKRO.mk
+::del ps2avrGB_NKRO.hex
+::copy ps2avrGB.hex ps2avrGB_NKRO.hex
+::pause;
+
+del bin\*.hex
+
 make clean
-make -f makefile_NKRO.mk
-del ps2avrGB_NKRO.hex
-ren main.hex ps2avrGB_NKRO.hex
+make SPLIT=1
+copy /Y ps2avrGB.hex bin\ps2avrGB_split_NKRO.hex
 ::pause;
 ::make clean
-::make -f makefile_GKP.mk
-::del ps2avrGB_GKP.hex
-::ren main.hex ps2avrGB_GKP.hex
+::make SPLIT=1 GKP=1
+::move /Y ps2avrGB.hex bin\ps2avrGB_split_GKP.hex
 ::pause;
-go.bat
-pause;
+
+make clean
+make
+copy /Y ps2avrGB.hex bin\ps2avrGB_NKRO.hex
+::pause;
+::make clean
+::make GKP=1
+::move /Y ps2avrGB.hex bin\ps2avrGB_GKP.hex
