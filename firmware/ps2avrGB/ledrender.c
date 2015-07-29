@@ -832,7 +832,7 @@ static void _setLed2All(cRGB_t xRgb){
 	sendI2c();*/
 }
 
-static void getRainbowColorByIndex(cRGB_t *pRgb, uint8_t *pIndex, uint8_t aOffset){	
+/*static void getRainbowColorByIndex(cRGB_t *pRgb, uint8_t *pIndex, uint8_t aOffset){	
 	uint8_t kIndex = (*pIndex + aOffset) % LENGTH_OF_RAINBOW_COLOR;
 
 	if(rainbowColor[kIndex].r == 0 && rainbowColor[kIndex].g == 0 && rainbowColor[kIndex].b == 0)
@@ -845,7 +845,7 @@ static void getRainbowColorByIndex(cRGB_t *pRgb, uint8_t *pIndex, uint8_t aOffse
 	{
 		*pRgb = rainbowColor[kIndex];
 	}
-} 
+}*/ 
 
 static void increaseRainbowIndex(void)
 {
@@ -854,17 +854,38 @@ static void increaseRainbowIndex(void)
 	}
 }
 
+static void setModLength(uint8_t *aIndex)
+{
+	if(*aIndex >= LENGTH_OF_RAINBOW_COLOR)
+	{
+		*aIndex -= LENGTH_OF_RAINBOW_COLOR;
+	}
+}
+
 static void setNextAvailableRainbowIndex(uint8_t *aIndex)
 {
 	uint8_t kIndex;
 	uint8_t i;
 	for (i = 0; i < numOfLeds; i++) {					
-		kIndex = (*aIndex + _rainbowIndex) % LENGTH_OF_RAINBOW_COLOR;
+		kIndex = (*aIndex + _rainbowIndex); // % LENGTH_OF_RAINBOW_COLOR;
+
+		setModLength(&kIndex);
+		/*if(kIndex >= LENGTH_OF_RAINBOW_COLOR)
+		{
+			kIndex -= LENGTH_OF_RAINBOW_COLOR;
+		}*/
+
 		if(rainbowColor[kIndex].r == 0 
 			&& rainbowColor[kIndex].g == 0 
 			&& rainbowColor[kIndex].b == 0)
 		{
 			*aIndex	+= 1;
+
+			setModLength(aIndex);
+			/*if(*aIndex >= LENGTH_OF_RAINBOW_COLOR)
+			{
+				*aIndex = 0;
+			}*/
 		}
 		else
 		{
@@ -873,6 +894,7 @@ static void setNextAvailableRainbowIndex(uint8_t *aIndex)
 	}
 }
 
+#define VALUE_RAINBOW_FLOW 		2
 static void setLed2All(cRGB_t xRgb){
 
 //DBG1(0x40, (uchar *)&xRgb, 3);
@@ -886,7 +908,15 @@ static void setLed2All(cRGB_t xRgb){
 	_setLed2All(xRgb);
 }
 
-#define VALUE_RAINBOW_FLOW 		2
+static void changeRainbowColor(uint8_t *aTargetColor, uint8_t *aCurrentColor)
+{
+	if (*aTargetColor > *aCurrentColor + VALUE_RAINBOW_FLOW) {
+		*aCurrentColor += VALUE_RAINBOW_FLOW;
+	} else if (*aTargetColor < *aCurrentColor - VALUE_RAINBOW_FLOW) {
+		*aCurrentColor -= VALUE_RAINBOW_FLOW;
+	}
+}
+
 static void _fadeLED2(void){
 	static int gFrame = 0;
 
@@ -963,11 +993,16 @@ static void _fadeLED2(void){
 				if (_delayCount++ == 0) {
 					_changeCount = 0;
 					for (i = 0; i < numOfLeds; i++) {
-						_changeCount++;
 						setNextAvailableRainbowIndex(&_changeCount);
-						ledModified[i] = rainbowColor[_changeCount % LENGTH_OF_RAINBOW_COLOR];
+						setModLength(&_changeCount);
+						/*if(_changeCount >= LENGTH_OF_RAINBOW_COLOR)
+						{
+							_changeCount -= LENGTH_OF_RAINBOW_COLOR;
+						}*/
+						ledModified[i] = rainbowColor[_changeCount];
 						getMaxRgbValue(&ledModified[i]);
 						i2cLength = i2cLength + 3;
+						_changeCount++;
 					}
 					sendI2c();
 				}
@@ -975,10 +1010,20 @@ static void _fadeLED2(void){
 				uint8_t kIndex;
 				_changeCount = 0;
 				for (i = 0; i < numOfLeds; i++) {
-					_changeCount++;
 					setNextAvailableRainbowIndex(&_changeCount);
-					kIndex = (_changeCount + _rainbowIndex) % LENGTH_OF_RAINBOW_COLOR;
-					if (rainbowColor[kIndex].r > ledModified[i].r + VALUE_RAINBOW_FLOW) {
+					kIndex = (_changeCount + _rainbowIndex); // % LENGTH_OF_RAINBOW_COLOR;
+
+					setModLength(&kIndex);
+					/*if(kIndex >= LENGTH_OF_RAINBOW_COLOR)
+					{
+						kIndex -= LENGTH_OF_RAINBOW_COLOR;
+					}*/
+
+					changeRainbowColor(&rainbowColor[kIndex].r, &ledModified[i].r);
+					changeRainbowColor(&rainbowColor[kIndex].g, &ledModified[i].g);
+					changeRainbowColor(&rainbowColor[kIndex].b, &ledModified[i].b);
+
+					/*if (rainbowColor[kIndex].r > ledModified[i].r + VALUE_RAINBOW_FLOW) {
 						ledModified[i].r += VALUE_RAINBOW_FLOW;
 					} else if (rainbowColor[kIndex].r < ledModified[i].r - VALUE_RAINBOW_FLOW) {
 						ledModified[i].r -= VALUE_RAINBOW_FLOW;
@@ -994,11 +1039,17 @@ static void _fadeLED2(void){
 						ledModified[i].b += VALUE_RAINBOW_FLOW;
 					} else if (rainbowColor[kIndex].b < ledModified[i].b - VALUE_RAINBOW_FLOW) {
 						ledModified[i].b -= VALUE_RAINBOW_FLOW;
-					}
+					}*/
 
 					getMaxRgbValue(&ledModified[i]);
 
 					i2cLength = i2cLength + 3;
+					_changeCount++;
+					setModLength(&_changeCount);
+					/*if(_changeCount >= LENGTH_OF_RAINBOW_COLOR)
+					{
+						_changeCount -= LENGTH_OF_RAINBOW_COLOR;
+					}*/
 				}
 
 				_delayCount += VALUE_RAINBOW_FLOW;
@@ -1033,9 +1084,12 @@ static void _fadeLED2(void){
 				setLed2All(_currentLedAllColor);
 
 				if (arrived == 3) {
-					if (++_rainbowIndex > 6) {
+
+					++_rainbowIndex;
+					setModLength(&_rainbowIndex);
+					/*if (++_rainbowIndex > 6) {
 						_rainbowIndex = 0;
-					}
+					}*/
 				}
 			}
 
@@ -1065,7 +1119,8 @@ static void fadeLED(void) {
             // pwmDir 0~3 : idle
             if( pwmCounter>=PWM_MAX) {
                 pwmCounter=0;
-                pwmDir = (pwmDir+1)%4;
+                //pwmDir = (pwmDir+1)%4;
+                if(++pwmDir >= 4) pwmDir = 0;
             }else{
                 pwmCounter++;
             }
