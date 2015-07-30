@@ -542,7 +542,7 @@ void printPrepareString(void){
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 void loadCurrentLayer(void)
 {	
-	uint16_t gAddress;
+	/*uint16_t gAddress;
 	uint8_t k, j;
 	for(k = 0; k < ROWS; ++k){
 		for (j = 0; j < COLUMNS; ++j)
@@ -550,7 +550,9 @@ void loadCurrentLayer(void)
 			gAddress = EEPROM_MAPPING + (k * COLUMNS + j) + (ROWS * COLUMNS * _currentLayer);	// key
 			_newKeyMap[k][j] = eeprom_read_byte((uint8_t *)gAddress);
 		}
-	}
+	}*/
+
+    eeprom_read_block(&_newKeyMap, (uint8_t *)(EEPROM_MAPPING + (ROWS * COLUMNS * _currentLayer)), ROWS * COLUMNS);
 	_editCount = 0;
 }
 #endif
@@ -570,7 +572,7 @@ void prepareKeyMapper(void)
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 void saveCurrentLayerAfter(void)
 {
-	uint8_t gKeyindex;
+	/*uint8_t gKeyindex;
 	uint16_t gAddress;
 	uint8_t k, j;
 	for(k = 0; k < ROWS; ++k){
@@ -578,9 +580,12 @@ void saveCurrentLayerAfter(void)
 		{
 			gKeyindex = _newKeyMap[k][j];	// value
 			gAddress = EEPROM_MAPPING + (k * COLUMNS + j) + (ROWS * COLUMNS * _currentLayer);	// key
-			eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
+			eeprom_update_byte((uint8_t *)gAddress, gKeyindex);
 		}
-	}
+	}*/
+
+	eeprom_update_block(&_newKeyMap, (uint8_t *)(EEPROM_MAPPING + (ROWS * COLUMNS * _currentLayer)), ROWS * COLUMNS);
+
 	_editCount = 0;
 
 	if(_stepAfterLayerSave == STEP_SAVE_END_MAPPING)
@@ -697,24 +702,27 @@ void readMacro(uint8_t xMacroIndex){
 void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
 
-	uint8_t gKeyindex;
+	/*uint8_t gKeyindex;
 	uint16_t gAddress;
 	uint8_t k;
 	for(k = 0; k < MACRO_SIZE_MAX; ++k){
 		gKeyindex = _macroInputBuffer[k];	// value
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		eeprom_write_byte((uint8_t *)gAddress, gKeyindex);
-	}
+		eeprom_update_byte((uint8_t *)gAddress, gKeyindex);
+	}*/
+	eeprom_update_block(&_macroInputBuffer, (uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * _macroIndex)), MACRO_SIZE_MAX);
 	_macroIndex = 255;
 }
 
 void clearMacroAllAfter(void){
-	uint16_t gAddress;
+//	uint16_t gAddress;
 	int k;
 	for(k = 0; k < MACRO_SIZE_MAX * MACRO_NUM; ++k){
-		gAddress = EEPROM_MACRO + (k);	// key
-		eeprom_write_byte((uint8_t *)gAddress, 0);
+//		gAddress = EEPROM_MACRO + (k);	// key
+		eeprom_update_byte((uint8_t *)(EEPROM_MACRO + (k)), 0);
 	}
+
+//	eeprom_update_block(&_macroInputBuffer, (uint8_t *)(EEPROM_MACRO), MACRO_SIZE_MAX * MACRO_NUM);
 
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();
@@ -731,12 +739,12 @@ void clearMacroAll(void)
 }
 
 void clearMacroAtIndexAfter(void){
-	uint16_t gAddress;
+//	uint16_t gAddress;
 	int k;
 	int gLen = MACRO_SIZE_MAX;
 	for(k = 0; k < gLen; ++k){
-		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		eeprom_write_byte((uint8_t *)gAddress, 0);
+//		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
+		eeprom_update_byte((uint8_t *)(EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex)), 0);
 	}
 	_step = STEP_INPUT_COMMAND;
 	printPrompt();

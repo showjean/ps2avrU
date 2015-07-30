@@ -262,7 +262,7 @@ static void clearReportBuffer(void);
 static void wakeUpUsb(void);
 static void countSleepUsb(void);
 #endif
-
+static void wake_up_signal(void);
 
 void delegateLedUsb(uint8_t xState){
 //    DBG1(0x3A, (uchar *)&xState, 1);
@@ -452,7 +452,7 @@ static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
-static void wake_up_signal()
+static void wake_up_signal(void)
 {
     cli();
     char ps_p = P2U_PS2_PORT;

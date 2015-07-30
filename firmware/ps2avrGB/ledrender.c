@@ -111,7 +111,7 @@ static uint16_t getBrightness(uint16_t xValue);
 static uint8_t numOfLeds = LED_NUM_DEFAULT; //LED_NUM_MAX;
 //static cRGB_t led[LED_NUM_MAX];
 static cRGB_t ledModified[LED_NUM_MAX];
-static cRGB_t rainbowColor[7];
+static cRGB_t rainbowColor[LENGTH_OF_RAINBOW_COLOR];
 static uint16_t led2Brightness; 	// = LED2_MAX_200MA_SUM;
 static uint16_t led2SumLimit; 	// = LED2_MAX_400MA_SUM / numOfLeds;
 static u08 i2cLength;
