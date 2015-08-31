@@ -73,7 +73,6 @@ bool hasCustomMacroAt(uint8_t xMacroIndex){
 
 // 매크로가 실행되면 timer2를 작동시켜서 정해진 delay마다 매크로 버퍼에 keyindex를 넣어 준다.
 // 해당 매크로의 실행이 완료되기 전까지 다른 키입력은 막는다.
-// 단, 현재는 딜레이를 적용하지 않았으므로 모든 keyindex를 매크로 버퍼에 넣는다.
 void readCustomMacroAt(uint8_t xMacroIndex){
     if(_isActiveCustomMacro) return;
     // DEBUG_PRINT(("readCustomMacroAt  xMacroIndex: %d \n", xMacroIndex));

@@ -42,6 +42,7 @@ static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 
 static bool _isReleaseAll = true;
 static bool _isReleaseAllPrev = true;
 static bool _isFnPressed = false;
+static uint8_t _pressedFn = LAYER_NORMAL;
 static uint8_t _currentLazyLayer = 0;
 
 
@@ -140,13 +141,6 @@ uint8_t getLayer(void) {
 			if(cur){
 				keyidx = getCurrentKeyindex(_fnScanLayer, row, col);
 			    keyidx = getDualActionKeyWhenCompound(keyidx); 	// fn 키는 무조건 다운 액션을 적용;
-
-#ifdef DEBUG_QUICK_BOOTLOADER
-    // for test
-    if(col == 0 && row == 0){
-    	delegateGotoBootloader();
-    }
-#endif
 				
 				// DEBUG_PRINT(("col= %d, row= %d keymap\n", col, row));
 				if(keyidx == KEY_FN){
@@ -162,6 +156,7 @@ uint8_t getLayer(void) {
 						return LAYER_NORMAL;
 					}
 				}
+
 				if(gLayer > 0){
 					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 gLayer로 반환;
 					if(isLazyFn()){
@@ -176,6 +171,13 @@ uint8_t getLayer(void) {
 					setFnScanLayer();
 
 					_isFnPressed = true;
+
+					// FN 키가 2개 이상 눌릴 경우 matrix 상에서 빠른 순서가 우선 적용되어 오작동 되는 경우가 있어 2개 이상의 FN은 동시 적용 되지 않도록
+                    if(_pressedFn != _fnScanLayer && _pressedFn != gLayer)
+                    {
+                        return _pressedFn;
+                    }
+                    _pressedFn = gLayer;
 					return gLayer;
 				}
 			}
@@ -185,6 +187,7 @@ uint8_t getLayer(void) {
 	setFnScanLayer();
 	
 	_isFnPressed = false;
+	_pressedFn = _fnScanLayer;
 	return _fnScanLayer;
 }
 

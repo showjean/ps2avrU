@@ -380,7 +380,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
 //            DBG1(0xC7, (uchar *)&xKeyidx, 3);
 
             gIdx = findIndex(reportBuffer, xKeyidx);
-            DBG1(0xC7, (uchar *)&gIdx, 3);
+//            DBG1(0xC7, (uchar *)&gIdx, 3);
 
             if(gIdx >= 0 ){
                 delete(reportBuffer, gIdx);

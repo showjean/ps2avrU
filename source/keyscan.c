@@ -75,12 +75,11 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
     // 이전 상태에서(press/up) 변화가 있을 경우;
     //if( !(prev&&cur) && !(!prev&&!cur)) {                
     if( xPrev != xCur ) {
-//        pushDownBuffer(getDualActionKeyWhenCompound(xKeyidx), xCur);
         pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx), xCur);
 
         setKeyEnabled(xKeyidx, xCur);
 
-        if(isKeyEnabled(xKeyidx) == false) return;   
+        if(isKeyEnabled(xKeyidx) == false) return;
 
         if(xCur) {
 //            DBG1(0xB1, (uchar *)&xKeyidx, 1);
@@ -181,7 +180,6 @@ void scanKeyWithDebounce(void) {
 static void scanKey(uint8_t xLayer) {
 
 	uint8_t row, col, prev, cur, keyidx;
-	uint8_t gLayer = xLayer; 
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
@@ -191,7 +189,7 @@ static void scanKey(uint8_t xLayer) {
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-            keyidx = getCurrentKeyindex(gLayer, row, col);	   		
+            keyidx = getCurrentKeyindex(xLayer, row, col);
 
 #ifdef ENABLE_BOOTMAPPER           
             if(isBootMapper()){

@@ -189,7 +189,7 @@ static uint8_t led2rainbowSettingCount = 0;
 void getLed2(led2_info_t *buffer){
 
 	// report led2 info
-	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte
+	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte, fade mode 1byte
 	buffer->num = numOfLeds;
 	buffer->mode = _Led2Mode;
 	buffer->brightness = (uint8_t)(led2Brightness / 3);
@@ -304,91 +304,6 @@ void setLed2(uint8_t *data){
 		_saved |= BV(SAVE_BIT_LED2_NUM);
 	 }
 
-	/*switch (*(data+1)){
-		// case LED2_INDEX_LED_SAVE:
-		// 	confirmLed2Save = true;
-		// 	break;
-		case LED2_INDEX_COLOR_RAINBOW_INIT:
-			led2rainbowSettingCount = 0;
-			break;
-		case LED2_INDEX_COLOR_RAINBOW:
-			if(led2rainbowSettingCount > 0 && led2rainbowSettingCount < 4){
-				rainbowColor[(led2rainbowSettingCount*2)-2] = *((cRGB_t *)(data+2));
-				rainbowColor[(led2rainbowSettingCount*2)-1] = *((cRGB_t *)(data+5));
-			}else if(led2rainbowSettingCount==4){
-				rainbowColor[6] = *((cRGB_t *)(data+2));
-
-	//			DBG1(0xbb, (uchar *)data, 8);
-
-				_saved |= BV(SAVE_BIT_LED2_COLOR_RAINBOW);
-				break;
-			}
-			++led2rainbowSettingCount;
-
-			break;
-		case LED2_INDEX_COLOR_SET1:
-			color1 = *((cRGB_t *)(data+2));
-			_saved |= BV(SAVE_BIT_LED2_COLOR1);
-
-		    setLed2State();
-			break;
-		case LED2_INDEX_COLOR_SET2:
-			color2 = *((cRGB_t *)(data+2));
-			_saved |= BV(SAVE_BIT_LED2_COLOR2);
-
-		    setLed2State();
-			break;
-		case LED2_INDEX_COLOR_SET3:
-			color3 = *((cRGB_t *)(data+2));
-			_saved |= BV(SAVE_BIT_LED2_COLOR3);
-
-		    setLed2State();
-			break;
-		case LED2_INDEX_COLOR_KEY_SET1:
-			color_key1 = *((cRGB_t *)(data+2));
-			_saved2 |= BV(SAVE2_BIT_LED2_COLOR_KEY1);
-
-			break;
-		case LED2_INDEX_MODE:
-			__setLed2Mode(*(data+2), 0);	// 항상 led 재설정;
-			break;
-		case LED2_INDEX_LED_BRIGHTNESS:
-			led2Brightness = *(data+2) * 3;
-			if(led2Brightness == 0) led2Brightness = 3;
-			setLed2BrightnessLimit();
-
-			setLed2BrightnessAfter();
-			setLed2State();
-			break;
-		case LED2_INDEX_MODE_KEY:
-			_Led2KeyEventMode = *(data+2);
-			_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);
-			break;
-		case LED2_INDEX_MODE_FADE_TYPE:
-			_rainbowMode = *(data+2);
-			_delayCount = 0;
-			_changeCount = 0;
-			_rainbowIndex = 0;
-			_saved2 |= BV(SAVE2_BIT_LED2_FADE_TYPE);
-			break;
-		// case LED2_INDEX_MODE_KEY_TYPE:
-		// 	break;
-		case LED2_INDEX_LED_NUM:
-			turnOffLed2();
-			setLed2Num(*(data+2));
-		    setLedBalance();
-
-			_saved |= BV(SAVE_BIT_LED2_NUM);
-			break;
-		// case LED2_INDEX_LED_ENABLED:
-		// 	turnOffLed2();
-		// 	setLed2Num(*(data+2));
-		//     setLedBalance();
-
-		// 	_saved |= BV(SAVE_BIT_LED2_NUM);
-		// 	break;
-	}*/
-
 	ledStateCount = 0;
 }
 
@@ -463,27 +378,12 @@ void initFullLEDStateAfter(void){
 	eeprom_read_block(&color1, (uint8_t *)EEPROM_LED2_COLOR_1, 3);
 	eeprom_read_block(&color2, (uint8_t *)EEPROM_LED2_COLOR_2, 3);
 	eeprom_read_block(&color3, (uint8_t *)EEPROM_LED2_COLOR_3, 3);
-	/*color1.g = eeprom_read_byte((uint8_t *)EEPROM_LED2_COLOR_1);
-	color1.r = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_1+1));
-	color1.b = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_1+2));
-	color2.g = eeprom_read_byte((uint8_t *)EEPROM_LED2_COLOR_2);
-	color2.r = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_2+1));
-	color2.b = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_2+2));
-	color3.g = eeprom_read_byte((uint8_t *)EEPROM_LED2_COLOR_3);
-	color3.r = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_3+1));
-	color3.b = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_3+2));*/
 
 	// set rainbow color
 
 	// led2 rainbow
 	eeprom_read_block(&rainbowColor[0], (uint8_t *)EEPROM_LED2_COLOR_RAINBOW, 21 /* LENGTH_OF_RAINBOW_COLOR * 3 */);
-	/*uint8_t i;
-	for(i=0;i<LENGTH_OF_RAINBOW_COLOR;++i){
-		eeprom_read_block(&rainbowColor[i], (uint8_t *)EEPROM_LED2_COLOR_RAINBOW+(i*3), 3);
-		// rainbowColor[i].g = eeprom_read_byte((uint8_t *)EEPROM_LED2_COLOR_RAINBOW+(i*3));
-		// rainbowColor[i].r = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_RAINBOW+(i*3)+1));
-		// rainbowColor[i].b = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_RAINBOW+(i*3)+2));
-	}*/
+
 	// led2 rainbow fading type
 	_rainbowMode = eeprom_read_byte((uint8_t *)EEPROM_LED2_FADE_TYPE);
 
@@ -499,9 +399,6 @@ void initFullLEDStateAfter(void){
 	}
 	// led2 key color 1
 	eeprom_read_block(&color_key1, (uint8_t *)EEPROM_LED2_COLOR_KEY1, 3);
-	/*color_key1.g = eeprom_read_byte((uint8_t *)EEPROM_LED2_COLOR_KEY1);
-	color_key1.r = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_KEY1+1));
-	color_key1.b = eeprom_read_byte((uint8_t *)(EEPROM_LED2_COLOR_KEY1+2));*/
 
 
     setLedBalance();
@@ -685,7 +582,6 @@ static void writeLEDMode(void) {
 
 		// led num SAVE_BIT_LED2_NUM
 		if(((_saved >> SAVE_BIT_LED2_NUM) & 0x01)){
-//			prevRgb = (cRGB_t){0,0,0};
 			setFullLedState();
 		    setLed2State();
 
@@ -695,21 +591,12 @@ static void writeLEDMode(void) {
 		// led2 color1~3
 		if(((_saved >> SAVE_BIT_LED2_COLOR1) & 0x01)){
 			eeprom_update_block(&color1, (uint8_t *)(EEPROM_LED2_COLOR_1), 3);
-			/*eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_1), color1.g);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_1+1), color1.r);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_1+2), color1.b);*/
 		}
 		if(((_saved >> SAVE_BIT_LED2_COLOR2) & 0x01)){
 			eeprom_update_block(&color2, (uint8_t *)(EEPROM_LED2_COLOR_2), 3);
-			/*eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_2), color2.g);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_2+1), color2.r);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_2+2), color2.b);*/
 		}
 		if(((_saved >> SAVE_BIT_LED2_COLOR3) & 0x01)){
 			eeprom_update_block(&color3, (uint8_t *)(EEPROM_LED2_COLOR_3), 3);
-			/*eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_3), color3.g);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_3+1), color3.r);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_3+2), color3.b);*/
 		}
 
 		// led2 rainbow
@@ -717,12 +604,6 @@ static void writeLEDMode(void) {
 
 			eeprom_update_block(&rainbowColor, (uint8_t *)(EEPROM_LED2_COLOR_RAINBOW), 21 /* LENGTH_OF_RAINBOW_COLOR * 3 */);
 
-			/*uint8_t *gRainbowData = (uint8_t *)rainbowColor;
-			uint8_t i;
-			for(i= 0; i < 21; ++i){ // LENGTH_OF_RAINBOW_COLOR * 3
-				eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_RAINBOW+i), *gRainbowData++);
-			}*/
-//			DBG1(0x22, (uint8_t *)rainbowColor, 21);
 		}
 
 		// led2 rainbow fading type
@@ -737,9 +618,6 @@ static void writeLEDMode(void) {
 
 		if(((_saved2 >> SAVE2_BIT_LED2_COLOR_KEY1) & 0x01)){
 			eeprom_update_block(&color_key1, (uint8_t *)(EEPROM_LED2_COLOR_KEY1), 3);
-			/*eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_KEY1), color_key1.g);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_KEY1+1), color_key1.r);
-			eeprom_update_byte((uint8_t *)(EEPROM_LED2_COLOR_KEY1+2), color_key1.b);*/
 		}
 
 		_saved = 0;
@@ -960,7 +838,7 @@ static void setNextAvailableRainbowIndex(uint8_t *aIndex)
 
 		setModLength(&kIndex);
 
-		if(rainbowColor[kIndex].r == 0 
+		if(rainbowColor[kIndex].r == 0
 			&& rainbowColor[kIndex].g == 0 
 			&& rainbowColor[kIndex].b == 0)
 		{
@@ -1090,6 +968,10 @@ static void _fadeLED2(void){
 				}
 			}
 
+		}
+		else if(_Led2Mode != 0)
+		{
+		    _setLed2All(&prevRgb);
 		}
 	}	// frame
 }

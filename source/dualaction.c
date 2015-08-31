@@ -144,8 +144,6 @@ void applyDualActionDownWhenIsCancel(bool isDown){
 
 static void applyDualActionUp(void){
 
-	// DEBUG_PRINT(("applyDualAction \n"));
-
     if(dualActionKeyIndex > 0 && !isCanceledDualAction()){
         // 듀얼액션이 저장되어 있을 때 아무키도 눌리지 않은 리포트가 간다면 액션!
        	uint8_t gUpIdx = getDualActionKeyWhenAlone(dualActionKeyIndex);
@@ -170,8 +168,9 @@ static void applyDualActionUp(void){
 }
 
 void setDualAction(uint8_t keyidx, bool isDown){
-
+//    DBG1(0x00, (uchar *)&isDown, 1);
 	if(isDown){
+//	    DBG1(0x01, (uchar *)&keyidx, 1);
 		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
 			++_dualActionCount;
 			if (_isActiveDualAction == false && _normalKeyCount == 0) {
@@ -182,6 +181,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
 				// 듀얼액션이 저장되어 있을 때 아무 키나 눌리면 액션 중지;
 				_isCanceledDualAction = true;
 			}
+//	        DBG1(0x02, (uchar *)&_dualActionCount, 1);
 		} else if (dualActionKeyIndex > 0) {
 			// 듀얼액션이 저장되어 있을 때 아무 키나 눌리면 액션 중지;
 			_isCanceledDualAction = true; // 듀얼액션을 취소 시키면 다음 듀얼액션 키 down일 때까지 계속 취소상태로 유지됨;
@@ -191,7 +191,9 @@ void setDualAction(uint8_t keyidx, bool isDown){
 			++_normalKeyCount;  // 보통 키가 눌려진 수만큼 증가;
 			_isCanceledDualAction = true;
 		}
+//        DBG1(0x03, (uchar *)&_isCanceledDualAction, 1);
 	} else {
+//	    DBG1(0x04, (uchar *)&keyidx, 1);
 		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
 			if (_dualActionCount > 0)
 				--_dualActionCount;

@@ -127,6 +127,17 @@ endif
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
 #	CPGLAGS += -fno-inline-small-functions
 
+# --------------------
+	CPFLAGS += -fno-inline-small-functions
+	CPFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+	CPFLAGS += --param inline-call-cost=2 -finline-limit=3 
+	CPFLAGS += -ffunction-sections -fdata-sections
+#	CPFLAGS += -ffreestanding 
+	CPFLAGS += -Wl,--relax,--gc-sections
+	#
+	CPFLAGS += -fno-split-wide-types -fno-tree-scev-cprop
+# --------------------
+
 #linker flags
 	LDFLAGS += -Wl,-Map=$(TRG).map,--cref -Wl,-u,vfprintf -lprintf_min
 #	LDFLAGS = -Wl,-Map=$(TRG).map,--cref -lm
