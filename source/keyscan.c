@@ -47,7 +47,6 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
         
-//    	DBG1(0x0A, (uchar *)&xKeyidx, 1);
         putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 
         return;
@@ -130,7 +129,6 @@ void scanKeyWithDebounce(void) {
     
     uint8_t prevKeyidx;
     uint8_t row, col, prev, cur, keyidx;
-    static bool _isFnPressedPrev = false;   
     static uint8_t _prevLayer = 0;
     uint8_t gLayer = getLayer();
 
@@ -138,7 +136,9 @@ void scanKeyWithDebounce(void) {
     uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
     // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-    if( (!isLazyFn() || !_isFnPressedPrev) && _prevLayer != gLayer){    // !isLazyFn() || !_isFnPressedPrev 순서 주의
+//    DBG1(0x0A, (uchar *)&_prevLayer, 1);
+//    DBG1(0x0A, (uchar *)&gLayer, 1);
+    if( (!isLazyFn()) && _prevLayer != gLayer){    // !isLazyFn() || !_isFnPressedPrev 순서 주의
         for(col=0;col<COLUMNS;col++)
         {       
             for(row=0;row<ROWS;row++)
@@ -158,11 +158,11 @@ void scanKeyWithDebounce(void) {
                     cur  = gMatrix[row] & BV(col);
 
                     if(prev){
-                        // DBG1(0x0B, (uchar *)&prevKeyidx, 1);  
+//                        DBG1(0x0B, (uchar *)&prevKeyidx, 1);
                         processKeyIndex(prevKeyidx, true, false, col, row);
                     }
                     if(cur){
-                        // DBG1(0x0C, (uchar *)&keyidx, 1);  
+//                        DBG1(0x0C, (uchar *)&keyidx, 1);
                         processKeyIndex(keyidx, false, true, col, row);
                     }
                 }
@@ -172,12 +172,12 @@ void scanKeyWithDebounce(void) {
         }
     }
     _prevLayer = gLayer;
-    _isFnPressedPrev = isFnPressed();
 
     scanKey(gLayer);
 }
 
 static void scanKey(uint8_t xLayer) {
+//    DBG1(0x00, (uchar *)&xLayer, 1);
 
 	uint8_t row, col, prev, cur, keyidx;
 

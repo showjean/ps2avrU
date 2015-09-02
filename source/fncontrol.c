@@ -50,6 +50,16 @@ uint8_t isBeyondFN(void){
 uint8_t isBeyondFnLedEnabled(void){
     return _beyondFnLedEnabled;
 }
+
+static void setBeyondFnLed(void)
+{
+    if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+        setLed(LED_STATE_NUM, isBeyondFN());
+    }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+        setLed(LED_STATE_SCROLL, isBeyondFN());
+    }
+}
+
 static void setBeyondFnLedEnabled(uint8_t xLed){
     _beyondFnLedEnabled = xLed;
     /*
@@ -70,7 +80,7 @@ static void setBeyondFnLedEnabled(uint8_t xLed){
 //    DBG1(0xFC, (uchar *)&len, 1);
 //    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL, _beyondFnLedEnabled);
 
-    setLEDIndicate();
+    setBeyondFnLed();
 }
 
 
@@ -268,11 +278,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 #endif
 
-             if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
-                setLed(LED_STATE_NUM, isBeyondFN());
-             }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
-            	setLed(LED_STATE_SCROLL, isBeyondFN());
-			 }
+             setBeyondFnLed();
 
              if( xKeyidx == BEYOND_FN_CANCEL_KEY ) {    // 키가 작동하도록 1 리턴;
             	 return 1;

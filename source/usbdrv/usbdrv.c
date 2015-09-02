@@ -9,6 +9,7 @@
 
 #include "usbdrv.h"
 #include "oddebug.h"
+//#include "main.h"
 
 /*
 General Description:
@@ -602,8 +603,11 @@ uchar   i;
             usbBuildTxBlock();
         }
     }
+
+//    if(interfaceReady == true) goto isNotReset;
+
     for(i = 20; i > 0; i--){
-        uchar usbLineStatus = USBIN & USBMASK;
+        uchar usbLineStatus = USBIN & USBMASK;  // USBIN = PIND, USBMASK = 0b110
         if(usbLineStatus != 0)  /* SE0 has ended */
             goto isNotReset;
     }

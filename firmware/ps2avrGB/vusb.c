@@ -372,7 +372,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
     delegateInterfaceReadyUsb();
 
     usbRequest_t *rq = (void *)data;
-    DBG1(0xCC, data, 8);
+//    DBG1(0xCC, data, 8);
 
     if ((rq->bmRequestType & USBRQ_TYPE_MASK) == USBRQ_TYPE_CLASS) {
         // class request type
@@ -543,7 +543,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
  * \return 0x01
  */
 uint8_t usbFunctionWrite(uchar *data, uchar len) {
-    DBG1(0xBB, (uchar *)&len, 1);
+//    DBG1(0xBB, (uchar *)&len, 1);
     if (expectReport == 1 && (len == 1)) {
         // change LEDs of indicator
         delegateLedUsb(data[0]);

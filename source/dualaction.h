@@ -6,6 +6,7 @@
 
 void applyDualActionDownWhenIsCancel(bool isDown);
 void setDualAction(uint8_t keyidx, bool isDown);
+void clearDualAction(void);
 // fncontrol에 사용되는 기본 키를 반환한다.
 uint8_t getDualActionDefaultKey(uint8_t xActionIndex);
 uint8_t getDualActionKeyWhenCompound(uint8_t keyidx);
