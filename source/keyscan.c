@@ -15,6 +15,7 @@
 #include "oddebug.h"
 
 static void scanKey(uint8_t xLayer);
+static void pushKeyCodeWhenChange(uint8_t xKeyidx, bool xIsDown);
 
 static keyscan_driver_t *keyscanDriver;
 
@@ -23,14 +24,21 @@ void setKeyScanDriver(keyscan_driver_t *driver)
     keyscanDriver = driver;
 }
 
-uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
+static void pushKeyCodeWhenChange(uint8_t xKeyidx, bool xIsDown)
+{
+    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
+
+    (*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+}
+
+void pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
 
     if(xIsDown){
         // 듀얼액션 취소되었을 때는 down 키코드를 적용한다.;
         pushDownBuffer(getDualActionDownKeyIndexWhenIsCancel(xKeyidx), xIsDown);
     }
 
-    return (*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+    pushKeyCodeWhenChange(xKeyidx, xIsDown);
 }
 
 
@@ -63,7 +71,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
     xKeyidx = getEscToTilde(xKeyidx, xIsDown);
     
-	(*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+	pushKeyCodeWhenChange(xKeyidx, xIsDown);
 	
 }
 
@@ -101,7 +109,7 @@ void scanKeyWithMacro(void){
 
 //            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down
-                (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, true);
+                pushKeyCodeWhenChange(gKey.keyindex, true);
                 
             }else{  // up
                 // 모디키가 눌려져 있다면 그 상태를 유지;
@@ -110,7 +118,7 @@ void scanKeyWithMacro(void){
                         goto PASS_MODI;
                     }
                 }
-                (*keyscanDriver->pushKeyCodeWhenChange)(gKey.keyindex, false);                
+                pushKeyCodeWhenChange(gKey.keyindex, false);
              
             }
         }

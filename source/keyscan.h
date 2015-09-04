@@ -13,6 +13,6 @@ void setKeyScanDriver(keyscan_driver_t *driver);
 void scanKeyWithDebounce(void);
 void scanKeyWithMacro(void);
 
-uint8_t pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown);
+void pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown);
 
 #endif
