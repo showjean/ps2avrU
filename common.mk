@@ -77,6 +77,10 @@ ifdef I2C_FULLDUPLEX
 	OPT_DEFS += -DI2C_FULLDUPLEX
 endif
 
+ifdef SPLIT
+	OPT_DEFS += -DSPLIT
+endif
+
 #put your C sourcefiles here 
 #  Here you must list any C source files which are used by your target file.
 #  They will be compiled in the order you list them, so it's probably best

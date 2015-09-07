@@ -90,6 +90,9 @@ static uint16_t getBrightness(uint16_t xValue);
 // i2c
 //#define LOCAL_ADDR  0xA0
 #define TARGET_ADDR 0xB0
+#ifdef SPLIT
+    #define TARGET_ADDR_SPLIT 0xB8
+#endif
 
 #define led2TickPerFrame    40
 #define led2SpeedValue      1
@@ -642,7 +645,6 @@ static void fadePWM(void){
 	fadeLED2();
 }
 
-//TODO: led2
 /*
  * 3개의 LED를 사용하기 때문에 3개 모두의 값이 제한 값이 초과 되지 않도록 하고,
  * 2개 이하의 LED를 이용할 경우 개별 값은 LED2_COLOR_MAX까지 설정할 수 있도록 하여 밝기를 확보한다.
@@ -654,6 +656,12 @@ static void getMaxRgbValue(cRGB_t *xRgb){
 		xRgb->r = (uint32_t)(xRgb->r) * led2Brightness / gSum;
 		xRgb->g = (uint32_t)(xRgb->g) * led2Brightness / gSum;
 		xRgb->b = (uint32_t)(xRgb->b) * led2Brightness / gSum;
+	}
+
+	if(xRgb->r > 2 && xRgb->r == xRgb->g == xRgb->b)
+	{
+	    xRgb->g -= 1;
+	    xRgb->b -= 2;
 	}
 }
 
@@ -794,10 +802,22 @@ static void setLed2State(void){
 	applyStaticFullLed();
 
 }
+
 static void sendI2c(void){
-	i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
+
+#ifdef SPLIT
+    /**
+     *
+     */
+    uint8_t gLengthHalf = i2cLength >> 1;
+    i2cLength = i2cLength - gLengthHalf;
+    i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
+    i2cMasterSendNI(TARGET_ADDR_SPLIT, gLengthHalf, (u08 *)ledModified+i2cLength);
+#else
+    i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
 	
-	i2cLength = 0;
+#endif
+    i2cLength = 0;
 }
 
 static void _setLed2All(cRGB_t *xRgb){

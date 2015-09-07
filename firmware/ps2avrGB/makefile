@@ -20,6 +20,7 @@ SCROLL_LOCK_LED_IS_APART = 1
 DISABLE_HARDWARE_KEYMAPPING = 1
 USING_CUSTOM_TIMER = 1
 #USING_SIMPLE_MODE = 1
+#SPLIT = 1
 
 
 ########### change this lines according to your project ##################
@@ -42,7 +43,7 @@ ifdef SPLIT
 	I2C_FULLDUPLEX = 1
 	INTERFACE_ONLY_USB = 1
 	
-	SRC +=  ps2avrGB_split_main.c
+	SRC +=  ps2avrGB_split_main.c 
 
 	ifdef GKP
 		GHOST_KEY_PREVENTION = 1
