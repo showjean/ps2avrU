@@ -188,10 +188,10 @@ int main(void) {
     uint8_t *gMatrix = getCurrentMatrix();
 
     // debounce cleared => compare last matrix and current matrix
-    for(row=0;row<ROWS;row++)
+    for(row=0;row<ROWS;++row)
     {   
         if(gMatrix[row] == 0) continue;
-        for(col=0;col<COLUMNS;col++)
+        for(col=0;col<COLUMNS;++col)
         {
             cur  = gMatrix[row] & BV(col);
             // DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));

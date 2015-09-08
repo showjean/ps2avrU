@@ -63,9 +63,9 @@ static uint8_t downLevelLife = 0;
 static uint8_t ledInited = 0;
 
 static uint8_t _fullLEDMode = 0;	// 
-static uint8_t _Led2Mode = 0;	//
-static uint8_t _Led2KeyEventMode = 0;	//
-static uint8_t _Led2KeyEventType = 0;	//
+static uint8_t _rgbMode = 0;	//
+static uint8_t _rgbKeyEventMode = 0;	//
+static uint8_t _rgbKeyEventType = 0;	//
 
 static uint8_t pwmCounter = 0;
 static uint8_t pwmDir = 0;
@@ -194,7 +194,7 @@ void getLed2(led2_info_t *buffer){
 	// report led2 info
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte, fade mode 1byte
 	buffer->num = numOfLeds;
-	buffer->mode = _Led2Mode;
+	buffer->mode = _rgbMode;
 	buffer->brightness = (uint8_t)(led2Brightness / 3);
 	buffer->color1 = color1;
 	buffer->color2 = color2;
@@ -203,7 +203,7 @@ void getLed2(led2_info_t *buffer){
 	for(i=0;i<LENGTH_OF_RAINBOW_COLOR;++i){
 		buffer->rainbow[i] = rainbowColor[i];
 	}
-	buffer->keymode = _Led2KeyEventMode;
+	buffer->keymode = _rgbKeyEventMode;
 	buffer->colorkey1 = color_key1;
 	buffer->fadetype = _rainbowMode;
 
@@ -212,8 +212,8 @@ void getLed2(led2_info_t *buffer){
 }
 
 void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
-	_Led2Mode = xMode;
-	if(_Led2Mode >= FULL_LED_MODE2_NUM) _Led2Mode = 0;
+	_rgbMode = xMode;
+	if(_rgbMode >= FULL_LED_MODE2_NUM) _rgbMode = 0;
 
 	if(xKeyEventMode == 0 ){	// 키 이벤트가 없을 경우에만 모드 변경 적용;
 		_pressed = PRESS_MODE_UP;
@@ -287,7 +287,7 @@ void setLed2(uint8_t *data){
 	 }
 	 else if(*(data+1) == LED2_INDEX_MODE_KEY)
 	 {
-	 	_Led2KeyEventMode = *(data+2);
+	 	_rgbKeyEventMode = *(data+2);
 		_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);	
 	 }
 	 else if(*(data+1) == LED2_INDEX_MODE_FADE_TYPE)
@@ -312,7 +312,7 @@ void setLed2(uint8_t *data){
 
 static void changeLed2KeyEventMode(void){
 //	_Led2KeyEventMode = (_Led2KeyEventMode + 1);
-	if(++_Led2KeyEventMode == FULL_LED_MODE2_KEY_EVENT_NUM) _Led2KeyEventMode = 0;
+	if(++_rgbKeyEventMode == FULL_LED_MODE2_KEY_EVENT_NUM) _rgbKeyEventMode = 0;
 	_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);
 }
 
@@ -372,9 +372,9 @@ void initFullLEDStateAfter(void){
 	}
 
 	// led2
-	_Led2Mode = (eeprom_read_byte((uint8_t *)EEPROM_LED_MODE) >> 4) & 0x0F;
-	if(_Led2Mode == 0x0F){
-		_Led2Mode = 0;
+	_rgbMode = (eeprom_read_byte((uint8_t *)EEPROM_LED_MODE) >> 4) & 0x0F;
+	if(_rgbMode == 0x0F){
+		_rgbMode = 0;
 	}
 
 	// led2 color1~3
@@ -396,9 +396,9 @@ void initFullLEDStateAfter(void){
 	setLed2Num(eeprom_read_byte((uint8_t *)EEPROM_LED2_NUM));
 
 	// led2 key mode
-	_Led2KeyEventMode = eeprom_read_byte((uint8_t *)EEPROM_LED2_KEY_EVENT) & 0x0F;	// 0xF0 : type, 0x0F : mode
-	if(_Led2KeyEventMode == 0x0F){
-		_Led2KeyEventMode = 0;
+	_rgbKeyEventMode = eeprom_read_byte((uint8_t *)EEPROM_LED2_KEY_EVENT) & 0x0F;	// 0xF0 : type, 0x0F : mode
+	if(_rgbKeyEventMode == 0x0F){
+		_rgbKeyEventMode = 0;
 	}
 	// led2 key color 1
 	eeprom_read_block(&color_key1, (uint8_t *)EEPROM_LED2_COLOR_KEY1, 3);
@@ -454,7 +454,7 @@ static void setLed2BrightnessAfter(void){
 	DBG1(0x11, (uchar *)&led2Brightness, 2);
 
 	// if(_Led2Mode == 2 || _Led2Mode == 3 || _Led2Mode == 4){
-	if(_Led2Mode > 1 && _Led2Mode < 5){
+	if(_rgbMode > 1 && _rgbMode < 5){
 		_pressed = PRESS_MODE_CHANGE;
 //		setLed2State();
 	}
@@ -516,7 +516,7 @@ void changeFullLedState(uint8_t xFullLedMode){
 		setFullLedState();
 		_saved |= BV(SAVE_BIT_LED_MODE);
 	}else if(xFullLedMode == FULL_LED_MODE2){
-		__setLed2Mode(_Led2Mode+1, _Led2KeyEventMode);	// 키보드를 이용할 경우 키이벤트에 따라 재설정 판가름;
+		__setLed2Mode(_rgbMode+1, _rgbKeyEventMode);	// 키보드를 이용할 경우 키이벤트에 따라 재설정 판가름;
 	}
 
 	ledStateCount = 0;
@@ -572,7 +572,7 @@ static void writeLEDMode(void) {
 
 		// full led
 		if(((_saved >> SAVE_BIT_LED_MODE) & 0x01)){	// || ((_saved >> SAVE_BIT_LED2_MODE) & 0x01)){
-			eeprom_update_byte((uint8_t *)EEPROM_LED_MODE, (_fullLEDMode & 0x0F) | ((_Led2Mode & 0x0F) << 4));
+			eeprom_update_byte((uint8_t *)EEPROM_LED_MODE, (_fullLEDMode & 0x0F) | ((_rgbMode & 0x0F) << 4));
 		}
 
 		// brightness
@@ -616,7 +616,7 @@ static void writeLEDMode(void) {
 
 		// led2 key color1
 		if(((_saved2 >> SAVE2_BIT_LED2_KEY_EVENT) & 0x01)){
-			eeprom_update_byte((uint8_t *)EEPROM_LED2_KEY_EVENT, (_Led2KeyEventMode & 0x0F) | ((_Led2KeyEventType & 0x0F) << 4));
+			eeprom_update_byte((uint8_t *)EEPROM_LED2_KEY_EVENT, (_rgbKeyEventMode & 0x0F) | ((_rgbKeyEventType & 0x0F) << 4));
 		}
 
 		if(((_saved2 >> SAVE2_BIT_LED2_COLOR_KEY1) & 0x01)){
@@ -658,11 +658,13 @@ static void getMaxRgbValue(cRGB_t *xRgb){
 		xRgb->b = (uint32_t)(xRgb->b) * led2Brightness / gSum;
 	}
 
-	if(xRgb->r > 2 && xRgb->r == xRgb->g == xRgb->b)
-	{
-	    xRgb->g -= 1;
-	    xRgb->b -= 2;
-	}
+	// 0xffffff는 간혹 꺼지는 LED가 있어 이를 패치
+    if(xRgb->r > 2 && xRgb->r == xRgb->g && xRgb->r == xRgb->b)
+    {
+        xRgb->g -= 1;
+        xRgb->b -= 2;
+    }
+
 }
 
 static void turnOffLed2(void){
@@ -712,15 +714,15 @@ void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t is
 		}
 
 		// led2
-		if(_Led2Mode > 0 && keyidx != KEY_LED_ON_OFF){
-			if(_Led2KeyEventMode == 1)
+		if(_rgbMode > 0 && keyidx != KEY_LED_ON_OFF){
+			if(_rgbKeyEventMode == 1)
 			{		// color 1
 				ledModified[0] = color_key1;
 				setLed2All(ledModified[0]);
 
 				_pressed = PRESS_MODE_DOWN;
 			}
-			else if(_Led2KeyEventMode == 2)
+			else if(_rgbKeyEventMode == 2)
 			{	// complementary color
 				// ledModified[0] = (cRGB_t){255 - _currentLedAllColor.g, 255 - _currentLedAllColor.r, 255 - _currentLedAllColor.b};
 				ledModified[0].g = 255 - _currentLedAllColor.g;
@@ -754,38 +756,38 @@ static void setLed2State(void){
 		// 3 = key down effect
 	*/
 //	uint8_t i;
-	DBG1(0xAE, (uchar *)&_Led2Mode, 1);
+//	DBG1(0xAE, (uchar *)&_rgbMode, 1);
 
 	if((INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER)){
-		if(_Led2Mode == 0)
+		if(_rgbMode == 0)
 			startFullLed();
 		else
 			stopFullLed();
     }
 
     
-	if(_Led2Mode == 1)
+	if(_rgbMode == 1)
 	{
 		setLedBalance();
 		_delayCount = 0;
 		_changeCount = 0;
 		
 	}
-	else if(_Led2Mode == 2)
+	else if(_rgbMode == 2)
 	{
 		setLedBalance();
 		_currentLedAllColor = color1;
 		setLed2All(_currentLedAllColor);
 		
 	}
-	else if(_Led2Mode == 3)
+	else if(_rgbMode == 3)
 	{
 		setLedBalance();
 		_currentLedAllColor = color2;
 		setLed2All(_currentLedAllColor);
 		
 	}
-	else if(_Led2Mode == 4)
+	else if(_rgbMode == 4)
 	{
 		setLedBalance();
 		_currentLedAllColor = color3;
@@ -875,11 +877,14 @@ static void setNextAvailableRainbowIndex(uint8_t *aIndex)
 
 static void setLed2All(cRGB_t xRgb){
 
-//DBG1(0x40, (uchar *)&xRgb, 3);
+//    DBG1(0x41, (uchar *)&xRgb, 3);
+
 	getMaxRgbValue(&xRgb);
 //DBG1(0x44, (uchar *)&xRgb, 3);
 
 	if(prevRgb.r == xRgb.r && prevRgb.g == xRgb.g && prevRgb.b == xRgb.b) return;
+
+
 	prevRgb = xRgb;
 //DBG1(0x45, (uchar *)&xRgb, 3);
 
@@ -902,7 +907,7 @@ static void _fadeLED2(void){
 		gFrame = 0;
 		uint8_t i;
 		uint8_t kIndex;
-		if (_Led2Mode == 1) { // 1 = rainbow
+		if (_rgbMode == 1) { // 1 = rainbow
 
 			if (_rainbowMode == 1) {	// immediately
 				if (_delayCount++ == 0) {
@@ -989,7 +994,7 @@ static void _fadeLED2(void){
 			}
 
 		}
-		else if(_Led2Mode != 0)
+		else if(_rgbMode != 0)
 		{
 		    _setLed2All(&prevRgb);
 		}
@@ -1130,7 +1135,7 @@ void initFullLEDState(void) {
 
 	timer1PWMInit(8);
 
-	if( _Led2Mode == 0 || (INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER)){
+	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
 		startFullLed();
 	}else{

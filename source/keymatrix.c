@@ -129,9 +129,9 @@ uint8_t getLayer(void) {
 //	DBG1(0x01, (uchar *)&fnScanLayer, 1);
 
     uint8_t *gMatrix = getCurrentMatrix();
-	for(row=0;row<ROWS;row++){	
+	for(row=0;row<ROWS;++row){
 		if(gMatrix[row] == 0) continue;
-		for(col=0;col<COLUMNS;col++){	
+		for(col=0;col<COLUMNS;++col){
 
 			cur  = gMatrix[row] & BV(col);
 

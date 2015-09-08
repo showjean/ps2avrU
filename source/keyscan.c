@@ -147,9 +147,9 @@ void scanKeyWithDebounce(void) {
 //    DBG1(0x0A, (uchar *)&_prevLayer, 1);
 //    DBG1(0x0A, (uchar *)&gLayer, 1);
     if( (!isLazyFn()) && _prevLayer != gLayer){    // !isLazyFn() || !_isFnPressedPrev 순서 주의
-        for(col=0;col<COLUMNS;col++)
+        for(col=0;col<COLUMNS;++col)
         {       
-            for(row=0;row<ROWS;row++)
+            for(row=0;row<ROWS;++row)
             {               
                 prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
                 keyidx = getCurrentKeyindex(gLayer, row, col);

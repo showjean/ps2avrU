@@ -109,12 +109,12 @@ void delegateGetLiveMatrix(uint8_t *xCurrentMatrix, uint8_t *xIsModified){
 	uint8_t col, row;
 	uint8_t prev, cur;
 
-	for(col=0;col<COLUMNS;col++)
+	for(col=0;col<COLUMNS;++col)
 	{
 		delegateSetCellStatus(col);
 
 		// scan each rows
-		for(row=0;row<ROWS;row++)
+		for(row=0;row<ROWS;++row)
 		{
 			cur = delegateGetCellStatus(row);
 

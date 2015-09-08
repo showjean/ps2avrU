@@ -129,17 +129,17 @@ endif
 
 #compiler flags
 	CPFLAGS	= -g -Os -Wall -Wstrict-prototypes -I$(COMMON_DIR) -I$(INC) -I$(AVRLIB) $(LIBSRC) -DF_CPU=$(F_CPU)UL $(OPT_DEFS) -Wa,-ahlms=$(<:.c=.lst)
-#	CPGLAGS += -fno-inline-small-functions
-
+	
 # --------------------
 	CPFLAGS += -fno-inline-small-functions
 	CPFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 	CPFLAGS += --param inline-call-cost=2 -finline-limit=3 
 	CPFLAGS += -ffunction-sections -fdata-sections
-#	CPFLAGS += -ffreestanding 
 	CPFLAGS += -Wl,--relax,--gc-sections
+	CPFLAGS += -fno-tree-scev-cprop
+#	CPFLAGS += -fno-split-wide-types 
 	#
-	CPFLAGS += -fno-split-wide-types -fno-tree-scev-cprop
+#	CPFLAGS += -ffreestanding 
 # --------------------
 
 #linker flags
@@ -151,42 +151,5 @@ endif
 	
 ########### you should not need to change the following line #############
 include $(COMMON_DIR)/avrproj.mk
-	  
-###### dependecies, add any dependencies you need here ###################
-#  Dependencies tell the compiler which files in your code depend on which
-#  other files.  When you change a piece of code, the dependencies allow
-#  the compiler to intelligently figure out which files are affected and
-#  need to be recompiled.  You should only list the dependencies of *.o 
-#  files.  For example: uart.o is the compiled output of uart.c and uart.h
-#  and therefore, uart.o "depends" on uart.c and uart.h.  But the code in
-#  uart.c also uses information from global.h, so that file should be listed
-#  in the dependecies too.  That way, if you alter global.h, uart.o will be
-#  recompiled to take into account the changes.
 
-buffer.o		: buffer.c		buffer.h
-uart.o		: uart.c			uart.h		global.h
-uart2.o		: uart2.c		uart2.h		global.h
-rprintf.o	: rprintf.c		rprintf.h
-a2d.o			: a2d.c			a2d.h
-timer.o		: timer.c		timer.h		global.h
-pulse.o		: pulse.c		pulse.h		timer.h	global.h
-lcd.o			: lcd.c			lcd.h			global.h
-i2c.o			: i2c.c			i2c.h			global.h
-spi.o			: spi.c			spi.h			global.h
-swpwm.o		: swpwm.c		swpwm.h		global.h
-servo.o		: servo.c		servo.h		global.h
-swuart.o		: swuart.c		swuart.h		global.h
-tsip.o		: tsip.c			tsip.h		global.h
-nmea.o		: nmea.c			nmea.h		global.h
-vt100.o		: vt100.c		vt100.h		global.h
-gps.o			: gps.c			gps.h			global.h
-$(TRG).o		: $(TRG).c						global.h
-keysta.o: keysta.h keysta.c
 
-prog: all
-	avrdude -c stk500v2 -P com3 -p atmega32 -U hfuse:w:0xD0:m -U lfuse:w:0x0F:m
-	avrdude -c stk500v2 -P com3 -p atmega32 -U flash:w:main.hex:i
-	pause;
-
-#rename: $(TRG).hex
-#	cp $(TRG).hex $(RESULT).hex
