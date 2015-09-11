@@ -7,6 +7,8 @@
 #define LAYER_FN			1
 #define LAYER_FN2			2
 #define LAYER_FN3			3
+#define LAYER_NOR           10
+#define LAYER_NOTHING       99
 
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    Function  global ----------------------------- */

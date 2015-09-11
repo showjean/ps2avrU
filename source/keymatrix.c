@@ -24,7 +24,7 @@
 #include "keydownbuffer.h"
 #include "oddebug.h"
 
-// 17*8 bit matrix
+// ROWS*COLUMNS bit matrix
 static uint8_t prevMatrix[ROWS];
 static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 
@@ -34,13 +34,14 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #endif
 
 /* ------------------------------------------------------------------------- */
-static uint8_t debounceMAX;
+//static uint8_t DEBOUNCE_MAX = 7;
+#define DEBOUNCE_MAX 4
 static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 static bool _isReleaseAllPrev = true;
 static bool _isFnPressed = false;
 static uint8_t _pressedFn = LAYER_NORMAL;
-static uint8_t _currentLazyLayer = 0;
+static uint8_t _currentLazyLayer = LAYER_NOTHING;
 
 
 
@@ -51,8 +52,7 @@ void initMatrix(void){
 	
 	delegateInitMatrixDevice();
 
-	debounceMAX = 7;
-	debounce = 10;
+	debounce = DEBOUNCE_MAX + 3;
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
@@ -110,7 +110,7 @@ uint8_t getLayer(void) {
 	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
 	*/
 
-	if(_currentLazyLayer > 0) {
+	if(_currentLazyLayer != LAYER_NOTHING) {
 
 	    _pressedFn = fnScanLayer;
 		_isFnPressed = false;
@@ -118,7 +118,7 @@ uint8_t getLayer(void) {
 		return _currentLazyLayer;
 	}
 
-	gLayer= 0;
+	gLayer = LAYER_NORMAL;
 
 	if(isBeyondFN()) {
 	    fnScanLayer = isBeyondFN();
@@ -148,14 +148,21 @@ uint8_t getLayer(void) {
 				}else if(keyidx == KEY_NOR){
 					if(fnScanLayer == LAYER_FN2 || fnScanLayer == LAYER_FN3){	// fn2/3에서만 작동;
 						// _fnScanLayer은 2를 유지하면서 스캔할 레이어는 0으로 반환;
-						_isFnPressed = true;
-						return LAYER_NORMAL;
+						/*_isFnPressed = true;
+						return LAYER_NORMAL;*/
+					    gLayer = LAYER_NOR;
 					}
 				}
 
 //				DBG1(0x02, (uchar *)&gLayer, 1);
 
-				if(gLayer > 0){
+				if(gLayer != LAYER_NORMAL){
+
+				    if(gLayer == LAYER_NOR)
+				    {
+				        gLayer = LAYER_NORMAL;
+				    }
+
 					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 gLayer로 반환;
 					if(isLazyFn()){
 						// FN키를 처음 누른 경우
@@ -233,7 +240,7 @@ uint8_t getLiveMatrix(void){
 		debounce++;
 	}
 
-	if(debounce != debounceMAX){
+	if(debounce != DEBOUNCE_MAX){
 		return 0;
 	}
 
@@ -281,7 +288,7 @@ void setCurrentMatrixAfter(void){
 
 	// 모든 키가 release이거나 modi key만 눌려진 상태에서 lazy FN 해제;
 	if(isReleaseAll() || (getDownBufferAt(0) == 0 && isFnPressed() == false)){
-		_currentLazyLayer = 0;
+		_currentLazyLayer = LAYER_NOTHING;
 
 		clearDualAction();
 	}

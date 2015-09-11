@@ -553,25 +553,6 @@ void usb_main(void) {
         // main event loop
         usbPoll();
 
-#if USB_COUNT_SOF 
-        /*if(_isSuspended == true) {
-            continue;
-        }*/
-#endif
-
-        // check timer if we need periodic reports
-        /*if (TIFR & (1 << TOV0)) {
-            TIFR = (1 << TOV0); // reset flag
-            if (idleRate != 0) { // do we need periodic reports?
-                if(idleCounter > 4){ // yes, but not yet
-                    idleCounter -= 5; // 22ms in units of 4ms
-                } else { // yes, it is time now
-                    updateNeeded = 1;
-                    idleCounter = idleRate;
-                }
-            }
-        }*/
-
         // if an update is needed, send the report
         if (usbInterruptIsReady()) {
 
