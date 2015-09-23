@@ -8,7 +8,6 @@
 #include "keymap.h"
 #include "keymapper.h"
 #include "quickswap.h"
-//#include "smartkey.h"
 
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 // eeprom에 매핑된 키코드 반환(하드웨어 키매핑)

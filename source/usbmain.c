@@ -237,7 +237,6 @@
 #include "vusb.h"
 #include "ps2avru_util.h"
 #include "dualaction.h"
-//#include "smartkey.h"
 #include "keyscan.h"
 #include "bootmapper.h"
 #include "custommacro.h"

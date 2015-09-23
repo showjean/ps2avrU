@@ -31,7 +31,6 @@
 #include "keyindex.h"
 #include "quickswap.h"
 #include "lazyfn.h"
-//#include "smartkey.h"
 #include "ledrender.h"
 #include "keyindex.h"
 #ifndef INTERFACE_ONLY_USB
