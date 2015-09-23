@@ -28,10 +28,10 @@
 // Program ROM constants
 // the prescale division values stored in order of timer control register index
 // STOP, CLK, CLK/8, CLK/64, CLK/256, CLK/1024
-unsigned short __attribute__ ((progmem)) TimerPrescaleFactor[] = {0,1,8,64,256,1024};
+const unsigned short __attribute__ ((progmem)) TimerPrescaleFactor[] = {0,1,8,64,256,1024};
 // the prescale division values stored in order of timer control register index
 // STOP, CLK, CLK/8, CLK/32, CLK/64, CLK/128, CLK/256, CLK/1024
-unsigned short __attribute__ ((progmem)) TimerRTCPrescaleFactor[] = {0,1,8,32,64,128,256,1024};
+const unsigned short __attribute__ ((progmem)) TimerRTCPrescaleFactor[] = {0,1,8,32,64,128,256,1024};
 
 // Global variables
 // time registers
@@ -226,7 +226,7 @@ void timerPause(unsigned short pause_ms)
 	// loop until time expires
 	while( ((TimerPauseReg<<8) | inb(TCNT0)) < (pause+timerThres) )
 	{
-		if( TimerPauseReg < (pause>>8))
+		if( TimerPauseReg < (pause>>8));
 		{
 			// save power by idling the processor
 			set_sleep_mode(SLEEP_MODE_IDLE);
@@ -393,7 +393,7 @@ void timer1PWMBSet(u16 pwmDuty)
 }
 
 //! Interrupt handler for tcnt0 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW0)
+TIMER_INTERRUPT_HANDLER(TIMER0_OVF_vect)
 {
 	Timer0Reg0++;			// increment low-order counter
 
@@ -406,7 +406,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW0)
 }
 
 //! Interrupt handler for tcnt1 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW1)
+TIMER_INTERRUPT_HANDLER(TIMER1_OVF_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER1OVERFLOW_INT])
@@ -415,7 +415,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW1)
 
 #ifdef TCNT2	// support timer2 only if it exists
 //! Interrupt handler for tcnt2 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW2)
+TIMER_INTERRUPT_HANDLER(TIMER2_OVF_vect)
 {
 	Timer2Reg0++;			// increment low-order counter
 
@@ -428,7 +428,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW2)
 #ifdef OCR0
 // include support for Output Compare 0 for new AVR processors that support it
 //! Interrupt handler for OutputCompare0 match (OC0) interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE0)
+TIMER_INTERRUPT_HANDLER(TIMER0_COMP_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER0OUTCOMPARE_INT])
@@ -437,7 +437,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE0)
 #endif
 
 //! Interrupt handler for CutputCompare1A match (OC1A) interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE1A)
+TIMER_INTERRUPT_HANDLER(TIMER1_COMPA_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER1OUTCOMPAREA_INT])
@@ -445,7 +445,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE1A)
 }
 
 //! Interrupt handler for OutputCompare1B match (OC1B) interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE1B)
+TIMER_INTERRUPT_HANDLER(TIMER1_COMPB_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER1OUTCOMPAREB_INT])
@@ -453,7 +453,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE1B)
 }
 
 //! Interrupt handler for InputCapture1 (IC1) interrupt
-TIMER_INTERRUPT_HANDLER(SIG_INPUT_CAPTURE1)
+TIMER_INTERRUPT_HANDLER(TIMER1_CAPT_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER1INPUTCAPTURE_INT])
@@ -461,7 +461,7 @@ TIMER_INTERRUPT_HANDLER(SIG_INPUT_CAPTURE1)
 }
 
 //! Interrupt handler for OutputCompare2 match (OC2) interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE2)
+TIMER_INTERRUPT_HANDLER(TIMER2_COMP_vect)
 {
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER2OUTCOMPARE_INT])

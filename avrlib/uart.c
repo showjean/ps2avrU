@@ -67,9 +67,9 @@ void uartInitBuffers(void)
 {
 	#ifndef UART_BUFFERS_EXTERNAL_RAM
 		// initialize the UART receive buffer
-		bufferInit(&uartRxBuffer, uartRxData, UART_RX_BUFFER_SIZE);
+		bufferInit(&uartRxBuffer, (unsigned char *)uartRxData, UART_RX_BUFFER_SIZE);
 		// initialize the UART transmit buffer
-		bufferInit(&uartTxBuffer, uartTxData, UART_TX_BUFFER_SIZE);
+		bufferInit(&uartTxBuffer, (unsigned char *)uartTxData, UART_TX_BUFFER_SIZE);
 	#else
 		// initialize the UART receive buffer
 		bufferInit(&uartRxBuffer, (u08*) UART_RX_BUFFER_ADDR, UART_RX_BUFFER_SIZE);

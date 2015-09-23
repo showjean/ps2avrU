@@ -93,8 +93,8 @@ void uart0InitBuffers(void)
 {
 	#ifndef UART_BUFFER_EXTERNAL_RAM
 		// initialize the UART0 buffers
-		bufferInit(&uartRxBuffer[0], uart0RxData, UART0_RX_BUFFER_SIZE);
-		bufferInit(&uartTxBuffer[0], uart0TxData, UART0_TX_BUFFER_SIZE);
+		bufferInit(&uartRxBuffer[0], (u08*)uart0RxData, UART0_RX_BUFFER_SIZE);
+		bufferInit(&uartTxBuffer[0], (u08*)uart0TxData, UART0_TX_BUFFER_SIZE);
 	#else
 		// initialize the UART0 buffers
 		bufferInit(&uartRxBuffer[0], (u08*) UART0_RX_BUFFER_ADDR, UART0_RX_BUFFER_SIZE);
@@ -106,8 +106,8 @@ void uart1InitBuffers(void)
 {
 	#ifndef UART_BUFFER_EXTERNAL_RAM
 		// initialize the UART1 buffers
-		bufferInit(&uartRxBuffer[1], uart1RxData, UART1_RX_BUFFER_SIZE);
-		bufferInit(&uartTxBuffer[1], uart1TxData, UART1_TX_BUFFER_SIZE);
+		bufferInit(&uartRxBuffer[1], (u08*)uart1RxData, UART1_RX_BUFFER_SIZE);
+		bufferInit(&uartTxBuffer[1], (u08*)uart1TxData, UART1_TX_BUFFER_SIZE);
 	#else
 		// initialize the UART1 buffers
 		bufferInit(&uartRxBuffer[1], (u08*) UART1_RX_BUFFER_ADDR, UART1_RX_BUFFER_SIZE);
@@ -354,25 +354,25 @@ void uartReceiveService(u08 nUart)
 	}
 }
 
-UART_INTERRUPT_HANDLER(SIG_UART0_TRANS)      
+UART_INTERRUPT_HANDLER(USART0_TX_vect)
 {
 	// service UART0 transmit interrupt
 	uartTransmitService(0);
 }
 
-UART_INTERRUPT_HANDLER(SIG_UART1_TRANS)      
+UART_INTERRUPT_HANDLER(USART1_TX_vect)
 {
 	// service UART1 transmit interrupt
 	uartTransmitService(1);
 }
 
-UART_INTERRUPT_HANDLER(SIG_UART0_RECV)      
+UART_INTERRUPT_HANDLER(USART0_RX_vect)
 {
 	// service UART0 receive interrupt
 	uartReceiveService(0);
 }
 
-UART_INTERRUPT_HANDLER(SIG_UART1_RECV)      
+UART_INTERRUPT_HANDLER(USART1_RX_vect)
 {
 	// service UART1 receive interrupt
 	uartReceiveService(1);

@@ -52,12 +52,24 @@ static u08 (*i2cSlaveTransmit)(u08 transmitDataLengthMax, u08* transmitData);
 // functions
 void i2cInit(void)
 {
+
+#ifdef I2C_USE_INT_PULLUP_RESISTORS
 	// set pull-up resistors on I2C bus pins
-	// TODO: should #ifdef these
-	sbi(PORTC, 0);	// i2c SCL on ATmega163,323,16,32,etc
-	sbi(PORTC, 1);	// i2c SDA on ATmega163,323,16,32,etc
+#if (defined (__AVR_ATmega64C1__) || defined (__AVR_ATmega64M1__) ||\
+	defined (__AVR_ATmega128__) || defined (__AVR_ATmega1280__) ||\
+	defined (__AVR_ATmega1281__) || defined (__AVR_ATmega1284P__) ||\
+	defined (__AVR_ATmega128RFA1__))
+
 	sbi(PORTD, 0);	// i2c SCL on ATmega128,64
 	sbi(PORTD, 1);	// i2c SDA on ATmega128,64
+#elseif (defined (__AVR_ATmega8__) || defined (__AVR_ATmega8A__))
+  sbi(PORTC, 5); // i2c SCL on ATmega8
+  sbi(PORTC, 4); // i2c SDA on ATmega8
+#else
+	sbi(PORTC, 0);	// i2c SCL on ATmega163,323,16,32,etc
+	sbi(PORTC, 1);	// i2c SDA on ATmega163,323,16,32,etc
+#endif
+#endif
 
 	// clear SlaveReceive and SlaveTransmit handler to null
 	i2cSlaveReceive = 0;
@@ -98,7 +110,7 @@ void i2cSetBitrate(u16 bitrateKHz)
 void i2cSetLocalDeviceAddr(u08 deviceAddr, u08 genCallEn)
 {
 	// set local device address (used in slave mode only)
-	outb(TWAR, ((deviceAddr&0xFE) | (genCallEn?1:0)) );
+	outb(TWAR, ((deviceAddr<<1) | (genCallEn?1:0)) );
 }
 
 void i2cSetSlaveReceiveHandler(void (*i2cSlaveRx_func)(u08 receiveDataLength, u08* recieveData))
@@ -361,7 +373,7 @@ void i2cMasterTransferNI(u08 deviceAddr, u08 sendlength, u08* senddata, u08 rece
 */
 
 //! I2C (TWI) interrupt service routine
-SIGNAL(SIG_2WIRE_SERIAL)
+SIGNAL(TWI_vect)
 {
 	// read status bits
 	u08 status = inb(TWSR) & TWSR_STATUS_MASK;

@@ -49,21 +49,23 @@ void extintInit(void)
 
 //! Configure external interrupt trigger
 // NOTE: this function is not complete!!!
+// TODO Not yet work extintConfigure()
 void extintConfigure(u08 interruptNum, u08 configuration)
 {
+	#if !defined(__AVR_ATmega128__)
 	if(interruptNum == EXTINT0)
 	{
 		MCUCR &= ~((1<<ISC01) | (1<<ISC00));
 		MCUCR |= configuration;
 	}
-	#ifdef SIG_INTERRUPT1
+	#ifdef INT1_vect
 	else if(interruptNum == EXTINT1)
 	{
 		MCUCR &= ~((1<<ISC11) | (1<<ISC10));
 		MCUCR |= configuration<<2;
 	}
 	#endif
-	#ifdef SIG_INTERRUPT2
+	#ifdef INT2_vect
 	else if(interruptNum == EXTINT2)
 	{
 		if(configuration == EXTINT_EDGE_RISING)
@@ -71,6 +73,7 @@ void extintConfigure(u08 interruptNum, u08 configuration)
 		else
 			cbi(MCUCSR, ISC2);
 	}
+	#endif
 	#endif
 	// need to handle a lot more cases
 	// and differences between processors.
@@ -102,16 +105,16 @@ void extintDetach(u08 interruptNum)
 }
 
 //! Interrupt handler for INT0
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT0)
+EXTINT_INTERRUPT_HANDLER(INT0_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT0])
 		ExtIntFunc[EXTINT0]();
 }
 
-#ifdef SIG_INTERRUPT1
+#ifdef INT1_vect
 //! Interrupt handler for INT1
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT1)
+EXTINT_INTERRUPT_HANDLER(INT1_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT1])
@@ -119,9 +122,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT1)
 }
 #endif
 
-#ifdef SIG_INTERRUPT2
+#ifdef INT2_vect
 //! Interrupt handler for INT2
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT2)
+EXTINT_INTERRUPT_HANDLER(INT2_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT2])
@@ -129,9 +132,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT2)
 }
 #endif
 
-#ifdef SIG_INTERRUPT3
+#ifdef INT3_vect
 //! Interrupt handler for INT3
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT3)
+EXTINT_INTERRUPT_HANDLER(INT3_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT3])
@@ -139,9 +142,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT3)
 }
 #endif
 
-#ifdef SIG_INTERRUPT4
+#ifdef INT4_vect
 //! Interrupt handler for INT4
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT4)
+EXTINT_INTERRUPT_HANDLER(INT4_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT4])
@@ -149,9 +152,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT4)
 }
 #endif
 
-#ifdef SIG_INTERRUPT5
+#ifdef INT5_vect
 //! Interrupt handler for INT5
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT5)
+EXTINT_INTERRUPT_HANDLER(INT5_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT5])
@@ -159,9 +162,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT5)
 }
 #endif
 
-#ifdef SIG_INTERRUPT6
+#ifdef INT6_vect
 //! Interrupt handler for INT6
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT6)
+EXTINT_INTERRUPT_HANDLER(INT6_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT6])
@@ -169,9 +172,9 @@ EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT6)
 }
 #endif
 
-#ifdef SIG_INTERRUPT7
+#ifdef INT7_vect
 //! Interrupt handler for INT7
-EXTINT_INTERRUPT_HANDLER(SIG_INTERRUPT7)
+EXTINT_INTERRUPT_HANDLER(INT7_vect)
 {
 	// if a user function is defined, execute it
 	if(ExtIntFunc[EXTINT7])

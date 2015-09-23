@@ -22,16 +22,16 @@
 /// \code #include "rprintf.h" \endcode
 /// \par Overview
 ///		The rprintf function library provides a simplified (reduced) version of
-///		the common C printf() function.  See the code files for details about
-///		which printf features are supported.  Also in this library are a
+///		the common C printf() function.ï¿½ See the code files for details about
+///		which printf features are supported.ï¿½ Also in this library are a
 ///		variety of functions for fast printing of certain common data types
-///		(variable types).  Functions include print string from RAM, print
+///		(variable types).ï¿½ Functions include print string from RAM, print
 ///		string from ROM, print string snippet, print hex byte/short/long, and
 ///		a custom-formatted number print, as well as an optional floating-point
 ///		print routine.
 ///
 /// \note	All output from the rprintf library can be directed to any device
-///		or software which accepts characters.  This means that rprintf output
+///		or software which accepts characters.ï¿½ This means that rprintf output
 ///		can be sent to the UART (serial port) or can be used with the LCD
 ///		display libraries to print formatted text on the screen.
 //
@@ -82,7 +82,7 @@ void rprintfStrLen(char str[], unsigned int start, unsigned int len);
 //! prints a string stored in program rom
 /// \note This function does not actually store your string in
 /// program rom, but merely reads it assuming you stored it properly.
-void rprintfProgStr(const prog_char str[]);
+void rprintfProgStr(const char str[]);
 
 //! Using the function rprintfProgStrM(...) automatically causes 
 /// your string to be stored in ROM, thereby not wasting precious RAM.

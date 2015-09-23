@@ -53,9 +53,9 @@
 // Global variables
 
 // strings
-u08 PROGMEM CmdlinePrompt[] = "cmd>";
-u08 PROGMEM CmdlineNotice[] = "cmdline: ";
-u08 PROGMEM CmdlineCmdNotFound[] = "command not found";
+const u08 PROGMEM CmdlinePrompt[] = "cmd>";
+const u08 PROGMEM CmdlineNotice[] = "cmdline: ";
+const u08 PROGMEM CmdlineCmdNotFound[] = "command not found";
 
 // command list
 // -commands are null-terminated strings
@@ -344,14 +344,17 @@ void cmdlineProcessInputString(void)
 	// search command list for match with entered command
 	for(cmdIndex=0; cmdIndex<CmdlineNumCommands; cmdIndex++)
 	{
-		if( !strncmp(CmdlineCommandList[cmdIndex], CmdlineBuffer, i) )
+		if ( strlen( CmdlineCommandList[cmdIndex] == i ) )
 		{
-			// user-entered command matched a command in the list (database)
-			// run the corresponding function
-			CmdlineExecFunction = CmdlineFunctionList[cmdIndex];
-			// new prompt will be output after user function runs
-			// and we're done
-			return;
+			if( !strncmp(CmdlineCommandList[cmdIndex], CmdlineBuffer, i) )
+			{
+				// user-entered command matched a command in the list (database)
+				// run the corresponding function
+				CmdlineExecFunction = CmdlineFunctionList[cmdIndex];
+				// new prompt will be output after user function runs
+				// and we're done
+				return;
+			}
 		}
 	}
 

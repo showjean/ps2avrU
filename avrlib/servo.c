@@ -22,6 +22,15 @@
 #include "global.h"
 #include "servo.h"
 
+
+// compatibility with megaXX8 processors
+#if	defined(__AVR_ATmega88__)	|| \
+	defined(__AVR_ATmega168__)	|| \
+	defined(__AVR_ATmega644__)
+  #define TIMSK       TIMSK0
+#endif
+
+
 // Program ROM constants
 
 // Global variables
@@ -30,6 +39,7 @@ u16 ServoPosTics;
 u16 ServoPeriodTics;
 u08 ServoChannel;
 ServoChannelType ServoChannels[SERVO_NUM_CHANNELS];
+
 
 // functions
 
