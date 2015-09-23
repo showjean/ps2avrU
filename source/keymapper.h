@@ -14,7 +14,7 @@
 #include "keymatrix.h"
 #include "ps2avru_util.h"
 #include "macrobuffer.h"
-#include "bootMapper.h"
+#include "bootmapper.h"
 
 #ifdef DEBUG_KEYMAPPER_H
 	#define KEY_MAPPING_COUNT_MAX 500
