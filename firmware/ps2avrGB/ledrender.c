@@ -111,6 +111,7 @@ static uint16_t getBrightness(uint16_t xValue);
 #define LENGTH_OF_RAINBOW_COLOR     7
 #define VALUE_RAINBOW_FLOW 		2
 
+static uint16_t _countOfframe = 0;
 static uint8_t numOfLeds = LED_NUM_DEFAULT; //LED_NUM_MAX;
 //static cRGB_t led[LED_NUM_MAX];
 static cRGB_t ledModified[LED_NUM_MAX];
@@ -145,6 +146,9 @@ static void sendI2c(void);
 static void setLedBalance(void);
 static void setLed2BrightnessLimit(void);
 static void setLed2BrightnessAfter(void);
+static void changeRainbowColor(uint8_t *aTargetColor, uint8_t *aCurrentColor);
+static void setNextAvailableRainbowIndex(uint8_t *aIndex);
+static void setModLength(uint8_t *aIndex);
 
 void initLED(void){
 	// led pin
@@ -684,14 +688,6 @@ static void turnOffLed2(void){
 
 void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown){
 
-	// for test sub leds
-/*if(isDown){
-	ledModified[0].g = 0x03;
-}else{
-	ledModified[0].g = 0x00;
-}
-	i2cLength = 1;
-	sendI2c();*/
 	if(isSleep() || _ledOff){
 		return;
 	}
@@ -718,25 +714,69 @@ void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t is
 			if(_rgbKeyEventMode == 1)
 			{		// color 1
 				ledModified[0] = color_key1;
-				setLed2All(ledModified[0]);
+				getMaxRgbValue(&ledModified[0]);
+				prevRgb = ledModified[0];
+				_setLed2All(&ledModified[0]);
 
 				_pressed = PRESS_MODE_DOWN;
 			}
 			else if(_rgbKeyEventMode == 2)
 			{	// complementary color
-				// ledModified[0] = (cRGB_t){255 - _currentLedAllColor.g, 255 - _currentLedAllColor.r, 255 - _currentLedAllColor.b};
 				ledModified[0].g = 255 - _currentLedAllColor.g;
 				ledModified[0].r = 255 - _currentLedAllColor.r;
 				ledModified[0].b = 255 - _currentLedAllColor.b;
-				setLed2All(ledModified[0]);
+				getMaxRgbValue(&ledModified[0]);
+                prevRgb = ledModified[0];
+                _setLed2All(&ledModified[0]);
 
 				_pressed = PRESS_MODE_DOWN;
 			}
 		}
 	}else{	// up
 		// led2
+        uint8_t i, kIndex;
 		if(_pressed == PRESS_MODE_DOWN){
-			setLed2All(_currentLedAllColor);
+		    if (_rgbMode == 1) { // 1 = rainbow
+                if (_rainbowMode == 3)  //static
+                {
+                    _changeCount = 0;
+                    for (i = 0; i < numOfLeds; ++i) {
+                        setNextAvailableRainbowIndex(&_changeCount);
+                        setModLength(&_changeCount);
+                        ledModified[i] = rainbowColor[_changeCount];
+                        getMaxRgbValue(&ledModified[i]);
+                        i2cLength += 3;
+                        _changeCount++;
+                    }
+                    sendI2c();
+
+                }else if(_rainbowMode == 4) { // flow
+                    _changeCount = 0;
+                    for (i = 0; i < numOfLeds; i++) {
+                        setNextAvailableRainbowIndex(&_changeCount);
+                        kIndex = (_changeCount + _rainbowIndex); // % LENGTH_OF_RAINBOW_COLOR;
+
+                        setModLength(&kIndex);
+
+                        changeRainbowColor(&rainbowColor[kIndex].r, &ledModified[i].r);
+                        changeRainbowColor(&rainbowColor[kIndex].g, &ledModified[i].g);
+                        changeRainbowColor(&rainbowColor[kIndex].b, &ledModified[i].b);
+
+                        getMaxRgbValue(&ledModified[i]);
+
+                        i2cLength = i2cLength + 3;
+                        _changeCount++;
+                        setModLength(&_changeCount);
+                    }
+                } else {    // others
+                    setLed2All(_currentLedAllColor);
+                }
+
+            }
+		    else
+		    {
+		        setLed2All(_currentLedAllColor);
+		    }
 		}else if(_pressed == PRESS_MODE_CHANGE){
 			// led2 mode에 변동이 있다.
 			setLed2State();
@@ -842,7 +882,6 @@ static void increaseRainbowIndex(void)
 		_rainbowIndex = 0;
 	}
 }
-
 static void setModLength(uint8_t *aIndex)
 {
 	if(*aIndex >= LENGTH_OF_RAINBOW_COLOR)
@@ -901,10 +940,9 @@ static void changeRainbowColor(uint8_t *aTargetColor, uint8_t *aCurrentColor)
 }
 
 static void _fadeLED2(void){
-	static int gFrame = 0;
 
-	if(++gFrame >= led2TickPerFrame){	// setDelay(led2TickPerFrame)){
-		gFrame = 0;
+	if(++_countOfframe >= led2TickPerFrame){	// setDelay(led2TickPerFrame)){
+		_countOfframe = 0;
 		uint8_t i;
 		uint8_t kIndex;
 		if (_rgbMode == 1) { // 1 = rainbow
@@ -948,6 +986,9 @@ static void _fadeLED2(void){
 						setNextAvailableRainbowIndex(&_changeCount);
 						setModLength(&_changeCount);
 						ledModified[i] = rainbowColor[_changeCount];
+
+						_currentLedAllColor = ledModified[i];
+
 						getMaxRgbValue(&ledModified[i]);
 						i2cLength += 3;
 						_changeCount++;
@@ -965,6 +1006,8 @@ static void _fadeLED2(void){
 					changeRainbowColor(&rainbowColor[kIndex].r, &ledModified[i].r);
 					changeRainbowColor(&rainbowColor[kIndex].g, &ledModified[i].g);
 					changeRainbowColor(&rainbowColor[kIndex].b, &ledModified[i].b);
+
+                    _currentLedAllColor = ledModified[i];
 
 					getMaxRgbValue(&ledModified[i]);
 
