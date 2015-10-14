@@ -17,7 +17,7 @@
 #include "keymatrix.h"
 #include "keymap.h"
 #include "fncontrol.h"
-#include "lazyfn.h"
+//#include "lazyfn.h"
 #include "keymapper.h"
 #include "keyindex.h"
 #include "dualaction.h"
@@ -164,7 +164,8 @@ uint8_t getLayer(void) {
 				    }
 
 					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 gLayer로 반환;
-					if(isLazyFn()){
+//					if(isLazyFn()){
+                    if(true){
 						// FN키를 처음 누른 경우
 						if(isReleaseAllPrev() || _isFnPressed == false){
 							_currentLazyLayer = gLayer;

@@ -10,7 +10,7 @@
 #include "keymatrix.h"
 #include "fncontrol.h"
 #include "bootmapper.h"
-#include "lazyfn.h"
+//#include "lazyfn.h"
 #include "esctilde.h"
 #include "oddebug.h"
 
@@ -137,6 +137,7 @@ void scanKeyWithDebounce(void) {
     
     uint8_t prevKeyidx;
     uint8_t row, col, prev, cur, keyidx;
+    static bool _isFnPressedPrev = false;
     static uint8_t _prevLayer = 0;
     uint8_t gLayer = getLayer();
 
@@ -146,7 +147,7 @@ void scanKeyWithDebounce(void) {
     // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 //    DBG1(0x0A, (uchar *)&_prevLayer, 1);
 //    DBG1(0x0A, (uchar *)&gLayer, 1);
-    if( (!isLazyFn()) && _prevLayer != gLayer){    // !isLazyFn() || !_isFnPressedPrev 순서 주의
+    if( (_prevLayer != gLayer)){
         for(col=0;col<COLUMNS;++col)
         {       
             for(row=0;row<ROWS;++row)
@@ -180,6 +181,7 @@ void scanKeyWithDebounce(void) {
         }
     }
     _prevLayer = gLayer;
+    _isFnPressedPrev = isFnPressed();
 
     scanKey(gLayer);
 }

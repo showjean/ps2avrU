@@ -30,7 +30,7 @@
 #include "keymapper.h"
 #include "keyindex.h"
 #include "quickswap.h"
-#include "lazyfn.h"
+//#include "lazyfn.h"
 #include "ledrender.h"
 #include "keyindex.h"
 #ifndef INTERFACE_ONLY_USB
@@ -151,8 +151,7 @@ static void initPreparing(void){
     // init sw
     initQuickSwap();
     initKeymapper();    // first
-    initLazyFn();       // 1...
-//    initSmartKey();
+//    initLazyFn();       // 1...
     initBeyondFn();
     initEscTilde();     // last
 

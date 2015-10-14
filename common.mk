@@ -102,10 +102,10 @@ endif
 			$(COMMON_DIR)/enterframe.c \
 			$(COMMON_DIR)/fncontrol.c \
 			$(COMMON_DIR)/esctilde.c \
-			$(COMMON_DIR)/lazyfn.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
 			$(COMMON_DIR)/main.c \
+#			$(COMMON_DIR)/lazyfn.c 
 			
 #put additional assembler source file here
 #  The ASRC line allows you to list files which contain assembly code/routines that

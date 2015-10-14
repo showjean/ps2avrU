@@ -32,7 +32,6 @@
 #include "keydownbuffer.h"
 #include "fncontrol.h"
 #include "dualaction.h"
-#include "lazyfn.h"
 #include "keyscan.h"
 #include "oddebug.h"
 

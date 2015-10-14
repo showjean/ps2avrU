@@ -26,7 +26,7 @@
 #include "ledrender.h"
 #include "keydownbuffer.h"
 #include "quickswap.h"
-#include "lazyfn.h"
+//#include "lazyfn.h"
 #include "custommacro.h"
 #include "dualaction.h"
 #include "bootmapper.h"
