@@ -26,6 +26,7 @@
 #include "i2c/i2c.h"        // include i2c support
 #include "led2.h"
 #include "keydownbuffer.h"
+#include "esctilde.h"
 
 #include "ledrender_inc.c"
 
@@ -210,6 +211,10 @@ void getLed2(led2_info_t *buffer){
 	buffer->keymode = _rgbKeyEventMode;
 	buffer->colorkey1 = color_key1;
 	buffer->fadetype = _rainbowMode;
+	buffer->esctotilde = isEscTilde();
+	buffer->fnled = isBeyondFN();
+	buffer->interface = 0;
+	buffer->ps2repeat = 0;
 
 //	DBG1(0x22, 0, 0);
 //	DBG1(0xC2, (uchar *)buffer, sizeof(led2_info_t));

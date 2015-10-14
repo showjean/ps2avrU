@@ -70,6 +70,7 @@ typedef struct {
 
 typedef struct {
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, keymode 1byte, key color1 3byte
+    // fade type 1byte, esc to tilde 1byte, fn led 1byte, interface 1byte, ps2repeat 1byte,
 	 uint8_t num;
 	 uint8_t mode;
 	 uint8_t brightness;
@@ -79,7 +80,12 @@ typedef struct {
 	 cRGB_t rainbow[7];
 	 uint8_t keymode;
 	 cRGB_t colorkey1;
-	 uint8_t fadetype;
+
+     uint8_t fadetype;
+     uint8_t esctotilde;
+     uint8_t fnled;
+     uint8_t interface;
+     uint8_t ps2repeat;
 } led2_info_t;
 
 void setLed2(uint8_t *data);
