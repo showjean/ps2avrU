@@ -22,6 +22,7 @@
 	#define KEY_MAPPING_COUNT_MAX 2500
 #endif
 
+#ifndef DISABLE_HARDWARE_MENU
 // mapping
 #define STEP_NOTHING 0
 #define STEP_CHOOSE_LAYER 1
@@ -34,7 +35,11 @@
 #define STEP_SELECT_MODE 8
 // macro
 #define STEP_SELECT_INDEX 9
+#endif
+
 #define STEP_INPUT_MACRO 11
+
+#ifndef DISABLE_HARDWARE_MENU
 #define STEP_CLEAR_ALL_MACRO 12
 #define STEP_CLEAR_SELECT_INDEX 13
 // exit
@@ -145,7 +150,6 @@ typedef struct {
 void addKeymapperDriver(keymapper_driver_t *xDriver);
 void printStringFromFlashWithEnter(const char *str);
 void printStringFromFlash(const char *str);
-void printString(const char *xString);
 void stopKeyMapping(void);
 void printEnter(void);
 void setStep(uint8_t xStep);
@@ -154,10 +158,6 @@ void initKeymapper(void);
 
 uint8_t isKeyMapping(void);
 uint8_t isDeepKeyMapping(void);
-bool isMacroKey(uint8_t xKeyidx);
-bool isEepromMacroKey(uint8_t xKeyidx);
-
-//void showP2UMenu(void);
 
 // 부팅시 키 매핑 시작
 void readyKeyMappingOnBoot(void);
@@ -166,16 +166,20 @@ void startKeyMappingOnBoot(void);
 // event loop
 void enterFrameForMapper(void);
 
+
+#endif
+void printString(const char *xString);
+
 // 매크로 등록중인지 확인;
 bool isMacroInput(void);
+bool isMacroKey(uint8_t xKeyidx);
+bool isEepromMacroKey(uint8_t xKeyidx);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx);
-
 void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
 
 bool isQuickMacro(void);
 void startQuickMacro(uint8_t xMacroIndex);
 void stopQuickMacro(void);
-
 
 #endif

@@ -23,11 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <util/delay.h>
 #include "usbdrv/usbdrv.h"
 #include "usbconfig.h"
+#include "hardwareconfig.h"
 #include "vusb.h"
 #include "main.h"
 #include "oddebug.h"
 #include "boot.h"
-#include "led2.h"
+#include "options.h"
 #include "ledrender.h"
 #include "ledconfig.h"
 #include "eeprominfo.h"
@@ -404,7 +405,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
         		static uchar    led2Buffer[CUSTOM_MACRO_SIZE_MAX];
             	if(rq->wLength.word == LED2_GET_REPORT_LENGTH_INFO){
             		// report led2 info
-            		getLed2((led2_info_t *)led2Buffer);
+            	    getOptions((led2_info_t *)led2Buffer);
             		usbMsgPtr = (usbMsgPtr_t)led2Buffer;
             		return LED2_GET_REPORT_LENGTH_INFO; 	//sizeof(led2Buffer);
             	}else if(rq->wLength.word >= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER4){
@@ -444,7 +445,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
 //                isStart = 1;
                 if(readyForRainbowColor==1){
                 	data[1] = LED2_INDEX_COLOR_RAINBOW_INIT;
-                	setLed2((uint8_t *)data);
+                	setOptions((uint8_t *)data);
                 	expectReport = 4;
                 }else{
                 	expectReport = 3;
@@ -574,14 +575,14 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         	startFullLed();
 
         }else{
-        	setLed2((uint8_t *)data);
+        	setOptions((uint8_t *)data);
         }
 
 //        expectReport = 0;
     }else if (expectReport == 4){
     	// rainbow color setting
     	DBG1(0x44, data, len);
-        setLed2((uint8_t *)data);
+    	setOptions((uint8_t *)data);
     }else if (expectReport == 3){   // HID_REPORT_BOOT
         DBG1(0xDD, data, len);
         /*

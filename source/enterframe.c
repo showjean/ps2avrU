@@ -7,8 +7,10 @@
 #include "dualaction.h"
 
 void enterFrame(void){	
-	
+
+#ifndef DISABLE_HARDWARE_MENU
 	enterFrameForMapper();	
+#endif
 	enterFrameForQuickSwap();
 	enterFrameForCustomMacro();
 	enterFrameForFnControl();

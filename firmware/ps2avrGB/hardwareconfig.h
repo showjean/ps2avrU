@@ -1,6 +1,15 @@
 #ifndef HARDWARD_CONFIG_H
 #define HARDWARD_CONFIG_H
 
+
+/* report id */
+#define REPORT_ID_INFO      1
+#define REPORT_ID_BOOT      2
+#define REPORT_ID_SYSTEM    4
+#define REPORT_ID_CONSUMER  3
+#define REPORT_ID_MOUSE     5
+
+
 /* ----------------------- PS/2 ------------------------ */
 #define P2U_PS2_PORT		PORTD
 #define P2U_PS2_DDR			DDRD

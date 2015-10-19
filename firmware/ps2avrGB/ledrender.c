@@ -24,7 +24,7 @@
 #include "ps2avru_util.h"
 #include "oddebug.h"
 #include "i2c/i2c.h"        // include i2c support
-#include "led2.h"
+#include "options.h"
 #include "keydownbuffer.h"
 #include "esctilde.h"
 
@@ -150,6 +150,7 @@ static void setLed2BrightnessAfter(void);
 static void changeRainbowColor(uint8_t *aTargetColor, uint8_t *aCurrentColor);
 static void setNextAvailableRainbowIndex(uint8_t *aIndex);
 static void setModLength(uint8_t *aIndex);
+static void applyStaticFullLed(void);
 
 void initLED(void){
 	// led pin
@@ -190,11 +191,11 @@ void setLed2Num(uint8_t xNum){
     setLed2BrightnessLimit();
 }
 
-// led2.h
+// options.h
 // data = hid report
 static uint8_t led2rainbowSettingCount = 0;
 
-void getLed2(led2_info_t *buffer){
+void getOptions(led2_info_t *buffer){
 
 	// report led2 info
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte, fade mode 1byte
@@ -211,10 +212,15 @@ void getLed2(led2_info_t *buffer){
 	buffer->keymode = _rgbKeyEventMode;
 	buffer->colorkey1 = color_key1;
 	buffer->fadetype = _rainbowMode;
+
+    buffer->fullledmode = _fullLEDMode;
+    buffer->fullledbrightness = _ledBrightnessMax;
+
 	buffer->esctotilde = isEscTilde();
-	buffer->fnled = isBeyondFN();
+	buffer->fnled = getBeyondFN();
 	buffer->interface = 0;
 	buffer->ps2repeat = 0;
+
 
 //	DBG1(0x22, 0, 0);
 //	DBG1(0xC2, (uchar *)buffer, sizeof(led2_info_t));
@@ -233,7 +239,7 @@ void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
 
 	_saved |= BV(SAVE_BIT_LED_MODE);
 }
-void setLed2(uint8_t *data){
+void setOptions(uint8_t *data){
 	/*
 	 * data[0] = report id;
 	 * data[1] = index
@@ -315,6 +321,27 @@ void setLed2(uint8_t *data){
 
 		_saved |= BV(SAVE_BIT_LED2_NUM);
 	 }
+     else if(*(data+1) == LED2_INDEX_FULL_LED_MODE)
+     {
+         _fullLEDMode = *(data+2);
+         _saved |= BV(SAVE_BIT_LED_MODE);
+     }
+     else if(*(data+1) == LED2_INDEX_FULL_LED_BRIGHTNESS)
+     {
+         _ledBrightnessMax = *(data+2);
+
+         applyStaticFullLed();
+         _saved |= BV(SAVE_BIT_LED_BRITNESS_MAX);
+     }
+     else if(*(data+1) == LED2_INDEX_ESC_TO_TILDE)
+     {
+         setEscTilde(*(data+2));
+     }
+     else if(*(data+1) == LED2_INDEX_FN_LED)
+     {
+         setBeyondFnLed(*(data+2));
+     }
+
 
 	ledStateCount = 0;
 }
@@ -545,7 +572,7 @@ void setLEDIndicate(void) {
 	static uint8_t prevLEDstate;
 
 	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
-		getLedBlink(LED_STATE_NUM, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
+		getLedBlink(LED_STATE_NUM, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
 	else if (LEDstate & LED_STATE_NUM) { // light up num lock
         turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
@@ -561,7 +588,7 @@ void setLEDIndicate(void) {
     }
 
     if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
-		getLedBlink(LED_STATE_SCROLL, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
+		getLedBlink(LED_STATE_SCROLL, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
 	else if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
 		turnOnLED(LEDSCROLL); //PORTLEDS |= (1 << LEDCAPS);	//

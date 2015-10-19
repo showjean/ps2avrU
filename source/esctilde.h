@@ -5,10 +5,13 @@
 #include <stdbool.h>
 #include "keymapper.h"
 
-//keymapper_driver_t driverKeymapperEscTilde;
+#ifndef DISABLE_HARDWARE_MENU
+void toggleEscTilde(void);
+#endif
+
 void initEscTilde(void);
 bool isEscTilde(void);
-void toggleEscTilde(void);
+void setEscTilde(bool xEnabled);
 uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown);
 
 #endif

@@ -150,7 +150,9 @@ void initAfterInterfaceMount(void){
 static void initPreparing(void){
     // init sw
     initQuickSwap();
+#ifndef DISABLE_HARDWARE_MENU
     initKeymapper();    // first
+#endif
 //    initLazyFn();       // 1...
     initBeyondFn();
     initEscTilde();     // last
@@ -201,10 +203,17 @@ int main(void) {
                     continue;
                 }
 #endif
+
+#ifndef DISABLE_HARDWARE_MENU
                 if(keyidx == KEY_M) {
                     readyKeyMappingOnBoot();
+                }
+#endif
 #ifndef INTERFACE_ONLY_USB
-                }else if(keyidx == KEY_U) {
+#ifndef DISABLE_HARDWARE_MENU
+                else
+#endif
+                if(keyidx == KEY_U) {
                     ckeckNeedInterface |= (1 << 0);
                 }else if(keyidx == KEY_P) {
                     ckeckNeedInterface |= (1 << 1);
@@ -214,8 +223,8 @@ int main(void) {
                 	ps2_repeat_speed = PS2_REPEAT_SPEED_MIDD;
                 }else if(keyidx == KEY_3) {
                 	ps2_repeat_speed = PS2_REPEAT_SPEED_LOW;
-#endif
                 }
+#endif
             }
 
         }

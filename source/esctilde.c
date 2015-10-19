@@ -4,13 +4,14 @@
 #include "oddebug.h"
 
 //
+static bool _isEscTilde;
+
+#ifndef DISABLE_HARDWARE_MENU
 #define CMD_TOGGLE_ESC_TILDE 1
 #define CMD_EXIT_ESC_TILDE 3
 #define CMD_BACK_ESC_TILDE 6
 
 const char str_select_esc_tilde[] PROGMEM =  "esc to ~";
-
-static bool _isEscTilde;
 
 void printMenuEscTilde(void);
 void printContentsEscTilde(void);
@@ -66,6 +67,11 @@ void putKeyindexEscTilde(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xR
 		setStep(STEP_BACK);
 	}
 }
+void toggleEscTilde(void){
+    _isEscTilde ^= true;
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_ESC_TO_TILDE, _isEscTilde);
+}
+#endif
 
 static bool _isEscTildeDown = false;
 uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
@@ -89,13 +95,18 @@ uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
 
 void initEscTilde(void){
 	_isEscTilde = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_ESC_TO_TILDE);
+#ifndef DISABLE_HARDWARE_MENU
 	addKeymapperDriver(&driverKeymapperEscTilde);
+#endif
 }
+
 bool isEscTilde(void){
 	return _isEscTilde;
 }
-void toggleEscTilde(void){
-	_isEscTilde ^= true;
-	setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_ESC_TO_TILDE, _isEscTilde);
+
+void setEscTilde(bool xEnabled)
+{
+    _isEscTilde = xEnabled;
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_ESC_TO_TILDE, _isEscTilde);
 }
 

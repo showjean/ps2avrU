@@ -6,14 +6,17 @@
 #include "macrobuffer.h"
 #include "ps2avru_util.h"
 
+#if 0
+static bool _isLazyFn;
+#endif
+
+#ifndef DISABLE_HARDWARE_MENU
 // lazy fn
 #define CMD_TOGGLE_LAZY_FN 1
 #define CMD_EXIT_LAZY_FN 3
 #define CMD_BACK_LAZY_FN 6
 
 const char str_select_lazy_fn[] PROGMEM =  "lazy fn";
-
-static bool _isLazyFn;
 
 void printMenuLazyFn(void);
 void printContentsLazyFn(void);
@@ -68,10 +71,14 @@ void putKeyindexLazyFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow
 		setStep(STEP_BACK);
 	}
 }
+#endif
 
+#if 0
 void initLazyFn(void){
 	_isLazyFn = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LAZY_FN);
+#ifndef DISABLE_HARDWARE_MENU
 	addKeymapperDriver(&driverKeymapperLazyFn);
+#endif
 }
 
 bool isLazyFn(void){
@@ -83,3 +90,4 @@ void toggleLazyFn(void){
 	_isLazyFn ^= true;	
     setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LAZY_FN, _isLazyFn);
 }
+#endif

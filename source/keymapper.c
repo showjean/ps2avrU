@@ -34,7 +34,7 @@
 #include "esctilde.h"
 #include "oddebug.h"
 
-
+#ifndef DISABLE_HARDWARE_MENU
 const char str_select_mode[] PROGMEM =  "select mode";
 
 const char str_exit_msg[] PROGMEM =  "good bye";
@@ -86,25 +86,25 @@ const char str_input_macro[] PROGMEM = "input key (max 24 keys, stop : press ESC
 const char str_invalid_number[] PROGMEM = "invalid number, input again.";
 const char str_clear_all_macro[] PROGMEM = "clear...";
 
-
-
-static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
 static uint8_t enabledKeyMappingCount = COUNT_TYPE_NONE;
 static int keyMappingCount = 0;
 static int keyMappingCountMax = KEY_MAPPING_COUNT_MAX;
 static uint8_t _keyMappingOnBoot = 0;
+static uint8_t _isKeyMapping = 0;	// 0b00000001 : will start mapping, 0b00000011 : did start mapping
+#endif
 
-uint8_t _macroIndex;
-uint8_t _macroBufferIndex;
-uint8_t _macroPressedBuffer[MACRO_SIZE_MAX_HALF];
-uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
-int _pressedEscapeKeyCount = 0;
-uint8_t _isPressedEscapeKey = 0;
-uint8_t _isTiredEscapeKey = 0;
+static uint8_t _macroIndex;
+static uint8_t _macroBufferIndex;
+static uint8_t _macroPressedBuffer[MACRO_SIZE_MAX_HALF];
+static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
+static int _pressedEscapeKeyCount = 0;
+static uint8_t _isPressedEscapeKey = 0;
+static uint8_t _isTiredEscapeKey = 0;
 
-static uint8_t _mode;
 static uint8_t _step;
+#ifndef DISABLE_HARDWARE_MENU
 static uint8_t _wait;			// 매크로 완료 후 실행될 작업 구분;
+static uint8_t _mode;
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 static uint8_t _stepAfterLayerSave;	// save 후 실행될 step 저장;
 static uint8_t _col, _row;
@@ -116,15 +116,20 @@ static uint8_t _currentLayerAfter;
 static uint8_t _buffer[3];
 static uint8_t _bufferIndex;
 static uint8_t _isWorkingForEmpty = 0;	// 매크로 버퍼가 모두 소진된 후 진행할 내용이 있는지 확인;
+#endif
 
 
-
+#ifndef DISABLE_HARDWARE_MENU
 // 키매핑에 사용되는 키들 정의;
 static uint8_t usingKeys[11] = {
     KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9, KEY_ESC	//, KEY_S, KEY_X, KEY_L, KEY_R           
 };
+#endif
 
 // define functions
+void readMacro(uint8_t xMacroIndex);
+
+#ifndef DISABLE_HARDWARE_MENU
 void printPrepareString(void);
 static void prepareKeyMapping(void);
 void prepareKeyMapper(void);
@@ -137,7 +142,6 @@ void printSelectModeAfter(void);
 void clearMacroAllAfter(void);
 void clearMacroAtIndexAfter(void);
 void printSelectMode(void);
-void readMacro(uint8_t xMacroIndex);
 
 static keymapper_driver_t *_drivers[4];
 static uint8_t _driverCount;
@@ -155,7 +159,6 @@ void initKeymapper(void){
 
 	_driverCount = 0;
 }
-
 void addKeymapperDriver(keymapper_driver_t *xDriver){
 	_drivers[_driverCount] = xDriver;
 	++_driverCount;
@@ -165,17 +168,19 @@ void setStep(uint8_t xStep){
 }
 //------------------------------------------------------///
 
-static void setWillStartKeyMapping(void){
-	_isKeyMapping |= BV(0);	//set will start mapping
-}
-
 uint8_t isKeyMapping(void){
 	return _isKeyMapping & BV(0);	// will start key mapping
 }
+
+static void setWillStartKeyMapping(void){
+    _isKeyMapping |= BV(0); //set will start mapping
+}
+
 void setDeepKeyMapping(void){
 	setWillStartKeyMapping();
 	_isKeyMapping |= BV(1);	//set doing mapping
 }
+
 uint8_t isDeepKeyMapping(void){
 	return _isKeyMapping & BV(1);	// did start key mapping
 }
@@ -273,7 +278,6 @@ void stopKeyMapping(void){
 	DBG1(0xff, (uchar *)&_isKeyMapping, 1);
 }
 
-
 static void countKeyMappingEnabled(void){	
 	if(!_isKeyMapping && enabledKeyMappingCount == COUNT_TYPE_COUNTING && ++keyMappingCount > keyMappingCountMax){
 		prepareKeyMapping();			
@@ -321,31 +325,8 @@ void enterFrameForMapper(void){
 	}
 
 }
-
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-
-static void pushCharacter(char *xStr)
-{	   
- 	// 버퍼에 쌓아두고 모두 출력되기를 기다린다.
-	macro_key_t key = charToKey(xStr[0]);
-    if(key.mode){
-    	pushM(KEY_LSHIFT);
-    }
-	pushM(key.keyindex);	// 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
-	pushM(key.keyindex);
-    // DEBUG_PRINT(("pushCharacter char %c : %d \n", xStr[0], key.keyindex));
-    if(key.mode){
-    	pushM(KEY_LSHIFT);
-    }
-   
-}
-
-
 void printEnter(void)
-{	
+{
     pushM(KEY_ENTER);
     pushM(KEY_ENTER);
 }
@@ -354,6 +335,24 @@ void printStringAndFlash(const char *xStr, const char *xfStr){
 	printString(xStr);
 	printStringFromFlash(xfStr);
 }
+#endif
+
+static void pushCharacter(char *xStr)
+{
+    // 버퍼에 쌓아두고 모두 출력되기를 기다린다.
+    macro_key_t key = charToKey(xStr[0]);
+    if(key.mode){
+        pushM(KEY_LSHIFT);
+    }
+    pushM(key.keyindex);    // 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
+    pushM(key.keyindex);
+    // DEBUG_PRINT(("pushCharacter char %c : %d \n", xStr[0], key.keyindex));
+    if(key.mode){
+        pushM(KEY_LSHIFT);
+    }
+   
+}
+
 void printString(const char *xString)
 {
 	char c;
@@ -368,6 +367,7 @@ void printString(const char *xString)
     	
     }
 }
+#ifndef DISABLE_HARDWARE_MENU
 void printStringFromFlashWithEnter(const char *str){
 	printStringFromFlash(str);
 	printEnter();
@@ -633,6 +633,9 @@ void resetCurrentLayer(void)
 
 }
 #endif
+#endif
+
+
 bool isMacroKey(uint8_t xKeyidx){
 	if(xKeyidx >= KEY_CST_MAC1 && xKeyidx <= KEY_MAC12){
 		return true;
@@ -651,7 +654,9 @@ bool isEepromMacroKey(uint8_t xKeyidx){
 
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx){
+#ifndef DISABLE_HARDWARE_MENU
 	if(isKeyMapping()) return 0;	// 키매핑이 아닐때만 매크로 적용;
+#endif
 
 	uint8_t gMacroIndex;
 	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
@@ -701,18 +706,11 @@ void readMacro(uint8_t xMacroIndex){
 void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
 
-	/*uint8_t gKeyindex;
-	uint16_t gAddress;
-	uint8_t k;
-	for(k = 0; k < MACRO_SIZE_MAX; ++k){
-		gKeyindex = _macroInputBuffer[k];	// value
-		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * _macroIndex);	// key
-		eeprom_update_byte((uint8_t *)gAddress, gKeyindex);
-	}*/
 	eeprom_update_block(&_macroInputBuffer, (uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * _macroIndex)), MACRO_SIZE_MAX);
 	_macroIndex = 255;
 }
 
+#ifndef DISABLE_HARDWARE_MENU
 void clearMacroAllAfter(void){
 //	uint16_t gAddress;
 	int k;
@@ -760,6 +758,7 @@ void clearMacroAtIndex(void){
 	_wait = WAIT_CLEAR_MACRO;
 	_step = STEP_NOTHING;
 }
+#endif
 
 bool isMacroInput(void){
 	if(_step == STEP_INPUT_MACRO){
@@ -785,9 +784,11 @@ bool isQuickMacro(void){
 void startQuickMacro(uint8_t xMacroIndex){
 	resetMacroInput();
 	_macroIndex = xMacroIndex;
+	_isQuickMacro = true;
+#ifndef DISABLE_HARDWARE_MENU
 	_step = STEP_INPUT_MACRO;
 	setDeepKeyMapping();
-	_isQuickMacro = true;
+#endif
 
 	blinkOnce(500);
 	_delay_ms(100);
@@ -797,9 +798,11 @@ void stopQuickMacro(void){
 	DBG1(0xef, (uchar *)&_macroBufferIndex, 1);
 	saveMacro();
 	_macroIndex = 255;
-	_step = STEP_NOTHING;
 	_isQuickMacro = false;
+#ifndef DISABLE_HARDWARE_MENU
+	_step = STEP_NOTHING;
 	stopKeyMapping();
+#endif
 
 	blinkOnce(1000);
 }
@@ -808,12 +811,15 @@ static void stopMacroInput(void){
 	DBG1(0xee, (uchar *)&_macroBufferIndex, 1);
 	if(_isQuickMacro){
 		stopQuickMacro();
-	}else{
+	}
+#ifndef DISABLE_HARDWARE_MENU
+	else{
 		saveMacro();
 		_step = STEP_INPUT_COMMAND;
 		printEnter();
 		printPrompt();
 	}
+#endif
 }
 
 static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
@@ -881,7 +887,8 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 }
 
 void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
-{	
+{
+#ifndef DISABLE_HARDWARE_MENU
 	uint8_t cmd;
 #ifndef DISABLE_HARDWARE_KEYMAPPING
 	uint8_t gLayer;
@@ -894,17 +901,18 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	// 매크로 실행중에는 입력을 받지 않는다.
 	if(_isWorkingForEmpty) return;
 
+#endif
 //    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
     xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
 
 //    DBG1(0x11, (uchar *)&xKeyidx, 1);
-
+#ifndef DISABLE_HARDWARE_MENU
 	// 매핑 중에는 키 업만 실행 시킨다.
 	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
-
 	if(isMacroInput()){
+#endif
 		putMacro(xKeyidx, xIsDown);	
-
+#ifndef DISABLE_HARDWARE_MENU
 		return;	
 	}
 
@@ -1154,6 +1162,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 		}
 		printPrompt();
 	}
+#endif
 
 }
 

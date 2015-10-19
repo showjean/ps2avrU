@@ -1,5 +1,5 @@
-#ifndef LED2_H
-#define LED2_H
+#ifndef OPTIONS_H
+#define OPTIONS_H
 
 #define LED2_INDEX_COLOR_RAINBOW_INIT	0x1F
 #define LED2_INDEX_COLOR_RAINBOW	0x10
@@ -15,15 +15,23 @@
 #define LED2_INDEX_COLOR_KEY_SET	0xA0
 #define LED2_INDEX_COLOR_KEY_SET1	0xA1
 #define LED2_INDEX_LED_ENABLED		0xE0
-#define LED2_INDEX_LED_SAVE			0xF0
+#define LED2_INDEX_LED_SAVE         0xF0
+#define LED2_INDEX_FULL_LED_MODE    0x80
+#define LED2_INDEX_FULL_LED_BRIGHTNESS 0x81
+#define LED2_INDEX_ESC_TO_TILDE     0x82
+#define LED2_INDEX_FN_LED           0x83
+
+
 
 #define LED2_GET_REPORT_LENGTH_RAINBOW			133	//0x85
-#define LED2_GET_REPORT_LENGTH_INFO				100	// used byte : 38
+#define LED2_GET_REPORT_LENGTH_INFO				100
 #define LED2_GET_REPORT_LENGTH_KEYMAP			120
 #define LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1	121
 #define LED2_GET_REPORT_LENGTH_KEYMAP_LAYER2	122
 #define LED2_GET_REPORT_LENGTH_KEYMAP_LAYER3	123
 #define LED2_GET_REPORT_LENGTH_KEYMAP_LAYER4	124
+
+
 
 enum{
 	LED2_GET_REPORT_LENGTH_MACRO1 = 168,
@@ -70,7 +78,8 @@ typedef struct {
 
 typedef struct {
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, keymode 1byte, key color1 3byte
-    // fade type 1byte, esc to tilde 1byte, fn led 1byte, interface 1byte, ps2repeat 1byte,
+    // fade type 1byte, full led mode 1byte, full led brightness 1byte, esc to tilde 1byte, fn led 1byte, interface 1byte, ps2repeat 1byte,
+
 	 uint8_t num;
 	 uint8_t mode;
 	 uint8_t brightness;
@@ -80,16 +89,20 @@ typedef struct {
 	 cRGB_t rainbow[7];
 	 uint8_t keymode;
 	 cRGB_t colorkey1;
-
      uint8_t fadetype;
+
+     uint8_t fullledmode;
+     uint8_t fullledbrightness;
+
      uint8_t esctotilde;
      uint8_t fnled;
      uint8_t interface;
      uint8_t ps2repeat;
+
 } led2_info_t;
 
-void setLed2(uint8_t *data);
-void getLed2(led2_info_t *buffer);
+void setOptions(uint8_t *data);
+void getOptions(led2_info_t *buffer);
 
 void stopFullLed(void);
 void startFullLed(void);

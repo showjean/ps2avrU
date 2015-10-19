@@ -296,7 +296,9 @@ static void initPs2(void)
 
         initAfterInterfaceMount();
 
+#ifndef DISABLE_HARDWARE_MENU
         startKeyMappingOnBoot();
+#endif
     }
 } 
 

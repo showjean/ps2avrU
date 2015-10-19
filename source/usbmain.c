@@ -604,19 +604,22 @@ void usb_main(void) {
                 // LED 반응 후에 처리하려고 하면 MAC OS에서 실행되지 않는다.
                 // (MAC OS에서는 플러깅 시 LED가 반응하지 않는다. 대신 바로 출력이 된다.)
                 // for os x
+#ifndef DISABLE_HARDWARE_MENU
                 if(idleRate > 0) {
                     startKeyMappingOnBoot();
                 }
+#endif
 
 //                DBG1(0xAA, (uchar *)&idleRate, 1);
 
             }else if(_ledInitState == INIT_INDEX_INITED){
                 _ledInitState = INIT_INDEX_COMPLETE;
                 // for windows
+#ifndef DISABLE_HARDWARE_MENU
                 if(idleRate == 0) {
                     startKeyMappingOnBoot();
                 }
-
+#endif
             }
         }
 

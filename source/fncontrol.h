@@ -18,18 +18,19 @@
 #define BEYOND_FN_LED_NL  	1
 #define BEYOND_FN_LED_SL	2
 
-//keymapper_driver_t driverKeymapperBeyondFn;
 void initBeyondFn(void);
 uint8_t isBeyondFnLedEnabled(void);
 
 // for KEY_BEYOND_FN;
-uint8_t isBeyondFN(void);//KEY_BEYOND_FN state
+uint8_t getBeyondFN(void);//KEY_BEYOND_FN state
 
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown);
 
 bool isKeyEnabled(uint8_t xKeyidx);
 void setKeyEnabled(uint8_t xKeyidx, bool xIsDown);
+
+void setBeyondFnLed(uint8_t xLed);
 
 void enterFrameForFnControl(void);
 

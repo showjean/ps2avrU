@@ -12,13 +12,6 @@
 
 #include "hardwareconfig.h"
 
-/* report id */
-#define REPORT_ID_BOOT      2
-#define REPORT_ID_INFO      1
-#define REPORT_ID_SYSTEM    4
-#define REPORT_ID_CONSUMER  3
-#define REPORT_ID_MOUSE 	5
-
 /*
 General Description:
 This file is an example configuration (with inline documentation) for the USB
@@ -247,7 +240,7 @@ section at the end of this file).
  * with libusb: 0x16c0/0x5dc.  Use this VID/PID pair ONLY if you understand
  * the implications!
  */
-#define USB_CFG_DEVICE_VERSION  0x00, 0x01
+#define USB_CFG_DEVICE_VERSION  0x01, 0x01
 /* Version number of the device: Minor number first, then major number.
  */
 #define USB_CFG_VENDOR_NAME     'w', 'i', 'n', 'k', 'e', 'y', 'l', 'e', 's', 's', '.', 'k', 'r'

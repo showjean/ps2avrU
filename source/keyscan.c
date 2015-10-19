@@ -50,7 +50,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
         applyDualActionDownWhenIsCancel(true);
     }
 
-
+#ifndef DISABLE_HARDWARE_MENU
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
@@ -59,6 +59,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
         return;
     }
+#endif
 
     // fn키를 키매핑에 적용하려면 위치 주의;
     if(gFN == false) return;

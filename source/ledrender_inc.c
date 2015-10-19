@@ -60,11 +60,11 @@ void blinkIndicateLED(void) {
 				}
 			}else{
 				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
-					if(isBeyondFN()){
+					if(getBeyondFN()){
 						turnOnLED(LEDNUM);
 					}
 				}else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
-					if(isBeyondFN()){
+					if(getBeyondFN()){
 						turnOnLED(LEDSCROLL);
 					}
 				}else{
@@ -84,52 +84,30 @@ void blinkIndicateLED(void) {
 
 
 void blinkBootMapperLED(void) {
-//	static int gCounter = 0;
+#ifdef ENABLE_BOOTMAPPER
 	static int gDelayCounter = 0;
 	static uint8_t gLEDState = 1;
-//	const int gCountMAX = blinkLedCountDelay; // 200;
-	uint8_t gIsOn = 0;
 
-#ifdef ENABLE_BOOTMAPPER
 	if(isBootMapper()){
-		gIsOn = 1;
-	}
-#endif
-
-	if(gIsOn == 1){
 		++gDelayCounter;
-		if(gDelayCounter > blinkLedCountDelay){	//setDelay(blinkLedCountDelay)){
-//			++gCounter;
-//			if(gCounter > gCountMAX){
-//				if(getLEDState() & LED_STATE_CAPS){	// Caps Lock이 켜져 있을때는 커졌다 켜지고;
-					if(gLEDState == 1){
-						turnOffLED(LEDCAPS);
-					}else{
-						turnOnLED(LEDCAPS);
-//						gDelayCounter = 0;
-					}
-				/*}else{	// Caps Lock이 꺼져 있을 때는 켜졌다 꺼진다.
-					if(gLEDState == 1){
-						turnOnLED(LEDCAPS);
-					}else{
-						turnOffLED(LEDCAPS);
-//						gDelayCounter = 0;
-					}
-				}*/
-				gDelayCounter = 0;
-				gLEDState ^= 1;
-//				gCounter = 0;
-//			}
+		if(gDelayCounter > blinkLedCountDelay){
+            if(gLEDState == 1){
+                turnOffLED(LEDCAPS);
+            }else{
+                turnOnLED(LEDCAPS);
+            }
+            gDelayCounter = 0;
+            gLEDState ^= 1;
 		}
 	}else{
-//		gCounter = 0;
 		gLEDState = 1;
 	}
+#endif
 }
 
 void blinkOnce(const int xStayMs){
 	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
-		if (isBeyondFN()) { // light up num lock on FN2 toggle
+		if (getBeyondFN()) { // light up num lock on FN2 toggle
 	        turnOffLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
 	    } else {
 	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
@@ -153,7 +131,7 @@ void blinkOnce(const int xStayMs){
 	__delay_ms(xStayMs);
 
 	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
-		if (isBeyondFN()) { // light up num lock on FN2 toggle
+		if (getBeyondFN()) { // light up num lock on FN2 toggle
 	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
 	    } else {
 	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//

@@ -165,7 +165,7 @@ void setLEDIndicate(void) {
 	static uint8_t prevLEDstate;
 
 	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_NL) {
-		getLedBlink(LED_STATE_NUM, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
+		getLedBlink(LED_STATE_NUM, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	} else {
 		if (LEDstate & LED_STATE_NUM) { // light up num lock
 			turnOnLED(LEDNUM); //PORTLEDS |= (1 << LEDNUM);	//
@@ -182,7 +182,7 @@ void setLEDIndicate(void) {
 
 #ifdef LEDSCROLL
 	if (isBeyondFnLedEnabled() == BEYOND_FN_LED_SL) {
-		getLedBlink(LED_STATE_SCROLL, isBeyondFN(), &prevLEDstate, &ledBlinkCount);
+		getLedBlink(LED_STATE_SCROLL, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	} else {
 		if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
 			turnOnLED(LEDSCROLL);//PORTLEDS |= (1 << LEDCAPS);	//

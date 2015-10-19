@@ -120,8 +120,8 @@ uint8_t getLayer(void) {
 
 	gLayer = LAYER_NORMAL;
 
-	if(isBeyondFN()) {
-	    fnScanLayer = isBeyondFN();
+	if(getBeyondFN()) {
+	    fnScanLayer = getBeyondFN();
     }else{
         fnScanLayer = LAYER_NORMAL;
     }

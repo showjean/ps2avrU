@@ -7,6 +7,7 @@
 
 //#define  DEBUG_LEVEL 		1	// for oddebug
 // DBG1(0x00, (uchar *)&xRgb, 3);
+//#define DISABLE_HARDWARE_MENU 1
 
 // only for test, use makefile -D option on release.bat
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
