@@ -21,7 +21,7 @@
 #include "ps2avru_util.h"
 #include "oddebug.h"
 
-static uint8_t _beyondFnLedEnabled;	// 0: off, 1:NL, 2:SL
+static uint8_t _beyondFnLed;	// 0: off, 1:NL, 2:SL
 // for KEY_BEYOND_FN;
 static uint8_t _beyondFnIndex = 0;     //KEY_BEYOND_FN state
 static bool _isExtraFNDown = false;
@@ -37,32 +37,32 @@ uint8_t getBeyondFN(void){
     return _beyondFnIndex;
 }
 
-uint8_t isBeyondFnLedEnabled(void){
-    return _beyondFnLedEnabled;
+uint8_t getBeyondFnLed(void){
+    return _beyondFnLed;
 }
 
 static void __setBeyondFnLed(void)
 {
-    if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+    setLEDIndicate();
+
+    if(getBeyondFnLed() == BEYOND_FN_LED_NL){
         setLed(LED_STATE_NUM, getBeyondFN());
-    }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+    }else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
         setLed(LED_STATE_SCROLL, getBeyondFN());
-    }else{
-        setLEDIndicate();
     }
 }
 
 void setBeyondFnLed(uint8_t xLed){
-    _beyondFnLedEnabled = xLed;
+    _beyondFnLed = xLed;
     /*
     	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 1 : off
     	 TOGGLE_BEYOND_FN_LED_NL == 0, TOGGLE_BEYOND_FN_LED_SL == 1 : NL
     	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
     	 */
 
-    if(_beyondFnLedEnabled == BEYOND_FN_LED_NL){
+    if(_beyondFnLed == BEYOND_FN_LED_NL){
     	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) & ~(_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
-    }else if(_beyondFnLedEnabled == BEYOND_FN_LED_SL){
+    }else if(_beyondFnLed == BEYOND_FN_LED_SL){
     	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) & ~(_BV(TOGGLE_BEYOND_FN_LED_SL))));
     }else{
     	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
@@ -102,9 +102,9 @@ static void printBeyondFnLedState(void){
     printStringFromFlash(str_space);
     printStringFromFlash(str_colon);
     printStringFromFlash(str_space);
-    if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+    if(getBeyondFnLed() == BEYOND_FN_LED_NL){
         printStringFromFlash(str_beyond_fn_led_nl);
-    }else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+    }else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
         printStringFromFlash(str_beyond_fn_led_sl);
     }else{
         printStringFromFlash(str_off);
@@ -167,14 +167,14 @@ void initBeyondFn(void){
         ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_ON
         && ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_OFF
     ){
-        _beyondFnLedEnabled = BEYOND_FN_LED_NL;
+        _beyondFnLed = BEYOND_FN_LED_NL;
     }else if(
         ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_OFF
         && ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_ON
     ){
-        _beyondFnLedEnabled = BEYOND_FN_LED_SL;
+        _beyondFnLed = BEYOND_FN_LED_SL;
     }else{
-        _beyondFnLedEnabled = BEYOND_FN_LED_OFF;
+        _beyondFnLed = BEYOND_FN_LED_OFF;
     }
 
 #ifndef DISABLE_HARDWARE_MENU
@@ -275,7 +275,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
              }
 
 #ifndef DISABLE_FN2_TOGGLE_LED_BLINK 
-             if(isBeyondFnLedEnabled() == BEYOND_FN_LED_OFF){
+             if(getBeyondFnLed() == BEYOND_FN_LED_OFF){
                  if(_beyondFnIndex == 0){
                     blinkOnce(100);
                  }else{

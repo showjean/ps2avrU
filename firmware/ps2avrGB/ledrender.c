@@ -217,7 +217,7 @@ void getOptions(led2_info_t *buffer){
     buffer->fullledbrightness = _ledBrightnessMax;
 
 	buffer->esctotilde = isEscTilde();
-	buffer->fnled = getBeyondFN();
+	buffer->fnled = getBeyondFnLed();
 	buffer->interface = 0;
 	buffer->ps2repeat = 0;
 
@@ -571,7 +571,7 @@ uint8_t getLEDState(void){
 void setLEDIndicate(void) {
 	static uint8_t prevLEDstate;
 
-	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+	if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 		getLedBlink(LED_STATE_NUM, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
 	else if (LEDstate & LED_STATE_NUM) { // light up num lock
@@ -587,7 +587,7 @@ void setLEDIndicate(void) {
         turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
     }
 
-    if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+    if(getBeyondFnLed() == BEYOND_FN_LED_SL){
 		getLedBlink(LED_STATE_SCROLL, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
 	else if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock

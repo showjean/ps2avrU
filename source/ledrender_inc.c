@@ -47,23 +47,23 @@ void blinkIndicateLED(void) {
 		counter++;
 		if(counter > countMAX){
 			if(ledBlinkCount == 5 || ledBlinkCount == 3){
-				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 					turnOnLED(LEDNUM);
 				}else{
 					turnOnLED(LEDSCROLL);
 				}
 			}else if(ledBlinkCount == 4 || ledBlinkCount == 2){
-				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 					turnOffLED(LEDNUM);
 				}else{
 					turnOffLED(LEDSCROLL);
 				}
 			}else{
-				if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 					if(getBeyondFN()){
 						turnOnLED(LEDNUM);
 					}
-				}else if(isBeyondFnLedEnabled() == BEYOND_FN_LED_SL){
+				}else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
 					if(getBeyondFN()){
 						turnOnLED(LEDSCROLL);
 					}
@@ -106,7 +106,7 @@ void blinkBootMapperLED(void) {
 }
 
 void blinkOnce(const int xStayMs){
-	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+	if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 		if (getBeyondFN()) { // light up num lock on FN2 toggle
 	        turnOffLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
 	    } else {
@@ -130,7 +130,7 @@ void blinkOnce(const int xStayMs){
 	*/
 	__delay_ms(xStayMs);
 
-	if(isBeyondFnLedEnabled() == BEYOND_FN_LED_NL){
+	if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 		if (getBeyondFN()) { // light up num lock on FN2 toggle
 	        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
 	    } else {

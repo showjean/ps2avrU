@@ -19,7 +19,7 @@
 #define BEYOND_FN_LED_SL	2
 
 void initBeyondFn(void);
-uint8_t isBeyondFnLedEnabled(void);
+uint8_t getBeyondFnLed(void);
 
 // for KEY_BEYOND_FN;
 uint8_t getBeyondFN(void);//KEY_BEYOND_FN state

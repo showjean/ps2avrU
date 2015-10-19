@@ -148,7 +148,7 @@ void scanKeyWithDebounce(void) {
     // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 //    DBG1(0x0A, (uchar *)&_prevLayer, 1);
 //    DBG1(0x0A, (uchar *)&gLayer, 1);
-    if( (_prevLayer != gLayer)){
+    if( _isFnPressedPrev == false && (_prevLayer != gLayer)){
         for(col=0;col<COLUMNS;++col)
         {       
             for(row=0;row<ROWS;++row)
