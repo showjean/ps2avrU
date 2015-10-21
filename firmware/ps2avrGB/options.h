@@ -20,6 +20,7 @@
 #define LED2_INDEX_FULL_LED_BRIGHTNESS 0x81
 #define LED2_INDEX_ESC_TO_TILDE     0x82
 #define LED2_INDEX_FN_LED           0x83
+#define LED2_INDEX_SKIP_FRAME       0x84
 
 #define LED2_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define LED2_GET_REPORT_LENGTH_INFO				100
@@ -64,7 +65,10 @@ typedef struct {
 
 typedef struct {
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, keymode 1byte, key color1 3byte
-    // fade type 1byte, full led mode 1byte, full led brightness 1byte, esc to tilde 1byte, fn led 1byte
+    // fade type 1byte,
+
+    // Ver1.1
+    //skipFrame 1byte, full led mode 1byte, full led brightness 1byte, esc to tilde 1byte, fn led 1byte
 
 	 uint8_t num;
 	 uint8_t mode;
@@ -76,6 +80,9 @@ typedef struct {
 	 uint8_t keymode;
 	 cRGB_t colorkey1;
      uint8_t fadetype;
+
+     //Ver1.1
+     uint8_t skipFrame;
 
      uint8_t fullledmode;
      uint8_t fullledbrightness;

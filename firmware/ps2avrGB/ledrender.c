@@ -51,6 +51,7 @@
 #define SAVE2_BIT_LED2_KEY_EVENT	0
 #define SAVE2_BIT_LED2_COLOR_KEY1	1
 #define SAVE2_BIT_LED2_FADE_TYPE	2
+#define SAVE2_BIT_LED2_SKIP_FRAME	3
 
 static uint8_t _saved = 0;	//
 static uint8_t _saved2 = 0;	//
@@ -95,7 +96,10 @@ static uint16_t getBrightness(uint16_t xValue);
     #define TARGET_ADDR_SPLIT 0xB8
 #endif
 
-#define led2TickPerFrame    40
+#define LED2_SKIP_FRAME_BASE    1
+#define LED2_SKIP_FRAME_MAX    80
+#define LED2_SKIP_FRAME_DEFAULT    40
+static uint8_t led2SkipFrame = LED2_SKIP_FRAME_DEFAULT;
 #define led2SpeedValue      1
 //#define LED2_MAX_400MA      186	// each color
 //#define LED2_MAX_200MA      73
@@ -213,6 +217,9 @@ void getLedOptions(led2_info_t *buffer){
 	buffer->colorkey1 = color_key1;
 	buffer->fadetype = _rainbowMode;
 
+	//Ver1.1
+	buffer->skipFrame = led2SkipFrame;
+
     buffer->fullledmode = _fullLEDMode;
     buffer->fullledbrightness = _ledBrightnessMax;
 
@@ -327,6 +334,12 @@ void setLedOptions(uint8_t *data){
          applyStaticFullLed();
          _saved |= BV(SAVE_BIT_LED_BRITNESS_MAX);
      }
+     else if(*(data+1) == LED2_INDEX_SKIP_FRAME)
+     {
+         led2SkipFrame = *(data+2);
+
+         _saved2 |= BV(SAVE2_BIT_LED2_SKIP_FRAME);
+     }
 
 	ledStateCount = 0;
 }
@@ -428,6 +441,15 @@ void initFullLEDStateAfter(void){
 	// led2 key color 1
 	eeprom_read_block(&color_key1, (uint8_t *)EEPROM_LED2_COLOR_KEY1, 3);
 
+	led2SkipFrame = eeprom_read_byte((uint8_t *)EEPROM_LED2_SKIP_FRAME);
+	if(led2SkipFrame == 0xFF)
+    {
+	    led2SkipFrame = LED2_SKIP_FRAME_DEFAULT;
+    }
+	else if(led2SkipFrame > LED2_SKIP_FRAME_MAX)
+    {
+	    led2SkipFrame = LED2_SKIP_FRAME_MAX;
+    }
 
     setLedBalance();
 
@@ -647,6 +669,10 @@ static void writeLEDMode(void) {
 		if(((_saved2 >> SAVE2_BIT_LED2_COLOR_KEY1) & 0x01)){
 			eeprom_update_block(&color_key1, (uint8_t *)(EEPROM_LED2_COLOR_KEY1), 3);
 		}
+
+		if(((_saved2 >> SAVE2_BIT_LED2_SKIP_FRAME) & 0x01)){
+		    eeprom_update_byte((uint8_t *)EEPROM_LED2_SKIP_FRAME, led2SkipFrame);
+        }
 
 		_saved = 0;
 		_saved2 = 0;
@@ -962,7 +988,7 @@ static void changeRainbowColor(uint8_t *aTargetColor, uint8_t *aCurrentColor)
 
 static void _fadeLED2(void){
 
-	if(++_countOfframe >= led2TickPerFrame){	// setDelay(led2TickPerFrame)){
+	if(++_countOfframe >= LED2_SKIP_FRAME_BASE + led2SkipFrame){	// setDelay(led2TickPerFrame)){
 		_countOfframe = 0;
 		uint8_t i;
 		uint8_t kIndex;
