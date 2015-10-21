@@ -301,9 +301,6 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
 #define HID_REPORT_BOOT     (0x0300 | REPORT_ID_BOOT)
 #define HID_REPORT_OPTION   (0x0300 | REPORT_ID_INFO)
 
-//static uchar isStart = 0;
-
-static uint8_t readyForRainbowColor = 0;
 
 /**
  * This function is called whenever we receive a setup request via USB.
@@ -314,6 +311,8 @@ static uint8_t readyForRainbowColor = 0;
 usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
 
     delegateInterfaceReadyUsb();
+
+    static uint8_t readyForRainbowColor = 0;
 
     usbRequest_t *rq = (void *)data;
 //    DBG1(0xCC, data, 8);
@@ -334,30 +333,21 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             }else if(rq->wValue.word == HID_REPORT_OPTION){
             	// length : rq->wLength.word 필요한 리포트를 length로 구분한다.
 
-        		uint8_t k, j, i = 0;
-        		static uchar    led2Buffer[CUSTOM_MACRO_SIZE_MAX];
             	if(rq->wLength.word == LED2_GET_REPORT_LENGTH_INFO){
             		// report led2 info
-            	    getOptions((led2_info_t *)led2Buffer);
-            		usbMsgPtr = (usbMsgPtr_t)led2Buffer;
-            		return LED2_GET_REPORT_LENGTH_INFO; 	//sizeof(led2Buffer);
+            	    static led2_info_t optionsBuffer;
+            	    getOptions(&optionsBuffer);
+            		usbMsgPtr = (usbMsgPtr_t)&optionsBuffer;
+            		return sizeof(optionsBuffer); //LED2_GET_REPORT_LENGTH_INFO;
             	}else if(rq->wLength.word >= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER4){
             		// keymap
-					for(k = 0; k < ROWS; ++k){
-						for (j = 0; j < COLUMNS; ++j)
-						{
-							led2Buffer[i++] = pgm_read_byte(KEYMAP_ADDRESS+(ROWS * COLUMNS * (rq->wLength.word - LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1))+(k * COLUMNS + j));
-						}
-					}
-//					DBG1(0x89, led2Buffer, 120);
-					usbMsgPtr = (usbMsgPtr_t)led2Buffer;
+            	    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+					usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
 					return LED2_GET_REPORT_LENGTH_KEYMAP;
             	}else if(rq->wLength.word >= LED2_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= LED2_GET_REPORT_LENGTH_MACRO12){
             		// cst macro
-            		for(k = 0; k < CUSTOM_MACRO_SIZE_MAX; ++k){
-            			led2Buffer[i++] = pgm_read_byte(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - LED2_GET_REPORT_LENGTH_MACRO1))+(k));
-            		}
-            		usbMsgPtr = (usbMsgPtr_t)led2Buffer;
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - LED2_GET_REPORT_LENGTH_MACRO1)));
 					return CUSTOM_MACRO_SIZE_MAX;
             	}else {
             		return rq->wLength.word;
@@ -451,7 +441,6 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         }
     }else if (expectReport == 4){
     	// rainbow color setting
-    	DBG1(0x44, data, len);
     	setOptions((uint8_t *)data);
     }
 

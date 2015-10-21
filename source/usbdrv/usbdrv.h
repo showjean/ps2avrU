@@ -191,6 +191,12 @@ USB_PUBLIC void usbPoll(void);
  * Please note that debug outputs through the UART take ~ 0.5ms per byte
  * at 19200 bps.
  */
+
+extern uchar        usbMsgFlags;    /* flag values see below */
+
+#define USB_FLG_MSGPTR_IS_ROM   (1<<6)
+#define USB_FLG_USE_USER_RW     (1<<7)
+
 extern usbMsgPtr_t usbMsgPtr;
 /* This variable may be used to pass transmit data to the driver from the
  * implementation of usbFunctionWrite(). It is also used internally by the

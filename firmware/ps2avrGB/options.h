@@ -62,16 +62,6 @@ typedef struct {
 	uint8_t b;
 } cRGB_t;
 
-/*typedef struct {
-	cRGB_t r;
-	cRGB_t o;
-	cRGB_t y;
-	cRGB_t g;
-	cRGB_t b;
-	cRGB_t n;
-	cRGB_t v;
-} rainbow_t;*/
-
 typedef struct {
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, keymode 1byte, key color1 3byte
     // fade type 1byte, full led mode 1byte, full led brightness 1byte, esc to tilde 1byte, fn led 1byte
