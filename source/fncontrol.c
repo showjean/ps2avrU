@@ -61,16 +61,12 @@ void setBeyondFnLed(uint8_t xLed){
     	 */
 
     if(_beyondFnLed == BEYOND_FN_LED_NL){
-    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) & ~(_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
+    	eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) & ~(_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
     }else if(_beyondFnLed == BEYOND_FN_LED_SL){
-    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) & ~(_BV(TOGGLE_BEYOND_FN_LED_SL))));
+        eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) & ~(_BV(TOGGLE_BEYOND_FN_LED_SL))));
     }else{
-    	eeprom_write_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
+        eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
     }
-
-//    uint8_t len = eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION);
-//    DBG1(0xFC, (uchar *)&len, 1);
-//    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL, _beyondFnLedEnabled);
 
     __setBeyondFnLed();
 }
@@ -246,8 +242,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     setDualAction(xKeyidx, xIsDown);    
 
-    // 듀얼액션 키의 기본 키를 가져온다.
-    xKeyidx = getDualActionDefaultKey(xKeyidx);
+    xKeyidx = getDualActionDefaultKeyForFncontrol(xKeyidx);
     if(isFnKey(xKeyidx)) return false; 
 
     if(xIsDown) {

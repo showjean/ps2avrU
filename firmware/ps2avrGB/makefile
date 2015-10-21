@@ -36,6 +36,7 @@ F_CPU = 12000000
 SRC =i2c/i2c.c \
 	timer/timer.c \
 	ledrender.c \
+	options.c \
 	vusb.c
 
 

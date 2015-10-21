@@ -184,8 +184,6 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 {
     if(keyidx == KEY_NONE) return 0;
 
-//    keyidx = getDualActionDownKeyIndexWhenIsCancel(keyidx);
-
     if(keyidx >= KEY_MAX) return 0;
 
     DBG1(0x20, (uchar *)&keyidx, 2);
@@ -562,7 +560,7 @@ void ps2_main(void){
     if(ps2_repeat_speed == PS2_REPEAT_SPEED_NONE){
     	ps2_repeat_speed = gSpeed;
     }else if(ps2_repeat_speed != gSpeed){
-    	eeprom_write_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED, ps2_repeat_speed);
+        eeprom_update_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED, ps2_repeat_speed);
     }
 
 

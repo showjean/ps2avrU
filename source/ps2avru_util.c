@@ -50,7 +50,7 @@ void setToggleOption(int xAddress, uint8_t xBit, bool xBool){
     }else{
         gOption |= (OPTION_ON<<xBit);
     }
-    eeprom_write_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
+    eeprom_update_byte((uint8_t *)EEPROM_ENABLED_OPTION, gOption);
 }
 
 bool getToggleOption(int xAddress, uint8_t xBit){

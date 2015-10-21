@@ -112,55 +112,6 @@ PROGMEM const uchar keyboard_hid_report[] = {
  * http://www.microsoft.com/whdc/device/input/wheel.mspx
  */
 PROGMEM const uchar custom_hid_report[] = {
-	/* mouse */
-/*
-	0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
-	0x09, 0x02,                    // USAGE (Mouse)
-	0xa1, 0x01,                    // COLLECTION (Application)
-	0x85, REPORT_ID_MOUSE,         //   REPORT_ID (1)
-	0x09, 0x01,                    //   USAGE (Pointer)
-	0xa1, 0x00,                    //   COLLECTION (Physical)
-								   // ----------------------------  Buttons
-	0x05, 0x09,                    //     USAGE_PAGE (Button)
-	0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
-	0x29, 0x05,                    //     USAGE_MAXIMUM (Button 5)
-	0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-	0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-	0x75, 0x01,                    //     REPORT_SIZE (1)
-	0x95, 0x05,                    //     REPORT_COUNT (5)
-	0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-	0x75, 0x03,                    //     REPORT_SIZE (3)
-	0x95, 0x01,                    //     REPORT_COUNT (1)
-	0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
-								   // ----------------------------  X,Y position
-	0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-	0x09, 0x30,                    //     USAGE (X)
-	0x09, 0x31,                    //     USAGE (Y)
-	0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
-	0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
-	0x75, 0x08,                    //     REPORT_SIZE (8)
-	0x95, 0x02,                    //     REPORT_COUNT (2)
-	0x81, 0x06,                    //     INPUT (Data,Var,Rel)
-								   // ----------------------------  Vertical wheel
-	0x09, 0x38,                    //     USAGE (Wheel)
-	0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
-	0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
-	0x35, 0x00,                    //     PHYSICAL_MINIMUM (0)        - reset physical
-	0x45, 0x00,                    //     PHYSICAL_MAXIMUM (0)
-	0x75, 0x08,                    //     REPORT_SIZE (8)
-	0x95, 0x01,                    //     REPORT_COUNT (1)
-	0x81, 0x06,                    //     INPUT (Data,Var,Rel)
-								   // ----------------------------  Horizontal wheel
-	0x05, 0x0c,                    //     USAGE_PAGE (Consumer Devices)
-	0x0a, 0x38, 0x02,              //     USAGE (AC Pan)
-	0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
-	0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
-	0x75, 0x08,                    //     REPORT_SIZE (8)
-	0x95, 0x01,                    //     REPORT_COUNT (1)
-	0x81, 0x06,                    //     INPUT (Data,Var,Rel)
-	0xc0,                          //   END_COLLECTION
-	0xc0,                          // END_COLLECTION
-*/
 
     /* consumer */
     0x06, 0x00, 0xff,              // USAGE_PAGE (Generic Desktop)
@@ -307,14 +258,6 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
 {
     usbMsgLen_t len = 0;
 
-/*
-    debug("usbFunctionDescriptor: ");
-    debug_hex(rq->bmRequestType); debug(" ");
-    debug_hex(rq->bRequest); debug(" ");
-    debug_hex16(rq->wValue.word); debug(" ");
-    debug_hex16(rq->wIndex.word); debug(" ");
-    debug_hex16(rq->wLength.word); debug("\n");
-*/
     switch (rq->wValue.bytes[1]) {
 #if USB_CFG_DESCR_PROPS_CONFIGURATION
         case USBDESCR_CONFIG:
@@ -388,16 +331,6 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             	if(rq->wLength.word == LED2_GET_REPORT_LENGTH_RAINBOW){	// ready for rainbow color setting;
             		readyForRainbowColor = 1;
             	}
-//                // boot
-//            	static uchar    optionsBuffer[0x84];
-//
-//            	memset(optionsBuffer, 0, 0x83);
-//            	optionsBuffer[0]       = REPORT_ID_BOOT;	// LED options
-//            	/* LED options */
-//            	optionsBuffer[0x83] = 0x84;
-//            	usbMsgPtr = (usbMsgPtr_t)optionsBuffer;
-
-//            	return sizeof(optionsBuffer);
             }else if(rq->wValue.word == HID_REPORT_OPTION){
             	// length : rq->wLength.word 필요한 리포트를 length로 구분한다.
 
@@ -447,8 +380,6 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                 	data[1] = LED2_INDEX_COLOR_RAINBOW_INIT;
                 	setOptions((uint8_t *)data);
                 	expectReport = 4;
-                }else{
-                	expectReport = 3;
                 }
                 readyForRainbowColor = 0;
                 return USB_NO_MSG; // Call usbFunctionWrite with data
@@ -481,61 +412,6 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
     return 0;
 }
 
-
-//
-//uint8_t _hasBootUpdate;
-//uint8_t _pageCount = 0;
-//uint32_t address[BOOT_PAGE_COUNT];
-//uint8_t buffer[BOOT_PAGE_COUNT][SPM_PAGESIZE];
-//
-//uint8_t writeFlash(uchar *data, uchar len, uchar isNew){
-//
-//	uint8_t isLast;
-//	static uchar offset;
-//	static uchar bufferIndex;
-//
-////    DBG1(0x3A, data, len);
-//
-//    if(isNew == 1){
-//        offset = 0;
-//        memset(buffer[_pageCount], 0, SPM_PAGESIZE);
-//        DBG1(0x30, data, 3);
-//        address[_pageCount] = data[1] | (data[2]<<8);
-//        data += 4;
-//        len -= 4;
-//        bufferIndex = 0;
-//    }
-////    DBG1(0x31, (void *)&address, sizeof(address));
-//    offset += len;
-//    isLast = offset & 0x80;  //!= 0 if last block received
-//    do{
-//    	buffer[_pageCount][bufferIndex] = *data++;
-//    	bufferIndex++;
-//        len -= 1;
-//    }while(len);
-//
-//    if(isLast != 0){
-//
-//    	 /* 3줄 코멘트 : 작동 됨;
-//    	 * callProgramPage만 코멘트 : 작동 됨;
-//    	 * callProgramPage만 실행 : 리셋됨
-//    	 * 3줄 모두 실행 : 커뮤니케이션 에러;
-//    	 */
-//    	cli();
-//    	callProgramPage(address[_pageCount], (uint8_t *)buffer);
-//    	sei();
-////    	DBG1(0x3F, (void *)&address[_pageCount], 2);
-////    	DBG1(0x3F, buffer[_pageCount], SPM_PAGESIZE);
-//        _pageCount = _pageCount + 1;
-//    	if(_pageCount == BOOT_PAGE_COUNT){
-//    		_hasBootUpdate = 1;
-//    		_pageCount = 0;
-//    	}
-//    }
-////    DBG1(0x35, 0, 0);
-//
-//    return isLast;
-//}
 /**
  * The write function is called when LEDs should be set. Normally, we get only
  * one byte that contains info about the LED states.
@@ -566,75 +442,17 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         	}
 #endif
         }else if(data[1] == OPTION_INDEX_READY){
-        	//stop timer
-        	// stop timer1
-        	stopFullLed();
+            stopPwmForUsbReport(true);
 
         }else if(data[1] == OPTION_INDEX_ACTION){
-        	// start timer1
-        	startFullLed();
-
+            stopPwmForUsbReport(false);
         }else{
         	setOptions((uint8_t *)data);
         }
-
-//        expectReport = 0;
     }else if (expectReport == 4){
     	// rainbow color setting
     	DBG1(0x44, data, len);
     	setOptions((uint8_t *)data);
-    }else if (expectReport == 3){   // HID_REPORT_BOOT
-        DBG1(0xDD, data, len);
-        /*
-         * 44: 02 10 00 00 00 00 00 00
-        44: ff 00 ff 00 ff 00 00 00
-        44: 00 00 00 00 00 00 00 00
-        44: 00 00 00 00 00 00 00 00
-        44: 00 00 00
-         */
-//        uchar   isLast;
-//        static uchar            offset;
-//        if(isStart == 1){
-//        	isStart = 0;
-//			offset = 0;
-//			len -= 4;
-//		}
-//		offset += len;
-//		isLast = offset & 0x80; /* != 0 if last block received */
-//		DBG1(0xDE, (void *)&isLast, 1);
-//		return isLast;
-
-       /* uint8_t gRet;
-
-        gRet = writeFlash(data, len, isStart);
-        if(isStart == 1){
-            isStart = 0;
-        }
-
-        DBG1(0xDF, (uchar *)&gRet, 1);
-        return gRet;*/
-
-        /*
-         *
-         *
-         * 여기까지 제대로 실행이 되지만, '커뮤니케이션 에러'가 발생하면서 다음 page로 진행이 되지 않는다.
-         * - 일단 page는 저장이 된 상태
-         *
-         * USB_CFG_SUPPRESS_INTR_CODE 와 USB_CFG_INTR_POLL_INTERVAL 값을 변경해야 통신이 원활히 된다.
-         * (아마도 다른 인터럽트를 허용하지 않고 해당 통신만 전담하는 세팅인것 같다.)
-         *
-         * USB_CFG_INTR_POLL_INTERVAL를 높히면 매크로 출력시 속도가 느리고,
-         * USB_CFG_SUPPRESS_INTR_CODE를 1로 설정하면 키보드로 작동을 안한다.
-         *
-         * 이 둘을 최적화 했다 치더라도, 통신 중(페이지 단위로 쓰기 위해서 8바이트씩 전송되는 데이터를 조합하고 이 페이지를 5개 받는다)에
-         * 플래시를 쓰면 커뮤니케이션 에러가 발생하고,
-         *
-         * 이를 방지하기 위해서 모든 페이지를 메모리에 저장 후 쓰려고 하면, 작동은하지만 메모리가 부족한 현상이 있다.
-         *
-         *
-         *
-         *
-         * */
     }
 
     return 0x01;

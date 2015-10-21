@@ -236,16 +236,13 @@ static void writeLEDMode(void) {
 		ledStateCount = 0;
 		if (_fullLEDMode != _fullLEDMode_saved) {
 			_fullLEDMode_saved = _fullLEDMode;
-			eeprom_write_byte((uint8_t *) EEPROM_LED_MODE, _fullLEDMode); // 1바이트 11번지 쓰기
-			// DEBUG_PRINT(("eeprom_write_byte : mode %d \n", _fullLEDMode));
+			eeprom_update_byte((uint8_t *) EEPROM_LED_MODE, _fullLEDMode); // 1바이트 11번지 쓰기
 		}
 
 		// brightness
 		if (_ledBrightnessMax_saved != _ledBrightnessMax) {
 			_ledBrightnessMax_saved = _ledBrightnessMax;
-			eeprom_write_byte((uint8_t *) EEPROM_LED_BRIGHTNESS,
-					_ledBrightnessMax);  // 1바이트 9번지 쓰기
-			// DEBUG_PRINT(("eeprom_write_byte : _ledBrightnessMax %d \n", _ledBrightnessMax));
+			eeprom_update_byte((uint8_t *) EEPROM_LED_BRIGHTNESS, _ledBrightnessMax);  // 1바이트 9번지 쓰기
 		}
 		blinkOnce(50);
 	}

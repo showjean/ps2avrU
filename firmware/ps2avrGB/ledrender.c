@@ -25,8 +25,8 @@
 #include "oddebug.h"
 #include "i2c/i2c.h"        // include i2c support
 #include "options.h"
+#include "optionsled.h"
 #include "keydownbuffer.h"
-#include "esctilde.h"
 
 #include "ledrender_inc.c"
 
@@ -195,7 +195,7 @@ void setLed2Num(uint8_t xNum){
 // data = hid report
 static uint8_t led2rainbowSettingCount = 0;
 
-void getOptions(led2_info_t *buffer){
+void getLedOptions(led2_info_t *buffer){
 
 	// report led2 info
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte, fade mode 1byte
@@ -216,12 +216,6 @@ void getOptions(led2_info_t *buffer){
     buffer->fullledmode = _fullLEDMode;
     buffer->fullledbrightness = _ledBrightnessMax;
 
-	buffer->esctotilde = isEscTilde();
-	buffer->fnled = getBeyondFnLed();
-	buffer->interface = 0;
-	buffer->ps2repeat = 0;
-
-
 //	DBG1(0x22, 0, 0);
 //	DBG1(0xC2, (uchar *)buffer, sizeof(led2_info_t));
 }
@@ -239,7 +233,7 @@ void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
 
 	_saved |= BV(SAVE_BIT_LED_MODE);
 }
-void setOptions(uint8_t *data){
+void setLedOptions(uint8_t *data){
 	/*
 	 * data[0] = report id;
 	 * data[1] = index
@@ -333,15 +327,6 @@ void setOptions(uint8_t *data){
          applyStaticFullLed();
          _saved |= BV(SAVE_BIT_LED_BRITNESS_MAX);
      }
-     else if(*(data+1) == LED2_INDEX_ESC_TO_TILDE)
-     {
-         setEscTilde(*(data+2));
-     }
-     else if(*(data+1) == LED2_INDEX_FN_LED)
-     {
-         setBeyondFnLed(*(data+2));
-     }
-
 
 	ledStateCount = 0;
 }
@@ -352,23 +337,27 @@ static void changeLed2KeyEventMode(void){
 	_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);
 }
 
-void stopFullLed(void){
+void stopPwmLed(bool xIsStop){
     // stop timer for usb report
 
-	timer1SetPrescaler( TIMERRTC_CLK_STOP );	// set prescaler
-	cbi(TIMSK, TOIE1);
-	setPWM(0);
-	turnOffLED(LEDFULLLED);
-	timer1PWMBOff();
+    if(xIsStop)
+    {
+        timer1SetPrescaler( TIMERRTC_CLK_STOP );	// set prescaler
+        cbi(TIMSK, TOIE1);
+        setPWM(0);
+        turnOffLED(LEDFULLLED);
+        timer1PWMBOff();
+    }
+    else
+    {
+        timer1Init();
+        timer1PWMBOn();
+        if(_fullLEDMode == 2){
+            setFullLedState();
+        }
+    }
 }
 
-void startFullLed(void){
-	timer1Init();
-	timer1PWMBOn();
-	if(_fullLEDMode == 2){
-		setFullLedState();
-	}
-}
 
 /*
  * 전류 배분;
@@ -832,9 +821,9 @@ static void setLed2State(void){
 
 	if((INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER)){
 		if(_rgbMode == 0)
-			startFullLed();
+		    stopPwmLed(false);
 		else
-			stopFullLed();
+		    stopPwmLed(true);
     }
 
     
@@ -1212,9 +1201,9 @@ void initFullLEDState(void) {
 
 	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
-		startFullLed();
+	    stopPwmLed(false);
 	}else{
-		stopFullLed();
+	    stopPwmLed(true);
 	}
 
 

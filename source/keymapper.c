@@ -902,8 +902,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 	if(_isWorkingForEmpty) return;
 
 #endif
-//    xKeyidx = getDualActionKeyWhenCompound(xKeyidx);
-    xKeyidx = getDualActionDownKeyIndexWhenIsCancel(xKeyidx);
+    xKeyidx = getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false);
 
 //    DBG1(0x11, (uchar *)&xKeyidx, 1);
 #ifndef DISABLE_HARDWARE_MENU

@@ -80,7 +80,7 @@ static void applyQuickSwap(void) {
 				blinkOnce(100);
 			}
 		}		
-		eeprom_write_byte((uint8_t *)EEPROM_QUICK_SWAP, quickSwapMode);
+		eeprom_update_byte((uint8_t *)EEPROM_QUICK_SWAP, quickSwapMode);
 		enabledQuickSwapCount = 0;
 	}
 

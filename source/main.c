@@ -243,10 +243,10 @@ int main(void) {
     }  
 
     if(INTERFACE == INTERFACE_CLEAR){
-        eeprom_write_byte((uint8_t *)EEPROM_INTERFACE, 255);  // eeprom clear; // 1바이트 12번지 쓰기
+        eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, 255);  // eeprom clear; // 1바이트 12번지 쓰기
         // DEBUG_PRINT(("--------------------------eeprom   write   INTERFACE %02x \n", 255));
     }else if(INTERFACE < INTERFACE_CLEAR){
-        eeprom_write_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);  // 1바이트 12번지 쓰기
+        eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);  // 1바이트 12번지 쓰기
         // DEBUG_PRINT(("--------------------------eeprom   write   INTERFACE %02x \n", INTERFACE));
     }else{
         INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)  
