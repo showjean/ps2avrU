@@ -46,7 +46,7 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
     if(xIsDown && xKeyidx != KEY_NONE){
-        applyDualActionDownWhenIsCancel(true);
+        applyDualActionDownWhenIsCompounded(true);
     }
 
 #ifndef DISABLE_HARDWARE_MENU

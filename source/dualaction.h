@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <avr/pgmspace.h>
 
-void applyDualActionDownWhenIsCancel(bool isDown);
+void applyDualActionDownWhenIsCompounded(bool isDown);
 void setDualAction(uint8_t keyidx, bool isDown);
 void clearDualAction(void);
 

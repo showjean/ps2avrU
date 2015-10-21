@@ -111,12 +111,12 @@ void enterFrameForDualAction(void){
 	 */
 	if(dualActionKeyIndex > 0 && ++_autoDownCount > 500){
 		_isCompounded = true;
-		applyDualActionDownWhenIsCancel(true);
+		applyDualActionDownWhenIsCompounded(true);
 	}
 
 }
 
-void applyDualActionDownWhenIsCancel(bool isDown){
+void applyDualActionDownWhenIsCompounded(bool isDown){
 	 if(dualActionKeyIndex > 0 && isCompounded()){
         // 다른 키와 조합되었을 때 우선 듀얼액션키의 down 값을 버퍼에 저장한다.
 		pushKeyCodeDecorator(getDualActionCompoundKey(dualActionKeyIndex), isDown);
@@ -181,12 +181,11 @@ void setDualAction(uint8_t keyidx, bool isDown){
 	} else {
 //	    DBG1(0xF4, (uchar *)&keyidx, 1);
 		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
-			if (_dualActionCount > 0)
-				--_dualActionCount;
+			if (_dualActionCount > 0) --_dualActionCount;
+
 			applyDualActionUp();
 		} else {
-			if (_normalKeyCount > 0)
-				--_normalKeyCount;
+			if (_normalKeyCount > 0) --_normalKeyCount;
 		}
 
 /* 작동하지 않는 부분;
