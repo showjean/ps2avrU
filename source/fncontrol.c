@@ -235,7 +235,6 @@ bool isKeyEnabled(uint8_t xKeyidx){
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
-    // DEBUG_PRINT(("applyFN  : %d xIsDown : %d\n", xKeyidx, xIsDown));
     applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
 
     if(isFnKey(xKeyidx)) return false; 
@@ -243,6 +242,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
     setDualAction(xKeyidx, xIsDown);    
 
     xKeyidx = getDualActionDefaultKeyForFncontrol(xKeyidx);
+
     if(isFnKey(xKeyidx)) return false; 
 
     if(xIsDown) {

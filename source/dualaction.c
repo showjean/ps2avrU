@@ -214,8 +214,8 @@ void clearDualAction(void)
 uint8_t getDualActionDefaultKeyForFncontrol(uint8_t xActionIndex){
     if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end){
         // 조합 키가 우선이되 FN 계열의 키는 제외;
-        xActionIndex =  getDualActionCompoundKey(xActionIndex);
-        if(isFnKey(xActionIndex)){
+        uint8_t gIndex =  getDualActionCompoundKey(xActionIndex);
+        if(isFnKey(gIndex)){
             return getDualActionAloneKey(xActionIndex);
         }
     }
