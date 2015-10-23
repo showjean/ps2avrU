@@ -24,14 +24,19 @@
 static uint8_t _beyondFnLed;	// 0: off, 1:NL, 2:SL
 // for KEY_BEYOND_FN;
 static uint8_t _beyondFnIndex = 0;     //KEY_BEYOND_FN state
-static bool _isExtraFNDown = false;
-static bool _isQuickMacroDown = false;
+static bool _isDownExtraFN = false;
+static bool _isDownQuickMacro = false;
 static bool _isReadyQuickMacro = false;
 static uint8_t _quickMacroIndex = 255;
 static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
 static bool _ledOff = false;
+
+bool isDownExtraFn(void)
+{
+    return _isDownExtraFN;
+}
 
 uint8_t getBeyondFN(void){
     return _beyondFnIndex;
@@ -248,7 +253,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
     if(xIsDown) {
 
         if((xKeyidx ==  KEY_BEYOND_FN || xKeyidx == KEY_BEYOND_FN3)
-        		|| (_isExtraFNDown && xKeyidx == BEYOND_FN_CANCEL_KEY)){ // beyond_fn을 활성화;
+        		|| (_isDownExtraFN && xKeyidx == BEYOND_FN_CANCEL_KEY)){ // beyond_fn을 활성화;
              if( xKeyidx == BEYOND_FN_CANCEL_KEY ) {    // 취소만 가능한 키 
                 _beyondFnIndex = false;
              }else{
@@ -287,12 +292,12 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             	 return 1;
 			  }
              return 0;
-        }else if(_isQuickMacroDown && isEepromMacroKey(xKeyidx)){
+        }else if(_isDownQuickMacro && isEepromMacroKey(xKeyidx)){
             _quickMacroIndex = xKeyidx - KEY_MAC1; 
             _isReadyQuickMacro = true;
             return 0;
         }else if(xKeyidx == EXTRA_FN){
-            _isExtraFNDown = true;
+            _isDownExtraFN = true;
         }else if(xKeyidx == KEY_LED_ON_OFF){
         	_ledOff ^= true;
         	if(_ledOff == false){
@@ -305,11 +310,11 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             if(isQuickMacro()){
                 stopQuickMacro();
             }else{
-                _isQuickMacroDown = true;                
+                _isDownQuickMacro = true;
             }
             return 0;
         }else{
-        	return delegateFnControl(xKeyidx, _isExtraFNDown);
+        	return delegateFnControl(xKeyidx, _isDownExtraFN);
         }
 
     }else{  // up 
@@ -317,9 +322,9 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
         if(xKeyidx ==  KEY_BEYOND_FN){  // beyond_fn             
              return 0;
         }else if(xKeyidx == EXTRA_FN){
-            _isExtraFNDown = false;
+            _isDownExtraFN = false;
         }else if(xKeyidx == KEY_QUICK_MACRO){
-            _isQuickMacroDown = false;
+            _isDownQuickMacro = false;
             return 0;
         }
     }

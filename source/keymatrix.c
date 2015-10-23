@@ -137,7 +137,15 @@ uint8_t getLayer(void) {
 
 			if(cur){
 				keyidx = getCurrentKeyindex(fnScanLayer, row, col);
-			    keyidx = getDualActionDownKeyIndexWhenIsCompounded(keyidx, true); 	// fn 키는 무조건 조합 액션을 적용;
+
+
+			    /**
+			     * Extra FN 키가 눌렸을 경우에는 dual action 의 FN 키들은 반영하지 않는다.
+			     */
+				if(isDownExtraFn() == false)
+				{
+				    keyidx = getDualActionDownKeyIndexWhenIsCompounded(keyidx, true); 	// fn 키는 무조건 조합 액션을 적용;
+				}
 				
 				if(keyidx == KEY_FN){
 					gLayer = LAYER_FN;

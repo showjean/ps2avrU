@@ -21,6 +21,8 @@
 void initBeyondFn(void);
 uint8_t getBeyondFnLed(void);
 
+bool isDownExtraFn(void);
+
 // for KEY_BEYOND_FN;
 uint8_t getBeyondFN(void);//KEY_BEYOND_FN state
 
