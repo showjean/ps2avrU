@@ -20,7 +20,7 @@
 #define LED2_INDEX_FULL_LED_BRIGHTNESS 0x81
 #define LED2_INDEX_ESC_TO_TILDE     0x82
 #define LED2_INDEX_FN_LED           0x83
-#define LED2_INDEX_SKIP_FRAME       0x84
+#define LED2_INDEX_TRANSITION_DELAY 0x84
 
 #define LED2_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define LED2_GET_REPORT_LENGTH_INFO				100
@@ -82,7 +82,7 @@ typedef struct {
      uint8_t fadetype;
 
      //Ver1.1
-     uint8_t skipFrame;
+     uint8_t transitiondelay;
 
      uint8_t fullledmode;
      uint8_t fullledbrightness;
