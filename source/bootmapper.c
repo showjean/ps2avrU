@@ -17,11 +17,11 @@ bool isBootMapper(void){
 }
 void trace(uint8_t xRow, uint8_t xCol){
 	// DEBUG_PRINT(("trace : row= %d, col= %d \n", xRow, xCol));
-	printString("-");
+	printString(".");
 	printString(toString(xCol));
 	printString(",");
 	printString(toString(xRow));	
-	printString("=");
+	printString(".");
 }
 #endif
 
