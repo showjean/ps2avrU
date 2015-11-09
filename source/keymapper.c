@@ -101,6 +101,9 @@ static int _pressedEscapeKeyCount = 0;
 static uint8_t _isPressedEscapeKey = 0;
 static uint8_t _isTiredEscapeKey = 0;
 
+static uint8_t _macroDownCount = 0;
+static bool _isQuickMacro = false;
+
 static uint8_t _step;
 #ifndef DISABLE_HARDWARE_MENU
 static uint8_t _wait;			// 매크로 완료 후 실행될 작업 구분;
@@ -180,11 +183,18 @@ void setDeepKeyMapping(void){
 	setWillStartKeyMapping();
 	_isKeyMapping |= BV(1);	//set doing mapping
 }
+#endif
 
 uint8_t isDeepKeyMapping(void){
+
+#ifndef DISABLE_HARDWARE_MENU
 	return _isKeyMapping & BV(1);	// did start key mapping
+#else
+	return _isQuickMacro;
+#endif
 }
 
+#ifndef DISABLE_HARDWARE_MENU
 static void applyKeyMapping(uint8_t xModi) {
 	static uint8_t prevModifier = 0;
 
@@ -768,8 +778,6 @@ bool isMacroInput(void){
 	}
 }
 
-static uint8_t _macroDownCount = 0;
-static bool _isQuickMacro = false;
 static void resetMacroInput(void){	
 	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);
 	_macroBufferIndex = 0;

@@ -157,7 +157,6 @@ void setStep(uint8_t xStep);
 void initKeymapper(void);
 
 uint8_t isKeyMapping(void);
-uint8_t isDeepKeyMapping(void);
 
 // 부팅시 키 매핑 시작
 void readyKeyMappingOnBoot(void);
@@ -168,6 +167,9 @@ void enterFrameForMapper(void);
 
 
 #endif
+
+uint8_t isDeepKeyMapping(void);
+
 void printString(const char *xString);
 
 // 매크로 등록중인지 확인;
