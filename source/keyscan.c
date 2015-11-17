@@ -16,6 +16,7 @@
 
 static void scanKey(uint8_t xLayer);
 static void pushKeyCodeWhenChange(uint8_t xKeyidx, bool xIsDown);
+static void scanKeyWithDebounce(void);
 
 static keyscan_driver_t *keyscanDriver;
 
@@ -77,20 +78,21 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
 static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
-#ifdef ENABLE_BOOTMAPPER
-    if (isBootMapper()) {
-        if (xPrev != xCur) {
-            if (xCur) trace(xRow, xCol);
-            return 2;
-        }
-        return 1;
-    }
-#endif
 	// !(prev&&cur) : 1 && 1 이 아니고,
-    // !(!prev&&!cur) : 0 && 0 이 아니고, 
+    // !(!prev&&!cur) : 0 && 0 이 아니고,
     // 이전 상태에서(press/up) 변화가 있을 경우;
-    //if( !(prev&&cur) && !(!prev&&!cur)) {                
+    //if( !(prev&&cur) && !(!prev&&!cur)) {
     if( xPrev != xCur ) {
+
+#ifdef ENABLE_BOOTMAPPER
+        if (isBootMapper()) {
+            if (xCur) {
+                trace(xRow, xCol);
+                return 2;
+            }
+            return 1;
+        }
+#endif
         pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xCur);
 
         setKeyEnabled(xKeyidx, xCur);
@@ -141,7 +143,7 @@ PASS_MODI:
     scanKeyWithDebounce();
 }
 
-void scanKeyWithDebounce(void) {
+static void scanKeyWithDebounce(void) {
     
     // debounce cleared and changed
     if(!setCurrentMatrix()) return;

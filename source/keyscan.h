@@ -10,7 +10,6 @@ typedef struct {
 } keyscan_driver_t;
 
 void setKeyScanDriver(keyscan_driver_t *driver);
-void scanKeyWithDebounce(void);
 void scanKeyWithMacro(void);
 
 void pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown);
