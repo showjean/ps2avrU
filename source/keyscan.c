@@ -75,8 +75,17 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 	
 }
 
-static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
+static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
 
+#ifdef ENABLE_BOOTMAPPER
+    if (isBootMapper()) {
+        if (xPrev != xCur) {
+            if (xCur) trace(xRow, xCol);
+            return 2;
+        }
+        return 1;
+    }
+#endif
 	// !(prev&&cur) : 1 && 1 이 아니고,
     // !(!prev&&!cur) : 0 && 0 이 아니고, 
     // 이전 상태에서(press/up) 변화가 있을 경우;
@@ -86,7 +95,7 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
 
         setKeyEnabled(xKeyidx, xCur);
 
-        if(isKeyEnabled(xKeyidx) == false) return;
+        if(isKeyEnabled(xKeyidx) == false) return 0;
 
         if(xCur) {
             DBG1(0xB1, (uchar *)&xKeyidx, 1);
@@ -96,6 +105,8 @@ static void processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol
             putChangedKey(xKeyidx, false, xCol, xRow);
         }
     }
+
+    return 0;
 
 }
 
@@ -136,7 +147,7 @@ void scanKeyWithDebounce(void) {
     if(!setCurrentMatrix()) return;
     
     uint8_t prevKeyidx;
-    uint8_t row, col, prev, cur, keyidx;
+    uint8_t row, col, prev, cur, keyidx, result;
     static bool _isFnPressedPrev = false;
     static uint8_t _prevLayer = 0;
     uint8_t gLayer = getLayer();
@@ -172,7 +183,11 @@ void scanKeyWithDebounce(void) {
                     }
                     if(cur){
 //                        DBG1(0x0C, (uchar *)&keyidx, 1);
-                        processKeyIndex(keyidx, false, true, col, row);
+                        result = processKeyIndex(keyidx, false, true, col, row);
+                        if(result > 0)
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -189,7 +204,7 @@ void scanKeyWithDebounce(void) {
 static void scanKey(uint8_t xLayer) {
 //    DBG1(0x00, (uchar *)&xLayer, 1);
 
-	uint8_t row, col, prev, cur, keyidx;
+	uint8_t row, col, prev, cur, keyidx, result;
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
@@ -201,6 +216,7 @@ static void scanKey(uint8_t xLayer) {
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(xLayer, row, col);
 
+/*
 #ifdef ENABLE_BOOTMAPPER           
             if(isBootMapper()){
                 if( prev != cur){
@@ -210,7 +226,14 @@ static void scanKey(uint8_t xLayer) {
                 continue;              
             }
 #endif              
-            processKeyIndex(keyidx, prev, cur, col, row);	
+*/
+            result = processKeyIndex(keyidx, prev, cur, col, row);
+            if(result == 1){
+                continue;
+            }else if(result == 2){
+                break;
+            }
+
 		}
 	}
 
