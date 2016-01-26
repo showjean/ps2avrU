@@ -538,7 +538,7 @@ void usb_main(void) {
 
         }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
-            if (_isSuspended == false && suspendCount++ > 10000 && getModifierDownBuffer() == 0 && getDownBufferAt(0) == 0) {
+            if (_isSuspended == false && suspendCount++ > 1000 && getModifierDownBuffer() == 0 && getDownBufferAt(0) == 0) {
 //                DBG1(0x5a, (uchar *)&usbSofCount, 2);
                 _isSuspended = true;
 

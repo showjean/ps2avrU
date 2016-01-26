@@ -1190,7 +1190,6 @@ void sleepLED(void){
 }
 
 void wakeUpLED(void){
-	// DEBUG_PRINT(("wakeUpLED \n"));
 	_ledOff = false;
 	setLEDIndicate();
 
@@ -1199,7 +1198,13 @@ void wakeUpLED(void){
 }
 
 void renderLED(void) {
+    static int _sleepOffCount = 0;
 	if(!ledInited || isSleep()){
+	    if(isSleep() && _sleepOffCount++ > 10000)
+	    {
+	        _sleepOffCount = 0;
+	        sleepLED();
+	    }
 		return;
 	}
 

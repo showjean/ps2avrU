@@ -26,20 +26,20 @@ void countSleep(void){
 
 void wakeUp(void){
 	if(_isSleep){
-		_isSleep = 0;
 
 		wakeUpLED();
 	}
+    _isSleep = 0;
 	_sleepCount = 0;
 	_sleepCount2 = 0;
 }
 
 void sleep(void){
 	if(_isSleep == 0){
-		_isSleep = 1;
 
 		sleepLED();
 	}
+    _isSleep = 1;
 }
 
 uint8_t isSleep(void){
