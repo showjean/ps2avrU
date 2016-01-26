@@ -296,7 +296,8 @@ void setCurrentMatrixAfter(void){
 	setReleaseAll();
 
 	// 모든 키가 release이거나 modi key만 눌려진 상태에서 lazy FN 해제;
-	if(isReleaseAll() || (getDownBufferAt(0) == 0 && isFnPressed() == false)){
+//	if(isReleaseAll() || (getDownBufferAt(0) == 0 && isFnPressed() == false)){
+	if(isReleaseAll() || (isAnyKeyDown() == false && isFnPressed() == false)){
 		_currentLazyLayer = LAYER_NOTHING;
 	}
 

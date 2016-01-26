@@ -13,6 +13,7 @@
 static uint8_t _downBuffer[DOWN_BUFFER_SIZE];
 static uint8_t _downModifyBuffer;
 static uint8_t _downBufferIndex;
+static uint8_t _downCount;
 
 /**
 	현재 눌려진 키들을 저장하고 있다. 최대 6+1개;
@@ -28,6 +29,7 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 			_downModifyBuffer |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
 //			DBG1(0x34, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
+		    ++_downCount;
 //	            gLen = strlen((char *)_downBuffer);
 			if (_downBufferIndex >= DOWN_BUFFER_SIZE || xKeyidx >= KEY_MAX) { // too many keycodes
 //				DBG1(0x39, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
@@ -50,6 +52,8 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 			_downModifyBuffer &= ~(getModifierBit(xKeyidx));
 //			DBG1(0x35, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
+		    --_downCount;
+
 			gIdx = findIndex(_downBuffer, xKeyidx);
 //			DBG1(0x35, (uchar *)&gIdx, 1);
 			if(gIdx >= 0){
@@ -67,7 +71,12 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 void initKeyDownBuffer(void){
 	_downBufferIndex = 0;
 	_downModifyBuffer = 0;
+	_downCount = 0;
 	memset(_downBuffer, 0, DOWN_BUFFER_SIZE);
+}
+bool isAnyKeyDown()
+{
+    return _downCount > 0;
 }
 
 uint8_t getDownBufferAt(uint8_t xIdx){

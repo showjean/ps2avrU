@@ -2,6 +2,7 @@
 #define KEYDOWNBUFFER_H
 
 #include <stdio.h>
+#include <stdbool.h>
 
 #define DOWN_BUFFER_SIZE            6
 /**
@@ -11,6 +12,7 @@
 void pushDownBuffer(uint8_t xKeyidx, bool xIsDown);
 void initKeyDownBuffer(void);
 uint8_t getDownBufferAt(uint8_t xIdx);
+bool isAnyKeyDown(void);
 uint8_t getModifierDownBuffer(void);
 
 #endif
