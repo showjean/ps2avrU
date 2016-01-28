@@ -158,8 +158,9 @@ static void scanKeyWithDebounce(void) {
     uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
     // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-//    DBG1(0x0A, (uchar *)&_prevLayer, 1);
-//    DBG1(0x0A, (uchar *)&gLayer, 1);
+    DBG1(0xAA, (uchar *)&_prevLayer, 1);
+    DBG1(0xAA, (uchar *)&gLayer, 1);
+    DBG1(0xAB, (uchar *)&_isFnPressedPrev, 1);
     if( _isFnPressedPrev == false && (_prevLayer != gLayer)){
         for(col=0;col<COLUMNS;++col)
         {       
@@ -179,13 +180,13 @@ static void scanKeyWithDebounce(void) {
                     prev = gPrevMatrix[row] & BV(col);
                     cur  = gMatrix[row] & BV(col);
 
-                    if(prev){
-//                        DBG1(0x0B, (uchar *)&prevKeyidx, 1);
+                    // 이전에 눌려져 있던 상태에서 layer가 변경되면 적용;
+                    if(prev && cur){
+                        DBG1(0xCC, (uchar *)&prevKeyidx, 1);
+                        DBG1(0xCC, (uchar *)&keyidx, 1);
                         processKeyIndex(prevKeyidx, true, false, col, row);
-                    }
-                    if(cur){
-//                        DBG1(0x0C, (uchar *)&keyidx, 1);
                         result = processKeyIndex(keyidx, false, true, col, row);
+
                         if(result > 0)
                         {
                             break;

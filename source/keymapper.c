@@ -97,15 +97,15 @@ static uint8_t _macroIndex;
 static uint8_t _macroBufferIndex;
 static uint8_t _macroPressedBuffer[MACRO_SIZE_MAX_HALF];
 static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
-static int _pressedEscapeKeyCount = 0;
-static uint8_t _isPressedEscapeKey = 0;
-static uint8_t _isTiredEscapeKey = 0;
 
 static uint8_t _macroDownCount = 0;
 static bool _isQuickMacro = false;
 
 static uint8_t _step;
 #ifndef DISABLE_HARDWARE_MENU
+static int _pressedEscapeKeyCount = 0;
+static uint8_t _isPressedEscapeKey = 0;
+static uint8_t _isTiredEscapeKey = 0;
 static uint8_t _wait;			// 매크로 완료 후 실행될 작업 구분;
 static uint8_t _mode;
 #ifndef DISABLE_HARDWARE_KEYMAPPING
@@ -835,6 +835,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
 
+#ifndef DISABLE_HARDWARE_MENU
 	if(_isTiredEscapeKey){
 		_isPressedEscapeKey = 0;
 		_isTiredEscapeKey = 0;
@@ -847,6 +848,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 		return;
 	}
+#endif
 
 	if(xIsDown){
 		if(_macroDownCount >= MACRO_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
@@ -860,7 +862,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 	}else{
 	    gIdx = findIndex(_macroPressedBuffer, xKeyidx);
 	    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
-//	    DBG1(0x08, (uchar *)&gIdx, 2);
+
 	    if(gIdx == -1){
 	    	return;
 	    }
@@ -884,6 +886,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		return;
 	}
 
+#ifndef DISABLE_HARDWARE_MENU
 	if(xIsDown && xKeyidx == KEY_ESC){
 		//esc 눌렸음;
 		_isPressedEscapeKey = 1;
@@ -892,6 +895,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		_isPressedEscapeKey = 0;
 		_isTiredEscapeKey = 0;
 	}
+#endif
 }
 
 void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
