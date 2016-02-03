@@ -28,7 +28,11 @@
 #define COLUMNS 	8
 #define ROWS 		15
 
+// dualaction
+#define DUALACTION_BYTES     0x80    // 128
+
 // flash address
+#define DUALACTION_ADDRESS      0x6580
 #define KEYMAP_ADDRESS			0x6600
 #define CUSTOM_MACRO_ADDRESS	0x6800
 

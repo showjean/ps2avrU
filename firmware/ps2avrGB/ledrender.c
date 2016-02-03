@@ -169,8 +169,6 @@ void initLED(void){
     i2cInit();
     i2cSetBitrate(400);
 
-//    uint8_t len = sizeof(led2_info_t);
-//    DBG1(0xBF, (uchar *)&len, 1);
 }
 
 void setLed2Num(uint8_t xNum){
@@ -203,7 +201,7 @@ void setLed2Num(uint8_t xNum){
 // data = hid report
 static uint8_t led2rainbowSettingCount = 0;
 
-void getLedOptions(led2_info_t *buffer){
+void getLedOptions(option_info_t *buffer){
 
 	// report led2 info
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, key color 3byte, fade mode 1byte
@@ -227,8 +225,6 @@ void getLedOptions(led2_info_t *buffer){
     buffer->fullledmode = _fullLEDMode;
     buffer->fullledbrightness = _ledBrightnessMax;
 
-//	DBG1(0x22, 0, 0);
-//	DBG1(0xC2, (uchar *)buffer, sizeof(led2_info_t));
 }
 
 void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
@@ -250,11 +246,11 @@ void setLedOptions(uint8_t *data){
 	 * data[1] = index
 	 * data[2] ~ = data...
 	 */
-	 if(*(data+1) == LED2_INDEX_COLOR_RAINBOW_INIT)
+	 if(*(data+1) == OPTION_INDEX_COLOR_RAINBOW_INIT)
 	 {
 		led2rainbowSettingCount = 0;
 	 }
-	 else if(*(data+1) == LED2_INDEX_COLOR_RAINBOW)
+	 else if(*(data+1) == OPTION_INDEX_COLOR_RAINBOW)
 	 {
 	 	if(led2rainbowSettingCount > 0 && led2rainbowSettingCount < 4){
 			rainbowColor[(led2rainbowSettingCount*2)-2] = *((cRGB_t *)(data+2));
@@ -266,37 +262,37 @@ void setLedOptions(uint8_t *data){
 		}
 		++led2rainbowSettingCount;
 	 }
-	 else if(*(data+1) == LED2_INDEX_COLOR_SET1)
+	 else if(*(data+1) == OPTION_INDEX_COLOR_SET1)
 	 {
 	 	color1 = *((cRGB_t *)(data+2));
 		_saved |= BV(SAVE_BIT_LED2_COLOR1);
 
 	    setLed2State();
 	 }
-	 else if(*(data+1) == LED2_INDEX_COLOR_SET2)
+	 else if(*(data+1) == OPTION_INDEX_COLOR_SET2)
 	 {
 	 	color2 = *((cRGB_t *)(data+2));
 		_saved |= BV(SAVE_BIT_LED2_COLOR2);
 
 	    setLed2State();
 	 }
-	 else if(*(data+1) == LED2_INDEX_COLOR_SET3)
+	 else if(*(data+1) == OPTION_INDEX_COLOR_SET3)
 	 {
 	 	color3 = *((cRGB_t *)(data+2));
 		_saved |= BV(SAVE_BIT_LED2_COLOR3);
 
 	    setLed2State();
 	 }
-	 else if(*(data+1) == LED2_INDEX_COLOR_KEY_SET1)
+	 else if(*(data+1) == OPTION_INDEX_COLOR_KEY_SET1)
 	 {
 	 	color_key1 = *((cRGB_t *)(data+2));
 		_saved2 |= BV(SAVE2_BIT_LED2_COLOR_KEY1);
 	 }
-	 else if(*(data+1) == LED2_INDEX_MODE)
+	 else if(*(data+1) == OPTION_INDEX_MODE)
 	 {
 	 	__setLed2Mode(*(data+2), 0);	// 항상 led 재설정;
 	 }
-	 else if(*(data+1) == LED2_INDEX_LED_BRIGHTNESS)
+	 else if(*(data+1) == OPTION_INDEX_LED_BRIGHTNESS)
 	 {
 	 	led2Brightness = *(data+2) * 3;
 		if(led2Brightness == 0) led2Brightness = 3;
@@ -305,12 +301,12 @@ void setLedOptions(uint8_t *data){
 		setLed2BrightnessAfter();
 		setLed2State();
 	 }
-	 else if(*(data+1) == LED2_INDEX_MODE_KEY)
+	 else if(*(data+1) == OPTION_INDEX_MODE_KEY)
 	 {
 	 	_rgbKeyEventMode = *(data+2);
 		_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);	
 	 }
-	 else if(*(data+1) == LED2_INDEX_MODE_FADE_TYPE)
+	 else if(*(data+1) == OPTION_INDEX_MODE_FADE_TYPE)
 	 {
 	 	_rainbowMode = *(data+2);
 		_delayCount = 0;
@@ -319,7 +315,7 @@ void setLedOptions(uint8_t *data){
 		_stepCount = 0;
 		_saved2 |= BV(SAVE2_BIT_LED2_FADE_TYPE);
 	 }
-	 else if(*(data+1) == LED2_INDEX_LED_NUM)
+	 else if(*(data+1) == OPTION_INDEX_LED_NUM)
 	 {
 	 	turnOffLed2();
 		setLed2Num(*(data+2));
@@ -327,19 +323,19 @@ void setLedOptions(uint8_t *data){
 
 		_saved |= BV(SAVE_BIT_LED2_NUM);
 	 }
-     else if(*(data+1) == LED2_INDEX_FULL_LED_MODE)
+     else if(*(data+1) == OPTION_INDEX_FULL_LED_MODE)
      {
          _fullLEDMode = *(data+2);
          _saved |= BV(SAVE_BIT_LED_MODE);
      }
-     else if(*(data+1) == LED2_INDEX_FULL_LED_BRIGHTNESS)
+     else if(*(data+1) == OPTION_INDEX_FULL_LED_BRIGHTNESS)
      {
          _ledBrightnessMax = *(data+2);
 
          applyStaticFullLed();
          _saved |= BV(SAVE_BIT_LED_BRITNESS_MAX);
      }
-     else if(*(data+1) == LED2_INDEX_TRANSITION_DELAY)
+     else if(*(data+1) == OPTION_INDEX_TRANSITION_DELAY)
      {
          led2Delay = *(data+2);
 

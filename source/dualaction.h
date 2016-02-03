@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <avr/pgmspace.h>
 
+#define DUALACTION_NUMBER    24
+
 void applyDualActionDownWhenIsCompounded(bool isDown);
 void setDualAction(uint8_t keyidx, bool isDown);
 void clearDualAction(void);

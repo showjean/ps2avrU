@@ -10,17 +10,17 @@ void setOptions(uint8_t *data)
 {
     setLedOptions(data);
 
-    if(*(data+1) == LED2_INDEX_ESC_TO_TILDE)
+    if(*(data+1) == OPTION_INDEX_ESC_TO_TILDE)
     {
         setEscTilde(*(data+2));
     }
-    else if(*(data+1) == LED2_INDEX_FN_LED)
+    else if(*(data+1) == OPTION_INDEX_FN_LED)
     {
         setBeyondFnLed(*(data+2));
     }
 }
 
-void getOptions(led2_info_t *buffer)
+void getOptions(option_info_t *buffer)
 {
     getLedOptions(buffer);
 

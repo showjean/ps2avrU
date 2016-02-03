@@ -327,28 +327,34 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                 return sizeof(reportKeyboard);
             }else if(rq->wValue.word == HID_REPORT_BOOT){
 
-            	if(rq->wLength.word == LED2_GET_REPORT_LENGTH_RAINBOW){	// ready for rainbow color setting;
+            	if(rq->wLength.word == OPTION_GET_REPORT_LENGTH_RAINBOW){	// ready for rainbow color setting;
             		readyForRainbowColor = 1;
             	}
             }else if(rq->wValue.word == HID_REPORT_OPTION){
             	// length : rq->wLength.word 필요한 리포트를 length로 구분한다.
 
-            	if(rq->wLength.word == LED2_GET_REPORT_LENGTH_INFO){
+            	if(rq->wLength.word == OPTION_GET_REPORT_LENGTH_INFO){
             		// report led2 info
-            	    static led2_info_t optionsBuffer;
+            	    static option_info_t optionsBuffer;
             	    getOptions(&optionsBuffer);
             		usbMsgPtr = (usbMsgPtr_t)&optionsBuffer;
-            		return sizeof(optionsBuffer); //LED2_GET_REPORT_LENGTH_INFO;
-            	}else if(rq->wLength.word >= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= LED2_GET_REPORT_LENGTH_KEYMAP_LAYER4){
+            		return sizeof(optionsBuffer); //OPTION_GET_REPORT_LENGTH_INFO;
+            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
             		// keymap
             	    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-					usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - LED2_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
-					return LED2_GET_REPORT_LENGTH_KEYMAP;
-            	}else if(rq->wLength.word >= LED2_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= LED2_GET_REPORT_LENGTH_MACRO12){
+					usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
+					return OPTION_GET_REPORT_LENGTH_KEYMAP;
+            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
             		// cst macro
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - LED2_GET_REPORT_LENGTH_MACRO1)));
+                    usbMsgPtr = (usbMsgPtr_t)(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_MACRO1)));
 					return CUSTOM_MACRO_SIZE_MAX;
+
+                }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
+                    // cst macro
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(DUALACTION_ADDRESS);
+                    return DUALACTION_BYTES;
             	}else {
             		return rq->wLength.word;
             	}
@@ -367,7 +373,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                 // boot
 //                isStart = 1;
                 if(readyForRainbowColor==1){
-                	data[1] = LED2_INDEX_COLOR_RAINBOW_INIT;
+                	data[1] = OPTION_INDEX_COLOR_RAINBOW_INIT;
                 	setOptions((uint8_t *)data);
                 	expectReport = 4;
                 }

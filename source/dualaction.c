@@ -7,8 +7,10 @@
 #include "keymatrix.h"
 #include "keyindex.h"
 #include "keyscan.h"
+#include "hardwareinfo.h"
 #include "oddebug.h"
 
+/*
 const uint8_t PROGMEM dualActionCompoundMask[24] = {
     KEY_FN, // FN
     KEY_FN, // FN
@@ -61,33 +63,6 @@ const uint8_t PROGMEM dualActionAloneMask[24] = {
     KEY_APPS,
     KEY_APPS,
     KEY_APPS
-};
-// 듀얼액션 취소시 출력할 코드값이 "다운"쪽 설정 값인지 결정;
-/*const bool PROGMEM dualActionCancelDefaultDown[] = {
-    true, 
-    true,  
-    true, 
-    true, 
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    false,
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-    true
 };*/
 
 static uint8_t dualActionKeyIndex = 0;
@@ -233,15 +208,15 @@ uint8_t getDualActionDownKeyIndexWhenIsCompounded(uint8_t xActionIndex, bool xFo
 // 조합 키코드를 반환한다.
 static uint8_t getDualActionCompoundKey(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getExchangedKeyindex(pgm_read_byte(&dualActionCompoundMask[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getExchangedKeyindex(pgm_read_byte(DUALACTION_ADDRESS + (keyidx - (KEY_dualAction + 1)) * 2));
     }
     return keyidx;
 }
 
-// 각개 키보드 반환;
+// 각개 키코드 반환;
 static uint8_t getDualActionAloneKey(uint8_t keyidx){
     if(keyidx > KEY_dualAction && keyidx < KEY_dualAction_end){
-        keyidx = getExchangedKeyindex(pgm_read_byte(&dualActionAloneMask[keyidx - (KEY_dualAction + 1)])); 
+        keyidx = getExchangedKeyindex(pgm_read_byte(DUALACTION_ADDRESS + 1 + (keyidx - (KEY_dualAction + 1)) * 2));
     }
     return keyidx;
 }

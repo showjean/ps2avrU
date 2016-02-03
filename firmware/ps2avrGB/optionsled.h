@@ -3,7 +3,7 @@
 
 void setLedOptions(uint8_t *data);
 
-void getLedOptions(led2_info_t *buffer);
+void getLedOptions(option_info_t *buffer);
 
 void stopPwmLed(bool xIsStop);
 
