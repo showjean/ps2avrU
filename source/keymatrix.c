@@ -101,10 +101,10 @@ uint8_t getLayer(void) {
 	/*
 
 	게으른 FN이 작동되는 상황 정리;
-	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함; <- 불편할 수 있으므로
-		기본 레이어일 경우에는 다른 키들이 눌려져 있어도 FN이 작동하도록 한다.
-		: 
+	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함;
+
 	- modi key만 눌려진(FN 키와 문자 키들은 눌리지 않은) 상태는 해제.
+
 	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
 	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
 	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
@@ -125,6 +125,12 @@ uint8_t getLayer(void) {
     }else{
         fnScanLayer = LAYER_NORMAL;
     }
+
+	// modi키를 제외한 다른 키가 눌려있는 경우에는 FN키 작동하지 않도록;
+	if(isAnyKeyDown())
+	{
+	    return fnScanLayer;
+	}
 
 //	DBG1(0x01, (uchar *)&fnScanLayer, 1);
 
