@@ -34,14 +34,11 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #endif
 
 /* ------------------------------------------------------------------------- */
-//static uint8_t DEBOUNCE_MAX = 7;
 #define DEBOUNCE_MAX 4
-static uint8_t debounce;	// debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+static uint8_t debounce = 7;	// DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 static bool _isReleaseAllPrev = true;
-static bool _isFnPressed = false;
-static uint8_t _pressedFn = LAYER_NORMAL;
-static uint8_t _currentLazyLayer = LAYER_NOTHING;
+static uint8_t _currentLayer = LAYER_NOTHING;
 
 
 
@@ -51,8 +48,6 @@ static uint8_t _currentLazyLayer = LAYER_NOTHING;
 void initMatrix(void){
 	
 	delegateInitMatrixDevice();
-
-	debounce = DEBOUNCE_MAX + 3;
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
@@ -88,37 +83,24 @@ bool isReleaseAll(void){
 bool isReleaseAllPrev(void){
 	return _isReleaseAllPrev;
 }
-bool isFnPressed(void){
-	return _isFnPressed;
-}
 
-// function that determine keymap
-// 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur, gLayer;
 
 	static uint8_t fnScanLayer = 0;
+
 	/*
-
-	게으른 FN이 작동되는 상황 정리;
+	FN이 작동되는 상황 정리;
 	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함;
-
-	- modi key만 눌려진(FN 키와 문자 키들은 눌리지 않은) 상태는 해제.
 
 	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
 	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
 	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
 	*/
 
-	if(_currentLazyLayer != LAYER_NOTHING) {
-
-	    _pressedFn = fnScanLayer;
-		_isFnPressed = false;
-
-		return _currentLazyLayer;
+	if(_currentLayer != LAYER_NOTHING) {
+		return _currentLayer;
 	}
-
-	gLayer = LAYER_NORMAL;
 
 	if(getBeyondFN()) {
 	    fnScanLayer = getBeyondFN();
@@ -126,31 +108,33 @@ uint8_t getLayer(void) {
         fnScanLayer = LAYER_NORMAL;
     }
 
-	// modi키를 제외한 다른 키가 눌려있는 경우에는 FN키 작동하지 않도록;
-	if(isAnyKeyDown())
+	// 다른 키가 눌려있는 경우에는 FN키 작동하지 않도록;
+	if(!isReleaseAll())
 	{
 	    return fnScanLayer;
 	}
 
-//	DBG1(0x01, (uchar *)&fnScanLayer, 1);
+    gLayer = LAYER_NOTHING;
 
     uint8_t *gMatrix = getCurrentMatrix();
-	for(row=0;row<ROWS;++row){
+
+	for( row = 0 ; row < ROWS ; ++row ){
+
 		if(gMatrix[row] == 0) continue;
-		for(col=0;col<COLUMNS;++col){
+
+		for( col = 0 ; col < COLUMNS ; ++col ){
 
 			cur  = gMatrix[row] & BV(col);
 
 			if(cur){
 				keyidx = getCurrentKeyindex(fnScanLayer, row, col);
 
-
 			    /**
 			     * Extra FN 키가 눌렸을 경우에는 dual action 의 FN 키들은 반영하지 않는다.
 			     */
 				if(isDownExtraFn() == false)
 				{
-				    keyidx = getDualActionDownKeyIndexWhenIsCompounded(keyidx, true); 	// fn 키는 무조건 조합 액션을 적용;
+				    keyidx = getDualActionDownKeyIndexWhenIsCompounded(keyidx, true);   // dual action 의 FN계열 키는 무조건 검출;
 				}
 				
 				if(keyidx == KEY_FN){
@@ -162,48 +146,23 @@ uint8_t getLayer(void) {
 				}else if(keyidx == KEY_NOR){
 					if(fnScanLayer == LAYER_FN2 || fnScanLayer == LAYER_FN3){	// fn2/3에서만 작동;
 						// _fnScanLayer은 2를 유지하면서 스캔할 레이어는 0으로 반환;
-						/*_isFnPressed = true;
-						return LAYER_NORMAL;*/
-					    gLayer = LAYER_NOR;
+					    gLayer = LAYER_NORMAL;
 					}
 				}
 
 //				DBG1(0x02, (uchar *)&gLayer, 1);
 
-				if(gLayer != LAYER_NORMAL){
+				if(gLayer != LAYER_NOTHING){
 
-				    if(gLayer == LAYER_NOR)
-				    {
-				        gLayer = LAYER_NORMAL;
-				    }
+				    // _fnScanLayer은 유지하면서 스캔할 레이어는 gLayer로 반환;
+                    _currentLayer = gLayer;
 
-					// _fnScanLayer은 0을 유지하면서 스캔할 레이어는 gLayer로 반환;
-//					if(isLazyFn()){
-                    if(true){
-						// FN키를 처음 누른 경우
-						if(isReleaseAllPrev() || _isFnPressed == false){
-							_currentLazyLayer = gLayer;
-						}else{
-							return fnScanLayer;
-						}
-					}
-
-					_isFnPressed = true;
-
-					// FN 키가 2개 이상 눌릴 경우 matrix 상에서 빠른 순서가 우선 적용되어 오작동 되는 경우가 있어 2개 이상의 FN은 동시 적용 되지 않도록
-                    if(_pressedFn != fnScanLayer && _pressedFn != gLayer)
-                    {
-                        return _pressedFn;
-                    }
-                    _pressedFn = gLayer;
-					return gLayer;
+					return _currentLayer;
 				}
 			}
 		}
 	}
 
-	_isFnPressed = false;
-	_pressedFn = fnScanLayer;
 	return fnScanLayer;
 }
 
@@ -301,13 +260,13 @@ uint8_t setCurrentMatrix(void){
 void setCurrentMatrixAfter(void){
 	setReleaseAll();
 
-	// 모든 키가 release이거나 modi key만 눌려진 상태에서 lazy FN 해제;
-//	if(isReleaseAll() || (getDownBufferAt(0) == 0 && isFnPressed() == false)){
-	if(isReleaseAll() || (isAnyKeyDown() == false && isFnPressed() == false)){
-		_currentLazyLayer = LAYER_NOTHING;
+	// 모든 키가 release되면 FN 해제;
+	if(isReleaseAll())
+	{
+		_currentLayer = LAYER_NOTHING;
+        clearDualAction();
 	}
 
-	if(isReleaseAll()) clearDualAction();
 }
 
 
