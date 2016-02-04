@@ -17,7 +17,7 @@
 #include "keymapper.h"
 #include "dualaction.h"
 #include "keymatrix.h"
-#include "keydownbuffer.h"
+//#include "keydownbuffer.h"
 #include "ps2avru_util.h"
 #include "oddebug.h"
 
@@ -240,13 +240,7 @@ bool isKeyEnabled(uint8_t xKeyidx){
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
-    applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
-
-    if(isFnKey(xKeyidx)) return false; 
-
-    setDualAction(xKeyidx, xIsDown);    
-
-    xKeyidx = getDualActionDefaultKeyForFncontrol(xKeyidx);
+    xKeyidx = getDualActionDefaultKey(xKeyidx);
 
     if(isFnKey(xKeyidx)) return false; 
 

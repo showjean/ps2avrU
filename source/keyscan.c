@@ -10,12 +10,12 @@
 #include "keymatrix.h"
 #include "fncontrol.h"
 #include "bootmapper.h"
-//#include "lazyfn.h"
 #include "esctilde.h"
+#include "ledrender.h"
 #include "oddebug.h"
 
 static void scanKey(uint8_t xLayer);
-static void pushKeyCodeWhenChange(uint8_t xKeyidx, bool xIsDown);
+static void sendKeyCodeWhenChange(uint8_t xKeyidx_not_dualaction_idx, bool xIsDown);
 static void scanKeyWithDebounce(void);
 
 static keyscan_driver_t *keyscanDriver;
@@ -25,29 +25,42 @@ void setKeyScanDriver(keyscan_driver_t *driver)
     keyscanDriver = driver;
 }
 
-static void pushKeyCodeWhenChange(uint8_t xKeyidx, bool xIsDown)
+static void sendKeyCodeWhenChange(uint8_t xKeyidx_not_dualaction_idx, bool xIsDown)
 {
-    xKeyidx = getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false);
-
-    (*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx, xIsDown);
+    (*keyscanDriver->pushKeyCodeWhenChange)(xKeyidx_not_dualaction_idx, xIsDown);
 }
 
 void pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
 
-    if(xIsDown){
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xIsDown);
-    }
+//    if(xIsDown){
+//        pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xIsDown);
+//    }
 
-    pushKeyCodeWhenChange(xKeyidx, xIsDown);
+    sendKeyCodeWhenChange(xKeyidx, xIsDown);
 }
 
 
 static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t xRow){
 
+    applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
+
+    // 빈 키코드는 LED 반응 이외의 기능 없음;
+    if(xKeyidx == KEY_NONE ) return;
+
+
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
-    if(xIsDown && xKeyidx != KEY_NONE){
-        applyDualActionDownWhenIsCompounded(true);
+    setDualAction(xKeyidx, xIsDown);
+
+    // down : 조합키 판정 전에는 듀얼 액션 키의 인덱스로 전달되고
+    // up : 조합 후 modi 키로 up이 되어서 key down count가 제대로 작동하지 않는다.
+//    pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xIsDown);
+
+    // 듀얼 액션 키 자체로 버퍼에 저장하면?
+    pushDownBuffer(xKeyidx, xIsDown);
+
+    if(xIsDown){
+        applyDualActionDownWhenIsCompounded();
     }
 
 
@@ -63,6 +76,8 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     // fn키를 키매핑에 적용하려면 위치 주의;
     if(gFN == false) return;
+
+    if(isFnKey(xKeyidx)) return;
             
     if(xIsDown && applyMacro(xKeyidx)) {
         // 매크로 실행됨;
@@ -71,8 +86,10 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
     xKeyidx = getEscToTilde(xKeyidx, xIsDown);
-    
-	pushKeyCodeWhenChange(xKeyidx, xIsDown);
+
+    xKeyidx = getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false);
+
+    sendKeyCodeWhenChange(xKeyidx, xIsDown);
 	
 }
 
@@ -93,7 +110,6 @@ static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t x
             return 1;
         }
 #endif
-        pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xCur);
 
         setKeyEnabled(xKeyidx, xCur);
 
@@ -122,7 +138,7 @@ void scanKeyWithMacro(void){
 
 //            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down
-                pushKeyCodeWhenChange(gKey.keyindex, true);
+                sendKeyCodeWhenChange(gKey.keyindex, true);
                 
             }else{  // up
                 // 모디키가 눌려져 있다면 그 상태를 유지;
@@ -131,7 +147,7 @@ void scanKeyWithMacro(void){
                         goto PASS_MODI;
                     }
                 }
-                pushKeyCodeWhenChange(gKey.keyindex, false);
+                sendKeyCodeWhenChange(gKey.keyindex, false);
              
             }
         }
@@ -148,20 +164,20 @@ static void scanKeyWithDebounce(void) {
     // debounce cleared and changed
     if(!setCurrentMatrix()) return;
     
-    uint8_t prevKeyidx;
-    uint8_t row, col, prev, cur, keyidx, result;
-    static bool _isFnPressedPrev = false;
-    static uint8_t _prevLayer = 0;
+//    uint8_t prevKeyidx;
+//    uint8_t row, col, prev, cur, keyidx, result;
+//    static bool _isFnPressedPrev = false;
+//    static uint8_t _prevLayer = 0;
     uint8_t gLayer = getLayer();
 
-    uint8_t *gMatrix = getCurrentMatrix();
-    uint8_t *gPrevMatrix = getPrevMatrix();
+//    uint8_t *gMatrix = getCurrentMatrix();
+//    uint8_t *gPrevMatrix = getPrevMatrix();
     // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
     // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
 //    DBG1(0xAA, (uchar *)&_prevLayer, 1);
 //    DBG1(0xAA, (uchar *)&gLayer, 1);
 //    DBG1(0xAB, (uchar *)&_isFnPressedPrev, 1);
-    if( _isFnPressedPrev == false && (_prevLayer != gLayer)){
+    /*if( _isFnPressedPrev == false && (_prevLayer != gLayer)){
         for(col=0;col<COLUMNS;++col)
         {       
             for(row=0;row<ROWS;++row)
@@ -170,12 +186,12 @@ static void scanKeyWithDebounce(void) {
                 keyidx = getCurrentKeyindex(gLayer, row, col);
 
                 // 이전 상태에서(press/up) 변화가 있을 경우;
-                /*
+
                 prev : 1, cur : 1 = prev up, cur down
                 prev : 1, cur : 0 = prev up
                 prev : 0, cur : 1 = cur down
                 prev : 0, cur : 0 = -
-                */
+
                 if( prevKeyidx != keyidx && !isFnKey(prevKeyidx)) {
                     prev = gPrevMatrix[row] & BV(col);
                     cur  = gMatrix[row] & BV(col);
@@ -199,7 +215,7 @@ static void scanKeyWithDebounce(void) {
         }
     }
     _prevLayer = gLayer;
-    _isFnPressedPrev = isFnPressed();
+    _isFnPressedPrev = isFnPressed();*/
 
     scanKey(gLayer);
 }

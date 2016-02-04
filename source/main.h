@@ -5,8 +5,6 @@
 #include <stdbool.h>
 #include "global.h"
 
-#define DISABLE_HARDWARE_MENU 1     // for test
-
 // only for test, use makefile -D option on release.bat
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
 
@@ -18,7 +16,7 @@
         #define SCROLL_LOCK_LED_IS_APART // SCROLL_LOCK pin was connected
     #endif
     #if !defined(INTERFACE_ONLY_USB)
-//        #define INTERFACE_ONLY_USB // usb only
+        #define INTERFACE_ONLY_USB // usb only
     #endif
 //    #define DEBUG_QUICK_BOOTLOADER  // for debug
 #endif

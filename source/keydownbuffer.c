@@ -8,6 +8,7 @@
 #include "keymatrix.h"
 #include "keydownbuffer.h"
 #include "ps2avru_util.h"
+#include "dualaction.h"
 #include "oddebug.h"
 
 static uint8_t _downBuffer[DOWN_BUFFER_SIZE];
@@ -24,12 +25,16 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 
 //    uint8_t gLen;
 	int gIdx;
+
+//	xKeyidx = getDualActionDefaultKey(xKeyidx);
+
 	if(xIsDown){
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
 			_downModifyBuffer |= getModifierBit(xKeyidx); // modmask[xKeyidx - (KEY_Modifiers + 1)];
-//			DBG1(0x34, (uchar *)&_downModifyBuffer, 1);
+//			DBG1(0xD4, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
 		    ++_downCount;
+//		    DBG1(0xE0, (uchar *)&_downCount, 6);
 //	            gLen = strlen((char *)_downBuffer);
 			if (_downBufferIndex >= DOWN_BUFFER_SIZE || xKeyidx >= KEY_MAX) { // too many keycodes
 //				DBG1(0x39, (uchar *)&_downBuffer, DOWN_BUFFER_SIZE);
@@ -50,9 +55,10 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
 			_downModifyBuffer &= ~(getModifierBit(xKeyidx));
-//			DBG1(0x35, (uchar *)&_downModifyBuffer, 1);
+//			DBG1(0xD5, (uchar *)&_downModifyBuffer, 1);
 		}else{ // keycode should be added to report
 		    --_downCount;
+//		    DBG1(0xE1, (uchar *)&_downCount, 6);
 
 			gIdx = findIndex(_downBuffer, xKeyidx);
 //			DBG1(0x35, (uchar *)&gIdx, 1);
@@ -76,6 +82,7 @@ void initKeyDownBuffer(void){
 }
 bool isAnyKeyDown()
 {
+//    DBG1(0xF2, (uchar *)&_downCount, 4);
     return _downCount > 0;
 }
 

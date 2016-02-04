@@ -140,8 +140,8 @@ endif
 	CPFLAGS += --param inline-call-cost=2 -finline-limit=3 
 	CPFLAGS += -ffunction-sections -fdata-sections
 	CPFLAGS += -Wl,--relax,--gc-sections
-	CPFLAGS += -fno-tree-scev-cprop
-#	CPFLAGS += -fno-split-wide-types 
+#	CPFLAGS += -fno-tree-scev-cprop # 최근 아래 -fno-split-wide-types 옵션과 같은 증상이 발생됨
+#	CPFLAGS += -fno-split-wide-types  #usb_only 옵션으로 실행시 부트맵퍼 트리거 이상 현상 발생 (입력 row의 배수도 동시 입력) 
 	#
 #	CPFLAGS += -ffreestanding 
 # --------------------

@@ -26,7 +26,9 @@
 								<inputType id="de.innot.avreclipse.tool.assembler.input.1180201356" superClass="de.innot.avreclipse.tool.assembler.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.compiler.winavr.base.466035486" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.base">
-								<option id="de.innot.avreclipse.compiler.option.incpath.1415039373" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath"/>
+								<option id="de.innot.avreclipse.compiler.option.incpath.1415039373" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ps2avrU/firmware/ps2avrGB}&quot;"/>
+								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.1637242480" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.base.566519604" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.base">
@@ -49,7 +51,11 @@
 		<project id="ps2avrU.null.809544187" name="ps2avrU"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Default">
+			<resource resourceType="PROJECT" workspacePath="/ps2avrU"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<scannerConfigBuildInfo instanceId="de.innot.avreclipse.toolchain.winavr.base.2086647547;de.innot.avreclipse.toolchain.winavr.base.2086647547.1463068052;de.innot.avreclipse.tool.compiler.winavr.base.466035486;de.innot.avreclipse.compiler.winavr.input.1637242480">
