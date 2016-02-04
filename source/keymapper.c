@@ -101,7 +101,6 @@ static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
 static uint8_t _macroDownCount = 0;
 static bool _isQuickMacro = false;
 static bool _isQuickMacroStopped;
-//static uint8_t _quickMacroStoppedCount = 0;
 static void __stopQuickMacro(void);
 
 static uint8_t _step;
@@ -339,14 +338,12 @@ void enterFrameForMapper(void){
 			putKeyindex(KEY_ESC, 255, 255, 0);	// esc가 up 된것으로 알림;
 		}
 	}
-#else
+#endif
 	// for quick macro save
-	if(_isQuickMacroStopped && isReleaseAll() && !isActiveMacro()) // && ++_quickMacroStoppedCount > 10)
+	if(_isQuickMacroStopped && isReleaseAll() && !isActiveMacro())
 	{
-//	    _quickMacroStoppedCount = 0;
 	    __stopQuickMacro();
 	}
-#endif
 }
 
 
