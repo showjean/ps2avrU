@@ -68,9 +68,9 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
     if(isDeepKeyMapping()){
         
-        putKeyindex(xKeyidx, xCol, xRow, xIsDown);
+        xKeyidx = putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 
-        return;
+        if(xKeyidx == KEY_NONE) return;
     }
 
 
@@ -163,59 +163,8 @@ static void scanKeyWithDebounce(void) {
     
     // debounce cleared and changed
     if(!setCurrentMatrix()) return;
-    
-//    uint8_t prevKeyidx;
-//    uint8_t row, col, prev, cur, keyidx, result;
-//    static bool _isFnPressedPrev = false;
-//    static uint8_t _prevLayer = 0;
+
     uint8_t gLayer = getLayer();
-
-//    uint8_t *gMatrix = getCurrentMatrix();
-//    uint8_t *gPrevMatrix = getPrevMatrix();
-    // ps/2 연결시 FN/FN2/NOR키의 레이어 전환시 같은 위치에 있는 다른 키코드의 키가 눌려지지만 손을 때면 눌려진 상태로 유지되는 버그 패치
-    // 레이어가 변경된 경우에는 이전 레이어를 검색하여 달리진 점이 있는지 확인하여 적용;
-//    DBG1(0xAA, (uchar *)&_prevLayer, 1);
-//    DBG1(0xAA, (uchar *)&gLayer, 1);
-//    DBG1(0xAB, (uchar *)&_isFnPressedPrev, 1);
-    /*if( _isFnPressedPrev == false && (_prevLayer != gLayer)){
-        for(col=0;col<COLUMNS;++col)
-        {       
-            for(row=0;row<ROWS;++row)
-            {               
-                prevKeyidx = getCurrentKeyindex(_prevLayer, row, col);
-                keyidx = getCurrentKeyindex(gLayer, row, col);
-
-                // 이전 상태에서(press/up) 변화가 있을 경우;
-
-                prev : 1, cur : 1 = prev up, cur down
-                prev : 1, cur : 0 = prev up
-                prev : 0, cur : 1 = cur down
-                prev : 0, cur : 0 = -
-
-                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx)) {
-                    prev = gPrevMatrix[row] & BV(col);
-                    cur  = gMatrix[row] & BV(col);
-
-                    // 이전에 눌려져 있던 상태에서 layer가 변경되면 적용;
-                    if(prev && cur){
-                        DBG1(0xCC, (uchar *)&prevKeyidx, 1);
-                        DBG1(0xCC, (uchar *)&keyidx, 1);
-                        processKeyIndex(prevKeyidx, true, false, col, row);
-                        result = processKeyIndex(keyidx, false, true, col, row);
-
-                        if(result > 0)
-                        {
-                            break;
-                        }
-                    }
-                }
-
-            }
-            
-        }
-    }
-    _prevLayer = gLayer;
-    _isFnPressedPrev = isFnPressed();*/
 
     scanKey(gLayer);
 }
@@ -235,17 +184,6 @@ static void scanKey(uint8_t xLayer) {
 			cur  = gMatrix[row] & BV(col);
             keyidx = getCurrentKeyindex(xLayer, row, col);
 
-/*
-#ifdef ENABLE_BOOTMAPPER           
-            if(isBootMapper()){
-                if( prev != cur){
-                    if(cur) trace(row, col);
-                    break;
-                }  
-                continue;              
-            }
-#endif              
-*/
             result = processKeyIndex(keyidx, prev, cur, col, row);
             if(result == 1){
                 continue;
@@ -255,8 +193,6 @@ static void scanKey(uint8_t xLayer) {
 
 		}
 	}
-
-    setPrevMatrix();
 
     setCurrentMatrixAfter();
 

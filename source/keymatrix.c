@@ -37,7 +37,7 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #define DEBOUNCE_MAX 4
 static uint8_t debounce = 7;	// DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
-static bool _isReleaseAllPrev = true;
+
 static uint8_t _currentLayer = LAYER_NOTHING;
 
 
@@ -68,20 +68,11 @@ static void setReleaseAll(void){
 			break;
 		}
 	}
-	_isReleaseAllPrev = true;
-	for(row=0;row<ROWS;row++) {
-		if(prevMatrix[row] > 0){
-			_isReleaseAllPrev = false;
-			break;
-		}
-	}
+
 }
 
 bool isReleaseAll(void){	
 	return _isReleaseAll;
-}
-bool isReleaseAllPrev(void){
-	return _isReleaseAllPrev;
 }
 
 uint8_t getLayer(void) {
@@ -243,7 +234,7 @@ uint8_t *getCurrentMatrix(void){
 
 }
 
-void setPrevMatrix(void){
+static void setPrevMatrix(void){
 	memcpy(prevMatrix, getCurrentMatrix(), ROWS);
 }
 
@@ -258,6 +249,9 @@ uint8_t setCurrentMatrix(void){
 
 // 매트릭스에 관련된 모든 처리가 끝난 후 실행 된다.
 void setCurrentMatrixAfter(void){
+//    DBG1(0x11, (uchar *)&prevMatrix, ROWS);
+//    DBG1(0x11, (uchar *)&currentMatrix, ROWS);
+    setPrevMatrix();
 	setReleaseAll();
 
 	// 모든 키가 release되면 FN 해제;

@@ -19,7 +19,6 @@ extern void delegateInitMatrixDevice(void);
 void clearMatrix(void);
 
 bool isReleaseAll(void);
-bool isReleaseAllPrev(void);
 
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = beyond_fn
@@ -30,7 +29,7 @@ uint8_t getLiveMatrix(void);
 void setCurrentMatrixAfter(void);
 uint8_t setCurrentMatrix(void);
 uint8_t *getCurrentMatrix(void);
-void setPrevMatrix(void);
+//void setPrevMatrix(void);
 uint8_t *getPrevMatrix(void);
 
 extern void delegateGetLiveMatrix(uint8_t *xCurrentMatrix, uint8_t *isModified);

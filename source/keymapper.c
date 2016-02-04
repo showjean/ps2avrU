@@ -101,6 +101,7 @@ static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
 static uint8_t _macroDownCount = 0;
 static bool _isQuickMacro = false;
 static bool _isQuickMacroStopped;
+//static uint8_t _quickMacroStoppedCount = 0;
 static void __stopQuickMacro(void);
 
 static uint8_t _step;
@@ -275,7 +276,7 @@ void startKeyMappingOnBoot(void)
 */
 static void startKeyMapping(void){
 		// isReleaseAll()로 비교하면 ps/2연결시 마지막 키의 up 판단 전에 매트릭스상 모든 키가 릴리즈 상태여서 마지막 키가 리포트 되지 않는다.
-	if(isKeyMapping() && !isDeepKeyMapping() && isReleaseAllPrev()){
+	if(isKeyMapping() && !isDeepKeyMapping() && isReleaseAll()){
 		startKeyMappingDeep();
 	}
 }
@@ -340,8 +341,9 @@ void enterFrameForMapper(void){
 	}
 #else
 	// for quick macro save
-	if(_isQuickMacroStopped && isReleaseAll() && !isActiveMacro())
+	if(_isQuickMacroStopped && isReleaseAll() && !isActiveMacro()) // && ++_quickMacroStoppedCount > 10)
 	{
+//	    _quickMacroStoppedCount = 0;
 	    __stopQuickMacro();
 	}
 #endif
@@ -824,7 +826,6 @@ static void __stopQuickMacro(void){
     _isQuickMacroStopped = false;
     saveMacro();
     _macroIndex = 255;
-    _isQuickMacro = false;
 #ifndef DISABLE_HARDWARE_MENU
     _step = STEP_NOTHING;
     stopKeyMapping();
@@ -834,6 +835,7 @@ static void __stopQuickMacro(void){
 }
 
 void stopQuickMacro(void){
+    _isQuickMacro = false;
     _isQuickMacroStopped = true;
 }
 
@@ -852,10 +854,10 @@ static void stopMacroInput(void){
 #endif
 }
 
-static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
+static uint8_t putMacro(uint8_t xKeyidx, uint8_t xIsDown){
     int gIdx;
 
-	if(xKeyidx >= KEY_MAX) return;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
+	if(xKeyidx >= KEY_MAX) return KEY_NONE;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
 
 #ifndef DISABLE_HARDWARE_MENU
 	if(_isTiredEscapeKey){
@@ -868,13 +870,13 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 		stopMacroInput();
 
-		return;
+		return KEY_NONE;
 	}
 #endif
 
 	if(xIsDown){
 		if(_macroDownCount >= MACRO_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
-			return;
+			return KEY_NONE;
 		}
 		++_macroDownCount;
 	    DBG1(0x07, (uchar *)&xKeyidx, 1);  
@@ -886,7 +888,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 	    // 릴리즈시에는 프레스 버퍼에 있는 녀석만 처리; 버퍼에 없는 녀석은 16키 이후의 키이므로 제외;
 
 	    if(gIdx == -1){
-	    	return;
+	    	return KEY_NONE;
 	    }
 	    delete(_macroPressedBuffer, gIdx);
 	    DBG1(0x08, (uchar *)&xKeyidx, 1);  
@@ -897,7 +899,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
 
-	pushMacroKeyIndex(xKeyidx);
+//	pushMacroKeyIndex(xKeyidx);
 
 	// MACRO_SIZE_MAX개를 채웠다면 종료;
 	if(_macroBufferIndex >= MACRO_SIZE_MAX){
@@ -905,7 +907,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 	
 		stopMacroInput();
 
-		return;
+		return xKeyidx;
 	}
 
 #ifndef DISABLE_HARDWARE_MENU
@@ -918,9 +920,11 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		_isTiredEscapeKey = 0;
 	}
 #endif
+
+	return xKeyidx;
 }
 
-void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
+uint8_t putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 {
 #ifndef DISABLE_HARDWARE_MENU
 	uint8_t cmd;
@@ -933,7 +937,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
     DBG1(0x01, (uchar *)&_isWorkingForEmpty, 1);
 	// 매크로 실행중에는 입력을 받지 않는다.
-	if(_isWorkingForEmpty) return;
+	if(_isWorkingForEmpty) return KEY_NONE;
 
 #endif
     xKeyidx = getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false);
@@ -941,12 +945,11 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 //    DBG1(0x11, (uchar *)&xKeyidx, 1);
 #ifndef DISABLE_HARDWARE_MENU
 	// 매핑 중에는 키 업만 실행 시킨다.
-	if(!isMacroInput() && xIsDown) return;	// 매크로 일 경우에만 다운 키 실행;
+	if(!isMacroInput() && xIsDown) return KEY_NONE;	// 매크로 일 경우에만 다운 키 실행;
 	if(isMacroInput()){
 #endif
-		putMacro(xKeyidx, xIsDown);	
+		return	putMacro(xKeyidx, xIsDown);
 #ifndef DISABLE_HARDWARE_MENU
-		return;	
 	}
 
 	gKeyIndex = findIndex(usingKeys, xKeyidx);
@@ -1037,7 +1040,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 			printPrompt();
 		}
-		return;
+		return KEY_NONE;
 
 	}else if(_step == STEP_CHOOSE_KEY){
 		// do not anything;
@@ -1050,7 +1053,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 
 	}else{
 		// DEBUG_PRINT(("bad command \n"));
-		return;
+		return KEY_NONE;
 	}
 	
 	// key mapper
@@ -1081,7 +1084,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					printEnter();
 				}else{
 					_delay_ms(100);
-					return;
+					return KEY_NONE;
 				}
 			break;	
 			case STEP_CLEAR_SELECT_INDEX:
@@ -1109,7 +1112,7 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					_bufferIndex = 0;
 				}else{
 					_delay_ms(100);
-					return;
+					return KEY_NONE;
 				}
 			break;	
 #ifndef DISABLE_HARDWARE_KEYMAPPING
@@ -1187,16 +1190,18 @@ void putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown)
 					printEnter();
 				}else{
 					_delay_ms(100);
-					return;
+					return KEY_NONE;
 				}
 
 			break;
 #endif
 		}
 		printPrompt();
+
 	}
 #endif
 
+    return KEY_NONE;
 }
 
 #endif

@@ -201,7 +201,7 @@ void enterFrameForFnControl(void){
         applyLock(&_isLockKey);
         applyLock(&_isLockWin);
     }
-    if(isReleaseAllPrev() && _isReadyQuickMacro){
+    if(isReleaseAll() && _isReadyQuickMacro){
         _isReadyQuickMacro = false;
         if(_quickMacroIndex < 255) {
             startQuickMacro(_quickMacroIndex);

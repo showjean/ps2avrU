@@ -230,7 +230,6 @@ int main(void) {
         }
 
     }
-    setPrevMatrix();
     setCurrentMatrixAfter();
 
 
