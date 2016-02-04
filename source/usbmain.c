@@ -555,9 +555,6 @@ void usb_main(void) {
 
             scanKeyUsbWithMacro(); // changes?
 
-            // ps2avrU loop, must be after scan matrix;
-            enterFrame();
-
             if(updateNeeded){
                 if(interfaceReady==false) continue;
 
@@ -619,6 +616,10 @@ void usb_main(void) {
                 }
 #endif
             }
+
+            // ps2avrU loop, must be after scan matrix;
+            enterFrame();
+
         }
 
 #if !defined( USING_SIMPLE_MODE )

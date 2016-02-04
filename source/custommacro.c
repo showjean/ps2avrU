@@ -121,7 +121,7 @@ static void pushNextKeyIndex(void){
 
         if(gKeyindex > 0 && gKeyindex < 255){
 
-            pushM(gKeyindex);
+            pushMacroKeyIndex(gKeyindex);
             // 현재 사용되지 않음;
 //            gIsDown = (gDownDelay>>7)&0x01;
             // delay : 100ms

@@ -24,16 +24,16 @@ typedef struct {
 #define MESSAGE_SIZE_MAX 	300
 
 // Queue operation -> push, pop
-void pushM(uint8_t item);
-uint8_t popM(void);
-bool isEmptyM(void);
-void clearM(void);
+void pushMacroKeyIndex(uint8_t item);
+uint8_t popMacroKeyIndex(void);
+bool isEmptyMacroKeyIndex(void);
+void clearMacroKeyIndex(void);
 bool isRepeat(void);
 void stopRepeat(void);
 void clearRepeat(void);
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
-macro_key_t popMWithKey(void);
+macro_key_t popMacroKey(void);
 
 // 새로운 매크로 시작전에 초기화;
 void clearMacroPressedBuffer(void);

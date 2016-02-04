@@ -132,9 +132,9 @@ void scanKeyWithMacro(void){
 
     macro_key_t gKey;
     if(isActiveMacro()){
-        if(!isEmptyM()){
+        if(!isEmptyMacroKeyIndex()){
           
-            gKey = popMWithKey();
+            gKey = popMacroKey();
 
 //            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down

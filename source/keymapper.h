@@ -162,11 +162,11 @@ uint8_t isKeyMapping(void);
 void readyKeyMappingOnBoot(void);
 void startKeyMappingOnBoot(void);
 
+#endif
+
+
 // event loop
 void enterFrameForMapper(void);
-
-
-#endif
 
 uint8_t isDeepKeyMapping(void);
 

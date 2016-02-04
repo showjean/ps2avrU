@@ -110,8 +110,8 @@ static void applyDualActionUp(void){
     if(dualActionKeyIndex > 0 && !isCompounded()){
         // 듀얼액션이 저장되어 있을 때 아무키도 눌리지 않은 리포트가 간다면 액션!
        	uint8_t gUpIdx = getDualActionAloneKey(dualActionKeyIndex);
-        pushM(gUpIdx);
-        pushM(gUpIdx);
+        pushMacroKeyIndex(gUpIdx);
+        pushMacroKeyIndex(gUpIdx);
 
         dualActionKeyIndex = 0;
 		_autoDownCount = 0;

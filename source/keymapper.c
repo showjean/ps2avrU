@@ -100,6 +100,8 @@ static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
 
 static uint8_t _macroDownCount = 0;
 static bool _isQuickMacro = false;
+static bool _isQuickMacroStopped;
+static void __stopQuickMacro(void);
 
 static uint8_t _step;
 #ifndef DISABLE_HARDWARE_MENU
@@ -295,9 +297,12 @@ static void countKeyMappingEnabled(void){
 	}
 
 }
+#endif
+
 
 void enterFrameForMapper(void){
 
+#ifndef DISABLE_HARDWARE_MENU
 	applyKeyMapping(getModifierDownBuffer());
 
 	startKeyMapping();
@@ -333,12 +338,21 @@ void enterFrameForMapper(void){
 			putKeyindex(KEY_ESC, 255, 255, 0);	// esc가 up 된것으로 알림;
 		}
 	}
-
+#else
+	// for quick macro save
+	if(_isQuickMacroStopped && isReleaseAll() && !isActiveMacro())
+	{
+	    __stopQuickMacro();
+	}
+#endif
 }
+
+
+#ifndef DISABLE_HARDWARE_MENU
 void printEnter(void)
 {
-    pushM(KEY_ENTER);
-    pushM(KEY_ENTER);
+    pushMacroKeyIndex(KEY_ENTER);
+    pushMacroKeyIndex(KEY_ENTER);
 }
 
 void printStringAndFlash(const char *xStr, const char *xfStr){
@@ -352,13 +366,13 @@ static void pushCharacter(char *xStr)
     // 버퍼에 쌓아두고 모두 출력되기를 기다린다.
     macro_key_t key = charToKey(xStr[0]);
     if(key.mode){
-        pushM(KEY_LSHIFT);
+        pushMacroKeyIndex(KEY_LSHIFT);
     }
-    pushM(key.keyindex);    // 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
-    pushM(key.keyindex);
+    pushMacroKeyIndex(key.keyindex);    // 같은 코드를 2개 입력한다. 첫번째는 press, 두번재는 release
+    pushMacroKeyIndex(key.keyindex);
     // DEBUG_PRINT(("pushCharacter char %c : %d \n", xStr[0], key.keyindex));
     if(key.mode){
-        pushM(KEY_LSHIFT);
+        pushMacroKeyIndex(KEY_LSHIFT);
     }
    
 }
@@ -708,7 +722,7 @@ void readMacro(uint8_t xMacroIndex){
 		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
 		gKeyindex = eeprom_read_byte((uint8_t *)gAddress);
 		if(gKeyindex > 0 && gKeyindex < 255){
-			pushM(gKeyindex);
+			pushMacroKeyIndex(gKeyindex);
 		}
 	}
 }
@@ -793,32 +807,40 @@ void startQuickMacro(uint8_t xMacroIndex){
 	resetMacroInput();
 	_macroIndex = xMacroIndex;
 	_isQuickMacro = true;
+	_isQuickMacroStopped = false;
 #ifndef DISABLE_HARDWARE_MENU
 	_step = STEP_INPUT_MACRO;
 	setDeepKeyMapping();
 #endif
 
-	blinkOnce(500);
+	blinkOnce(200);
 	_delay_ms(100);
-	blinkOnce(500);
+	blinkOnce(100);
 }
-void stopQuickMacro(void){
-	DBG1(0xef, (uchar *)&_macroBufferIndex, 1);
-	saveMacro();
-	_macroIndex = 255;
-	_isQuickMacro = false;
+
+static void __stopQuickMacro(void){
+
+//  DBG1(0xef, (uchar *)&_macroBufferIndex, 1);
+    _isQuickMacroStopped = false;
+    saveMacro();
+    _macroIndex = 255;
+    _isQuickMacro = false;
 #ifndef DISABLE_HARDWARE_MENU
-	_step = STEP_NOTHING;
-	stopKeyMapping();
+    _step = STEP_NOTHING;
+    stopKeyMapping();
 #endif
 
-	blinkOnce(1000);
+    blinkOnce(100);
+}
+
+void stopQuickMacro(void){
+    _isQuickMacroStopped = true;
 }
 
 static void stopMacroInput(void){
-	DBG1(0xee, (uchar *)&_macroBufferIndex, 1);
+//	DBG1(0xee, (uchar *)&_macroBufferIndex, 1);
 	if(_isQuickMacro){
-		stopQuickMacro();
+	    stopQuickMacro();
 	}
 #ifndef DISABLE_HARDWARE_MENU
 	else{
@@ -840,7 +862,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 		_isPressedEscapeKey = 0;
 		_isTiredEscapeKey = 0;
 
-		pushM(xKeyidx);
+		pushMacroKeyIndex(xKeyidx);
 		// 또는 ESC를 1초이상 누르면 종료;
 		_macroInputBuffer[_macroBufferIndex-1] = 0;	// 마지막 esc 눌림 제거;
 
@@ -875,7 +897,7 @@ static void putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
 
-	pushM(xKeyidx);
+	pushMacroKeyIndex(xKeyidx);
 
 	// MACRO_SIZE_MAX개를 채웠다면 종료;
 	if(_macroBufferIndex >= MACRO_SIZE_MAX){

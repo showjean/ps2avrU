@@ -18,7 +18,7 @@ static int rear = 0, front = 0;
 
 static uint8_t _pressedBuffer[MACRO_SIZE_MAX] = {0};
 
-void clearM(void){
+void clearMacroKeyIndex(void){
 	rear = 0;
 	front = 0;
 	memset(QUEUE, 0, MESSAGE_SIZE_MAX);
@@ -26,7 +26,7 @@ void clearM(void){
 }
 // Queue operation -> push, pop
 // keyindex를 저장한다.
-void pushM(uint8_t item) {
+void pushMacroKeyIndex(uint8_t item) {
     
     rear = (rear+1) % MESSAGE_SIZE_MAX;
     if(front == rear) {
@@ -36,7 +36,7 @@ void pushM(uint8_t item) {
     QUEUE[rear] = item;
 }
 
-uint8_t popM(void) {
+uint8_t popMacroKeyIndex(void) {
     if(front == rear) {
         return 0;
     }
@@ -52,17 +52,17 @@ void stopRepeat(void){
 	_isRepeat = false;
 }
 void clearRepeat(void){
-	clearM();
+	clearMacroKeyIndex();
 	closeCustomMacro();
 }
 
 // 매크로 버퍼에서 키값을 가져와 프레스/업을 확인하여 Key 를 반환한다.
-macro_key_t popMWithKey(void) {
+macro_key_t popMacroKey(void) {
     macro_key_t gKey;
     int gIdx;
 
     gKey.mode = MACRO_KEY_UP; // down = 1, up = 0;
-    gKey.keyindex = popM();
+    gKey.keyindex = popMacroKeyIndex();
 
 //    DBG1(0x76, (void *)&gKey.keyindex, 1);
 
@@ -102,7 +102,7 @@ macro_key_t popMWithKey(void) {
     return gKey;
 }
 
-bool isEmptyM(void) {
+bool isEmptyMacroKeyIndex(void) {
     if(front == rear)
         return true;
     else
@@ -111,14 +111,14 @@ bool isEmptyM(void) {
 
 // 새로운 매크로 시작전에 초기화;
 void clearMacroPressedBuffer(void){
-    if(isEmptyM()) memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
+    if(isEmptyMacroKeyIndex()) memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
 }
 
 // 현재 매크로가 진행중인지 확인, 
 // 매크로 시작시 true, 각 인터페이스에서 종료시 false로 표시해준다.
 bool isActiveMacro(void)
 {
-    return !isEmptyM() || isActiveCustomMacro();
+    return !isEmptyMacroKeyIndex() || isActiveCustomMacro();
 }
 
 const char * toString(uint8_t xInt)
