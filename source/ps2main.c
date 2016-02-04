@@ -471,9 +471,6 @@ static void processTxPs2(void){
                     scanKeyPs2WithMacro();
                 }
 
-                // ps2avrU loop, must be scan matrix;
-                enterFrame();
-
                 keyval = pop();
 
                 if(keyval == WAIT_RX) {
@@ -500,6 +497,9 @@ static void processTxPs2(void){
                     }
                 }
 
+                // ps2avrU loop, must be scan matrix;
+                enterFrame();
+
                 break;
             // typematic : repeat last key
             case STA_REPEAT:
@@ -507,8 +507,6 @@ static void processTxPs2(void){
                 if(lastMAKE_IDX==0) {   // key state can be escaped only if whole key scancode is transmitted
                     scanKeyPs2WithMacro();
                 }
-                // ps2avrU loop, must be scan matrix;
-                enterFrame();
 
                 if(lastMAKE_SIZE==0 || !isEmpty()) {    // key is released. go to normal
                     m_state=STA_NORMAL;
@@ -525,6 +523,8 @@ static void processTxPs2(void){
                 loopCnt++;
                 loopCnt %= (3+TYPEMATIC_REPEAT*10) * ps2_repeat_speed;
 
+                // ps2avrU loop, must be scan matrix;
+                enterFrame();
                 
                 break;
             case STA_WAIT_SCAN_REPLY:
