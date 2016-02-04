@@ -26,7 +26,7 @@ void pushDownBuffer(uint8_t xKeyidx, bool xIsDown){
 //    uint8_t gLen;
 	int gIdx;
 
-//	xKeyidx = getDualActionDefaultKey(xKeyidx);
+	xKeyidx = getDualActionDefaultKey(xKeyidx);
 
 	if(xIsDown){
 		if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { // Is this a modifier key?
