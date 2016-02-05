@@ -186,8 +186,8 @@ void setLed2Num(uint8_t xNum){
 	led2MaxSum200ma = LED2_MAX_200MA_SUM / numOfLeds;
 	if(led2MaxSum200ma > 762) led2MaxSum200ma = 762;
 //	led2MaxSumGap = led2MaxSum400ma - led2MaxSum200ma;
-	DBG1(0xD4, (uchar *)&led2MaxSum400ma, 2);
-	DBG1(0xD2, (uchar *)&led2MaxSum200ma, 2);
+//	DBG1(0xD4, (uchar *)&led2MaxSum400ma, 2);
+//	DBG1(0xD2, (uchar *)&led2MaxSum200ma, 2);
 
     if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
     	led2SumLimit = led2MaxSum200ma;

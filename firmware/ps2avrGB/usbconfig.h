@@ -173,7 +173,7 @@ section at the end of this file).
 /* This macro (if defined) is executed when a USB SET_ADDRESS request was
  * received.
  */
-#define USB_COUNT_SOF                   P2U_USB_COUNT_SOF	//0	//
+#define USB_COUNT_SOF                   P2U_USB_COUNT_SOF	//0   //
 /* define this macro to 1 if you need the global variable "usbSofCount" which
  * counts SOF packets. This feature requires that the hardware interrupt is
  * connected to D- instead of D+.
@@ -386,7 +386,6 @@ section at the end of this file).
 /* #define USB_INTR_PENDING_BIT    INTF0 */
 /* #define USB_INTR_VECTOR         INT0_vect */
 
-#if USB_COUNT_SOF
 /* Set INT1 for D- falling edge to count SOF */
 /* #define USB_INTR_CFG            MCUCR */
 #define USB_INTR_CFG_SET        ((1 << ISC11) | (0 << ISC10))
@@ -396,6 +395,5 @@ section at the end of this file).
 /* #define USB_INTR_PENDING        GIFR */
 #define USB_INTR_PENDING_BIT    INTF1
 #define USB_INTR_VECTOR         INT1_vect
-#endif
 
 #endif /* __usbconfig_h_included__ */

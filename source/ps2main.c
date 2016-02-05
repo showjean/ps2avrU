@@ -33,6 +33,7 @@
 #include "fncontrol.h"
 #include "dualaction.h"
 #include "keyscan.h"
+#include "sleep.h"
 #include "oddebug.h"
 
 // Output buffer - circular queue
@@ -563,16 +564,15 @@ void ps2_main(void){
         eeprom_update_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED, ps2_repeat_speed);
     }
 
-
     // init
     setKeyScanDriver(&driverKeyScanPs2);
     setUpdateDriver(&updatePs2);
     clearMatrix();
 
-//    DEBUG_PRINT(("STARTING PS/2 KEYBOARD\n"));
+    wakeUp();
 
     sei();
-//    DBG1(0x90, 0, 0);
+
     for(;;){
 
         // 카운트 이내에 신호가 잡히지 않으면 이동;
@@ -588,5 +588,4 @@ void ps2_main(void){
         processTxPs2();
 
     }
-//    DBG1(0x9F, 0, 0);
 }

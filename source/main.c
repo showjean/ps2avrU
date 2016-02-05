@@ -153,8 +153,7 @@ static void initPreparing(void){
 #ifndef DISABLE_HARDWARE_MENU
     initKeymapper();    // first
 #endif
-//    initLazyFn();       // 1...
-    initBeyondFn();
+    initBeyondFn();     // 1...
     initEscTilde();     // last
 
     initKeyDownBuffer();
@@ -194,7 +193,6 @@ int main(void) {
         for(col=0;col<COLUMNS;++col)
         {
             cur  = gMatrix[row] & BV(col);
-            // DEBUG_PRINT(("keyidx : %d, row: %d, matrix : %s \n", keyidx, row, currentMatrix[row]));
             if( cur ) {
                 keyidx = getDefaultKeyindex(0, row, col);
 #ifdef ENABLE_BOOTMAPPER
@@ -236,20 +234,16 @@ int main(void) {
 #ifdef INTERFACE_ONLY_USB
     INTERFACE = INTERFACE_USB_USER;
 #else
-    // DEBUG_PRINT(("ckeckNeedInterface %02x \n", ckeckNeedInterface));
     if(ckeckNeedInterface > 0){
         INTERFACE = ckeckNeedInterface + 1; 
     }  
 
     if(INTERFACE == INTERFACE_CLEAR){
         eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, 255);  // eeprom clear; // 1바이트 12번지 쓰기
-        // DEBUG_PRINT(("--------------------------eeprom   write   INTERFACE %02x \n", 255));
     }else if(INTERFACE < INTERFACE_CLEAR){
         eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);  // 1바이트 12번지 쓰기
-        // DEBUG_PRINT(("--------------------------eeprom   write   INTERFACE %02x \n", INTERFACE));
     }else{
         INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)  
-        // DEBUG_PRINT(("eeprom   read   INTERFACE %02x \n", INTERFACE));
     }
 
     // preparing auto detacting
@@ -300,7 +294,6 @@ int main(void) {
     }
 #endif
 
-    // DEBUG_PRINT(("INTERFACE %02x \n", INTERFACE));
     DBG1(0x01, (void *)&INTERFACE, 1);
 
     initPreparing();

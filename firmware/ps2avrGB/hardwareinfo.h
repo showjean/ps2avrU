@@ -3,6 +3,17 @@
 
 #include "eeprominfo.h"
 
+
+// for test
+//#define USING_SIMPLE_MODE
+#define DISABLE_HARDWARE_MENU
+
+#if defined(USING_SIMPLE_MODE)
+#warning "=============================================================================================================="
+#warning "Never compile production devices with USING_SIMPLE_MODE enabled"
+#warning "=============================================================================================================="
+#endif
+
 // PB0-PB7 : col1 .. col8
 // PA0-PA7 : row1 .. row8
 // PC7-PC0 : row9 .. row16
