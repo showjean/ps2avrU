@@ -251,8 +251,13 @@
 #define INIT_INDEX_INITED       2
 #define INIT_INDEX_COMPLETE     3
 
+#define INIT_LED_INDEX_NOT_INIT     0
+#define INIT_LED_INDEX_SET_IDLE     1
+#define INIT_LED_INDEX_INITED       2
+#define INIT_LED_INDEX_COMPLETE     3
+
 static uint8_t _initState = INIT_INDEX_NOT_INIT;     // set 1 when HID init
-static uint8_t _ledInitState = INIT_INDEX_NOT_INIT;
+static uint8_t _ledInitState = INIT_LED_INDEX_NOT_INIT;
 static int initCount = 0;
 static bool _usbReset = false;
 
@@ -267,8 +272,8 @@ void delegateLedUsb(uint8_t xState){
 //    DBG1(0x3A, (uchar *)&xState, 1);
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();
-    if(_ledInitState == INIT_INDEX_NOT_INIT){
-        _ledInitState = INIT_INDEX_INITED;
+    if(_ledInitState == INIT_LED_INDEX_NOT_INIT){
+        _ledInitState = INIT_LED_INDEX_INITED;
     }
 }
 
@@ -281,10 +286,10 @@ void delegateInitInterfaceUsb(void)
     // 부팅시 cmos와 os에서 각각 불려지므로, os 시작시에 초기화를 해주려면 if문 없이 실행해야한다.
     // if(_initState == INIT_INDEX_NOT_INIT || _initState == INIT_INDEX_COMPLETE) {
         _initState = INIT_INDEX_SET_IDLE;
-        _ledInitState = INIT_INDEX_NOT_INIT;    
+        _ledInitState = INIT_LED_INDEX_NOT_INIT;
         _usbReset = true;   
     // }
-   DBG1(0xA0, (uchar *)&idleRate, 1);
+//   DBG1(0xA0, (uchar *)&idleRate, 1);
 }
 
 
@@ -538,7 +543,7 @@ void usb_main(void) {
 
         }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
-            if (_isSuspended == false && suspendCount++ > 1000 && getModifierDownBuffer() == 0 && getDownBufferAt(0) == 0) {
+            if (_isSuspended == false && suspendCount++ > 1000 && isReleaseAll()) {
 //                DBG1(0x5a, (uchar *)&usbSofCount, 2);
                 _isSuspended = true;
 
@@ -590,6 +595,7 @@ void usb_main(void) {
                 memset(reportKeyboard, 0, REPORT_SIZE_KEYBOARD);
                 usbSetInterrupt((void *)&reportKeyboard, sizeof(reportKeyboard));
                 clearMatrix();
+
 #if !USB_COUNT_SOF
                 wakeUpUsb();
 #endif
@@ -607,8 +613,8 @@ void usb_main(void) {
 
 //                DBG1(0xAA, (uchar *)&idleRate, 1);
 
-            }else if(_ledInitState == INIT_INDEX_INITED){
-                _ledInitState = INIT_INDEX_COMPLETE;
+            }else if(_ledInitState == INIT_LED_INDEX_INITED){
+                _ledInitState = INIT_LED_INDEX_COMPLETE;
                 // for windows
 #ifndef DISABLE_HARDWARE_MENU
                 if(idleRate == 0) {
@@ -653,6 +659,7 @@ void usb_main(void) {
             if(initCount++ == 200){       // delay for OS X USB multi device
                 // all platform init led
                 initAfterInterfaceMount();
+                DBG1(0xAB, (uchar *)&initCount, 2);
             }else if(initCount > 200){
                 initCount = 201;
                 _initState = INIT_INDEX_COMPLETE;
@@ -666,7 +673,7 @@ void usb_main(void) {
 
     }
 
-#ifndef INTERFACE_ONLY_USB
+#if !defined(INTERFACE_ONLY_USB)
     // data line reset;
     USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
 #endif

@@ -9,7 +9,6 @@
 
 #include "usbdrv.h"
 #include "oddebug.h"
-//#include "main.h"
 
 /*
 General Description:
@@ -317,7 +316,7 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
     SWITCH_START(rq->wValue.bytes[1])
     SWITCH_CASE(USBDESCR_DEVICE)    /* 1 */
         // disable TCNT1 overflow
-        TIMSK &= ~(1 << TOIE1); //cbi(TIMSK, TOIE1);
+//        TIMSK &= ~(1 << TOIE1); //cbi(TIMSK, TOIE1);
 
         GET_DESCRIPTOR(USB_CFG_DESCR_PROPS_DEVICE, usbDescriptorDevice)
     SWITCH_CASE(USBDESCR_CONFIG)    /* 2 */
@@ -350,7 +349,7 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
         GET_DESCRIPTOR(USB_CFG_DESCR_PROPS_HID_REPORT, usbDescriptorHidReport)
 
         // enable TCNT1 overflow
-        TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
+//        TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
 #endif
     SWITCH_DEFAULT
         if(USB_CFG_DESCR_PROPS_UNKNOWN & USB_PROP_IS_DYNAMIC){
@@ -603,8 +602,6 @@ uchar   i;
             usbBuildTxBlock();
         }
     }
-
-//    if(interfaceReady == true) goto isNotReset;
 
     for(i = 20; i > 0; i--){
         uchar usbLineStatus = USBIN & USBMASK;  // USBIN = PIND, USBMASK = 0b110

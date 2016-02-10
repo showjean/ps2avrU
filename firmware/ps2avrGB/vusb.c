@@ -387,12 +387,15 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             }
         } else if (rq->bRequest == USBRQ_HID_GET_IDLE) {
             usbMsgPtr = idleRate;
+            DBG1(0x71, (uchar *)&idleRate, 1);
             return 1;
         } else if (rq->bRequest == USBRQ_HID_SET_IDLE) {
 
             delegateInitInterfaceUsb();
 
             idleRate = rq->wValue.bytes[1];
+            DBG1(0x70, (uchar *)&idleRate, 1);
+
         } else if (rq->bRequest == USBRQ_HID_GET_PROTOCOL) {
             if (rq->wValue.bytes[1] < 1) {
                 protocolVer = rq->wValue.bytes[1];
