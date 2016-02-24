@@ -516,12 +516,12 @@ void usb_main(void) {
 #ifndef INTERFACE_ONLY_USB
         // 카운트 이내에 신호가 잡히지 않으면 이동;
         // 특별한 경우에만 발생하는 현상이다.
-        if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 3000){
+        /*if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 3000){
             // move to ps/2
             INTERFACE = INTERFACE_PS2;
             DBG1(0x88, 0, 0);
             break;
-        }
+        }*/
 #endif
 
 #if USB_COUNT_SOF

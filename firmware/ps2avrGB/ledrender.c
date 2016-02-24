@@ -189,7 +189,7 @@ void setLed2Num(uint8_t xNum){
 //	DBG1(0xD4, (uchar *)&led2MaxSum400ma, 2);
 //	DBG1(0xD2, (uchar *)&led2MaxSum200ma, 2);
 
-    if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
+    if(INTERFACE == INTERFACE_PS2){
     	led2SumLimit = led2MaxSum200ma;
     }else{
     	led2SumLimit = led2MaxSum400ma;
@@ -820,7 +820,7 @@ static void setLed2State(void){
 //	uint8_t i;
 //	DBG1(0xAE, (uchar *)&_rgbMode, 1);
 
-	if((INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER)){
+	if((INTERFACE == INTERFACE_PS2)){
 		if(_rgbMode == 0)
 		    stopPwmLed(false);
 		else
@@ -1233,7 +1233,7 @@ void initFullLEDState(void) {
 
 	timer1PWMInit(8);
 
-	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER)){
+	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
 	    stopPwmLed(false);
 	}else{
