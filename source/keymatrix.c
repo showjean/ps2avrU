@@ -75,6 +75,17 @@ bool isReleaseAll(void){
 	return _isReleaseAll;
 }
 
+static uint8_t fnCol;
+static uint8_t fnRow;
+bool isFnPosition(uint8_t xCol, uint8_t xRow)
+{
+    if(xCol == fnCol && xRow == fnRow)
+    {
+        return true;
+    }
+    return false;
+}
+
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur, gLayer;
 
@@ -144,6 +155,9 @@ uint8_t getLayer(void) {
 //				DBG1(0x02, (uchar *)&gLayer, 1);
 
 				if(gLayer != LAYER_NOTHING){
+
+				    fnCol = col;
+				    fnRow = row;
 
 				    // _fnScanLayer은 유지하면서 스캔할 레이어는 gLayer로 반환;
                     _currentLayer = gLayer;
@@ -257,6 +271,8 @@ void setCurrentMatrixAfter(void){
 	// 모든 키가 release되면 FN 해제;
 	if(isReleaseAll())
 	{
+	    fnCol = 127;    // must bigger then COLUMNS, ROWS
+	    fnRow = 127;
 		_currentLayer = LAYER_NOTHING;
         clearDualAction();
 	}

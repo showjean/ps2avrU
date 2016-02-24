@@ -111,6 +111,12 @@ static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t x
         }
 #endif
 
+        // fn 키가 눌렸을 경우 해당 위치의 키는 무시한다.
+        if(isFnPosition(xCol, xRow))
+        {
+            return 0;
+        }
+
         setKeyEnabled(xKeyidx, xCur);
 
         if(isKeyEnabled(xKeyidx) == false) return 0;
@@ -179,6 +185,7 @@ static void scanKey(uint8_t xLayer) {
 	for (row = 0; row < ROWS; ++row) { // check every bit on this row   
         if(gPrevMatrix[row] == 0 && gMatrix[row] == 0) continue;
         for (col = 0; col < COLUMNS; ++col) { // process all rows for key-codes
+
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
