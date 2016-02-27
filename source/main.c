@@ -246,6 +246,7 @@ int main(void) {
 
     initPreparing();
 
+#ifndef INTERFACE_ONLY_USB
     if(INTERFACE == INTERFACE_PS2){
 
         clearInterface();
@@ -254,6 +255,7 @@ int main(void) {
         ps2_main();
     }
     else
+#endif
     {
         clearInterface();
         initHardware(true);

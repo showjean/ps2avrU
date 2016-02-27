@@ -47,6 +47,29 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     // 빈 키코드는 LED 반응 이외의 기능 없음;
     if(xKeyidx == KEY_NONE ) return;
 
+    // fn 키가 눌렸을 경우 해당 위치의 키는 무시한다.
+    uint8_t gLayer, gKeyIndex;
+    if(getBeyondFN()) {
+        gLayer = getBeyondFN();
+    }else{
+        gLayer = LAYER_NORMAL;
+    }
+
+
+    if(isFnPosition(xCol, xRow))
+    {
+        // 현재 레이어에서 눌린 FN키가 듀얼 액션 키이면, 변경된 레이어의 키를 해당 키로 강제 치환시킴;
+        gKeyIndex = getCurrentKeyindex(gLayer, xRow, xCol);
+        IF_IS_DUAL_ACTION_KEY(gKeyIndex)
+        {
+            xKeyidx = gKeyIndex;
+        }
+        else
+        {
+            return;
+        }
+    }
+
 
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
@@ -110,12 +133,6 @@ static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t x
             return 1;
         }
 #endif
-
-        // fn 키가 눌렸을 경우 해당 위치의 키는 무시한다.
-        if(isFnPosition(xCol, xRow))
-        {
-            return 0;
-        }
 
         setKeyEnabled(xKeyidx, xCur);
 

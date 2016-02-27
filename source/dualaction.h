@@ -3,8 +3,11 @@
 
 #include <stdbool.h>
 #include <avr/pgmspace.h>
+#include "keymap.h"
 
 #define DUALACTION_NUMBER    24
+
+#define IF_IS_DUAL_ACTION_KEY(keyindex)     if ((keyindex) > KEY_dualAction && (keyindex) < KEY_dualAction_end)
 
 void applyDualActionDownWhenIsCompounded(void);
 void setDualAction(uint8_t keyidx, bool isDown);
