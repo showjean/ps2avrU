@@ -34,8 +34,8 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #endif
 
 /* ------------------------------------------------------------------------- */
-#define DEBOUNCE_MAX 4
-static uint8_t debounce = 7;	// DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+#define DEBOUNCE_MAX    10  //4
+static uint8_t debounce; // DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 
 static uint8_t _currentLayer = LAYER_NOTHING;
@@ -48,6 +48,8 @@ static uint8_t _currentLayer = LAYER_NOTHING;
 void initMatrix(void){
 	
 	delegateInitMatrixDevice();
+
+	debounce = DEBOUNCE_MAX + 3;
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
