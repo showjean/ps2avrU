@@ -60,7 +60,7 @@
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
-//int interfaceCount = 0;
+int interfaceCount = 0;
 bool interfaceReady = false;
 uint8_t INTERFACE = 255;
 /* ------------------------------------------------------------------------- */
@@ -85,7 +85,7 @@ void setUsbOff(void) {
 static void clearInterface(void){
     cli();
     clearLEDInited();
-//    interfaceCount = 0;
+    interfaceCount = 0;
     interfaceReady = false;
 }
 
@@ -249,18 +249,14 @@ int main(void) {
     if(INTERFACE == INTERFACE_PS2){
 
         clearInterface();
-
         blinkOnce(50);
         initHardware(false);
-
         ps2_main();
     }
     else
     {
         clearInterface();
-
         initHardware(true);
-
         usb_main();
 
     }

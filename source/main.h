@@ -40,7 +40,7 @@ typedef struct {
 	bool (*hasUpdate)(void);
 } interface_update_t;
 
-//int interfaceCount;
+int interfaceCount;
 bool interfaceReady;
 uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
 extern uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow);
