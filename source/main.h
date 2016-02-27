@@ -22,8 +22,6 @@
 //    #define DEBUG_QUICK_BOOTLOADER  // for debug
 #endif
 
-#if !defined( DEBUG_LEVEL )
-#endif
 #define ENABLE_BOOTMAPPER	// use bootmapper
 
 //#define DEBUG_SLEEP_H
@@ -33,16 +31,16 @@
 
 /* --------------------------- interface --------------------------------*/
 #define INTERFACE_PS2		0
-#define INTERFACE_PS2_USER	3
 #define INTERFACE_USB		1
-#define INTERFACE_USB_USER	2
-#define INTERFACE_CLEAR		4
+//#define INTERFACE_USB_USER	2
+//#define INTERFACE_PS2_USER	3
+//#define INTERFACE_CLEAR		4
 
 typedef struct {
 	bool (*hasUpdate)(void);
 } interface_update_t;
 
-int interfaceCount;
+//int interfaceCount;
 bool interfaceReady;
 uint8_t INTERFACE;		// ps/2 : 0, usb : 1, user usb : 2, user ps/2 : 3, clear user interface : 4 
 extern uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow);

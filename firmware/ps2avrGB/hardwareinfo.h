@@ -6,6 +6,7 @@
 
 // for test
 //#define USING_SIMPLE_MODE
+
 #define DISABLE_HARDWARE_MENU
 
 #if defined(USING_SIMPLE_MODE)

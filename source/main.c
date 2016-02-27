@@ -60,7 +60,7 @@
 /* ------------------------------------------------------------------------- */
 /* -----------------------------    variable  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
-int interfaceCount = 0;
+//int interfaceCount = 0;
 bool interfaceReady = false;
 uint8_t INTERFACE = 255;
 /* ------------------------------------------------------------------------- */
@@ -85,7 +85,7 @@ void setUsbOff(void) {
 static void clearInterface(void){
     cli();
     clearLEDInited();
-    interfaceCount = 0;
+//    interfaceCount = 0;
     interfaceReady = false;
 }
 
@@ -121,7 +121,7 @@ static void initHardware(bool xIsUSB) {
 }
 
 int setDelay(int xDelay){
-    if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){      
+    if(INTERFACE == INTERFACE_PS2){
         return xDelay >> 1; // ps2의 경우 USB보다 대기 시간이 길어서 반으로 줄여줌;
     }
     return xDelay;
@@ -161,15 +161,10 @@ static void initPreparing(void){
 
 int main(void) {
 
-    // enable_printf();
     odDebugInit();
 
     DBG1(0x00, 0, 0);
 
-#ifndef INTERFACE_ONLY_USB
-//    INTERFACE = 255;
-    uint8_t ckeckNeedInterface = 0;
-#endif
     // for interface select
     // initHardware(0); //여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
 
@@ -212,9 +207,9 @@ int main(void) {
                 else
 #endif
                 if(keyidx == KEY_U) {
-                    ckeckNeedInterface |= (1 << 0);
+                    INTERFACE = INTERFACE_USB;
                 }else if(keyidx == KEY_P) {
-                    ckeckNeedInterface |= (1 << 1);
+                    INTERFACE = INTERFACE_PS2;
                 }else if(keyidx == KEY_1) {
                 	ps2_repeat_speed = PS2_REPEAT_SPEED_HIGH;
                 }else if(keyidx == KEY_2) {
@@ -232,95 +227,43 @@ int main(void) {
 
 
 #ifdef INTERFACE_ONLY_USB
-    INTERFACE = INTERFACE_USB_USER;
+    INTERFACE = INTERFACE_USB;
 #else
-    if(ckeckNeedInterface > 0){
-        INTERFACE = ckeckNeedInterface + 1; 
-    }  
 
-    if(INTERFACE == INTERFACE_CLEAR){
-        eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, 255);  // eeprom clear; // 1바이트 12번지 쓰기
-    }else if(INTERFACE < INTERFACE_CLEAR){
-        eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);  // 1바이트 12번지 쓰기
+    if(INTERFACE <= INTERFACE_USB){
+        eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);
     }else{
+        // 255 이면;
         INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)  
     }
 
-    // preparing auto detacting
-    P2U_PS2_DDR     &= ~BV(P2U_PS2_CLOCK_PIN);
-    P2U_PS2_PORT    |= BV(P2U_PS2_CLOCK_PIN);
-    uint8_t debounce = 0;
-    uint8_t prevPIN = 0;
-
-    // 인터페이스 선택이 없었다면 자동 인식 실행;
-    if(INTERFACE >= INTERFACE_CLEAR){
-        for(;;){
-
-            /*
-            DDRD    = 0b00010011; 
-            PORTD   = 0b11101100; 
-
-            usb  0xd8 = 0b11011000 => 0xc8 = 0b11001000
-            ps/2  0xdc = 0b11011100 => 0xcc = 0b11001100
-             */
-
-            if((P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))) == 0){
-                if((prevPIN&(BV(P2U_PS2_CLOCK_PIN))) == 0){
-                    debounce++;
-                    if(debounce > 5){
-                        // usb
-                        INTERFACE = INTERFACE_USB;
-                    }
-                }else{
-                    debounce = 0;
-                }
-                prevPIN = P2U_PS2_PINS;
-            }else if(P2U_PS2_PINS&(BV(P2U_PS2_CLOCK_PIN))){
-                if(prevPIN&(BV(P2U_PS2_CLOCK_PIN))){
-                    debounce++;
-                    if(debounce > 5){
-                        // ps2
-                        INTERFACE = INTERFACE_PS2;
-                    }
-                }else{
-                    debounce = 0;
-                }
-                prevPIN = P2U_PS2_PINS;
-            }
-
-            if(INTERFACE < 2) break;
-
-        }
+    // usb가 default;
+    if(INTERFACE != INTERFACE_PS2){
+        INTERFACE = INTERFACE_USB;
     }
-#endif
 
-    DBG1(0x01, (void *)&INTERFACE, 1);
+#endif
 
     initPreparing();
 
-#ifndef INTERFACE_ONLY_USB
-    for(;;){
-        if(INTERFACE == INTERFACE_USB || INTERFACE == INTERFACE_USB_USER){
-#endif
-            clearInterface();
+    if(INTERFACE == INTERFACE_PS2){
 
-            initHardware(true);
+        clearInterface();
 
-            usb_main(); 
-#ifndef INTERFACE_ONLY_USB
-        }
+        blinkOnce(50);
+        initHardware(false);
 
-        if(INTERFACE == INTERFACE_PS2 || INTERFACE == INTERFACE_PS2_USER){
-
-            clearInterface();
-
-            blinkOnce(50);
-            initHardware(false);
-
-            ps2_main();
-        }
+        ps2_main();
     }
-#endif
+    else
+    {
+        clearInterface();
+
+        initHardware(true);
+
+        usb_main();
+
+    }
 
     return 1;
 }
