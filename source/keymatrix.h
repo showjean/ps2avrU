@@ -24,6 +24,7 @@ bool isReleaseAll(void);
 // 0 = normal, 1 = fn, 2 = beyond_fn
 uint8_t getLayer(void);
 bool isFnPosition(uint8_t xCol, uint8_t xRow);
+uint8_t getFnScanLayer(void);
 
 uint8_t getLiveMatrix(void);
 //curmatrix

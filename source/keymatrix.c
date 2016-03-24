@@ -88,6 +88,15 @@ bool isFnPosition(uint8_t xCol, uint8_t xRow)
     return false;
 }
 
+uint8_t getFnScanLayer(void)
+{
+    if(getBeyondFN()) {
+        return getBeyondFN();
+    }else{
+        return LAYER_NORMAL;
+    }
+}
+
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur, gLayer;
 
@@ -106,17 +115,13 @@ uint8_t getLayer(void) {
 		return _currentLayer;
 	}
 
-	if(getBeyondFN()) {
-	    fnScanLayer = getBeyondFN();
-    }else{
-        fnScanLayer = LAYER_NORMAL;
-    }
+    fnScanLayer = getFnScanLayer();
 
 	// 다른 키가 눌려있는 경우에는 FN키 작동하지 않도록;
-	if(!isReleaseAll())
+	/*if(!isReleaseAll())
 	{
 	    return fnScanLayer;
-	}
+	}*/
 
     gLayer = LAYER_NOTHING;
 

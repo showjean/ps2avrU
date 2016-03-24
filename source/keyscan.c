@@ -20,6 +20,8 @@ static void scanKeyWithDebounce(void);
 
 static keyscan_driver_t *keyscanDriver;
 
+static uint8_t oldDownedMatrix[ROWS];
+
 void setKeyScanDriver(keyscan_driver_t *driver)
 {
     keyscanDriver = driver;
@@ -142,6 +144,15 @@ static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t x
             DBG1(0xB1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, true, xCol, xRow);
         }else{
+#if 1
+            if(oldDownedMatrix[xRow] & BV(xCol))
+            {
+                // 레이어 변경 전 눌렸던 키처리
+                xKeyidx = getCurrentKeyindex(getFnScanLayer(), xRow, xCol);
+
+                oldDownedMatrix[xRow] &= ~BV(xCol);
+            }
+#endif
             DBG1(0xC1, (uchar *)&xKeyidx, 1);
             putChangedKey(xKeyidx, false, xCol, xRow);
         }
@@ -187,8 +198,76 @@ static void scanKeyWithDebounce(void) {
     // debounce cleared and changed
     if(!setCurrentMatrix()) return;
 
-    uint8_t gLayer = getLayer();
+    uint8_t row, col, prev, cur, keyidx, result, prevKeyidx;
 
+    static uint8_t _prevLayer;
+    uint8_t gLayer = getLayer();
+    uint8_t gFnScanLayer = getFnScanLayer();
+
+    uint8_t * gMatrix = getCurrentMatrix();
+    uint8_t * gPrevMatrix = getPrevMatrix();
+
+#if 1
+    if(_prevLayer != gLayer && gFnScanLayer != gLayer)
+    {
+        /* FN 키가 눌렸을 경우;
+         * 현재 down키들을 확인하여 layer간 키코드가 다르다면
+         *
+         * 1안 - old up, new down을 실행해준다.
+         * 2안 - up을 대비해서 키코드들을 저장해둔다.
+         */
+
+        // 1안 처리
+        /*for (row = 0; row < ROWS; ++row)
+        { // check every bit on this row
+            for (col = 0; col < COLUMNS; ++col)
+            { // process all rows for key-codes
+                prevKeyidx = getCurrentKeyindex(gFnScanLayer, row, col);
+                keyidx = getCurrentKeyindex(gLayer, row, col);
+
+                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx) )
+                {
+                    prev = gPrevMatrix[row] & BV(col);
+                    cur = gMatrix[row] & BV(col);
+
+                    if(prev && cur)
+                    {
+                        processKeyIndex(prevKeyidx, true, false, col, row);
+                        result = processKeyIndex(keyidx, false, true, col, row);
+
+                        if(result > 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }*/
+
+        // 2안 처리
+        for (row = 0; row < ROWS; ++row)
+        { // check every bit on this row
+            for (col = 0; col < COLUMNS; ++col)
+            { // process all rows for key-codes
+                prevKeyidx = getCurrentKeyindex(gFnScanLayer, row, col);
+                keyidx = getCurrentKeyindex(gLayer, row, col);
+
+                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx) )
+                {
+                    prev = gPrevMatrix[row] & BV(col);
+                    cur = gMatrix[row] & BV(col);
+
+                    if(prev && cur)
+                    {
+                        oldDownedMatrix[row] |= BV(col);
+                    }
+                }
+            }
+        }
+    }
+
+    _prevLayer = gLayer;
+#endif
     scanKey(gLayer);
 }
 

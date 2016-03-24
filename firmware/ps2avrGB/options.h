@@ -1,6 +1,9 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include <stdio.h>
+#include <stdbool.h>
+
 #define OPTION_INDEX_COLOR_RAINBOW_INIT	0x1F
 #define OPTION_INDEX_COLOR_RAINBOW	0x10
 #define OPTION_INDEX_COLOR_SET1		0x11
