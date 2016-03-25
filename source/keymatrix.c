@@ -38,7 +38,7 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 static uint8_t debounce; // DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 
-static uint8_t _currentLayer = LAYER_NOTHING;
+//static uint8_t _currentLayer = LAYER_NOTHING;
 
 
 
@@ -88,40 +88,23 @@ bool isFnPosition(uint8_t xCol, uint8_t xRow)
     return false;
 }
 
-uint8_t getFnScanLayer(void)
-{
-    if(getBeyondFN()) {
-        return getBeyondFN();
-    }else{
-        return LAYER_NORMAL;
-    }
-}
-
 uint8_t getLayer(void) {
-	uint8_t col, row, keyidx, cur, gLayer;
-
-	static uint8_t fnScanLayer = 0;
+	uint8_t col, row, keyidx, cur, gLayer, fnScanLayer;
 
 	/*
 	FN이 작동되는 상황 정리;
-	- 첫키로 FN이 눌려야 한다. 이미 다른 키가 눌려있다면 작동 안 함;
 
-	- 작동이 된 후에는 모든 키가 release 되는 순간까지 layer를 유지 시킨다.
-	(즉, 모든 키가 release 되고 1프레임 후에 작동 해제 되어야한다. 
-	ps2의 경우 제일 마지막 키의 release값을 처리해야하기 때문에.)
+	- 각각 키가 down/up 될 때, fn 상태에 따라서 적용된다.
+
+	- 가장 자연스럽게 처리된다고 보면 됨;
+
 	*/
 
-	if(_currentLayer != LAYER_NOTHING) {
-		return _currentLayer;
-	}
-
-    fnScanLayer = getFnScanLayer();
-
-	// 다른 키가 눌려있는 경우에는 FN키 작동하지 않도록;
-	/*if(!isReleaseAll())
-	{
-	    return fnScanLayer;
-	}*/
+	if(getBeyondFN()) {
+	    fnScanLayer = getBeyondFN();
+    }else{
+        fnScanLayer = LAYER_NORMAL;
+    }
 
     gLayer = LAYER_NOTHING;
 
@@ -159,17 +142,12 @@ uint8_t getLayer(void) {
 					}
 				}
 
-//				DBG1(0x02, (uchar *)&gLayer, 1);
-
 				if(gLayer != LAYER_NOTHING){
 
 				    fnCol = col;
 				    fnRow = row;
 
-				    // _fnScanLayer은 유지하면서 스캔할 레이어는 gLayer로 반환;
-                    _currentLayer = gLayer;
-
-					return _currentLayer;
+					return gLayer;
 				}
 			}
 		}
@@ -270,8 +248,6 @@ uint8_t setCurrentMatrix(void){
 
 // 매트릭스에 관련된 모든 처리가 끝난 후 실행 된다.
 void setCurrentMatrixAfter(void){
-//    DBG1(0x11, (uchar *)&prevMatrix, ROWS);
-//    DBG1(0x11, (uchar *)&currentMatrix, ROWS);
     setPrevMatrix();
 	setReleaseAll();
 
@@ -280,7 +256,7 @@ void setCurrentMatrixAfter(void){
 	{
 	    fnCol = 127;    // must bigger then COLUMNS, ROWS
 	    fnRow = 127;
-		_currentLayer = LAYER_NOTHING;
+
         clearDualAction();
 	}
 

@@ -14,13 +14,12 @@
 #include "ledrender.h"
 #include "oddebug.h"
 
-static void scanKey(uint8_t xLayer);
 static void sendKeyCodeWhenChange(uint8_t xKeyidx_not_dualaction_idx, bool xIsDown);
 static void scanKeyWithDebounce(void);
 
 static keyscan_driver_t *keyscanDriver;
 
-static uint8_t oldDownedMatrix[ROWS];
+static uint8_t oldDownedMatrix[LAYERS][ROWS];
 
 void setKeyScanDriver(keyscan_driver_t *driver)
 {
@@ -33,10 +32,6 @@ static void sendKeyCodeWhenChange(uint8_t xKeyidx_not_dualaction_idx, bool xIsDo
 }
 
 void pushKeyCodeDecorator(uint8_t xKeyidx, bool xIsDown){
-
-//    if(xIsDown){
-//        pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xIsDown);
-//    }
 
     sendKeyCodeWhenChange(xKeyidx, xIsDown);
 }
@@ -77,17 +72,12 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     setDualAction(xKeyidx, xIsDown);
 
-    // down : 조합키 판정 전에는 듀얼 액션 키의 인덱스로 전달되고
-    // up : 조합 후 modi 키로 up이 되어서 key down count가 제대로 작동하지 않는다.
-//    pushDownBuffer(getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false), xIsDown);
-
     // 듀얼 액션 키 자체로 버퍼에 저장하면?
     pushDownBuffer(xKeyidx, xIsDown);
 
     if(xIsDown){
         applyDualActionDownWhenIsCompounded();
     }
-
 
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
@@ -97,7 +87,6 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
         if(xKeyidx == KEY_NONE) return;
     }
-
 
     // fn키를 키매핑에 적용하려면 위치 주의;
     if(gFN == false) return;
@@ -111,19 +100,16 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
     xKeyidx = getEscToTilde(xKeyidx, xIsDown);
-
     xKeyidx = getDualActionDownKeyIndexWhenIsCompounded(xKeyidx, false);
 
     sendKeyCodeWhenChange(xKeyidx, xIsDown);
 	
 }
 
-static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow){
+static uint8_t processKeyIndex(uint8_t xLayer, bool xPrev, bool xCur, uint8_t xCol, uint8_t xRow ){
 
-	// !(prev&&cur) : 1 && 1 이 아니고,
-    // !(!prev&&!cur) : 0 && 0 이 아니고,
-    // 이전 상태에서(press/up) 변화가 있을 경우;
-    //if( !(prev&&cur) && !(!prev&&!cur)) {
+    uint8_t keyidx, i;
+
     if( xPrev != xCur ) {
 
 #ifdef ENABLE_BOOTMAPPER
@@ -136,25 +122,37 @@ static uint8_t processKeyIndex(uint8_t xKeyidx, bool xPrev, bool xCur, uint8_t x
         }
 #endif
 
-        setKeyEnabled(xKeyidx, xCur);
+        keyidx = getCurrentKeyindex(xLayer, xRow, xCol);
 
-        if(isKeyEnabled(xKeyidx) == false) return 0;
+        setKeyEnabled(keyidx, xCur);
+
+        if(isKeyEnabled(keyidx) == false) return 0;
 
         if(xCur) {
-            DBG1(0xB1, (uchar *)&xKeyidx, 1);
-            putChangedKey(xKeyidx, true, xCol, xRow);
-        }else{
-#if 1
-            if(oldDownedMatrix[xRow] & BV(xCol))
-            {
-                // 레이어 변경 전 눌렸던 키처리
-                xKeyidx = getCurrentKeyindex(getFnScanLayer(), xRow, xCol);
+//            DBG1(0xB1, (uchar *)&xKeyidx, 1);
 
-                oldDownedMatrix[xRow] &= ~BV(xCol);
+            // mark for downed layer
+            oldDownedMatrix[xLayer][xRow] |= BV(xCol);
+
+            putChangedKey(keyidx, true, xCol, xRow);
+        }else{
+
+            // check layer for up
+            i = 0;
+            for (  ; i < LAYERS ; ++i)
+            {
+                if(oldDownedMatrix[i][xRow] & BV(xCol))
+                {
+                    xLayer = i;
+                    break;
+                }
             }
-#endif
-            DBG1(0xC1, (uchar *)&xKeyidx, 1);
-            putChangedKey(xKeyidx, false, xCol, xRow);
+
+            keyidx = getCurrentKeyindex(xLayer, xRow, xCol);
+            oldDownedMatrix[xLayer][xRow] &= ~BV(xCol);
+
+//            DBG1(0xC1, (uchar *)&xKeyidx, 1);
+            putChangedKey(keyidx, false, xCol, xRow);
         }
     }
 
@@ -170,7 +168,6 @@ void scanKeyWithMacro(void){
           
             gKey = popMacroKey();
 
-//            DBG1(0x1F, (uchar *)&gKey, 2);
             if(gKey.mode == MACRO_KEY_DOWN){    // down
                 sendKeyCodeWhenChange(gKey.keyindex, true);
                 
@@ -198,83 +195,8 @@ static void scanKeyWithDebounce(void) {
     // debounce cleared and changed
     if(!setCurrentMatrix()) return;
 
-    uint8_t row, col, prev, cur, keyidx, result, prevKeyidx;
-
-    static uint8_t _prevLayer;
+	uint8_t row, col, prev, cur, result;
     uint8_t gLayer = getLayer();
-    uint8_t gFnScanLayer = getFnScanLayer();
-
-    uint8_t * gMatrix = getCurrentMatrix();
-    uint8_t * gPrevMatrix = getPrevMatrix();
-
-#if 1
-    if(_prevLayer != gLayer && gFnScanLayer != gLayer)
-    {
-        /* FN 키가 눌렸을 경우;
-         * 현재 down키들을 확인하여 layer간 키코드가 다르다면
-         *
-         * 1안 - old up, new down을 실행해준다.
-         * 2안 - up을 대비해서 키코드들을 저장해둔다.
-         */
-
-        // 1안 처리
-        /*for (row = 0; row < ROWS; ++row)
-        { // check every bit on this row
-            for (col = 0; col < COLUMNS; ++col)
-            { // process all rows for key-codes
-                prevKeyidx = getCurrentKeyindex(gFnScanLayer, row, col);
-                keyidx = getCurrentKeyindex(gLayer, row, col);
-
-                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx) )
-                {
-                    prev = gPrevMatrix[row] & BV(col);
-                    cur = gMatrix[row] & BV(col);
-
-                    if(prev && cur)
-                    {
-                        processKeyIndex(prevKeyidx, true, false, col, row);
-                        result = processKeyIndex(keyidx, false, true, col, row);
-
-                        if(result > 0)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }*/
-
-        // 2안 처리
-        for (row = 0; row < ROWS; ++row)
-        { // check every bit on this row
-            for (col = 0; col < COLUMNS; ++col)
-            { // process all rows for key-codes
-                prevKeyidx = getCurrentKeyindex(gFnScanLayer, row, col);
-                keyidx = getCurrentKeyindex(gLayer, row, col);
-
-                if( prevKeyidx != keyidx && !isFnKey(prevKeyidx) )
-                {
-                    prev = gPrevMatrix[row] & BV(col);
-                    cur = gMatrix[row] & BV(col);
-
-                    if(prev && cur)
-                    {
-                        oldDownedMatrix[row] |= BV(col);
-                    }
-                }
-            }
-        }
-    }
-
-    _prevLayer = gLayer;
-#endif
-    scanKey(gLayer);
-}
-
-static void scanKey(uint8_t xLayer) {
-//    DBG1(0x00, (uchar *)&xLayer, 1);
-
-	uint8_t row, col, prev, cur, keyidx, result;
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();
@@ -285,9 +207,8 @@ static void scanKey(uint8_t xLayer) {
 			// usb 입력은 눌렸을 때만 확인하면 되지만, 각종 FN키 조작을 위해서 업/다운을 모두 확인한다.
 			prev = gPrevMatrix[row] & BV(col);
 			cur  = gMatrix[row] & BV(col);
-            keyidx = getCurrentKeyindex(xLayer, row, col);
 
-            result = processKeyIndex(keyidx, prev, cur, col, row);
+            result = processKeyIndex(gLayer, prev, cur, col, row);
             if(result == 1){
                 continue;
             }else if(result == 2){

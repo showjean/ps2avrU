@@ -21,22 +21,17 @@ void clearMatrix(void);
 bool isReleaseAll(void);
 
 // function that determine keymap
-// 0 = normal, 1 = fn, 2 = beyond_fn
+// 0 = normal, 1 = fn, 2 = fn2, 3 = fn3
 uint8_t getLayer(void);
 bool isFnPosition(uint8_t xCol, uint8_t xRow);
-uint8_t getFnScanLayer(void);
 
 uint8_t getLiveMatrix(void);
-//curmatrix
 void setCurrentMatrixAfter(void);
 uint8_t setCurrentMatrix(void);
 uint8_t *getCurrentMatrix(void);
-//void setPrevMatrix(void);
 uint8_t *getPrevMatrix(void);
 
 extern void delegateGetLiveMatrix(uint8_t *xCurrentMatrix, uint8_t *isModified);
-//extern void delegateSetCellStatus(uint8_t xCol);
-//extern uint8_t delegateGetCellStatus(uint8_t xRow);
 
 
 #endif
