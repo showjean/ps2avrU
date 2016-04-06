@@ -350,7 +350,8 @@ uchar       flags = USB_FLG_MSGPTR_IS_ROM;
         GET_DESCRIPTOR(USB_CFG_DESCR_PROPS_HID_REPORT, usbDescriptorHidReport)
 
         // enable TCNT1 overflow
-        TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
+//        TIMSK |= (1 << TOIE1);  //sbi(TIMSK, TOIE1);
+//        TIMSK = timskStore;
 #endif
     SWITCH_DEFAULT
         if(USB_CFG_DESCR_PROPS_UNKNOWN & USB_PROP_IS_DYNAMIC){

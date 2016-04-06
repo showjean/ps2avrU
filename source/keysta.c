@@ -93,10 +93,10 @@ kbd_init(void)
     clockHigh();
     dataHigh();
 
-    timer0Init();
     timer0SetPrescaler(TIMER_CLK_DIV8);
     timerAttach(TIMER0OVERFLOW_INT, timerAction);
     outp(COUNT_UP, TCNT0);  /* value counts up from this to zero */
+    sbi(TIMSK, TOIE0);                      // enable TCNT0 overflow interrupt
 
 }
 

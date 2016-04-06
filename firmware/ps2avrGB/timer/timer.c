@@ -35,9 +35,9 @@
 
 // Global variables
 // time registers
-volatile unsigned long TimerPauseReg;
-volatile unsigned long Timer0Reg0;
-volatile unsigned long Timer2Reg0;
+//volatile unsigned long TimerPauseReg;
+//volatile unsigned long Timer0Reg0;
+//volatile unsigned long Timer2Reg0;
 
 typedef void (*voidFuncPtr)(void);
 volatile static voidFuncPtr TimerIntFunc[TIMER_NUM_INTERRUPTS];
@@ -50,13 +50,13 @@ void timer0Init()
 	sbi(TIMSK, TOIE0);						// enable TCNT0 overflow interrupt
 
 //	timer0ClearOverflowCount();				// initialize time registers
-	Timer0Reg0 = 0;	// initialize time registers
+//	Timer0Reg0 = 0;	// initialize time registers
 }
 
 void timer1Init(void)
 {
 	// initialize timer 1
-	timer1SetPrescaler( TIMER1PRESCALE );	// set prescaler
+	timer1SetPrescaler( TIMER_CLK_DIV8 ); //TIMER1PRESCALE );	// set prescaler
 	outb(TCNT1H, 0);						// reset TCNT1
 	outb(TCNT1L, 0);
 	sbi(TIMSK, TOIE1);						// enable TCNT1 overflow
@@ -70,7 +70,7 @@ void timer2Init(void)
 	outb(TCNT2, 0);							// reset TCNT2
 	sbi(TIMSK, TOIE2);						// enable TCNT2 overflow
 
-	timer2ClearOverflowCount();				// initialize time registers
+//	timer2ClearOverflowCount();				// initialize time registers
 }
 #endif
 
@@ -215,7 +215,7 @@ u16 timerTicsToMs(u32 tics)
 //}
 
 #ifdef TCNT2	// support timer2 only if it exists
-void timer2ClearOverflowCount(void)
+/*void timer2ClearOverflowCount(void)
 {
 	// clear the timer overflow counter registers
 	Timer2Reg0 = 0;	// initialize time registers
@@ -226,7 +226,7 @@ long timer2GetOverflowCount(void)
 	// return the current timer overflow count
 	// (this is since the last timer2ClearOverflowCount() command was called)
 	return Timer2Reg0;
-}
+}*/
 #endif
 
 void timer1PWMInit(u08 bitRes)
@@ -348,12 +348,9 @@ void timer1PWMBSet(u16 pwmDuty)
 }
 
 //! Interrupt handler for tcnt0 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW0)
+ISR(SIG_OVERFLOW0, ISR_NOBLOCK)
 {
-	Timer0Reg0++;			// increment low-order counter
-
-	// increment pause counter
-	TimerPauseReg++;
+    sei();
 
 	// if a user function is defined, execute it too
 	if(TimerIntFunc[TIMER0OVERFLOW_INT])
@@ -361,7 +358,7 @@ TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW0)
 }
 
 //! Interrupt handler for tcnt1 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW1)
+ISR(SIG_OVERFLOW1, ISR_NOBLOCK)
 {
 	sei();
 
@@ -372,11 +369,9 @@ TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW1)
 
 #ifdef TCNT2	// support timer2 only if it exists
 //! Interrupt handler for tcnt2 overflow interrupt
-TIMER_INTERRUPT_HANDLER(SIG_OVERFLOW2)
+ISR(SIG_OVERFLOW2, ISR_NOBLOCK)
 {
 	sei();
-
-	Timer2Reg0++;			// increment low-order counter
 
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER2OVERFLOW_INT])
