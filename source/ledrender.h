@@ -12,6 +12,8 @@
 #define FULL_LED_MODE1	1
 #define FULL_LED_MODE2	2
 
+#define PWM_MAX             0xFF
+
 void setLEDState(uint8_t xState);
 uint8_t getLEDState(void);
 

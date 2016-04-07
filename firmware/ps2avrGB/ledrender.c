@@ -30,7 +30,6 @@
 
 #include "ledrender_inc.c"
 
-#define PWM_MAX 			0xFF
 #define FULL_LED_MODE_NUM 	5
 #define FULL_LED_MODE2_NUM 	5
 #define FULL_LED_MODE2_KEY_EVENT_NUM 	3

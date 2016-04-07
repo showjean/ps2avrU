@@ -19,7 +19,6 @@
 
 #include "ledrender_inc.c"
 
-#define PWM_MAX 0xFF
 #define LED_MODE_NUM 5
 #ifndef PWM_SPEED
 	#ifdef PWM_SPEED_3
