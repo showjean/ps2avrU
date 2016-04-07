@@ -2,7 +2,6 @@
 
 # Directory common source filess exist
 TOP_DIR = ../..
-#TIMER = timer
 
 #FLASH_WRITE_ADDRESS = 0x7E00
 
@@ -19,7 +18,7 @@ endif
 SCROLL_LOCK_LED_IS_APART = 1
 DISABLE_HARDWARE_KEYMAPPING = 1
 #DISABLE_HARDWARE_MENU = 1
-USING_CUSTOM_TIMER = 1
+#USING_CUSTOM_TIMER = 1
 #USING_SIMPLE_MODE = 1
 #SPLIT = 1
 
@@ -33,8 +32,9 @@ MCU = atmega32
 F_CPU = 12000000
 # Light_WS2812/light_ws2812.c \
 
+#	timer/timer.c \
+
 SRC =i2c/i2c.c \
-	timer/timer.c \
 	ledrender.c \
 	options.c \
 	vusb.c

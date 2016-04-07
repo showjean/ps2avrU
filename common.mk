@@ -62,11 +62,11 @@ else
 endif
 
 ifndef USING_CUSTOM_TIMER
-	ifndef TIMER	
-		TIMER = timer
-	endif
+#	ifndef TIMER	
+#		TIMER = timer
+#	endif
 
-	SRC +=  $(AVRLIB)/$(TIMER).c
+	SRC +=  $(COMMON_DIR)/timer.c
 endif
 
 ifdef USING_SIMPLE_MODE

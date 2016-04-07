@@ -269,7 +269,6 @@ static void countSleepUsb(void);
 static void wake_up_signal(void);
 
 void delegateLedUsb(uint8_t xState){
-//    DBG1(0x3A, (uchar *)&xState, 1);
     setLEDState(xState); // Get the state of all LEDs
     setLEDIndicate();
     if(_ledInitState == INIT_LED_INDEX_NOT_INIT){
@@ -369,8 +368,6 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
         }
     }else{
 
-//        DBG1(0xC6, (uchar *)&xKeyidx, 3);
-
         if (xKeyidx > KEY_Modifiers && xKeyidx < KEY_Modifiers_end) { /* Is this a modifier key? */
             _modifiers &= ~(getModifierBit(xKeyidx));
 
@@ -379,10 +376,7 @@ static void makeReportBuffer(uint8_t xKeyidx, bool xIsDown){
                 xKeyidx = pgm_read_byte(&keycode_USB_extend[xKeyidx - (KEY_extend + 1)]); 
             }
 
-//            DBG1(0xC7, (uchar *)&xKeyidx, 3);
-
             gIdx = findIndex(reportBuffer, xKeyidx);
-//            DBG1(0xC7, (uchar *)&gIdx, 3);
 
             if(gIdx >= 0 ){
                 delete(reportBuffer, gIdx);
@@ -401,15 +395,11 @@ static uint8_t pushKeyindexBuffer(uint8_t xKeyidx, bool xIsDown){
 
     if(xIsDown){    // down
 
-//        DBG1(0xB5, (uchar *)&xKeyidx, 3);
-
         makeReportBuffer(xKeyidx, true);
         makeReportBufferExtra(xKeyidx, true);
         makeReportBufferSystem(xKeyidx, true);
 
     }else{  // up
-
-//        DBG1(0xC5, (uchar *)&xKeyidx, 3);
 
         makeReportBuffer(xKeyidx, false);
         makeReportBufferExtra(xKeyidx, false);
@@ -454,6 +444,7 @@ static keyscan_driver_t driverKeyScanUsb = {
     pushKeyindexBuffer   // pushKeyCodeWhenChange
 };
 
+#if USB_COUNT_SOF
 static void wake_up_signal(void)
 {
     cli();
@@ -470,6 +461,7 @@ static void wake_up_signal(void)
     P2U_PS2_DDR = ps_ddr;
     sei();
 }
+#endif
 
 /**
  * Main function, containing the main loop that manages timer- and
@@ -481,19 +473,12 @@ void usb_main(void) {
     // USB Reset by device only required on Watchdog Reset         
     P2U_PS2_PORT &= ~((1 << P2U_PS2_CLOCK_PIN)|(1 << P2U_PS2_DATA_PIN)); // input:tri-state     output:low                 
     P2U_USB_CFG_DDR &= ~((1 << P2U_USB_CFG_DPLUS_BIT)|(1 << P2U_USB_CFG_DMINUS_BIT));// input, remove USB reset condition
-    
-    // configure timer 0 for a rate of 12M/(1024 * 256) = 45.78Hz (~22ms)
-    //TCCR0 |= (1<<CS02)|(1<<CS00);          // timer 0 prescaler: 1024
-//    TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));    // timer stop
 
     usbInit();
-
-//    uint8_t idleCounter = 0;
 
     uchar   i = 0;
     usbDeviceDisconnect();  /* do this while interrupts are disabled */
     do{             /* fake USB disconnect for > 250 ms */
-        // wdt_reset();
         _delay_ms(1);
     }while(--i);
     usbDeviceConnect();
@@ -512,21 +497,8 @@ void usb_main(void) {
 
     for(;;){
 
-
-#ifndef INTERFACE_ONLY_USB
-        // 카운트 이내에 신호가 잡히지 않으면 이동;
-        // 특별한 경우에만 발생하는 현상이다.
-        /*if(INTERFACE == INTERFACE_USB && interfaceReady == false && interfaceCount++ > 3000){
-            // move to ps/2
-            INTERFACE = INTERFACE_PS2;
-            DBG1(0x88, 0, 0);
-            break;
-        }*/
-#endif
-
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {
-//      DBG1(0x55, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
             usbSofCount = 0;
             suspendCount = 0;
@@ -535,7 +507,6 @@ void usb_main(void) {
             wakeUp();
 
         } else if(_usbReset == true){
-//            DBG1(0x56, (uchar *)&usbSofCount, 1);
             _isSuspended = false;
             usbSofCount = 1;
 
@@ -544,7 +515,6 @@ void usb_main(void) {
         }else{
             // Suspend when no SOF in 3ms-10ms(7.1.7.4 Suspending of USB1.1)
             if (_isSuspended == false && suspendCount++ > 1000 && isReleaseAll()) {
-//                DBG1(0x5a, (uchar *)&usbSofCount, 2);
                 _isSuspended = true;
 
                 sleep();
@@ -575,7 +545,6 @@ void usb_main(void) {
 
                 reportKeyboard[0] = _modifiers;
                 reportKeyboard[1] = 0;
-//                DBG1(0x05, (uchar *)&reportBuffer, _countOfBuffer);
                 memcpy ( reportKeyboard+2, reportBuffer, _countOfBuffer ); //strlen((char *)reportBuffer) );
 //                DBG1(0x06, (uchar *)&reportKeyboard, 8);
 
@@ -673,9 +642,11 @@ void usb_main(void) {
 
     }
 
+/*
 #if !defined(INTERFACE_ONLY_USB)
     // data line reset;
     USB_INTR_ENABLE &= ~(1 << USB_INTR_ENABLE_BIT);
 #endif
+*/
 
 }
