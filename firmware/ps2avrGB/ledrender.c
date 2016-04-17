@@ -326,6 +326,7 @@ void setLedOptions(uint8_t *data){
      {
          _fullLEDMode = *(data+2);
          _saved |= BV(SAVE_BIT_LED_MODE);
+         setFullLedState();
      }
      else if(*(data+1) == OPTION_INDEX_FULL_LED_BRIGHTNESS)
      {

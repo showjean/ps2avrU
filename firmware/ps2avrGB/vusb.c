@@ -440,11 +440,11 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         		setToBootMapper(false);
         	}
 #endif
-        }else if(data[1] == OPTION_INDEX_READY){
+       /* }else if(data[1] == OPTION_INDEX_READY){
             stopPwmForUsbReport(true);
 
         }else if(data[1] == OPTION_INDEX_ACTION){
-            stopPwmForUsbReport(false);
+            stopPwmForUsbReport(false);*/
         }else{
         	setOptions((uint8_t *)data);
         }
