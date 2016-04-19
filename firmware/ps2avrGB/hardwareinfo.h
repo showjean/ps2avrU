@@ -15,6 +15,14 @@
 #warning "=============================================================================================================="
 #endif
 
+
+// Ver 1.2
+#define VERSION_MAJOR   1
+#define VERSION_MINOR   2
+#define VERSION_PATCH   0
+#define FIRMWARE        0   // 0=ps2avrGB, 1=ps2avrGB4U
+
+
 // PB0-PB7 : col1 .. col8
 // PA0-PA7 : row1 .. row8
 // PC7-PC0 : row9 .. row16

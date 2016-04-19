@@ -5,6 +5,7 @@
 #include "optionsled.h"
 #include "esctilde.h"
 #include "fncontrol.h"
+#include "hardwareinfo.h"
 
 void setOptions(uint8_t *data)
 {
@@ -26,6 +27,12 @@ void getOptions(option_info_t *buffer)
 
     buffer->esctotilde = isEscTilde();
     buffer->fnled = getBeyondFnLed();
+
+    // Ver 1.2
+    buffer->version[0] = VERSION_MAJOR;
+    buffer->version[1] = VERSION_MINOR;
+    buffer->version[2] = VERSION_PATCH;
+    buffer->firmware = FIRMWARE;
 }
 
 void stopPwmForUsbReport(bool xIsStop)

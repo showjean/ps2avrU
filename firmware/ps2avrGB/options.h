@@ -24,6 +24,9 @@
 #define OPTION_INDEX_ESC_TO_TILDE     0x82
 #define OPTION_INDEX_FN_LED           0x83
 #define OPTION_INDEX_TRANSITION_DELAY 0x84
+#define OPTION_INDEX_LOCK_LED_NL    0x85
+#define OPTION_INDEX_LOCK_LED_CL    0x86
+#define OPTION_INDEX_LOCK_LED_SL    0x87
 
 #define OPTION_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define OPTION_GET_REPORT_LENGTH_INFO				100
@@ -68,12 +71,32 @@ typedef struct {
 	uint8_t b;
 } cRGB_t;
 
+/**
+ *  0. indicator for lock status(default)
+    1. always on
+    2. always off
+ */
+#define LOCK_LED_DEFAULT    0
+#define LOCK_LED_ALWAYS_ON  1
+#define LOCK_LED_ALWAYS_OFF 2
+typedef struct {
+    uint8_t nl;
+    uint8_t cl;
+    uint8_t sl;
+} lock_led_t;
+
 typedef struct {
 	// num 1byte, mode 1byte, brightness 1byte, color1 3byte, color2 3byte, color3 3byte, rainbow colors 21byte, keymode 1byte, key color1 3byte
     // fade type 1byte,
+    // = 38 bytes
 
     // Ver1.1
     //skipFrame 1byte, full led mode 1byte, full led brightness 1byte, esc to tilde 1byte, fn led 1byte
+    // = 5 bytes
+
+    // Ver 1.2
+    //ver 3byte, firm 1byte, lockled 3byte
+    // = 7 bytes
 
 	 uint8_t num;
 	 uint8_t mode;
@@ -94,6 +117,12 @@ typedef struct {
 
      uint8_t esctotilde;
      uint8_t fnled;
+
+     //Ver 1.2
+     uint8_t version[3];    // r/o, 1.2.0
+     uint8_t firmware;      // r/o, 0= ps2avrGB, 1=ps2varGB4U ...
+     lock_led_t lockled;
+
 
 } option_info_t;
 

@@ -67,11 +67,11 @@ void blinkIndicateLED(void) {
 					if(getBeyondFN()){
 						turnOnLED(LEDSCROLL);
 					}
-				}else{
+				}/*else{
 					if((getLEDState() & LED_STATE_NUM)){
 						turnOnLED(LEDNUM);
 					}
-				}
+				}*/
 			}
 			counter = 0;
 
@@ -113,13 +113,13 @@ void blinkOnce(const int xStayMs){
 	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }
 	}else{
-		if (LEDstate & LED_STATE_NUM) { // light up num lock
+		if ( IS_LIGHT_UP_NL ) { // light up num lock
 	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }else{
 	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }
 	}
-    if (LEDstate & LED_STATE_CAPS) { // light up caps lock
+    if ( IS_LIGHT_UP_CL ) { // light up caps lock
         turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
     } else {
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	//
@@ -137,13 +137,13 @@ void blinkOnce(const int xStayMs){
 	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }
 	}else{
-		if (LEDstate & LED_STATE_NUM) { // light up num lock
+		if ( IS_LIGHT_UP_NL ) { // light up num lock
 	        turnOnLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }else{
 	        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
 	    }
 	}
-    if (LEDstate & LED_STATE_CAPS) { // light up caps lock
+    if ( IS_LIGHT_UP_CL ) { // light up caps lock
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	//
     } else {
         turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//

@@ -30,7 +30,8 @@
 #define EEPROM_LED2_COLOR_2		397	// 3byte
 #define EEPROM_LED2_COLOR_3		400	// 3byte ~402
 #define EEPROM_LED2_SKIP_FRAME  403	// 1byte
-// 404~420 : 17bytes
+#define EEPROM_LOCK_LED_STATUS  404	// 3byte
+// 407~420 : 14bytes
 #define EEPROM_MACRO			421	// ~996
 #define EEPROM_LED2_COLOR_KEY1	997	// 3byte ~999
 // 1000~1024 : 25bytes

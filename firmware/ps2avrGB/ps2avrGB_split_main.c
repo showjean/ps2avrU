@@ -136,7 +136,7 @@ void delegateInitMatrixDevice(void){
 	// initialize matrix ports - cols, rows
 	// PB0-PB7 : col0 .. col7
 	// PA0-PA7 : row0 .. row7
-	// PC7-PC0 : row8 .. row15
+	// PC7-PC2 : row8 .. row13
 	
 	// PD0 : NUM
     // PD1 : CAPS
@@ -145,7 +145,7 @@ void delegateInitMatrixDevice(void){
     // PD4 : FULL LED
     // PD5 : 3.6V switch TR
 	// PD6 : SCRL
-    // PD7 : row17
+    // PD7 : row14
 	
 
 	// signal direction : col -> row
@@ -157,12 +157,12 @@ void delegateInitMatrixDevice(void){
 	// all inputs for rows
 	DDRROWS1	= 0x00;
 	DDRROWS2	&= ~(0x111111<<2); //0x00;
-	DDRD        &= ~(1<<PIND7); // row 15
+	DDRD        &= ~(1<<PIND7); // row 14
 
 	// all rows pull-up.
 	PORTROWS1	= 0xFF;
 	PORTROWS2	|= (0b111111<<2); //0x11111100;
-	PORTD 		|= (1<<PIND7);// row 15
+	PORTD 		|= (1<<PIND7);// row 14
 
     // initialize i2c function library
 	i2cInit();

@@ -28,6 +28,8 @@
 #include "optionsled.h"
 #include "keydownbuffer.h"
 
+static lock_led_t lockLedStatus;
+
 #include "ledrender_inc.c"
 
 #define FULL_LED_MODE_NUM 	5
@@ -50,7 +52,8 @@
 #define SAVE2_BIT_LED2_KEY_EVENT	0
 #define SAVE2_BIT_LED2_COLOR_KEY1	1
 #define SAVE2_BIT_LED2_FADE_TYPE	2
-#define SAVE2_BIT_LED2_SKIP_FRAME	3
+#define SAVE2_BIT_LED2_SKIP_FRAME   3
+#define SAVE2_BIT_LOCK_LED_STATUS   4
 
 static uint8_t _saved = 0;	//
 static uint8_t _saved2 = 0;	//
@@ -224,6 +227,8 @@ void getLedOptions(option_info_t *buffer){
     buffer->fullledmode = _fullLEDMode;
     buffer->fullledbrightness = _ledBrightnessMax;
 
+    // Ver 1.2
+    buffer->lockled = lockLedStatus;
 }
 
 void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
@@ -341,6 +346,27 @@ void setLedOptions(uint8_t *data){
 
          _saved2 |= BV(SAVE2_BIT_LED2_SKIP_FRAME);
      }
+     else if(*(data+1) == OPTION_INDEX_LOCK_LED_NL)
+     {
+         lockLedStatus.nl = *(data+2);
+         setLEDIndicate();
+
+         _saved2 |= BV(SAVE2_BIT_LOCK_LED_STATUS);
+     }
+     else if(*(data+1) == OPTION_INDEX_LOCK_LED_CL)
+     {
+         lockLedStatus.cl = *(data+2);
+         setLEDIndicate();
+
+         _saved2 |= BV(SAVE2_BIT_LOCK_LED_STATUS);
+     }
+     else if(*(data+1) == OPTION_INDEX_LOCK_LED_SL)
+     {
+         lockLedStatus.sl = *(data+2);
+         setLEDIndicate();
+
+         _saved2 |= BV(SAVE2_BIT_LOCK_LED_STATUS);
+     }
 
 	ledStateCount = 0;
 }
@@ -451,6 +477,12 @@ void initFullLEDStateAfter(void){
     {
 	    led2Delay = LED2_DELAY_MAX;
     }
+
+	// lock led status
+	eeprom_read_block(&lockLedStatus, (uint8_t *)EEPROM_LOCK_LED_STATUS, 3);
+	if(lockLedStatus.nl == 0xFF) lockLedStatus.nl = LOCK_LED_DEFAULT;
+	if(lockLedStatus.cl == 0xFF) lockLedStatus.cl = LOCK_LED_DEFAULT;
+	if(lockLedStatus.sl == 0xFF) lockLedStatus.sl = LOCK_LED_DEFAULT;
 
     setLedBalance();
 
@@ -583,26 +615,28 @@ uint8_t getLEDState(void){
 void setLEDIndicate(void) {
 	static uint8_t prevLEDstate;
 
+	// nl led를 fn2 toggle 로 사용할 경우는 깜박이도록;
 	if(getBeyondFnLed() == BEYOND_FN_LED_NL){
 		getLedBlink(LED_STATE_NUM, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
-	else if (LEDstate & LED_STATE_NUM) { // light up num lock
+	else if (   IS_LIGHT_UP_NL    ) { // light up num lock
         turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
     } else {
         turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
     }
 	
 
-    if (LEDstate & LED_STATE_CAPS) { // light up caps lock
+    if (  IS_LIGHT_UP_CL  ) { // light up caps lock
         turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	//
     } else {
         turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
     }
 
+    // sl led를 fn2 toggle 로 사용할 경우는 깜박이도록;
     if(getBeyondFnLed() == BEYOND_FN_LED_SL){
 		getLedBlink(LED_STATE_SCROLL, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
 	}
-	else if (LEDstate & LED_STATE_SCROLL) { // light up scroll lock
+	else if ( IS_LIGHT_UP_SL ) { // light up scroll lock
 		turnOnLED(LEDSCROLL); //PORTLEDS |= (1 << LEDCAPS);	//
 	} else {
 		turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
@@ -671,8 +705,12 @@ static void writeLEDMode(void) {
 			eeprom_update_block(&color_key1, (uint8_t *)(EEPROM_LED2_COLOR_KEY1), 3);
 		}
 
-		if(((_saved2 >> SAVE2_BIT_LED2_SKIP_FRAME) & 0x01)){
-		    eeprom_update_byte((uint8_t *)EEPROM_LED2_SKIP_FRAME, led2Delay);
+        if(((_saved2 >> SAVE2_BIT_LED2_SKIP_FRAME) & 0x01)){
+            eeprom_update_byte((uint8_t *)EEPROM_LED2_SKIP_FRAME, led2Delay);
+        }
+
+        if(((_saved2 >> SAVE2_BIT_LOCK_LED_STATUS) & 0x01)){
+            eeprom_update_block(&lockLedStatus, (uint8_t *)(EEPROM_LOCK_LED_STATUS), 3);
         }
 
 		_saved = 0;
