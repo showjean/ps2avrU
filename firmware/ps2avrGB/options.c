@@ -33,6 +33,7 @@ void getOptions(option_info_t *buffer)
     buffer->version[1] = VERSION_MINOR;
     buffer->version[2] = VERSION_PATCH;
     buffer->firmware = FIRMWARE;
+    buffer->size = sizeof(option_info_t);
 }
 
 void stopPwmForUsbReport(bool xIsStop)

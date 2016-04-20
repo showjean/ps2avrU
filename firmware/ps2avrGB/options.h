@@ -95,33 +95,35 @@ typedef struct {
     // = 5 bytes
 
     // Ver 1.2
+    // data size 1byte
     //ver 3byte, firm 1byte, lockled 3byte
     // = 7 bytes
 
-	 uint8_t num;
-	 uint8_t mode;
-	 uint8_t brightness;
-	 cRGB_t color1;
-	 cRGB_t color2;
-	 cRGB_t color3;
-	 cRGB_t rainbow[7];
-	 uint8_t keymode;
-	 cRGB_t colorkey1;
-     uint8_t fadetype;
+    uint8_t size;
+    uint8_t num;
+    uint8_t mode;
+    uint8_t brightness;
+    cRGB_t color1;
+    cRGB_t color2;
+    cRGB_t color3;
+    cRGB_t rainbow[7];
+    uint8_t keymode;
+    cRGB_t colorkey1;
+    uint8_t fadetype;
 
-     //Ver1.1
-     uint8_t transitiondelay;
+    //Ver1.1
+    uint8_t transitiondelay;
 
-     uint8_t fullledmode;
-     uint8_t fullledbrightness;
+    uint8_t fullledmode;
+    uint8_t fullledbrightness;
 
-     uint8_t esctotilde;
-     uint8_t fnled;
+    uint8_t esctotilde;
+    uint8_t fnled;
 
-     //Ver 1.2
-     uint8_t version[3];    // r/o, 1.2.0
-     uint8_t firmware;      // r/o, 0= ps2avrGB, 1=ps2varGB4U ...
-     lock_led_t lockled;
+    //Ver 1.2
+    uint8_t version[3];    // r/o, 1.2.0
+    uint8_t firmware;      // r/o, 0= ps2avrGB, 1=ps2varGB4U ...
+    lock_led_t lockled;
 
 
 } option_info_t;
