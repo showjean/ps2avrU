@@ -61,14 +61,6 @@ else
             $(COMMON_DIR)/ps2main.c
 endif
 
-ifndef USING_CUSTOM_TIMER
-#	ifndef TIMER	
-#		TIMER = timer
-#	endif
-
-	SRC +=  $(COMMON_DIR)/timer.c
-endif
-
 ifdef USING_SIMPLE_MODE
 	OPT_DEFS += -DUSING_SIMPLE_MODE
 endif
@@ -108,8 +100,8 @@ endif
 			$(COMMON_DIR)/esctilde.c \
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
+			$(COMMON_DIR)/timer.c \
 			$(COMMON_DIR)/main.c \
-#			$(COMMON_DIR)/lazyfn.c 
 			
 #put additional assembler source file here
 #  The ASRC line allows you to list files which contain assembly code/routines that
