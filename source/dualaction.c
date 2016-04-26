@@ -10,61 +10,6 @@
 #include "hardwareinfo.h"
 #include "oddebug.h"
 
-/*
-const uint8_t PROGMEM dualActionCompoundMask[24] = {
-    KEY_FN, // FN
-    KEY_FN, // FN
-    KEY_FN2, // FN2
-    KEY_FN2, // FN2
-    KEY_RSHIFT,
-    KEY_RSHIFT,    
-    KEY_LSHIFT,
-    KEY_LSHIFT,
-    KEY_RALT,
-    KEY_RALT,
-    KEY_LALT,
-    KEY_LALT,
-    KEY_RCTRL,
-    KEY_RCTRL,
-    KEY_LCTRL,
-    KEY_LCTRL,
-    KEY_FN,    
-    KEY_FN2,
-    KEY_FN3,
-    KEY_FN3,
-    KEY_FN3,
-    KEY_FN,    
-    KEY_FN2,
-    KEY_FN3
-
-};
-const uint8_t PROGMEM dualActionAloneMask[24] = {
-    KEY_HANGLE, // hangle
-    KEY_HANJA,  // hanja
-    KEY_HANGLE, // hangle
-    KEY_HANJA,  // hanja
-    KEY_HANGLE,
-    KEY_HANJA,  // hanja    
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_CAPS,
-    KEY_CAPS,
-    KEY_HANGLE,
-    KEY_HANJA,
-    KEY_CAPS,
-    KEY_APPS,
-    KEY_APPS,
-    KEY_APPS
-};*/
-
 static uint8_t dualActionKeyIndex = 0;
 //static uint8_t _dualActionCount = 0;
 static bool _isCompounded = false;
@@ -140,7 +85,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
 
 	if(isDown){
 //	    DBG1(0xF1, (uchar *)&keyidx, 1);
-		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
+	    IF_IS_DUAL_ACTION_KEY(keyidx) {
 			if (isReleaseAll() && dualActionKeyIndex == 0) { // 첫 키가 듀얼 액션 키로 눌린 상태;
 //			    DBG1(0xF1, (uchar *)&dualActionKeyIndex, 5);
 				dualActionKeyIndex = keyidx;
@@ -165,7 +110,7 @@ void setDualAction(uint8_t keyidx, bool isDown){
 //        DBG1(0xF2, (uchar *)&_isCompounded, 3);
 	} else {
 //	    DBG1(0xF3, (uchar *)&keyidx, 1);
-		if (keyidx > KEY_dualAction && keyidx < KEY_dualAction_end) {
+	    IF_IS_DUAL_ACTION_KEY(keyidx) {
 //			if (_dualActionCount > 0) --_dualActionCount;
 
 			applyDualActionUp();
@@ -186,7 +131,7 @@ void clearDualAction(void)
 //-------------------------------------------------------------------------------
 
 uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
-    if(xActionIndex > KEY_dualAction && xActionIndex < KEY_dualAction_end){
+    IF_IS_DUAL_ACTION_KEY(xActionIndex){
         // 조합 키가 우선이되 FN 계열의 키는 alone키로 반환
         uint8_t gIndex =  getDualActionCompoundKey(xActionIndex);
         if(isFnKey(gIndex)){
@@ -201,7 +146,7 @@ uint8_t getDualActionDefaultKey(uint8_t xActionIndex){
 uint8_t getDualActionDownKeyIndexWhenIsCompounded(uint8_t xKeyidx, bool xForceCompounded){
 //    DBG1(0xF8, (uchar *)&xKeyidx, 2);
 //    DBG1(0xF1, (uchar *)&dualActionKeyIndex, 3);
-    if(xKeyidx > KEY_dualAction && xKeyidx < KEY_dualAction_end){
+    IF_IS_DUAL_ACTION_KEY(xKeyidx){
         if(xForceCompounded == true)
         {
             return getDualActionCompoundKey(xKeyidx);

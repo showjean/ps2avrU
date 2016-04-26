@@ -37,6 +37,7 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #define DEBOUNCE_MAX    10  //4
 static uint8_t debounce; // DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
+static uint8_t __pressedFnIndex = LAYER_NOTHING;
 
 //static uint8_t _currentLayer = LAYER_NOTHING;
 
@@ -87,6 +88,26 @@ bool isFnPosition(uint8_t xCol, uint8_t xRow)
     }
     return false;
 }
+void clearFnPosition(void)
+{
+    fnCol = 127;    // must bigger then COLUMNS, ROWS
+    fnRow = 127;
+}
+void setFnPressed(uint8_t xFnIndex)
+{
+    if(xFnIndex == KEY_FN){
+        __pressedFnIndex = LAYER_FN;
+    }else if(xFnIndex == KEY_FN2){
+        __pressedFnIndex = LAYER_FN2;
+    }else if(xFnIndex == KEY_FN3){
+        __pressedFnIndex = LAYER_FN3;
+    }else if(xFnIndex == KEY_NOR){
+        __pressedFnIndex = LAYER_NORMAL;
+    }else{
+        __pressedFnIndex = LAYER_NOTHING;
+    }
+//    DBG1(0x34, (uchar *)&__pressedFnIndex, 1);
+}
 
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur, gLayer, fnScanLayer;
@@ -99,6 +120,7 @@ uint8_t getLayer(void) {
 	- 가장 자연스럽게 처리된다고 보면 됨;
 
 	*/
+	if(__pressedFnIndex != LAYER_NOTHING) return __pressedFnIndex;
 
 	if(getBeyondFN()) {
 	    fnScanLayer = getBeyondFN();
@@ -251,12 +273,8 @@ void setCurrentMatrixAfter(void){
     setPrevMatrix();
 	setReleaseAll();
 
-	// 모든 키가 release되면 FN 해제;
 	if(isReleaseAll())
 	{
-	    fnCol = 127;    // must bigger then COLUMNS, ROWS
-	    fnRow = 127;
-
         clearDualAction();
 	}
 

@@ -240,9 +240,10 @@ bool isKeyEnabled(uint8_t xKeyidx){
 // 키를 누르거나 땔때 FN 및 LED등 을 컨트롤한다.
 bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
+    // dual action key를 기본키 (caps lock 등)으로 반환;
     xKeyidx = getDualActionDefaultKey(xKeyidx);
 
-    if(isFnKey(xKeyidx)) return false; 
+    if(isFnKey(xKeyidx)) return false;
 
     if(xIsDown) {
 
