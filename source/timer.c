@@ -412,7 +412,7 @@ ISR(SIG_OVERFLOW2, ISR_NOBLOCK)
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER1INPUTCAPTURE_INT])
 		TimerIntFunc[TIMER1INPUTCAPTURE_INT]();
-}*/
+}
 
 //! Interrupt handler for OutputCompare2 match (OC2) interrupt
 TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE2)
@@ -422,4 +422,4 @@ TIMER_INTERRUPT_HANDLER(SIG_OUTPUT_COMPARE2)
 	// if a user function is defined, execute it
 	if(TimerIntFunc[TIMER2OUTCOMPARE_INT])
 		TimerIntFunc[TIMER2OUTCOMPARE_INT]();
-}
+}*/

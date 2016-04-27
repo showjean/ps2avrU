@@ -11,6 +11,7 @@
 #define __usbconfig_h_included__
 
 #include "hardwareconfig.h"
+#include "hardwareinfo.h"
 
 /*
 General Description:
@@ -240,7 +241,7 @@ section at the end of this file).
  * with libusb: 0x16c0/0x5dc.  Use this VID/PID pair ONLY if you understand
  * the implications!
  */
-#define USB_CFG_DEVICE_VERSION  0x01, 0x01
+#define USB_CFG_DEVICE_VERSION  VERSION_MINOR, VERSION_MAJOR
 /* Version number of the device: Minor number first, then major number.
  */
 #define USB_CFG_VENDOR_NAME     'w', 'i', 'n', 'k', 'e', 'y', 'l', 'e', 's', 's', '.', 'k', 'r'

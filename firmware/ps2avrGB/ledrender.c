@@ -621,6 +621,12 @@ void setLEDIndicate(void) {
 	}
 	else if (   IS_LIGHT_UP_NL    ) { // light up num lock
         turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);	//
+
+        //TODO
+        /*
+         * 항상 켜짐/꺼짐 시 깜박임으로 알려줄 필요가 있다.
+         * */
+
     } else {
         turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);	//
     }
@@ -715,7 +721,9 @@ static void writeLEDMode(void) {
 
 		_saved = 0;
 		_saved2 = 0;
-		blinkOnce(50);
+
+		// deprecated
+		//blinkOnce(50);
 	}
 }
 
