@@ -15,14 +15,5 @@
 #define turnOnLED(pin)		PORTLEDS |= (pin);
 #define turnOffLED(pin)		PORTLEDS &= ~(pin);
 
-#define IS_LIGHT_UP_NL  lockLedStatus.nl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.nl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_NUM)) \
-                        || (lockLedStatus.nl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_NUM))
-#define IS_LIGHT_UP_CL  lockLedStatus.cl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.cl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_CAPS)) \
-                        || (lockLedStatus.cl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_CAPS))
-#define IS_LIGHT_UP_SL  lockLedStatus.sl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.sl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_SCROLL)) \
-                        || (lockLedStatus.sl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_SCROLL))
 
 #endif

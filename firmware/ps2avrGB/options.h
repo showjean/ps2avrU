@@ -80,6 +80,8 @@ typedef struct {
 #define LOCK_LED_ALWAYS_ON  1
 #define LOCK_LED_ALWAYS_OFF 2
 #define LOCK_LED_REVERSE    3
+#define LOCK_LED_FN_TOGGLE  4
+
 typedef struct {
     uint8_t nl;
     uint8_t cl;
