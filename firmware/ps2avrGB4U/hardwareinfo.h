@@ -19,8 +19,8 @@
 // Ver 1.2
 #define VERSION_MAJOR   1
 #define VERSION_MINOR   2
-#define VERSION_PATCH   1
-#define FIRMWARE        0   // 0=ps2avrGB, 1=ps2avrGB4U
+#define VERSION_PATCH   2
+#define FIRMWARE        1   // 0=ps2avrGB, 1=ps2avrGB4U
 
 
 // PB0-PB7 : col1 .. col8
@@ -46,15 +46,15 @@
 
 #define LAYERS		4
 #define COLUMNS 	8
-#define ROWS 		15
+#define ROWS 		17
 
 // dualaction
 #define DUALACTION_BYTES     0x80    // 128
 
 // flash address
-#define DUALACTION_ADDRESS      0x6580
-#define KEYMAP_ADDRESS			0x6600
-#define CUSTOM_MACRO_ADDRESS	0x6800
+#define DUALACTION_ADDRESS      0x6480
+#define KEYMAP_ADDRESS          0x6500
+#define CUSTOM_MACRO_ADDRESS    0x6800
 
 // eeprom macro
 #define MACRO_SIZE_MAX 48

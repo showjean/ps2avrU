@@ -15,10 +15,10 @@ void setOptions(uint8_t *data)
     {
         setEscTilde(*(data+2));
     }
-    else if(*(data+1) == OPTION_INDEX_FN_LED)
+   /* else if(*(data+1) == OPTION_INDEX_FN_LED)
     {
         setBeyondFnLed(*(data+2));
-    }
+    }*/
 }
 
 void getOptions(option_info_t *buffer)

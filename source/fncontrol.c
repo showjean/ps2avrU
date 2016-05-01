@@ -61,7 +61,6 @@ static void __setBeyondFnLed(void)
         setLed(LED_STATE_SCROLL, getBeyondFN());
     }
 }
-#endif
 
 void setBeyondFnLed(uint8_t xLed){
     _beyondFnLed = xLed;
@@ -83,8 +82,9 @@ void setBeyondFnLed(uint8_t xLed){
     __setBeyondFnLed();
 #endif
 }
+#endif
 
-#ifndef DISABLE_HARDWARE_MENU
+#if 0 //ndef DISABLE_HARDWARE_MENU
 
 #define CMD_OFF_BEYOND_FN_LED 1
 #define CMD_NL_BEYOND_FN_LED 2
@@ -172,7 +172,7 @@ void initBeyondFn(void){
      TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
      */
 //    _beyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL);
-    if(
+    /*if(
         ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_ON
         && ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_OFF
     ){
@@ -184,9 +184,9 @@ void initBeyondFn(void){
         _beyondFnLed = BEYOND_FN_LED_SL;
     }else{
         _beyondFnLed = BEYOND_FN_LED_OFF;
-    }
+    }*/
 
-#ifndef DISABLE_HARDWARE_MENU
+#if 0 //ndef DISABLE_HARDWARE_MENU
     addKeymapperDriver(&driverKeymapperBeyondFn);
 #endif
 }

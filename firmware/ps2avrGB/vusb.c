@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "eeprominfo.h"
 #include "bootmapper.h"
 #include "timerinclude.h"
+#include "hardwareinfo.h"
 
 /* ------------------------------------------------------------------------- */
 /* ----------------------------- USB interface ----------------------------- */
@@ -339,22 +340,42 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             	    getOptions(&optionsBuffer);
             		usbMsgPtr = (usbMsgPtr_t)&optionsBuffer;
             		return sizeof(optionsBuffer); //OPTION_GET_REPORT_LENGTH_INFO;
-            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
-            		// keymap
-            	    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-					usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
-					return OPTION_GET_REPORT_LENGTH_KEYMAP;
-            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
-            		// cst macro
+#if (FIRMWARE > 0)
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
+                    // keymap
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
+                    // cst macro
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
+
+                }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
+                    // cst macro
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
+#else
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
+                    // keymap
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
+                    return OPTION_GET_REPORT_LENGTH_KEYMAP;
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
+                    // cst macro
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_MACRO1)));
-					return CUSTOM_MACRO_SIZE_MAX;
+                    return CUSTOM_MACRO_SIZE_MAX;
 
                 }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
                     // cst macro
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(DUALACTION_ADDRESS);
                     return DUALACTION_BYTES;
+
+#endif
             	}else {
             		return rq->wLength.word;
             	}

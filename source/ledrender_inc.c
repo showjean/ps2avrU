@@ -13,15 +13,16 @@ static uint8_t LEDstate = 0;     ///< current state of the LEDs
 #define blinkLedCountDelay 900
 
 static uint8_t ledBlinkCount = 0;
-
+static uint8_t targetLED;
+static uint8_t targetStatus;
 /*
  * xPrev : LED의 이전 상태를 저장하고 있다. 이정 상태와 다를 경우에만 깜박이도록.
  */
-void getLedBlink(uint8_t xLed, bool xStatus, uint8_t *xPrevState, uint8_t *xCount){
+void getLedBlink(uint8_t xLed, bool xOnOffStatus, uint8_t *xPrevState, uint8_t *xCount){
     if ((LEDstate & xLed) && !(*xPrevState & xLed)) { // light up
 
 //		*xPrevState = LEDstate;
-    	if(!xStatus){
+    	if(!xOnOffStatus){
     	    *xCount =  5;	//on off on off 1
 		}else{
 		    *xCount =  4;	// off on off 1
@@ -30,13 +31,31 @@ void getLedBlink(uint8_t xLed, bool xStatus, uint8_t *xPrevState, uint8_t *xCoun
 	} else if(!(LEDstate & xLed) && (*xPrevState & xLed)){
 
 //		*xPrevState = LEDstate;
-		if(!xStatus){
+		if(!xOnOffStatus){
 		    *xCount =  3;	// on off 1
 		}else{
 		    *xCount =  2;	// off 1
 		}
 
 	}
+
+    if(*xCount > 0)
+    {
+        targetStatus = xOnOffStatus;
+
+        if(xLed == LED_STATE_NUM)
+        {
+            targetLED = LEDNUM;
+        }
+        else if(xLed == LED_STATE_CAPS)
+        {
+            targetLED = LEDCAPS;
+        }
+        else if(xLed == LED_STATE_SCROLL)
+        {
+            targetLED = LEDSCROLL;
+        }
+    }
 }
 
 void blinkIndicateLED(void) {
@@ -47,31 +66,13 @@ void blinkIndicateLED(void) {
 		counter++;
 		if(counter > countMAX){
 			if(ledBlinkCount == 5 || ledBlinkCount == 3){
-				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
-					turnOnLED(LEDNUM);
-				}else{
-					turnOnLED(LEDSCROLL);
-				}
+				turnOnLED(targetLED);
 			}else if(ledBlinkCount == 4 || ledBlinkCount == 2){
-				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
-					turnOffLED(LEDNUM);
-				}else{
-					turnOffLED(LEDSCROLL);
-				}
+				turnOffLED(targetLED);
 			}else{
-				if(getBeyondFnLed() == BEYOND_FN_LED_NL){
-					if(getBeyondFN()){
-						turnOnLED(LEDNUM);
-					}
-				}else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
-					if(getBeyondFN()){
-						turnOnLED(LEDSCROLL);
-					}
-				}/*else{
-					if((getLEDState() & LED_STATE_NUM)){
-						turnOnLED(LEDNUM);
-					}
-				}*/
+                if(targetStatus){
+                    turnOnLED(targetLED);
+                }
 			}
 			counter = 0;
 
@@ -104,6 +105,10 @@ void blinkBootMapperLED(void) {
 	}
 #endif
 }
+
+#define IS_LIGHT_UP_NL  LEDstate & LED_STATE_NUM
+#define IS_LIGHT_UP_CL  LEDstate & LED_STATE_CAPS
+#define IS_LIGHT_UP_SL  LEDstate & LED_STATE_SCROLL
 
 void blinkOnce(const int xStayMs){
 	if(getBeyondFnLed() == BEYOND_FN_LED_NL){

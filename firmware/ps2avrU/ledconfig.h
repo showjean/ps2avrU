@@ -13,8 +13,5 @@
 #define turnOnLED(pin)		PORTLEDS |= (pin);
 #define turnOffLED(pin)		PORTLEDS &= ~(pin);
 
-#define IS_LIGHT_UP_NL  LEDstate & LED_STATE_NUM
-#define IS_LIGHT_UP_CL  LEDstate & LED_STATE_CAPS
-#define IS_LIGHT_UP_SL  LEDstate & LED_STATE_SCROLL
 
 #endif
