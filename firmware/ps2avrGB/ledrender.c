@@ -170,7 +170,7 @@ static uint8_t targetStatus;
 /*
  * xPrev : LED의 이전 상태를 저장하고 있다. 이정 상태와 다를 경우에만 깜박이도록.
  */
-void getLedBlink(uint8_t xLed, bool xMainLedOnOffStatus, bool xSubOnOffStatus, bool xSubPrevOnOffStatus, uint8_t *xCount){
+void getLedBlink(uint8_t xLedPin, bool xMainLedOnOffStatus, bool xSubOnOffStatus, bool xSubPrevOnOffStatus, uint8_t *xCount){
 
     bool isChanged = false;
 
@@ -188,21 +188,8 @@ void getLedBlink(uint8_t xLed, bool xMainLedOnOffStatus, bool xSubOnOffStatus, b
 
     if(isChanged)
     {
-        if(xLed == LED_STATE_NUM)
-        {
-            if(xMainLedOnOffStatus) targetStatus |= LEDNUM;
-            targetLeds |= LEDNUM;
-        }
-        else if(xLed == LED_STATE_CAPS)
-        {
-            if(xMainLedOnOffStatus) targetStatus |= LEDCAPS;
-            targetLeds |= LEDCAPS;
-        }
-        else if(xLed == LED_STATE_SCROLL)
-        {
-            if(xMainLedOnOffStatus) targetStatus |= LEDSCROLL;
-            targetLeds |= LEDSCROLL;
-        }
+        if(xMainLedOnOffStatus) targetStatus |= xLedPin;
+        targetLeds |= xLedPin;
     }
 }
 
@@ -826,14 +813,14 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
     if(xLockStatus == LOCK_LED_ALWAYS_ON)
     {
         turnOnLED(xLedPin);
-        getLedBlink(xLedState, true, (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
-        if(gCount == 0) getLedBlink(xLedState, true, getBeyondFN(), getBeyondFNPrev(), &gCount);
+        getLedBlink(xLedPin, true, (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+        if(gCount == 0) getLedBlink(xLedPin, true, getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
     else if(xLockStatus == LOCK_LED_ALWAYS_OFF)
     {
         turnOffLED(xLedPin);
-        getLedBlink(xLedState, false, (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
-        if(gCount == 0) getLedBlink(xLedState, false, getBeyondFN(), getBeyondFNPrev(), &gCount);
+        getLedBlink(xLedPin, false, (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+        if(gCount == 0) getLedBlink(xLedPin, false, getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
     else if(xLockStatus == LOCK_LED_DEFAULT)
     {
@@ -842,7 +829,7 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         } else {
             turnOffLED(xLedPin);
         }
-        getLedBlink(xLedState, (LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
+        getLedBlink(xLedPin, (LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
     else if(xLockStatus == LOCK_LED_REVERSE)
     {
@@ -851,7 +838,7 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         } else {
             turnOnLED(xLedPin);
         }
-        getLedBlink(xLedState, !(LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
+        getLedBlink(xLedPin, !(LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
     else if(xLockStatus == LOCK_LED_FN_TOGGLE)
     {
@@ -860,7 +847,7 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         } else {
             turnOffLED(xLedPin);
         }
-        getLedBlink(xLedState, getBeyondFN(), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+        getLedBlink(xLedPin, getBeyondFN(), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
     }
 
     return gCount;
@@ -871,18 +858,7 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
  */
 void setLEDIndicate(void) {
 
-    /*// nl led를 다른 용도로 사용 할 경우 깜박임으로 indicating
-    if(lockLedStatus.nl == LOCK_LED_ALWAYS_ON || lockLedStatus.nl == LOCK_LED_ALWAYS_OFF || lockLedStatus.nl == LOCK_LED_FN_TOGGLE){
-        getLedBlink(LED_STATE_NUM, \
-                (lockLedStatus.nl == LOCK_LED_FN_TOGGLE && getBeyondFN()) || lockLedStatus.nl == LOCK_LED_ALWAYS_ON, \
-                &prevLEDstate, &ledBlinkCount);
-    }
-    else if (   IS_LIGHT_UP_NL    ) { // light up num lock
-        turnOnLED(LEDNUM);//PORTLEDS |= (1 << LEDNUM);  //
-
-    } else {
-        turnOffLED(LEDNUM);//PORTLEDS &= ~(1 << LEDNUM);    //
-    }*/
+    // nl led를 다른 용도로 사용 할 경우 깜박임으로 indicating
 
     uint8_t gCount = 0;
     gCount = updateLed(lockLedStatus.nl, LEDNUM, LED_STATE_NUM);
@@ -891,29 +867,6 @@ void setLEDIndicate(void) {
     if(gCount > 0) ledBlinkCount = gCount;
     gCount = updateLed(lockLedStatus.sl, LEDSCROLL, LED_STATE_SCROLL);
     if(gCount > 0) ledBlinkCount = gCount;
-
-
-	/*if((LEDstate & LED_STATE_CAPS) != (prevLEDstate & LED_STATE_CAPS))
-	{
-        if (  IS_LIGHT_UP_CL  ) { // light up caps lock
-            turnOnLED(LEDCAPS); //PORTLEDS |= (1 << LEDCAPS);	//
-        } else {
-            turnOffLED(LEDCAPS); //PORTLEDS &= ~(1 << LEDCAPS);	//
-        }
-	}
-
-	if((LEDstate & LED_STATE_SCROLL) != (prevLEDstate & LED_STATE_SCROLL))
-    {
-        // sl led를 fn2 toggle 로 사용할 경우는 깜박이도록;
-        if(getBeyondFnLed() == BEYOND_FN_LED_SL){
-//            getLedBlink(LED_STATE_SCROLL, getBeyondFN(), &prevLEDstate, &ledBlinkCount);
-        }
-        else if ( IS_LIGHT_UP_SL ) { // light up scroll lock
-            turnOnLED(LEDSCROLL); //PORTLEDS |= (1 << LEDCAPS);	//
-        } else {
-            turnOffLED(LEDSCROLL); //PORTLEDS &= ~(1 << LEDCAPS);	//
-        }
-    }*/
 
 	prevLEDstate = LEDstate;
 

@@ -25,16 +25,7 @@
 
 // _______________________________________________________________ boot
 void delegateGotoBootloader(void){
-//	sleepLED();
-//	usbDeviceDisconnect();  /* do this while interrupts are disabled */
-//	wdt_enable(WDTO_15MS);
-//	for(;;);
 
-	//        	typedef void (*AppPtr_t)(void) __attribute__ ((noreturn));
-	//
-	//        	AppPtr_t AppStartPtr = (AppPtr_t)(BOOTLOADER_START);
-	//        	AppStartPtr();
-	//        	((void (*)(void))(BOOTLOADER_START))();
 }
 
 
@@ -49,24 +40,24 @@ uint8_t delegateGetBootmapperStatus(uint8_t xCol, uint8_t xRow){
 
 // _______________________________________________________________ keymatrix
 void delegateInitMatrixDevice(void){
-	// initialize matrix ports - cols, rows
-	// PB0-PB7 : col0 .. col7
-	// PA0-PA7 : row0 .. row7
-	// PC7-PC2 : row8 .. row13
-	
-	// PD0 : NUM
+    // initialize matrix ports - cols, rows
+    // PB0-PB7 : col0 .. col7
+    // PA0-PA7 : row0 .. row7
+    // PC7-PC0 : row8 .. row15
+
+    // PD0 : NUM
     // PD1 : CAPS
     // PD2 : D+ / Clock
     // PD3 : D- / Data
     // PD4 : FULL LED
     // PD5 : 3.6V switch TR
-	// PD6 : SCRL
-    // PD7 : row14
-	
+    // PD6 : SCRL
+    // PD7 : row17
 
-	// signal direction : col -> row
 
-    DDRCOLUMNS   = 0xFF; // all outputs for cols
+    // signal direction : col -> row
+
+    DDRCOLUMNS  = 0xFF; // all outputs for cols
     PORTCOLUMNS = 0xFF; // high
     DDRROWS1    = 0x00; // all inputs for rows
     DDRROWS2    = 0x00;
