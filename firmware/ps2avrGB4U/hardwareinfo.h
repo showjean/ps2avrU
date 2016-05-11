@@ -2,6 +2,7 @@
 #define HARDWARE_INFO_H_GB
 
 #include "eeprominfo.h"
+#include "version.h"
 
 
 // for test
@@ -16,10 +17,6 @@
 #endif
 
 
-// Ver 1.2
-#define VERSION_MAJOR   1
-#define VERSION_MINOR   2
-#define VERSION_PATCH   1
 #define FIRMWARE        1   // 0=ps2avrGB, 1=ps2avrGB4U
 
 
