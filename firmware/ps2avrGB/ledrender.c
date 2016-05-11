@@ -861,6 +861,15 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         }
         getLedBlink(xLedPin, (getBeyondFN() == LAYER_FN3), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
     }
+    else if(xLockStatus == LOCK_LED_FN23_TOGGLE)
+    {
+        if (getBeyondFN()) {
+            turnOnLED(xLedPin);
+        } else {
+            turnOffLED(xLedPin);
+        }
+        getLedBlink(xLedPin, getBeyondFN(), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+    }
 
     return gCount;
 }
