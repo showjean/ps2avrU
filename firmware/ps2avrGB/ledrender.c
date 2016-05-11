@@ -288,15 +288,18 @@ void blinkBootMapperLED(void) {
 #define IS_LIGHT_UP_NL  lockLedStatus.nl == LOCK_LED_ALWAYS_ON \
                         || (lockLedStatus.nl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_NUM)) \
                         || (lockLedStatus.nl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_NUM)) \
-                        || (lockLedStatus.nl == LOCK_LED_FN_TOGGLE && getBeyondFN())
+                        || (lockLedStatus.nl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
+                        || (lockLedStatus.nl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
 #define IS_LIGHT_UP_CL  lockLedStatus.cl == LOCK_LED_ALWAYS_ON \
                         || (lockLedStatus.cl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_CAPS)) \
                         || (lockLedStatus.cl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_CAPS)) \
-                        || (lockLedStatus.cl == LOCK_LED_FN_TOGGLE && getBeyondFN())
+                        || (lockLedStatus.cl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
+                        || (lockLedStatus.cl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
 #define IS_LIGHT_UP_SL  lockLedStatus.sl == LOCK_LED_ALWAYS_ON \
                         || (lockLedStatus.sl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_SCROLL)) \
                         || (lockLedStatus.sl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_SCROLL)) \
-                        || (lockLedStatus.sl == LOCK_LED_FN_TOGGLE && getBeyondFN())
+                        || (lockLedStatus.sl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
+                        || (lockLedStatus.sl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
 
 void blinkOnce(const int xStayMs){
 
@@ -840,14 +843,23 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         }
         getLedBlink(xLedPin, !(LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
-    else if(xLockStatus == LOCK_LED_FN_TOGGLE)
+    else if(xLockStatus == LOCK_LED_FN2_TOGGLE)
     {
-        if (getBeyondFN()) {
+        if (getBeyondFN() == LAYER_FN2) {
             turnOnLED(xLedPin);
         } else {
             turnOffLED(xLedPin);
         }
-        getLedBlink(xLedPin, getBeyondFN(), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+        getLedBlink(xLedPin, (getBeyondFN() == LAYER_FN2), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+    }
+    else if(xLockStatus == LOCK_LED_FN3_TOGGLE)
+    {
+        if (getBeyondFN() == LAYER_FN3) {
+            turnOnLED(xLedPin);
+        } else {
+            turnOffLED(xLedPin);
+        }
+        getLedBlink(xLedPin, (getBeyondFN() == LAYER_FN3), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
     }
 
     return gCount;

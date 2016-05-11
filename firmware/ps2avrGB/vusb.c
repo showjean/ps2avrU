@@ -340,6 +340,17 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             	    getOptions(&optionsBuffer);
             		usbMsgPtr = (usbMsgPtr_t)&optionsBuffer;
             		return sizeof(optionsBuffer); //OPTION_GET_REPORT_LENGTH_INFO;
+            	}else if(rq->wLength.word == OPTION_GET_REPORT_LENGTH_TOGGLE_BOOTMAPPER){
+            	    static bool gIsBootloader;
+            	    if(isBootMapper()){
+                        setToBootMapper(false);
+                        gIsBootloader = false;
+                    }else{
+                        setToBootMapper(true);
+                        gIsBootloader = true;
+                    }
+            	    usbMsgPtr = (usbMsgPtr_t)&gIsBootloader;
+            	    return 1;
 #if (FIRMWARE > 0)
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
                     // keymap
@@ -453,14 +464,7 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         		eeprom_write_byte((uint8_t *)EEPROM_BOOTLOADER_START, 0x00);
         	}
         	delegateGotoBootloader();
-#ifdef ENABLE_BOOTMAPPER
-        }else if(data[1] == OPTION_INDEX_BOOTMAPPER){
-        	if(data[2] == OPTION_VALUE_BOOTMAPPER_START){
-        		setToBootMapper(true);
-        	}else{
-        		setToBootMapper(false);
-        	}
-#endif
+
        /* }else if(data[1] == OPTION_INDEX_READY){
             stopPwmForUsbReport(true);
 
