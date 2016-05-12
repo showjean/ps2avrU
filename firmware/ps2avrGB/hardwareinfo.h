@@ -16,8 +16,7 @@
 #warning "=============================================================================================================="
 #endif
 
-
-#define FIRMWARE        0   // 0=ps2avrGB, 1=ps2avrGB4U
+#define FIRMWARE        FIRMWARE_GB   // 0=ps2avrGB, 1=ps2avrGB4U
 
 
 // PB0-PB7 : col1 .. col8

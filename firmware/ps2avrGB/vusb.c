@@ -351,7 +351,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     }
             	    usbMsgPtr = (usbMsgPtr_t)&gIsBootloader;
             	    return 1;
-#if (FIRMWARE > 0)
+#if (FIRMWARE > FIRMWARE_GB)
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
                     // keymap
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;

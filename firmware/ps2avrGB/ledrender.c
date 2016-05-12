@@ -27,6 +27,7 @@
 #include "options.h"
 #include "optionsled.h"
 #include "keydownbuffer.h"
+#include "hardwareinfo.h".h"
 
 static lock_led_t lockLedStatus;
 
@@ -361,8 +362,10 @@ void initLED(void){
 	PORTD &= ~(LEDNUM | LEDCAPS | LEDFULLLED | LEDSCROLL);	// low
 
 	// initialize i2c function library
+#if FIRMWARE == FIRMWARE_GB
     i2cInit();
     i2cSetBitrate(400);
+#endif
 
 }
 
@@ -1156,6 +1159,7 @@ static void setLed2State(void){
 
 static void sendI2c(void){
 
+#if FIRMWARE == FIRMWARE_GB
     i2cLength = numOfLeds * 3;
 #ifdef SPLIT
     /**
@@ -1170,6 +1174,8 @@ static void sendI2c(void){
 	
 #endif
     i2cLength = 0;
+#endif
+
 }
 
 static void _setLed2All(cRGB_t *xRgb){
