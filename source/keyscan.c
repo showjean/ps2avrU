@@ -52,10 +52,8 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
         gLayer = LAYER_NORMAL;
     }
 
-
     if(isFnPosition(xCol, xRow))
     {
-
         // 현재 레이어에서 눌린 FN키가 듀얼 액션 키이면, 변경된 레이어의 키를 듀얼 액션 키로 강제 치환시켜서 진행
         gKeyIndex = getCurrentKeyindex(gLayer, xRow, xCol);
 
@@ -145,7 +143,7 @@ static uint8_t processKeyIndex(uint8_t xLayer, bool xPrev, bool xCur, uint8_t xC
         if(isKeyEnabled(keyidx) == false) return 0;
 
         if(xCur) {
-//            DBG1(0xB1, (uchar *)&xKeyidx, 1);
+//            DBG1(0xB1, (uchar *)&keyidx, 1);
 
             // mark for downed layer
             oldDownedMatrix[xLayer][xRow] |= BV(xCol);
@@ -167,7 +165,7 @@ static uint8_t processKeyIndex(uint8_t xLayer, bool xPrev, bool xCur, uint8_t xC
             keyidx = getCurrentKeyindex(xLayer, xRow, xCol);
             oldDownedMatrix[xLayer][xRow] &= ~BV(xCol);
 
-//            DBG1(0xC1, (uchar *)&xKeyidx, 1);
+//            DBG1(0xC1, (uchar *)&keyidx, 1);
             putChangedKey(keyidx, false, xCol, xRow);
         }
     }

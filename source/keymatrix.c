@@ -52,6 +52,8 @@ void initMatrix(void){
 
 	debounce = DEBOUNCE_MAX + 3;
 
+	clearFnPosition();
+
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
 #endif

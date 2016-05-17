@@ -19,7 +19,7 @@
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
 #define KEY_LED2        241		// bottom led
-// undefined : 160~188, 239~240
+// undefined : 176~188, 239~240
 
 
 enum {  // for macro
@@ -252,7 +252,7 @@ enum {
     KEY_LANG6,          
     KEY_LANG7,
     KEY_LANG8,
-    KEY_LANG9,      */          
+    KEY_LANG9,      */    //174
     KEY_extend_end  //159
 };
 

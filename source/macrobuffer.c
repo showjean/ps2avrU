@@ -70,7 +70,8 @@ macro_key_t popMacroKey(void) {
 	 * 매크로키가 발견되면 현재 매크로 중단,
 	 * 새 매크로 시작;
 	 */
-	if(gKey.keyindex >= KEY_CST_MAC1 && gKey.keyindex <= KEY_CST_MAC12){
+//	if(gKey.keyindex >= KEY_CST_MAC1 && gKey.keyindex <= KEY_CST_MAC12){
+    if(isMacroKey(gKey.keyindex)){
 		DBG1(0x77, (void *)&gKey.keyindex, 1);
 
 		clearRepeat();
