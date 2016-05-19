@@ -464,7 +464,17 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         		eeprom_write_byte((uint8_t *)EEPROM_BOOTLOADER_START, 0x00);
         	}
         	delegateGotoBootloader();
-
+/* TODO
+ * 이전 버전과 호환을 위해 남겨둠
+ */
+#ifdef ENABLE_BOOTMAPPER
+        }else if(data[1] == OPTION_INDEX_BOOTMAPPER){
+        	if(data[2] == OPTION_VALUE_BOOTMAPPER_START){
+        		setToBootMapper(true);
+        	}else{
+        		setToBootMapper(false);
+        	}
+#endif
        /* }else if(data[1] == OPTION_INDEX_READY){
             stopPwmForUsbReport(true);
 
