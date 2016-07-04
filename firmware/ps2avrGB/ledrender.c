@@ -27,7 +27,7 @@
 #include "options.h"
 #include "optionsled.h"
 #include "keydownbuffer.h"
-#include "hardwareinfo.h".h"
+#include "hardwareinfo.h"
 
 static lock_led_t lockLedStatus;
 
@@ -1123,7 +1123,11 @@ static void setLed2State(void){
 		_delayCount = 0;
 		_changeCount = 0;
 		_stepCount = 0;
-		
+
+		// 0으로 처리해주지 않으면 다른 컬러로 되돌아갈 때 작동하지 않는 경우가 생긴다.
+	    prevRgb.r = 0;
+	    prevRgb.g = 0;
+	    prevRgb.b = 0;
 	}
 	else if(_rgbMode == 2)
 	{

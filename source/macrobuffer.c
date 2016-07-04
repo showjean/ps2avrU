@@ -12,6 +12,7 @@
 #include "hardwareinfo.h"
 #include "custommacro.h"
 #include "oddebug.h"
+#include "keymapper.h"
 
 static uint8_t QUEUE[MESSAGE_SIZE_MAX];
 static int rear = 0, front = 0;
