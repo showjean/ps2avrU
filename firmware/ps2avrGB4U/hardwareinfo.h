@@ -16,8 +16,11 @@
 #warning "=============================================================================================================="
 #endif
 
-
-#define FIRMWARE        1   // 0=ps2avrGB, 1=ps2avrGB4U
+#ifdef SPLIT
+#define FIRMWARE        FIRMWARE_GB4U_SPLIT
+#else
+#define FIRMWARE        FIRMWARE_GB4U
+#endif
 
 
 // PB0-PB7 : col1 .. col8
