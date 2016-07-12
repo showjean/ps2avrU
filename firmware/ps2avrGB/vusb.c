@@ -351,25 +351,8 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     }
             	    usbMsgPtr = (usbMsgPtr_t)&gIsBootloader;
             	    return 1;
-#if (FIRMWARE > FIRMWARE_GB)
-                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
-                    // keymap
-                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
-                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
-                    // cst macro
-                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
-
-                }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
-                    // cst macro
-                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
-#else
-                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
+#if HAS_OPTIONS
+            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
                     // keymap
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
@@ -385,6 +368,24 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(DUALACTION_ADDRESS);
                     return DUALACTION_BYTES;
+
+#else
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
+                    // keymap
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
+                    // cst macro
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
+
+                }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
+                    // cst macro
+                    usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
 
 #endif
             	}else {

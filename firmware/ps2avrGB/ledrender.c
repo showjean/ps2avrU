@@ -362,7 +362,7 @@ void initLED(void){
 	PORTD &= ~(LEDNUM | LEDCAPS | LEDFULLLED | LEDSCROLL);	// low
 
 	// initialize i2c function library
-#if FIRMWARE == FIRMWARE_GB
+#if HAS_RGB_LED //FIRMWARE == FIRMWARE_GB
     i2cInit();
     i2cSetBitrate(400);
 #endif
@@ -1163,7 +1163,7 @@ static void setLed2State(void){
 
 static void sendI2c(void){
 
-#if FIRMWARE == FIRMWARE_GB
+#if HAS_RGB_LED //FIRMWARE == FIRMWARE_GB
     i2cLength = numOfLeds * 3;
 #ifdef SPLIT
     /**
