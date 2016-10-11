@@ -42,6 +42,7 @@
 #include "fncontrol.h"
 #include "esctilde.h"
 #include "keydownbuffer.h"
+#include "numlocklayer.h"
 
 #include "oddebug.h"
 
@@ -154,6 +155,7 @@ static void initPreparing(void){
     initKeymapper();    // first
 #endif
     initBeyondFn();     // 1...
+    initNumlockLayer();
     initEscTilde();     // last
 
     initKeyDownBuffer();

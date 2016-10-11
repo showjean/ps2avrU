@@ -27,6 +27,7 @@
 #define OPTION_INDEX_LOCK_LED_NL    0x85
 #define OPTION_INDEX_LOCK_LED_CL    0x86
 #define OPTION_INDEX_LOCK_LED_SL    0x87
+#define OPTION_INDEX_NUMLOCK_LAYER  0x88
 
 #define OPTION_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define OPTION_GET_REPORT_LENGTH_INFO				100
@@ -104,6 +105,9 @@ typedef struct {
     // data size 1byte
     //ver 3byte, firm 1byte, lockled 3byte
     // = 7 bytes
+    // ver 1.2.4
+    // numlocklayer 1byte
+    // = 1 byte
 
     uint8_t size;
     uint8_t num;
@@ -130,6 +134,7 @@ typedef struct {
     uint8_t version[3];    // r/o, 1.2.0
     uint8_t firmware;      // r/o, 0= ps2avrGB, 1=ps2varGB4U ...
     lock_led_t lockled;
+    uint8_t numlocklayer;      //
 
 
 } option_info_t;

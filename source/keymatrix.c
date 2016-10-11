@@ -22,6 +22,7 @@
 #include "keyindex.h"
 #include "dualaction.h"
 #include "keydownbuffer.h"
+#include "numlocklayer.h"
 #include "oddebug.h"
 
 // ROWS*COLUMNS bit matrix
@@ -111,6 +112,27 @@ void setFnPressed(uint8_t xFnIndex)
 //    DBG1(0x34, (uchar *)&__pressedFnIndex, 1);
 }
 
+bool isFnPressed(void)
+{
+    return __pressedFnIndex != LAYER_NOTHING;
+}
+
+uint8_t getCurrentFnLayer(void)
+{
+    if(getNumlockLayer())
+    {
+        return getNumlockLayer();
+    }
+    else if(getBeyondFN())
+    {
+        return getBeyondFN();
+    }
+    else
+    {
+        return LAYER_NORMAL;
+    }
+}
+
 uint8_t getLayer(void) {
 	uint8_t col, row, keyidx, cur, gLayer, fnScanLayer;
 
@@ -124,11 +146,7 @@ uint8_t getLayer(void) {
 	*/
 	if(__pressedFnIndex != LAYER_NOTHING) return __pressedFnIndex;
 
-	if(getBeyondFN()) {
-	    fnScanLayer = getBeyondFN();
-    }else{
-        fnScanLayer = LAYER_NORMAL;
-    }
+	fnScanLayer = getCurrentFnLayer();
 
     gLayer = LAYER_NOTHING;
 

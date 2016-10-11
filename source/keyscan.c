@@ -46,13 +46,13 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     // fn 키가 눌렸을 경우 해당 위치의 키는 무시한다.
     uint8_t gLayer, gKeyIndex, gFnIndex;
-    if(getBeyondFN()) {
-        gLayer = getBeyondFN();
-    }else{
-        gLayer = LAYER_NORMAL;
-    }
 
-    if(isFnPosition(xCol, xRow))
+    gLayer = getCurrentFnLayer();
+    DBG1(0xC2, (uchar *)&gLayer, 1);
+
+    if(isFnPosition(xCol, xRow) /* -> */ && (xIsDown || (!xIsDown && isFnPressed())) /* <- */)
+        // 키 입력 동안 레이어 토글이 변경될 경우 FN 키와 같은 위치의 키들은 up 신호가 무시 되어 계속 눌려진 상태가 된다. 이를 패치.
+        // 이 경우 fnPressed가 false 상태로 진행되므로 이를 확인
     {
         // 현재 레이어에서 눌린 FN키가 듀얼 액션 키이면, 변경된 레이어의 키를 듀얼 액션 키로 강제 치환시켜서 진행
         gKeyIndex = getCurrentKeyindex(gLayer, xRow, xCol);
@@ -165,7 +165,8 @@ static uint8_t processKeyIndex(uint8_t xLayer, bool xPrev, bool xCur, uint8_t xC
             keyidx = getCurrentKeyindex(xLayer, xRow, xCol);
             oldDownedMatrix[xLayer][xRow] &= ~BV(xCol);
 
-//            DBG1(0xC1, (uchar *)&keyidx, 1);
+            DBG1(0xC0, (uchar *)&xLayer, 1);
+            DBG1(0xC1, (uchar *)&keyidx, 1);
             putChangedKey(keyidx, false, xCol, xRow);
         }
     }
@@ -212,7 +213,7 @@ static void scanKeyWithDebounce(void) {
 	uint8_t row, col, prev, cur, result;
     uint8_t gLayer = getLayer();
 
-//    DBG1(0x33, (uchar *)&gLayer, 1);
+    DBG1(0x33, (uchar *)&gLayer, 1);
 
     uint8_t *gMatrix = getCurrentMatrix();
     uint8_t *gPrevMatrix = getPrevMatrix();

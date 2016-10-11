@@ -23,9 +23,11 @@ bool isReleaseAll(void);
 // function that determine keymap
 // 0 = normal, 1 = fn, 2 = fn2, 3 = fn3
 uint8_t getLayer(void);
+uint8_t getCurrentFnLayer(void);
 bool isFnPosition(uint8_t xCol, uint8_t xRow);
 void clearFnPosition(void);
 void setFnPressed(uint8_t xFnIndex);
+bool isFnPressed(void);
 
 uint8_t getLiveMatrix(void);
 void setCurrentMatrixAfter(void);

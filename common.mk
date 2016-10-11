@@ -101,6 +101,7 @@ endif
 			$(COMMON_DIR)/usbmain.c \
 			$(COMMON_DIR)/usbdrv/usbdrv.c \
 			$(COMMON_DIR)/timer.c \
+			$(COMMON_DIR)/numlocklayer.c \
 			$(COMMON_DIR)/main.c \
 			
 #put additional assembler source file here
