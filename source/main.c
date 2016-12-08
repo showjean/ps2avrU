@@ -180,12 +180,12 @@ int main(void) {
         // waiting during clear debounce
     }
 
-    uint8_t row, col, cur, keyidx;  
+    uint8_t row, col, cur, keyidx;
     uint8_t *gMatrix = getCurrentMatrix();
 
     // debounce cleared => compare last matrix and current matrix
     for(row=0;row<ROWS;++row)
-    {   
+    {
         if(gMatrix[row] == 0) continue;
         for(col=0;col<COLUMNS;++col)
         {
@@ -236,7 +236,7 @@ int main(void) {
         eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);
     }else{
         // 255 이면;
-        INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)  
+        INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)
     }
 
     // usb가 default;
