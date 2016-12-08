@@ -512,7 +512,8 @@ void usb_main(void) {
         if(interfaceReady == false && interfaceCount++ > 1000)
         {
             cli();
-            usbDeviceDisconnect();  /* do this while interrupts are disabled */
+
+            usbDeviceDisconnect();
             wdt_enable(WDTO_15MS);
             for(;;);
         }

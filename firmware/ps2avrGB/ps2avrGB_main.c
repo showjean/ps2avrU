@@ -26,7 +26,7 @@
 // _______________________________________________________________ boot
 void delegateGotoBootloader(void){
 	sleepLED();
-	usbDeviceDisconnect();  /* do this while interrupts are disabled */
+	usbDeviceDisconnect();
 	wdt_enable(WDTO_15MS);
 	for(;;);
 
