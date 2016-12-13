@@ -73,11 +73,11 @@ PS/2
 LED 모드 변경 단축키
 - **ESC + caps lock**
 
-    1. LED off -  꺼짐
-    2. fading - 숨쉬기
-    3. on - 계속 켜짐
-    4. key down level up - 키 입력이 잦을수록 밝아짐
-    5. key down level down - 키 입력이 잦을수록 어두워짐
+1. LED off -  꺼짐
+2. fading - 숨쉬기
+3. on - 계속 켜짐
+4. key down level up - 키 입력이 잦을수록 밝아짐
+5. key down level down - 키 입력이 잦을수록 어두워짐
 
 Full LED의 최대 밝기를 조절할 수 있는 기능 키
 - KEY_LED_UP : 최대 밝기 증가
@@ -160,4 +160,5 @@ Bootmapper Client(부트맵퍼 클라이언트)를 이용해서 키맵핑/매크
 
 
 ## Store Site
-<http://winkeyless.kr>
+Global : <http://winkeyless.kr>
+한국 : <http://winkeyless.com>
