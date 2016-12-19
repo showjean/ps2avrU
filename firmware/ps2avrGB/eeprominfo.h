@@ -31,7 +31,7 @@
 #define EEPROM_LED2_COLOR_3		400	// 3byte ~402
 #define EEPROM_LED2_SKIP_FRAME  403	// 1byte
 #define EEPROM_LOCK_LED_STATUS  404	// 3byte
-#define EEPROM_NUMLOCK_LAYER    407	// 3byte
+#define EEPROM_NUMLOCK_LAYER    407	// 1byte
 #define EEPROM_USB_COMPATIBILITY    408	// 1byte
 // 408~420 : 13bytes
 #define EEPROM_MACRO			421	// ~996

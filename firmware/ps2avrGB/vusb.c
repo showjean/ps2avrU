@@ -364,11 +364,15 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     return CUSTOM_MACRO_SIZE_MAX;
 
                 }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
-                    // cst macro
+                    // dual action
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(DUALACTION_ADDRESS);
                     return DUALACTION_BYTES;
 
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO12){
+                    usbMsgFlags = USB_FLG_USE_USER_RW;
+                    usbMsgPtr = (usbMsgPtr_t)(EEPROM_MACRO+(MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_QUICK_MACRO1)));
+                    return MACRO_SIZE_MAX;
 #else
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
                     // keymap
@@ -382,11 +386,14 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     return 0;
 
                 }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
-                    // cst macro
+                    // dual action
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
                     usbMsgPtr = (usbMsgPtr_t)(0);
                     return 0;
-
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO12){
+                    usbMsgFlags = USB_FLG_USE_USER_RW;
+                    usbMsgPtr = (usbMsgPtr_t)(0);
+                    return 0;
 #endif
             	}else {
             		return rq->wLength.word;
@@ -442,6 +449,24 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
     }
 
     return 0;
+}
+/*
+ * EEPROM Quick macro reading
+ */
+uchar usbFunctionRead(uchar *data, uchar len)
+{
+    uchar i = len;
+    usbMsgPtr_t r = usbMsgPtr;
+    /* EEPROM data */
+    do{
+       uchar c = eeprom_read_byte(r);
+       *data++ = c;
+       r++;
+    }while(--i);
+
+    usbMsgPtr = r;
+
+    return len;
 }
 
 /**
