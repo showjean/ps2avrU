@@ -302,6 +302,11 @@ USB_PUBLIC usbMsgLen_t usbFunctionDescriptor(struct usbRequest *rq)
 #define HID_REPORT_BOOT     (0x0300 | REPORT_ID_BOOT)
 #define HID_REPORT_OPTION   (0x0300 | REPORT_ID_INFO)
 
+#define NEXT_RAINBOW    1
+#define NEXT_QUICK_MACRO 2
+
+static int quickMacroAddress = 0;
+static bool IsAddressHead = false;
 
 /**
  * This function is called whenever we receive a setup request via USB.
@@ -313,7 +318,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
 
     delegateInterfaceReadyUsb();
 
-    static uint8_t readyForRainbowColor = 0;
+    static uint8_t readyForNext = 0;
 
     usbRequest_t *rq = (void *)data;
 //    DBG1(0xCC, data, 8);
@@ -329,8 +334,12 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             }else if(rq->wValue.word == HID_REPORT_BOOT){
 
             	if(rq->wLength.word == OPTION_GET_REPORT_LENGTH_RAINBOW){	// ready for rainbow color setting;
-            		readyForRainbowColor = 1;
+            		readyForNext = NEXT_RAINBOW;
+            	}else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO12){
+            	    readyForNext = rq->wLength.word;
             	}
+
+
             }else if(rq->wValue.word == HID_REPORT_OPTION){
             	// length : rq->wLength.word 필요한 리포트를 length로 구분한다.
 
@@ -412,12 +421,19 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
             }else if(rq->wValue.word == HID_REPORT_BOOT){
                 // boot
 //                isStart = 1;
-                if(readyForRainbowColor==1){
+                if(readyForNext == NEXT_RAINBOW){
                 	data[1] = OPTION_INDEX_COLOR_RAINBOW_INIT;
+                	// init setting;
                 	setOptions((uint8_t *)data);
                 	expectReport = 4;
+                }else if(readyForNext >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO1 && readyForNext <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO12){
+                    // write quick macro
+                    IsAddressHead = true;
+                    quickMacroAddress = EEPROM_MACRO + (MACRO_SIZE_MAX * (readyForNext - OPTION_GET_REPORT_LENGTH_QUICK_MACRO1));
+                    expectReport = 5;
                 }
-                readyForRainbowColor = 0;
+                readyForNext = 0;
+
                 return USB_NO_MSG; // Call usbFunctionWrite with data
             }else if(rq->wValue.word == HID_REPORT_OPTION){
             	// options
@@ -451,6 +467,29 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
     return 0;
 }
 /*
+ * EEPROM Quick macro writing
+ */
+void updateQuickMacro(uint8_t *data, uint8_t len)
+{
+    if(IsAddressHead)
+    {
+        IsAddressHead = false;
+        // 처음에는 인덱스와 ID를 제거해준다.
+        len += -2;
+        data += 2;
+    }
+    eeprom_update_block(data, (uint8_t *)quickMacroAddress, len);
+    quickMacroAddress += len;
+
+    /*uint8_t i;
+    for(i = 0; i< len; ++i)
+    {
+        eeprom_update_byte((uint8_t *)quickMacroAddress, *data);
+        quickMacroAddress++;
+        data++;
+    }*/
+}
+/*
  * EEPROM Quick macro reading
  */
 uchar usbFunctionRead(uchar *data, uchar len)
@@ -458,13 +497,15 @@ uchar usbFunctionRead(uchar *data, uchar len)
     uchar i = len;
     usbMsgPtr_t r = usbMsgPtr;
     /* EEPROM data */
-    do{
+    /*do{
        uchar c = eeprom_read_byte(r);
        *data++ = c;
        r++;
-    }while(--i);
+    }while(--i);*/
 
-    usbMsgPtr = r;
+    eeprom_read_block(data, (void *)r, i);
+
+    usbMsgPtr = r + i;
 
     return len;
 }
@@ -512,6 +553,9 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
     }else if (expectReport == 4){
     	// rainbow color setting
     	setOptions((uint8_t *)data);
+    }else if (expectReport == 5){
+        // write quick macro;
+        updateQuickMacro((uint8_t *)data, len);
     }
 
     return 0x01;

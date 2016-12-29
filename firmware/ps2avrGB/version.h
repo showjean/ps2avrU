@@ -9,9 +9,9 @@
 #define HAS_RGB_LED     (FIRMWARE == FIRMWARE_GB || FIRMWARE == FIRMWARE_GB_SPLIT)
 #define HAS_OPTIONS     (FIRMWARE == FIRMWARE_GB || FIRMWARE == FIRMWARE_GB_SPLIT)
 
-// Ver 1.2
+// Ver
 #define VERSION_MAJOR   1
-#define VERSION_MINOR   2
-#define VERSION_PATCH   5
+#define VERSION_MINOR   3
+#define VERSION_PATCH   0
 
 #endif
