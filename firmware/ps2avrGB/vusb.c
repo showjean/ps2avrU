@@ -386,23 +386,25 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER4){
                     // keymap
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
+                    usbMsgPtr = (usbMsgPtr_t)(KEYMAP_ADDRESS + (ROWS * COLUMNS * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_KEYMAP_LAYER1)));
+                    return OPTION_GET_REPORT_LENGTH_KEYMAP;
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_MACRO12){
                     // cst macro
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
+                    usbMsgPtr = (usbMsgPtr_t)(CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_MACRO1)));
+                    return CUSTOM_MACRO_SIZE_MAX;
 
                 }else if(rq->wLength.word == OPTION_GET_OPTION_INDEX_DUALACTION){
                     // dual action
                     usbMsgFlags = USB_FLG_MSGPTR_IS_ROM;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
+                    usbMsgPtr = (usbMsgPtr_t)(DUALACTION_ADDRESS);
+                    return DUALACTION_BYTES;
+
                 }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO12){
                     usbMsgFlags = USB_FLG_USE_USER_RW;
-                    usbMsgPtr = (usbMsgPtr_t)(0);
-                    return 0;
+                    usbMsgPtr = (usbMsgPtr_t)(EEPROM_MACRO+(MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_QUICK_MACRO1)));
+                    return MACRO_SIZE_MAX;
+
 #endif
             	}else {
             		return rq->wLength.word;
