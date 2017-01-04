@@ -57,7 +57,8 @@ PS/2
 
 
 - 밝기 변경
-    - SHIFT+KEY_LED_UP, SHIFT+KEY_LED_DOWN
+    - SHIFT + LED BR UP
+    - SHIFT + LED BR DOWN
 
 > RGB LED의 밝기가 밝아질 수록 full LED는 어두워집니다.
 
@@ -80,8 +81,8 @@ LED 모드 변경 단축키
 5. key down level down - 키 입력이 잦을수록 어두워짐
 
 Full LED의 최대 밝기를 조절할 수 있는 기능 키
-- KEY_LED_UP : 최대 밝기 증가
-- KEY_LED_DOWN : 최대 밝기 감소
+- LED BR UP : 최대 밝기 증가
+- LED BR DOWN : 최대 밝기 감소
 
 스위치 full LED의 조절 키들은 기본적으로 다음의 위치에 매핑되어 있습니다.
 
