@@ -98,7 +98,9 @@ static void push(uint8_t item) {
     if(record)
         lastMAKE[lastMAKE_SIZE++] = item;
 
-    rear = (rear+1)%QUEUE_SIZE;
+//    rear = (rear+1)%QUEUE_SIZE;
+    if(++rear >= QUEUE_SIZE) rear = 0;
+
     if(front==rear) {
         rear = (rear!=0) ? (rear-1):(QUEUE_SIZE-1);
         return;
@@ -110,7 +112,8 @@ static uint8_t pop(void) {
     if(front==rear) {
         return 0;
     }
-    front = (front+1)%QUEUE_SIZE;
+//    front = (front+1)%QUEUE_SIZE;
+    if(++front >= QUEUE_SIZE) front = 0;
 
     return QUEUE[front];
 }

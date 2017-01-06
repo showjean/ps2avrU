@@ -30,8 +30,7 @@ void clearMacroKeyIndex(void){
 void pushMacroKeyIndex(uint8_t item) {
     
 //    rear = (rear+1) % MACRO_BUFFER_SIZE;
-    ++rear;
-    if(rear >= MACRO_BUFFER_SIZE) rear -= MACRO_BUFFER_SIZE;
+    if(++rear >= MACRO_BUFFER_SIZE) rear = 0;
 
     if(front == rear) {
         rear = (rear!=0) ? (rear-1):(MACRO_BUFFER_SIZE-1);
@@ -45,8 +44,7 @@ uint8_t popMacroKeyIndex(void) {
         return 0;
     }
 //    front = (front+1) % MACRO_BUFFER_SIZE;
-    ++front;
-    if(front >= MACRO_BUFFER_SIZE) front -= MACRO_BUFFER_SIZE;
+    if(++front >= MACRO_BUFFER_SIZE) front = 0;
 
     return QUEUE[front];
 }
@@ -59,6 +57,7 @@ void stopRepeat(void){
 }
 
 void clearRepeat(void){
+    // 매크로 버퍼 초기화;
     rear = 0;
     front = 0;
     memset(QUEUE, 0, MACRO_BUFFER_SIZE);
