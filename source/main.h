@@ -8,6 +8,7 @@
 // only for test, use makefile -D option on release.bat
 // #define GHOST_KEY_PREVENTION	//ghost key prevention
 //#define DISABLE_HARDWARE_MENU
+//#define DISABLE_HARDWARE_KEYMAPPING
 
 #if defined( DEBUG_LEVEL )
     #if !defined(DISABLE_HARDWARE_KEYMAPPING)

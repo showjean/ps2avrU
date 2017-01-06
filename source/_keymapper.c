@@ -132,7 +132,7 @@ static uint8_t usingKeys[11] = {
 #endif
 
 // define functions
-void readMacro(uint8_t xMacroIndex);
+//void readMacro(uint8_t xMacroIndex);
 
 #ifndef DISABLE_HARDWARE_MENU
 void printPrepareString(void);

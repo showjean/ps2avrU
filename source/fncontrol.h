@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "keymapper.h"
+#include "quickmacro.h"
 
 #define EXTRA_FN				KEY_ESC		// led 모드변경과 beyond_fn 취소를 위한 조합키
 #define LED_KEY					KEY_CAPS	// led 모드 변경 키 (EXTRA_FN 와 조합)

@@ -6,7 +6,7 @@
 #include "keydownbuffer.h"
 #include "keyindex.h"
 #include "keymap.h"
-#include "keymapper.h"
+#include "quickmacro.h"
 #include "keymatrix.h"
 #include "fncontrol.h"
 #include "bootmapper.h"

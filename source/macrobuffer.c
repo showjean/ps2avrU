@@ -12,7 +12,7 @@
 #include "hardwareinfo.h"
 #include "custommacro.h"
 #include "oddebug.h"
-#include "keymapper.h"
+#include "quickmacro.h"
 
 static uint8_t QUEUE[MESSAGE_SIZE_MAX];
 static int rear = 0, front = 0;
@@ -77,7 +77,11 @@ macro_key_t popMacroKey(void) {
 
 		clearRepeat();
 
-		readCustomMacroAt(gKey.keyindex - KEY_CST_MAC1);
+		if(gKey.keyindex >= KEY_MAC1){    // eeprom macro
+		    readMacro(gKey.keyindex - KEY_MAC1);
+		}else{
+		    readCustomMacroAt(gKey.keyindex - KEY_CST_MAC1);
+		}
 
 		_isRepeat = true;
 

@@ -3,11 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "keymapper.h"
-
-#ifndef DISABLE_HARDWARE_MENU
-void toggleEscTilde(void);
-#endif
+#include "quickmacro.h"
 
 void initEscTilde(void);
 bool isEscTilde(void);

@@ -18,7 +18,7 @@
 #include "keymap.h"
 #include "fncontrol.h"
 //#include "lazyfn.h"
-#include "keymapper.h"
+#include "quickmacro.h"
 #include "keyindex.h"
 #include "dualaction.h"
 #include "keydownbuffer.h"

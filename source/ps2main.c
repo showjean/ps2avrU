@@ -25,7 +25,7 @@
 #include "hardwareinfo.h"
 #include "keymatrix.h"
 #include "ledrender.h"
-#include "keymapper.h"
+#include "quickmacro.h"
 #include "keyindex.h"
 #include "macrobuffer.h"
 #include "enterframe.h"
@@ -295,9 +295,6 @@ static void initPs2(void)
 
         initAfterInterfaceMount();
 
-#ifndef DISABLE_HARDWARE_MENU
-        startKeyMappingOnBoot();
-#endif
     }
 } 
 

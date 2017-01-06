@@ -27,7 +27,7 @@
 #include "hardwareinfo.h"
 #include "hardwareconfig.h"
 #include "keymap.h" 
-#include "keymapper.h"
+#include "quickmacro.h"
 #include "keyindex.h"
 #include "quickswap.h"
 //#include "lazyfn.h"
@@ -151,9 +151,7 @@ void initAfterInterfaceMount(void){
 static void initPreparing(void){
     // init sw
     initQuickSwap();
-#ifndef DISABLE_HARDWARE_MENU
-    initKeymapper();    // first
-#endif
+
     initBeyondFn();     // 1...
     initNumlockLayer();
     initEscTilde();     // last
@@ -199,15 +197,7 @@ int main(void) {
                 }
 #endif
 
-#ifndef DISABLE_HARDWARE_MENU
-                if(keyidx == KEY_M) {
-                    readyKeyMappingOnBoot();
-                }
-#endif
 #ifndef INTERFACE_ONLY_USB
-#ifndef DISABLE_HARDWARE_MENU
-                else
-#endif
                 if(keyidx == KEY_U) {
                     INTERFACE = INTERFACE_USB;
                 }else if(keyidx == KEY_P) {

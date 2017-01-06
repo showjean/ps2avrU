@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "keymapper.h"
+#include "quickmacro.h"
 
 #if 0
 void initLazyFn(void);

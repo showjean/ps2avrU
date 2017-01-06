@@ -14,7 +14,6 @@
 #include "keymap.h"
 #include "keymatrix.h"
 #include "ledrender.h"
-#include "keymapper.h"
 #include "dualaction.h"
 #include "keymatrix.h"
 //#include "keydownbuffer.h"
@@ -50,145 +49,9 @@ uint8_t getBeyondFnLed(void){
     return _beyondFnLed;
 }
 
-#ifdef FN_TOGGLE_TEST
-static void __setBeyondFnLed(void)
-{
-    setLEDIndicate();
-
-    if(getBeyondFnLed() == BEYOND_FN_LED_NL){
-        setLed(LED_STATE_NUM, getBeyondFN());
-    }else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
-        setLed(LED_STATE_SCROLL, getBeyondFN());
-    }
-}
-
-void setBeyondFnLed(uint8_t xLed){
-    _beyondFnLed = xLed;
-    /*
-    	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 1 : off
-    	 TOGGLE_BEYOND_FN_LED_NL == 0, TOGGLE_BEYOND_FN_LED_SL == 1 : NL
-    	 TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
-    	 */
-
-    if(_beyondFnLed == BEYOND_FN_LED_NL){
-    	eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) & ~(_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
-    }else if(_beyondFnLed == BEYOND_FN_LED_SL){
-        eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) & ~(_BV(TOGGLE_BEYOND_FN_LED_SL))));
-    }else{
-        eeprom_update_byte((uint8_t *) EEPROM_ENABLED_OPTION, ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) | (_BV(TOGGLE_BEYOND_FN_LED_NL))) | (_BV(TOGGLE_BEYOND_FN_LED_SL))));
-    }
-
-#ifdef FN_TOGGLE_TEST
-    __setBeyondFnLed();
-#endif
-}
-#endif
-
-#if 0 //ndef DISABLE_HARDWARE_MENU
-
-#define CMD_OFF_BEYOND_FN_LED 1
-#define CMD_NL_BEYOND_FN_LED 2
-#define CMD_SL_BEYOND_FN_LED 3
-#define CMD_EXIT_BEYOND_FN_LED 4
-#define CMD_BACK_BEYOND_FN_LED 6
-
-const char str_select_beyond_fn[] PROGMEM = "fn2/3 led";
-const char str_beyond_fn_led_nl[] PROGMEM = "nl";
-const char str_beyond_fn_led_sl[] PROGMEM = "sl";
-
-void printMenuBeyondFn(void);
-void printContentsBeyondFn(void);
-void putKeyindexBeyondFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
-
-keymapper_driver_t driverKeymapperBeyondFn = {
-    printMenuBeyondFn,
-    printContentsBeyondFn,
-    putKeyindexBeyondFn
-};
-
-static void printBeyondFnLedState(void){
-    printStringFromFlash(str_select_beyond_fn);
-    printStringFromFlash(str_space);
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_space);
-    if(getBeyondFnLed() == BEYOND_FN_LED_NL){
-        printStringFromFlash(str_beyond_fn_led_nl);
-    }else if(getBeyondFnLed() == BEYOND_FN_LED_SL){
-        printStringFromFlash(str_beyond_fn_led_sl);
-    }else{
-        printStringFromFlash(str_off);
-    }
-}
-
-void printMenuBeyondFn(void){
-    printBeyondFnLedState();
-}
-
-void printContentsBeyondFn(void){
-    printBeyondFnLedState();
-    printEnter();
-    printString(toString(CMD_OFF_BEYOND_FN_LED));
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_off);
-    printEnter();
-    printString(toString(CMD_NL_BEYOND_FN_LED));
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_beyond_fn_led_nl);
-    printEnter();
-    printString(toString(CMD_SL_BEYOND_FN_LED));
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_beyond_fn_led_sl);
-    printEnter();
-    printString(toString(CMD_EXIT_BEYOND_FN_LED));
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_exit); // exit
-    printEnter();
-    printString(toString(CMD_BACK_BEYOND_FN_LED));
-    printStringFromFlash(str_colon);
-    printStringFromFlash(str_back);
-    printEnter();
-}
-
-void putKeyindexBeyondFn(uint8_t xCmd, uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown){
-    if(xCmd == CMD_OFF_BEYOND_FN_LED || xCmd == CMD_NL_BEYOND_FN_LED || xCmd == CMD_SL_BEYOND_FN_LED){
-        setStep(STEP_INPUT_COMMAND);
-        setBeyondFnLed(xCmd-1);
-        printBeyondFnLedState();
-        printEnter();
-    }else if(xCmd == CMD_EXIT_BEYOND_FN_LED){
-        setStep(STEP_EXIT);
-        stopKeyMapping();
-    }else if(xCmd == CMD_BACK_BEYOND_FN_LED){     
-        setStep(STEP_BACK);
-    }
-}
-#endif
-
 
 void initBeyondFn(void){
-    /*
-     TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 1 : off
-     TOGGLE_BEYOND_FN_LED_NL == 0, TOGGLE_BEYOND_FN_LED_SL == 1 : NL
-     TOGGLE_BEYOND_FN_LED_NL == 1, TOGGLE_BEYOND_FN_LED_SL == 0 : SL
-     */
-//    _beyondFnLedEnabled = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_BEYOND_FN_LED_NL);
-    /*if(
-        ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_ON
-        && ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_OFF
-    ){
-        _beyondFnLed = BEYOND_FN_LED_NL;
-    }else if(
-        ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_NL) & 0x01) == OPTION_OFF
-        && ((eeprom_read_byte((uint8_t *) EEPROM_ENABLED_OPTION) >> TOGGLE_BEYOND_FN_LED_SL) & 0x01) == OPTION_ON
-    ){
-        _beyondFnLed = BEYOND_FN_LED_SL;
-    }else{
-        _beyondFnLed = BEYOND_FN_LED_OFF;
-    }*/
 
-#if 0 //ndef DISABLE_HARDWARE_MENU
-    addKeymapperDriver(&driverKeymapperBeyondFn);
-#endif
 }
 
 
@@ -278,20 +141,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
             	}
              }
 
-#ifdef FN_TOGGLE_TEST
-             if(getBeyondFnLed() == BEYOND_FN_LED_OFF){
-                 if(_beyondFnIndex == 0){
-                    blinkOnce(100);
-                 }else{
-                    blinkOnce(100);
-                    _delay_ms(80);
-                    blinkOnce(70);
-                 }
-             }
-             __setBeyondFnLed();
-#else
              setLEDIndicate();
-#endif
              _prevBeyondFnIndex = _beyondFnIndex;   // 더이상 변화가 없도록;
 
 

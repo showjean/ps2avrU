@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "keymapper.h"
+#include "quickmacro.h"
 #include "macrobuffer.h"
 #include "bootmapper.h"
 #include "ledrender.h"
