@@ -14,24 +14,27 @@
 #include "oddebug.h"
 #include "quickmacro.h"
 
-static uint8_t QUEUE[MESSAGE_SIZE_MAX];
+static uint8_t QUEUE[MACRO_BUFFER_SIZE];
 static int rear = 0, front = 0;
 
-static uint8_t _pressedBuffer[MACRO_SIZE_MAX] = {0};
+static uint8_t _pressedBuffer[MACRO_PRESSED_BUFFER_SIZE] = {0};
 
 void clearMacroKeyIndex(void){
 	rear = 0;
 	front = 0;
-	memset(QUEUE, 0, MESSAGE_SIZE_MAX);
-	memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
+	memset(QUEUE, 0, MACRO_BUFFER_SIZE);
+	memset(_pressedBuffer, 0, MACRO_PRESSED_BUFFER_SIZE);
 }
 // Queue operation -> push, pop
 // keyindex를 저장한다.
 void pushMacroKeyIndex(uint8_t item) {
     
-    rear = (rear+1) % MESSAGE_SIZE_MAX;
+//    rear = (rear+1) % MACRO_BUFFER_SIZE;
+    ++rear;
+    if(rear >= MACRO_BUFFER_SIZE) rear -= MACRO_BUFFER_SIZE;
+
     if(front == rear) {
-        rear = (rear!=0) ? (rear-1):(MESSAGE_SIZE_MAX-1);
+        rear = (rear!=0) ? (rear-1):(MACRO_BUFFER_SIZE-1);
         return;
     }
     QUEUE[rear] = item;
@@ -41,7 +44,9 @@ uint8_t popMacroKeyIndex(void) {
     if(front == rear) {
         return 0;
     }
-    front = (front+1) % MESSAGE_SIZE_MAX;
+//    front = (front+1) % MACRO_BUFFER_SIZE;
+    ++front;
+    if(front >= MACRO_BUFFER_SIZE) front -= MACRO_BUFFER_SIZE;
 
     return QUEUE[front];
 }
@@ -52,8 +57,26 @@ bool isRepeat(void){
 void stopRepeat(void){
 	_isRepeat = false;
 }
+
 void clearRepeat(void){
-	clearMacroKeyIndex();
+    rear = 0;
+    front = 0;
+    memset(QUEUE, 0, MACRO_BUFFER_SIZE);
+
+    // 눌려졌던 키들 up
+    uint8_t i;
+    for( i = 0; i< MACRO_PRESSED_BUFFER_SIZE; ++i)
+    {
+        if(_pressedBuffer[i] > 0)
+        {
+            pushMacroKeyIndex(_pressedBuffer[i]);
+        }
+        else
+        {
+            break;
+        }
+    }
+
 	closeCustomMacro();
 }
 
@@ -71,17 +94,12 @@ macro_key_t popMacroKey(void) {
 	 * 매크로키가 발견되면 현재 매크로 중단,
 	 * 새 매크로 시작;
 	 */
-//	if(gKey.keyindex >= KEY_CST_MAC1 && gKey.keyindex <= KEY_CST_MAC12){
     if(isMacroKey(gKey.keyindex)){
 		DBG1(0x77, (void *)&gKey.keyindex, 1);
 
 		clearRepeat();
 
-		if(gKey.keyindex >= KEY_MAC1){    // eeprom macro
-		    readMacro(gKey.keyindex - KEY_MAC1);
-		}else{
-		    readCustomMacroAt(gKey.keyindex - KEY_CST_MAC1);
-		}
+        readCustomMacroAt(gKey.keyindex - KEY_CST_MAC1);
 
 		_isRepeat = true;
 
@@ -90,7 +108,7 @@ macro_key_t popMacroKey(void) {
 	}
 
     if(gKey.keyindex == 0) {
-        memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
+        memset(_pressedBuffer, 0, MACRO_PRESSED_BUFFER_SIZE);
         return gKey;
     }
 
@@ -117,7 +135,7 @@ bool isEmptyMacroKeyIndex(void) {
 
 // 새로운 매크로 시작전에 초기화;
 void clearMacroPressedBuffer(void){
-    if(isEmptyMacroKeyIndex()) memset(_pressedBuffer, 0, MACRO_SIZE_MAX);
+    if(isEmptyMacroKeyIndex()) memset(_pressedBuffer, 0, MACRO_PRESSED_BUFFER_SIZE);
 }
 
 // 현재 매크로가 진행중인지 확인, 

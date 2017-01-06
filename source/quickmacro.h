@@ -35,7 +35,7 @@ bool isEepromMacroKey(uint8_t xKeyidx);
 // 매크로 적용됐으면 1, 아니면 0 반환;
 uint8_t applyMacro(uint8_t xKeyidx);
 uint8_t putKeyindex(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, uint8_t xIsDown);
-void readMacro(uint8_t xMacroIndex);
+//void readMacro(uint8_t xMacroIndex);
 
 bool isQuickMacro(void);
 void startQuickMacro(uint8_t xMacroIndex);

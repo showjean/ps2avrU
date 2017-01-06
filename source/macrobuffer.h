@@ -21,7 +21,7 @@ typedef struct {
 } macro_key_t;
 
 
-#define MESSAGE_SIZE_MAX 	300
+//#define MESSAGE_SIZE_MAX 	300
 
 // Queue operation -> push, pop
 void pushMacroKeyIndex(uint8_t item);

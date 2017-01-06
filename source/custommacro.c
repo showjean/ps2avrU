@@ -63,7 +63,14 @@ static void stopTimerCustomMacro(void){
 }
 
 bool hasCustomMacroAt(uint8_t xMacroIndex){
-    uint8_t gKeyidx = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * xMacroIndex));
+    uint8_t gKeyidx = 0;
+
+    if(xMacroIndex >= CUSTOM_MACRO_NUM)    // eeprom macro
+    {
+        gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * (xMacroIndex - CUSTOM_MACRO_NUM))));
+    }else{
+        gKeyidx = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS+(CUSTOM_MACRO_SIZE_MAX * xMacroIndex));
+    }
     // 매크로의 첫번째 byte의 값이 있는지 확인;
     if(gKeyidx > 0 && gKeyidx < 255){
         return true;
@@ -91,6 +98,18 @@ void closeCustomMacro(void){
     stopTimerCustomMacro();
 }
 
+static bool isOverSize(void)
+{
+    if(_currentMacroIndex >= CUSTOM_MACRO_NUM )
+    {   // eeprom
+        return MACRO_SIZE_MAX <= macroCounter;
+    }
+    else
+    {
+        return CUSTOM_MACRO_SIZE_MAX <= macroCounter;
+    }
+}
+
 static void pushNextKeyIndex(void){
     _countForMs = 0;
     _customMacroDelay = 0;
@@ -103,17 +122,21 @@ static void pushNextKeyIndex(void){
 //    uint8_t gIsDown;
     uint8_t gDelay;
     while(1){
-        if(CUSTOM_MACRO_SIZE_MAX <= macroCounter){
+        if(isOverSize()){
             closeCustomMacro();
             break;
         }
 
 //        DBG1(0x73, (void *)&macroCounter, 1);
-
         // key index
-        gKeyindex = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
-
-        gDownDelay = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
+        if(_currentMacroIndex >= CUSTOM_MACRO_NUM )
+        {   // eeprom
+            gKeyindex = eeprom_read_byte((uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * (_currentMacroIndex-CUSTOM_MACRO_NUM)) + macroCounter++));
+            gDownDelay = 0;
+        }else{
+            gKeyindex = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
+            gDownDelay = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);
+        }
         
 //        DBG1(0x74, (void *)&_currentMacroIndex, 1);
 //        DBG1(0x75, (void *)&gKeyindex, 1);

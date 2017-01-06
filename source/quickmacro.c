@@ -112,49 +112,25 @@ bool isEepromMacroKey(uint8_t xKeyidx){
 uint8_t applyMacro(uint8_t xKeyidx){
 
 	uint8_t gMacroIndex;
-	// DEBUG_PRINT(("applyMacro  xKeyidx: %d isMacroKey: %d \n", xKeyidx, isMacroKey(xKeyidx)));
+
 	if(isMacroKey(xKeyidx)){		
 		if(!isActiveMacro()){
-			if(xKeyidx >= KEY_MAC1){	// eeprom macro
-				gMacroIndex = xKeyidx - KEY_MAC1;			
-				uint8_t gKeyidx = eeprom_read_byte((uint8_t *)(EEPROM_MACRO+(MACRO_SIZE_MAX * gMacroIndex)));
-				if(gKeyidx > 0 && gKeyidx < 255){
-					clearMacroPressedBuffer();
-					readMacro(gMacroIndex);
-				}
-			}else{	// custom macro
-				gMacroIndex = xKeyidx - KEY_CST_MAC1;		
-				if(hasCustomMacroAt(gMacroIndex)){
-					clearMacroPressedBuffer();
-					readCustomMacroAt(gMacroIndex);
-				}
-			}
+		    gMacroIndex = xKeyidx - KEY_CST_MAC1;
+		    if(hasCustomMacroAt(gMacroIndex)){
+                clearMacroPressedBuffer();
+                readCustomMacroAt(gMacroIndex);
+		    }
 
-			return 1;
 		}else if(isRepeat()){
 			clearRepeat();
 			stopRepeat();
-
-			return 1;
 		}
+
+        return 1;
 	}
 	return 0;
 }
 
-void readMacro(uint8_t xMacroIndex){
-	if(xMacroIndex >= MACRO_NUM) return;
-
-	uint16_t gAddress;
-	uint8_t gKeyindex;
-	uint8_t k;
-	for(k = 0; k < MACRO_SIZE_MAX; ++k){
-		gAddress = EEPROM_MACRO + (k) + (MACRO_SIZE_MAX * xMacroIndex);	// key
-		gKeyindex = eeprom_read_byte((uint8_t *)gAddress);
-		if(gKeyindex > 0 && gKeyindex < 255){
-			pushMacroKeyIndex(gKeyindex);
-		}
-	}
-}
 
 void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
