@@ -1,5 +1,5 @@
-#ifndef HARDWARD_CONFIG_H
-#define HARDWARD_CONFIG_H
+#ifndef HARDWARE_CONFIG_H
+#define HARDWARE_CONFIG_H
 
 
 /* report id */

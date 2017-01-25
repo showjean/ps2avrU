@@ -387,6 +387,7 @@ section at the end of this file).
 /* #define USB_INTR_PENDING_BIT    INTF0 */
 /* #define USB_INTR_VECTOR         INT0_vect */
 
+#if USB_COUNT_SOF
 /* Set INT1 for D- falling edge to count SOF */
 /* #define USB_INTR_CFG            MCUCR */
 #define USB_INTR_CFG_SET        ((1 << ISC11) | (0 << ISC10))
@@ -396,5 +397,6 @@ section at the end of this file).
 /* #define USB_INTR_PENDING        GIFR */
 #define USB_INTR_PENDING_BIT    INTF1
 #define USB_INTR_VECTOR         INT1_vect
+#endif
 
 #endif /* __usbconfig_h_included__ */

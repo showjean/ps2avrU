@@ -266,7 +266,9 @@ static void clearReportBuffer(void);
 static void wakeUpUsb(void);
 static void countSleepUsb(void);
 #endif
+#if USB_COUNT_SOF
 static void wake_up_signal(void);
+#endif
 
 void delegateLedUsb(uint8_t xState){
     setLEDState(xState); // Get the state of all LEDs
@@ -517,6 +519,7 @@ void usb_main(void) {
             wdt_enable(WDTO_15MS);
             for(;;);
         }
+
 
 #if USB_COUNT_SOF
         if (usbSofCount != 0) {

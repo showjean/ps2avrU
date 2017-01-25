@@ -575,15 +575,6 @@ void ps2_main(void){
 
     for(;;){
 
-        // 카운트 이내에 신호가 잡히지 않으면 이동;
-        // 특별한 경우에만 발생하는 현상이다.
-       /* if(INTERFACE == INTERFACE_PS2 && interfaceReady == false && interfaceCount++ > 1000){
-            // move to usb
-            INTERFACE = INTERFACE_USB;
-            DBG1(0x99, 0, 0);
-            break;
-        }*/
-
         processRxPs2();
         processTxPs2();
 

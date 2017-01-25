@@ -14,21 +14,20 @@
 
 #define PWM_MAX             0xFF
 
+void initLED(void);
+void clearLEDInited(void);
 void setLEDState(uint8_t xState);
 uint8_t getLEDState(void);
+void setLEDIndicate(void);
+void setLed(uint8_t xLed, bool xBool);
+void blinkOnce(const int xStayMs);
 
 void increaseLedBrightness(uint8_t xFullLedMode);
 void reduceLedBrightness(uint8_t xFullLedMode);
 void changeFullLedState(uint8_t xFullLedMode);
-void clearLEDInited(void);
 
-void blinkOnce(const int xStayMs);
 void initFullLEDState(void);
 void initFullLEDStateAfter(void);
-void initLED(void);
-
-void setLEDIndicate(void);
-void setLed(uint8_t xLed, bool xBool);
 
 void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
 

@@ -579,6 +579,7 @@ static void changeLed2KeyEventMode(void){
 void stopPwmLed(bool xIsStop){
     // stop timer for usb report
 
+#if LEDFULLLED == (1 << 4)
     if(xIsStop)
     {
         timer1SetPrescaler( TIMERRTC_CLK_STOP );	// set prescaler
@@ -595,6 +596,9 @@ void stopPwmLed(bool xIsStop){
             setFullLedState();
         }
     }
+#else
+    // nothing;
+#endif
 }
 
 
@@ -1513,7 +1517,9 @@ void renderLED(void) {
 }
 
 void setPWM(int xValue){
+#if LEDFULLLED == (1 << 4)
 	timer1PWMBSet(xValue);
+#endif
 }
 
 void initFullLEDState(void) {
@@ -1527,7 +1533,9 @@ void initFullLEDState(void) {
 		timer2 = custom macro
 	*/
 
+#if LEDFULLLED == (1 << 4)
 	timer1PWMInit(8);
+#endif
 
 	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
