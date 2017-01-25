@@ -229,12 +229,12 @@ static void scanKeyWithDebounce(void) {
             if(result == 1){
                 continue;
             }else if(result == 2){
-                break;
+                goto BREAK;
             }
 
 		}
 	}
-
+BREAK:
     setCurrentMatrixAfter();
 
 }
