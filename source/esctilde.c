@@ -12,7 +12,7 @@ uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
     	if(xIsDown){
 			uint8_t gModi = getModifierDownBuffer();
 //			DBG1(0x33, (uchar *)&gModi, 1);
-			if(gModi == 0x02 || gModi == 0x20){
+			if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){
 				xKeyidx = KEY_HASH;
 				_isEscTildeDown = true;
 			}

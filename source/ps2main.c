@@ -246,7 +246,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
             	// ctrl + scroll lock 키는 LED 반응을 하지 않으니 설정안함
             	// ctrl + alt + s/l 등 다른 조합키와 섞이면 반응함
             	uint8_t gModi = getModifierDownBuffer();
-				if(!(gModi == 0x01) || !(gModi == 0x10) || !(gModi == 0x11)){
+				if(!(gModi == MODI_LCTRL) || !(gModi == MODI_RCTRL) || !(gModi == (MODI_LCTRL|MODI_RCTRL))){
 	            	push(WAIT_RX);
 				}
             }else{

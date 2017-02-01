@@ -4,6 +4,16 @@
 #include <stdbool.h>
 #include <avr/pgmspace.h>
 
+#define MODI_LCTRL       0x01
+#define MODI_LSHIFT      0x02
+#define MODI_LALT        0x04
+#define MODI_LGUI        0x08
+#define MODI_RCTRL       0x10
+#define MODI_RSHIFT      0x20
+#define MODI_RALT        0x40
+#define MODI_RGUI        0x80
+
+
 // fn
 #define KEY_FN          254
 #define KEY_LED         253

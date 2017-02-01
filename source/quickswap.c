@@ -55,7 +55,7 @@ static void applyQuickSwap(void) {
 
 	if(gModi != prevModifier) {
 
-        if(gModi == 0x2C || gModi == 0xE0 || gModi == 0x68 || gModi == 0xA4){	// ALT + GUI + R SHIFT
+        if(gModi == (MODI_RSHIFT|MODI_LALT|MODI_LGUI) || gModi == (MODI_RSHIFT|MODI_RALT|MODI_RGUI) || gModi == (MODI_RSHIFT|MODI_LALT|MODI_RGUI) || gModi == (MODI_RSHIFT|MODI_LALT|MODI_LGUI)){	// ALT + GUI + R SHIFT
             _quickSwapCount = 0;
             enabledQuickSwapCount = COUNT_TYPE_QUICKSWAP_ALT_GUI;
         }else{
@@ -67,7 +67,6 @@ static void applyQuickSwap(void) {
     }
 
 //}
-
 //static void countQuickSwapEnabled(void){
 	if(enabledQuickSwapCount && ++_quickSwapCount > quickSwapCountMax){
 		if(enabledQuickSwapCount == COUNT_TYPE_QUICKSWAP_ALT_GUI){

@@ -1553,7 +1553,7 @@ void initFullLEDState(void) {
 bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 	uint8_t gModi = getModifierDownBuffer();
 	if((xIsExtraFnDown && xKeyidx == LED_KEY)){
-		if(gModi == 0x02 || gModi == 0x20){	// shift
+		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){	// shift
 			changeFullLedState(FULL_LED_MODE2);
 		}else if(gModi == 0x01 || gModi == 0x10){	// control
 			changeLed2KeyEventMode();
@@ -1565,21 +1565,21 @@ bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 		changeFullLedState(FULL_LED_MODE1);
 		return 0;
 	}else if(xKeyidx == KEY_LED2){
-		if(gModi == 0x01 || gModi == 0x10){	// control
+		if(gModi == MODI_LCTRL || gModi == MODI_RCTRL){	// control
 			changeLed2KeyEventMode();
 		}else{
 			changeFullLedState(FULL_LED_MODE2);
 		}
 		return 0;
 	}else if(xKeyidx == KEY_LED_UP){
-		if(gModi == 0x02 || gModi == 0x20){
+		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){
 			increaseLedBrightness(FULL_LED_MODE2);
 		}else{
 			increaseLedBrightness(FULL_LED_MODE1);
 		}
 		return 0;
 	}else if(xKeyidx == KEY_LED_DOWN){
-		if(gModi == 0x02 || gModi == 0x20){
+		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){
 			reduceLedBrightness(FULL_LED_MODE2);
 		}else{
 			reduceLedBrightness(FULL_LED_MODE1);
