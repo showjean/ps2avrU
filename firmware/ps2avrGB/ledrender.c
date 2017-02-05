@@ -1112,14 +1112,14 @@ static void setLed2State(void){
 	*/
 //	uint8_t i;
 //	DBG1(0xAE, (uchar *)&_rgbMode, 1);
-
+#if HAS_RGB_LED
 	if((INTERFACE == INTERFACE_PS2)){
 		if(_rgbMode == 0)
 		    stopPwmLed(false);
 		else
 		    stopPwmLed(true);
     }
-
+#endif
     
 	if(_rgbMode == 1)
 	{
@@ -1169,19 +1169,19 @@ static void sendI2c(void){
 
 #if HAS_RGB_LED //FIRMWARE == FIRMWARE_GB
     i2cLength = numOfLeds * 3;
-#ifdef SPLIT
-    /**
-     *
-     */
-    uint8_t gLengthHalf = i2cLength >> 1;
-    i2cLength = i2cLength - gLengthHalf;
-    i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
-    i2cMasterSendNI(TARGET_ADDR_SPLIT, gLengthHalf, (u08 *)ledModified+i2cLength);
-#else
-    i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
-	
-#endif
-    i2cLength = 0;
+    #ifdef SPLIT
+        /**
+         *
+         */
+        uint8_t gLengthHalf = i2cLength >> 1;
+        i2cLength = i2cLength - gLengthHalf;
+        i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
+        i2cMasterSendNI(TARGET_ADDR_SPLIT, gLengthHalf, (u08 *)ledModified+i2cLength);
+    #else
+        i2cMasterSendNI(TARGET_ADDR, i2cLength, (u08 *)ledModified);
+
+    #endif
+        i2cLength = 0;
 #endif
 
 }
@@ -1537,13 +1537,16 @@ void initFullLEDState(void) {
 	timer1PWMInit(8);
 #endif
 
+#if HAS_RGB_LED
 	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
 	    stopPwmLed(false);
 	}else{
 	    stopPwmLed(true);
 	}
-
+#else
+	stopPwmLed(false);
+#endif
 
 	initFullLEDStateAfter();
 
