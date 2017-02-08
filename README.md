@@ -47,7 +47,8 @@ PS/2
 이에 관한 모든 설정은 "BootMapper Client"에서 할 수 있고, 밝기와 모드는 키보드에서도 직접 변경이 가능합니다.
 
 - 모드 변경 
-    - ESC + SHIFT + Caps lock 또는 (LED MODE2)
+    - ESC + SHIFT + Caps lock 
+    - 또는 SHIFT + LED MODE2
 
 > PS/2 연결시 RGB LED가 off 일 경우에만 스위치쪽 full LED가 점등 됩니다.
 
