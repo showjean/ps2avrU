@@ -29,8 +29,8 @@
 #define KEY_LOCK_WIN    243
 #define KEY_QUICK_MACRO 242
 #define KEY_LED2        241		// bottom led
-// undefined : 176~188, 239~240
-
+#define KEY_ESC_TILDE   176
+// undefined : 177~188, 239~240
 
 enum {  // for macro
 

@@ -8,7 +8,8 @@ static bool _isEscTilde;
 
 static bool _isEscTildeDown = false;
 uint8_t getEscToTilde(uint8_t xKeyidx, bool xIsDown){
-    if(xKeyidx == KEY_ESC && isEscTilde()){
+    if((xKeyidx == KEY_ESC && isEscTilde()) || xKeyidx == KEY_ESC_TILDE){
+        xKeyidx = KEY_ESC;
     	if(xIsDown){
 			uint8_t gModi = getModifierDownBuffer();
 //			DBG1(0x33, (uchar *)&gModi, 1);
