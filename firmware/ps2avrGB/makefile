@@ -42,7 +42,7 @@ SRC =i2c/i2c.c \
 ifdef SPLIT
 	PWM_SPEED_3 = 1
 	I2C_FULLDUPLEX = 1
-	INTERFACE_ONLY_USB = 1
+#	INTERFACE_ONLY_USB = 1
 	
 	SRC +=  ps2avrGB_split_main.c 
 

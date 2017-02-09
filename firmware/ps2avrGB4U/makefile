@@ -37,7 +37,8 @@ SRC = vusb.c \
 ifdef SPLIT
 	PWM_SPEED_3 = 1
 	I2C_FULLDUPLEX = 1
-	INTERFACE_ONLY_USB = 1
+	# ps/2 이용시 LED가 느려지는 것 외에는 별다른 문제는 없어 보임;
+#	INTERFACE_ONLY_USB = 1
 	
 	SRC +=  ps2avrGB4U_split_main.c 
 
