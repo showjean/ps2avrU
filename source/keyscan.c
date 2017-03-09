@@ -82,6 +82,10 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     }
 
 
+    // 변환 된 키를 매크로에 사용할 수 있도록 그보다 위쪽에 위치시킴;
+    // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
+    xKeyidx = getEscToTilde(xKeyidx, xIsDown);
+
 	bool gFN = applyFN(xKeyidx, xCol, xRow, xIsDown);
 
     setDualAction(xKeyidx, xIsDown);
@@ -92,10 +96,6 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
     if(xIsDown){
         applyDualActionDownWhenIsCompounded();
     }
-
-    // 변환 된 키를 매크로에 사용할 수 있도록 그보다 위쪽에 위치시킴;
-    // shift가 눌려있고 ESC to ~ 옵션이 on 이라면 ESC를 `키로 변환한다.
-    xKeyidx = getEscToTilde(xKeyidx, xIsDown);
 
     // 키매핑 진행중;
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
