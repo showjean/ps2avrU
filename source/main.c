@@ -197,17 +197,17 @@ int main(void) {
                 }
 #endif
 
-#ifndef INTERFACE_ONLY_USB
+#ifndef false   //INTERFACE_ONLY_USB
                 if(keyidx == KEY_U) {
                     INTERFACE = INTERFACE_USB;
                 }else if(keyidx == KEY_P) {
                     INTERFACE = INTERFACE_PS2;
                 }else if(keyidx == KEY_1) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_HIGH;
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_HIGH;
                 }else if(keyidx == KEY_2) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_MIDD;
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_MIDD;
                 }else if(keyidx == KEY_3) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_LOW;
+                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_LOW;
                 }
 #endif
             }

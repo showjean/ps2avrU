@@ -557,12 +557,27 @@ void ps2_main(void){
 
     //set key repeat speed;
     uint8_t gSpeed = eeprom_read_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED);
-    if(gSpeed == 0xFF) gSpeed = 1;
-    if(ps2_repeat_speed == PS2_REPEAT_SPEED_NONE){
+
+    if(gSpeed == PS2_REPEAT_SPEED_SET_MIDD)
+    {
+        ps2_repeat_speed = PS2_REPEAT_SPEED_MIDD;
+    }
+    else if(gSpeed == PS2_REPEAT_SPEED_SET_LOW)
+    {
+        ps2_repeat_speed = PS2_REPEAT_SPEED_LOW;
+    }
+    else
+    {
+        // default
+        ps2_repeat_speed = PS2_REPEAT_SPEED_HIGH;
+
+    }
+
+    /*if(ps2_repeat_speed == PS2_REPEAT_SPEED_NONE){
     	ps2_repeat_speed = gSpeed;
     }else if(ps2_repeat_speed != gSpeed){
         eeprom_update_byte((uint8_t *)EEPROM_PS2_REPEAT_SPEED, ps2_repeat_speed);
-    }
+    }*/
 
     // init
     setKeyScanDriver(&driverKeyScanPs2);
