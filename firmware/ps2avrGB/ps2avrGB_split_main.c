@@ -109,10 +109,7 @@ out:
 
 // _______________________________________________________________ boot
 void delegateGotoBootloader(void){
-	sleepLED();
-	usbDeviceDisconnect();  /* do this while interrupts are disabled */
-	wdt_enable(WDTO_15MS);
-	for(;;);
+    exitLED();
 
 	//        	typedef void (*AppPtr_t)(void) __attribute__ ((noreturn));
 	//

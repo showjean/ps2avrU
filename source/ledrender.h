@@ -31,6 +31,7 @@ void initFullLEDStateAfter(void);
 
 void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t isDown);
 
+void exitLED(void);
 void sleepLED(void);
 void wakeUpLED(void);
 void renderLED(void);

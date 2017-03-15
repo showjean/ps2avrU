@@ -25,10 +25,7 @@
 
 // _______________________________________________________________ boot
 void delegateGotoBootloader(void){
-	sleepLED();
-	usbDeviceDisconnect();
-	wdt_enable(WDTO_15MS);
-	for(;;);
+	exitLED();
 
 	//        	typedef void (*AppPtr_t)(void) __attribute__ ((noreturn));
 	//

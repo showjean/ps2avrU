@@ -7,10 +7,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <avr/eeprom.h>
+#include <avr/wdt.h>
 
 #include <util/delay.h>
 #include <string.h>
 
+#include "usbdrv/usbdrv.h"
 #include "ledconfig.h"
 #include "ledrender.h"
 
@@ -75,6 +77,7 @@ static uint8_t _rgbMode = 0;	//
 static uint8_t _rgbKeyEventMode = 0;	//
 static uint8_t _rgbKeyEventType = 0;	//
 static bool _hasRgbModeChanged = false;    //
+static bool _hasRgbOff = false;    //
 
 static uint8_t pwmCounter = 0;
 static uint8_t pwmDir = 0;
@@ -127,6 +130,7 @@ static uint8_t led2Delay = LED2_DELAY_DEFAULT;
 
 static uint16_t _countOfFrame = 0;
 static uint8_t numOfLeds = LED_NUM_DEFAULT; //LED_NUM_MAX;
+static uint8_t numOfLedsForChanging = 0;
 //static cRGB_t led[LED_NUM_MAX];
 static cRGB_t ledModified[LED_NUM_MAX];
 static cRGB_t rainbowColor[LENGTH_OF_RAINBOW_COLOR];
@@ -146,6 +150,7 @@ static cRGB_t prevRgb;
 static uint8_t _rgbPressed = PRESS_MODE_UP;
 static uint8_t _keyPressed = KEY_APPLY_NONE;
 
+static bool _ledExit = false;
 static bool _ledOff = false;
 static uint8_t _rainbowMode = 0;
 static uint8_t _changeCount = 0;
@@ -524,9 +529,7 @@ void setLedOptions(uint8_t *data){
 	 }
 	 else if(*(data+1) == OPTION_INDEX_LED_NUM)
 	 {
-	 	turnOffLed2();
-		setLed2Num(*(data+2));
-	    setLedBalance();
+	    numOfLedsForChanging = *(data+2);
 
 		_saved |= BV(SAVE_BIT_LED2_NUM);
 	 }
@@ -928,9 +931,6 @@ static void writeLEDMode(void) {
 
 		// led num SAVE_BIT_LED2_NUM
 		if(((_saved >> SAVE_BIT_LED2_NUM) & 0x01)){
-			setFullLedState();
-		    setLed2State();
-
 			eeprom_update_byte((uint8_t *)EEPROM_LED2_NUM, numOfLeds);
 		}
 
@@ -1020,17 +1020,21 @@ static void getMaxRgbValue(cRGB_t *xRgb){
 }
 
 static void turnOffLed2(void){
-	ledModified[0].r = 0;
-	ledModified[0].g = 0;
-	ledModified[0].b = 0;	
-	prevRgb.r = 0; // = (cRGB_t){0,0,0};
-	prevRgb.g = 0;
-	prevRgb.b = 0;
-	// _currentLedAllColor = ledModified[0];
-	_currentLedAllColor.r = 0; 
-	_currentLedAllColor.g = 0;
-	_currentLedAllColor.b = 0;
-	_setLed2All(&_currentLedAllColor);
+    _hasRgbOff = true;;
+}
+
+static void __turnOffLed2(void)
+{
+    ledModified[0].r = 0;
+    ledModified[0].g = 0;
+    ledModified[0].b = 0;
+    prevRgb.r = 0; // = (cRGB_t){0,0,0};
+    prevRgb.g = 0;
+    prevRgb.b = 0;
+    _currentLedAllColor.r = 0;
+    _currentLedAllColor.g = 0;
+    _currentLedAllColor.b = 0;
+    _setLed2All(&_currentLedAllColor);
 }
 
 
@@ -1223,6 +1227,45 @@ static void __fadeLED2(void){
 	if(++_countOfFrame >= LED2_SKIP_FRAME_BASE){	// setDelay(led2TickPerFrame)){
 		_countOfFrame = 0;
 
+		// exit led
+		if(_ledExit)
+		{
+		    __turnOffLed2();
+            usbDeviceDisconnect();
+            wdt_enable(WDTO_15MS);
+            for(;;);
+		}
+
+		// led num
+		if(numOfLedsForChanging > 0)
+		{
+		    __turnOffLed2();
+            setLed2Num(numOfLedsForChanging);
+            setLedBalance();
+            setFullLedState();
+            setLed2State();
+
+            numOfLedsForChanging = 0;
+
+            return;
+		}
+
+        // led off
+        if(_hasRgbOff == true)
+        {
+            _hasRgbOff = false;
+
+            __turnOffLed2();
+
+            return;
+        }
+
+	    if(_ledOff)
+	    {
+            return;
+	    }
+
+		// mode changing
 		if(_hasRgbModeChanged == true)
 		{
 		    _hasRgbModeChanged = false;
@@ -1262,7 +1305,7 @@ static void __fadeLED2(void){
 		    else
 		    {
 
-		        turnOffLed2();
+		        __turnOffLed2();
 		        ledBrightnessLimit = 255;
 
 		    }
@@ -1270,6 +1313,7 @@ static void __fadeLED2(void){
 		    return;
 		}
 
+		// key pressing event
 		if(_keyPressed == KEY_APPLY_DOWN)
 		{
 		    _keyPressed = KEY_APPLY_NONE;
@@ -1324,7 +1368,7 @@ static void __fadeLED2(void){
 
 		if(_rgbPressed == PRESS_MODE_DOWN) return;
 
-
+		// rgb render
 		uint8_t i;
 		uint16_t gValue;
 		if (_rgbMode == 1) { // 1 = rainbow
@@ -1436,6 +1480,8 @@ static void fadeLED2(void){
 // 
 static void fadeLED(void) {
 
+    if(_ledOff) return;
+
     static int gFrame = 0;
 	if(_fullLEDMode == 1) {
 	    if(++gFrame == PWM_SPEED){
@@ -1499,12 +1545,18 @@ void turnOnLedAll(void){
 
 }
 void turnOffLedAll(void){
-	_ledOff = true;
 
 	setPWM(0);
 	turnOffLED(LEDFULLLED);
 
 	turnOffLed2();
+
+    _ledOff = true;
+}
+
+void exitLED(void)
+{
+    _ledExit = true;
 }
 
 void sleepLED(void){
@@ -1544,13 +1596,13 @@ void renderLED(void) {
 	// LED 모드 저장.
 	writeLEDMode();
 
-	if(_ledOff) return;
-
 	/* LED Fader */
 	fadePWM();
 }
 
 void setPWM(int xValue){
+    if(_ledOff) return;
+
 #if LEDFULLLED == (1 << 4)
 	timer1PWMBSet(xValue);
 #endif
