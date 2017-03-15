@@ -7,6 +7,7 @@
 #include "fncontrol.h"
 #include "hardwareinfo.h"
 #include "numlocklayer.h"
+#include "keymatrix.h"
 
 void setOptions(uint8_t *data)
 {
@@ -24,6 +25,10 @@ void setOptions(uint8_t *data)
     {
         setNumlockLayer(*(data+2));
     }
+    else if(*(data+1) == OPTION_INDEX_DEBOUNCE_VALUE)
+    {
+        setDebounceValue(*(data+2));
+    }
 }
 
 void getOptions(option_info_t *buffer)
@@ -39,6 +44,7 @@ void getOptions(option_info_t *buffer)
     buffer->version[2] = VERSION_PATCH;
     buffer->firmware = FIRMWARE;
     buffer->numlocklayer = getNumlockLayer();
+    buffer->debouncevalue = getDebounceValue();
     buffer->size = sizeof(option_info_t);
 }
 

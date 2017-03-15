@@ -165,58 +165,6 @@ int main(void) {
 
     DBG1(0x00, 0, 0);
 
-    // for interface select
-    // initHardware(0); //여기서 이 함수를 사용하면 ps/2인식 오류를 발생시킴;
-
-    initMatrix();
-    clearMatrix();
-
-    _delay_us(5);
-
-    uint8_t escapeCounter = 0;
-    while(getLiveMatrix() == 0 && ++escapeCounter < 20){
-        // waiting during clear debounce
-    }
-
-    uint8_t row, col, cur, keyidx;
-    uint8_t *gMatrix = getCurrentMatrix();
-
-    // debounce cleared => compare last matrix and current matrix
-    for(row=0;row<ROWS;++row)
-    {
-        if(gMatrix[row] == 0) continue;
-        for(col=0;col<COLUMNS;++col)
-        {
-            cur  = gMatrix[row] & BV(col);
-            if( cur ) {
-                keyidx = getDefaultKeyindex(0, row, col);
-#ifdef ENABLE_BOOTMAPPER
-                if(delegateGetBootmapperStatus(col, row) || keyidx == KEY_TAB){ // bootmapper start
-                    setToBootMapper(true);
-                    continue;
-                }
-#endif
-
-#ifndef false   //INTERFACE_ONLY_USB
-                if(keyidx == KEY_U) {
-                    INTERFACE = INTERFACE_USB;
-                }else if(keyidx == KEY_P) {
-                    INTERFACE = INTERFACE_PS2;
-                }else if(keyidx == KEY_1) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_HIGH;
-                }else if(keyidx == KEY_2) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_MIDD;
-                }else if(keyidx == KEY_3) {
-                	ps2_repeat_speed = PS2_REPEAT_SPEED_SET_LOW;
-                }
-#endif
-            }
-
-        }
-
-    }
-    setCurrentMatrixAfter();
-
 
 #ifdef INTERFACE_ONLY_USB
     INTERFACE = INTERFACE_USB;

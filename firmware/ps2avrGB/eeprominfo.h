@@ -33,7 +33,8 @@
 #define EEPROM_LOCK_LED_STATUS  404	// 3byte
 #define EEPROM_NUMLOCK_LAYER    407	// 1byte
 #define EEPROM_USB_COMPATIBILITY    408	// 1byte
-// 408~420 : 13bytes
+#define EEPROM_DEBOUNCE_VALUE     409 // 1byte
+// 409~420 : 12bytes
 #define EEPROM_MACRO			421	// ~996
 #define EEPROM_LED2_COLOR_KEY1	997	// 3byte ~999
 // 1000~1024 : 25bytes

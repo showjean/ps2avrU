@@ -14,6 +14,9 @@
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 void initMatrix(void);
+uint8_t getDebounceValue(void);
+void setDebounceValue(uint8_t xDebounceValue);
+
 extern void delegateInitMatrixDevice(void);
 
 void clearMatrix(void);

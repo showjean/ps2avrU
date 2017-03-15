@@ -35,8 +35,10 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #endif
 
 /* ------------------------------------------------------------------------- */
-#define DEBOUNCE_MAX    10  //4
-static uint8_t debounce; // DEBOUNCE_MAX + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+#define DEBOUNCE_VALUE_DEFAULT  10
+#define DEBOUNCE_MIN            1
+static uint8_t DEBOUNCE_VALUE;
+static uint8_t debounce; // DEBOUNCE_VALUE + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
 static bool _isReleaseAll = true;
 static uint8_t __pressedFnIndex = LAYER_NOTHING;
 
@@ -48,16 +50,36 @@ static uint8_t __pressedFnIndex = LAYER_NOTHING;
 /* -----------------------------    Function  global ----------------------------- */
 /* ------------------------------------------------------------------------- */
 void initMatrix(void){
+
+    DEBOUNCE_VALUE = eeprom_read_byte((uint8_t *)EEPROM_DEBOUNCE_VALUE);
+    if(DEBOUNCE_VALUE == 0xFF)
+    {
+        DEBOUNCE_VALUE = DEBOUNCE_VALUE_DEFAULT;
+    }
 	
 	delegateInitMatrixDevice();
 
-	debounce = DEBOUNCE_MAX + 3;
+	debounce = 0;   //DEBOUNCE_VALUE + 3;
 
 	clearFnPosition();
+
+	clearMatrix();
 
 #ifdef GHOST_KEY_PREVENTION	
 	ghostFilterMatrixPointer = currentMatrix;
 #endif
+}
+
+uint8_t getDebounceValue(void)
+{
+    return DEBOUNCE_VALUE - DEBOUNCE_MIN;
+}
+
+void setDebounceValue(uint8_t xDebounceValue)
+{
+    DEBOUNCE_VALUE = xDebounceValue + DEBOUNCE_MIN;
+    eeprom_update_byte((uint8_t *)EEPROM_DEBOUNCE_VALUE, DEBOUNCE_VALUE);
+    debounce = 0;
 }
 
 void clearMatrix(void){
@@ -233,37 +255,46 @@ uint8_t findGhostKey(void){
 }
 #endif
 
+
+/**
+ * TODO:
+ * usbmain.c에서 clearMatrix()를 실행하지 않으면 부팅시 누르고 있던 키가 입력되지 않는다.
+ *
+ */
 uint8_t getLiveMatrix(void){
 	
 	uint8_t isModified = 0;
 
+	if(debounce < DEBOUNCE_VALUE)
+	{
+        debounce++;
+	    return 0;
+	}
+
 	delegateGetLiveMatrix(currentMatrix, &isModified);
 
 	if(isModified){
-		debounce=0;
-	}else if(debounce<100){	// to prevent going over limit of int
-		// 키 입력에 변화가 없다면 99에서 멈춰서 0을 계속 반환하게 된다. 때문에, 키 변화없을때는 키코드 갱신없음;
-		debounce++;
-	}
-
-	if(debounce != DEBOUNCE_MAX){
-		return 0;
-	}
+		debounce = 0;
 
 #ifdef GHOST_KEY_PREVENTION
-	// ghost-key prevention
-	// col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.	
-	
-	if(findGhostKey() > 0){
-		ghostFilterMatrixPointer = prevMatrix;
-	}else{
-		ghostFilterMatrixPointer = currentMatrix;
-	}
+    // ghost-key prevention
+    // col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.
+
+    if(findGhostKey() > 0){
+        ghostFilterMatrixPointer = prevMatrix;
+    }else{
+        ghostFilterMatrixPointer = currentMatrix;
+    }
 
 #endif
 
-	return 1;
+        return 1;
+	}
+
+    return 0;
+
 }
+
 
 uint8_t *getCurrentMatrix(void){
 
