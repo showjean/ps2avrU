@@ -170,17 +170,14 @@ int main(void) {
     INTERFACE = INTERFACE_USB;
 #else
 
-    if(INTERFACE <= INTERFACE_USB){
+    /*if(INTERFACE <= INTERFACE_USB){
         eeprom_update_byte((uint8_t *)EEPROM_INTERFACE, INTERFACE);
     }else{
         // 255 이면;
         INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);    // 1바이트 12번지 읽기, 기본값 0xFF ( 255)
-    }
+    }*/
 
-    // usb가 default;
-    if(INTERFACE != INTERFACE_PS2){
-        INTERFACE = INTERFACE_USB;
-    }
+    INTERFACE = eeprom_read_byte((uint8_t *)EEPROM_INTERFACE);
 
 #endif
 
