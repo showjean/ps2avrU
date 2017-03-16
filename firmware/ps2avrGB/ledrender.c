@@ -1020,7 +1020,7 @@ static void getMaxRgbValue(cRGB_t *xRgb){
 }
 
 static void turnOffLed2(void){
-    _hasRgbOff = true;;
+    _hasRgbOff = true;
 }
 
 static void __turnOffLed2(void)
@@ -1565,10 +1565,12 @@ void sleepLED(void){
 	turnOffLED(LEDCAPS);
 	turnOffLED(LEDSCROLL);
 
-	setPWM(0);
+	/*setPWM(0);
 	turnOffLED(LEDFULLLED);
 
-	turnOffLed2();
+	turnOffLed2();*/
+
+	turnOffLedAll();
 }
 
 void wakeUpLED(void){
@@ -1580,15 +1582,16 @@ void wakeUpLED(void){
 }
 
 void renderLED(void) {
-    static int _sleepOffCount = 0;
-	if(!ledInited || isSleep()){
-	    if(isSleep() && _sleepOffCount++ > 10000)
-	    {
-	        _sleepOffCount = 0;
-	        sleepLED();
-	    }
+	if(!ledInited){
 		return;
-	}
+	}else if(isSleep()){
+	    /* LED Fader */
+	    if(_hasRgbOff == true)
+	    {
+	        fadePWM();
+	    }
+        return;
+    }
 
 	blinkBootMapperLED();
 	blinkIndicateLED();
