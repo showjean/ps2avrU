@@ -38,12 +38,9 @@ static uint8_t currentMatrix[ROWS];  ///< contains current state of the keyboard
 #define DEBOUNCE_VALUE_DEFAULT  10
 #define DEBOUNCE_MIN            1
 static uint8_t DEBOUNCE_VALUE;
-static uint8_t debounce; // DEBOUNCE_VALUE + 3, debounceMAX 보다 크게 설정하여 플러깅시 all release가 작동되는 것을 방지;
+static uint8_t debounce;
 static bool _isReleaseAll = true;
 static uint8_t __pressedFnIndex = LAYER_NOTHING;
-
-//static uint8_t _currentLayer = LAYER_NOTHING;
-
 
 
 /* ------------------------------------------------------------------------- */
@@ -59,7 +56,7 @@ void initMatrix(void){
 	
 	delegateInitMatrixDevice();
 
-	debounce = 0;   //DEBOUNCE_VALUE + 3;
+	debounce = DEBOUNCE_VALUE + 3;
 
 	clearFnPosition();
 
@@ -79,7 +76,7 @@ void setDebounceValue(uint8_t xDebounceValue)
 {
     DEBOUNCE_VALUE = xDebounceValue + DEBOUNCE_MIN;
     eeprom_update_byte((uint8_t *)EEPROM_DEBOUNCE_VALUE, DEBOUNCE_VALUE);
-    debounce = 0;
+    debounce = DEBOUNCE_VALUE + 3;
 }
 
 void clearMatrix(void){
@@ -265,16 +262,53 @@ uint8_t getLiveMatrix(void){
 	
 	uint8_t isModified = 0;
 
-	if(debounce < DEBOUNCE_VALUE)
-	{
-        debounce++;
-	    return 0;
-	}
-
 	delegateGetLiveMatrix(currentMatrix, &isModified);
 
 	if(isModified){
-		debounce = 0;
+		debounce=0;
+	}else if(debounce<100){	// to prevent going over limit of int
+		// 키 입력에 변화가 없다면 100에서 멈춰서 0을 계속 반환하게 된다. 때문에, 키 변화없을때는 키코드 갱신없음;
+		debounce++;
+	}
+
+	if(debounce != DEBOUNCE_VALUE){
+		return 0;
+	}
+
+#ifdef GHOST_KEY_PREVENTION
+    // ghost-key prevention
+    // col에 2개 이상의 입력이 있을 경우, 입력이 있는 row에는 더이상 입력을 허용하지 않는다.
+
+    if(findGhostKey() > 0){
+        ghostFilterMatrixPointer = prevMatrix;
+    }else{
+        ghostFilterMatrixPointer = currentMatrix;
+    }
+
+#endif
+
+	return 1;
+}
+
+/*uint8_t getLiveMatrix(void){
+
+    uint8_t isModified = 0;
+
+    delegateGetLiveMatrix(currentMatrix, &isModified);
+
+    if(debounce < DEBOUNCE_VALUE)
+    {
+        debounce++;
+//        _delay_ms(1);
+        memcpy(currentMatrix, prevMatrix, ROWS);
+
+        return 0;
+    }
+
+//    delegateGetLiveMatrix(currentMatrix, &isModified);
+
+    if(isModified){
+        debounce = 0;
 
 #ifdef GHOST_KEY_PREVENTION
     // ghost-key prevention
@@ -289,12 +323,11 @@ uint8_t getLiveMatrix(void){
 #endif
 
         return 1;
-	}
+    }
 
     return 0;
 
-}
-
+}*/
 
 uint8_t *getCurrentMatrix(void){
 
