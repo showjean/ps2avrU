@@ -256,6 +256,11 @@ uint8_t findGhostKey(void){
 /**
  * TODO:
  * usbmain.c에서 clearMatrix()를 실행하지 않으면 부팅시 누르고 있던 키가 입력되지 않는다.
+ *  => 아마 led indicator가 반응하기 전에는 키 입력이 되지 않아서 그런 것 같다.
+ *
+ *  활성기->안정기->보고
+ *
+ *  = 활성기에서 보고를 하면 빠른 키입력시 미싱이 나타나는 경우가 많다.
  *
  */
 uint8_t getLiveMatrix(void){
@@ -265,10 +270,11 @@ uint8_t getLiveMatrix(void){
 	delegateGetLiveMatrix(currentMatrix, &isModified);
 
 	if(isModified){
-		debounce=0;
-	}else if(debounce<100){	// to prevent going over limit of int
-		// 키 입력에 변화가 없다면 100에서 멈춰서 0을 계속 반환하게 된다. 때문에, 키 변화없을때는 키코드 갱신없음;
-		debounce++;
+	    debounce = 0;
+	}
+	else if(debounce <= DEBOUNCE_VALUE)
+	{	// to prevent going over limit of int
+		++debounce;
 	}
 
 	if(debounce != DEBOUNCE_VALUE){
@@ -287,9 +293,12 @@ uint8_t getLiveMatrix(void){
 
 #endif
 
-	return 1;
+   return 1;
 }
 
+/**
+ * 카일/게이트론은 생각보다 디바운스 처리를 길게 해야 한다.
+ */
 /*uint8_t getLiveMatrix(void){
 
     uint8_t isModified = 0;

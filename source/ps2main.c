@@ -167,7 +167,7 @@ static void keymap_init(void)
 
 void setWaitingRx(bool xIsWait){
 	if(xIsWait) {
-		keyval = SPLIT;
+		keyval = SPLIT_KEY;
 	}else{
 		isAlreadyPushedWaitingRx = false;
 	}
@@ -209,7 +209,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
                     push(0xE0);
                     push(0x7C);
                     push(END_MAKE);
-                    push(SPLIT); // SPLIT is for make sure all key codes are transmitted before disturbed by RX
+                    push(SPLIT_KEY); // SPLIT_KEY is for make sure all key codes are transmitted before disturbed by RX
                     break;
                 case KEY_PAUSE:
                     push(NO_REPEAT);
@@ -221,12 +221,12 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
                     push(0x14);
                     push(0xF0);
                     push(0x77);
-                    push(SPLIT);
+                    push(SPLIT_KEY);
                     break;
             }
         }else if(KFLA[keyidx]&KFLA_MAKEONLY) {
             push(keyVal);
-            push(SPLIT);
+            push(SPLIT_KEY);
         }else{
             push(START_MAKE);
             if(KFLA[keyidx]&KFLA_EXTEND) 
@@ -234,7 +234,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
             push(keyVal);
 
             push(END_MAKE);
-            push(SPLIT);
+            push(SPLIT_KEY);
 
         }
 
@@ -268,7 +268,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
                     push(0xE0);
                     push(0xF0);
                     push(0x12);
-                    push(SPLIT);
+                    push(SPLIT_KEY);
                     break;
             }
         }else if(KFLA[keyidx]&KFLA_MAKEONLY) {
@@ -278,7 +278,7 @@ static uint8_t pushKeyCode(uint8_t keyidx, bool isDown)
 
             push(0xF0);
             push(keyVal);
-            push(SPLIT);
+            push(SPLIT_KEY);
 
             // DBG1(0x21, (uchar *)&keyidx, 1); 
         }
@@ -329,7 +329,7 @@ static void processRxPs2(void){
         sei();
     }
 
-    if ( isReadyForRx() && (keyval==SPLIT || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
+    if ( isReadyForRx() && (keyval==SPLIT_KEY || isEmpty())) {     // pokud nastaveny flag prijmu bytu, vezmi ho a zanalyzuj
         // pokud law, the flag setting apart, take it and zanalyzuj
         rxed = kbd_get_rx_char();  
 
@@ -479,7 +479,7 @@ static void processTxPs2(void){
                     return;
                 }
 
-                if(keyval==SPLIT)
+                if(keyval==SPLIT_KEY)
                     return;
 
                 if(keyval) {

@@ -37,7 +37,7 @@
 #define START_MAKE  0xFF
 #define END_MAKE    0xFE
 #define NO_REPEAT   0xFD
-#define SPLIT       0xFC
+#define SPLIT_KEY       0xFC
 #define WAIT_RX     0xFB
 
 #define PS2_REPEAT_SPEED_NONE	0
