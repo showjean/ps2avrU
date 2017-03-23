@@ -142,6 +142,10 @@ typedef struct {
     // numlocklayer 1byte
     // = 1 byte
 
+    // ver 1.3.0
+    // debouncevalue 1byte
+    // = 1 byte
+
     uint8_t size;
     uint8_t num;
     uint8_t mode;
@@ -175,7 +179,5 @@ typedef struct {
 
 void setOptions(uint8_t *data);
 void getOptions(option_info_t *buffer);
-
-void stopPwmForUsbReport(bool xIsStop);
 
 #endif

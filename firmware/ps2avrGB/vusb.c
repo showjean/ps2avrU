@@ -521,16 +521,11 @@ uint8_t usbFunctionWrite(uchar *data, uchar len) {
         		setToBootMapper(false);
         	}
 #endif
-       /* }else if(data[1] == OPTION_INDEX_READY){
-            stopPwmForUsbReport(true);
-
-        }else if(data[1] == OPTION_INDEX_ACTION){
-            stopPwmForUsbReport(false);*/
         }else{
         	setOptions((uint8_t *)data);
         }
     }else if (expectReport == 4){
-    	// rainbow color setting
+    	// init rainbow color setting
     	setOptions((uint8_t *)data);
     }else if (expectReport == 5){
         // write quick macro;

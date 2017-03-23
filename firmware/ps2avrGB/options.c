@@ -17,10 +17,6 @@ void setOptions(uint8_t *data)
     {
         setEscTilde(*(data+2));
     }
-   /* else if(*(data+1) == OPTION_INDEX_FN_LED)
-    {
-        setBeyondFnLed(*(data+2));
-    }*/
     else if(*(data+1) == OPTION_INDEX_NUMLOCK_LAYER)
     {
         setNumlockLayer(*(data+2));
@@ -44,11 +40,9 @@ void getOptions(option_info_t *buffer)
     buffer->version[2] = VERSION_PATCH;
     buffer->firmware = FIRMWARE;
     buffer->numlocklayer = getNumlockLayer();
+
+    // Ver 1.3
     buffer->debouncevalue = getDebounceValue();
     buffer->size = sizeof(option_info_t);
 }
 
-void stopPwmForUsbReport(bool xIsStop)
-{
-    stopPwmLed(xIsStop);
-}
