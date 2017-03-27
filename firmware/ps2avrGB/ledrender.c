@@ -1647,7 +1647,7 @@ bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 	if((xIsExtraFnDown && xKeyidx == LED_KEY)){
 		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){	// shift
 			changeFullLedState(FULL_LED_MODE2);
-		}else if(gModi == 0x01 || gModi == 0x10){	// control
+		}else if(gModi == MODI_LCTRL || gModi == MODI_RCTRL){	// control
 			changeLed2KeyEventMode();
 		}else{
 			changeFullLedState(FULL_LED_MODE1);

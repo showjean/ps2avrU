@@ -13,7 +13,7 @@
 
 
 **ps2avrGB**는 ps2avrU 펌웨어에 RGB LED를 컨트롤할 수 있는 Sub MCU를 추가한 펌웨어 입니다. 
-대부분의 기능은 ps2avrU와 동일하며 추가적으로 더 손쉽게 키 맵핑 및 커스텀 매크로 등을 등록할 수 있는 BootMapper Client를 이용한 관리가 가능합니다.
+대부분의 기능은 ps2avrU와 동일하며 추가적으로 더 손쉽게 키 맵핑 및 커스텀 매크로 등을 등록할 수 있는 Bootmapper Client를 이용한 관리가 가능합니다.
 
 > 현재 ps2avrU는 더이상 지원이 중단 된 상태이며, 이를 대신하는 "ps2avrGB4U"가 배포되고 있습니다.
 
@@ -48,29 +48,29 @@ PS/2
 ## RGB LED 지원
 
 컬러를 자유롭게 변경할 수 있는 RGB LED를 지원합니다.
-이에 관한 모든 설정은 "BootMapper Client"에서 할 수 있고, 밝기와 모드는 키보드에서도 직접 변경이 가능합니다.
+이에 관한 모든 설정은 "Bootmapper Client"에서 할 수 있고, 밝기와 모드는 키보드에서도 직접 변경이 가능합니다.
 
 - 모드 변경 
     - ESC + SHIFT + Caps lock 
-    - 또는 SHIFT + LED MODE2
+    - RGB MODE 키 (또는 SHIFT + LED MODE 키)
 
 > PS/2 연결시 RGB LED가 off 일 경우에만 스위치쪽 full LED가 점등 됩니다.
 
 - RGB key event mode 변경
     - ESC + Ctrl + Capslock으로 RGB key event mode 변경
-    - 또는 Ctrl + LED_MODE2
+    - Ctrl + RGB MODE 키
 
 
 - 밝기 변경
-    - SHIFT + LED BR UP
-    - SHIFT + LED BR DOWN
+    - SHIFT + LED BR UP 키
+    - SHIFT + LED BR DOWN 키
 
 > RGB LED의 밝기가 밝아질 수록 full LED는 어두워집니다.
 
 > full LED를 최대 밝기로 이용하고자 할 경우 RGB LED의 밝기는 중간 이하로 설정해야 합니다.
 
-> 컬러 및 기타 세부 설정은 "BootMapper Client"를 통해서 할 수 있습니다.
-> BootMapper Client 사용 법 : <http://blog.winkeyless.kr/154>
+> 컬러 및 기타 세부 설정은 "Bootmapper Client"를 통해서 할 수 있습니다.
+> Bootmapper Client 사용 법 : <http://blog.winkeyless.kr/154>
 
 
 
