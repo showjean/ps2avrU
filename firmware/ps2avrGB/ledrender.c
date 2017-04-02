@@ -7,12 +7,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <avr/eeprom.h>
-#include <avr/wdt.h>
 
 #include <util/delay.h>
 #include <string.h>
 
-#include "usbdrv/usbdrv.h"
 #include "ledconfig.h"
 #include "ledrender.h"
 
@@ -30,6 +28,10 @@
 #include "optionsled.h"
 #include "keydownbuffer.h"
 #include "hardwareinfo.h"
+#if HAS_RGB_LED
+#include <avr/wdt.h>
+#include "usbdrv/usbdrv.h"
+#endif
 
 static lock_led_t lockLedStatus;
 
@@ -1233,9 +1235,11 @@ static void __fadeLED2(void){
 		if(_ledExit)
 		{
 		    __turnOffLed2();
+#if HAS_RGB_LED
             usbDeviceDisconnect();
             wdt_enable(WDTO_15MS);
             for(;;);
+#endif
 		}
 
 		// led num
