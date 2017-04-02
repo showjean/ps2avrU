@@ -60,6 +60,8 @@ static lock_led_t lockLedStatus;
 #define SAVE2_BIT_LED2_SKIP_FRAME   3
 #define SAVE2_BIT_LOCK_LED_STATUS   4
 
+#define IS_NOT_AIKON    LEDFULLLED == (1 << 4)  // gb 및 gb4u에서만 full led 세팅
+
 static uint8_t _saved = 0;	//
 static uint8_t _saved2 = 0;	//
 //static bool confirmLed2Save = false;	//
@@ -589,7 +591,7 @@ static void changeLed2KeyEventMode(void){
 void stopPwmLed(bool xIsStop){
     // stop timer for usb report
 
-#if LEDFULLLED == (1 << 4)
+#if IS_NOT_AIKON
     if(xIsStop)
     {
         timer1SetPrescaler( TIMERRTC_CLK_STOP );	// set prescaler
@@ -1606,7 +1608,7 @@ void renderLED(void) {
 void setPWM(int xValue){
     if(_ledOff) return;
 
-#if LEDFULLLED == (1 << 4)
+#if IS_NOT_AIKON
 	timer1PWMBSet(xValue);
 #endif
 }
@@ -1622,7 +1624,7 @@ void initFullLEDState(void) {
 		timer2 = custom macro
 	*/
 
-#if LEDFULLLED == (1 << 4)
+#if IS_NOT_AIKON
 	timer1PWMInit(8);
 #endif
 
