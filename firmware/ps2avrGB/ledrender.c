@@ -89,7 +89,7 @@ static uint8_t pwmDir = 0;
 	#define PWM_SPEED 8
 #endif
 
-static int ledStateCount = 0;
+//static int ledStateCount = 0;
 static cRGB_t _currentLedAllColor;
 
 static uint8_t _ledBrightnessMax = PWM_MAX;
@@ -581,7 +581,7 @@ void setLedOptions(uint8_t *data){
          _saved2 |= BV(SAVE2_BIT_LOCK_LED_STATUS);
      }
 
-	ledStateCount = 0;
+//	ledStateCount = 0;
 }
 
 static void changeLed2KeyEventMode(void){
@@ -778,7 +778,7 @@ void increaseLedBrightness(uint8_t xFullLedMode){
 
 		setLed2BrightnessAfter();
 	}
-	ledStateCount = 0;
+//	ledStateCount = 0;
 }
 void reduceLedBrightness(uint8_t xFullLedMode){
 	if(xFullLedMode == FULL_LED_MODE1){
@@ -799,7 +799,7 @@ void reduceLedBrightness(uint8_t xFullLedMode){
 		if(led2Brightness < LED_SUM_MIN) led2Brightness = LED_SUM_MIN;
 		setLed2BrightnessAfter();
 	}
-	ledStateCount = 0;
+//	ledStateCount = 0;
 }
 void changeFullLedState(uint8_t xFullLedMode){
 	if(isSleep()){
@@ -816,7 +816,7 @@ void changeFullLedState(uint8_t xFullLedMode){
 		__setLed2Mode(_rgbMode+1, _rgbKeyEventMode);	// 키보드를 이용할 경우 키이벤트에 따라 재설정 판가름;
 	}
 
-	ledStateCount = 0;
+//	ledStateCount = 0;
 }
 
 void clearLEDInited(void){
@@ -917,71 +917,70 @@ void setLEDIndicate(void) {
 static void writeLEDMode(void) {
 	// LED 모드 저장, 너무많은 eeprom접근을 막기위해 일정 간격으로 저장한다.
 //	const int countMAX = 1000;
-	if((_saved > 0 || _saved2 > 0) && ++ledStateCount == 3000){
-		ledStateCount = 0;
+//	if((_saved > 0 || _saved2 > 0) && ++ledStateCount == 3000){
+    if(_saved > 0 || _saved2 > 0){
+//		ledStateCount = 0;
 
 		// full led
-		if(((_saved >> SAVE_BIT_LED_MODE) & 0x01)){	// || ((_saved >> SAVE_BIT_LED2_MODE) & 0x01)){
+//		if(((_saved >> SAVE_BIT_LED_MODE) & 0x01)){	// || ((_saved >> SAVE_BIT_LED2_MODE) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED_MODE, (_fullLEDMode & 0x0F) | ((_rgbMode & 0x0F) << 4));
-		}
+//		}
 
 		// brightness
-		if(((_saved >> SAVE_BIT_LED_BRITNESS_MAX) & 0x01)){
+//		if(((_saved >> SAVE_BIT_LED_BRITNESS_MAX) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED_BRIGHTNESS, _ledBrightnessMax);
-		}
-		if(((_saved >> SAVE_BIT_LED2_BRITNESS_MAX) & 0x01)){
+//		}
+//		if(((_saved >> SAVE_BIT_LED2_BRITNESS_MAX) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED2_BRIGHTNESS, led2Brightness/3);
-		}
+//		}
 
 		// led num SAVE_BIT_LED2_NUM
-		if(((_saved >> SAVE_BIT_LED2_NUM) & 0x01)){
+//		if(((_saved >> SAVE_BIT_LED2_NUM) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED2_NUM, numOfLeds);
-		}
+//		}
 
 		// led2 color1~3
-		if(((_saved >> SAVE_BIT_LED2_COLOR1) & 0x01)){
+//		if(((_saved >> SAVE_BIT_LED2_COLOR1) & 0x01)){
 			eeprom_update_block(&color1, (uint8_t *)(EEPROM_LED2_COLOR_1), 3);
-		}
-		if(((_saved >> SAVE_BIT_LED2_COLOR2) & 0x01)){
+//		}
+//		if(((_saved >> SAVE_BIT_LED2_COLOR2) & 0x01)){
 			eeprom_update_block(&color2, (uint8_t *)(EEPROM_LED2_COLOR_2), 3);
-		}
-		if(((_saved >> SAVE_BIT_LED2_COLOR3) & 0x01)){
+//		}
+//		if(((_saved >> SAVE_BIT_LED2_COLOR3) & 0x01)){
 			eeprom_update_block(&color3, (uint8_t *)(EEPROM_LED2_COLOR_3), 3);
-		}
+//		}
 
 		// led2 rainbow
-		if(((_saved >> SAVE_BIT_LED2_COLOR_RAINBOW) & 0x01)){
-
+//		if(((_saved >> SAVE_BIT_LED2_COLOR_RAINBOW) & 0x01)){
 			eeprom_update_block(&rainbowColor, (uint8_t *)(EEPROM_LED2_COLOR_RAINBOW), 21 /* LENGTH_OF_RAINBOW_COLOR * 3 */);
-
-		}
+//		}
 
 		// led2 rainbow fading type
-		if(((_saved2 >> SAVE2_BIT_LED2_FADE_TYPE) & 0x01)){
+//		if(((_saved2 >> SAVE2_BIT_LED2_FADE_TYPE) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED2_FADE_TYPE, _rainbowMode);
-		}
+//		}
 
 		// led2 key color1
-		if(((_saved2 >> SAVE2_BIT_LED2_KEY_EVENT) & 0x01)){
+//		if(((_saved2 >> SAVE2_BIT_LED2_KEY_EVENT) & 0x01)){
 			eeprom_update_byte((uint8_t *)EEPROM_LED2_KEY_EVENT, (_rgbKeyEventMode & 0x0F) | ((_rgbKeyEventType & 0x0F) << 4));
-		}
+//		}
 
-		if(((_saved2 >> SAVE2_BIT_LED2_COLOR_KEY1) & 0x01)){
+//		if(((_saved2 >> SAVE2_BIT_LED2_COLOR_KEY1) & 0x01)){
 			eeprom_update_block(&color_key1, (uint8_t *)(EEPROM_LED2_COLOR_KEY1), 3);
-		}
+//		}
 
-        if(((_saved2 >> SAVE2_BIT_LED2_SKIP_FRAME) & 0x01)){
+//		if(((_saved2 >> SAVE2_BIT_LED2_SKIP_FRAME) & 0x01)){
             eeprom_update_byte((uint8_t *)EEPROM_LED2_SKIP_FRAME, led2Delay);
-        }
+//        }
 
-        if(((_saved2 >> SAVE2_BIT_LOCK_LED_STATUS) & 0x01)){
+//        if(((_saved2 >> SAVE2_BIT_LOCK_LED_STATUS) & 0x01)){
             eeprom_update_block(&lockLedStatus, (uint8_t *)(EEPROM_LOCK_LED_STATUS), 3);
-        }
+//        }
 
 		_saved = 0;
 		_saved2 = 0;
 
-		blinkOnce(50);
+//		blinkOnce(50);
 	}
 }
 
