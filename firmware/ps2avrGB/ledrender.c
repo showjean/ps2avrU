@@ -1100,8 +1100,6 @@ static void setLed2State(void){
 	
 	_hasRgbModeChanged = true;
 
-	applyStaticFullLed();
-
 }
 
 static void sendI2c(void){
@@ -1314,6 +1312,8 @@ static void __fadeLED2(void){
 		        ledBrightnessLimit = 255;
 
 		    }
+
+		    applyStaticFullLed();
 
 		    return;
 		}
