@@ -41,9 +41,6 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
 
     applyKeyDownForFullLED(xKeyidx, xCol, xRow, xIsDown);
 
-    // 빈 키코드는 LED 반응 이외의 기능 없음;
-    if(xKeyidx == KEY_NONE ) return;
-
     // fn 키가 눌렸을 경우 해당 위치의 키는 무시한다.
     uint8_t gLayer, gKeyIndex, gFnIndex;
 
@@ -80,6 +77,9 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
             return;
         }
     }
+
+    // 빈 키코드는 LED 반응 이외의 기능 없음;
+    if(xKeyidx == KEY_NONE ) return;
 
 
     // 변환 된 키를 매크로에 사용할 수 있도록 그보다 위쪽에 위치시킴;
