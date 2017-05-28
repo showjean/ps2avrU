@@ -38,7 +38,7 @@ PS/2
     - USB로 설정하려면 "U"키를 누른 상태에서 USB포트에 연결하면 됩니다.
 * V1.3.0 이후
     - 키 입력을 통한 전환 방법은 제거
-    - Bootmapper Client를 이용해서 전환하는 기능 추가
+    - Bootmapper Client를 이용해서 전환하는 기능 추가    
     - 부트로더로 연결 후 “Set USB”또는 “Set PS/2″를 클릭해서 전환
 
 인터페이스 인식 표시는 CapsLock/NumLock LED의 깜박이는 수로 확인 가능합니다.
