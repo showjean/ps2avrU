@@ -19,14 +19,14 @@ void initNumlockLayer(void)
 
 uint8_t getNumlockLayer(void)
 {
-    if(getLEDState() & LED_STATE_NUM)
-    {
+//    if(getLEDState() & LED_STATE_NUM)
+//    {
         return _numlockLayer;
-    }
-    else
-    {
-        return 0;
-    }
+//    }
+//    else
+//    {
+//        return 0;
+//    }
 }
 
 void setNumlockLayer(uint8_t xNumlockLayer)
