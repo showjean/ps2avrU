@@ -457,15 +457,29 @@ void updateQuickMacro(uint8_t *data, uint8_t len)
         len += -2;
         data += 2;
     }
-    eeprom_update_block(data, (uint8_t *)quickMacroAddress, len);
+
+    // quick macro의 eeprom address 범위를 넘어서지 않도록 패치
+    if(quickMacroAddress >= (EEPROM_MACRO + MACRO_SIZE_MAX * MACRO_NUM))
+    {
+        return;
+
+    }
+    else if(quickMacroAddress + len > (EEPROM_MACRO + MACRO_SIZE_MAX * MACRO_NUM))
+    {
+        len = (EEPROM_MACRO + MACRO_SIZE_MAX * MACRO_NUM) - quickMacroAddress;
+    }
+
+    eeprom_update_block(data, (void *)quickMacroAddress, len);
     quickMacroAddress += len;
 
     /*uint8_t i;
     for(i = 0; i< len; ++i)
     {
-        eeprom_update_byte((uint8_t *)quickMacroAddress, *data);
+        eeprom_update_byte((void *)quickMacroAddress, *data);
         quickMacroAddress++;
         data++;
+
+        if(quickMacroAddress >= (EEPROM_MACRO + MACRO_SIZE_MAX * MACRO_NUM)) return;
     }*/
 }
 /*

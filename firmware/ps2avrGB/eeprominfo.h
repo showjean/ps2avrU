@@ -37,6 +37,6 @@
 // 409~420 : 12bytes
 #define EEPROM_MACRO			421	// ~996
 #define EEPROM_LED2_COLOR_KEY1	997	// 3byte ~999
-// 1000~1024 : 25bytes
+// 1000~1023 : 24bytes
 
 #endif
