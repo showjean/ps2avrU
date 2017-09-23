@@ -33,10 +33,20 @@
 #include "usbdrv/usbdrv.h"
 #endif
 
-static lock_led_t lockLedStatus;
+#define RGB_MODE_OFF        0
+#define RGB_MODE_RAINBOW    1
+#define RGB_MODE_COLOR1     2
+#define RGB_MODE_COLOR2     3
+#define RGB_MODE_COLOR3     4
+
+#define RAINBOW_MODE_FADING         0
+#define RAINBOW_MODE_IMMEDIATELY    1
+#define RAINBOW_MODE_SEQUENTIAL     2
+#define RAINBOW_MODE_STATIC         3
+#define RAINBOW_MODE_FLOW           4
 
 #define FULL_LED_MODE_NUM 	5
-#define FULL_LED_MODE2_NUM 	5
+#define RGB_LED_MODE_NUM 	5
 #define FULL_LED_MODE2_KEY_EVENT_NUM 	3
 
 #define PRESS_MODE_UP	 	0
@@ -64,6 +74,8 @@ static lock_led_t lockLedStatus;
 
 #define IS_NOT_AIKON    LEDFULLLED == (1 << 4)  // gb 및 gb4u에서만 full led 세팅
 
+static lock_led_t lockLedStatus;
+
 static uint8_t _saved = 0;	//
 static uint8_t _saved2 = 0;	//
 //static bool confirmLed2Save = false;	//
@@ -77,7 +89,7 @@ static uint8_t prevLEDstate = 0;
 static uint8_t ledInited = 0;
 
 static uint8_t _fullLEDMode = 0;	// 
-static uint8_t _rgbMode = 0;	//
+static uint8_t _rgbMode = RGB_MODE_OFF;	//
 static uint8_t _rgbKeyEventMode = 0;	//
 static uint8_t _rgbKeyEventType = 0;	//
 static bool _hasRgbModeChanged = false;    //
@@ -442,7 +454,7 @@ void getLedOptions(option_info_t *buffer){
 
 void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
 	_rgbMode = xMode;
-	if(_rgbMode >= FULL_LED_MODE2_NUM) _rgbMode = 0;
+	if(_rgbMode >= RGB_LED_MODE_NUM) _rgbMode = RGB_MODE_OFF;
 
 	if(xKeyEventMode == 0 ){	// 키 이벤트가 없을 경우에만 모드 변경 적용;
 		_rgbPressed = PRESS_MODE_UP;
@@ -655,7 +667,7 @@ void initFullLEDStateAfter(void){
 	// led2
 	_rgbMode = (eeprom_read_byte((uint8_t *)EEPROM_LED_MODE) >> 4) & 0x0F;
 	if(_rgbMode == 0x0F){
-		_rgbMode = 0;
+		_rgbMode = RGB_MODE_OFF;
 	}
 
 	// led2 color1~3
@@ -749,8 +761,8 @@ static void setLed2BrightnessAfter(void){
 
 	DBG1(0x11, (uchar *)&led2Brightness, 2);
 
-	// if(_Led2Mode == 2 || _Led2Mode == 3 || _Led2Mode == 4){
-	if(_rgbMode > 1 && _rgbMode < 5){
+//	if(_rgbMode > 1 && _rgbMode < 5){
+	if(_rgbMode == RGB_MODE_COLOR1 || _rgbMode == RGB_MODE_COLOR2 || _rgbMode == RGB_MODE_COLOR3){
 		_rgbPressed = PRESS_MODE_CHANGE;
 //		setLed2State();
 	}
@@ -1064,7 +1076,7 @@ void applyKeyDownForFullLED(uint8_t keyidx, uint8_t col, uint8_t row, uint8_t is
 		}
 
 		// led2
-		if(_rgbMode > 0 && keyidx != KEY_LED_ON_OFF){
+		if(_rgbMode > RGB_MODE_OFF && keyidx != KEY_LED_ON_OFF){
 		    _keyPressed = KEY_APPLY_DOWN;
             _rgbPressed = PRESS_MODE_DOWN;
 		}
@@ -1090,7 +1102,7 @@ static void setLed2State(void){
 //	DBG1(0xAE, (uchar *)&_rgbMode, 1);
 #if HAS_RGB_LED
 	if((INTERFACE == INTERFACE_PS2)){
-		if(_rgbMode == 0)
+		if(_rgbMode == RGB_MODE_OFF)
 		    stopPwmLed(false);
 		else
 		    stopPwmLed(true);
@@ -1272,7 +1284,7 @@ static void __fadeLED2(void){
 		{
 		    _hasRgbModeChanged = false;
 
-		    if(_rgbMode == 1)
+		    if(_rgbMode == RGB_MODE_RAINBOW)
 		    {
 		        setLedBalance();
 		        _delayCount = 0;
@@ -1283,22 +1295,23 @@ static void __fadeLED2(void){
 		        prevRgb.r = 0;
 		        prevRgb.g = 0;
 		        prevRgb.b = 0;
+
 		    }
-		    else if(_rgbMode == 2)
+		    else if(_rgbMode == RGB_MODE_COLOR1)
 		    {
 		        setLedBalance();
 		        _currentLedAllColor = color1;
 		        setLed2All(_currentLedAllColor);
 
 		    }
-		    else if(_rgbMode == 3)
+		    else if(_rgbMode == RGB_MODE_COLOR2)
 		    {
 		        setLedBalance();
 		        _currentLedAllColor = color2;
 		        setLed2All(_currentLedAllColor);
 
 		    }
-		    else if(_rgbMode == 4)
+		    else if(_rgbMode == RGB_MODE_COLOR3)
 		    {
 		        setLedBalance();
 		        _currentLedAllColor = color3;
@@ -1345,12 +1358,12 @@ static void __fadeLED2(void){
 		    _keyPressed = KEY_APPLY_NONE;
 
 		    if(_rgbPressed == PRESS_MODE_DOWN){
-                if (_rgbMode == 1) { // 1 = rainbow
-                    if (_rainbowMode == 3)  //static
+                if (_rgbMode == RGB_MODE_RAINBOW) { // 1 = rainbow
+                    if (_rainbowMode == RAINBOW_MODE_STATIC)  //static
                     {
                         fadeRgbRainbowStatic();
 
-                    }else if(_rainbowMode == 4) { // flow
+                    }else if(_rainbowMode == RAINBOW_MODE_FLOW) { // flow
 
                     } else {    // others
                         setLed2All(_currentLedAllColor);
@@ -1375,16 +1388,16 @@ static void __fadeLED2(void){
 		// rgb render
 		uint8_t i;
 		uint16_t gValue;
-		if (_rgbMode == 1) { // 1 = rainbow
+		if (_rgbMode == RGB_MODE_RAINBOW) { // 1 = rainbow
 
-			if (_rainbowMode == 1) {	// immediately
-				if (_delayCount++ >= led2Delay) {
-				    _delayCount = 0;
-					_currentLedAllColor = rainbowColor[_rainbowIndex];
-					setLed2All(_currentLedAllColor);
-					increaseRainbowIndex();
+			if (_rainbowMode == RAINBOW_MODE_IMMEDIATELY) {	// immediately
+				if (_delayCount-- == 0) {
+				    _delayCount = led2Delay;
+                    _currentLedAllColor = rainbowColor[_rainbowIndex];
+                    setLed2All(_currentLedAllColor);
+                    increaseRainbowIndex();
 				}
-			} else if (_rainbowMode == 2) {	// sequential
+			} else if (_rainbowMode == RAINBOW_MODE_SEQUENTIAL) {	// sequential
                     if (_changeCount < numOfLeds) {
                         for (i = 0; i < numOfLeds; ++i) {
                             if (i > _changeCount) {
@@ -1393,8 +1406,8 @@ static void __fadeLED2(void){
                             } else {
                                 // new color
                                 ledModified[i] = rainbowColor[_rainbowIndex];
-                                getMaxRgbValue(&ledModified[i]);
                             }
+                            getMaxRgbValue(&ledModified[i]);
 
                         }
                         ++_changeCount;
@@ -1414,11 +1427,11 @@ static void __fadeLED2(void){
                         _changeCount = 0;
                         increaseRainbowIndex();
                     }
-			}else  if (_rainbowMode == 3) {	// static
+			}else  if (_rainbowMode == RAINBOW_MODE_STATIC) {	// static
 				if (_delayCount++ == 0) {
 					fadeRgbRainbowStatic();
 				}
-			} else if (_rainbowMode == 4) {	// flow
+			} else if (_rainbowMode == RAINBOW_MODE_FLOW) {	// flow
 
 			    // TODO
 			    /**
@@ -1631,7 +1644,7 @@ void initFullLEDState(void) {
 #endif
 
 #if HAS_RGB_LED
-	if( _rgbMode == 0 || (INTERFACE == INTERFACE_USB)){
+	if( _rgbMode == RGB_MODE_OFF || (INTERFACE == INTERFACE_USB)){
 		// led2가 off 상태이거나, usb 연결시에만 full led를 사용할 수 있음, 전류용량 때문.
 	    stopPwmLed(false);
 	}else{
