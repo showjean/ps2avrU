@@ -399,9 +399,6 @@ void setLed2Num(uint8_t xNum){
 	if(led2MaxSum400ma > 762) led2MaxSum400ma = 762;	// 255 * 3
 	led2MaxSum200ma = LED2_MAX_200MA_SUM / numOfLeds;
 	if(led2MaxSum200ma > 762) led2MaxSum200ma = 762;
-//	led2MaxSumGap = led2MaxSum400ma - led2MaxSum200ma;
-//	DBG1(0xD4, (uchar *)&led2MaxSum400ma, 2);
-//	DBG1(0xD2, (uchar *)&led2MaxSum200ma, 2);
 
     if(INTERFACE == INTERFACE_PS2){
     	led2SumLimit = led2MaxSum200ma;
@@ -619,19 +616,21 @@ void stopPwmLed(bool xIsStop){
 /*
  * 전류 배분;
  *
- * 하판은 200~400mA (LED2_SUM_MAX 값으로 93 * 3 ~ 186 * 3)
- * 하판이 200이하 경우 상판은 200(= limit 255)
- * 400일 경우는 25mA(= limit 50)
+ * 하판은 400mA
+ * 하판이 200mA이하 경우 상판은 200mA(= limit 255)
+ * 400mA일 경우는 25mA(= limit 50)
  */
 static void setLedBalance(void){
 	// 50~ 255
-	if(led2MaxSum200ma  > led2Brightness|| led2MaxSum400ma == led2MaxSum200ma) {
+    //RGB 밝기가 200mA보다 낮으면 언제나 OK
+	if(led2Brightness <= led2MaxSum200ma) {
 		ledBrightnessLimit = 255;
 		return;
 	}
+	// RGB 밝기가 200mA보다 높다는 것은 400mA와 200mA와의 밝기 차이가 있다는 뜻
+	// 즉, 200과 400의 차이만큼 스위치 밝기를 조절 할 필요가 있음.
 	uint16_t gLim;
-	// 50 + (205 * (610) / 330);
-	gLim = 50 + (205 * (uint32_t)(led2MaxSum400ma  - led2Brightness) / (led2MaxSum400ma - led2MaxSum200ma));
+	gLim = 50 + (205 * (uint32_t)((led2MaxSum400ma-led2MaxSum200ma) - (led2Brightness-led2MaxSum200ma)) / (led2MaxSum400ma-led2MaxSum200ma));
 	ledBrightnessLimit = (uint8_t)gLim;
 }
 
