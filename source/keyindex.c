@@ -33,12 +33,12 @@ uint8_t getCurrentKeyindex(uint8_t xLayer, uint8_t xRow, uint8_t xCol)
 {
 	uint8_t gKeyIndex = 0;
 
-		if(isMacroInput()){			
-			// 매크로 입력 중에는 매핑된 키코드를 사용;
-            gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
+    if(isQuickMacro()){
+        // 매크로 입력 중에는 매핑된 키코드를 사용;
+        gKeyIndex = getDefaultKeyindex(xLayer, xRow, xCol);
 
-			// 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
-			gKeyIndex = escapeMacroKeyindex(gKeyIndex);
+        // 매크로 입력 중에는 다시 매크로 키가 포함되지 않도록;
+        gKeyIndex = escapeMacroKeyindex(gKeyIndex);
 
         // return gKeyIndex;
         goto RETURN_INDEX;

@@ -23,13 +23,9 @@
 
 // event loop
 void enterFrameForMapper(void);
-
-uint8_t isDeepKeyMapping(void);
-
 void printString(const char *xString);
 
 // 매크로 등록중인지 확인;
-bool isMacroInput(void);
 bool isMacroKey(uint8_t xKeyidx);
 bool isEepromMacroKey(uint8_t xKeyidx);
 // 매크로 적용됐으면 1, 아니면 0 반환;

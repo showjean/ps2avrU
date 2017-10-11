@@ -44,13 +44,13 @@ static bool _isQuickMacro = false;
 static bool _isQuickMacroStopped;
 static void __stopQuickMacro(void);
 
-static uint8_t _step;
+//static uint8_t _step;
 
-uint8_t isDeepKeyMapping(void){
-
-	return _isQuickMacro;
-
-}
+//uint8_t isDeepKeyMapping(void){
+//
+//	return _isQuickMacro;
+//
+//}
 
 void enterFrameForMapper(void){
 
@@ -139,13 +139,14 @@ void saveMacro(void){
 	_macroIndex = 255;
 }
 
-bool isMacroInput(void){
-	if(_step == STEP_INPUT_MACRO){
-		return true;
-	}else{
-		return false;
-	}
-}
+//bool isMacroInput(void){
+//	/*if(_step == STEP_INPUT_MACRO){
+//		return true;
+//	}else{
+//		return false;
+//	}*/
+//    return _isQuickMacro;
+//}
 
 static void resetMacroInput(void){	
 	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);

@@ -97,9 +97,9 @@ static void putChangedKey(uint8_t xKeyidx, bool xIsDown, uint8_t xCol, uint8_t x
         applyDualActionDownWhenIsCompounded();
     }
 
-    // 키매핑 진행중;
+    // 퀵매크로 레코딩...
     // isKeyMapping()을 쓰면 ps2에서 눌렸던 키들이 복귀 되지 않는다.
-    if(isDeepKeyMapping()){
+    if(isQuickMacro()){
         
         xKeyidx = putKeyindex(xKeyidx, xCol, xRow, xIsDown);
 

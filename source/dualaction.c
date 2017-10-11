@@ -15,6 +15,7 @@ static uint8_t dualActionKeyIndex = 0;
 static bool _isCompounded = false;
 //static bool _isActiveDualAction = false;
 static uint16_t _autoDownCount = 0;
+static bool _alreadyActioned = false;
 
 static uint8_t getDualActionCompoundKey(uint8_t keyidx);
 static uint8_t getDualActionAloneKey(uint8_t keyidx);
@@ -37,16 +38,18 @@ void enterFrameForDualAction(void){
 }
 
 void applyDualActionDownWhenIsCompounded(void){
-	 if(dualActionKeyIndex > 0 && isCompounded()){
+
+	if(dualActionKeyIndex > 0 && isCompounded() && false == _alreadyActioned){
         // 다른 키와 조합되었을 때 우선 듀얼액션키의 조합 키코드 값을 버퍼에 저장한다.
 		pushKeyCodeDecorator(getDualActionCompoundKey(dualActionKeyIndex), true);
 
-        if(isMacroInput()){
+        if(isQuickMacro()){
         	putKeyindex(getDualActionCompoundKey(dualActionKeyIndex), 0, 0, 1);
         }
 
 //        dualActionKeyIndex = 0;
 		_autoDownCount = 0;
+		_alreadyActioned = true;
     }
 }
 
@@ -61,7 +64,7 @@ static void applyDualActionUp(void){
         dualActionKeyIndex = 0;
 		_autoDownCount = 0;
 
-        if(isMacroInput()){
+        if(isQuickMacro()){
         	putKeyindex(gUpIdx, 0, 0, 1);
         	putKeyindex(gUpIdx, 0, 0, 0);
         }
@@ -126,6 +129,7 @@ void clearDualAction(void)
 //    _dualActionCount = 0;
     dualActionKeyIndex = 0;
     _isCompounded = false;
+    _alreadyActioned = false;
 //    _isActiveDualAction = false;
 }
 //-------------------------------------------------------------------------------
