@@ -30,6 +30,7 @@
 #define OPTION_INDEX_LOCK_LED_SL    0x87
 #define OPTION_INDEX_NUMLOCK_LAYER  0x88
 #define OPTION_INDEX_DEBOUNCE_VALUE 0x89
+#define OPTION_INDEX_FNLOCK_LED     0x8A
 
 #define OPTION_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define OPTION_GET_REPORT_LENGTH_INFO				100
@@ -173,6 +174,9 @@ typedef struct {
     lock_led_t lockled;
     uint8_t numlocklayer;      //
     uint8_t debouncevalue;      //
+
+    //Ver 1.4
+    uint8_t fnlock; // 11110000 fn2, 00001111 fn3
 
 
 } option_info_t;

@@ -39,6 +39,10 @@
 #define RGB_MODE_COLOR2     3
 #define RGB_MODE_COLOR3     4
 
+#define RGB_KEY_EVENT_OFF   0
+#define RGB_KEY_EVENT_COLOR   1
+#define RGB_KEY_EVENT_COMPL   2
+
 #define RAINBOW_MODE_FADING         0
 #define RAINBOW_MODE_IMMEDIATELY    1
 #define RAINBOW_MODE_SEQUENTIAL     2
@@ -47,7 +51,7 @@
 
 #define FULL_LED_MODE_NUM 	5
 #define RGB_LED_MODE_NUM 	5
-#define FULL_LED_MODE2_KEY_EVENT_NUM 	3
+#define RGB_KEY_EVENT_NUM 	3
 
 #define PRESS_MODE_UP	 	0
 #define PRESS_MODE_DOWN	 	1
@@ -74,6 +78,8 @@
 
 #define IS_NOT_AIKON    LEDFULLLED == (1 << 4)  // gb 및 gb4u에서만 full led 세팅
 
+#define FN_LOCK_LED_NONE         0x0F
+
 static lock_led_t lockLedStatus;
 
 static uint8_t _saved = 0;	//
@@ -90,7 +96,7 @@ static uint8_t ledInited = 0;
 
 static uint8_t _fullLEDMode = 0;	// 
 static uint8_t _rgbMode = RGB_MODE_OFF;	//
-static uint8_t _rgbKeyEventMode = 0;	//
+static uint8_t _rgbKeyEventMode = RGB_KEY_EVENT_OFF;	//
 static uint8_t _rgbKeyEventType = 0;	//
 static bool _hasRgbModeChanged = false;    //
 static bool _hasRgbOff = false;    //
@@ -196,6 +202,9 @@ static uint8_t LEDstate = 0;     ///< current state of the LEDs
 static uint8_t ledBlinkCount = 0;
 static uint8_t targetLeds;
 static uint8_t targetStatus;
+
+static uint8_t fn2lockLed = FN_LOCK_LED_NONE;
+static uint8_t fn3lockLed = FN_LOCK_LED_NONE;
 /*
  * xPrev : LED의 이전 상태를 저장하고 있다. 이정 상태와 다를 경우에만 깜박이도록.
  */
@@ -450,6 +459,9 @@ void getLedOptions(option_info_t *buffer){
 
     // Ver 1.2
     buffer->lockled = lockLedStatus;
+
+    // Ver 1.4
+    buffer->fnlock = (fn3lockLed & 0x0F) | ((fn2lockLed & 0x0F) << 4);
 }
 
 void __setLed2Mode(uint8_t xMode, uint8_t xKeyEventMode){
@@ -589,13 +601,19 @@ void setLedOptions(uint8_t *data){
 
          _saved2 |= BV(SAVE2_BIT_LOCK_LED_STATUS);
      }
+     else if(*(data+1) == OPTION_INDEX_FNLOCK_LED)
+     {
+         fn3lockLed = *(data+2) & 0x0F;
+         fn2lockLed = *(data+2) >> 4;
 
+         _saved2 = 1;
+     }
 //	ledStateCount = 0;
 }
 
 static void changeLed2KeyEventMode(void){
 //	_Led2KeyEventMode = (_Led2KeyEventMode + 1);
-	if(++_rgbKeyEventMode == FULL_LED_MODE2_KEY_EVENT_NUM) _rgbKeyEventMode = 0;
+	if(++_rgbKeyEventMode == RGB_KEY_EVENT_NUM) _rgbKeyEventMode = RGB_KEY_EVENT_OFF;
 	_saved2 |= BV(SAVE2_BIT_LED2_KEY_EVENT);
 }
 
@@ -691,7 +709,7 @@ void initFullLEDStateAfter(void){
 	// led2 key mode
 	_rgbKeyEventMode = eeprom_read_byte((uint8_t *)EEPROM_LED2_KEY_EVENT) & 0x0F;	// 0xF0 : type, 0x0F : mode
 	if(_rgbKeyEventMode == 0x0F){
-		_rgbKeyEventMode = 0;
+		_rgbKeyEventMode = RGB_KEY_EVENT_OFF;
 	}
 	// led2 key color 1
 	eeprom_read_block(&color_key1, (uint8_t *)EEPROM_LED2_COLOR_KEY1, 3);
@@ -711,6 +729,10 @@ void initFullLEDStateAfter(void){
 	if(lockLedStatus.nl == 0xFF) lockLedStatus.nl = LOCK_LED_DEFAULT;
 	if(lockLedStatus.cl == 0xFF) lockLedStatus.cl = LOCK_LED_DEFAULT;
 	if(lockLedStatus.sl == 0xFF) lockLedStatus.sl = LOCK_LED_DEFAULT;
+
+	// fn lock led
+	fn3lockLed = eeprom_read_byte((uint8_t *)EEPROM_FNLOCK_LED) & 0x0F;
+	fn2lockLed = (eeprom_read_byte((uint8_t *)EEPROM_FNLOCK_LED) >> 4) & 0x0F;
 
     setLedBalance();
 
@@ -987,6 +1009,8 @@ static void writeLEDMode(void) {
 //        if(((_saved2 >> SAVE2_BIT_LOCK_LED_STATUS) & 0x01)){
             eeprom_update_block(&lockLedStatus, (uint8_t *)(EEPROM_LOCK_LED_STATUS), 3);
 //        }
+
+          eeprom_update_byte((uint8_t *)EEPROM_FNLOCK_LED, (fn3lockLed & 0x0F) | ((fn2lockLed & 0x0F) << 4));
 
 		_saved = 0;
 		_saved2 = 0;
@@ -1335,7 +1359,7 @@ static void __fadeLED2(void){
 		{
 		    _keyPressed = KEY_APPLY_NONE;
 
-            if(_rgbKeyEventMode == 1)
+            if(_rgbKeyEventMode == RGB_KEY_EVENT_COLOR)
             {       // color 1
                 ledModified[0] = color_key1;
                 getMaxRgbValue(&ledModified[0]);
@@ -1343,7 +1367,7 @@ static void __fadeLED2(void){
                 _setLed2All(&ledModified[0]);
 
             }
-            else if(_rgbKeyEventMode == 2)
+            else if(_rgbKeyEventMode == RGB_KEY_EVENT_COMPL)
             {   // complementary color
                 ledModified[0].g = 255 - _currentLedAllColor.g;
                 ledModified[0].r = 255 - _currentLedAllColor.r;
@@ -1383,7 +1407,7 @@ static void __fadeLED2(void){
             return; // skip frame
 		}
 
-		if(_rgbPressed == PRESS_MODE_DOWN) return;
+		if(_rgbPressed == PRESS_MODE_DOWN && _rgbKeyEventMode != RGB_KEY_EVENT_OFF) return;
 
 		// rgb render
 		uint8_t i;
