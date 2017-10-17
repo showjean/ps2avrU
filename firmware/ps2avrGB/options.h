@@ -166,7 +166,7 @@ typedef struct {
     uint8_t fullledbrightness;
 
     uint8_t esctotilde;
-    uint8_t fnled;
+    uint8_t fnlock;     //Ver 1.4 // 11110000 fn2, 00001111 fn3
 
     //Ver 1.2
     uint8_t version[3];    // r/o, 1.2.0
@@ -174,10 +174,6 @@ typedef struct {
     lock_led_t lockled;
     uint8_t numlocklayer;      //
     uint8_t debouncevalue;      //
-
-    //Ver 1.4
-    uint8_t fnlock; // 11110000 fn2, 00001111 fn3
-
 
 } option_info_t;
 

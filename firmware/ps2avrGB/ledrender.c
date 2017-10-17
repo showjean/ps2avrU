@@ -945,6 +945,10 @@ void setLEDIndicate(void) {
 
 	prevLEDstate = LEDstate;
 
+
+	// todo
+	// fn2lock rgb
+
 }
 
 static void writeLEDMode(void) {
@@ -1408,6 +1412,10 @@ static void __fadeLED2(void){
 		}
 
 		if(_rgbPressed == PRESS_MODE_DOWN && _rgbKeyEventMode != RGB_KEY_EVENT_OFF) return;
+
+		/**
+		 * fn lock rgb >= 0 && fn toggle on 이라면 여기서 return;
+		 */
 
 		// rgb render
 		uint8_t i;

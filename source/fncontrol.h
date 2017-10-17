@@ -19,7 +19,7 @@
 #define BEYOND_FN_LED_SL	2
 
 void initBeyondFn(void);
-uint8_t getBeyondFnLed(void);
+//uint8_t getBeyondFnLed(void);
 
 bool isDownExtraFn(void);
 

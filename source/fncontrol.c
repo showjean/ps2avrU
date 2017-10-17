@@ -20,7 +20,7 @@
 #include "ps2avru_util.h"
 #include "oddebug.h"
 
-static uint8_t _beyondFnLed;	// 0: off, 1:NL, 2:SL
+//static uint8_t _beyondFnLed;	// 0: off, 1:NL, 2:SL
 // for KEY_BEYOND_FN;
 static uint8_t _beyondFnIndex = 0;     //KEY_BEYOND_FN state
 static uint8_t _prevBeyondFnIndex = 0;
@@ -45,9 +45,9 @@ uint8_t getBeyondFNPrev(void){
     return _prevBeyondFnIndex;
 }
 
-uint8_t getBeyondFnLed(void){
+/*uint8_t getBeyondFnLed(void){
     return _beyondFnLed;
-}
+}*/
 
 
 void initBeyondFn(void){
@@ -118,22 +118,22 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     if(xIsDown) {
 
-        if((xKeyidx ==  KEY_BEYOND_FN || xKeyidx == KEY_BEYOND_FN3)
+        if((xKeyidx ==  KEY_FN2_TOGGLE || xKeyidx == KEY_FN3_TOGGLE)
         		|| (_isDownExtraFN && xKeyidx == BEYOND_FN_CANCEL_KEY)){ // beyond_fn을 활성화;
             _prevBeyondFnIndex = _beyondFnIndex;
              if( xKeyidx == BEYOND_FN_CANCEL_KEY ) {    // 취소만 가능한 키 
                 _beyondFnIndex = LAYER_NORMAL;
              }else{
             	if(_beyondFnIndex == LAYER_NORMAL){
-            		if(xKeyidx ==  KEY_BEYOND_FN){
+            		if(xKeyidx ==  KEY_FN2_TOGGLE){
             			_beyondFnIndex = LAYER_FN2;
             		}else{
             			_beyondFnIndex = LAYER_FN3;
             		}
             	}else{
-            		if(xKeyidx ==  KEY_BEYOND_FN && !(_beyondFnIndex ==  LAYER_FN2)){
+            		if(xKeyidx ==  KEY_FN2_TOGGLE && !(_beyondFnIndex ==  LAYER_FN2)){
             			_beyondFnIndex = LAYER_FN2;
-					}else if(xKeyidx ==  KEY_BEYOND_FN3 && !(_beyondFnIndex ==  LAYER_FN3)){
+					}else if(xKeyidx ==  KEY_FN3_TOGGLE && !(_beyondFnIndex ==  LAYER_FN3)){
             			_beyondFnIndex = LAYER_FN3;
 					}else{
         				_beyondFnIndex = LAYER_NORMAL;
@@ -176,7 +176,7 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
 
     }else{  // up 
 
-        if(xKeyidx ==  KEY_BEYOND_FN){  // beyond_fn             
+        if(xKeyidx ==  KEY_FN2_TOGGLE || xKeyidx == KEY_FN3_TOGGLE){  // beyond_fn
              return 0;
         }else if(xKeyidx == EXTRA_FN){
             _isDownExtraFN = false;

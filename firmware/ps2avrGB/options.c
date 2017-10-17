@@ -32,7 +32,7 @@ void getOptions(option_info_t *buffer)
     getLedOptions(buffer);
 
     buffer->esctotilde = isEscTilde();
-    buffer->fnled = getBeyondFnLed();
+//    buffer->fnled = getBeyondFnLed();
 
     // Ver 1.2
     buffer->version[0] = VERSION_MAJOR;
