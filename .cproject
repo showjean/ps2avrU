@@ -14,24 +14,31 @@
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 				<configuration artifactName="ps2avrU" buildProperties="" description="" id="de.innot.avreclipse.toolchain.winavr.base.2086647547" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
 					<folderInfo id="de.innot.avreclipse.toolchain.winavr.base.2086647547.1463068052" name="/" resourcePath="">
-						<toolChain id="de.innot.avreclipse.toolchain.winavr.base.277944748" name="de.innot.avreclipse.toolchain.winavr.base" superClass="de.innot.avreclipse.toolchain.winavr.base">
+						<toolChain id="de.innot.avreclipse.toolchain.winavr.base.277944748" name="de.innot.avreclipse.toolchain.winavr.base" nonInternalBuilderId="de.innot.avreclipse.target.builder.winavr.base" superClass="de.innot.avreclipse.toolchain.winavr.base">
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.objcopy.flash.198169197" name="Generate HEX file for Flash memory" superClass="de.innot.avreclipse.toolchain.options.toolchain.objcopy.flash"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.objcopy.eeprom.649300901" name="Generate HEX file for EEPROM" superClass="de.innot.avreclipse.toolchain.options.toolchain.objcopy.eeprom"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.objdump.81783257" name="Generate Extended Listing (Source + generated Assembler)" superClass="de.innot.avreclipse.toolchain.options.toolchain.objdump"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.size.1610392373" name="Print Size" superClass="de.innot.avreclipse.toolchain.options.toolchain.size"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.avrdude.331069950" name="AVRDude" superClass="de.innot.avreclipse.toolchain.options.toolchain.avrdude"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="de.innot.avreclipse.targetplatform.avr.946041877" name="AVR Cross-Target" osList="all" superClass="de.innot.avreclipse.targetplatform.avr"/>
-							<builder id="de.innot.avreclipse.target.builder.winavr.base.321220122" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="AVR GNU Make Builder" superClass="de.innot.avreclipse.target.builder.winavr.base"/>
+							<builder enableCleanBuild="false" id="de.innot.avreclipse.target.builder.winavr.base.258081259" incrementalBuildTarget="" managedBuildOn="false" name="AVR GNU Make Builder" superClass="de.innot.avreclipse.target.builder.winavr.base"/>
 							<tool id="de.innot.avreclipse.tool.assembler.winavr.base.1387166258" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.base">
 								<inputType id="de.innot.avreclipse.tool.assembler.input.1180201356" superClass="de.innot.avreclipse.tool.assembler.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.compiler.winavr.base.466035486" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.base">
 								<option id="de.innot.avreclipse.compiler.option.incpath.1415039373" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ps2avrU/firmware/ps2avrGB}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\lib\gcc\avr\4.3.3\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\lib\gcc\avr\4.3.3\include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\avr\include&quot;"/>
 								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.1637242480" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.base.566519604" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.base">
+								<option id="de.innot.avreclipse.cppcompiler.option.incpath.1281581713" name="Include Paths (-I)" superClass="de.innot.avreclipse.cppcompiler.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\lib\gcc\avr\4.3.3\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\lib\gcc\avr\4.3.3\include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Installed\WinAVR-20100110\avr\include&quot;"/>
+								</option>
 								<inputType id="de.innot.avreclipse.cppcompiler.input.1133899115" superClass="de.innot.avreclipse.cppcompiler.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.linker.winavr.base.1497507529" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.base"/>
@@ -40,7 +47,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="firmware/ps2avrU/|firmware/ps2avrU_for_aikon/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry excluding="firmware/ps2avrGB4U_A|firmware/ps2avrGB4U|firmware/ps2avrGB/bootloader|firmware/ps2avrU/|firmware/ps2avrU_for_aikon/|firmware/ps2avrU_obsolete/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -69,4 +76,5 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
