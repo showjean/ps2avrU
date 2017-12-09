@@ -125,13 +125,17 @@ bool applyFN(uint8_t xKeyidx, uint8_t xCol, uint8_t xRow, bool xIsDown) {
                 _beyondFnIndex = LAYER_NORMAL;
              }else{
             	if(_beyondFnIndex == LAYER_NORMAL){
-            		if(xKeyidx ==  KEY_FN2_TOGGLE){
+            	    if(xKeyidx ==  KEY_FN_TOGGLE){
+                        _beyondFnIndex = LAYER_FN;
+                    }else if(xKeyidx ==  KEY_FN2_TOGGLE){
             			_beyondFnIndex = LAYER_FN2;
             		}else{
             			_beyondFnIndex = LAYER_FN3;
             		}
             	}else{
-            		if(xKeyidx ==  KEY_FN2_TOGGLE && !(_beyondFnIndex ==  LAYER_FN2)){
+            	    if(xKeyidx ==  KEY_FN_TOGGLE && !(_beyondFnIndex ==  LAYER_FN)){
+                        _beyondFnIndex = LAYER_FN;
+                    }else if(xKeyidx ==  KEY_FN2_TOGGLE && !(_beyondFnIndex ==  LAYER_FN2)){
             			_beyondFnIndex = LAYER_FN2;
 					}else if(xKeyidx ==  KEY_FN3_TOGGLE && !(_beyondFnIndex ==  LAYER_FN3)){
             			_beyondFnIndex = LAYER_FN3;

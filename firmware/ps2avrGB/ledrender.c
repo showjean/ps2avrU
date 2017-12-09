@@ -206,6 +206,7 @@ static uint8_t targetStatus;
 static bool _fnlockLedChanged = false;
 static bool _fnlockLedOn = false;
 static bool _fnlockLedReady = false;
+static uint8_t fnlockLed = FN_LOCK_LED_NONE;
 static uint8_t fn2lockLed = FN_LOCK_LED_NONE;
 static uint8_t fn3lockLed = FN_LOCK_LED_NONE;
 /*
@@ -326,21 +327,16 @@ void blinkBootMapperLED(void) {
 #endif
 }
 
-#define IS_LIGHT_UP_NL  lockLedStatus.nl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.nl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_NUM)) \
-                        || (lockLedStatus.nl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_NUM)) \
-                        || (lockLedStatus.nl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
-                        || (lockLedStatus.nl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
-#define IS_LIGHT_UP_CL  lockLedStatus.cl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.cl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_CAPS)) \
-                        || (lockLedStatus.cl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_CAPS)) \
-                        || (lockLedStatus.cl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
-                        || (lockLedStatus.cl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
-#define IS_LIGHT_UP_SL  lockLedStatus.sl == LOCK_LED_ALWAYS_ON \
-                        || (lockLedStatus.sl == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_SCROLL)) \
-                        || (lockLedStatus.sl == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_SCROLL)) \
-                        || (lockLedStatus.sl == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
-                        || (lockLedStatus.sl == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
+#define IS_LIGHT_UP(lockLedStatus)    (lockLedStatus) == LOCK_LED_ALWAYS_ON \
+                            || ((lockLedStatus) == LOCK_LED_DEFAULT && (LEDstate & LED_STATE_NUM)) \
+                            || ((lockLedStatus) == LOCK_LED_REVERSE && !(LEDstate & LED_STATE_NUM)) \
+                            || ((lockLedStatus) == LOCK_LED_FN_TOGGLE && getBeyondFN() == LAYER_FN)\
+                            || ((lockLedStatus) == LOCK_LED_FN2_TOGGLE && getBeyondFN() == LAYER_FN2)\
+                            || ((lockLedStatus) == LOCK_LED_FN3_TOGGLE && getBeyondFN() == LAYER_FN3)
+
+#define IS_LIGHT_UP_NL  IS_LIGHT_UP(lockLedStatus.nl)
+#define IS_LIGHT_UP_CL  IS_LIGHT_UP(lockLedStatus.cl)
+#define IS_LIGHT_UP_SL  IS_LIGHT_UP(lockLedStatus.sl)
 
 void blinkOnce(const int xStayMs){
 
@@ -608,8 +604,11 @@ void setLedOptions(uint8_t *data){
      {
          fn3lockLed = *(data+2) & 0x0F;
          fn2lockLed = *(data+2) >> 4;
+         fnlockLed =
+         // todo: fnlockLed
 
-         if((getBeyondFN() == LAYER_FN2 && fn2lockLed == FN_LOCK_LED_NONE)
+         if((getBeyondFN() == LAYER_FN && fnlockLed == FN_LOCK_LED_NONE)
+                 || (getBeyondFN() == LAYER_FN2 && fn2lockLed == FN_LOCK_LED_NONE)
                  || (getBeyondFN() == LAYER_FN3 && fn3lockLed == FN_LOCK_LED_NONE))
          {  // fn lock led 사용이 없으므로, rgb mode로 복귀
              _hasRgbModeChanged = true;
@@ -746,6 +745,8 @@ void initFullLEDStateAfter(void){
 	// fn lock led
 	fn3lockLed = eeprom_read_byte((uint8_t *)EEPROM_FNLOCK_LED) & 0x0F;
 	fn2lockLed = (eeprom_read_byte((uint8_t *)EEPROM_FNLOCK_LED) >> 4) & 0x0F;
+	// todo: fnlockLed
+    fnlockLed =
 
     setLedBalance();
 
@@ -910,6 +911,15 @@ static uint8_t updateLed(uint8_t xLockStatus, uint8_t xLedPin, uint8_t xLedState
         }
         getLedBlink(xLedPin, !(LEDstate & xLedState), getBeyondFN(), getBeyondFNPrev(), &gCount);
     }
+    else if(xLockStatus == LOCK_LED_FN_TOGGLE)
+    {
+        if (getBeyondFN() == LAYER_FN) {
+            turnOnLED(xLedPin);
+        } else {
+            turnOffLED(xLedPin);
+        }
+        getLedBlink(xLedPin, (getBeyondFN() == LAYER_FN), (LEDstate & xLedState), (prevLEDstate & xLedState), &gCount);
+    }
     else if(xLockStatus == LOCK_LED_FN2_TOGGLE)
     {
         if (getBeyondFN() == LAYER_FN2) {
@@ -959,14 +969,16 @@ void setLEDIndicate(void) {
 	prevLEDstate = LEDstate;
 
 	// fn2lock rgb
-	if((FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() == LAYER_FN2)
+	if((FN_LOCK_LED_NONE != fnlockLed && getBeyondFN() == LAYER_FN)
+	        || (FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() == LAYER_FN2)
             || (FN_LOCK_LED_NONE != fn3lockLed && getBeyondFN() == LAYER_FN3))
     {
 //        _fnlockLedChanged = true;
 	    _fnlockLedReady = true;
         _fnlockLedOn = true;
     }
-	else if(true == _fnlockLedOn && ((FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() != LAYER_FN2)
+	else if(true == _fnlockLedOn && ((FN_LOCK_LED_NONE != fnlockLed && getBeyondFN() != LAYER_FN)
+	        || (FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() != LAYER_FN2)
 	        || (FN_LOCK_LED_NONE != fn3lockLed && getBeyondFN() != LAYER_FN3)))
     {
 	    // 기본 레이어로 복귀될 때
@@ -1308,6 +1320,21 @@ static void setRgbSingleColor(cRGB_t *color)
    _currentLedAllColor = *color;
    setLed2All(_currentLedAllColor);
 }
+static void applyFnLockRgb(uint8_t *fnlock)
+{
+    if(*fnlock == 0)
+   {
+       setRgbSingleColor(&color1);
+   }
+   else if(*fnlock == 1)
+   {
+       setRgbSingleColor(&color2);
+   }
+   else if(*fnlock == 2)
+   {
+       setRgbSingleColor(&color3);
+   }
+}
 
 static void __fadeLED2(void){
 
@@ -1434,36 +1461,18 @@ static void __fadeLED2(void){
             prevRgb.g = 0;
             prevRgb.b = 0;
 
-		    if(getBeyondFN() == LAYER_FN2)
-		    {
-		        if(fn2lockLed == 0)
-		        {
-		            setRgbSingleColor(&color1);
-		        }
-		        else if(fn2lockLed == 1)
-		        {
-                    setRgbSingleColor(&color2);
-		        }
-                else if(fn2lockLed == 2)
-                {
-                    setRgbSingleColor(&color3);
-                }
-		    }
-		    else if(getBeyondFN() == LAYER_FN3)
-		    {
-                if(fn3lockLed == 0)
-                {
-                    setRgbSingleColor(&color1);
-                }
-                else if(fn3lockLed == 1)
-                {
-                    setRgbSingleColor(&color2);
-                }
-                else if(fn3lockLed == 2)
-                {
-                    setRgbSingleColor(&color3);
-                }
-		    }
+            if(getBeyondFN() == LAYER_FN)
+            {
+                applyFnLockRgb(&fnlockLed);
+            }
+            else  if(getBeyondFN() == LAYER_FN2)
+            {
+                applyFnLockRgb(&fn2lockLed);
+            }
+            else if(getBeyondFN() == LAYER_FN3)
+            {
+                applyFnLockRgb(&fn3lockLed);
+            }
 
 		    return;
 		}
@@ -1471,7 +1480,8 @@ static void __fadeLED2(void){
 		/**
 		 * fn lock rgb >= 0 && fn toggle on 이라면 여기서 return;
 		 */
-		if((FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() == LAYER_FN2)
+		if((FN_LOCK_LED_NONE != fnlockLed && getBeyondFN() == LAYER_FN)
+		        || (FN_LOCK_LED_NONE != fn2lockLed && getBeyondFN() == LAYER_FN2)
 		        || (FN_LOCK_LED_NONE != fn3lockLed && getBeyondFN() == LAYER_FN3))
 		{
 		    return;
@@ -1518,10 +1528,8 @@ static void __fadeLED2(void){
             }
             else
             {
-
                 __turnOffLed2();
                 ledBrightnessLimit = 255;
-
             }
 
             applyStaticFullLed();

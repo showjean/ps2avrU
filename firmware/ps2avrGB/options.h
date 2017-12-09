@@ -119,6 +119,7 @@ typedef struct {
 #define LOCK_LED_FN2_TOGGLE  4
 #define LOCK_LED_FN3_TOGGLE  5
 #define LOCK_LED_FN23_TOGGLE  6
+#define LOCK_LED_FN_TOGGLE  7
 
 typedef struct {
     uint8_t nl;
