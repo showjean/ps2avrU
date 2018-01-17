@@ -65,6 +65,8 @@ static int temp_a, temp_b;
 static int i, j;
 static int keyval=0;
 
+extern volatile unsigned long tick;
+
 // waiting RX, for led indicate key like capslock, because, fix bug of fast down/up like macro/dualaction.
 static bool _isWaitingRx = false;
 static void setWaitingRx(bool xIsWait);
@@ -168,6 +170,7 @@ static void keymap_init(void)
 void setWaitingRx(bool xIsWait){
 	if(xIsWait) {
 		keyval = SPLIT_KEY;
+		tick = 0;
 	}else{
 		isAlreadyPushedWaitingRx = false;
 	}
@@ -589,7 +592,8 @@ void ps2_main(void){
     sei();
 
     for(;;){
-
+        if (isWaitingRx() && tick > RX_TIMEOUT)
+            setWaitingRx(false);
         processRxPs2();
         processTxPs2();
 
