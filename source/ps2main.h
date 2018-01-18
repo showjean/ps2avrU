@@ -48,6 +48,7 @@
 #define PS2_REPEAT_SPEED_SET_MIDD	2
 #define PS2_REPEAT_SPEED_SET_LOW	3
 
+#define RX_TIMEOUT  20
 
 uint8_t ps2_repeat_speed;
 void ps2_main(void);

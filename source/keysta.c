@@ -78,6 +78,7 @@ enum enum_state { IDLE_START = 0, IDLE_WAIT_REL,
     TX_PARITY, TX_STOP, TX_AFTER_STOP, TX_END } ;
 
 volatile unsigned char kbd_state;
+volatile unsigned long tick;
 
 static volatile unsigned char   rx_byte;
 static volatile unsigned char   tx_byte;
@@ -133,7 +134,7 @@ static void timerAction(void)
 {
     /* restart timer */
     outp(COUNT_UP, TCNT0);  /* value counts up from this to zero */
-    
+    tick++;
 
     if (kbd_state < IDLE_END) { // start, wait_rel or ready to tx
         dataHigh();
