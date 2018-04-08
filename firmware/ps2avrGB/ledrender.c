@@ -558,8 +558,6 @@ void setLedOptions(uint8_t *data){
 	 else if(*(data+1) == OPTION_INDEX_LED_NUM)
 	 {
 	    numOfLedsForChanging = *(data+2);
-
-		_saved |= BV(SAVE_BIT_LED2_NUM);
 	 }
      else if(*(data+1) == OPTION_INDEX_FULL_LED_MODE)
      {
@@ -1333,6 +1331,8 @@ static void __fadeLED2(void){
             setLedBalance();
             setFullLedState();
             setLed2State();
+
+            _saved |= BV(SAVE_BIT_LED2_NUM);
 
             numOfLedsForChanging = 0;
 
