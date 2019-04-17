@@ -511,12 +511,12 @@ void usb_main(void) {
          * 하지만, 구식 부트로더 (ps2avrGB_bootloader_140623)의 경우 빠져나올 때 usbDeviceDisconnect()를 처리하지 않아서
          * 이를 여기서 처리해줌.
          */
-        if(interfaceReady == false && interfaceCount++ > 1000)
+        if(interfaceReady == false && interfaceCount++ > 10000) // 맥 모하비의 경우 1000 카운트 시 인식이 되지 않아서 10000으로 늘려줌
         {
             cli();
 
             usbDeviceDisconnect();
-            wdt_enable(WDTO_15MS);
+            wdt_enable(WDTO_250MS);
             for(;;);
         }
 
