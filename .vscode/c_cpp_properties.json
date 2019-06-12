@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:AVR32_HOME}\\avr\\include",
+                "${env:AVR32_HOME}\\lib\\gcc\\avr\\4.3.3\\include",
+                "${env:AVR32_HOME}\\lib\\gcc\\avr\\4.3.3\\include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__AVR_ATmega32__"
+            ],
+            "compilerPath": "${env:AVR32_HOME}\\bin\\avr-gcc.exe -mmcu=atmega32",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
