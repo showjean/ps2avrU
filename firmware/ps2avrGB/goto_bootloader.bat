@@ -1,1 +1,1 @@
-..\..\..\BootMapperClient\BootMapperClient\bin\gbmgr -bootloader
+..\..\..\BootMapperClient\bin-release\BootMapperClient\bin\gbmgr -bootloader
