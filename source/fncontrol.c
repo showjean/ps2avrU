@@ -32,6 +32,9 @@ static uint8_t _isLockKey = LOCK_NOT_SET;
 static uint8_t _isLockWin = LOCK_NOT_SET;
 
 static bool _ledOff = false;
+bool isLedOff(void) {
+    return _ledOff;
+}
 
 bool isDownExtraFn(void)
 {

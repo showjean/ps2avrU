@@ -1742,8 +1742,10 @@ void wakeUpLED(void){
 	_ledOff = false;
 	setLEDIndicate();
 
-	setFullLedState();
-	setLed2State();
+	if(isLedOff() == false) {
+		setFullLedState();
+		setLed2State();
+	}
 }
 
 void renderLED(void) {
