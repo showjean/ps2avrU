@@ -31,6 +31,15 @@
 #define OPTION_INDEX_NUMLOCK_LAYER  0x88
 #define OPTION_INDEX_DEBOUNCE_VALUE 0x89
 #define OPTION_INDEX_FNLOCK_LED     0x8A
+#define OPTION_INDEX_LED_ON_OFF_DEFAULT 0x8B    //ver 1.5
+
+#define OPTION_INDEX_BOOTLOADER		0x00
+#define OPTION_INDEX_BOOTMAPPER		0x01
+#define OPTION_INDEX_READY			0x90
+#define OPTION_INDEX_ACTION			0x91
+
+#define OPTION_VALUE_BOOTMAPPER_START		0x01
+#define OPTION_VALUE_BOOTMAPPER_STOP		0x00
 
 #define OPTION_GET_REPORT_LENGTH_RAINBOW			133	//0x85
 #define OPTION_GET_REPORT_LENGTH_INFO				100
@@ -88,14 +97,6 @@ enum{
     OPTION_GET_REPORT_LENGTH_QUICK_MACRO11,     // 190
 };
 #define OPTION_GET_REPORT_LENGTH_QUICK_MACRO12  191
-
-#define OPTION_INDEX_BOOTLOADER		0x00
-#define OPTION_INDEX_BOOTMAPPER		0x01
-#define OPTION_INDEX_READY			0x90
-#define OPTION_INDEX_ACTION			0x91
-
-#define OPTION_VALUE_BOOTMAPPER_START		0x01
-#define OPTION_VALUE_BOOTMAPPER_STOP		0x00
 
 /*
  *  Structure of the LED array
@@ -165,7 +166,7 @@ typedef struct {
     uint8_t fullledmode;
     uint8_t fullledbrightness;
 
-    uint8_t esctotilde;
+    uint8_t enableoption;   // ver 1.5 -> esc tilde, led on/off
     uint8_t fnlock;     //Ver 1.4 // 11110000 fn2, 00001111 fn3
 
     //Ver 1.2

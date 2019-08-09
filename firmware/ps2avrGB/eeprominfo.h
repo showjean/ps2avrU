@@ -7,10 +7,11 @@
 
 // EEPROM_ENABLED_OPTION bit
 //#define TOGGLE_LAZY_FN		    0   //deprecated
-//#define TOGGLE_SMART_KEY        1 //deprecated
-#define TOGGLE_BEYOND_FN_LED_NL 2
+//#define TOGGLE_SMART_KEY        1     //deprecated
+// #define TOGGLE_BEYOND_FN_LED_NL 2    //deprecated
 #define TOGGLE_ESC_TO_TILDE	    3
-#define TOGGLE_BEYOND_FN_LED_SL 4
+// #define TOGGLE_BEYOND_FN_LED_SL 4    //deprecated
+#define TOGGLE_LED_OFF_DEFAULT   5   // power on 시 led on or off 결정 기본값 on(false), 이후 'LED on/off' 키로 토글
 
 // eeprom address
 #define EEPROM_BOOTLOADER_START	1	// 1byte

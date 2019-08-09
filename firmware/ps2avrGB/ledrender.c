@@ -120,6 +120,7 @@ static void fadeLED2(void);
 static void setFullLedState(void);
 static void setLed2State(void);
 static uint16_t getBrightness(uint16_t xValue);
+static void setAllLedWithLedOption(void);
 
 // i2c
 //#define LOCAL_ADDR  0xA0
@@ -747,8 +748,20 @@ void initFullLEDStateAfter(void){
 
     setLedBalance();
 
-	setFullLedState();
-	setLed2State();
+	setAllLedWithLedOption();
+	// led 를 꺼진 상태로 power on 시
+	if(_ledOff == true) {
+		turnOffLedAll();
+	}
+}
+
+// wake up, power on 시 ledOff 옵션을 적용한다.
+static void setAllLedWithLedOption(void) {
+	_ledOff = isLedOff();
+	if(_ledOff == false) {
+		setFullLedState();
+		setLed2State();
+	}
 }
 
 
@@ -1639,7 +1652,7 @@ static void __fadeLED2(void){
 }
 
 static void fadeLED2(void){
-		__fadeLED2();
+	__fadeLED2();
 }
 
 // 
@@ -1711,9 +1724,11 @@ void turnOnLedAll(void){
 }
 void turnOffLedAll(void){
 
+	// off full led
 	setPWM(0);
 	turnOffLED(LEDFULLLED);
 
+	// off rgb led
 	turnOffLed2();
 
     _ledOff = true;
@@ -1739,13 +1754,9 @@ void sleepLED(void){
 }
 
 void wakeUpLED(void){
-	_ledOff = false;
 	setLEDIndicate();
 
-	if(isLedOff() == false) {
-		setFullLedState();
-		setLed2State();
-	}
+	setAllLedWithLedOption();
 }
 
 void renderLED(void) {

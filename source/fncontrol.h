@@ -44,5 +44,6 @@ extern bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown);
  LED on/off 기능 활성 확인
  */
 bool isLedOff(void);
+void setLedOff(bool xIsOn);
 
 #endif

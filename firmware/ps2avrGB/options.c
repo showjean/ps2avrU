@@ -25,14 +25,20 @@ void setOptions(uint8_t *data)
     {
         setDebounceValue(*(data+2));
     }
+    else if(*(data+1) == OPTION_INDEX_LED_ON_OFF_DEFAULT)
+    {
+        setLedOff(*(data+2));
+    }
 }
 
 void getOptions(option_info_t *buffer)
 {
     getLedOptions(buffer);
 
-    buffer->esctotilde = isEscTilde();
-//    buffer->fnled = getBeyondFnLed();
+    // ver 1.5
+    buffer->enableoption = 0xFF;    // defalut off all
+    buffer->enableoption |= (isEscTilde() ? OPTION_ON: OPTION_OFF) << TOGGLE_ESC_TO_TILDE;
+    buffer->enableoption |= (isLedOff() ? OPTION_ON: OPTION_OFF) << TOGGLE_LED_OFF_DEFAULT; // true/false 주의, true 일 때 led 가 꺼진 상태;
 
     // Ver 1.2
     buffer->version[0] = VERSION_MAJOR;

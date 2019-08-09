@@ -35,6 +35,9 @@ static bool _ledOff = false;
 bool isLedOff(void) {
     return _ledOff;
 }
+void setLedOff(bool xIsOff){
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LED_OFF_DEFAULT, xIsOff);
+}
 
 bool isDownExtraFn(void)
 {
@@ -52,11 +55,10 @@ uint8_t getBeyondFNPrev(void){
     return _beyondFnLed;
 }*/
 
-
 void initBeyondFn(void){
-
+    // ver 1.5
+    _ledOff = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LED_OFF_DEFAULT);
 }
-
 
 static void applyLock(uint8_t *lock){
     if(*lock == LOCK_WILL_SET){
