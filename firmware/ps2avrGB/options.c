@@ -36,9 +36,12 @@ void getOptions(option_info_t *buffer)
     getLedOptions(buffer);
 
     // ver 1.5
-    buffer->enableoption = 0xFF;    // defalut off all
-    buffer->enableoption |= (isEscTilde() ? OPTION_ON: OPTION_OFF) << TOGGLE_ESC_TO_TILDE;
-    buffer->enableoption |= (isLedOff() ? OPTION_ON: OPTION_OFF) << TOGGLE_LED_OFF_DEFAULT; // true/false 주의, true 일 때 led 가 꺼진 상태;
+    // defalut off all = 0xFF, 0=on, 1=off
+    bool ledOffOption = getToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LED_OFF_DEFAULT); // true/false 주의, true 일 때 led 가 꺼진 상태;
+    buffer->enableoption = ~(
+            0x00 | ((isEscTilde() ? 1: 0) << TOGGLE_ESC_TO_TILDE)
+             | ((ledOffOption ? 1: 0) << TOGGLE_LED_OFF_DEFAULT)
+        ); 
 
     // Ver 1.2
     buffer->version[0] = VERSION_MAJOR;
