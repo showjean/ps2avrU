@@ -25,9 +25,9 @@ void setOptions(uint8_t *data)
     {
         setDebounceValue(*(data+2));
     }
-    else if(*(data+1) == OPTION_INDEX_LED_ON_OFF_DEFAULT)
+    else if(*(data+1) == OPTION_INDEX_LED_OFF_DEFAULT)
     {
-        setLedOff(*(data+2));
+        setLedOffEnable(*(data+2));
     }
 }
 

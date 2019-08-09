@@ -43,7 +43,7 @@ extern bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown);
 /*
  LED on/off 기능 활성 확인
  */
-bool isLedOff(void);
-void setLedOff(bool xIsOn);
+bool isLedOff(void);    // 현재 LED OFF 상태인지 확인
+void setLedOffEnable(bool xIsEnable); // BM 에서 부팅 시 초기값 지정
 
 #endif

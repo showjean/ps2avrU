@@ -35,8 +35,8 @@ static bool _ledOff = false;
 bool isLedOff(void) {
     return _ledOff;
 }
-void setLedOff(bool xIsOff){
-    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LED_OFF_DEFAULT, xIsOff);
+void setLedOffEnable(bool xIsEnable){
+    setToggleOption(EEPROM_ENABLED_OPTION, TOGGLE_LED_OFF_DEFAULT, xIsEnable);
 }
 
 bool isDownExtraFn(void)
