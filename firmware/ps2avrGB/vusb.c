@@ -383,6 +383,15 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8]) {
                     usbMsgPtr = (usbMsgPtr_t)(EEPROM_MACRO+(MACRO_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_QUICK_MACRO1)));
                     return MACRO_SIZE_MAX;
 
+                /*
+                    이전 eeprom keymap 영역을 매크로 영역으로 확장하여 사용한다.
+                    기존 매크로에 28byte 씩 개별 매크로마다 추가한다.
+                */     
+                }else if(rq->wLength.word >= OPTION_GET_REPORT_LENGTH_QUICK_MACRO_EXTRA1 && rq->wLength.word <= OPTION_GET_REPORT_LENGTH_QUICK_MACRO_EXTRA12){
+                    usbMsgFlags = USB_FLG_USE_USER_RW;
+                    usbMsgPtr = (usbMsgPtr_t)(EEPROM_MACRO_EXTRA+(MACRO_EXTRA_SIZE_MAX * (rq->wLength.word - OPTION_GET_REPORT_LENGTH_QUICK_MACRO_EXTRA1)));
+                    return MACRO_EXTRA_SIZE_MAX;
+
             	}else {
             		return rq->wLength.word;
             	}
