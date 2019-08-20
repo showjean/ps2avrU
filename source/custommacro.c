@@ -102,7 +102,8 @@ static bool isOverSize(void)
 {
     if(_currentMacroIndex >= CUSTOM_MACRO_NUM )
     {   // eeprom
-        return MACRO_SIZE_MAX <= macroCounter;
+    // extra macro 를 포함한 사이즈
+        return MACRO_TOTAL_SIZE_MAX <= macroCounter;
     }
     else
     {
@@ -131,7 +132,13 @@ static void pushNextKeyIndex(void){
         // key index
         if(_currentMacroIndex >= CUSTOM_MACRO_NUM )
         {   // eeprom
-            gKeyindex = eeprom_read_byte((uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * (_currentMacroIndex-CUSTOM_MACRO_NUM)) + macroCounter++));
+            // macroCounter 가 MACRO_SIZE_MAX보다 크거나 같다면 extra macro 를 이용한다.
+            if(macroCounter >= MACRO_SIZE_MAX) {
+                gKeyindex = eeprom_read_byte((uint8_t *)(EEPROM_MACRO_EXTRA + (MACRO_EXTRA_SIZE_MAX * (_currentMacroIndex-CUSTOM_MACRO_NUM)) - MACRO_SIZE_MAX + macroCounter++));
+            }
+            else {                
+                gKeyindex = eeprom_read_byte((uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * (_currentMacroIndex-CUSTOM_MACRO_NUM)) + macroCounter++));
+            }
             gDownDelay = 0;
         }else{
             gKeyindex = pgm_read_byte((uint8_t*)CUSTOM_MACRO_ADDRESS + (CUSTOM_MACRO_SIZE_MAX * _currentMacroIndex) + macroCounter++);

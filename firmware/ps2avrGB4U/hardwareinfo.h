@@ -60,6 +60,10 @@
 #define MACRO_SIZE_MAX 48
 #define MACRO_SIZE_MAX_HALF 24
 #define MACRO_NUM 12
+#define MACRO_EXTRA_SIZE_MAX 28	// 360 / 12 = 30 이지만 28만 사용
+#define MACRO_EXTRA_SIZE_MAX_HALF 14
+#define MACRO_TOTAL_SIZE_MAX 76
+#define MACRO_TOTAL_SIZE_MAX_HALF 38
 
 // flash macro
 /*

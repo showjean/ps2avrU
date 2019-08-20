@@ -25,7 +25,8 @@
 #define EEPROM_LED_BRIGHTNESS 	9	// 1byte
 #define EEPROM_LED_MODE			11	// 1byte	0xF0 : led2, 0x0F : full led
 #define EEPROM_INTERFACE		12	// 1byte
-#define EEPROM_MACRO_EXTRA  	13	// 360byte ~372
+#define EEPROM_MACRO_EXTRA  	13	// 28 * 12 = 336byte ~349
+// 350~372 : 23byte
 #define EEPROM_LED2_COLOR_RAINBOW 373	// 21byte ~393
 #define EEPROM_LED2_COLOR_1		394	// 3byte
 #define EEPROM_LED2_COLOR_2		397	// 3byte

@@ -36,8 +36,8 @@
 
 static uint8_t _macroIndex;
 static uint8_t _macroBufferIndex;
-static uint8_t _macroPressedBuffer[MACRO_SIZE_MAX_HALF];
-static uint8_t _macroInputBuffer[MACRO_SIZE_MAX];
+static uint8_t _macroPressedBuffer[MACRO_TOTAL_SIZE_MAX_HALF];
+static uint8_t _macroInputBuffer[MACRO_TOTAL_SIZE_MAX];
 
 static uint8_t _macroDownCount = 0;
 static bool _isQuickMacro = false;
@@ -131,11 +131,12 @@ uint8_t applyMacro(uint8_t xKeyidx){
 	return 0;
 }
 
-
 void saveMacro(void){
 	if(_macroIndex >= MACRO_NUM) return;
 
 	eeprom_update_block(&_macroInputBuffer, (uint8_t *)(EEPROM_MACRO + (MACRO_SIZE_MAX * _macroIndex)), MACRO_SIZE_MAX);
+	// update extra macro
+	eeprom_update_block(&_macroInputBuffer[MACRO_SIZE_MAX], (uint8_t *)(EEPROM_MACRO_EXTRA + (MACRO_EXTRA_SIZE_MAX * _macroIndex)), MACRO_EXTRA_SIZE_MAX);
 	_macroIndex = 255;
 }
 
@@ -149,9 +150,9 @@ void saveMacro(void){
 //}
 
 static void resetMacroInput(void){	
-	memset(_macroInputBuffer, 0, MACRO_SIZE_MAX);
+	memset(_macroInputBuffer, 0, MACRO_TOTAL_SIZE_MAX);
 	_macroBufferIndex = 0;
-	memset(_macroPressedBuffer, 0, MACRO_SIZE_MAX);
+	memset(_macroPressedBuffer, 0, MACRO_TOTAL_SIZE_MAX);
 	_macroDownCount = 0;
 }
 
@@ -199,7 +200,7 @@ static uint8_t putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 	if(xKeyidx >= KEY_MAX) return KEY_NONE;		// 매크로 입력시 키값으로 변환할 수 없는 특수 키들은 중단;
 
 	if(xIsDown){
-		if(_macroDownCount >= MACRO_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
+		if(_macroDownCount >= MACRO_TOTAL_SIZE_MAX_HALF){	// 매크로 크기의 절반이 넘은 키 다운은 제외 시킨다. 그래야 나머지 공간에 up 데이터를 넣을 수 있으므로.
 			return KEY_NONE;
 		}
 		++_macroDownCount;
@@ -223,8 +224,8 @@ static uint8_t putMacro(uint8_t xKeyidx, uint8_t xIsDown){
 
 	DBG1(0x09, (uchar *)&_macroInputBuffer, strlen((char *)_macroInputBuffer));  
 
-	// MACRO_SIZE_MAX개를 채웠다면 종료;
-	if(_macroBufferIndex >= MACRO_SIZE_MAX){
+	// MACRO_TOTAL_SIZE_MAX개를 채웠다면 종료;
+	if(_macroBufferIndex >= MACRO_TOTAL_SIZE_MAX){
 		// _macroIndex 위치에 저장;
 	
 		stopMacroInput();
