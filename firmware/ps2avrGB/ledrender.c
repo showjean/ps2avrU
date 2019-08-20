@@ -531,6 +531,7 @@ void setLedOptions(uint8_t *data){
 	 }
 	 else if(*(data+1) == OPTION_INDEX_MODE)
 	 {
+		_ledOff = false;
 	 	__setLed2Mode(*(data+2), 0);	// 항상 led 재설정;
 	 }
 	 else if(*(data+1) == OPTION_INDEX_LED_BRIGHTNESS)
@@ -564,6 +565,7 @@ void setLedOptions(uint8_t *data){
      {
          _fullLEDMode = *(data+2);
          _saved |= BV(SAVE_BIT_LED_MODE);
+		_ledOff = false;
          setFullLedState();
      }
      else if(*(data+1) == OPTION_INDEX_FULL_LED_BRIGHTNESS)
@@ -1823,6 +1825,7 @@ void initFullLEDState(void) {
 bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 	uint8_t gModi = getModifierDownBuffer();
 	if((xIsExtraFnDown && xKeyidx == LED_KEY)){
+		_ledOff = false;
 		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){	// shift
 			changeFullLedState(FULL_LED_MODE2);
 		}else if(gModi == MODI_LCTRL || gModi == MODI_RCTRL){	// control
@@ -1832,9 +1835,11 @@ bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 		}
 		return 0;
 	}else if(xKeyidx == KEY_LED){
+		_ledOff = false;
 		changeFullLedState(FULL_LED_MODE1);
 		return 0;
 	}else if(xKeyidx == KEY_LED2){
+		_ledOff = false;
 		if(gModi == MODI_LCTRL || gModi == MODI_RCTRL){	// control
 			changeLed2KeyEventMode();
 		}else{
@@ -1842,6 +1847,7 @@ bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 		}
 		return 0;
 	}else if(xKeyidx == KEY_LED_UP){
+		_ledOff = false;
 		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){
 			increaseLedBrightness(FULL_LED_MODE2);
 		}else{
@@ -1849,6 +1855,7 @@ bool delegateFnControl(uint8_t xKeyidx, bool xIsExtraFnDown){
 		}
 		return 0;
 	}else if(xKeyidx == KEY_LED_DOWN){
+		_ledOff = false;
 		if(gModi == MODI_LSHIFT || gModi == MODI_RSHIFT){
 			reduceLedBrightness(FULL_LED_MODE2);
 		}else{
