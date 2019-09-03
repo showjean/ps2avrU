@@ -166,6 +166,8 @@ Bootmapper Client(부트맵퍼 클라이언트)를 이용해서 키맵핑/매크
 
 <https://github.com/showjean/ps2avrU/releases>
 
+## 부트로더 링크
+https://blog.winkeyless.kr/152
 
 ## Store Site
 Global : <http://winkeyless.kr>
